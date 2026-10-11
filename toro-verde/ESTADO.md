@@ -42,3 +42,13 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - Respuestas: Duda (humano) · No recibir mensajes (OPT_OUT) · Oferta precio cliente · Referidos mensaje · Consejos lluvias · Rinde y precio por bomba · Gracias por ahora no.
 - Campañas: Finca Toro Verde (2da entrega) · Campaña Lluvias.
 - Ojo: el calendario montado (3, 10, 25, 30, 55, 70, 90) no es el del documento (3, 7, 14, 21, 28, 31, 35, 50, 65, 90). Hay dos flujos de día 3 (S1 y d3).
+
+## Conexión con la API de Lucid Bot (11 oct)
+- La API funciona (cuenta Toro Verde, 27.492 contactos). La clave NO se guarda en el repositorio.
+- Lo que la API deja hacer: listar flujos, etiquetas y campos; leer y editar un contacto (etiquetas y campos); enviarle un flujo, texto o archivo a un contacto.
+- Lo que la API NO deja: leer el contenido de un flujo, ver los pasos de una secuencia, ver plantillas de Meta ni contar contactos por etiqueta. Eso se revisa con capturas del panel.
+- Secuencia que maneja los días: "RC Recompra Toro Verde" (id 306056).
+- Hay un flujo viejo "Flujo de recompra" (id 1771620943449): confirmar que esté apagado para que no choque con los RC.
+- Hay tres etiquetas de entrega: "Entregado", "Pedido Entregado" y "Entrega realizada". Confirmar cuál pone Dropi y cuál mete al cliente a la secuencia.
+- Campos de recompra que ya existen: fecha_entregado, ciclo_recompra, paso_recompra, segmento_recompra, es_recompra, escalon_oferta, dias_desde_ultima, compras_entregadas, ultimo_producto, ultimo_ticket, cultivo, maleza, referidor.
+- Etiquetas de recompra: SEG_1_RECIENTE, SEG_2_VENTANA, SEG_3_VENCIDO, SEG_4_DORMIDO, SATISFECHO, RESCATE, SUBDOSIS, EVENTO_ADVERSO, OPT_OUT, RECOMPRA, RECOMPRA_LISTA, VIP_RECOMPRA, CLIENTE_TORO, REFERIDO_AFILIADO.
