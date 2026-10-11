@@ -34,3 +34,11 @@ Falta para arrancar:
 - Semana 3 (21–27 oct): activar días 14, 21, 28 y 35.
 - Semana 4 (28 oct – 3 nov): activar días 50, 65 y 90, referidos y primer corte de métricas.
 - Pregunta abierta: ¿Lucid Bot crea el pedido en Dropi directo desde el botón "Sí, mándemelo"?
+
+## Recompra: lo que ya está montado en Lucid Bot (captura del 11 oct)
+Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada encendidos:
+- Secuencia: RC S1 Día 3 dosis · RC d3 Ya aplicó (dosis) · RC S2 Día 10 cómo le quedó · RC S3 Día 25 referidos · RC S4 Día 30 otro lote · RC S5 Día 55 mantenimiento · RC S6 Día 70 precio guardado · RC S7 Día 90 cómo le fue.
+- Ramas: Diagnóstico (RESCATE) · Evento adverso (EVENTO_ADVERSO) · Pedir foto (SATISFECHO).
+- Respuestas: Duda (humano) · No recibir mensajes (OPT_OUT) · Oferta precio cliente · Referidos mensaje · Consejos lluvias · Rinde y precio por bomba · Gracias por ahora no.
+- Campañas: Finca Toro Verde (2da entrega) · Campaña Lluvias.
+- Ojo: el calendario montado (3, 10, 25, 30, 55, 70, 90) no es el del documento (3, 7, 14, 21, 28, 31, 35, 50, 65, 90). Hay dos flujos de día 3 (S1 y d3).
