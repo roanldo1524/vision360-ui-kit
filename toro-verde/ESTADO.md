@@ -10,6 +10,16 @@
   - CREATIVE OS: app desplegada antes con Claude Code.
   - Para traerlos aquí: subir esas carpetas a este repositorio en GitHub (botón "Add file → Upload files").
 
+## PRIORIDAD: recuperar el código de la plataforma
+- La plataforma está publicada en https://maquina-creativa.vercel.app/crm (Vercel, equipo "Mi ciclo", plan Hobby) y usa Supabase.
+- El proyecto de Vercel NO tiene repositorio de Git conectado: se publicó desde una carpeta con la CLI de Vercel. El código fuente está guardado en el último deployment.
+- Plan de recuperación:
+  1. Con la variable `VERCEL_TOKEN` y la red abierta a `api.vercel.com`, listar los deployments del proyecto `maquina-creativa` y descargar todos los archivos fuente del último (API `GET /v6/deployments/{id}/files` y `GET /v7/deployments/{id}/files/{fileId}`).
+  2. Guardar el código en un repositorio de GitHub propio (por ejemplo `roanldo1524/maquina-creativa`).
+  3. Conectar ese repositorio al proyecto de Vercel (Settings → Git) para que cada cambio quede guardado y se publique solo.
+  4. Las variables de Supabase se copian desde Vercel (Settings → Environment Variables), nunca se suben al repositorio.
+- No construir una plataforma nueva: se sigue editando la que ya existe.
+
 ## Máquina Creativa: qué sigue
 Fase 1, el cerebro: análisis de los 95 videos, ADN de marca, guionista con 3 críticos y la tanda en PDF.
 Falta para arrancar:
