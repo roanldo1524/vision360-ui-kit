@@ -1,0 +1,31 @@
+{
+  "collapse-filter": false,
+  "search": "-path:99-Plantillas -path:_sistema",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    { "query": "path:02-Lobulos", "color": { "a": 1, "rgb": 16733525 } },
+    { "query": "tag:#lobulo/negocio", "color": { "a": 1, "rgb": 16766720 } },
+    { "query": "tag:#lobulo/marketing", "color": { "a": 1, "rgb": 16738740 } },
+    { "query": "tag:#lobulo/aprendizaje", "color": { "a": 1, "rgb": 5025616 } },
+    { "query": "tag:#lobulo/tecnologia", "color": { "a": 1, "rgb": 2201331 } },
+    { "query": "tag:#lobulo/vida", "color": { "a": 1, "rgb": 10233776 } },
+    { "query": "path:03-Proyectos", "color": { "a": 1, "rgb": 16777215 } },
+    { "query": "path:07-Diario", "color": { "a": 1, "rgb": 7697781 } }
+  ],
+  "collapse-display": false,
+  "showArrow": true,
+  "textFadeMultiplier": -0.5,
+  "nodeSizeMultiplier": 1.3,
+  "lineSizeMultiplier": 1.1,
+  "collapse-forces": false,
+  "centerStrength": 0.45,
+  "repelStrength": 12,
+  "linkStrength": 1,
+  "linkDistance": 180,
+  "scale": 1,
+  "close": false
+}
