@@ -52,3 +52,8 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - Hay tres etiquetas de entrega: "Entregado", "Pedido Entregado" y "Entrega realizada". Confirmar cuál pone Dropi y cuál mete al cliente a la secuencia.
 - Campos de recompra que ya existen: fecha_entregado, ciclo_recompra, paso_recompra, segmento_recompra, es_recompra, escalon_oferta, dias_desde_ultima, compras_entregadas, ultimo_producto, ultimo_ticket, cultivo, maleza, referidor.
 - Etiquetas de recompra: SEG_1_RECIENTE, SEG_2_VENTANA, SEG_3_VENCIDO, SEG_4_DORMIDO, SATISFECHO, RESCATE, SUBDOSIS, EVENTO_ADVERSO, OPT_OUT, RECOMPRA, RECOMPRA_LISTA, VIP_RECOMPRA, CLIENTE_TORO, REFERIDO_AFILIADO.
+
+## Editor de videos (reels de creadoras)
+- Se trabajó en un chat de claude.ai (no en Claude Code). Resultado guardado en la página "Reels Toro Verde": https://claude.ai/artifact/Ee9PwhBAQeCaZewXA9mVML (videos 1 a 9 con sus versiones viral, PRO e imperial, actualizada el 3 oct).
+- El código del editor (los scripts que cortaban, subtitulaban y mezclaban) no quedó en ningún repositorio; vivía dentro de ese chat.
+- Reglas de edición que usaba: Fugaz One + Verde Vital (#C8F520) y Verde Roble (#043434); subtítulos palabra por palabra en zona segura de Meta, palabra clave en verde; cortes en cada pausa, nada quieto más de 2–4 s; voz de la creadora al frente y música libre (Pixabay) que baja cuando habla; efectos de sonido en los cortes, no encima de la voz; textos que nunca tapan la cara; cierre con envío gratis, pago contra entrega, toroverde.co y el mantra "Controle con fuerza. Proteja su tierra."
