@@ -57,3 +57,8 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - Se trabajó en un chat de claude.ai (no en Claude Code). Resultado guardado en la página "Reels Toro Verde": https://claude.ai/artifact/Ee9PwhBAQeCaZewXA9mVML (videos 1 a 9 con sus versiones viral, PRO e imperial, actualizada el 3 oct).
 - El código del editor (los scripts que cortaban, subtitulaban y mezclaban) no quedó en ningún repositorio; vivía dentro de ese chat.
 - Reglas de edición que usaba: Fugaz One + Verde Vital (#C8F520) y Verde Roble (#043434); subtítulos palabra por palabra en zona segura de Meta, palabra clave en verde; cortes en cada pausa, nada quieto más de 2–4 s; voz de la creadora al frente y música libre (Pixabay) que baja cuando habla; efectos de sonido en los cortes, no encima de la voz; textos que nunca tapan la cara; cierre con envío gratis, pago contra entrega, toroverde.co y el mantra "Controle con fuerza. Proteja su tierra."
+
+## Lucid Sales: oficina principal de Interrapidísimo (aplicado el 19 oct)
+- Guardado en el campo `Reglas_adicionales2_LucidSales` (ahora 77 reglas): nueva regla 77 y ajustes a 12, 21, 56, 72 y 73 (punto 5). Textos en `lucid-sales/PEGAR-en-lucid-sales.md`.
+- Hay copia de las 76 reglas anteriores (fuera del repositorio) por si hay que devolverlo.
+- Pendiente: las reglas 36, 37 y 38 dicen "Herbicidas Orgánico Regenerativo" (palabra prohibida por la marca).
