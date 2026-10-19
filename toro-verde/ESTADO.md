@@ -62,4 +62,5 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - Guardado en el campo `Reglas_adicionales2_LucidSales` (ahora 77 reglas): nueva regla 77 y ajustes a 12, 21, 56, 72 y 73 (punto 5). Textos en `lucid-sales/PEGAR-en-lucid-sales.md`.
 - Hay copia de las 76 reglas anteriores (fuera del repositorio) por si hay que devolverlo.
 - 19 oct: reglas 36, 37 y 38 corregidas (ahora "Herbicida Toro Verde") y nueva regla 78 de palabras prohibidas y dosis (78 reglas en total).
+- 19 oct: se quitó del catálogo el consejo de "2 limones por bomba" (los dos productos); esa respuesta ahora dice "Agite el envase antes de medir" y la dosis mínima de 130 ml.
 - Pendiente: el catálogo del bot (campo Catalogo_productos_LucidSales) todavía dice "ecológico", "natural", "no deja residuos tóxicos" y el nombre "Herbicidas Orgánico Regenerativo"; no dice "agite el envase"; y el precio de 20 L no cuadra ($995.000 en el paquete, $980.000 en preguntas frecuentes). Antes de cambiar el nombre, confirmar si está conectado con Dropi.
