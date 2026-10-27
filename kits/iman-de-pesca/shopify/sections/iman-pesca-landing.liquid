@@ -1,0 +1,705 @@
+{% comment %} Landing alcomprar: imán de pesca 140 kg. Solo para celular. El diseño vive en un shadow DOM para que el tema no lo altere. {% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="{{ 'ct-1-principal.jpg' | file_url }}&width=540" imagesrcset="{{ 'ct-1-principal.jpg' | file_url }}&width=360 360w, {{ 'ct-1-principal.jpg' | file_url }}&width=540 540w, {{ 'ct-1-principal.jpg' | file_url }}&width=720 720w" imagesizes="(max-width:480px) 92vw, 440px" fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Barlow:wght@400;600;700;800&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+<style>.shopify-section-group-header-group,.shopify-section-group-footer-group,#shopify-section-announcement-bar,#shopify-section-header,#shopify-section-footer{display:none!important}main#MainContent,#MainContent{padding:0!important;margin:0!important;max-width:none!important}body{background:#cfd8de;margin:0!important;padding:0!important}#ct-host{all:initial!important;display:block!important;min-height:100vh;margin:0!important;padding:0!important;letter-spacing:normal!important;word-spacing:normal!important;text-transform:none!important}.ct-form{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}</style>
+<div id="ct-host"></div>
+{%- liquid
+  assign rv_count = 0
+  assign rv_sum = 0
+  for r in shop.metaobjects.resena_cliente.values
+    if r.producto.value.id == product.id
+      assign rv_count = rv_count | plus: 1
+      assign st0 = r.estrellas.value | default: 5
+      assign rv_sum = rv_sum | plus: st0
+    endif
+  endfor
+  if rv_count > 0
+    assign rv_avg = rv_sum | times: 1.0 | divided_by: rv_count | round: 1
+  endif
+-%}
+<template id="ct-tpl"><style>:host{all:initial;display:block}.ct-page{letter-spacing:normal;word-spacing:normal;text-transform:none;text-align:left;font-style:normal;text-indent:0;white-space:normal}.ct-page{--deep:#0A2233;--deep-2:#123A52;--gold:#F6B826;--gold-soft:#EAF0F5;--cream:#ECF1F4;--sand:#E3EAEF;--white:#fff;--ink:#0A2233;--muted:#3E5566;--red:#C8432B;--star:#8F6500;--display:"Fugaz One","Arial Black",sans-serif;--text:Barlow,system-ui,sans-serif;--label:"Barlow Condensed",Barlow,sans-serif;--r:4px}.ct-page *{box-sizing:border-box;margin:0;padding:0}.ct-page{background:#cfd8de;min-height:100vh;color:var(--ink);font-family:var(--text);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}.ct-page img{display:block;max-width:100%}.ct-page button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}.ct-page a{color:inherit}.ct-page .page{max-width:480px;margin:0 auto;background:var(--white);overflow:hidden;position:relative;padding-bottom:84px}.ct-page .promo{background:var(--deep);color:#fff;padding:12px 20px;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:center}.ct-page .promo b.tag{font:400 20px/1 var(--display);color:var(--gold);transform:skew(-6deg)}.ct-page .promo .until{font:600 13px/1 var(--text);color:rgba(255,255,255,.8);text-align:right}.ct-page .promo p{grid-column:1/-1;font-weight:600;font-size:15px}.ct-page .promo p mark{background:var(--gold);color:var(--deep);padding:2px 9px;border-radius:999px;font-weight:700;white-space:nowrap}.ct-page header.bar{position:sticky;top:0;z-index:40;background:#fff;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 20px;box-shadow:0 1px 0 #dde4e9}.ct-page .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--deep)}.ct-page .logo .mark{width:36px;height:36px;border-radius:50%;background:var(--deep);display:grid;place-items:center;flex:none}.ct-page .logo .mark svg{width:20px;height:20px}.ct-page .logo .word{display:flex;flex-direction:column;gap:2px}.ct-page .logo .word b{font:400 22px/1 var(--display);letter-spacing:-.02em;color:var(--deep)}.ct-page .logo .word small{font:600 13px/1 var(--text);color:var(--muted)}.ct-page .btn-sm{background:var(--deep);color:#fff;font:700 14px/1 var(--text);padding:12px 16px;border-radius:var(--r);text-decoration:none;white-space:nowrap;transition:transform .15s}.ct-page .btn-sm:active{transform:scale(.96)}.ct-page footer .logo{color:#fff}.ct-page footer .logo .word b{color:#fff}.ct-page footer .logo .word small{color:rgba(255,255,255,.7)}.ct-page footer .logo .mark{background:var(--gold)}.ct-page .titlebar{padding:16px 20px 14px;background:#fff}.ct-page .titlebar h1{margin:6px 0 8px}.ct-page .titlebar .pricing{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px}.ct-page .titlebar .pricing b{font:800 26px/1 var(--text);color:var(--deep)}.ct-page .titlebar .pricing s{font-size:16px;color:#566874}.ct-page .titlebar .pricing span{background:var(--red);color:#fff;font:700 13px/1 var(--text);padding:5px 8px;border-radius:3px}.ct-page .titlebar .perks{margin-top:8px;font-size:15px;font-weight:600}.ct-page .gallery{position:relative;background:#fff;padding:4px 0 2px}.ct-page .slides{display:flex;align-items:flex-start;gap:6px;padding:0 4%;scroll-padding:0;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}.ct-page .slides::-webkit-scrollbar{display:none}.ct-page .gstage{position:relative}.ct-page .slides > img,.ct-page .slides > video{flex:0 0 92%;width:92%;aspect-ratio:4/5;object-fit:cover;scroll-snap-align:center;scroll-snap-stop:always;background:#e1e8ec;display:block;border-radius:14px;height:auto;max-height:none}.ct-page .slides > video{background:#0A2233}.ct-page .thumbs .tvid{position:relative}.ct-page .thumbs .tvid::after{content:"";position:absolute;inset:0;margin:auto;width:0;height:0;border-left:12px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}.ct-page .garrow{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center;box-shadow:0 2px 8px rgba(10,34,51,.18);z-index:3;transition:transform .16s cubic-bezier(.23,1,.32,1),opacity .2s}.ct-page .garrow:active{transform:translateY(-50%) scale(.9)}.ct-page .garrow[disabled]{opacity:0;pointer-events:none}.ct-page .gprev{left:8px}.ct-page .garrow svg{width:18px;height:18px}.ct-page .gnext{right:8px}.ct-page .gcount{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(10,34,51,.62);color:#fff;font:600 12px/1 var(--text);padding:5px 9px;border-radius:999px;z-index:3;font-variant-numeric:tabular-nums}.ct-page .gdots{display:none!important;position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:3;pointer-events:none}.ct-page .gdots b{width:7px;height:7px;border-radius:9px;background:rgba(255,255,255,.75);box-shadow:0 0 0 1px rgba(10,34,51,.25);transition:width .25s cubic-bezier(.23,1,.32,1),background .25s}.ct-page .gdots b.on{width:22px;background:var(--gold)}.ct-page .thumbs{display:flex;gap:6px;padding:8px 16px 4px;overflow-x:auto;scrollbar-width:none}.ct-page .thumbs::-webkit-scrollbar{display:none}.ct-page .thumbs button{flex:0 0 54px;aspect-ratio:1;border-radius:8px;overflow:hidden;outline:2px solid transparent;outline-offset:-2px;transition:outline-color .2s,opacity .2s;opacity:.65}.ct-page .thumbs button.on{outline-color:var(--deep);opacity:1}.ct-page .thumbs img{width:100%;height:100%;object-fit:cover}.ct-page .intro{padding:18px 20px 8px}.ct-page .rating{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px}.ct-page .stars{color:var(--star);letter-spacing:2px;font-size:17px}.ct-page h1{font-family:var(--display);font-weight:400;letter-spacing:-.32px;line-height:1.02;color:var(--deep);font-size:34px;margin:8px 0 12px}.ct-page .intro-h{font:400 26px/1.05 var(--display);letter-spacing:-.32px;color:var(--deep);margin-bottom:12px;text-wrap:balance}.ct-page .lead{font-weight:700;font-size:18px;line-height:1.35;margin-bottom:14px}.ct-page .intro p{margin-bottom:12px;color:var(--ink)}.ct-page .intro p b{font-weight:700}.ct-page .result{list-style:none;margin:6px 0 4px}.ct-page .result li{position:relative;padding-left:20px;margin:8px 0}.ct-page .result li::before{content:"";position:absolute;left:2px;top:9px;width:8px;height:8px;border-radius:50%;background:var(--deep)}.ct-page .life{margin:18px 0 4px;border-radius:12px;overflow:hidden;position:relative}.ct-page .life img{width:100%;aspect-ratio:4/5;object-fit:cover}.ct-page .life figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 16px 14px;color:#fff;font-weight:700;font-size:16px;background:linear-gradient(transparent,rgba(10,34,51,.85))}.ct-page .finds{display:flex;flex-wrap:wrap;gap:8px;padding:14px 20px 4px}.ct-page .finds span{flex:none;border:2px solid var(--deep);border-radius:999px;padding:7px 14px;font-weight:700;font-size:14px;white-space:nowrap}.ct-page .offer{padding:22px 20px 8px}.ct-page .kicker{font:700 14px/1 var(--label);letter-spacing:.1em;text-transform:uppercase;color:var(--deep);margin-bottom:12px;display:flex;align-items:center;gap:10px}.ct-page .kicker::after{content:"";flex:1;height:2px;background:var(--gold)}.ct-page .opt{display:grid;grid-template-columns:24px 64px 1fr auto;gap:12px;align-items:center;width:100%;text-align:left;border:2px solid #d3dce2;border-radius:8px;padding:12px;margin-bottom:10px;background:#fff;position:relative;transition:border-color .2s,background .2s,transform .15s}.ct-page .opt:active{transform:scale(.985)}.ct-page .opt .dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--deep);display:grid;place-items:center}.ct-page .opt .dot::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--deep);transform:scale(0);transition:transform .2s}.ct-page .opt img{width:64px;height:64px;object-fit:cover;border-radius:6px;background:var(--cream)}.ct-page .opt h3{font:800 17px/1.15 var(--text)}.ct-page .opt small{display:block;font-size:13.5px;color:var(--muted);margin-top:2px}.ct-page .opt .badge{display:inline-block;margin-top:6px;background:var(--gold);color:var(--deep);font:700 13px/1 var(--label);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:3px}.ct-page .opt .badge.red{background:var(--red);color:#fff}.ct-page .opt .price{text-align:right}.ct-page .opt .price b{display:block;font:800 18px/1.1 var(--text)}.ct-page .opt .price s{font-size:13px;color:#566874}.ct-page .opt .price em{display:block;font-style:normal;font-size:13px;color:var(--muted)}.ct-page .opt.on{border-color:var(--deep);background:var(--gold-soft)}.ct-page .opt.on .dot::after{transform:scale(1)}.ct-page .opt .flag{position:absolute;top:-11px;right:12px;background:var(--deep);color:var(--gold);font:700 13px/1 var(--label);letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:3px}.ct-page .cta{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;background:var(--deep);color:var(--gold);font:700 20px/1.1 var(--text);padding:18px 20px;border-radius:var(--r);text-decoration:none;text-align:center;transition:transform .15s,background .2s}.ct-page .cta small{display:block;color:#fff;font:400 13px/1.2 var(--text);margin-top:4px;opacity:.9}.ct-page .cta:active{transform:scale(.98)}.ct-page .cta.gold{background:var(--gold);color:var(--deep)}.ct-page .cta.gold small{color:var(--deep)}.ct-page .pulse{animation:ctpulse 2.4s ease-in-out infinite}@keyframes ctpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}.ct-page .ship{display:flex;gap:10px;align-items:flex-start;margin:16px 0 4px;font-size:14.5px}.ct-page .ship svg{flex:none;width:22px;height:22px;margin-top:1px}.ct-page .ship b{display:block;font-size:15.5px}.ct-page .trust{display:grid;grid-template-columns:repeat(3,1fr);margin:16px 0 8px;text-align:center;font-size:13px;font-weight:600}.ct-page .trust div{padding:8px 4px;display:flex;flex-direction:column;align-items:center;gap:6px}.ct-page .trust div+div{border-left:1px solid #d3dce2}.ct-page .trust svg{width:24px;height:24px}.ct-page .acc{border-top:2px dashed var(--gold)}.ct-page .acc details{border-bottom:2px dashed var(--gold)}.ct-page .acc summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 4px;font-weight:700;font-size:16.5px;cursor:pointer}.ct-page .acc summary::-webkit-details-marker{display:none}.ct-page .acc summary::after{content:"+";font:400 26px/1 var(--text);transition:transform .25s}.ct-page .acc details[open] summary::after{transform:rotate(45deg)}.ct-page .acc .ans{padding:0 4px 16px;color:var(--ink)}.ct-page .dark{background:var(--deep);color:#fff;padding:48px 0 44px;margin-top:36px;position:relative}.ct-page .dark h2{font-family:var(--display);font-weight:400;color:#fff;font-size:32px;line-height:1.04;letter-spacing:-.32px;padding:0 20px;margin-bottom:12px}.ct-page .dark .sub{padding:0 20px;color:rgba(255,255,255,.82);font-size:17px;margin-bottom:22px}.ct-page .reel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 20px;scrollbar-width:none}.ct-page .reel::-webkit-scrollbar{display:none}.ct-page .reel figure{flex:0 0 72%;scroll-snap-align:center;border-radius:18px;overflow:hidden;background:#123A52;position:relative}.ct-page .reel video{width:100%;aspect-ratio:9/13;object-fit:cover;display:block;background:#0b3d3d}.ct-page .reel figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 14px 14px;font-weight:700;font-size:15px;background:linear-gradient(transparent,rgba(0,0,0,.72))}.ct-page .sec{padding:48px 0 8px}.ct-page .h2-under{font:800 25px/1.2 var(--text);text-align:center;padding:0 20px;margin-bottom:22px}.ct-page .h2-under span{background:linear-gradient(var(--deep),var(--deep)) 0 100%/100% 2px no-repeat;padding-bottom:2px}.ct-page .cards{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 20px 6px;scrollbar-width:none}.ct-page .cards::-webkit-scrollbar{display:none}.ct-page .card{flex:0 0 78%;scroll-snap-align:center;border-radius:14px;padding:22px 18px 18px;color:#fff;text-align:center;background:linear-gradient(180deg,var(--deep) 0%,var(--deep) 45%,var(--deep-2) 70%,var(--gold) 100%)}.ct-page .card h3{font:800 22px/1.15 var(--text);margin-bottom:8px}.ct-page .card p{font-size:15px;line-height:1.45;opacity:.95;margin-bottom:16px}.ct-page .card img{border-radius:10px;aspect-ratio:4/5;object-fit:cover;width:100%}.ct-page .dots{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:16px}.ct-page .dots button{width:44px;height:44px;border-radius:50%;background:var(--gold);display:grid;place-items:center;transition:transform .15s,opacity .2s}.ct-page .dots button:disabled{opacity:.35}.ct-page .dots button:active{transform:scale(.92)}.ct-page .dots i{display:flex;gap:5px}.ct-page .dots i b{width:7px;height:7px;border-radius:9px;background:#b5c2cb;transition:width .25s,background .25s}.ct-page .dots i b.on{width:22px;background:var(--deep)}.ct-page .lift{padding:48px 20px 8px}.ct-page .lift h2,.ct-page .how h2,.ct-page .steps h2,.ct-page .vs h2,.ct-page .faq h2{font:400 30px/1.04 var(--display);letter-spacing:-.32px;color:var(--deep);margin-bottom:10px}.ct-page .lift p.txt{margin-bottom:16px}.ct-page .objs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}.ct-page .objs button{border:2px solid #d3dce2;border-radius:8px;padding:10px 4px;font-weight:700;font-size:14px;line-height:1.15;transition:border-color .2s,background .2s,transform .15s}.ct-page .objs button small{display:block;font-weight:400;font-size:13px;color:var(--muted);margin-top:2px}.ct-page .objs button.on{border-color:var(--deep);background:var(--gold-soft)}.ct-page .objs button:active{transform:scale(.96)}.ct-page .meter{background:var(--cream);border-radius:12px;padding:16px}.ct-page .meter .row{display:flex;justify-content:space-between;font-weight:700;font-size:14px;margin-bottom:8px}.ct-page .track{height:18px;border-radius:99px;background:#d3dce2;overflow:hidden;position:relative}.ct-page .fill{height:100%;width:0;background:var(--deep);border-radius:99px;transition:width .6s cubic-bezier(.2,.8,.2,1),background .3s}.ct-page .fill.over{background:var(--red)}.ct-page .verdict{margin-top:12px;font:400 22px/1.1 var(--display);color:var(--deep)}.ct-page .verdict.no{color:var(--red)}.ct-page .note{font-size:13.5px;color:var(--muted);margin-top:8px}.ct-page .how{padding:48px 20px 8px}.ct-page .how p.txt{margin-bottom:20px}.ct-page .tl{list-style:none;position:relative;padding-left:30px}.ct-page .tl::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:3px;background:var(--gold)}.ct-page .tl li{position:relative;padding-bottom:22px}.ct-page .tl li::before{content:"";position:absolute;left:-30px;top:2px;width:21px;height:21px;border-radius:50%;background:var(--deep);border:4px solid var(--gold)}.ct-page .tl .when{font:700 13px/1 var(--label);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}.ct-page .tl h3{font:800 20px/1.2 var(--text);margin:4px 0 2px}.ct-page .tl p{font-size:15.5px}.ct-page .box{background:var(--deep);color:#fff;border-radius:12px;padding:18px;font-size:15.5px;margin-top:4px}.ct-page .box b{color:var(--gold)}.ct-page .steps{padding:48px 20px 8px}.ct-page .steps .warn{display:inline-block;background:var(--red);color:#fff;font:700 13px/1 var(--label);letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:3px;margin-bottom:16px}.ct-page .step{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;padding:14px 0;border-bottom:2px dashed #d3dce2}.ct-page .step .n{font:700 13px/1 var(--label);letter-spacing:.08em;background:var(--gold);color:var(--deep);padding:7px 9px;border-radius:3px;white-space:nowrap}.ct-page .step p{font-size:16px}.ct-page table{width:100%;border-collapse:collapse;margin-top:18px;font-size:15px}.ct-page th{font:700 13px/1.1 var(--label);letter-spacing:.08em;text-transform:uppercase;background:var(--deep);color:#fff;text-align:left;padding:11px 12px}.ct-page td{padding:11px 12px;border-bottom:1px solid #dde4e9;vertical-align:top}.ct-page tbody tr:nth-child(even) td{background:#f4f7f9}.ct-page td:first-child{font-weight:700}.ct-page .after-table{font-weight:700;margin-top:12px;font-size:15px}.ct-page .vs{background:var(--cream);padding:44px 0 36px;margin-top:44px}.ct-page .vs .kick2{font:700 14px/1 var(--label);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:0 20px;margin-bottom:10px}.ct-page .vs h2{padding:0 20px;margin-bottom:18px}.ct-page .vs .scroll{overflow-x:auto;padding:0 20px;scrollbar-width:none}.ct-page .vs table{min-width:520px;margin:0;font-size:14.5px;background:#fff;border-radius:10px;overflow:hidden}.ct-page .vs th:first-child,.ct-page .vs td:first-child{position:sticky;left:0;z-index:1}.ct-page .vs td:first-child{background:#fff}.ct-page .vs th.me{background:var(--gold);color:var(--deep)}.ct-page .vs td.me{background:var(--gold-soft)!important;font-weight:700}.ct-page .vs .hint{font-size:13px;color:var(--muted);padding:10px 20px 0}.ct-page .faq{padding:44px 20px 8px}.ct-page .faq p.txt{margin-bottom:14px}.ct-page .wa{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:#25D366;color:#fff;font:700 17px/1 var(--text);padding:16px;border-radius:var(--r);text-decoration:none;margin:4px 0 22px}.ct-page .wa svg{width:22px;height:22px}.ct-page .close{background:var(--deep);color:#fff;padding:44px 20px 40px;margin-top:44px;text-align:center}.ct-page .close h2{font:400 34px/1.02 var(--display);color:var(--gold);margin-bottom:12px;letter-spacing:-.32px}.ct-page .close p{margin-bottom:20px;color:rgba(255,255,255,.88)}.ct-page footer{background:#06182A;color:rgba(255,255,255,.75);padding:28px 20px 30px;font-size:14px;text-align:center}.ct-page footer .logo{justify-content:center;margin-bottom:12px}.ct-page footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin:10px 0}.ct-page footer a{text-decoration:none}.ct-page .sticky{position:fixed;left:50%;bottom:0;transform:translate(-50%,110%);width:100%;max-width:480px;background:#fff;padding:10px 14px calc(10px + env(safe-area-inset-bottom));z-index:50;box-shadow:0 -6px 20px rgba(10,34,51,.15);transition:transform .35s cubic-bezier(.2,.8,.2,1)}.ct-page .sticky.show{transform:translate(-50%,0)}.ct-page .sticky .cta{padding:13px 16px;font-size:18px}.ct-page .toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,20px);max-width:440px;width:calc(100% - 32px);background:var(--deep);color:#fff;padding:14px 16px;border-radius:10px;font-size:14.5px;opacity:0;pointer-events:none;transition:.3s;z-index:60}.ct-page .toast.show{opacity:1;transform:translate(-50%,0)}.ct-page .proof{background:var(--deep);color:#fff;margin:22px 0 0;padding:34px 20px 28px;position:relative}.ct-page .proof-num{font:400 112px/.85 var(--display);color:var(--gold);letter-spacing:-.04em;display:flex;align-items:flex-start;gap:6px}.ct-page .proof-num span{font-size:34px;line-height:1;margin-top:10px}.ct-page .proof h2{font:400 28px/1.05 var(--display);color:#fff;margin:14px 0 10px;text-wrap:balance}.ct-page .proof p{color:rgba(255,255,255,.88);font-size:16.5px}.ct-page .proof-list{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0 18px}.ct-page .proof-list li{background:var(--deep-2);border-radius:8px;padding:12px 8px;font-size:13px;line-height:1.25;text-align:center;color:rgba(255,255,255,.85)}.ct-page .proof-list b{display:block;font:400 22px/1.1 var(--display);color:var(--gold);margin-bottom:4px}.ct-page .gift{display:flex;gap:12px;align-items:center;background:var(--gold-soft);border:2px dashed var(--gold);border-radius:10px;padding:12px 14px;margin-top:12px;font-size:15px;line-height:1.35}.ct-page .gift svg{flex:none;width:30px;height:30px;color:var(--red)}.ct-page .nopay{text-align:center;font-size:14px;font-weight:600;margin-top:8px}.ct-page .howbuy{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 4px;text-align:center;font-size:13px;line-height:1.25;font-weight:600}.ct-page .howbuy li{background:var(--cream);border-radius:8px;padding:12px 6px 10px}.ct-page .howbuy b{display:grid;place-items:center;width:26px;height:26px;margin:0 auto 6px;border-radius:50%;background:var(--deep);color:var(--gold);font:400 14px/1 var(--display)}.ct-page .wa-float{position:fixed;right:max(16px,calc(50% - 240px + 16px));bottom:calc(92px + env(safe-area-inset-bottom,0px));width:54px;height:54px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.25);z-index:55;opacity:0;transform:scale(.8);pointer-events:none;transition:opacity .25s,transform .25s cubic-bezier(.23,1,.32,1)}.ct-page .wa-float.show{opacity:1;transform:none;pointer-events:auto}.ct-page .wa-float svg{width:30px;height:30px}.ct-page ::selection{background:var(--gold);color:var(--deep)}.ct-page :focus-visible{outline:3px solid var(--gold);outline-offset:2px}.ct-page .rv{transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1)}.ct-page .rv.pre{opacity:0;transform:translateY(22px)}@media (prefers-reduced-motion:reduce){.ct-page *{animation:none!important;transition:none!important}.ct-page .rv{opacity:1;transform:none}}.ct-page .sec-img{display:block;width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;border-radius:12px;margin:0 0 18px;background:#e1e8ec}
+.ct-page .proof-img{margin:20px 0 0}.ct-page .proof-img img{display:block;width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;border-radius:12px;background:var(--deep-2)}.ct-page .proof-img figcaption{font-size:13px;color:rgba(255,255,255,.7);margin-top:8px}
+.ct-page .vs{background:linear-gradient(180deg,var(--cream),#fff);padding:48px 16px 40px}
+.ct-page .vs .kick2,.ct-page .vs h2{padding:0 4px}
+.ct-page .vs-sub{padding:0 4px;margin:-2px 0 20px;color:var(--muted);font-size:16px}
+.ct-page .cmp{background:#fff;border-radius:16px;box-shadow:0 1px 0 #dde4e9,0 12px 32px -12px rgba(10,34,51,.18);padding:6px 8px 8px}
+.ct-page .cr{display:grid;grid-template-columns:1.35fr 1.05fr .8fr .8fr;align-items:stretch;min-height:54px}
+.ct-page .cr>span{border-bottom:1px solid #edf1f4}.ct-page .cr>span.me{border-bottom-color:rgba(255,255,255,.1)}.ct-page .cr.ch>span,.ct-page .cr.cp>span{border-bottom:0}
+.ct-page .cr>span{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px 4px;font-size:12.5px;color:var(--muted);line-height:1.2}
+.ct-page .cr>span.q{align-items:flex-start;text-align:left;font-weight:700;font-size:14px;color:var(--ink);padding-left:6px}
+.ct-page .cr>span.me{background:var(--deep);color:#fff;align-self:stretch}
+.ct-page .cr.ch{border-bottom:0;min-height:0}
+.ct-page .cr.ch>span{font:700 12px/1.1 var(--label);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:12px 4px 10px;align-self:end}
+.ct-page .cr.ch>span.me{border-radius:12px 12px 0 0;color:var(--gold);padding-top:12px;gap:6px;align-self:stretch;justify-content:flex-end}
+.ct-page .cr.ch>span.me img{width:40px;height:40px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px var(--gold)}
+.ct-page .cr.ch>span.me b{font:inherit}
+.ct-page .cr.cp>span.me{border-radius:0 0 12px 12px}
+.ct-page .cr.cp b{font:800 16px/1 var(--text);color:var(--ink);display:block}
+.ct-page .cr.cp>span.me b{color:var(--gold);font-size:18px}
+.ct-page .cr.cp small{font-size:11px;margin-top:3px;display:block}
+.ct-page .cr.cp>span.me small{color:rgba(255,255,255,.75)}
+.ct-page .ic{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%}
+.ct-page .ic.ok{background:var(--gold);color:var(--deep)}
+.ct-page .cr>span:not(.me) .ic.ok{background:#e3ecf2;color:var(--deep)}
+.ct-page .ic.no{background:#f1f3f5;color:#9aa7b0}
+.ct-page .ic.mid{background:#f1f3f5;color:#9aa7b0}
+.ct-page .vs-trust{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.ct-page .vs-trust li{background:#fff;border:1px solid #e3eaef;border-radius:10px;padding:10px 6px;text-align:center;font-size:12px;color:var(--muted);line-height:1.25}
+.ct-page .vs-trust b{display:block;color:var(--ink);font-size:13px;margin-bottom:2px}
+.ct-page .close{background:linear-gradient(180deg,rgba(10,34,51,0) 0%,rgba(10,34,51,.35) 30%,rgba(10,34,51,.92) 58%,var(--deep) 75%),var(--bg) center top/100% auto no-repeat,var(--deep);padding-top:300px}
+.ct-page .logo .mark{background:none;width:38px;height:38px}.ct-page .logo .mark svg{width:38px;height:38px}
+.ct-page footer .logo .mark{background:none}
+.ct-page footer .seal-link{display:block;width:132px;margin:4px auto 14px}.ct-page footer .seal{display:block;width:132px;height:132px}
+.ct-page footer .brandline{max-width:300px;margin:0 auto 6px;color:rgba(255,255,255,.8);line-height:1.45}.ct-page footer .brandline b{color:#fff}
+.ct-page .proof-note{margin-top:12px;font-size:15px!important;background:var(--deep-2);border-left:3px solid var(--gold);border-radius:0;padding:10px 12px}.ct-page .proof-note b{color:var(--gold)}
+.ct-page a.rating{text-decoration:none;color:inherit}.ct-page .rating .tick{color:#1d7a4a;font-weight:800}
+.ct-page .rev{padding:44px 20px 8px}
+.ct-page .rev h2{font:400 30px/1.04 var(--display);letter-spacing:-.32px;color:var(--deep);margin-bottom:14px}
+.ct-page .rev-sum{display:flex;align-items:center;gap:10px;margin-bottom:14px}.ct-page .rev-sum b{font:400 34px/1 var(--display);color:var(--deep)}.ct-page .rev-sum small{display:block;color:var(--muted);font-size:14px}
+.ct-page .rev .stars{color:var(--gold);letter-spacing:1px}
+.ct-page .rev-list{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -20px;padding:0 20px 4px}.ct-page .rev-list::-webkit-scrollbar{display:none}
+.ct-page .rev-card{flex:0 0 78%;scroll-snap-align:start;background:#fff;border:1px solid #e3eaef;border-radius:14px;overflow:hidden}
+.ct-page .rev-card img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+.ct-page .rev-body{padding:12px 14px 14px}.ct-page .rev-body p{font-size:15px;margin:6px 0 8px}.ct-page .rev-body .who{font-size:13px;font-weight:700;color:var(--muted)}
+.ct-page .rev-cta{display:block;margin-top:14px;padding:14px 16px;border:1.5px dashed var(--gold);border-radius:12px;background:var(--gold-soft);color:var(--ink);text-decoration:none;font-size:15px;line-height:1.4}.ct-page .rev-cta b{display:block;color:var(--deep)}
+.ct-page .page{overflow:hidden;overflow:clip}
+.ct-page .promo{position:sticky;top:0;z-index:45;padding:9px 14px 10px;gap:6px 10px;box-shadow:0 2px 10px rgba(6,24,42,.25)}
+.ct-page header.bar{position:relative;top:auto}
+.ct-page .promo p{font-size:14px}
+.ct-page .cd{display:flex;align-items:center;justify-content:flex-end;gap:4px}
+
+.ct-page .cd-u{display:flex;align-items:baseline;gap:1px;background:rgba(255,255,255,.1);border-radius:6px;padding:5px 5px 4px;min-width:34px;justify-content:center}
+.ct-page .cd-u b{font:800 16px/1 var(--text);color:#fff;font-variant-numeric:tabular-nums}
+.ct-page .cd-u i{font:600 10px/1 var(--text);color:var(--gold);font-style:normal}
+.ct-page .snd{position:absolute;top:10px;right:10px;z-index:4;display:inline-flex;align-items:center;gap:6px;background:rgba(6,24,42,.72);color:#fff;font:700 12px/1 var(--text);padding:8px 11px;border-radius:999px;backdrop-filter:blur(4px);transition:transform .16s cubic-bezier(.23,1,.32,1),background .2s}
+.ct-page .snd:active{transform:scale(.94)}.ct-page .snd.on{background:var(--gold);color:var(--deep)}
+.ct-page .snd.gal{top:auto;bottom:10px;right:calc(4% + 10px)}.ct-page .snd[hidden]{display:none}
+.ct-page .sticky .cta{box-shadow:0 6px 18px rgba(10,34,51,.25)}
+.ct-page .incl{padding:22px 20px 6px}
+.ct-page .incl h2{font:400 24px/1.05 var(--display);color:var(--deep);margin-bottom:12px}
+.ct-page .incl ul{list-style:none;border:1px solid #e3eaef;border-radius:14px;overflow:hidden;background:#fff}
+.ct-page .incl li{display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid #edf1f4}
+.ct-page .incl li:last-child{border-bottom:0;background:linear-gradient(90deg,var(--gold-soft),#fff)}
+.ct-page .incl li img{width:56px;height:56px;border-radius:10px;object-fit:cover;background:#e1e8ec}
+.ct-page .incl li b{display:block;font-size:15px;line-height:1.2;color:var(--ink)}
+.ct-page .incl li small{display:block;font-size:12.5px;color:var(--muted);line-height:1.3;margin-top:2px}
+.ct-page .incl .free{font:700 11px/1 var(--label);letter-spacing:.08em;text-transform:uppercase;background:var(--gold);color:var(--deep);padding:6px 8px;border-radius:999px;white-space:nowrap}
+.ct-page .incl .free.inc{background:#e3ecf2}
+.ct-page .incl-note{font-size:13px;color:var(--muted);margin-top:8px}
+.ct-page .promo p mark+mark{margin-left:4px}
+.ct-page .proof{padding:30px 16px 22px}
+.ct-page .proof .kick-g{font:700 12px/1 var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.ct-page .proof h2{margin:0 0 14px;font-size:26px}
+.ct-page .proof-hero{position:relative;margin:0;border-radius:16px;overflow:hidden}
+.ct-page .proof-hero img{display:block;width:100%;height:auto;aspect-ratio:5/4;object-fit:cover}
+.ct-page .proof-hero .seal{position:absolute;left:12px;bottom:12px;width:92px;height:92px;border-radius:50%;background:var(--gold);color:var(--deep);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(10,34,51,.85),0 8px 22px rgba(0,0,0,.35);transform:rotate(-8deg)}
+.ct-page .proof-hero .seal b{font:400 36px/.9 var(--display);letter-spacing:-.03em}
+.ct-page .proof-hero .seal span{font:700 13px/1 var(--label);letter-spacing:.14em;text-transform:uppercase}
+.ct-page .proof-hero .pill{position:absolute;left:10px;top:10px;background:rgba(6,24,42,.78);color:#fff;font:600 12px/1 var(--text);padding:7px 10px;border-radius:999px;backdrop-filter:blur(4px)}
+.ct-page .proof .proof-list{margin:12px 0 12px}
+.ct-page .proof-tip{margin:0;font-size:14px;color:rgba(255,255,255,.85);border-top:1px solid rgba(255,255,255,.12);padding-top:12px}
+.ct-page .proof-tip b{color:var(--gold)}
+.ct-page .opt{grid-template-columns:72px 1fr auto;grid-template-areas:"ph info price" "gifts gifts gifts";gap:8px 12px;padding:14px 12px 12px;border-radius:12px;border:2px solid #dbe3e8;box-shadow:0 1px 0 #e7edf1;margin-bottom:14px}
+.ct-page .opt.on{border-color:var(--deep);background:#fff;box-shadow:0 0 0 3px rgba(246,184,38,.45),0 10px 24px -12px rgba(10,34,51,.35)}
+.ct-page .opt .ph{grid-area:ph;position:relative;width:72px;height:72px}
+.ct-page .opt .ph img{width:72px;height:72px;border-radius:10px;object-fit:cover;background:var(--cream)}
+.ct-page .opt .ph i{position:absolute;right:-6px;bottom:-6px;min-width:28px;height:28px;padding:0 6px;border-radius:999px;background:var(--deep);color:var(--gold);font:400 14px/28px var(--display);font-style:normal;text-align:center;box-shadow:0 0 0 2px #fff}
+.ct-page .opt .info{grid-area:info;min-width:0}
+.ct-page .opt h3{font:400 20px/1.05 var(--display);color:var(--deep)}
+.ct-page .opt small{font-size:13px;margin-top:3px}
+.ct-page .opt .save{display:inline-block;margin-top:6px;background:#E6F4EC;color:#1d6b40;font:700 12px/1 var(--text);padding:5px 8px;border-radius:999px}
+.ct-page .opt .price{grid-area:price;align-self:start;padding-right:22px}
+.ct-page .opt .price b{font:800 20px/1.05 var(--text);color:var(--deep)}
+.ct-page .opt .price em{color:#1d6b40;font-weight:700}
+.ct-page .opt .dot{position:absolute;top:12px;right:10px;width:20px;height:20px;border:2px solid #b9c6cf}
+.ct-page .opt.on .dot{border-color:var(--deep);background:var(--deep)}
+.ct-page .opt .dot::after{width:6px;height:10px;border-radius:0;background:none;border:solid var(--gold);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) scale(0);margin-top:-2px}
+.ct-page .opt.on .dot::after{transform:rotate(45deg) scale(1)}
+.ct-page .opt .gifts{grid-area:gifts;display:flex;flex-wrap:wrap;gap:6px;border-top:1px dashed #dbe3e8;padding-top:9px}
+.ct-page .opt .gifts em{font-style:normal;font:600 12px/1 var(--text);color:var(--deep);background:var(--gold-soft);padding:6px 8px;border-radius:999px;display:inline-flex;align-items:center;gap:5px}
+.ct-page .opt .gifts em::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.ct-page .opt.on .gifts em{background:#FFF4D6}
+.ct-page .opt .flag{left:12px;right:auto;top:-12px;border-radius:999px;padding:6px 10px;font-size:12px}
+.ct-page .opt .flag.best{background:var(--red);color:#fff}
+.ct-page .g2{position:relative;margin:4px 0 14px;border-radius:16px;padding:2px;background:linear-gradient(135deg,#F6B826,#FFE08A 40%,#C98A00 70%,#F6B826);background-size:200% 200%;animation:g2b 6s ease-in-out infinite}
+@keyframes g2b{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.ct-page .g2>*{position:relative}
+.ct-page .g2-h{display:flex;align-items:center;gap:10px;background:var(--deep);color:#fff;border-radius:14px 14px 0 0;padding:11px 14px}
+.ct-page .g2-i{width:38px;height:38px;border-radius:50%;background:var(--gold);color:var(--deep);display:grid;place-items:center;flex:none;animation:g2w 2.4s cubic-bezier(.36,.07,.19,.97) infinite}
+@keyframes g2w{0%,80%,100%{transform:rotate(0)}84%{transform:rotate(-12deg)}88%{transform:rotate(10deg)}92%{transform:rotate(-6deg)}96%{transform:rotate(4deg)}}
+.ct-page .g2-h b{display:block;font:400 21px/1 var(--display);color:var(--gold);text-transform:uppercase;letter-spacing:.01em}
+.ct-page .g2-h small{display:block;font-size:12.5px;color:rgba(255,255,255,.8);margin-top:3px}
+.ct-page .g2-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;gap:6px;background:#FFFBF0;border-radius:0 0 14px 14px;padding:12px 10px}
+.ct-page .g2-c{position:relative;background:#fff;border-radius:12px;padding:10px 8px 10px;text-align:center;box-shadow:0 1px 0 #f0e2b8,0 6px 16px -10px rgba(10,34,51,.3)}
+.ct-page .g2-c img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:9px;margin-bottom:8px;background:#f4efe2}
+.ct-page .g2-c b{display:block;font:800 13.5px/1.2 var(--text);color:var(--deep)}
+.ct-page .g2-c small{display:block;font-size:12px;color:var(--muted);margin-top:3px;line-height:1.3}
+.ct-page .g2-c small s{color:#9aa7b0}
+.ct-page .g2-free{position:absolute;top:-8px;right:-6px;z-index:2;background:var(--red);color:#fff;font:700 11px/1 var(--label);letter-spacing:.1em;text-transform:uppercase;padding:6px 8px;border-radius:999px;transform:rotate(6deg);box-shadow:0 4px 10px rgba(200,67,43,.35)}
+.ct-page .g2-plus{align-self:center;font:400 26px/1 var(--display);color:var(--gold-d,#8F6500);color:#C98A00}
+@media (prefers-reduced-motion:reduce){.ct-page .g2,.ct-page .g2-i{animation:none}}
+.ct-page .wh{position:fixed;inset:0;z-index:80;background:rgba(6,24,42,.62);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .22s ease}
+.ct-page .wh.in{opacity:1}.ct-page .wh[hidden]{display:none}
+.ct-page .wh-card{position:relative;width:100%;max-width:360px;background:#fff;border-radius:20px;padding:22px 18px 16px;text-align:center;transform:scale(.94);transition:transform .3s cubic-bezier(.23,1,.32,1);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.ct-page .wh.in .wh-card{transform:scale(1)}
+.ct-page .wh-x{position:absolute;top:8px;right:10px;width:36px;height:36px;border-radius:50%;font-size:24px;line-height:1;color:var(--muted)}
+.ct-page .wh-k{font:700 12px/1 var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+.ct-page .wh-card h3{font:400 26px/1.05 var(--display);color:var(--deep);margin:6px 0 6px}
+.ct-page .wh-p{font-size:14px;color:var(--muted);margin-bottom:12px}
+.ct-page .wh-wheel{position:relative;width:250px;height:250px;margin:0 auto 14px}
+.ct-page .wh-wheel svg{width:100%;height:100%;display:block;filter:drop-shadow(0 8px 18px rgba(10,34,51,.3))}
+.ct-page .wh-ptr{position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:26px solid var(--red);z-index:2;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
+.ct-page .wh-hub{position:absolute;left:50%;top:50%;width:62px;height:62px;margin:-31px 0 0 -31px;border-radius:50%;background:#fff;border:4px solid var(--gold);display:grid;place-items:center;font:400 14px/1 var(--display);color:var(--deep)}
+.ct-page .wh-go[hidden],.ct-page .wh-res[hidden]{display:none!important}
+.ct-page .wh-res b{display:block;font:400 22px/1.15 var(--display);color:var(--red);margin-bottom:4px}
+.ct-page .wh-res p{font-size:14px;color:var(--muted);margin-bottom:12px}
+.ct-page .wh-wheel.tense .wh-ptr{animation:whptr .12s ease-in-out infinite}
+@keyframes whptr{0%,100%{transform:translateX(-50%) rotate(-7deg)}50%{transform:translateX(-50%) rotate(7deg)}}
+.ct-page .wh-wheel.tense svg{filter:drop-shadow(0 0 16px rgba(246,184,38,.85))}
+.ct-page .wa-float{display:none!important}
+.ct-page .wh-fine{display:block;font-size:11.5px;color:#7b8b96;margin-top:10px;line-height:1.35}
+.ct-page .wh-chip{position:fixed;left:12px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:49;display:flex;align-items:center;gap:7px;max-width:calc(100% - 96px);background:linear-gradient(90deg,#17603a,#23854f);color:#fff;font:600 13px/1.15 var(--text);padding:8px 8px 8px 10px;border:2px solid var(--gold);border-radius:999px;box-shadow:0 8px 22px rgba(10,34,51,.35);white-space:nowrap;cursor:pointer;overflow:hidden;animation:whcp 2.6s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
+.ct-page .wh-chip::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);animation:whsh 2.6s ease-in-out infinite}
+.ct-page .wh-chip b{color:var(--gold)}.ct-page .wh-chip[hidden],.ct-page .wh-pend[hidden]{display:none}
+.ct-page .wh-chip-g{font-size:18px;line-height:1;animation:whg 1.3s ease-in-out infinite}
+.ct-page .wh-chip-go{background:var(--gold);color:#0A2233;font-weight:800;padding:6px 10px;border-radius:999px}
+.ct-page .wh-chip.back{animation:whbk .55s ease-in-out 3,whcp 2.6s ease-in-out 1.7s infinite}
+.ct-page .wh-chip:active{transform:scale(.97)}
+@keyframes whcp{0%,100%{box-shadow:0 8px 22px rgba(10,34,51,.35),0 0 0 0 rgba(246,184,38,.55)}50%{box-shadow:0 8px 22px rgba(10,34,51,.35),0 0 0 9px rgba(246,184,38,0)}}
+@keyframes whsh{0%,55%{left:-60%}100%{left:130%}}
+@keyframes whg{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
+@keyframes whbk{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.ct-page .wh-pend{position:fixed;left:12px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:49;display:flex;align-items:center;gap:6px;background:#0A2233;color:#fff;font:700 13px/1 var(--text);padding:10px 13px;border:2px solid var(--gold);border-radius:999px;box-shadow:0 8px 22px rgba(10,34,51,.35);cursor:pointer;animation:whcp 2.2s ease-in-out infinite}
+.ct-page .wh-pend span{font-size:18px;animation:whg 1.1s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.ct-page .wh-chip,.ct-page .wh-chip::after,.ct-page .wh-chip-g,.ct-page .wh-pend,.ct-page .wh-pend span{animation:none}}
+@media (prefers-reduced-motion:reduce){.ct-page #whS{transition-duration:.01s!important}}
+.ct-page .cod{margin:12px 0 4px;border:1.5px solid #dbe3e8;border-radius:12px;padding:12px 14px;background:#F7FAFB}
+.ct-page .cod-h{display:block;font:800 14px/1.2 var(--text);color:var(--deep);margin-bottom:8px}
+.ct-page .cod ul{list-style:none;margin:0;padding:0}
+.ct-page .cod li{display:flex;gap:9px;font-size:13.5px;line-height:1.35;margin-bottom:7px;color:var(--ink)}
+.ct-page .cod li span{flex:none;width:20px;height:20px;border-radius:50%;background:var(--deep);color:var(--gold);font:800 11px/20px var(--text);text-align:center}
+.ct-page .cod small{display:block;font-size:12.5px;color:var(--muted)}
+.ct-page .wh-card{overflow:hidden}
+.ct-page .wh-res .wh-fel{font-size:28px;color:var(--deep);animation:whp .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes whp{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+.ct-page .wh-msg{font-size:14px;color:var(--ink);background:#FFF4D6;border-radius:10px;padding:9px 10px;margin:-4px 0 10px}
+.ct-page .wh-msg b{color:var(--red)}
+.ct-page .wh-p b{color:var(--deep)}
+.ct-page #whS{will-change:transform}
+.ct-page .wh-conf{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.ct-page .wh-conf i{position:absolute;top:-12px;width:8px;height:12px;border-radius:2px;animation:whc 1.6s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes whc{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),520px) rotate(var(--r));opacity:0}}
+</style><div class="ct-page no-js" id="ct-root">
+<div class="page">
+  <div class="promo" id="promo">
+    <b class="tag">BLACK FRIDAY</b>
+    <div class="cd" id="cd" data-end="{{ section.settings.fin_oferta | default: '2026-11-30T23:59:00-05:00' | escape }}" role="timer" aria-label="Tiempo restante de la oferta Black Friday"><span class="cd-u"><b id="cdD">00</b><i>d</i></span><span class="cd-u"><b id="cdH">00</b><i>h</i></span><span class="cd-u"><b id="cdM">00</b><i>m</i></span><span class="cd-u"><b id="cdS">00</b><i>s</i></span></div>
+    <p>Gratis con tu pedido: <mark>Cuerda 10 m</mark> <mark>Guía digital</mark></p>
+  </div>
+  <header class="bar">
+    <a class="logo" href="/" aria-label="alcomprar, inicio">
+      <span class="mark"><svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="98" fill="#F6B826"/><circle cx="100" cy="100" r="86" fill="#0A2233"/><text x="100" y="134" text-anchor="middle" font-family="Fugaz One,Arial Black,sans-serif" font-size="100" fill="#F6B826">a</text></svg></span>
+      <span class="word"><b>alcomprar</b><small>Tienda oficial</small></span>
+    </a>
+    <a class="btn-sm" href="#oferta">Pedir ahora</a>
+  </header>
+  <div class="titlebar">
+    {% if rv_count > 0 %}<a class="rating" href="#resenas"><span class="stars" aria-hidden="true">★★★★★</span> {{ rv_avg }} · {{ rv_count }} {% if rv_count == 1 %}reseña{% else %}reseñas{% endif %}</a>{% else %}<div class="rating"><span class="tick" aria-hidden="true">✓</span> Pago contra entrega en toda Colombia</div>{% endif %}
+    <h1>Imán de Pesca 140 kg</h1>
+    <div class="pricing"><b>$109.000</b><s>$150.000</s><span>-27% Black Friday</span></div>
+    <p class="perks">Cuerda 10 m + guía digital de regalo · Pagas al recibir</p>
+  </div>
+  <section class="gallery" aria-label="Fotos del producto">
+    <div class="gstage">
+    <div class="slides" id="slides">
+      <img decoding="async" src="{{ 'ct-1-principal.jpg' | file_url }}&width=540" srcset="{{ 'ct-1-principal.jpg' | file_url }}&width=360 360w, {{ 'ct-1-principal.jpg' | file_url }}&width=540 540w, {{ 'ct-1-principal.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Imán de pesca de 140 kg con cuerda de 10 metros de regalo" fetchpriority="high" width="800" height="1000">
+      <img decoding="async" src="{{ 'ct-submarina.jpg' | file_url }}&width=540" srcset="{{ 'ct-submarina.jpg' | file_url }}&width=360 360w, {{ 'ct-submarina.jpg' | file_url }}&width=540 540w, {{ 'ct-submarina.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Bajo el agua: el imán atrae una llave, monedas y un candado" loading="lazy">
+      <img decoding="async" data-src="{{ 'ct-ugc-caja-fuerte.jpg' | file_url }}&width=540" data-srcset="{{ 'ct-ugc-caja-fuerte.jpg' | file_url }}&width=360 360w, {{ 'ct-ugc-caja-fuerte.jpg' | file_url }}&width=540 540w, {{ 'ct-ugc-caja-fuerte.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Dos amigos sacando una caja fuerte oxidada del río con el imán" loading="lazy">
+      <img decoding="async" data-src="{{ 'ct-papa-hijo.jpg' | file_url }}&width=540" data-srcset="{{ 'ct-papa-hijo.jpg' | file_url }}&width=360 360w, {{ 'ct-papa-hijo.jpg' | file_url }}&width=540 540w, {{ 'ct-papa-hijo.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Papá e hijo sacando una herradura del río desde un puente" loading="lazy">
+      <img decoding="async" data-src="{{ 'ct-3-ofertas.jpg' | file_url }}&width=540" data-srcset="{{ 'ct-3-ofertas.jpg' | file_url }}&width=360 360w, {{ 'ct-3-ofertas.jpg' | file_url }}&width=540 540w, {{ 'ct-3-ofertas.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Combos: 1 imán $109.000, 2 imanes $172.900, 3 imanes $229.200" loading="lazy">
+      <img decoding="async" data-src="{{ 'ct-ugc-mano.jpg' | file_url }}&width=540" data-srcset="{{ 'ct-ugc-mano.jpg' | file_url }}&width=360 360w, {{ 'ct-ugc-mano.jpg' | file_url }}&width=540 540w, {{ 'ct-ugc-mano.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Monedas, llaves y un anzuelo pegados al imán" loading="lazy">
+      <video class="vid" src="{{ 'ct-video-unboxing-s.mp4' | file_url }}" poster="{{ 'ct-video-unboxing.jpg' | file_url }}&width=480" muted loop playsinline preload="none" aria-label="Video: el imán con su cuerda roja y mosquetón"></video>
+      <img decoding="async" data-src="{{ 'ct-navidad.jpg' | file_url }}&width=540" data-srcset="{{ 'ct-navidad.jpg' | file_url }}&width=360 360w, {{ 'ct-navidad.jpg' | file_url }}&width=540 540w, {{ 'ct-navidad.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Papá e hijo abriendo el imán como regalo de Navidad" loading="lazy">
+      <img decoding="async" data-src="{{ 'ct-2-ficha.jpg' | file_url }}&width=540" data-srcset="{{ 'ct-2-ficha.jpg' | file_url }}&width=360 360w, {{ 'ct-2-ficha.jpg' | file_url }}&width=540 540w, {{ 'ct-2-ficha.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Ficha técnica: 140 kg, 60 mm, neodimio, argolla inox 304, cuerda de 10 m" loading="lazy">
+      <img decoding="async" data-src="{{ 'ct-5-contraentrega.jpg' | file_url }}&width=540" data-srcset="{{ 'ct-5-contraentrega.jpg' | file_url }}&width=360 360w, {{ 'ct-5-contraentrega.jpg' | file_url }}&width=540 540w, {{ 'ct-5-contraentrega.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Pide hoy y paga al recibir en toda Colombia" loading="lazy">
+    </div>
+    <button class="garrow gprev" id="gprev" aria-label="Foto anterior" disabled><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A2233" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <button class="garrow gnext" id="gnext" aria-label="Foto siguiente"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A2233" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    <div class="gcount" aria-live="polite"><span id="gcur">1</span> / <span id="gtot">10</span></div>
+    <div class="gdots" id="gdots" aria-hidden="true"></div>
+    </div>
+    <div class="thumbs" id="thumbs">
+      <button class="on" aria-label="Foto principal"><img decoding="async" loading="lazy" src="{{ 'ct-1-principal.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
+      <button aria-label="Bajo el agua"><img decoding="async" loading="lazy" src="{{ 'ct-submarina.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
+      <button aria-label="Caja fuerte"><img decoding="async" loading="lazy" src="{{ 'ct-ugc-caja-fuerte.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
+      <button aria-label="Papá e hijo"><img decoding="async" loading="lazy" src="{{ 'ct-papa-hijo.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
+      <button aria-label="Combos"><img decoding="async" loading="lazy" src="{{ 'ct-3-ofertas.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
+      <button aria-label="Lo que se pega"><img decoding="async" loading="lazy" src="{{ 'ct-ugc-mano.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
+      <button aria-label="Video del producto" class="tvid"><img decoding="async" loading="lazy" src="{{ 'ct-video-unboxing.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
+      <button aria-label="Regalo de Navidad"><img decoding="async" loading="lazy" src="{{ 'ct-navidad.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
+      <button aria-label="Ficha técnica"><img decoding="async" loading="lazy" src="{{ 'ct-2-ficha.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
+      <button aria-label="Cómo pedir"><img decoding="async" loading="lazy" src="{{ 'ct-5-contraentrega.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
+    </div>
+  </section>
+  <section class="incl" aria-labelledby="inclTitle">
+    <h2 id="inclTitle">Tu pedido incluye</h2>
+    <ul>
+      <li><img decoding="async" loading="lazy" src="{{ 'ct-producto-mini.jpg' | file_url }}&width=160" alt="" width="64" height="64"><div><b>Imán de neodimio 140 kg</b><small>60 mm (como una tapa de frasco) · argolla inox</small></div><span class="free inc">Incluido</span></li>
+      <li><img decoding="async" loading="lazy" src="{{ 'ct-mosqueton.jpg' | file_url }}&width=160" alt="" width="64" height="64"><div><b>Cuerda de 10 m con mosquetón</b><small>Alta resistencia, lista para lanzar</small></div><span class="free">Gratis</span></li>
+      <li><img decoding="async" loading="lazy" src="{{ 'ct-guia-entierros-oro.jpg' | file_url }}&width=160" alt="" width="64" height="64"><div><b>Guía digital "Entierros y Oro"</b><small>Cómo buscar entierros, sacar oro del río y encontrar joyas perdidas</small></div><span class="free">Gratis</span></li>
+    </ul>
+    <p class="incl-note">La guía te llega por WhatsApp apenas confirmamos tu pedido.</p>
+  </section>
+  <section class="intro" aria-labelledby="introTitle">
+    <h2 id="introTitle" class="intro-h">Una búsqueda de tesoros en cada salida</h2>
+    <p class="lead">Lánzalo al río, arrástralo por el fondo y sácalo con lo que el agua lleva años escondiendo. Agarra hasta 140 kg: lo probamos en máquina hidráulica.</p>
+    <p><b>El problema:</b> los fines de semana se repiten: el mismo plan, el celular, nada nuevo. Mientras tanto, en el fondo de cada río, lago y muelle hay herramientas, monedas y piezas de metal que nadie ha sacado.</p>
+    <p><b>La solución:</b> un imán de neodimio con 140 kg de agarre, argolla de acero inoxidable y cuerda de 10 metros de regalo. No necesitas bote, licencia ni experiencia: lo enganchas, lo lanzas y lo recoges.</p>
+    <p><b>Lo que vas a vivir:</b></p>
+    <ul class="result">
+      <li><b>Primer lanzamiento:</b> el tirón cuando algo se pega allá abajo. Ese momento engancha.</li>
+      <li><b>Primera tarde:</b> monedas, llaves, anzuelos, herramientas, candados.</li>
+      <li><b>El sueño de todo cazador:</b> en el mundo hay quienes han sacado hasta cajas fuertes del agua.</li>
+      <li><b>Cada salida:</b> un plan barato y distinto para hacer solo, con los parceros o con los hijos.</li>
+    </ul>
+    <figure class="life"><img decoding="async" src="{{ 'ct-ugc-guatape.jpg' | file_url }}&width=540" srcset="{{ 'ct-ugc-guatape.jpg' | file_url }}&width=360 360w, {{ 'ct-ugc-guatape.jpg' | file_url }}&width=540 540w, {{ 'ct-ugc-guatape.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Amigos lanzando el imán desde un muelle" loading="lazy"><figcaption>Un plan distinto para el fin de semana</figcaption></figure>
+  </section>
+  <div class="finds" aria-label="Lo que puedes encontrar">
+    <span>Monedas</span><span>Llaves</span><span>Herramientas</span><span>Anzuelos</span><span>Rines</span><span>Candados</span><span>Cadenas</span><span>Cajas fuertes</span>
+  </div>
+  <section class="proof" aria-labelledby="proofTitle">
+    <div class="kick-g">Prueba real</div>
+    <h2 id="proofTitle">Probado en máquina hidráulica</h2>
+    <figure class="proof-hero"><img decoding="async" loading="lazy" src="{{ 'ct-prueba-hidraulica.jpg' | file_url }}&width=540" srcset="{{ 'ct-prueba-hidraulica.jpg' | file_url }}&width=360 360w, {{ 'ct-prueba-hidraulica.jpg' | file_url }}&width=540 540w, {{ 'ct-prueba-hidraulica.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="El imán en la máquina hidráulica de tracción" width="600" height="480"><div class="seal" aria-hidden="true"><b>140</b><span>kg</span></div><span class="pill">Halado hacia arriba hasta soltar</span></figure>
+    <ul class="proof-list">
+      <li><b>140 kg</b> de agarre</li>
+      <li><b>60 mm</b> de diámetro</li>
+      <li><b>0</b> pilas</li>
+    </ul>
+    <p class="proof-tip"><b>Truco de cazador:</b> sube derecho y sin tirones, así rinde sus 140 kg.</p>
+  </section>
+  <section class="offer" id="oferta">
+    <div class="kicker">Elige tu oferta</div>
+    <button class="opt" data-qty="1" data-price="109000" aria-pressed="false">
+      <span class="ph"><img decoding="async" loading="lazy" src="{{ 'ct-producto-mini.jpg' | file_url }}&width=160" alt="" width="72" height="72"><i>×1</i></span>
+      <span class="info"><h3>1 imán</h3><small>Para empezar a buscar</small><span class="save">Ahorras $41.000</span></span>
+      <span class="price"><b>$109.000</b><s>$150.000</s></span>
+      <span class="dot" aria-hidden="true"></span>
+      <span class="gifts"><em>Cuerda 10 m</em><em>Guía digital</em><em>Envío gratis</em></span>
+    </button>
+    <button class="opt on" data-qty="2" data-price="172900" aria-pressed="true">
+      <span class="flag">Más popular</span><span class="ph"><img decoding="async" loading="lazy" src="{{ 'ct-producto-mini.jpg' | file_url }}&width=160" alt="" width="72" height="72"><i>×2</i></span>
+      <span class="info"><h3>2 imanes</h3><small>Uno para ti y otro para tu parcero</small><span class="save">Ahorras $45.100</span></span>
+      <span class="price"><b>$172.900</b><s>$218.000</s><em>$86.450 c/u</em></span>
+      <span class="dot" aria-hidden="true"></span>
+      <span class="gifts"><em>Cuerda 10 m</em><em>Guía digital</em><em>Envío gratis</em></span>
+    </button>
+    <button class="opt" data-qty="3" data-price="229200" aria-pressed="false">
+      <span class="flag best">Mejor precio</span><span class="ph"><img decoding="async" loading="lazy" src="{{ 'ct-producto-mini.jpg' | file_url }}&width=160" alt="" width="72" height="72"><i>×3</i></span>
+      <span class="info"><h3>3 imanes</h3><small>Para salir en grupo o regalar</small><span class="save">Ahorras $97.800</span></span>
+      <span class="price"><b>$229.200</b><s>$327.000</s><em>$76.400 c/u</em></span>
+      <span class="dot" aria-hidden="true"></span>
+      <span class="gifts"><em>Cuerda 10 m</em><em>Guía digital</em><em>Envío gratis</em></span>
+    </button>
+    <div class="g2" aria-label="Regalos incluidos">
+      <div class="g2-h"><span class="g2-i"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="1.5"/><path d="M3 12h18M12 8v13M12 8c-2-4-6-4-6-1.5S9 8 12 8zm0 0c2-4 6-4 6-1.5S15 8 12 8z"/></svg></span><div><b>2 regalos gratis</b><small>Incluidos en cualquier combo que elijas</small></div></div>
+      <div class="g2-row">
+        <div class="g2-c"><span class="g2-free">Gratis</span><img decoding="async" loading="lazy" src="{{ 'ct-regalo-cuerda-10m.jpg' | file_url }}&width=320" alt="Cuerda roja de 10 metros con mosquetón" width="160" height="160"><b>Cuerda 10 m + mosquetón</b><small>Alta resistencia para lanzar más lejos</small></div>
+        <span class="g2-plus" aria-hidden="true">+</span>
+        <div class="g2-c"><span class="g2-free">Gratis</span><img decoding="async" loading="lazy" src="{{ 'ct-guia-entierros-oro.jpg' | file_url }}&width=320" alt="Guía digital Entierros y Oro" width="160" height="160"><b>Guía "Entierros y Oro"</b><small><s>$39.900</s> hoy $0</small></div>
+      </div>
+    </div>
+    <button class="cta pulse js-order" style="margin-top:6px">Pídelo y paga al recibir<small id="ctaSub">2 imanes · $172.900</small></button>
+    <p class="nopay">Sin tarjeta y sin anticipo. Pagas en efectivo cuando te llega.</p>
+    <div class="cod" aria-label="Antes de pedir">
+      <b class="cod-h">Antes de pedir, confirma 3 cosas</b>
+      <ul>
+        <li><span>1</span>Vas a estar en esa dirección los próximos días (o alguien de confianza para recibirlo).</li>
+        <li><span>2</span>Tendrás el efectivo listo para pagarle al transportador.</li>
+        <li><span>3</span>Contestarás nuestro WhatsApp: si no confirmamos tu pedido, no lo despachamos.</li>
+      </ul>
+      <small>Así tu imán sale el mismo día que confirmamos y te llega sin contratiempos.</small>
+    </div>
+    <ol class="howbuy" aria-label="Cómo pedir">
+      <li><b>1</b>Llenas tus datos<br>en 1 minuto</li>
+      <li><b>2</b>Te confirmamos<br>por WhatsApp</li>
+      <li><b>3</b>Pagas en efectivo<br>al recibir</li>
+    </ol>
+    <div class="ship">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#0A2233" stroke-width="2" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+      <div><b>Envío a toda Colombia</b>Ciudades principales: 2 a 4 días hábiles. Municipios y zona rural: 4 a 7 días. Pagas en efectivo cuando te llega.</div>
+    </div>
+    <div class="trust">
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="#0A2233" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="1"/><circle cx="12" cy="12" r="2.5"/></svg>Paga al recibir</div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="#0A2233" stroke-width="2"><path d="M12 2 4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>Compra segura</div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="#0A2233" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Te asesoramos por WhatsApp</div>
+    </div>
+    <div class="acc">
+      <details><summary>¿Por qué un imán de 140 kg?</summary><div class="ans"><p>Con menos fuerza solo salen cosas pequeñas. 140 kg de atracción alcanzan para herramientas, candados, partes de bicicleta y hasta rines, y el imán no se suelta al arrastrarlo entre piedras.</p></div></details>
+      <details><summary>¿Qué trae la caja?</summary><div class="ans"><p>El imán de neodimio de 60 mm con argolla de acero inoxidable, más una cuerda roja de 10 metros con mosquetón que te regalamos con tu pedido. Listo para usar. Además te enviamos por WhatsApp la guía digital "Entierros y Oro".</p></div></details>
+      <details><summary>¿Necesito experiencia?</summary><div class="ans"><p>No. Enganchas el mosquetón, lanzas y recoges. Lo aprendes en el primer intento.</p></div></details>
+      <details><summary>¿Cómo es el pago y el envío?</summary><div class="ans"><p>Llenas tus datos, te confirmamos el pedido y lo despachamos. Pagas en efectivo al transportador cuando lo recibes en tu casa.</p></div></details>
+    </div>
+  </section>
+  {%- if rv_count > 0 -%}<section class="rev" id="resenas" aria-labelledby="revTitle">
+    <h2 id="revTitle" class="rv">Lo que dicen nuestros clientes</h2>
+    {%- if rv_count > 0 -%}
+    <div class="rev-sum"><b>{{ rv_avg }}</b><span class="stars" aria-hidden="true">★★★★★</span><small>{{ rv_count }} {% if rv_count == 1 %}reseña{% else %}reseñas{% endif %} de compradores</small></div>
+    <div class="rev-list">
+      {%- for r in shop.metaobjects.resena_cliente.values -%}{%- if r.producto.value.id == product.id -%}
+      <article class="rev-card">
+        {%- if r.foto.value != blank -%}<img decoding="async" loading="lazy" src="{{ r.foto.value | image_url: width: 480 }}" alt="Foto de {{ r.nombre.value | escape }}" width="480" height="480">{%- endif -%}
+        <div class="rev-body">
+          {%- assign st = r.estrellas.value | default: 5 -%}
+          <div class="stars" aria-label="{{ st }} de 5 estrellas">{% for i in (1..st) %}★{% endfor %}</div>
+          <p>{{ r.texto.value | escape | newline_to_br }}</p>
+          <span class="who">{{ r.nombre.value | escape }}{% if r.ciudad.value != blank %} · {{ r.ciudad.value | escape }}{% endif %}</span>
+        </div>
+      </article>
+      {%- endif -%}{%- endfor -%}
+    </div>
+    {%- endif -%}
+  </section>{%- endif -%}
+  <section class="dark">
+    <h2 class="rv">Míralo en acción</h2>
+    <p class="sub rv">Así de fuerte se pega: monedas, metal y lo que esté en el fondo.</p>
+    <div class="reel rv">
+      <figure><video class="vid" src="{{ 'ct-video-frasco-s.mp4' | file_url }}" poster="{{ 'ct-video-frasco.jpg' | file_url }}&width=480" muted loop playsinline preload="none" aria-label="Monedas saltando al imán a través de una bolsa"></video><figcaption>Las monedas saltan al imán, hasta a través del plástico</figcaption></figure>
+      <figure><video class="vid" src="{{ 'ct-video-pozo-s.mp4' | file_url }}" poster="{{ 'ct-video-pozo.jpg' | file_url }}&width=480" muted loop playsinline preload="none" aria-label="Lanzando el imán en un pozo antiguo"></video><figcaption>Lo lanzamos a un pozo antiguo para ver qué sale</figcaption></figure>
+    </div>
+  </section>
+  <section class="sec">
+    <h2 class="h2-under rv"><span>¿Qué ganas con tu</span> <span>IMÁN DE PESCA?</span></h2>
+    <div class="cards" id="cards">
+      <article class="card"><h3>Fuerza de 140 kg</h3><p>Neodimio, el imán permanente más fuerte que existe. Lo que toca, lo sube.</p><img decoding="async" src="{{ 'ct-submarina.jpg' | file_url }}&width=540" srcset="{{ 'ct-submarina.jpg' | file_url }}&width=360 360w, {{ 'ct-submarina.jpg' | file_url }}&width=540 540w, {{ 'ct-submarina.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 90vw, 440px" alt="El imán atrayendo metal bajo el agua" loading="lazy"></article>
+      <article class="card"><h3>No se oxida</h3><p>Argolla y carcasa de acero inoxidable: aguanta agua dulce, barro y piedras salida tras salida.</p><img decoding="async" src="{{ 'ct-producto-argolla.jpg' | file_url }}&width=540" srcset="{{ 'ct-producto-argolla.jpg' | file_url }}&width=360 360w, {{ 'ct-producto-argolla.jpg' | file_url }}&width=540 540w, {{ 'ct-producto-argolla.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 90vw, 440px" alt="Argolla de acero inoxidable 304" loading="lazy"></article>
+      <article class="card"><h3>Para cualquier persona</h3><p>No necesitas licencia, bote ni equipo. Un puente, un muelle o la orilla del río bastan.</p><img decoding="async" src="{{ 'ct-papa-hijo.jpg' | file_url }}&width=540" srcset="{{ 'ct-papa-hijo.jpg' | file_url }}&width=360 360w, {{ 'ct-papa-hijo.jpg' | file_url }}&width=540 540w, {{ 'ct-papa-hijo.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 90vw, 440px" alt="Papá e hijo con sus hallazgos en el río" loading="lazy"></article>
+      <article class="card"><h3>Todo incluido</h3><p>Imán de 60 mm y, de regalo, cuerda roja de 10 metros con mosquetón. Lo abres y sales.</p><img decoding="async" src="{{ 'ct-hero-rio.jpg' | file_url }}&width=540" srcset="{{ 'ct-hero-rio.jpg' | file_url }}&width=360 360w, {{ 'ct-hero-rio.jpg' | file_url }}&width=540 540w, {{ 'ct-hero-rio.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 90vw, 440px" alt="Imán, cuerda roja de 10 m y mosquetón" loading="lazy"></article>
+    </div>
+    <div class="dots"><button id="prev" aria-label="Anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A2233" stroke-width="2.4"><path d="M19 12H5m6-6-6 6 6 6"/></svg></button><i id="dots"></i><button id="next" aria-label="Siguiente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A2233" stroke-width="2.4"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button></div>
+  </section>
+  <section class="lift">
+    <h2 class="rv">¿Lo levanta o no?</h2>
+    <p class="txt rv">Toca un objeto y mira cuánta de la fuerza del imán necesita.</p>
+    <img class="sec-img" decoding="async" loading="lazy" src="{{ 'ct-rin.jpg' | file_url }}&width=540" srcset="{{ 'ct-rin.jpg' | file_url }}&width=360 360w, {{ 'ct-rin.jpg' | file_url }}&width=540 540w, {{ 'ct-rin.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Sacando un rin de carro del río con el imán" width="600" height="480">
+    <div class="objs" id="objs">
+      <button data-kg="0.05">Llaves<small>~0,05 kg</small></button>
+      <button data-kg="1.2">Herramienta<small>~1,2 kg</small></button>
+      <button data-kg="4">Cadena<small>~4 kg</small></button>
+      <button data-kg="9" class="on">Rin de carro<small>~9 kg</small></button>
+      <button data-kg="120">Caja fuerte<small>~120 kg</small></button>
+      <button data-kg="200">Ancla de barco<small>~200 kg</small></button>
+    </div>
+    <div class="meter" aria-live="polite">
+      <div class="row"><span id="objName">Rin de carro</span><span id="objPct">6% de la fuerza</span></div>
+      <div class="track"><div class="fill" id="fill"></div></div>
+      <div class="verdict" id="verdict">¡Lo sube!</div>
+      <p class="note">140 kg es tirando derecho sobre acero grueso, plano y limpio. Con óxido, pintura, lámina delgada, superficies curvas o tirando de lado, la fuerza baja. Para cosas pesadas: hala recto hacia arriba, despacio y sin tirones.</p>
+    </div>
+  </section>
+  <section class="how">
+    <h2 class="rv">Del pedido al primer tesoro</h2>
+    <p class="txt rv">Así se ve tu semana desde que lo pides.</p>
+    <ol class="tl">
+      <li class="rv"><span class="when">Hoy</span><h3>Haces tu pedido</h3><p>Llenas el formulario en un minuto. No pagas nada por adelantado.</p></li>
+      <li class="rv"><span class="when">Día 1</span><h3>Confirmamos y despachamos</h3><p>Te escribimos para confirmar la dirección y sale con prioridad.</p></li>
+      <li class="rv"><span class="when">Día 2 a 7</span><h3>Llega a tu puerta</h3><p>Pagas en efectivo al transportador cuando lo tienes en la mano.</p></li>
+      <li class="rv"><span class="when">El fin de semana</span><h3>Primer lanzamiento</h3><p>Río, lago, quebrada o muelle. El primer tirón no se olvida.</p></li>
+    </ol>
+    <div class="box rv">Un solo imán te dura años: <b>no tiene pilas, no se descarga y no se oxida.</b> Cada salida cuesta cero pesos.</div>
+  </section>
+  <section class="steps">
+    <h2 class="rv">Cómo se usa</h2>
+    <span class="warn">Lee antes de lanzar</span>
+    <img class="sec-img" decoding="async" loading="lazy" src="{{ 'ct-mosqueton.jpg' | file_url }}&width=540" srcset="{{ 'ct-mosqueton.jpg' | file_url }}&width=360 360w, {{ 'ct-mosqueton.jpg' | file_url }}&width=540 540w, {{ 'ct-mosqueton.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Enganchando el mosquetón a la argolla del imán" width="600" height="480">
+    <div class="step rv"><span class="n">PASO 1</span><p><b>Engancha el mosquetón</b> de la cuerda a la argolla del imán y ciérralo con la rosca.</p></div>
+    <div class="step rv"><span class="n">PASO 2</span><p><b>Ata el otro extremo a tu muñeca</b> o a una baranda, para no perder el imán si se te escapa.</p></div>
+    <div class="step rv"><span class="n">PASO 3</span><p><b>Lánzalo</b> desde un puente, muelle u orilla y déjalo llegar al fondo.</p></div>
+    <div class="step rv"><span class="n">PASO 4</span><p><b>Arrástralo despacio</b> hacia ti. Cuando sientas peso, recoge <b>derecho hacia arriba</b> y sin tirones: así el imán agarra con toda su fuerza.</p></div>
+    <table class="rv">
+      <thead><tr><th>Ficha técnica</th><th>Detalle</th></tr></thead>
+      <tbody>
+        <tr><td>Material</td><td>Neodimio y acero inoxidable</td></tr>
+        <tr><td>Fuerza</td><td>Hasta 140 kg</td></tr>
+        <tr><td>Diámetro</td><td>60 mm</td></tr>
+        <tr><td>Incluye</td><td>Imán + cuerda de 10 m con mosquetón de regalo</td></tr>
+        <tr><td>Dónde usarlo</td><td>Ríos, lagos, quebradas, muelles</td></tr>
+      </tbody>
+    </table>
+    <p class="after-table">Usa guantes. No lo acerques a celulares, tarjetas ni marcapasos.</p>
+  </section>
+  <section class="vs">
+    <div class="kick2">La forma más barata de buscar tesoros</div>
+    <h2 class="rv">Más hallazgos, menos plata</h2>
+    <p class="vs-sub rv">Con un detector sabes que hay algo. Con el imán, lo sacas.</p>
+    <div class="cmp rv" role="table" aria-label="Comparación">
+      <div class="cr ch" role="row"><span></span><span class="me"><img decoding="async" loading="lazy" src="{{ 'ct-producto-mini.jpg' | file_url }}&width=140" alt="" width="40" height="40"><b>Imán 140 kg</b></span><span>Detector</span><span>A mano</span></div>
+      <div class="cr"><span class="q">Funciona bajo el agua</span><span class="me"><i class="ic ok" aria-label="Sí"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></span><span><i class="ic mid" aria-label="A medias"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 12h12"/></svg></i></span><span><i class="ic no" aria-label="No"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></i></span></div>
+      <div class="cr"><span class="q">Saca el objeto del fondo</span><span class="me"><i class="ic ok" aria-label="Sí"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></span><span><i class="ic no" aria-label="No"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></i></span><span><i class="ic mid" aria-label="A medias"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 12h12"/></svg></i></span></div>
+      <div class="cr"><span class="q">Sin pilas ni carga</span><span class="me"><i class="ic ok" aria-label="Sí"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></span><span><i class="ic no" aria-label="No"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></i></span><span><i class="ic ok" aria-label="Sí"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></span></div>
+      <div class="cr"><span class="q">Lo usas desde el primer día</span><span class="me"><i class="ic ok" aria-label="Sí"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></span><span><i class="ic mid" aria-label="A medias"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 12h12"/></svg></i></span><span><i class="ic ok" aria-label="Sí"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></span></div>
+      <div class="cr cp"><span class="q">Precio</span><span class="me"><b>$76.400</b><small>c/u en combo</small></span><span><b>$$$</b><small>varias veces más</small></span><span><b>$0</b><small>y no sale nada</small></span></div>
+    </div>
+    <ul class="vs-trust">
+      <li><b>Pagas al recibir</b>sin tarjeta</li>
+      <li><b>Envío</b>a toda Colombia</li>
+      <li><b>Cuerda 10 m</b>de regalo</li>
+    </ul>
+  </section>
+  <section class="faq">
+    <h2 class="rv">Lo que más nos preguntan</h2>
+    <p class="txt">¿Otra duda? Escríbenos por WhatsApp y te respondemos.</p>{% if section.settings.whatsapp != blank %}
+    <a class="wa" href="https://wa.me/{{ section.settings.whatsapp | remove: ' ' | remove: '+' }}?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20im%C3%A1n%20de%20pesca" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.6 14.2c-.2.7-1.4 1.3-2 1.4-.5 0-1.1.2-3.6-.8-3-1.2-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.4 1.8 2.2 1.2 1.1 2.2 1.4 2.5 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.4z"/></svg>
+      Escribir por WhatsApp
+    </a>{% endif %}
+    <div class="acc">
+      <details><summary>Si lo pego en una puerta, ¿por qué lo puedo despegar?</summary><div class="ans"><p>Porque hay dos fuerzas distintas. Los 140 kg son halando derecho, perpendicular, sobre acero grueso (así lo probamos en la máquina hidráulica). Si lo deslizas de lado, el imán resbala con mucha menos fuerza, más o menos una quinta parte. Además una puerta o una nevera son de lámina delgada y pintada, y eso le quita agarre. En el río pasa al revés: halas derecho hacia arriba, que es justo donde el imán es más fuerte.</p></div></details>
+      <details><summary>¿Qué tan fuerte es de verdad?</summary><div class="ans"><p>Hasta 140 kg de atracción sobre acero plano y limpio. En el fondo del río los objetos suelen estar oxidados o con barro, así que la fuerza real es menor; aun así sube herramientas, cadenas y rines.</p></div></details>
+      <details><summary>¿Dónde lo puedo usar?</summary><div class="ans"><p>Ríos, lagos, quebradas, muelles y puentes peatonales. Evita zonas privadas, represas con acceso restringido y lugares donde esté prohibido.</p></div></details>
+      <details><summary>¿Qué hago si saco algo peligroso?</summary><div class="ans"><p>Si sacas munición, armas o algo sospechoso, no lo manipules: déjalo en un lugar seguro y llama a la Policía al 123.</p></div></details>
+      <details><summary>¿Se oxida o se daña?</summary><div class="ans"><p>La carcasa y la argolla son de acero inoxidable. Después de usarlo, enjuágalo con agua limpia y sécalo para que dure años.</p></div></details>
+      <details><summary>¿Sirve como regalo?</summary><div class="ans"><p>Es de los regalos que más sorprenden en Navidad, cumpleaños o Día del Padre: es diferente, sirve para salir en familia y no necesita pilas ni recargas. El combo de 2 es el favorito para regalar uno y quedarse con otro.</p></div></details>
+      <details><summary>¿Lo pueden usar los niños?</summary><div class="ans"><p>¡Sí, es un plan buenísimo en familia! Los niños disfrutan lanzarlo y ver qué sale. Como es un imán muy fuerte, lo ideal es que un adulto lo despegue cuando se pega al metal y lo guarde lejos de celulares y tarjetas.</p></div></details>
+      <details><summary>¿Y si no estoy cuando llegue?</summary><div class="ans"><p>El transportador te llama antes de entregar y, si no estás, intenta de nuevo o lo puede recibir alguien de tu confianza. Si sabes que no vas a estar, escríbenos por WhatsApp y cambiamos la dirección o la fecha antes de despachar.</p></div></details>
+      <details><summary>¿Cómo es el pago y el envío?</summary><div class="ans"><p>Pagas en efectivo cuando recibes. Enviamos a ciudades, municipios y zona rural de toda Colombia. Antes de despachar te confirmamos el pedido.</p></div></details>
+    </div>
+  </section>
+  <section class="close" style="--bg:url({{ 'ct-atardecer.jpg' | file_url }}&width=800)">
+    <h2>Tu próximo sábado, en el río</h2>
+    <p>Pídelo hoy y paga cuando lo tengas en la mano.</p>
+    <a class="cta gold" href="#oferta">Quiero mi imán de pesca<small>Pago contra entrega</small></a>
+  </section>
+  <footer>
+    <a class="seal-link" href="/" aria-label="alcomprar, inicio"><svg class="seal" viewBox="0 0 200 200" role="img" aria-label="alcomprar.shop, tienda oficial, pago contra entrega en Colombia"><defs><path id="sealA" d="M100,100 m-72,0 a72,72 0 1,1 144,0"/><path id="sealB" d="M100,100 m-80,0 a80,80 0 0,0 160,0"/></defs><circle cx="100" cy="100" r="96" fill="#F6B826"/><circle cx="100" cy="100" r="88" fill="#0A2233"/><circle cx="100" cy="100" r="60" fill="none" stroke="#F6B826" stroke-width="1.5"/><text font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="17" letter-spacing="5" fill="#F6B826"><textPath href="#sealA" startOffset="50%" text-anchor="middle">TIENDA OFICIAL</textPath></text><text font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="12.5" letter-spacing="2.2" fill="#fff"><textPath href="#sealB" startOffset="50%" text-anchor="middle">PAGO CONTRA ENTREGA · COLOMBIA</textPath></text><text x="100" y="93" text-anchor="middle" font-family="Fugaz One,Arial Black,sans-serif" font-size="25" fill="#fff">alcomprar</text><rect x="62" y="102" width="76" height="2" fill="#F6B826"/><text x="100" y="122" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="14" letter-spacing="4" fill="#F6B826">.SHOP</text><path d="M21 100l4-3 4 3-4 3z M171 100l4-3 4 3-4 3z" fill="#F6B826"/></svg></a>
+    <p class="brandline"><b>Tienda en línea colombiana.</b> Productos probados, envío a todo el país y pagas cuando recibes.</p>
+    <nav><a href="/policies/refund-policy">Política de devolución</a><a href="/policies/terms-of-service">Términos de servicio</a><a href="/policies/privacy-policy">Política de privacidad</a></nav>
+    <p>© 2026 alcomprar.shop · Colombia</p>
+  </footer>
+</div>
+<div class="sticky" id="sticky"><button class="cta js-order">Pídelo y paga al recibir<small id="stickySub">2 imanes · $172.900</small></button></div>{% if section.settings.whatsapp != blank %}
+<a class="wa-float" href="https://wa.me/{{ section.settings.whatsapp | remove: ' ' | remove: '+' }}?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20im%C3%A1n%20de%20pesca" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.6 14.2c-.2.7-1.4 1.3-2 1.4-.5 0-1.1.2-3.6-.8-3-1.2-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.4 1.8 2.2 1.2 1.1 2.2 1.4 2.5 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.4z"/></svg>
+</a>{% endif %}
+<div class="toast" id="toast" role="status"></div>
+<div class="wh" id="wh" hidden role="dialog" aria-modal="true" aria-labelledby="whT">
+  <div class="wh-card">
+    <button class="wh-x" id="whX" type="button" aria-label="Cerrar">×</button>
+    <div class="wh-k">Black Friday</div>
+    <h3 id="whT">Gira y gana tu descuento</h3>
+    <p class="wh-p">Tienes <b>2 intentos</b> para descubrir cuánto ahorras hoy. ¿Te sale el de <b>$10.000</b>?</p>
+    <div class="wh-wheel"><span class="wh-ptr" aria-hidden="true"></span><svg id="whS" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="99" fill="#F6B826"/><path d="M100,100 L100.00,4.00 A96,96 0 0,1 167.88,32.12 Z" fill="#0A2233" stroke="#F6B826" stroke-width="1.5"/><g transform="rotate(22.5 100 100)"><text x="100" y="58" transform="rotate(-90 100 58)" text-anchor="start" dominant-baseline="middle" font-family="Fugaz One,Arial Black,sans-serif" font-size="13" fill="#F6B826">$5.000</text></g><path d="M100,100 L167.88,32.12 A96,96 0 0,1 196.00,100.00 Z" fill="#E9EEF2" stroke="#F6B826" stroke-width="1.5"/><g transform="rotate(67.5 100 100)"><text x="100" y="58" transform="rotate(-90 100 58)" text-anchor="start" dominant-baseline="middle" font-family="Fugaz One,Arial Black,sans-serif" font-size="13" fill="#5b6d79">¡Casi!</text></g><path d="M100,100 L196.00,100.00 A96,96 0 0,1 167.88,167.88 Z" fill="#C8432B" stroke="#F6B826" stroke-width="1.5"/><g transform="rotate(112.5 100 100)"><text x="100" y="58" transform="rotate(-90 100 58)" text-anchor="start" dominant-baseline="middle" font-family="Fugaz One,Arial Black,sans-serif" font-size="13" fill="#fff">$10.000</text></g><path d="M100,100 L167.88,167.88 A96,96 0 0,1 100.00,196.00 Z" fill="#0A2233" stroke="#F6B826" stroke-width="1.5"/><g transform="rotate(157.5 100 100)"><text x="100" y="58" transform="rotate(-90 100 58)" text-anchor="start" dominant-baseline="middle" font-family="Fugaz One,Arial Black,sans-serif" font-size="13" fill="#F6B826">$5.000</text></g><path d="M100,100 L100.00,196.00 A96,96 0 0,1 32.12,167.88 Z" fill="#0A2233" stroke="#F6B826" stroke-width="1.5"/><g transform="rotate(202.5 100 100)"><text x="100" y="58" transform="rotate(-90 100 58)" text-anchor="start" dominant-baseline="middle" font-family="Fugaz One,Arial Black,sans-serif" font-size="13" fill="#F6B826">$5.000</text></g><path d="M100,100 L32.12,167.88 A96,96 0 0,1 4.00,100.00 Z" fill="#E9EEF2" stroke="#F6B826" stroke-width="1.5"/><g transform="rotate(247.5 100 100)"><text x="100" y="58" transform="rotate(-90 100 58)" text-anchor="start" dominant-baseline="middle" font-family="Fugaz One,Arial Black,sans-serif" font-size="13" fill="#5b6d79">¡Casi!</text></g><path d="M100,100 L4.00,100.00 A96,96 0 0,1 32.12,32.12 Z" fill="#C8432B" stroke="#F6B826" stroke-width="1.5"/><g transform="rotate(292.5 100 100)"><text x="100" y="58" transform="rotate(-90 100 58)" text-anchor="start" dominant-baseline="middle" font-family="Fugaz One,Arial Black,sans-serif" font-size="13" fill="#fff">$10.000</text></g><path d="M100,100 L32.12,32.12 A96,96 0 0,1 100.00,4.00 Z" fill="#0A2233" stroke="#F6B826" stroke-width="1.5"/><g transform="rotate(337.5 100 100)"><text x="100" y="58" transform="rotate(-90 100 58)" text-anchor="start" dominant-baseline="middle" font-family="Fugaz One,Arial Black,sans-serif" font-size="13" fill="#F6B826">$5.000</text></g><circle cx="100.00" cy="1.00" r="2.6" fill="#fff"/><circle cx="170.00" cy="30.00" r="2.6" fill="#fff"/><circle cx="199.00" cy="100.00" r="2.6" fill="#fff"/><circle cx="170.00" cy="170.00" r="2.6" fill="#fff"/><circle cx="100.00" cy="199.00" r="2.6" fill="#fff"/><circle cx="30.00" cy="170.00" r="2.6" fill="#fff"/><circle cx="1.00" cy="100.00" r="2.6" fill="#fff"/><circle cx="30.00" cy="30.00" r="2.6" fill="#fff"/></svg><span class="wh-hub" aria-hidden="true">GIRA</span></div>
+    <p class="wh-msg" id="whM" hidden></p>
+    <button class="cta gold wh-go" id="whGo" type="button">Girar la ruleta</button>
+    <div class="wh-conf" id="whConf" aria-hidden="true"></div>
+    <div class="wh-res" id="whR" hidden>
+      <b class="wh-fel">¡Felicidades! 🎉</b><b>Ganaste <span id="whA"></span> de descuento</b>
+      <p>Ya quedó aplicado: lo ves en el total cuando llenes el formulario.</p>
+      <button class="cta js-order wh-buy" type="button">Pedir con mi descuento</button>
+    </div>
+    <small class="wh-fine">2 intentos por persona. El primer giro es de práctica; el premio sale en el segundo: $5.000 (70%) o $10.000 (30%). Válido hasta el 30 de noviembre en el imán de pesca, un uso por cliente. Se suma a tus 2 regalos.</small>
+  </div>
+</div>
+<button class="wh-chip" id="whChip" type="button" hidden><span class="wh-chip-g" aria-hidden="true">🎁</span><span id="whChipL">Tus <b id="whChipT"></b> están guardados</span><span class="wh-chip-go">Pedir</span></button>
+<button class="wh-pend" id="whPend" type="button" hidden><span aria-hidden="true">🎁</span>Tienes 1 giro gratis</button>
+
+</div></template>
+{%- form 'product', product, class: 'ct-form', id: 'ct-product-form' -%}
+  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+  <input type="number" name="quantity" value="2" min="1">
+  <button type="submit" name="add">Agregar</button>
+{%- endform -%}
+<div id="ct-apps" class="ct-form">
+  {%- for block in section.blocks -%}
+    {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
+  {%- endfor -%}
+</div>
+<script>
+(function(){
+  var host=document.getElementById('ct-host'),tpl=document.getElementById('ct-tpl');
+  if(!host||!tpl||host.shadowRoot)return;
+  var sr=host.attachShadow({mode:'open'});sr.appendChild(tpl.content.cloneNode(true));
+})();
+</script>
+<script>(function(){
+const host=document.getElementById('ct-host');
+const root=host&&host.shadowRoot&&host.shadowRoot.getElementById('ct-root');
+if(!root)return;
+root.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const t=root.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}});
+root.classList.remove('no-js');
+const $=s=>root.querySelector(s), $$=s=>[...root.querySelectorAll(s)];
+const fmt=n=>'$'+n.toLocaleString('es-CO');
+const VARIANT_ID={{ product.selected_or_first_available_variant.id | default: 54116364845269 }};
+const slides=$('#slides'), thumbs=$$('#thumbs button'), tbox=$('#thumbs'), N=slides.children.length;
+const gd=$('#gdots'); gd.innerHTML=Array.from({length:N},(_,i)=>`<b class="${i?'':'on'}"></b>`).join('');
+$('#gtot').textContent=N;
+let gcur=-1;
+const gStep=()=>N>1?slides.children[1].offsetLeft-slides.children[0].offsetLeft:slides.clientWidth;
+const gGo=i=>{i=Math.max(0,Math.min(N-1,i));const c=slides.children[i];slides.scrollTo({left:c.offsetLeft-(slides.clientWidth-c.offsetWidth)/2,behavior:'smooth'})};
+function gSync(){
+  const i=Math.min(N-1,Math.round(slides.scrollLeft/gStep())); if(i===gcur) return; gcur=i;
+  thumbs.forEach((t,j)=>t.classList.toggle('on',i===j));
+  [...gd.children].forEach((d,j)=>d.classList.toggle('on',i===j));
+  $('#gcur').textContent=i+1; $('#gprev').disabled=i===0; $('#gnext').disabled=i===N-1;
+  const t=thumbs[i]; if(t) tbox.scrollTo({left:t.offsetLeft-tbox.clientWidth/2+t.clientWidth/2,behavior:'smooth'});
+}
+const __gal=()=>{$$('#slides img[data-src]').forEach(im=>{if(im.dataset.srcset)im.srcset=im.dataset.srcset;im.src=im.dataset.src;im.removeAttribute('data-src');im.removeAttribute('data-srcset')})};
+slides.addEventListener('scroll',__gal,{passive:true,once:true});$$('#thumbs button,#gnext').forEach(b=>b.addEventListener('click',__gal,{once:true}));addEventListener('load',()=>setTimeout(__gal,4000),{once:true});
+thumbs.forEach((t,i)=>t.onclick=()=>gGo(i));
+$('#gprev').onclick=()=>gGo(gcur-1); $('#gnext').onclick=()=>gGo(gcur+1);
+slides.addEventListener('scroll',gSync,{passive:true}); addEventListener('resize',()=>{gcur=-1;gSync()}); gSync();
+let qty=2, price=172900;
+$$('.opt').forEach(o=>o.onclick=()=>{
+  $$('.opt').forEach(x=>{x.classList.remove('on');x.setAttribute('aria-pressed','false')});
+  o.classList.add('on');o.setAttribute('aria-pressed','true');
+  qty=+o.dataset.qty;price=+o.dataset.price;
+  const t=`${qty} ${qty>1?'imanes':'imán'} · ${fmt(price)}`;
+  $('#ctaSub').textContent=t;$('#stickySub').textContent=t;
+});
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200)}
+async function order(e){
+  e.preventDefault();
+  const qtyInput=document.querySelector('#ct-product-form input[name="quantity"]');
+  if(qtyInput) qtyInput.value=qty;
+  const es=document.getElementById('es-sticky')||document.querySelector('#ct-apps .es-button, .es-button:not(.js-order), [data-es-button]');
+  if(es){es.click();return}
+  try{
+    const r=await fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:[{id:VARIANT_ID,quantity:qty}]})});
+    if(!r.ok) throw 0; location.href='/checkout';
+  }catch(_){toast('No pudimos abrir el formulario. Escríbenos por WhatsApp y te tomamos el pedido.')}
+}
+$$('.js-order').forEach(b=>b.addEventListener('click',order));
+const SND_OFF='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m22 9-6 6M16 9l6 6"/></svg><span>Toca para oír</span>';
+const SND_ON='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg><span>Sonido</span>';
+const vids=$$('video.vid');
+function setSnd(v,on){vids.forEach(o=>{o.muted=true;if(o._b){o._b.innerHTML=SND_OFF;o._b.classList.remove('on')}});if(on){v.muted=false;v.play().catch(()=>{});v._b.innerHTML=SND_ON;v._b.classList.add('on')}}
+vids.forEach(v=>{const b=document.createElement('button');b.type='button';b.className='snd';b.setAttribute('aria-label','Activar o quitar el sonido del video');b.innerHTML=SND_OFF;v._b=b;
+  const host=v.parentElement.id==='slides'?$('.gstage'):v.parentElement;host.appendChild(b);if(host!==v.parentElement){b.classList.add('gal');b.hidden=true}
+  b.addEventListener('click',e=>{e.stopPropagation();setSnd(v,v.muted)});v.addEventListener('click',()=>setSnd(v,v.muted));});
+const gv=vids.find(v=>v.parentElement.id==='slides');
+if(gv){const gi=[...slides.children].indexOf(gv);slides.addEventListener('scroll',()=>{const i=Math.min(N-1,Math.round(slides.scrollLeft/gStep()));gv._b.hidden=i!==gi},{passive:true});}
+if('IntersectionObserver' in window){
+  const vo=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting&&e.intersectionRatio>.55){v.play().catch(()=>{})}else{v.pause()}}),{threshold:[0,.55,1]});
+  $$('video.vid').forEach(v=>vo.observe(v));
+}
+const cards=$('#cards'), n=cards.children.length, dots=$('#dots');
+dots.innerHTML=Array.from({length:n},(_,i)=>`<b class="${i?'':'on'}"></b>`).join('');
+const step=()=>cards.children[1].offsetLeft-cards.children[0].offsetLeft;
+const idx=()=>Math.round(cards.scrollLeft/step());
+function upd(){const i=idx();[...dots.children].forEach((d,j)=>d.classList.toggle('on',i===j));$('#prev').disabled=i===0;$('#next').disabled=i>=n-1}
+cards.addEventListener('scroll',upd,{passive:true});upd();
+$('#prev').onclick=()=>cards.scrollBy({left:-step(),behavior:'smooth'});
+$('#next').onclick=()=>cards.scrollBy({left:step(),behavior:'smooth'});
+const MAX=140;
+function pick(b){
+  $$('#objs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  const kg=+b.dataset.kg, pct=kg/MAX*100, ok=kg<=MAX;
+  $('#objName').textContent=b.firstChild.textContent.trim();
+  $('#objPct').textContent=ok?`${pct<1?'<1':Math.round(pct)}% de la fuerza`:`${Math.round(pct)}% · se pasa`;
+  const f=$('#fill');f.style.width=Math.min(pct,100)+'%';f.classList.toggle('over',!ok);
+  const v=$('#verdict');v.classList.toggle('no',!ok);
+  v.textContent=ok?(pct<20?'¡Lo sube sin esfuerzo!':'¡Lo sube!'):'Ese no… pero casi todo lo demás sí';
+}
+$$('#objs button').forEach(b=>b.onclick=()=>pick(b));
+new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){pick($('#objs .on'));o.disconnect()}},{threshold:.4}).observe($('.meter'));
+const cd=$('#cd');
+if(cd){const end=Date.parse(cd.dataset.end);const p=n=>String(n).padStart(2,'0');const el={d:$('#cdD'),h:$('#cdH'),m:$('#cdM'),s:$('#cdS')};
+  const tick=()=>{const t=end-Date.now();if(!(t>0)){cd.remove();clearInterval(iv);return}
+    el.d.textContent=p(Math.floor(t/864e5));el.h.textContent=p(Math.floor(t/36e5)%24);el.m.textContent=p(Math.floor(t/6e4)%60);el.s.textContent=p(Math.floor(t/1e3)%60)};
+  const iv=setInterval(tick,1000);tick();}
+/* Ruleta de descuento: 2 intentos; probabilidades publicadas en la letra pequeña. El descuento queda aplicado en EasySell */
+const __wheel=(function(){const wh=$('#wh');if(!wh)return;const KEY='ct_ruleta_v3';let saved=null;try{saved=JSON.parse(localStorage.getItem(KEY)||'null')}catch(_){}
+  const SEG=[5,0,10,5,5,0,10,5],SA=360/SEG.length, PR={5:{c:'GIRA5',t:'$5.000'},10:{c:'GIRA10',t:'$10.000'}};
+  const chip=$('#whChip'),chipT=$('#whChipT'),svg=$('#whS'),go=$('#whGo'),msg=$('#whM');
+  const has=c=>document.cookie.indexOf('discount_code='+c)>-1;
+  const apply=p=>new Promise(res=>{let n=0;const go=()=>{fetch('/discount/'+p.c+'?redirect=%2Fcart.js',{credentials:'same-origin'}).catch(()=>{}).finally(()=>{if(has(p.c)||++n>=4)res();else setTimeout(go,400)})};if(has(p.c))res();else go()});
+  const showChip=p=>{chipT.textContent=p.t;chip.hidden=false;watchForm()};
+  const pend=$('#whPend');
+  const formOpen=()=>{const m=document.querySelector('.es-modal');if(!m)return false;const cs=getComputedStyle(m),r=m.getBoundingClientRect();return cs.display!=='none'&&cs.visibility!=='hidden'&&+cs.opacity>0&&r.height>0&&r.width>0};
+  const goOrder=()=>{const b=$('#oferta .js-order')||$('.js-order:not(.wh-buy)');if(b)b.click()};
+  chip.addEventListener('click',()=>{track('DescuentoChipClic',{});goOrder()});
+  /* Si abre el formulario y lo cierra sin pedir, el descuento vuelve a aparecer y se sacude para recordárselo */
+  let watching=false;const watchForm=()=>{if(watching)return;watching=true;let was=false;setInterval(()=>{const v=formOpen();
+    if(v){chip.hidden=true;pend.hidden=true}
+    else if(was){chip.hidden=false;chip.classList.remove('back');void chip.offsetWidth;chip.classList.add('back');$('#whChipL').innerHTML='¡No pierdas tus <b>'+chipT.textContent+'</b>!';try{navigator.vibrate&&navigator.vibrate([40,30,40])}catch(_){}track('DescuentoRecordado',{})}
+    was=v},500)};
+  const track=(n,d)=>{try{window.fbq&&fbq('trackCustom',n,d)}catch(_){}};
+  if(saved&&PR[saved.v]){apply(PR[saved.v]);showChip(PR[saved.v]);return}
+  const wasClosed=!!(saved&&saved.closed);let ordering=false;
+  let ac=null;const unlock=()=>{try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume()}catch(_){}};
+  ['pointerdown','touchstart','keydown'].forEach(ev=>addEventListener(ev,unlock,{once:true,passive:true,capture:true}));
+  const fanfare=()=>{if(!ac||ac.state!=='running')return;sweep(220,1320,.45,.07,0);[523,659,784,1047].forEach(f=>tone(f,.9,'triangle',.055,.42));[2093,2637,3136,2637,3136].forEach((f,i)=>tone(f,.09,'sine',.035,.5+i*.07))};
+  let shown=false;const open=()=>{if(shown)return;shown=true;pend.hidden=true;wh.hidden=false;requestAnimationFrame(()=>wh.classList.add('in'));fanfare();try{navigator.vibrate&&navigator.vibrate(40)}catch(_){}track('RuletaVista',{})};
+  /* Cuándo se abre: a los 8 s si ya bajó un poco, a los 6 s de ver las ofertas, o de una si intenta irse (sube rápido o vuelve de otra pestaña) */
+  const t0=Date.now();let maxY=0,smp=[];
+  root.addEventListener('click',e=>{if(e.target.closest('.js-order')&&!e.target.closest('.wh'))ordering=true},true);
+  const can=()=>!shown&&!ordering&&!formOpen();
+  if(wasClosed){pend.hidden=false}
+  else{
+    setInterval(()=>{if(can()&&Date.now()-t0>=8000&&maxY>=250)open()},500);
+    addEventListener('scroll',()=>{const y=scrollY,n=Date.now();maxY=Math.max(maxY,y);smp.push([n,y]);while(smp.length&&n-smp[0][0]>350)smp.shift();
+      if(can()&&n-t0>4000&&maxY>600&&smp[0][1]-y>160)open()},{passive:true});
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&can()&&Date.now()-t0>3000&&maxY>0)open()});
+    const of=$('#oferta');if(of&&'IntersectionObserver' in window){let tm=null;new IntersectionObserver(es=>{if(es[0].isIntersecting&&!tm)tm=setTimeout(()=>{if(can())open()},6000)},{threshold:.3}).observe(of)}
+  }
+  pend.addEventListener('click',()=>{unlock();shown=false;ordering=false;track('RuletaPendienteClic',{});open()});
+  const close=()=>{wh.classList.remove('in');setTimeout(()=>wh.hidden=true,220);if(!saved){pend.hidden=false;try{localStorage.setItem(KEY,JSON.stringify({closed:1}))}catch(_){}}};
+  $('#whX').onclick=close; wh.addEventListener('click',e=>{if(e.target===wh)close()});
+  const tone=(f,d,type,vol,when)=>{if(!ac)return;const o=ac.createOscillator(),g=ac.createGain();o.type=type||'square';o.frequency.value=f;g.gain.setValueAtTime(vol||.05,ac.currentTime+(when||0));g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+(when||0)+d);o.connect(g);g.connect(ac.destination);o.start(ac.currentTime+(when||0));o.stop(ac.currentTime+(when||0)+d+.02)};
+  const sweep=(f0,f1,d,vol,when)=>{if(!ac)return;const t=ac.currentTime+(when||0),o=ac.createOscillator(),g=ac.createGain();o.type='sawtooth';o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f1,t+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+d*.6);g.gain.exponentialRampToValueAtTime(.0001,t+d);const lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.value=2400;o.connect(lp);lp.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+d+.05)};
+  let nb=null;const click=(vol)=>{if(!ac)return;if(!nb){nb=ac.createBuffer(1,ac.sampleRate*.03,ac.sampleRate);const d=nb.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,6)}const s=ac.createBufferSource(),g=ac.createGain(),bp=ac.createBiquadFilter();bp.type='bandpass';bp.frequency.value=2600;bp.Q.value=1.2;s.buffer=nb;g.gain.value=vol;s.connect(bp);bp.connect(g);g.connect(ac.destination);s.start()};
+  const sTick=()=>{click(.9);tone(1800,.02,'square',.012)};
+  const sWin=()=>{[523,659,784,1047,1319].forEach((f,i)=>tone(f,.18,'square',.045,i*.075));[523,659,784,1047].forEach(f=>tone(f,1.1,'triangle',.05,.42));for(let k=0;k<16;k++){const w=.5+k*.055+Math.random()*.03;tone(2400+Math.random()*1800,.07,'sine',.04,w);tone(3600+Math.random()*1400,.05,'triangle',.02,w+.02)}sweep(400,2000,.35,.04,.38)};
+  const sLose=()=>{tone(330,.18,'sawtooth',.05,0);tone(247,.32,'sawtooth',.05,.16)};
+  const confetti=()=>{const c=$('#whConf');c.innerHTML='';const cols=['#F6B826','#C8432B','#0A2233','#1d6b40','#FFE08A'];for(let k=0;k<36;k++){const e=document.createElement('i');e.style.left=Math.random()*100+'%';e.style.background=cols[k%5];e.style.animationDelay=(Math.random()*.25)+'s';e.style.setProperty('--dx',(Math.random()*120-60)+'px');e.style.setProperty('--r',(Math.random()*720-360)+'deg');c.appendChild(e)}};
+  let ang=0,attempt=0,spinning=false;
+  const wrap=$('.wh-wheel',wh)||svg.parentNode;
+  const heart=()=>{tone(70,.16,'sine',.09);tone(62,.2,'sine',.08,.2)};
+  /* Gira hasta que la flecha quede en el ángulo w de la rueda (0 = arriba, sentido horario) */
+  const spinTo=(w,dur,turns,ease,done)=>{const from=ang;const target=from+360*turns+((360-w)-(from%360)+720)%360;const st=performance.now();let lastSeg=Math.floor(from/SA);
+    const step=now=>{const t=Math.min(1,(now-st)/dur),e=ease(t);ang=from+(target-from)*e;svg.style.transform='rotate('+ang+'deg)';const sg=Math.floor(ang/SA);if(sg!==lastSeg){lastSeg=sg;sTick();try{navigator.vibrate&&navigator.vibrate(8)}catch(_){}}if(t<1)requestAnimationFrame(step);else done()};requestAnimationFrame(step)};
+  const easeOut=t=>1-Math.pow(1-t,4), easeSlow=t=>1-Math.pow(1-t,5), easeIO=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+  const spin=(idx,done)=>{spinning=true;spinTo(idx*SA+SA/2,4800,5,easeOut,()=>{spinning=false;done()})};
+  /* Primer giro (de práctica): frena despacio encima de $10.000 y en el último instante pasa a "¡Casi!" */
+  const nearMiss=(done)=>{spinning=true;const cs=SEG.map((v,i)=>v===0&&SEG[(i+1)%SEG.length]===10?i:-1).filter(i=>i>=0);const c=cs[Math.floor(Math.random()*cs.length)];const edge=(c+1)*SA;
+    spinTo(edge+SA*.1,6800,6,easeSlow,()=>{wrap.classList.add('tense');heart();try{navigator.vibrate&&navigator.vibrate([30,80,30])}catch(_){}
+      setTimeout(()=>{spinTo(edge-SA*.12,520,0,easeIO,()=>{wrap.classList.remove('tense');spinning=false;done(0)})},750)})};
+  go.onclick=function(){if(spinning)return;unlock();
+    attempt++;go.disabled=true;msg.hidden=true;
+    track('RuletaGiro',{intento:attempt});
+    const after=v=>{go.disabled=false;
+      if(!v){sLose();try{navigator.vibrate&&navigator.vibrate(60)}catch(_){}msg.innerHTML='<b>¡Uyyy, casi!</b> Por un pelito no fueron $10.000. Te queda 1 intento. ¡Gíralo!';msg.hidden=false;go.textContent='Girar otra vez';return}
+      const p=PR[v];saved={v};try{localStorage.setItem(KEY,JSON.stringify(saved))}catch(_){}const bb=wh.querySelector('.wh-buy');bb.disabled=true;bb.textContent='Aplicando tu descuento…';apply(p).then(()=>{bb.disabled=false;bb.textContent='Pedir con mi descuento'});showChip(p);
+      sWin();confetti();try{navigator.vibrate&&navigator.vibrate([60,40,120])}catch(_){}
+      $('#whA').textContent=p.t;go.hidden=true;$('#whR').hidden=false;track('RuletaPremio',{premio:v*1000,codigo:p.c,intento:attempt})};
+    if(attempt===1){nearMiss(after);return}
+    const pick=Math.random()<.70?5:10;
+    const cand=SEG.map((v,i)=>v===pick?i:-1).filter(i=>i>=0);const idx=cand[Math.floor(Math.random()*cand.length)];
+    spin(idx,()=>after(SEG[idx]))};
+  root.addEventListener('click',e=>{if(e.target.closest('.wh-buy')){track('RuletaPedido',{});setTimeout(close,50)}},true);
+});
+const __runWheel=()=>{try{__wheel()}catch(_){}};if(document.readyState==='complete')setTimeout(__runWheel,1500);else addEventListener('load',()=>setTimeout(__runWheel,1500),{once:true});
+
+const waf=$('.wa-float');
+if(waf){const wt=()=>waf.classList.toggle('show',scrollY>650);addEventListener('scroll',wt,{passive:true});wt();}
+const st=$('#sticky'), oc=$('#oferta .js-order'); let ocVis=false;
+const upSt=()=>st.classList.toggle('show',scrollY>320&&!ocVis);
+if(oc) new IntersectionObserver(es=>{ocVis=es[0].isIntersecting;upSt()}).observe(oc);
+addEventListener('scroll',upSt,{passive:true});upSt();
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target)}}),{threshold:.12});
+  $$('.rv').forEach((el,i)=>{if(el.getBoundingClientRect().top>innerHeight){el.style.transitionDelay=((i%3)*70)+'ms';el.classList.add('pre');io.observe(el)}});
+}
+})();</script>
+{% schema %}
+{
+  "name": "Landing imán de pesca",
+  "blocks": [{"type": "@app"}],
+  "settings": [
+    {"type": "text", "id": "whatsapp", "label": "WhatsApp (con 57 y sin espacios)", "info": "Ejemplo: 573233080393. Si lo dejas vacío, los botones de WhatsApp no se muestran.", "default": "573233080393"},
+    {"type": "text", "id": "fin_oferta", "label": "Fin de la oferta Black Friday", "info": "Fecha y hora real en que termina la oferta. Formato: 2026-11-30T23:59:00-05:00. Cuando pasa, el contador desaparece solo.", "default": "2026-11-30T23:59:00-05:00"}
+  ]
+}
+{% endschema %}

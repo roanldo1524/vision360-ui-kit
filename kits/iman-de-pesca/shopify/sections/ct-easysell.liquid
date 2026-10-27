@@ -1,0 +1,66 @@
+{% comment %} Conecta los botones de la landing con EasySell (combo preseleccionado) y hace que los carruseles se puedan mover con flechas, puntos, dedo y mouse. {% endcomment %}
+<style>#es-sticky{opacity:0!important;pointer-events:none!important}</style>
+<script>(function(){
+  var CSS='.rwrap{position:relative}'
+   +'.reel{touch-action:pan-x pan-y;scroll-behavior:smooth;cursor:grab}'
+   +'.reel.drag,.slides.drag,.cards.drag{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto}'
+   +'.reel.drag *,.slides.drag *,.cards.drag *{pointer-events:none;user-select:none}'
+   +'.rarr{position:absolute;top:calc(50% - 22px);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.3);z-index:3;border:0;cursor:pointer;transition:transform 160ms cubic-bezier(.23,1,.32,1),opacity 200ms ease}'
+   +'.rarr:active{transform:scale(.9)}'
+   +'.rarr[disabled]{opacity:0;pointer-events:none}'
+   +'.rprev{left:8px}.rnext{right:8px}'
+   +'.rdots{display:flex;justify-content:center;gap:6px;margin-top:16px}'
+   +'.rdots b{width:7px;height:7px;border-radius:9px;background:rgba(255,255,255,.35);transition:width 250ms cubic-bezier(.23,1,.32,1),background 250ms ease}'
+   +'.rdots b.on{width:22px;background:#F6B826}'
+   +'.rhint{text-align:center;color:rgba(255,255,255,.7);font:600 13px/1 Barlow,system-ui,sans-serif;margin-top:10px}';
+  var SVG=function(d){return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A2233" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+d+'"/></svg>'};
+  function dragScroll(el){
+    var down=false,sx=0,sl=0,moved=false;
+    el.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse')return;down=true;moved=false;sx=e.clientX;sl=el.scrollLeft;});
+    window.addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx;if(Math.abs(dx)>4){moved=true;el.classList.add('drag');}el.scrollLeft=sl-dx;});
+    window.addEventListener('pointerup',function(){if(!down)return;down=false;if(moved){var w=el.firstElementChild?el.firstElementChild.getBoundingClientRect().width+12:el.clientWidth;var i=Math.round(el.scrollLeft/w);el.classList.remove('drag');el.scrollTo({left:i*w,behavior:'smooth'});}});
+  }
+  function init(){
+    var h=document.getElementById('ct-host');
+    var sr=h&&h.shadowRoot; var r=sr&&sr.getElementById('ct-root');
+    if(!r){return setTimeout(init,200);}
+    var st=document.createElement('style');st.textContent=CSS;sr.appendChild(st);
+    /* Carrusel de videos: flechas, puntos y arrastre */
+    var reel=r.querySelector('.reel');
+    if(reel){
+      var items=reel.children, n=items.length;
+      var wrap=document.createElement('div');wrap.className='rwrap';reel.parentNode.insertBefore(wrap,reel);wrap.appendChild(reel);
+      var pv=document.createElement('button');pv.className='rarr rprev';pv.setAttribute('aria-label','Video anterior');pv.innerHTML=SVG('M15 6l-6 6 6 6');
+      var nx=document.createElement('button');nx.className='rarr rnext';nx.setAttribute('aria-label','Video siguiente');nx.innerHTML=SVG('M9 6l6 6-6 6');
+      wrap.appendChild(pv);wrap.appendChild(nx);
+      var dots=document.createElement('div');dots.className='rdots';dots.setAttribute('aria-hidden','true');
+      for(var i=0;i<n;i++){var b=document.createElement('b');if(!i)b.className='on';dots.appendChild(b);}
+      wrap.parentNode.insertBefore(dots,wrap.nextSibling);
+      var hint=document.createElement('p');hint.className='rhint';hint.textContent='Desliza para ver más videos →';dots.parentNode.insertBefore(hint,dots.nextSibling);
+      var step=function(){return items.length>1?items[1].offsetLeft-items[0].offsetLeft:reel.clientWidth};
+      var cur=function(){return Math.round(reel.scrollLeft/step())};
+      var go=function(i){i=Math.max(0,Math.min(n-1,i));reel.scrollTo({left:i*step(),behavior:'smooth'})};
+      var sync=function(){var i=cur();[].forEach.call(dots.children,function(d,j){d.classList.toggle('on',i===j)});pv.disabled=i<=0;nx.disabled=i>=n-1||reel.scrollLeft+reel.clientWidth>=reel.scrollWidth-4;if(i>0)hint.style.opacity='0';};
+      pv.onclick=function(){go(cur()-1)};nx.onclick=function(){go(cur()+1)};
+      reel.addEventListener('scroll',sync,{passive:true});sync();
+      dragScroll(reel);
+    }
+    /* Arrastre con mouse también en la galería y las tarjetas */
+    var sl=r.querySelector('#slides');if(sl)dragScroll(sl);
+    var cd=r.querySelector('#cards');if(cd)dragScroll(cd);
+    /* Botones de compra: abren EasySell con el combo elegido */
+    r.addEventListener('click',function(e){
+      var b=e.target.closest('.js-order'); if(!b) return;
+      var es=document.getElementById('es-sticky'); if(!es) return;
+      e.preventDefault(); e.stopPropagation();
+      var o=r.querySelector('.opt.on'); var q=o?(+o.dataset.qty||1):1;
+      es.click();
+      var k=0;
+      (function pick(){var qo=document.querySelectorAll('.es-modal .es-qo-container');if(qo[q-1]){qo[q-1].click();}else if(k++<30){setTimeout(pick,150);}})();
+    },true);
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
+})();</script>
+{% schema %}
+{"name":"Conexion EasySell","settings":[]}
+{% endschema %}

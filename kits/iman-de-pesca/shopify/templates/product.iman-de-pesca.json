@@ -1,0 +1,43 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "iman-pesca-landing",
+      "blocks": {
+        "easysell_cod": {
+          "type": "shopify://apps/easysell-cod-form/blocks/app-block/7bfd0a95-6839-4f02-b2ee-896832dbe67e",
+          "settings": {
+            "product": "iman-de-pesca"
+          }
+        }
+      },
+      "block_order": [
+        "easysell_cod"
+      ],
+      "settings": {
+        "whatsapp": "573233080393"
+      }
+    },
+    "easysell_fix": {
+      "type": "ct-easysell",
+      "settings": {}
+    },
+    "regalos": {
+      "type": "ct-regalos",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "easysell_fix",
+    "regalos"
+  ]
+}
