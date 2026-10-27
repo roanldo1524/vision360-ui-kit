@@ -78,10 +78,10 @@ Todo código que se genere o edite pasa por este filtro antes de subirse. Equiva
 - **Instaladas:**
   - `emilkowalski/skills` (16 skills), con `npx skills@latest add emilkowalski/skills -g --agent claude-code -y`;
   - `nutlope/hallmark`;
-  - `cofoundy/brand-skills` (16 skills de marca: brand, naming, brand-voice, brand-identity…).
+  - `cofoundy/brand-skills` (16 skills de marca: brand, naming, brand-voice, brand-identity…);
+  - **Impeccable** (`npx impeccable install`): la skill `impeccable`, su motor y sus agentes. Usarla para criticar, auditar y pulir toda interfaz antes de publicar.
 - **Pendientes de aprobación del dueño:**
-  - `leonxlnx/taste-skill@design-taste-frontend`;
-  - `pbakaus/impeccable@impeccable`.
+  - `leonxlnx/taste-skill@design-taste-frontend`.
   - Los nombres `anthropic/design-taste-frontend`, `ui-engine/impeccable` y `composio/brand-guidelines` no existen.
 - **Mientras tanto:** estas reglas aplican igual.
 
