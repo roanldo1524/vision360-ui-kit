@@ -373,7 +373,7 @@
 .ct-page .kit.on{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink),var(--sh-1);background:#FFFDF8}
 .ct-page .kit .rd{width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(35,32,28,.3);transition:box-shadow 220ms var(--ease)}
 .ct-page .kit.on .rd{box-shadow:inset 0 0 0 6px var(--ink)}
-.ct-page .kit .kph{width:52px;height:52px;border-radius:12px;object-fit:cover;background:var(--sand)}
+.ct-page .kit .kph{width:52px;height:52px;border-radius:12px;object-fit:cover;background:#F1E9DF}
 .ct-page .kit .kt b{display:block;font:700 15.5px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink)}
 .ct-page .kit .kt{text-align:left}.ct-page .kit .kt small{display:block;text-align:left;font-weight:400;font-size:13px;line-height:1.4;color:var(--muted);margin-top:3px}
 .ct-page .kit .kp{text-align:right;white-space:nowrap}
@@ -385,6 +385,40 @@
 .ct-page .sk-l{min-width:0;flex:1}.ct-page .sk-l b{display:block;font:700 14px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ct-page .sk-l small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
 .ct-page .xm{color:var(--amber-t);margin-bottom:12px}.ct-page .hero2 .lede{margin:12px auto 0}
 .ct-page figcaption{font-size:13px}.ct-page .vs th{font-size:13px}.ct-page .glass span,.ct-page li span{font-size:13px}.ct-page p,.ct-page .lede{max-width:62ch}.ct-page .center p,.ct-page .center .lede{margin-left:auto;margin-right:auto}@media (min-width:900px){.ct-page .gcount{display:none}.ct-page .short .qa{display:grid;grid-template-columns:1fr 1fr;column-gap:48px;max-width:none}}
+.ct-page .vc-hear{position:absolute;top:12px;left:50%;z-index:2;display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;background:rgba(20,18,16,.62);color:#fff;font:700 13px/1 var(--display);white-space:nowrap;opacity:0;transform:translate(-50%,-4px);transition:opacity 200ms var(--ease),transform 200ms var(--ease);pointer-events:none}.ct-page .vc-hear svg{width:16px;height:16px}.ct-page .vc.mute .vc-slide.on .vc-hear{opacity:1;transform:translate(-50%,0)}.ct-page .vc-card{cursor:pointer}
+.ct-page .gstage{position:relative}
+.ct-page .hov{position:absolute;left:0;right:0;bottom:0;padding:110px 20px 22px;background:linear-gradient(180deg,rgba(12,10,8,0),rgba(12,10,8,.8));pointer-events:none;border-radius:inherit;transition:opacity 260ms var(--ease),transform 260ms var(--ease)}
+.ct-page .hov.off{opacity:0;transform:translateY(8px)}
+.ct-page .hey{font:700 11px/1 var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--amber-2)}
+.ct-page .hov h1{color:#fff;font:800 clamp(34px,9.6vw,54px)/1 var(--display);letter-spacing:-.045em;margin-top:10px;max-width:11ch;text-wrap:balance}
+.ct-page .gcount{top:14px;right:14px;left:auto;bottom:auto}
+.ct-page .thumbs{display:flex;gap:6px;margin-top:10px;overflow-x:auto;scrollbar-width:none}
+.ct-page .thumbs::-webkit-scrollbar{display:none}
+.ct-page .thumbs button{flex:none;width:56px;height:56px;border-radius:10px;overflow:hidden;opacity:.55;transition:opacity 200ms var(--ease),box-shadow 200ms var(--ease)}
+.ct-page .thumbs button.on{opacity:1;box-shadow:0 0 0 1.5px var(--ink)}
+.ct-page .thumbs img{width:100%;height:100%;object-fit:cover}
+.ct-page .dots{display:none}
+.ct-page .nm{font:700 15px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.ct-page .info .sub{font:400 17px/1.55 var(--text);color:var(--body);margin-top:10px;max-width:36ch}
+.ct-page .price{margin-top:20px;gap:6px 12px;align-items:baseline}
+.ct-page .price strong{color:var(--ink);font-size:32px;letter-spacing:-.04em}
+.ct-page .price s{font:500 16px/1 var(--text)}
+.ct-page .off{background:none;border:0;padding:0;font:700 14px/1 var(--text);color:var(--amber-t)}
+.ct-page .pay{background:none;border:0;border-radius:0;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ct-page .pay svg{width:26px;height:26px}
+.ct-page .pay p{font-size:14.5px;color:var(--body)}
+.ct-page .pkl{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.ct-page .pkl b{font:700 15px/1 var(--display);letter-spacing:-.01em}
+.ct-page .pkl span{font:500 14px/1 var(--text);color:var(--muted)}
+.ct-page .kits{gap:12px}
+.ct-page .kit .ktag{left:auto;right:14px;font:700 11px/1 var(--label);letter-spacing:.02em;text-transform:none;background:var(--amber);color:var(--ink)}
+.ct-page .kit .kt b{font:700 16px/1.2 var(--display)}
+.ct-page .kit .kgift{border-top:0;padding-top:0;margin-top:8px}
+.ct-page .sep{opacity:.45}
+.ct-page h2{font-weight:800;letter-spacing:-.045em;line-height:1.02;font-size:clamp(30px,8.2vw,50px)}
+.ct-page h2 em{font-weight:500}
+@media (max-width:899px){.ct-page .buy{padding-top:0}.ct-page .buy .w{grid-template-columns:minmax(0,1fr)}.ct-page .gal{margin:0 -20px;min-width:0}.ct-page .slides{border-radius:0;box-shadow:none}.ct-page .slides figure{aspect-ratio:1/1.1}.ct-page .garr{display:none}.ct-page .thumbs{padding:0 20px}}
+@media (min-width:900px){.ct-page .slides{border-radius:24px}.ct-page .thumbs button{width:64px;height:64px;border-radius:12px}}
 @media (prefers-reduced-motion:reduce){.ct-page *{animation:none!important;transition-duration:.01ms!important}.ct-page .rv.pre{opacity:1;transform:none}}
 .ct-page .wh{position:fixed;inset:0;z-index:80;background:rgba(6,24,42,.62);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .22s ease}
 .ct-page .wh.in{opacity:1}.ct-page .wh[hidden]{display:none}
@@ -452,14 +486,14 @@
   <section class="buy" id="oferta">
     <div class="w">
       <div class="gal">
-        <div class="slides" id="slides" aria-label="Fotos de la lámpara">
+        <div class="gstage"><div class="slides" id="slides" aria-label="Fotos de la lámpara">
           {%- assign gal = 'au-sol-patio.png|au-pared.jpg|au-colores.jpg|au-sol-muro.png|au-cerca.jpg|au-sol-balcon.png|au-macro.png|au-familia.png|au-kit3.png|au-medidas.jpg' | split: '|' -%}
           {%- assign alts = 'Dos lámparas AURA en la pared del patio con mandalas de colores alrededor|Mandala de colores alrededor de una lámpara AURA en una pared de madera|Dos lámparas en una cerca: luz cálida y luz fría|Tres lámparas AURA en fila en el muro del jardín|Dos lámparas en la pared de una cerca|Lámpara AURA en la pared de un balcón|Lámpara AURA encendida de cerca|Familia en la terraza de una finca con lámparas AURA|Kit de tres lámparas AURA|Medidas: 9,6 cm de alto y 8,4 cm de ancho' | split: '|' -%}
           {%- for g in gal -%}
           <figure><img src="{{ g | file_url }}&width=900" srcset="{{ g | file_url }}&width=540 540w, {{ g | file_url }}&width=900 900w, {{ g | file_url }}&width=1200 1200w" sizes="(min-width:900px) 620px, 100vw" alt="{{ alts[forloop.index0] }}" width="900" height="900" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async"></figure>
           {%- endfor -%}
         </div>
-        <span class="seal" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><path id="sc" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/></defs><text font-family="Hanken Grotesk,sans-serif" font-size="9.2" font-weight="700" letter-spacing="2.2" fill="#23201C"><textPath href="#sc">CARGA SOLAR · SIN CABLES · </textPath></text><g transform="translate(50 50)" fill="none" stroke="#E8962E" stroke-width="2.2"><circle r="6"/><path d="M0-16v5M0 11v5M-16 0h5M11 0h5M-11.3-11.3l3.5 3.5M7.8 7.8l3.5 3.5M-11.3 11.3l3.5-3.5M7.8-7.8l3.5-3.5" stroke-linecap="round"/></g></svg></span>
+        <div class="hov" id="hov"><p class="hey">AURA · Edición Navidad</p><h1>Tu pared, llena de mandalas esta noche.</h1></div></div>
         <button class="garr gprev" id="gprev" type="button" aria-label="Foto anterior" disabled><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
         <button class="garr gnext" id="gnext" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
         <span class="gcount" id="gcount" aria-hidden="true">1 / {{ gal.size }}</span>
@@ -477,18 +511,18 @@
         </div>
         {%- endif -%}
 
-        <h1>AURA: luz solar mandala</h1>
+        <p class="nm">AURA · Luz solar mandala</p>
         <p class="sub">Cuélgala en la pared y esta Navidad tu casa se llena de mandalas de colores. Sin cables.</p>
         <div class="price"><strong id="pNow">{{ k1 | times: 100 | money_without_trailing_zeros }}</strong><s id="pWas">{{ antes | times: 100 | money_without_trailing_zeros }}</s><span class="off" id="pOff">Ahorras {{ antes | minus: k1 | times: 100 | money_without_trailing_zeros }}</span></div>
 
         <div class="pay"><svg viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="10" fill="#23201C"/><path d="M9 13.5h16v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 9 22.5zM9 13.5l2.4-3.5h11.2l2.4 3.5M17 17v4" stroke="#F2A945" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><p><b>Pagas cuando te llegue.</b> Recibes tu kit, lo revisas y pagas en efectivo al transportador.</p></div>
 
         <div class="pick">
-          <p>Kit: <span id="kitName">3 lámparas</span><span class="lmps" id="lmps" data-n="3" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></p>
+          <p class="pkl"><b>Elige tu kit</b><span id="kitName">3 lámparas</span></p>
           <div class="kits" role="radiogroup" aria-label="Elige tu kit">
-            <button class="kit on" type="button" role="radio" aria-checked="true" data-k="1"><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-kit3.png' | file_url }}&width=120" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>3 lámparas</b><small>Para una pared · {{ k1 | divided_by: 3 | times: 100 | money_without_trailing_zeros }} c/u</small></span><span class="kp"><b>{{ k1 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 1 | times: 100 | money_without_trailing_zeros }}</s></span></button>
-            <button class="kit" type="button" role="radio" aria-checked="false" data-k="2"><span class="ktag">Recomendado</span><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-cerca.jpg' | file_url }}&width=120" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>6 lámparas</b><small>Tu casa y un regalo de Navidad · {{ k2 | divided_by: 6 | times: 100 | money_without_trailing_zeros }} c/u</small></span><span class="kp"><b>{{ k2 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 2 | times: 100 | money_without_trailing_zeros }}</s></span><span class="kgift"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M12 9v11M4 13h16M12 9c-2-4-6-3.5-5-1.5S12 9 12 9zm0 0c2-4 6-3.5 5-1.5S12 9 12 9z"/></svg>Guía de decoración con luz gratis</span></button>
-            <button class="kit" type="button" role="radio" aria-checked="false" data-k="3"><span class="ktag">Mejor precio</span><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-patio.png' | file_url }}&width=120" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>9 lámparas</b><small>Patio, entrada y balcón · {{ k3 | divided_by: 9 | times: 100 | money_without_trailing_zeros }} c/u</small></span><span class="kp"><b>{{ k3 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 3 | times: 100 | money_without_trailing_zeros }}</s></span><span class="kgift"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M12 9v11M4 13h16M12 9c-2-4-6-3.5-5-1.5S12 9 12 9zm0 0c2-4 6-3.5 5-1.5S12 9 12 9z"/></svg>Guía de decoración con luz gratis</span></button>
+            <button class="kit on" type="button" role="radio" aria-checked="true" data-k="1"><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k3.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>3 lámparas</b><small>{{ k1 | divided_by: 3 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k1 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 1 | times: 100 | money_without_trailing_zeros }}</s></span></button>
+            <button class="kit" type="button" role="radio" aria-checked="false" data-k="2"><span class="ktag">Recomendado</span><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k6.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>6 lámparas</b><small>{{ k2 | divided_by: 6 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k2 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 2 | times: 100 | money_without_trailing_zeros }}</s></span><span class="kgift">+ Guía de decoración con luz gratis</span></button>
+            <button class="kit" type="button" role="radio" aria-checked="false" data-k="3"><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k9.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>9 lámparas</b><small>{{ k3 | divided_by: 9 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k3 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 3 | times: 100 | money_without_trailing_zeros }}</s></span><span class="kgift">+ Guía de decoración con luz gratis</span></button>
           </div>
         </div>
 
@@ -501,7 +535,7 @@
         <p class="desc">AURA es una lámpara solar con calado de mandala. De día carga sola con su panel; de noche se prende y llena de <b>colores la pared</b> a su alrededor. <b>La cuelgas en la pared</b> de tu patio, entrada o balcón, o la pones en el piso o en una mesa. Queda lista en un minuto.<i>Cada kit trae 3 lámparas iguales. Mide 9,6 cm de alto y 8,4 cm de ancho.</i></p>
 
         <div class="buybtn">
-          <button class="cta js-order" type="button" id="mainBtn"><span id="btnTxt">Pedir mi kit de 3</span><span class="sep">—</span><span id="btnPrice">{{ k1 | times: 100 | money_without_trailing_zeros }}</span></button>
+          <button class="cta js-order" type="button" id="mainBtn"><span id="btnTxt">Pedir mi kit de 3</span><span class="sep">·</span><span id="btnPrice">{{ k1 | times: 100 | money_without_trailing_zeros }}</span></button>
           <div class="micro"><span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.5"/><circle cx="17" cy="17.5" r="1.5"/></svg>Envío gratis</span><span>Pagas al recibir</span><span>Llega en 2 a 5 días hábiles</span></div>
           <p class="seller">Vendido y enviado por <b>alcomprar</b>, tienda oficial en Colombia. Te confirmamos el pedido por WhatsApp antes de despacharlo.</p>
         </div>
@@ -515,10 +549,10 @@
   <!-- 11 · Videos (coverflow como Lummia) -->
   <section class="vc-sec" aria-label="Videos de la lámpara">
     <div class="vc" id="vc"><div class="vc-track">
-        <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-vid-2.webp' | file_url }}&width=400" data-src="{{ 'au-vid-2.mp4' | file_url }}" aria-label="Así se ve al oscurecer"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><p class="vc-cap">Así se ve al oscurecer</p></div></div>
-        <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-vid-3.webp' | file_url }}&width=400" data-src="{{ 'au-vid-3.mp4' | file_url }}" aria-label="La misma cerca, de noche"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><p class="vc-cap">La misma cerca, de noche</p></div></div>
-        <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-vid-4.webp' | file_url }}&width=400" data-src="{{ 'au-vid-4.mp4' | file_url }}" aria-label="De cerca, y bajo la lluvia"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><p class="vc-cap">De cerca, y bajo la lluvia</p></div></div>
-        <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-vid-1.webp' | file_url }}&width=400" data-src="{{ 'au-vid-1o.mp4' | file_url }}" aria-label="De la bodega a tu pared"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><p class="vc-cap">De la bodega a tu pared</p></div></div>
+        <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-vid-2.webp' | file_url }}&width=400" data-src="{{ 'au-vid-2.mp4' | file_url }}" aria-label="Así se ve al oscurecer"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><span class="vc-hear" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>Toca para oír</span><p class="vc-cap">Así se ve al oscurecer</p></div></div>
+        <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-vid-3.webp' | file_url }}&width=400" data-src="{{ 'au-vid-3.mp4' | file_url }}" aria-label="La misma cerca, de noche"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><span class="vc-hear" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>Toca para oír</span><p class="vc-cap">La misma cerca, de noche</p></div></div>
+        <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-vid-4.webp' | file_url }}&width=400" data-src="{{ 'au-vid-4.mp4' | file_url }}" aria-label="De cerca, y bajo la lluvia"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><span class="vc-hear" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>Toca para oír</span><p class="vc-cap">De cerca, y bajo la lluvia</p></div></div>
+        <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-vid-1.webp' | file_url }}&width=400" data-src="{{ 'au-vid-1o.mp4' | file_url }}" aria-label="De la bodega a tu pared"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><span class="vc-hear" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>Toca para oír</span><p class="vc-cap">De la bodega a tu pared</p></div></div>
         <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-macro.png' | file_url }}&width=400" data-src="{{ 'au-v-macro.mp4' | file_url }}" aria-label="El calado de cerca"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><p class="vc-cap">El calado de cerca</p></div></div>
     </div></div>
     <div class="vc-nav"><button type="button" id="vcPrev" aria-label="Video anterior"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6l-6 6 6 6"/></svg></button><button type="button" id="vcSnd" aria-label="Activar sonido" aria-pressed="false"><svg class="i-off" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg><svg class="i-on" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg></button><button type="button" id="vcPlay" aria-label="Pausar video"><svg class="i-pause" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M9 7v10M15 7v10"/></svg><svg class="i-play" viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5z" fill="currentColor"/></svg></button><button type="button" id="vcNext" aria-label="Video siguiente"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6l6 6-6 6"/></svg></button></div>
@@ -790,7 +824,7 @@ root.addEventListener('click',e=>{const b=e.target.closest('.js-order');if(b){or
 /* Galería */
 const slides=$('#slides'),gp=$('#gprev'),gn=$('#gnext'),dots=$$('#gdots b'),th=$$('#thumbs button');
 const gi=()=>Math.round(slides.scrollLeft/slides.clientWidth);
-const gc=$('#gcount');const gsync=()=>{const i=gi();if(gc)gc.textContent=(i+1)+' / '+slides.children.length;dots.forEach((d,j)=>d.classList.toggle('on',i===j));th.forEach((d,j)=>d.classList.toggle('on',i===j));gp.disabled=i<=0;gn.disabled=i>=slides.children.length-1};
+const gc=$('#gcount'),hv=$('#hov');const gsync=()=>{const i=gi();if(hv)hv.classList.toggle('off',i>0);if(gc)gc.textContent=(i+1)+' / '+slides.children.length;dots.forEach((d,j)=>d.classList.toggle('on',i===j));th.forEach((d,j)=>d.classList.toggle('on',i===j));gp.disabled=i<=0;gn.disabled=i>=slides.children.length-1};
 const ggo=i=>slides.scrollTo({left:i*slides.clientWidth,behavior:'smooth'});
 slides.addEventListener('scroll',()=>requestAnimationFrame(gsync),{passive:true});gp.onclick=()=>ggo(gi()-1);gn.onclick=()=>ggo(gi()+1);th.forEach((b,i)=>b.onclick=()=>ggo(i));
 /* Coverflow de videos: centro reproduce, los demás pausados; swipe, flechas y pausa */
@@ -799,14 +833,14 @@ slides.addEventListener('scroll',()=>requestAnimationFrame(gsync),{passive:true}
   const load=v=>{if(v&&!v.src&&v.dataset.src){v.src=v.dataset.src}};
   const lay=()=>{const W=sl[0].offsetWidth;sl.forEach((s,i)=>{let d=i-cur;if(d>n/2)d-=n;if(d<-n/2)d+=n;const a=Math.abs(d);const sc=a===0?1:a===1?.84:.7;const x=d===0?0:Math.sign(d)*(a===1?W*.78:W*1.32);
     s.style.transform='translateX('+x+'px) scale('+sc+')';s.style.opacity=a===0?1:a===1?.55:a===2?.25:0;s.style.zIndex=10-a;s.style.filter=a?'saturate(.7)':'none';s.style.pointerEvents=a>1?'none':'auto';s.classList.toggle('on',a===0);
-    const v=vid(i);if(v)v.muted=!(snd&&a===0);if(!ready)return;if(a<=1)load(v);if(a===0&&playing){load(v);v.play&&v.play().catch(()=>{})}else if(v&&!v.paused)v.pause()})};
+    const v=vid(i);s.classList.toggle('on',a===0);vc.classList.toggle('mute',!snd);if(v)v.muted=!(snd&&a===0);if(!ready)return;if(a<=1)load(v);if(a===0&&playing){load(v);v.play&&v.play().catch(()=>{})}else if(v&&!v.paused)v.pause()})};
   const go=k=>{cur=(k+n)%n;lay()};
   $('#vcPrev').onclick=()=>go(cur-1);$('#vcNext').onclick=()=>go(cur+1);
   let snd=false;$('#vcSnd').onclick=function(){snd=!snd;this.setAttribute('aria-pressed',snd);this.setAttribute('aria-label',snd?'Silenciar':'Activar sonido');if(snd&&!playing){playing=true;$('#vcPlay').classList.remove('paused')}lay()};
   $('#vcPlay').onclick=function(){playing=!playing;this.classList.toggle('paused',!playing);this.setAttribute('aria-label',playing?'Pausar video':'Reproducir video');lay()};
   sl.forEach((s,i)=>s.addEventListener('click',()=>{if(i!==cur)go(i)}));
   let x0=null,t0=0;vc.addEventListener('pointerdown',e=>{x0=e.clientX;t0=performance.now()});
-  vc.addEventListener('pointerup',e=>{if(x0===null)return;const dx=e.clientX-x0,v=Math.abs(dx)/Math.max(1,performance.now()-t0);if(Math.abs(dx)>30||v>.11)go(cur+(dx<0?1:-1));x0=null});
+  vc.addEventListener('pointerup',e=>{if(x0===null)return;const dx=e.clientX-x0,v=Math.abs(dx)/Math.max(1,performance.now()-t0);if(Math.abs(dx)>30||v>.11)go(cur+(dx<0?1:-1));else{const t=e.target.closest('.vc-slide');const k=sl.indexOf(t);if(k===cur)$('#vcSnd').click();else if(k>=0)go(k)}x0=null});
   lay();if('IntersectionObserver' in window){new IntersectionObserver(es=>{if(es[0].isIntersecting){ready=true;lay()}else sl.forEach((s,i)=>{const v=vid(i);if(v&&!v.paused)v.pause()})},{rootMargin:'200px'}).observe(vc)}else{ready=true;lay()}
   addEventListener('resize',lay);
 })();
