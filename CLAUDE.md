@@ -108,6 +108,33 @@ Todo código que se genere o edite pasa por este filtro antes de subirse. Equiva
 - **Estructura de la página:** se replica **tal cual** la de la página de referencia, en el mismo orden de secciones y sin saltarse ninguna. Solo cambian la marca, las fotos, los textos y los precios.
 - **Precios:** siempre como están en Shopify y EasySell. Verificarlos contra los pedidos reales antes de publicar.
 
+## 🧭 Flujo obligatorio para cada página de ventas (3 pasos)
+Rol: **Director de Estrategia, Copywriter de Respuesta Directa y Diseñador Frontend Senior.**
+
+**Paso 1. Investigación de mercado y audiencia** (sin código ni imágenes):
+1. **Cliente ideal:** sus 3 dolores y frustraciones reales.
+2. **Objeciones:** las 3 razones por las que NO compraría, para matarlas en el texto.
+3. **Ángulo:** qué framework se usa (PAS o AIDA).
+
+**Paso 2. Dirección de arte, textos y plan visual:**
+1. **Textos humanos:** titulares que enganchen en 3 segundos, tono directo y sin jerga de IA.
+2. **Diseño:** paleta estricta de 3 colores en variables CSS y letra apretada. Diseño asimétrico, con bento y mini elementos vivos.
+3. **Plan de imágenes:** cuáles se generan con IA (GPT Image, vía Figma, que ya está conectado) y cuáles fotos reales se buscan en internet.
+
+**Paso 3. Construcción** (solo con la aprobación del dueño): código final, imágenes descargadas y todo armado con las reglas de este archivo.
+
+**Investigar el uso real del producto antes de diseñar.** Ejemplo: las lámparas mandala se usan sobre todo **colgadas en la pared**, así que fotos y textos deben mostrarlo.
+
+## 🌐 Búsqueda y manejo de imágenes
+- **Solo alta resolución:** nada pixelado, con marca de agua ni miniaturas. Fotos grandes, SVG limpios o PNG con fondo transparente.
+- **Licencia libre** que permita uso comercial. Nunca se presenta una foto de stock como si fuera del cliente ni de su producto.
+- **Nombres en kebab-case:** claros y descriptivos, por ejemplo `hero-pared-mandala.jpg`.
+- **Dónde se guardan:**
+  - en **Shopify** se suben a Contenido → Archivos con un prefijo por producto (`au-`, `ct-`…) y se llaman con `file_url`;
+  - en proyectos React o Next se guardan en `/public/assets/`.
+- **Enlaces temporales:** se cambian por la ruta final apenas se descarga la imagen.
+- **API keys:** nunca se pegan en el chat ni en el código. Van como secretos del entorno.
+
 ## Reglas de la tienda (no negociables)
 - Nunca inventar reseñas, lives falsos, premios que nunca salen ni contadores que se reinician.
 - Shopify no deja editar el tema en vivo por la API. Se trabaja en una **copia**, se prueba, se renombra a "LISTA PARA PUBLICAR" y el dueño le da **Publicar**.
