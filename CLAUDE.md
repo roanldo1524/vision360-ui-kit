@@ -80,9 +80,8 @@ Todo código que se genere o edite pasa por este filtro antes de subirse. Equiva
   - `nutlope/hallmark`;
   - `cofoundy/brand-skills` (16 skills de marca: brand, naming, brand-voice, brand-identity…);
   - **Impeccable** (`npx impeccable install`): la skill `impeccable`, su motor y sus agentes. Usarla para criticar, auditar y pulir toda interfaz antes de publicar.
-- **Pendientes de aprobación del dueño:**
-  - `leonxlnx/taste-skill@design-taste-frontend`.
-  - Los nombres `anthropic/design-taste-frontend`, `ui-engine/impeccable` y `composio/brand-guidelines` no existen.
+  - **Taste** (`leonxlnx/taste-skill`, skill `design-taste-frontend`).
+- **Nombres que no existen:** los nombres `anthropic/design-taste-frontend`, `ui-engine/impeccable` y `composio/brand-guidelines` no existen.
 - **Mientras tanto:** estas reglas aplican igual.
 
 ## 📐 Logos e íconos (anti logos "hechos por IA")
