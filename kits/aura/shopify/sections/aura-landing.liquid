@@ -68,7 +68,6 @@
 </style>
 <script>
 (function(){
-  if(!document.getElementById('au-host'))return;
   var K=[{{ 'au-k3.webp' | file_url | append: '&width=120' | json }},{{ 'au-k6.webp' | file_url | append: '&width=120' | json }},{{ 'au-k9.webp' | file_url | append: '&width=120' | json }}];
   var PAY={{ 'au-medios-pago.png' | file_url | append: '&width=720' | json }};
   var busy=false,q=false;
