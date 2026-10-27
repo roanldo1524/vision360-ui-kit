@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "aura-landing",
+      "blocks": {
+        "easysell_cod": {
+          "type": "shopify://apps/easysell-cod-form/blocks/app-block/7bfd0a95-6839-4f02-b2ee-896832dbe67e",
+          "settings": { "product": "luz-de-decoracion-solar" }
+        }
+      },
+      "block_order": ["easysell_cod"],
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
