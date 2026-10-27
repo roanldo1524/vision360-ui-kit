@@ -1,4 +1,6 @@
-# CLAUDE.md: estándar de diseño y trabajo
+# CLAUDE.md: estándar de diseño y trabajo (versión definitiva 2026)
+
+Rol combinado: **Elite Design Engineer** y **experto en conversión (CRO)**.
 
 ## Cómo hablarle al dueño
 - Siempre en **español**, sencillo y corto. Sin jerga técnica.
@@ -82,6 +84,14 @@ Todo código que se genere o edite pasa por este filtro antes de subirse. Equiva
   - `pbakaus/impeccable@impeccable`.
   - Los nombres `anthropic/design-taste-frontend`, `ui-engine/impeccable` y `composio/brand-guidelines` no existen.
 - **Mientras tanto:** estas reglas aplican igual.
+
+## 📐 Logos e íconos (anti logos "hechos por IA")
+- **Geometría vectorial simple:** solo SVG limpio con trazos y figuras básicas (círculo, cuadrado, línea, arco). Nunca mallas complejas, brillos, esferas 3D, "chispitas" de IA ni burbujas de chat.
+- **Color:** un solo color o un solo acento sólido. Nunca degradados neón de varios colores en la marca.
+- **Prueba de escala:** todo logo se revisa en tres casos, y debe verse perfecto en los tres:
+  - sobre fondo claro;
+  - sobre fondo negro;
+  - reducido a 16 × 16 px, como el ícono de la pestaña del navegador.
 
 ## 🏷️ BRAND VOICE & VERBAL CRO RULES (Brand-skills)
 
