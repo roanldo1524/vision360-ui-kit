@@ -75,12 +75,29 @@ Todo código que se genere o edite pasa por este filtro antes de subirse. Equiva
 ### Skills de diseño
 - **Instaladas:**
   - `emilkowalski/skills` (16 skills), con `npx skills@latest add emilkowalski/skills -g --agent claude-code -y`;
-  - `nutlope/hallmark`.
+  - `nutlope/hallmark`;
+  - `cofoundy/brand-skills` (16 skills de marca: brand, naming, brand-voice, brand-identity…).
 - **Pendientes de aprobación del dueño:**
   - `leonxlnx/taste-skill@design-taste-frontend`;
   - `pbakaus/impeccable@impeccable`.
-  - Los nombres `anthropic/design-taste-frontend` y `ui-engine/impeccable` no existen.
+  - Los nombres `anthropic/design-taste-frontend`, `ui-engine/impeccable` y `composio/brand-guidelines` no existen.
 - **Mientras tanto:** estas reglas aplican igual.
+
+## 🏷️ BRAND VOICE & VERBAL CRO RULES (Brand-skills)
+
+### 1. Ley del "copywriter humano"
+- **Nunca jerga de marketing de IA:** "revoluciona", "potencia", "lleva al siguiente nivel", "sumérgete", "optimiza tu vida", "empodera". Generan desconfianza al instante.
+- **Escribir como se habla.** Prueba de la fiesta: si no se lo dirías así a un amigo en una reunión, no va en la página. Español de Colombia, natural.
+
+### 2. Mensajes que convierten
+- **Título principal:** dice el resultado concreto en menos de 3 segundos (acción + beneficio específico). Ejemplo: "Tu patio lleno de colores esta noche, sin cables".
+- **Botones:** dicen el siguiente paso exacto ("Pedir mi kit de 6", no "Enviar").
+- **Debajo de cada botón principal:** una línea pequeña y suave que quita el miedo, por ejemplo "Pagas al recibir · Envío gratis · Llega en 2 a 5 días".
+
+### 3. Una marca por producto, misma estructura
+- **Marca propia:** cada producto tiene su propia marca (nombre, colores, sello, tono). Se arma con la skill `brand`.
+- **Estructura de la página:** se replica **tal cual** la de la página de referencia, en el mismo orden de secciones y sin saltarse ninguna. Solo cambian la marca, las fotos, los textos y los precios.
+- **Precios:** siempre como están en Shopify y EasySell. Verificarlos contra los pedidos reales antes de publicar.
 
 ## Reglas de la tienda (no negociables)
 - Nunca inventar reseñas, lives falsos, premios que nunca salen ni contadores que se reinician.
