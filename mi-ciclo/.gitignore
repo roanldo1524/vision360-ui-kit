@@ -4,3 +4,5 @@ out
 *.tsbuildinfo
 next-env.d.ts
 .env*.local
+.impeccable/live/
+.impeccable/config.local.json
