@@ -101,3 +101,9 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - Hallazgo: las reglas del bot (campo 456432), la espera (6 s) y la posventa (105173) volvieron a la versión original del 19 de octubre (76 reglas). Alguien restauró todo; no se volvió a poner nuestra versión.
 - Cambio pedido por Ronald: reglas 12 y 72 ahora mandan escribir como dirección exactamente «RECLAMA EN OFICINA INTERRAPIDISIMO» (otra transportadora: «RECLAMA EN OFICINA» + nombre). Respaldo previo en el scratchpad (respaldo_antes_reclama_1028.json).
 - Filtro de Shopify en la hoja: al 25 oct seguía subiendo pedidos web (#6461–#6473). La condición «Origen Directo/Ads + oportunidad abierta» no los separa; falta la línea `json_lucid_sales` no contiene `shopify` o revisar si «Subida landing»/«Confirmacion landing» también escriben en la hoja.
+
+### 28 oct, 11:45 a. m. — Arreglos puntuales sobre la versión restaurada del bot
+- Sobre la versión del 19 oct (no se borró ninguna regla): 19 y 65 (usted, sin «novio/novia»), 36-38 («Herbicida Toro Verde» en vez de «Orgánico Regenerativo»), 39 (quitada la fecha «viernes 8 de mayo»; ahora: sale de Cali, 3 a 8 días hábiles, paga al recibir).
+- Nuevas 77-84: responder siempre, mensaje inicial una sola vez, palabras prohibidas + dosis, precios oficiales, datos en un solo mensaje y esperar todos antes del resumen, un solo recordatorio, limón por enlace, prioridad.
+- Espera para agrupar mensajes: 6 → 10 s. Respaldo: scratchpad respaldo_antes_flujo_1028.json.
+- Ventas WhatsApp por día: 41 (26 oct), 45 (27 oct). Pendiente: el nombre del producto en Lucid Sales → Productos y el mensaje inicial siguen diciendo «Orgánico».
