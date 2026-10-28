@@ -1,6 +1,8 @@
 "use client";
+// Mi ciclo: portada de marca con el día y la fase, el mes como calendario sereno,
+// las cuatro fases con sus formas oficiales, próximos ciclos e historial.
 import { useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, Droplet, Heart } from "lucide-react";
+import { ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import { useEstado } from "@/lib/almacen";
 import {
   diaSemana, diferenciaDias, faseDelDia, FASES, fechaLarga, hoyColombia, infoDia, MESES, sumarDias,
@@ -11,10 +13,18 @@ import type { Fase, Fecha } from "@/lib/tipos";
 import { clases } from "@/lib/utilidades";
 import { Hoja, Confirmar } from "@/components/Hoja";
 import { avisar } from "@/components/Avisos";
+import { FlorLuna } from "@/components/FormasMarca";
 import { BebeAgua, MiObjetivo } from "@/components/hoy/Bienestar";
+import { GlifoFase } from "./GlifoFase";
 import estilos from "./calendario.module.css";
 
 const ENCABEZADO = ["L", "M", "M", "J", "V", "S", "D"];
+const MES_CORTO = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+const ORDEN: Fase[] = ["menstrual", "folicular", "ovulacion", "lutea"];
+
+function nombreCorto(f: Fase) {
+  return FASES[f].corta.toLowerCase();
+}
 
 export function Calendario() {
   const ciclo = useEstado((e) => e.ciclo);
@@ -45,54 +55,107 @@ export function Calendario() {
     setMes(fecha.toISOString().slice(0, 7));
   }
 
-  // Historial de ciclos registrados
   const ordenados = [...periodos].sort();
   const duraciones = ordenados.slice(1).map((p, i) => diferenciaDias(ordenados[i], p));
   const promedio = duraciones.length ? Math.round(duraciones.reduce((s, d) => s + d, 0) / duraciones.length) : null;
 
-  // Predicciones: próximos 3 ciclos
   const predicciones = Array.from({ length: 3 }, (_, i) => {
     const inicio = sumarDias(info.proximoPeriodo, i * ciclo.duracionCiclo);
     const ovul = sumarDias(inicio, ciclo.duracionCiclo - 14);
     return { inicio, fertilDesde: sumarDias(ovul, -5), fertilHasta: sumarDias(ovul, 1) };
   });
 
+  // Tramos de fase para la línea del ciclo de la portada
+  const tramos = ORDEN.map((f) => {
+    const dias = Array.from({ length: ciclo.duracionCiclo }, (_, i) => i + 1).filter((n) => faseDelDia(n, ciclo) === f);
+    return { fase: f, desde: dias[0], hasta: dias[dias.length - 1], largo: dias.length };
+  });
+
   const yaRegistradaHoy = periodos.includes(hoy);
+  const esMesActual = mes === hoy.slice(0, 7);
 
   return (
-    <main className="pagina">
-      <header className="columna" style={{ gap: 4 }}>
-        <span className="eyebrow eyebrow-rojo">Mi ciclo</span>
-        <h1 className="titulo-xl">
-          Día {info.diaCiclo} <span className="texto-3" style={{ fontSize: 22 }}>de {ciclo.duracionCiclo}</span>
+    <main className={clases("pagina", estilos.pagina)}>
+      {/* Portada de marca */}
+      <section className={estilos.portada} aria-label="Tu ciclo hoy">
+        <FlorLuna color="#ff5a66" fondo="var(--rojo)" tamano={280} className={estilos.florGigante} />
+        <h1 className={estilos.titulo}>
+          Mi <em>ciclo</em>
         </h1>
-        <p className="texto-2">
-          {FASES[info.fase].nombre} · próximo periodo el <b className="num" style={{ color: "var(--vino)" }}>{fechaLarga(info.proximoPeriodo)}</b>
+        <div className={estilos.dato}>
+          <span className={estilos.cifra} aria-hidden="true">
+            {info.diaCiclo}
+          </span>
+          <div className={estilos.datoTexto}>
+            <p className={estilos.datoEtiqueta}>día de {ciclo.duracionCiclo}</p>
+            <p className={estilos.faseNombre}>
+              Fase <em>{nombreCorto(info.fase)}</em>
+            </p>
+          </div>
+        </div>
+        <p className="solo-lector">
+          Día {info.diaCiclo} de {ciclo.duracionCiclo}, fase {nombreCorto(info.fase)}. Próximo período el {fechaLarga(info.proximoPeriodo)}.
         </p>
-      </header>
 
-      <button
-        className="boton boton-principal boton-ancho"
-        onClick={() => (yaRegistradaHoy ? avisar("Ya registraste tu regla hoy") : setConfirmar(true))}
-      >
-        <Droplet size={18} /> {yaRegistradaHoy ? "Regla registrada hoy" : "Mi regla llegó hoy"}
-      </button>
+        <div className={estilos.linea} aria-hidden="true">
+          {tramos.map((t) => (
+            <span
+              key={t.fase}
+              className={clases(estilos.tramo, t.fase === info.fase && estilos.tramoActual)}
+              style={{ flexGrow: t.largo }}
+            >
+              <span className={estilos.tramoBarra}>
+                {t.fase === info.fase && (
+                  <span
+                    className={estilos.tramoMarca}
+                    style={{ left: `${((info.diaCiclo - t.desde + 0.5) / t.largo) * 100}%` }}
+                  />
+                )}
+              </span>
+              <span className={estilos.tramoNombre}>{t.fase === "ovulacion" && t.fase !== info.fase ? "Ovul." : FASES[t.fase].corta}</span>
+            </span>
+          ))}
+        </div>
 
-      <section className="tarjeta" aria-label="Calendario">
-        <div className="fila-entre">
-          <button className="boton-icono" aria-label="Mes anterior" onClick={() => moverMes(-1)}>
-            <ChevronLeft size={20} />
+        <div className={estilos.portadaPie}>
+          <p className={estilos.proximo}>
+            Próximo período
+            <b>{fechaLarga(info.proximoPeriodo)}</b>
+          </p>
+          <button
+            className={estilos.botonBlanco}
+            onClick={() => (yaRegistradaHoy ? avisar("Ya registraste tu período hoy") : setConfirmar(true))}
+          >
+            {yaRegistradaHoy ? "Registrado hoy" : "Me llegó hoy"}
           </button>
-          <h2 className="titulo-m" style={{ textTransform: "capitalize" }}>
-            {MESES[numMes - 1]} {anio}
+        </div>
+      </section>
+
+      {/* Calendario */}
+      <section className={estilos.tarjeta} aria-label="Calendario">
+        <div className={estilos.mesCabeza}>
+          <h2 className={estilos.mesTitulo}>
+            {MESES[numMes - 1].replace(/^./, (c) => c.toUpperCase())} <em>{anio}</em>
           </h2>
-          <button className="boton-icono" aria-label="Mes siguiente" onClick={() => moverMes(1)}>
-            <ChevronRight size={20} />
-          </button>
+          <div className={estilos.mesFlechas}>
+            {!esMesActual && (
+              <button className={estilos.hoyEnlace} onClick={() => setMes(hoy.slice(0, 7))}>
+                Hoy
+              </button>
+            )}
+            <button className={estilos.flecha} aria-label="Mes anterior" onClick={() => moverMes(-1)}>
+              <ChevronLeft size={20} />
+            </button>
+            <button className={estilos.flecha} aria-label="Mes siguiente" onClick={() => moverMes(1)}>
+              <ChevronRight size={20} />
+            </button>
+          </div>
         </div>
         <div className={estilos.rejilla}>
           {ENCABEZADO.map((l, i) => (
-            <span key={i} className={estilos.cabeza}>{l}</span>
+            <span key={i} className={estilos.cabeza} aria-hidden="true">
+              {l}
+            </span>
           ))}
           {celdas.map((f, i) => {
             if (!f) return <span key={`v${i}`} />;
@@ -111,87 +174,123 @@ export function Calendario() {
                   f === hoy && estilos.hoy,
                 )}
                 onClick={() => setDia(f)}
-                aria-label={`${fechaLarga(f)}: ${FASES[d.fase].corta}${regla ? ", regla" : ""}${d.fertil ? ", ventana fértil" : ""}${reg?.intimo ? ", día íntimo" : ""}`}
+                aria-label={`${fechaLarga(f)}: fase ${FASES[d.fase].corta}${regla ? (futuro ? ", período previsto" : ", período") : ""}${d.fertil ? ", ventana fértil" : ""}${reg?.intimo ? ", día íntimo" : ""}`}
               >
                 <span className="num">{Number(f.slice(8))}</span>
-                <span className={estilos.marcas}>
-                  {reg?.intimo && <Heart size={8} fill="currentColor" />}
-                  {reg?.animo && <span className={estilos.puntoAnimo} />}
-                </span>
+                {(reg?.intimo || reg?.animo || reg?.nota) && (
+                  <span className={estilos.marcas} aria-hidden="true">
+                    {reg?.intimo && <Heart size={7} fill="currentColor" strokeWidth={0} />}
+                    {(reg?.animo || reg?.nota) && <span className={estilos.puntoAnimo} />}
+                  </span>
+                )}
               </button>
             );
           })}
         </div>
         <ul className={estilos.leyenda}>
-          <li><span className={clases(estilos.muestra, estilos.regla)} /> Regla</li>
-          <li><span className={clases(estilos.muestra, estilos.reglaPrevista)} /> Regla prevista</li>
-          <li><span className={clases(estilos.muestra, estilos.fertil)} /> Ventana fértil</li>
-          <li><span className={clases(estilos.muestra, estilos.ovulacion)} /> Ovulación</li>
-          <li><Heart size={10} fill="currentColor" color="var(--rosa-tinta)" /> Día íntimo</li>
+          <li>
+            <span className={clases(estilos.muestra, estilos.regla)} /> Período
+          </li>
+          <li>
+            <span className={clases(estilos.muestra, estilos.reglaPrevista)} /> Previsto
+          </li>
+          <li>
+            <span className={clases(estilos.muestra, estilos.fertil)} /> Fértil
+          </li>
+          <li>
+            <span className={clases(estilos.muestra, estilos.ovulacion)} /> Ovulación
+          </li>
+        </ul>
+        <p className={estilos.pista}>Toca un día para anotar cómo estuviste.</p>
+      </section>
+
+      {/* Las cuatro fases */}
+      <section className={estilos.seccion} aria-labelledby="t-fases">
+        <h2 id="t-fases" className={estilos.tituloSeccion}>
+          Tus <em>fases</em>
+        </h2>
+        <ul className={estilos.lista}>
+          {tramos.map((t) => (
+            <li key={t.fase} className={clases(estilos.fila, t.fase === info.fase && estilos.filaActual)}>
+              <GlifoFase fase={t.fase} tamano={52} />
+              <span className={estilos.filaTexto}>
+                <span className={estilos.filaTitulo}>
+                  {FASES[t.fase].corta}
+                  {t.fase === info.fase && <span className={estilos.ahora}>Ahora</span>}
+                </span>
+                <span className={estilos.filaSub}>{FASES[t.fase].tono}</span>
+              </span>
+              <span className={estilos.filaDias}>
+                días
+                <b className="num">
+                  {t.desde}–{t.hasta}
+                </b>
+              </span>
+            </li>
+          ))}
         </ul>
       </section>
 
-      <section className="seccion">
-        <h2 className="titulo-m">Tus fases</h2>
-        <div className={estilos.fases}>
-          {(Object.keys(FASES) as Fase[]).map((f) => {
-            const dias = Array.from({ length: ciclo.duracionCiclo }, (_, i) => i + 1).filter((n) => faseDelDia(n, ciclo) === f);
+      {/* Próximos ciclos */}
+      <section className={estilos.seccion} aria-labelledby="t-proximos">
+        <h2 id="t-proximos" className={estilos.tituloSeccion}>
+          Próximos <em>ciclos</em>
+        </h2>
+        <ul className={estilos.lista}>
+          {predicciones.map((p) => {
+            const [, mm, dd] = p.inicio.split("-").map(Number);
             return (
-              <div key={f} className={clases(estilos.faseFila, f === info.fase && estilos.faseActual)}>
-                <span className={estilos.faseColor} style={{ background: FASES[f].color }} />
-                <div className="columna" style={{ gap: 0, flex: 1, minWidth: 0 }}>
-                  <span className="negrita pequeno">{FASES[f].corta}</span>
-                  <span className="mini texto-2">{FASES[f].tono}</span>
-                </div>
-                <span className="mini texto-2 num">
-                  Días {dias[0]}–{dias[dias.length - 1]}
+              <li key={p.inicio} className={estilos.fila}>
+                <span className={estilos.fechaFicha} aria-hidden="true">
+                  <b className="num">{dd}</b>
+                  <span>{MES_CORTO[mm - 1]}</span>
                 </span>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="seccion">
-        <h2 className="titulo-m">Próximos ciclos</h2>
-        <div className="lista">
-          {predicciones.map((p) => (
-            <div key={p.inicio} className="lista-item">
-              <span className="lista-icono"><Droplet size={17} /></span>
-              <span className="lista-texto">
-                <span className="negrita pequeno">Periodo · {fechaLarga(p.inicio)}</span>
-                <span className="mini texto-2">Ventana fértil del {fechaLarga(p.fertilDesde)} al {fechaLarga(p.fertilHasta)}</span>
-              </span>
-              <span className="mini texto-3 num">en {diferenciaDias(hoy, p.inicio)} d</span>
-            </div>
-          ))}
-        </div>
-        <p className="ayuda">Son estimaciones según tu configuración y tus registros. No son un método anticonceptivo.</p>
-      </section>
-
-      <section className="seccion">
-        <h2 className="titulo-m">Tu historial</h2>
-        <div className="tarjeta columna">
-          <div className="fila-entre">
-            <span className="pequeno texto-2">Ciclos registrados</span>
-            <span className="negrita num">{Math.max(0, ordenados.length - 1)}</span>
-          </div>
-          <div className="fila-entre">
-            <span className="pequeno texto-2">Duración promedio</span>
-            <span className="negrita num">{promedio ? `${promedio} días` : `${ciclo.duracionCiclo} días (configurado)`}</span>
-          </div>
-          <hr className="separador" />
-          <ul className="columna" style={{ listStyle: "none", margin: 0, padding: 0, gap: 6 }}>
-            {[...ordenados].reverse().slice(0, 6).map((p, i, arr) => (
-              <li key={p} className="fila-entre pequeno">
-                <span>Inicio · {fechaLarga(p)} {p.slice(0, 4)}</span>
-                <span className="texto-2 num">
-                  {i < arr.length - 1 ? `${diferenciaDias(arr[i + 1], p)} días` : "primer registro"}
+                <span className={estilos.filaTexto}>
+                  <span className={estilos.filaTitulo}>Período</span>
+                  <span className={estilos.filaSub}>
+                    Fértil del {fechaLarga(p.fertilDesde)} al {fechaLarga(p.fertilHasta)}
+                  </span>
+                </span>
+                <span className={estilos.filaDias}>
+                  en
+                  <b className="num">{diferenciaDias(hoy, p.inicio)} d</b>
                 </span>
               </li>
-            ))}
-          </ul>
+            );
+          })}
+        </ul>
+        <p className={estilos.nota}>Son estimaciones según tu configuración y tus registros. No son un método anticonceptivo.</p>
+      </section>
+
+      {/* Historial */}
+      <section className={estilos.seccion} aria-labelledby="t-historial">
+        <h2 id="t-historial" className={estilos.tituloSeccion}>
+          Tu <em>historial</em>
+        </h2>
+        <div className={estilos.cifras}>
+          <div className={estilos.cifraFicha}>
+            <b className="num">{Math.max(0, ordenados.length - 1)}</b>
+            <span>ciclos registrados</span>
+          </div>
+          <div className={estilos.cifraFicha}>
+            <b className="num">{promedio ?? ciclo.duracionCiclo}</b>
+            <span>{promedio ? "días en promedio" : "días configurados"}</span>
+          </div>
         </div>
+        <ul className={estilos.lista}>
+          {[...ordenados].reverse().slice(0, 6).map((p, i, arr) => (
+            <li key={p} className={clases(estilos.fila, estilos.filaCompacta)}>
+              <span className={estilos.filaTexto}>
+                <span className={estilos.filaTituloSans}>
+                  {fechaLarga(p)} {p.slice(0, 4)}
+                </span>
+              </span>
+              <span className={estilos.filaSub}>
+                {i < arr.length - 1 ? `${diferenciaDias(arr[i + 1], p)} días` : "Primer registro"}
+              </span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <BebeAgua />
@@ -201,12 +300,12 @@ export function Calendario() {
       <Confirmar
         abierta={confirmar}
         alCerrar={() => setConfirmar(false)}
-        titulo="¿Te llegó la regla hoy?"
-        texto={`Registraremos el ${fechaLarga(hoy)} como primer día de tu regla y ajustaremos tus predicciones.`}
-        accion="Sí, registrar"
+        titulo="¿Te llegó el período hoy?"
+        texto={`Registraremos el ${fechaLarga(hoy)} como primer día de tu período y ajustaremos tus predicciones.`}
+        accion="Sí, me llegó hoy"
         alConfirmar={() => {
           registrarPeriodo(hoy);
-          avisar("Regla registrada");
+          avisar("Período registrado");
         }}
       />
     </main>
@@ -230,32 +329,44 @@ function DetalleDia({ fecha, alCerrar }: { fecha: Fecha | null; alCerrar: () => 
     <Hoja abierta={fecha !== null} alCerrar={alCerrar} titulo={fecha ? fechaLarga(fecha) : ""}>
       {d && fecha && (
         <>
-          <div className="fila" style={{ gap: 8 }}>
-            <span className="chip" style={{ background: FASES[d.fase].pastel, color: "var(--vino)" }}>
-              {FASES[d.fase].corta}
+          <div className={estilos.detalleFase}>
+            <GlifoFase fase={d.fase} tamano={48} />
+            <span className={estilos.filaTexto}>
+              <span className={estilos.filaTitulo}>
+                Fase <em>{nombreCorto(d.fase)}</em>
+              </span>
+              <span className={estilos.filaSub}>
+                Día {d.diaCiclo} del ciclo{d.fertil ? " · ventana fértil" : ""}
+              </span>
             </span>
-            <span className="chip chip-borde">Día {d.diaCiclo} del ciclo</span>
-            {d.fertil && <span className="chip chip-lila">Ventana fértil</span>}
           </div>
           {(animo || (registro?.sintomas.length ?? 0) > 0 || registro?.tomoSobre) && (
-            <div className="tarjeta-plana columna" style={{ gap: 4 }}>
-              {animo && <span className="pequeno">Ánimo: <b>{animo.nombre}</b></span>}
-              {registro?.sintomas.length ? <span className="pequeno">Síntomas: {registro.sintomas.join(", ")}</span> : null}
-              {registro?.tomoSobre && <span className="pequeno">Tomaste tu sobre de Mi Ciclo</span>}
+            <div className={estilos.detalleRegistro}>
+              {animo && (
+                <span>
+                  Ánimo <b>{animo.nombre}</b>
+                </span>
+              )}
+              {registro?.sintomas.length ? (
+                <span>
+                  Síntomas <b>{registro.sintomas.join(", ")}</b>
+                </span>
+              ) : null}
+              {registro?.tomoSobre && <span>Tomaste tu sobre de Mi Ciclo</span>}
             </div>
           )}
           <button
-            className="lista-item tarjeta-plana"
-            style={{ borderRadius: 18 }}
+            className={estilos.detalleIntimo}
             onClick={() => alternarIntimo(fecha)}
-            aria-pressed={!!registro?.intimo}
+            role="switch"
+            aria-checked={!!registro?.intimo}
           >
-            <span className="lista-icono"><Heart size={17} fill={registro?.intimo ? "currentColor" : "none"} /></span>
-            <span className="lista-texto">
-              <span className="negrita pequeno">Día íntimo</span>
-              <span className="mini texto-2">Solo tú lo ves. Nunca se comparte.</span>
+            <Heart size={18} fill={registro?.intimo ? "currentColor" : "none"} className={estilos.detalleCorazon} />
+            <span className={estilos.filaTexto}>
+              <span className={estilos.filaTituloSans}>Día íntimo</span>
+              <span className={estilos.filaSub}>Solo tú lo ves. Nunca se comparte.</span>
             </span>
-            <span className="interruptor" role="switch" aria-checked={!!registro?.intimo} aria-label="Día íntimo" />
+            <span className="interruptor" aria-checked={!!registro?.intimo} aria-hidden="true" />
           </button>
           <div className="campo">
             <label htmlFor="nota-dia">Nota del día</label>
@@ -275,22 +386,22 @@ function DetalleDia({ fecha, alCerrar }: { fecha: Fecha | null; alCerrar: () => 
                 disabled={periodos.length <= 1}
                 onClick={() => {
                   quitarPeriodo(fecha);
-                  avisar("Inicio de regla quitado");
+                  avisar("Inicio de período quitado");
                   alCerrar();
                 }}
               >
-                Quitar inicio de regla
+                Quitar inicio de período
               </button>
             ) : (
               <button
-                className="boton boton-vino boton-ancho"
+                className="boton boton-principal boton-ancho"
                 onClick={() => {
                   registrarPeriodo(fecha);
-                  avisar(`Regla registrada el ${fechaLarga(fecha)}`);
+                  avisar(`Período registrado el ${fechaLarga(fecha)}`);
                   alCerrar();
                 }}
               >
-                Mi regla empezó este día
+                Mi período empezó este día
               </button>
             ))}
         </>

@@ -9,19 +9,21 @@
   border-radius: 50%;
   object-fit: cover;
 }
+/* Anillo de historia: Rojo Coral sólido (nueva) o línea fina (vista) */
 .nuevo {
-  background: var(--anillo-historia);
+  background: var(--rojo);
 }
 .nuevo::before,
 .visto::before {
   content: "";
   position: absolute;
   inset: 2.5px;
+  box-shadow: inset 0 0 0 1.5px var(--blanco);
   border-radius: 50%;
   background: var(--blanco);
 }
 .visto {
-  background: #eadde1;
+  background: #eadbe2;
 }
 .nuevo > :first-child,
 .visto > :first-child {

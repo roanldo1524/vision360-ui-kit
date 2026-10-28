@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Camera, Check, ChevronDown, ChevronLeft, EyeOff, ImagePlus, Link2, Play, X } from "lucide-react";
 import { Ciclita } from "@/components/Ciclita";
+import { Flor } from "@/components/Flor";
+import { Estrella, FlorLuna, FlorOndulada } from "@/components/FormasMarca";
 import { Ilustracion } from "@/components/Ilustracion";
 import { MedioVista } from "@/components/MedioVista";
 import { avisar } from "@/components/Avisos";
@@ -22,6 +24,13 @@ const TIPOS: { id: TipoPublicacion; etiqueta: string }[] = [
 
 const MAXIMO: Record<TipoPublicacion, number> = { post: 3, historia: 1, reel: 1, pregunta: 1 };
 const FONDOS: FondoPregunta[] = ["lila", "rosa", "menta", "durazno"];
+// Los ids se conservan; los colores son los del brandbook
+const NOMBRE_FONDO: Record<FondoPregunta, string> = {
+  lila: "Violeta",
+  rosa: "Rosa",
+  menta: "Violeta oscuro",
+  durazno: "Rojo Coral",
+};
 const LIMITE_VIDEO = 60 * 1024 * 1024;
 
 const GALERIA: Medio[] = [
@@ -132,14 +141,31 @@ function Publicar() {
     const retenida = resultado.estado === "retenida";
     return (
       <main className={`pagina pagina-sin-barra ${estilos.exito}`}>
-        <Ciclita id={retenida ? "lila" : "flor"} tamano={128} feliz />
-        <h1 className="titulo-l">{retenida ? "Ya casi" : resultado.mensaje}</h1>
-        <p className="texto-2" style={{ maxWidth: 320 }}>
+        <div className={estilos.exitoMarca} aria-hidden="true">
+          <FlorOndulada color={retenida ? "#f3e2fb" : "#ffdced"} fondo={retenida ? "#f3e2fb" : "#ffdced"} tamano={168} />
+          <Ciclita id={retenida ? "lila" : "flor"} tamano={104} feliz />
+        </div>
+        <h1 className={estilos.exitoTitulo}>
+          {retenida ? (
+            <>
+              Ya casi <em>está lista</em>
+            </>
+          ) : (
+            <>
+              Ya está <em>en la comunidad</em>
+            </>
+          )}
+        </h1>
+        <p className={estilos.exitoTexto}>
           {retenida
             ? resultado.mensaje
             : "Gracias por compartir. Lo que cuentas puede acompañar a otra chica que lo necesita hoy."}
         </p>
-        {resultado.petalos ? <span className="chip chip-mantequilla">+{resultado.petalos} pétalos por compartir</span> : null}
+        {resultado.petalos ? (
+          <span className={estilos.petalos}>
+            <Flor activa tamano={16} /> +{resultado.petalos} pétalos por compartir
+          </span>
+        ) : null}
         <div className="columna" style={{ width: "100%", maxWidth: 320, marginTop: 8 }}>
           <Link
             href={
@@ -186,6 +212,9 @@ function Publicar() {
         </header>
         <main className={estilos.cuerpo}>
           <div className={`${estilos.lienzoPregunta} ${estilos[`fondo-${fondo}`]}`}>
+            <span className={estilos.lienzoForma} aria-hidden="true">
+              <Estrella color="currentColor" tamano={190} />
+            </span>
             {anonima && <Ciclita id="anonima" tamano={52} />}
             <label htmlFor="texto-pregunta" className="solo-lector">Tu pregunta</label>
             <textarea
@@ -197,26 +226,26 @@ function Publicar() {
               maxLength={280}
               autoFocus
             />
-            <span className="mini texto-3">{texto.length}/280</span>
+            <span className={estilos.contadorTexto}>{texto.length}/280</span>
           </div>
-          <div className="fila-entre">
-            <span className="etiqueta">Color de fondo</span>
+          <div className={estilos.filaColor}>
+            <span>Color de fondo</span>
             <div className="fila" style={{ gap: 8 }}>
               {FONDOS.map((f) => (
                 <button
                   key={f}
                   className={`${estilos.punto} ${estilos[`fondo-${f}`]}`}
                   aria-pressed={fondo === f}
-                  aria-label={`Fondo ${f}`}
+                  aria-label={`Fondo ${NOMBRE_FONDO[f]}`}
                   onClick={() => setFondo(f)}
                 >
-                  {fondo === f && <Check size={16} />}
+                  {fondo === f && <Check size={18} />}
                 </button>
               ))}
             </div>
           </div>
           <FilaAnonima anonima={anonima} alCambiar={setAnonima} texto="Preguntar como anónima" />
-          <p className="mini texto-3">
+          <p className={estilos.ayudaPequena}>
             Las preguntas anónimas las lee una persona del equipo antes de salir. Nadie más puede saber que son tuyas.
           </p>
           <button className="boton boton-principal boton-ancho" disabled={texto.trim().length < 5} onClick={compartir}>
@@ -308,8 +337,8 @@ function Publicar() {
               <FilaAnonima anonima={anonima} alCambiar={setAnonima} texto="Publicar como anónima" />
             </>
           )}
-          {tipo === "historia" && <p className="mini texto-3">Tu historia desaparece a las 24 horas.</p>}
-          <p className="mini texto-3">
+          {tipo === "historia" && <p className={estilos.ayudaPequena}>Tu historia desaparece a las 24 horas.</p>}
+          <p className={estilos.ayudaPequena}>
             No compartas datos de salud de otras personas. Las fotos de personas solo con su permiso.
           </p>
           <button
@@ -348,8 +377,13 @@ function Publicar() {
           <MedioVista medio={previa} />
         ) : (
           <div className={estilos.previaVacia}>
-            <ImagePlus size={30} />
-            <p className="pequeno">
+            <span className={estilos.previaForma} aria-hidden="true">
+              <FlorLuna color="#ffffff" fondo="#ffdced" tamano={260} />
+            </span>
+            <span className={estilos.previaIcono}>
+              <ImagePlus size={24} />
+            </span>
+            <p>
               {tipo === "post"
                 ? "Elige hasta 3 fotos o sigue sin fotos para publicar solo texto"
                 : tipo === "reel"
@@ -366,15 +400,15 @@ function Publicar() {
       </div>
 
       <div className={estilos.galeriaCabeza}>
-        <span className="negrita pequeno">
-          Recientes <ChevronDown size={14} style={{ display: "inline", verticalAlign: "middle" }} />
+        <span className="negrita">
+          Recientes <ChevronDown size={16} style={{ display: "inline", verticalAlign: "middle" }} />
         </span>
         <span className="chip chip-borde">Hasta {maximo} {maximo === 1 ? (tipo === "reel" ? "video" : "foto") : "fotos"}</span>
       </div>
 
       <div className={estilos.galeria}>
         <label className={`${estilos.celda} ${estilos.subir}`} htmlFor="subir-medios">
-          {subiendo ? <span className="mini">Subiendo…</span> : <><Camera size={22} /><span className="mini">Subir</span></>}
+          {subiendo ? <span>Subiendo…</span> : <><Camera size={22} /><span>Subir</span></>}
         </label>
         <input
           id="subir-medios"
@@ -417,12 +451,12 @@ function Publicar() {
 function FilaAnonima({ anonima, alCambiar, texto }: { anonima: boolean; alCambiar: (v: boolean) => void; texto: string }) {
   return (
     <div className={estilos.filaAnonima}>
-      <Ciclita id="anonima" tamano={40} />
+      <Ciclita id="anonima" tamano={44} />
       <div className="lista-texto">
-        <b className="pequeno">
-          <EyeOff size={13} style={{ display: "inline", verticalAlign: "-2px" }} /> {texto}
+        <b style={{ fontSize: 15 }}>
+          <EyeOff size={15} style={{ display: "inline", verticalAlign: "-2px" }} /> {texto}
         </b>
-        <span className="mini texto-3">Se mostrará la Ciclita anónima. Tu perfil nunca se enlaza.</span>
+        <span className="pequeno texto-2">Se mostrará la Ciclita anónima. Tu perfil nunca se enlaza.</span>
       </div>
       <button
         role="switch"

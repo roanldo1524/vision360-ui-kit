@@ -6,26 +6,20 @@
   flex-direction: column;
   gap: 20px;
   padding: 22px var(--lado-d) calc(24px + env(safe-area-inset-bottom, 0px)) var(--lado);
-  background: var(--degradado-marca);
+  background: var(--rojo);
   color: #fff;
 }
-.florA,
-.florB {
-  mix-blend-mode: screen;
-  opacity: 0.2;
-  filter: saturate(0.4) brightness(1.6);
-}
 .florA {
-  width: 220px;
-  height: 220px;
-  right: -80px;
-  top: -60px;
+  position: absolute;
+  right: -110px;
+  top: -70px;
+  pointer-events: none;
+  animation: girar 90s linear infinite;
 }
-.florB {
-  width: 140px;
-  height: 140px;
-  left: -60px;
-  bottom: 130px;
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
 }
 .logo {
   position: relative;
@@ -67,6 +61,9 @@
     transform: translateY(-4px);
   }
 }
+.portada > :not(.florA) {
+  position: relative;
+}
 .portadaTexto {
   position: relative;
   display: flex;
@@ -75,9 +72,16 @@
 }
 .lema {
   font-family: var(--f-titulo);
+  font-weight: 400;
   font-size: 32px;
-  line-height: 1.08;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: #fff;
+}
+.lema em {
+  font-style: italic;
+  font-weight: 500;
+  color: #ffdced;
 }
 .bajada {
   font-size: 15px;
@@ -113,35 +117,83 @@
   font-size: 12px;
   opacity: 0.85;
 }
+/* ---------- Pasos del registro ---------- */
 .paso {
   min-height: 100dvh;
+  gap: 24px;
+}
+.progresoBloque {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.pasoNumero {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--texto-2);
 }
 .progreso {
   display: flex;
-  gap: 6px;
+  gap: 4px;
 }
 .punto {
-  width: 22px;
-  height: 5px;
-  border-radius: 4px;
-  background: #ecdfe2;
-  transition: background 0.3s;
+  width: 24px;
+  height: 4px;
+  border-radius: 2px;
+  background: #f3e6ec;
+  transition: background-color 300ms ease;
 }
 .puntoHecho {
-  background: var(--rojo-accion);
+  background: var(--rojo);
 }
 .bloque {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+/* el botón de continuar baja al pie de la pantalla */
+.bloque > :global(.boton):last-child {
+  margin-top: auto;
+  min-height: 52px;
+}
+.glifo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.tituloPaso {
+  font-family: var(--f-titulo);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--vino);
+}
+.tituloPaso em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--carmesi);
+}
+.bajadaPaso {
+  margin-top: -8px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--texto-2);
+  max-width: 34ch;
 }
 .alerta {
   display: flex;
   gap: 12px;
   align-items: flex-start;
   background: var(--lila);
-  border-radius: var(--r-medio);
-  padding: 14px;
+  border-radius: 20px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.45;
 }
 .arroba {
   position: relative;
@@ -151,7 +203,7 @@
   left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--texto-3);
+  color: var(--texto-2);
   font-weight: 600;
 }
 .arroba input {
@@ -161,48 +213,94 @@
   display: grid;
   justify-items: center;
   gap: 8px;
-  padding: 10px 0;
+  padding: 16px 0;
+  border-radius: 28px;
+  background: var(--rosa-claro);
+}
+.nombreCiclita {
+  font-family: var(--f-titulo);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 19px;
+  color: var(--vino);
 }
 .rejillaCiclitas {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
 }
 .opcionCiclita {
+  position: relative;
   display: grid;
   justify-items: center;
-  gap: 4px;
-  padding: 12px 6px;
-  border-radius: var(--r-medio);
+  gap: 6px;
+  padding: 14px 6px 12px;
+  border-radius: 20px;
   background: var(--blanco);
-  box-shadow: inset 0 0 0 1.5px var(--linea);
-  transition: box-shadow 0.2s;
+  box-shadow: var(--sombra);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vino);
+  transition: box-shadow 200ms ease, transform 160ms var(--ease-out);
+}
+.opcionCiclita:active {
+  transform: scale(0.96);
 }
 .opcionCiclita[aria-checked="true"] {
-  box-shadow: inset 0 0 0 2px var(--vino);
+  box-shadow: inset 0 0 0 2px var(--rojo);
+}
+.marcaElegida {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--rojo);
+  color: #fff;
+  animation: entrar 240ms var(--ease-out) both;
 }
 .contador {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: var(--blanco);
-  border-radius: var(--r-medio);
-  padding: 8px;
+  border-radius: 999px;
+  padding: 6px;
   box-shadow: var(--sombra);
+}
+.contador :global(.boton-icono) {
+  background: var(--rosa-claro);
+  box-shadow: none;
+  color: var(--vino);
+}
+.valorContador {
+  font-size: 14px;
+  color: var(--texto-2);
+}
+.valorContador b {
+  font-family: var(--f-titulo);
+  font-weight: 500;
+  font-size: 26px;
+  color: var(--vino);
+  margin-right: 4px;
 }
 .acepto {
   display: flex;
   gap: 12px;
   align-items: flex-start;
-  padding: 14px;
-  border-radius: var(--r-medio);
-  background: var(--blanco);
-  box-shadow: inset 0 0 0 1.5px var(--linea);
+  padding: 16px;
+  border-radius: 20px;
+  background: var(--rosa-claro);
+  font-size: 14px;
+  line-height: 1.45;
 }
 .acepto input {
   width: 22px;
   height: 22px;
-  accent-color: var(--rojo-texto);
+  accent-color: var(--rojo-accion);
   flex: none;
   margin: 0;
 }

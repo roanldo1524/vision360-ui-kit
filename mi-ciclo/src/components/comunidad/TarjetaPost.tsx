@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Bookmark, Clock, ExternalLink, MessageCircle, MoreHorizontal, Send } from "lucide-react";
 import { Flor } from "@/components/Flor";
+import { Estrella } from "@/components/FormasMarca";
 import { Avatar } from "@/components/Avatar";
 import { MedioVista } from "@/components/MedioVista";
 import { avisar } from "@/components/Avisos";
@@ -76,7 +77,7 @@ export function TarjetaPost({ pub, ctx }: Props) {
             <NombreAutora autora={pub.autora} />
             <ChipTema tema={pub.temas[0]} anonima={pub.autora.anonima} />
           </div>
-          <span className="mini texto-3">{haceCuanto(pub.creadaEn, ctx.ahora)}</span>
+          <span className={estilos.tiempo}>{haceCuanto(pub.creadaEn, ctx.ahora)}</span>
         </div>
         {!pub.esMia && pub.autora.id && !pub.sigoAutora && (
           <button
@@ -86,11 +87,11 @@ export function TarjetaPost({ pub, ctx }: Props) {
               avisar(`Ahora sigues a ${pub.autora.alias}`);
             }}
           >
-            seguir
+            Seguir
           </button>
         )}
         <button className="boton-icono" aria-label="Más opciones" onClick={() => setMenu(true)}>
-          <MoreHorizontal size={20} />
+          <MoreHorizontal size={20} strokeWidth={1.8} />
         </button>
       </div>
 
@@ -98,6 +99,9 @@ export function TarjetaPost({ pub, ctx }: Props) {
 
       {esCita ? (
         <Link href={`/comunidad/p/${pub.id}`} className={`${estilos.cita} ${estilos[`fondo-${pub.fondo ?? "lila"}`]}`}>
+          <span className={estilos.citaForma} style={{ opacity: 0.16 }} aria-hidden="true">
+            <Estrella color="currentColor" tamano={150} />
+          </span>
           <span className={estilos.citaComillas} aria-hidden="true">“</span>
           <p className={estilos.citaTexto}>{pub.texto}</p>
         </Link>
@@ -115,15 +119,15 @@ export function TarjetaPost({ pub, ctx }: Props) {
             alternarFlor(`p:${pub.id}`);
           }}
         >
-          <Flor activa={pub.diFlor} tamano={23} />
+          <Flor activa={pub.diFlor} tamano={24} />
           {esCita && pub.flores > 0 && <span className="num">{pub.flores}</span>}
         </button>
         <Link href={`/comunidad/p/${pub.id}#comentar`} className={estilos.accion} aria-label="Comentarios">
-          <MessageCircle size={21} />
+          <MessageCircle size={22} strokeWidth={1.8} />
           <span className="num">{pub.numComentarios}</span>
         </Link>
         <button className={estilos.accion} aria-label="Enviar" onClick={() => copiarEnlace(`/comunidad/p/${pub.id}`, "Enlace copiado para enviar")}>
-          <Send size={20} />
+          <Send size={21} strokeWidth={1.8} />
         </button>
         <span className={estilos.espaciador} />
         <button
@@ -132,7 +136,7 @@ export function TarjetaPost({ pub, ctx }: Props) {
           aria-label={pub.guardada ? "Quitar de guardados" : "Guardar"}
           onClick={() => avisar(alternarGuardado(pub.id) ? "Guardado en tu perfil" : "Quitado de guardados")}
         >
-          <Bookmark size={21} fill={pub.guardada ? "currentColor" : "none"} />
+          <Bookmark size={22} strokeWidth={1.8} fill={pub.guardada ? "currentColor" : "none"} />
         </button>
       </div>
 
@@ -141,7 +145,7 @@ export function TarjetaPost({ pub, ctx }: Props) {
           {flores.nombres.length > 0 && (
             <span className={estilos.pila}>
               {flores.nombres.map((a) => (
-                <Avatar key={a.id} ciclita={a.ciclita} fotoId={a.fotoId} tamano={20} />
+                <Avatar key={a.id} ciclita={a.ciclita} fotoId={a.fotoId} tamano={22} />
               ))}
             </span>
           )}
@@ -180,7 +184,7 @@ export function TarjetaPost({ pub, ctx }: Props) {
             enviarComentario();
           }}
         >
-          {yo && <Avatar ciclita={yo.ciclita} fotoId={yo.fotoId} tamano={28} />}
+          {yo && <Avatar ciclita={yo.ciclita} fotoId={yo.fotoId} tamano={32} />}
           <label htmlFor={`com-${pub.id}`} className="solo-lector">Agrega un comentario</label>
           <input
             id={`com-${pub.id}`}

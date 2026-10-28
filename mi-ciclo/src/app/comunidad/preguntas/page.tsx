@@ -2,7 +2,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { EyeOff, PenLine } from "lucide-react";
-import { Ciclita } from "@/components/Ciclita";
+import { Luna } from "@/components/FormasMarca";
 import { Avatar } from "@/components/Avatar";
 import { EstadoVacio } from "@/components/EstadoVacio";
 import { avisar } from "@/components/Avisos";
@@ -33,9 +33,11 @@ export default function Preguntas() {
   return (
     <main className="pagina">
       <EncabezadoComunidad />
-      <div>
-        <h1 className="titulo-l">pregunta sin miedo</h1>
-        <p className="mini texto-3">aquí nadie te juzga.</p>
+      <div className={estilos.portadaPreguntas}>
+        <h1 className={estilos.tituloPagina}>
+          Pregunta <em>sin miedo</em>
+        </h1>
+        <p className={estilos.bajada}>Aquí nadie te juzga.</p>
       </div>
 
       <form
@@ -45,9 +47,13 @@ export default function Preguntas() {
           preguntarAnonima();
         }}
       >
+        <span className={estilos.tarjetaAnonimaForma} aria-hidden="true">
+          <Luna color="#e7bef8" tamano={140} />
+        </span>
         <div className={estilos.tarjetaAnonimaFila}>
-          <p className="titulo-m" style={{ flex: 1 }}>¿Algo que no te atreves a preguntar en voz alta?</p>
-          <Ciclita id="anonima" tamano={68} />
+          <p className={estilos.tarjetaAnonimaTitulo}>
+            ¿Algo que no te atreves a preguntar <em>en voz alta?</em>
+          </p>
         </div>
         <div className={estilos.campoAnonimo}>
           <label htmlFor="pregunta-anonima" className="solo-lector">Escribe tu pregunta</label>
@@ -58,32 +64,34 @@ export default function Preguntas() {
             onChange={(e) => setTexto(e.target.value)}
             maxLength={300}
           />
-          <button type="submit" className="boton boton-vino boton-chico" disabled={texto.trim().length < 5}>
-            <EyeOff size={14} /> Anónima
+          <button type="submit" className="boton boton-principal" disabled={texto.trim().length < 5}>
+            <EyeOff size={16} /> Anónima
           </button>
         </div>
-        <Link href="/publicar?tipo=pregunta" className="enlace-vino" style={{ alignSelf: "flex-start" }}>
-          <PenLine size={14} /> Preguntar con mi nombre o elegir color
+        <Link href="/publicar?tipo=pregunta" className={estilos.enlaceAnonimo}>
+          <PenLine size={16} /> Preguntar con mi nombre o elegir color
         </Link>
       </form>
 
       {esperan.length > 0 && (
         <section className="seccion" aria-labelledby="esperan">
-          <div className="seccion-cabeza">
-            <h2 id="esperan" className="titulo-m">Esperan tu respuesta</h2>
-            <span className="mini texto-3">{esperan.length} {esperan.length === 1 ? "nueva" : "nuevas"}</span>
+          <div className={estilos.cabezaSeccion}>
+            <h2 id="esperan" className={estilos.tituloSeccion}>
+              Esperan <em>tu respuesta</em>
+            </h2>
+            <span className={estilos.tiempo}>{esperan.length} {esperan.length === 1 ? "nueva" : "nuevas"}</span>
           </div>
           <div className="carrusel">
             {esperan.map((p, i) => (
               <article key={p.id} className={`${estilos.esperan} ${i % 2 ? estilos.esperanMenta : estilos.esperanMantequilla}`}>
-                <div className="fila mini">
-                  <Avatar ciclita={p.autora.ciclita} fotoId={p.autora.fotoId} tamano={22} />
+                <div className={estilos.esperanCabeza}>
+                  <Avatar ciclita={p.autora.ciclita} fotoId={p.autora.fotoId} tamano={28} />
                   <b>{p.autora.alias}</b>
-                  <span className="texto-3">· {haceCuanto(p.creadaEn, ctx.ahora)}</span>
+                  <span>· {haceCuanto(p.creadaEn, ctx.ahora)}</span>
                 </div>
                 <p className={estilos.esperanTexto}>{p.texto}</p>
                 <Link href={`/comunidad/p/${p.id}#comentar`} className={estilos.responder}>
-                  responder
+                  Responder
                 </Link>
               </article>
             ))}
@@ -92,7 +100,9 @@ export default function Preguntas() {
       )}
 
       <section className="seccion" aria-labelledby="recientes">
-        <h2 id="recientes" className="titulo-m">Recientes</h2>
+        <h2 id="recientes" className={estilos.tituloSeccion}>
+          Preguntas <em>recientes</em>
+        </h2>
         {preguntas.length === 0 ? (
           <EstadoVacio titulo="Aún no hay preguntas" texto="Haz la primera. Puedes hacerlo de forma anónima." ciclita="anonima" />
         ) : (

@@ -1,7 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Check, EyeOff, ShieldCheck, Trash2, UserX } from "lucide-react";
+import { AlertCircle, Check, EyeOff, ShieldCheck, Trash2, UserX } from "lucide-react";
 import { Cabecera } from "@/components/Cabecera";
 import { Ciclita } from "@/components/Ciclita";
 import { EstadoVacio } from "@/components/EstadoVacio";
@@ -65,20 +65,27 @@ export default function Admin() {
     <>
       <Cabecera titulo="Moderación" volverA="/comunidad" />
       <main className="pagina pagina-sin-barra">
-        <section className={estilos.resumen}>
-          <div>
-            <span className="titulo-l num">{cola.length}</span>
-            <span className="mini texto-2">en la cola</span>
-          </div>
-          <div>
-            <span className="titulo-l num">{nRetenidas}</span>
-            <span className="mini texto-2">retenidas</span>
-          </div>
-          <div>
-            <span className="titulo-l num">{nReportadas}</span>
-            <span className="mini texto-2">reportadas</span>
-          </div>
+        <section className={estilos.intro}>
+          <h1 className={estilos.tituloIntro}>
+            Cola de <em>moderación</em>
+          </h1>
+          <p>Retenidas por el filtro, reportadas y primeras publicaciones de usuarias nuevas.</p>
         </section>
+
+        <dl className={estilos.resumen}>
+          <div>
+            <dt className="num">{cola.length}</dt>
+            <dd>en la cola</dd>
+          </div>
+          <div>
+            <dt className="num">{nRetenidas}</dt>
+            <dd>retenidas</dd>
+          </div>
+          <div>
+            <dt className="num">{nReportadas}</dt>
+            <dd>reportadas</dd>
+          </div>
+        </dl>
 
         <div className="segmento" role="tablist" aria-label="Filtrar cola">
           {(["todo", "retenidas", "reportadas"] as Filtro[]).map((f) => (
@@ -99,15 +106,15 @@ export default function Admin() {
                     {i.tipo === "comentario" ? "Comentario" : NOMBRE_TIPO[i.tipoPublicacion ?? "post"]}
                   </span>
                   {i.anonima && <span className="chip chip-lila">Anónima</span>}
-                  {i.estado === "oculta" && <span className="chip chip-durazno">Oculta</span>}
+                  {i.estado === "oculta" && <span className="chip">Oculta</span>}
                 </span>
                 <span className="mini texto-3">{haceCuanto(i.fecha, ctx.ahora)}</span>
               </div>
 
               <div className={estilos.autora}>
-                <Ciclita id={i.anonima ? "anonima" : "rosa"} tamano={34} />
+                <Ciclita id={i.anonima ? "anonima" : "rosa"} tamano={40} />
                 <div className="lista-texto">
-                  <b className="pequeno">
+                  <b className={estilos.autoraNombre}>
                     {i.autora ? `${i.autora.alias} · @${i.autora.usuario}` : "Autora desconocida"}
                   </b>
                   <span className="mini texto-3">
@@ -118,11 +125,15 @@ export default function Admin() {
                 </div>
               </div>
 
-              <div className="chips">
-                {i.motivos.map((m) => (
-                  <span key={m} className="chip chip-mantequilla">{m}</span>
-                ))}
-              </div>
+              {i.motivos.length > 0 && (
+                <ul className={estilos.motivos}>
+                  {i.motivos.map((m) => (
+                    <li key={m}>
+                      <AlertCircle size={15} aria-hidden="true" /> {m}
+                    </li>
+                  ))}
+                </ul>
+              )}
 
               <div className={estilos.contenido}>
                 {i.medios[0] && (
@@ -148,18 +159,18 @@ export default function Admin() {
               )}
 
               <div className={estilos.acciones}>
-                <button className="boton boton-vino boton-chico" onClick={() => decidir(i, "aprobar")}>
-                  <Check size={15} /> Aprobar
+                <button className={`boton boton-vino ${estilos.aprobar}`} onClick={() => decidir(i, "aprobar")}>
+                  <Check size={16} /> Aprobar
                 </button>
-                <button className="boton boton-secundario boton-chico" onClick={() => decidir(i, "ocultar")}>
-                  <EyeOff size={15} /> Ocultar
+                <button className="boton boton-secundario" onClick={() => decidir(i, "ocultar")}>
+                  <EyeOff size={16} /> Ocultar
                 </button>
-                <button className="boton boton-secundario boton-chico" onClick={() => decidir(i, "eliminar")}>
-                  <Trash2 size={15} /> Eliminar
+                <button className="boton boton-secundario" onClick={() => decidir(i, "eliminar")}>
+                  <Trash2 size={16} /> Eliminar
                 </button>
                 {i.autora && i.autora.id !== "yo" && i.autora.estado !== "suspendida" && (
-                  <button className="boton boton-fantasma boton-chico" onClick={() => setSuspender(i)}>
-                    <UserX size={15} /> Suspender autora
+                  <button className={`boton boton-fantasma ${estilos.suspender}`} onClick={() => setSuspender(i)}>
+                    <UserX size={16} /> Suspender autora
                   </button>
                 )}
               </div>
@@ -169,7 +180,7 @@ export default function Admin() {
 
         {suspendidas.length > 0 && (
           <section className="seccion">
-            <h2 className="titulo-s">Cuentas suspendidas</h2>
+            <h2 className={estilos.tituloSeccion}>Cuentas suspendidas</h2>
             <div className="lista">
               {suspendidas.map((p) => (
                 <div key={p.id} className="lista-item">

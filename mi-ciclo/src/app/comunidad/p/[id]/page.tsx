@@ -51,12 +51,12 @@ export default function Detalle() {
       <Cabecera
         titulo={
           <span className={estilos.titulo}>
-            <b>{pub.autora.alias}</b>
-            <span className="mini texto-3">{esPregunta ? "pregunta" : "publicación"}</span>
+            <b>{esPregunta ? "Pregunta" : "Publicación"}</b>
+            <span>de {pub.autora.alias}</span>
           </span>
         }
         derecha={
-          <button className="boton-icono boton-icono-blanco" aria-label="Más opciones" onClick={() => setMenu(true)}>
+          <button className="boton-icono" aria-label="Más opciones" onClick={() => setMenu(true)}>
             <MoreHorizontal size={20} />
           </button>
         }
@@ -86,12 +86,19 @@ export default function Detalle() {
             )}
           </div>
         )}
+        {pub.medios.length > 1 && (
+          <div className={estilos.puntos} aria-hidden="true">
+            {pub.medios.map((_, i) => (
+              <span key={i} className={i === foto ? estilos.puntoActivo : undefined} />
+            ))}
+          </div>
+        )}
 
-        <div className="fila">
-          <AvatarAutora autora={pub.autora} tamano={36} />
-          <div className="columna" style={{ gap: 0, flex: 1, minWidth: 0 }}>
-            <b className="pequeno"><NombreAutora autora={pub.autora} /></b>
-            <span className="mini texto-3">{haceCuanto(pub.creadaEn, ctx.ahora)}</span>
+        <div className={estilos.autora}>
+          <AvatarAutora autora={pub.autora} tamano={40} />
+          <div className={estilos.autoraTexto}>
+            <b><NombreAutora autora={pub.autora} /></b>
+            <span>{haceCuanto(pub.creadaEn, ctx.ahora)}</span>
           </div>
           <ChipTema tema={pub.temas[0]} anonima={pub.autora.anonima} />
         </div>
@@ -102,9 +109,9 @@ export default function Detalle() {
             <h1 className={cs.citaTexto}>{pub.texto}</h1>
           </div>
         ) : (
-          <div className="columna" style={{ gap: 6 }}>
-            {pub.titulo && <h1 className="titulo-m">{pub.titulo}</h1>}
-            {esPregunta && <h1 className="titulo-m">{pub.texto}</h1>}
+          <div className={estilos.cuerpo}>
+            {pub.titulo && <h1 className={estilos.tituloPub}>{pub.titulo}</h1>}
+            {esPregunta && <h1 className={estilos.tituloPub}>{pub.texto}</h1>}
             {!esPregunta && (
               <p className={estilos.texto}>
                 <TextoConTemas texto={pub.texto} />
@@ -132,7 +139,7 @@ export default function Detalle() {
             <span className="num">{numeroCorto(pub.flores)} flores</span>
           </button>
           <a href="#comentar" className={cs.accion}>
-            <MessageCircle size={20} /> <span className="num">{pub.numComentarios} comentarios</span>
+            <MessageCircle size={20} /> <span className="num">{pub.numComentarios} {pub.numComentarios === 1 ? "comentario" : "comentarios"}</span>
           </a>
           <span className={cs.espaciador} />
           <button className={cs.accion} aria-label="Enviar" onClick={() => copiarEnlace(`/comunidad/p/${pub.id}`)}>
@@ -148,15 +155,15 @@ export default function Detalle() {
           </button>
         </div>
 
-        <hr className="separador" />
-
-        <section className="seccion" aria-labelledby="titulo-comentarios">
-          <div className="seccion-cabeza">
-            <h2 id="titulo-comentarios" className="titulo-l">{esPregunta ? "Respuestas" : "Comentarios"}</h2>
+        <section className={`seccion ${estilos.comentarios}`} aria-labelledby="titulo-comentarios">
+          <div className={estilos.comentariosCabeza}>
+            <h2 id="titulo-comentarios" className={estilos.tituloComentarios}>
+              {esPregunta ? "Respuestas" : "Comentarios"} <span className="num">{comentarios.length}</span>
+            </h2>
             <SelectorOrden orden={orden} alCambiar={setOrden} />
           </div>
           {comentarios.length === 0 ? (
-            <p className="texto-2 pequeno">Sé la primera en responder. Una palabra amable puede cambiarle el día.</p>
+            <p className={estilos.vacio}>Sé la primera en responder. Una palabra amable puede cambiarle el día.</p>
           ) : (
             <ListaComentarios comentarios={comentarios} ahora={ctx.ahora} alResponder={setRespondiendo} />
           )}

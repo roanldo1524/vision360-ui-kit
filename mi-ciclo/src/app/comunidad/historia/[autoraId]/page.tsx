@@ -4,6 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import { MoreHorizontal, Send, Trash2, Flag, X } from "lucide-react";
 import { Avatar } from "@/components/Avatar";
 import { Flor } from "@/components/Flor";
+import { Estrella } from "@/components/FormasMarca";
 import { MedioVista } from "@/components/MedioVista";
 import { Confirmar, Hoja } from "@/components/Hoja";
 import { avisar } from "@/components/Avisos";
@@ -133,7 +134,12 @@ function Visor({ autoraId }: { autoraId: string }) {
         </div>
       </div>
 
-      {(historia.texto || textoMedio) && <p className={estilos.texto}>{textoMedio ?? historia.texto} ✿</p>}
+      {(historia.texto || textoMedio) && (
+        <p className={estilos.texto}>
+          {textoMedio ?? historia.texto}
+          <Estrella color="#ffffff" tamano={28} className={estilos.florTexto} />
+        </p>
+      )}
 
       {historia.esMia ? (
         <div className={estilos.abajo}>

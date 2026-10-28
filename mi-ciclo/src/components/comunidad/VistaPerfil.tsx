@@ -4,13 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   Ban,
-  Bookmark,
   Camera,
   Copy,
   Flag,
-  Grid2x2,
   Layers,
-  MessageCircle,
   MoreHorizontal,
   Pencil,
   Play,
@@ -22,6 +19,7 @@ import {
 import { Avatar } from "@/components/Avatar";
 import { Ciclita, CICLITAS, CICLITAS_ELEGIBLES } from "@/components/Ciclita";
 import { Flor } from "@/components/Flor";
+import { FlorLuna } from "@/components/FormasMarca";
 import { Ilustracion, ILUSTRACIONES } from "@/components/Ilustracion";
 import { MedioVista } from "@/components/MedioVista";
 import { EstadoVacio } from "@/components/EstadoVacio";
@@ -52,18 +50,17 @@ type Pestana = "posts" | "reels" | "preguntas" | "guardados";
 function Mosaico({ pubs }: { pubs: PublicacionPublica[] }) {
   return (
     <div className={estilos.mosaico}>
-      {pubs.map((p, i) => (
+      {pubs.map((p) => (
         <Link
           key={p.id}
           href={`/comunidad/p/${p.id}`}
           className={estilos.celda}
-          style={{ aspectRatio: i % 3 === 0 ? "4 / 5" : "1 / 1" }}
           aria-label={p.titulo ?? p.texto.slice(0, 40)}
         >
           {p.medios[0] ? (
             <MedioVista medio={p.medios[0]} />
           ) : (
-            <span className={`${estilos.celdaTexto} ${cs[`fondo-${p.fondo ?? "lila"}`]}`}>{p.texto}</span>
+            <span className={estilos.celdaTexto} data-fondo={p.fondo ?? "lila"}>{p.texto}</span>
           )}
           {p.medios.length > 1 && (
             <span className={estilos.multiple}>
@@ -118,63 +115,64 @@ export function VistaPerfil({ id, menuAjeno = false, alCerrarMenuAjeno }: PropsP
     );
   }
 
-  const PESTANAS: { id: Pestana; Icono: typeof Grid2x2; etiqueta: string }[] = [
-    { id: "posts", Icono: Grid2x2, etiqueta: "Publicaciones" },
-    { id: "reels", Icono: Play, etiqueta: "Reels" },
-    { id: "preguntas", Icono: MessageCircle, etiqueta: "Preguntas" },
-    ...(perfil.esYo ? [{ id: "guardados" as Pestana, Icono: Bookmark, etiqueta: "Guardados" }] : []),
+  const PESTANAS: { id: Pestana; etiqueta: string }[] = [
+    { id: "posts", etiqueta: "Posts" },
+    { id: "reels", etiqueta: "Reels" },
+    { id: "preguntas", etiqueta: "Preguntas" },
+    ...(perfil.esYo ? [{ id: "guardados" as Pestana, etiqueta: "Guardados" }] : []),
   ];
 
   return (
     <>
-      <section className={estilos.cabeza}>
-        {perfil.esYo && (
-          <button className={`boton-icono ${estilos.masOpciones}`} aria-label="Opciones del perfil" onClick={() => setHoja("menu")}>
-            <MoreHorizontal size={20} />
-          </button>
-        )}
-        <div className={estilos.filaDatos}>
+      <section className={estilos.portadaPerfil} aria-label={`Perfil de ${perfil.alias}`}>
+        <FlorLuna color="#ffc4d8" fondo="#ffdced" tamano={240} className={estilos.florPortada} />
+        <div className={estilos.portadaArriba}>
           <div className={estilos.avatarZona}>
             {tieneHistoria ? (
-              <Link href={`/comunidad/historia/${id}`} aria-label="Ver historia">
-                <Avatar ciclita={perfil.ciclita} fotoId={perfil.fotoId} tamano={84} anillo={tieneHistoria.vistas ? "visto" : "nuevo"} nombre={perfil.alias} />
+              <Link href={`/comunidad/historia/${id}`} aria-label="Ver historia" className={estilos.avatarEnlace}>
+                <Avatar ciclita={perfil.ciclita} fotoId={perfil.fotoId} tamano={88} anillo={tieneHistoria.vistas ? "visto" : "nuevo"} nombre={perfil.alias} />
               </Link>
             ) : (
-              <Avatar ciclita={perfil.ciclita} fotoId={perfil.fotoId} tamano={84} anillo="nuevo" nombre={perfil.alias} />
+              <span className={estilos.avatarMarco}>
+                <Avatar ciclita={perfil.ciclita} fotoId={perfil.fotoId} tamano={80} nombre={perfil.alias} />
+              </span>
             )}
             {perfil.esYo && (
               <Link href="/publicar?tipo=historia" className={estilos.masAvatar} aria-label="Subir historia">
-                <Plus size={14} strokeWidth={3} />
+                <Plus size={16} strokeWidth={2.6} />
               </Link>
             )}
           </div>
-          <dl className={estilos.numeros}>
-            <div>
-              <dt className="num">{numeroCorto(perfil.publicaciones)}</dt>
-              <dd>publicaciones</dd>
-            </div>
-            <div>
-              <dt className="num">{numeroCorto(perfil.seguidoras)}</dt>
-              <dd>comunidad</dd>
-            </div>
-            <div>
-              <dt className="num">
-                <Flor tamano={13} activa /> {numeroCorto(perfil.floresRecibidas)}
-              </dt>
-              <dd>flores</dd>
-            </div>
-          </dl>
+          {perfil.esYo && (
+            <button className={estilos.masOpciones} aria-label="Opciones del perfil" onClick={() => setHoja("menu")}>
+              <MoreHorizontal size={20} />
+            </button>
+          )}
         </div>
 
-        <div className={estilos.nombreFila}>
-          <div className="columna" style={{ gap: 0, minWidth: 0, flex: 1 }}>
-            <h1 className="titulo-s">{perfil.alias}</h1>
-            <span className="mini texto-3">@{perfil.usuario}</span>
-          </div>
-          {!perfil.esYo && (
-            <div className="fila" style={{ gap: 6 }}>
+        <div className={estilos.identidad}>
+          <h1 className={estilos.nombre}>{perfil.alias}</h1>
+          <p className={estilos.usuario}>@{perfil.usuario}</p>
+          {perfil.bio && <p className={estilos.bio}>{perfil.bio}</p>}
+        </div>
+
+        <div className={estilos.accionesPerfil}>
+          {perfil.esYo ? (
+            <>
+              <button className={estilos.botonBlanco} onClick={() => setHoja("editar")}>
+                <Pencil size={16} /> Editar perfil
+              </button>
               <button
-                className={`boton boton-chico ${perfil.sigo ? "boton-secundario" : "boton-principal"}`}
+                className={estilos.botonBlanco}
+                onClick={() => copiarEnlace("/comunidad/u/yo", "Enlace de tu perfil copiado")}
+              >
+                <Send size={16} /> Compartir
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className={`boton ${perfil.sigo ? estilos.botonBlanco : "boton-principal"} ${estilos.botonSeguir}`}
                 aria-pressed={perfil.sigo}
                 onClick={() => {
                   const sigue = alternarSeguir(perfil.id);
@@ -184,22 +182,40 @@ export function VistaPerfil({ id, menuAjeno = false, alCerrarMenuAjeno }: PropsP
                 {perfil.sigo ? "Siguiendo" : "Seguir"}
               </button>
               <button
-                className="boton-icono boton-icono-blanco"
+                className={estilos.botonCircular}
                 aria-label="Enviar perfil"
                 onClick={() => copiarEnlace(`/comunidad/u/${perfil.id}`, "Enlace del perfil copiado")}
               >
-                <Send size={17} />
+                <Send size={18} />
               </button>
-            </div>
+            </>
           )}
         </div>
-        {perfil.bio && <p className={estilos.bio}>{perfil.bio}</p>}
+      </section>
 
-        <div className={estilos.destacadas}>
+      <dl className={estilos.numeros}>
+        <div>
+          <dt className="num">{numeroCorto(perfil.publicaciones)}</dt>
+          <dd>publicaciones</dd>
+        </div>
+        <div>
+          <dt className="num">{numeroCorto(perfil.seguidoras)}</dt>
+          <dd>en su comunidad</dd>
+        </div>
+        <div>
+          <dt className="num">
+            <Flor tamano={16} activa /> {numeroCorto(perfil.floresRecibidas)}
+          </dt>
+          <dd>flores</dd>
+        </div>
+      </dl>
+
+      {(perfil.esYo || (perfil.destacadas ?? []).length > 0) && (
+        <div className={estilos.destacadas} aria-label="Historias destacadas">
           {perfil.esYo && (
             <button className={estilos.destacada} onClick={() => setHoja("destacada")}>
               <span className={estilos.destacadaNueva}>
-                <Plus size={20} />
+                <Plus size={22} strokeWidth={1.8} />
               </span>
               <span>Nueva</span>
             </button>
@@ -213,19 +229,18 @@ export function VistaPerfil({ id, menuAjeno = false, alCerrarMenuAjeno }: PropsP
             </div>
           ))}
         </div>
-      </section>
+      )}
 
       <div className={estilos.pestanas} role="tablist" aria-label="Contenido del perfil">
-        {PESTANAS.map(({ id: pid, Icono, etiqueta }) => (
+        {PESTANAS.map(({ id: pid, etiqueta }) => (
           <button
             key={pid}
             role="tab"
             aria-selected={pestana === pid}
-            aria-label={etiqueta}
             className={estilos.pestana}
             onClick={() => setPestana(pid)}
           >
-            <Icono size={20} />
+            {etiqueta}
           </button>
         ))}
       </div>

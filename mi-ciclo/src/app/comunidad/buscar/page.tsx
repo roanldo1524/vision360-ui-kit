@@ -25,7 +25,7 @@ function Buscador() {
       <Cabecera titulo="Buscar" volverA="/comunidad" />
       <main className="pagina" style={{ paddingTop: 4 }}>
         <label className={estilos.caja} htmlFor="buscar-comunidad">
-          <Search size={18} />
+          <Search size={20} aria-hidden="true" />
           <input
             id="buscar-comunidad"
             autoFocus
@@ -38,9 +38,13 @@ function Buscador() {
 
         {!q.trim() && (
           <section className="seccion">
-            <h2 className="titulo-s">Chicas que quizá te gusten</h2>
+            <h2 className={estilos.titulo}>
+              Chicas que <em>quizá te gusten</em>
+            </h2>
             <ListaPerfiles perfiles={sugeridas} />
-            <h2 className="titulo-s">Temas</h2>
+            <h2 className={estilos.titulo}>
+              Explora <em>temas</em>
+            </h2>
             <div className="chips">
               {["rituales", "calma", "infusiones", "cólicos", "descanso", "nutrición", "reflexión"].map((t) => (
                 <button key={t} className="chip chip-borde seleccionable" onClick={() => setQ(`#${t}`)}>
@@ -55,14 +59,14 @@ function Buscador() {
 
         {r.perfiles.length > 0 && (
           <section className="seccion">
-            <h2 className="titulo-s">Usuarias</h2>
+            <h2 className={estilos.titulo}>Usuarias</h2>
             <ListaPerfiles perfiles={r.perfiles} />
           </section>
         )}
         {r.temas.length > 0 && (
           <div className="chips">
             {r.temas.map((t) => (
-              <button key={t} className="chip chip-lila seleccionable" onClick={() => setQ(`#${t}`)}>
+              <button key={t} className="chip chip-borde seleccionable" onClick={() => setQ(`#${t}`)}>
                 <Hash size={13} /> {t}
               </button>
             ))}
@@ -70,14 +74,14 @@ function Buscador() {
         )}
         {r.publicaciones.length > 0 && (
           <section className="seccion">
-            <h2 className="titulo-s">Publicaciones</h2>
+            <h2 className={estilos.titulo}>Publicaciones</h2>
             {r.publicaciones.map((p) =>
               p.tipo === "post" ? (
                 <TarjetaPost key={p.id} pub={p} ctx={ctx} />
               ) : (
                 <Link key={p.id} href={p.tipo === "reel" ? `/comunidad/reels?id=${p.id}` : `/comunidad/p/${p.id}`} className="tarjeta">
-                  <span className="eyebrow">{p.tipo === "reel" ? "Reel" : "Pregunta"}</span>
-                  <p className="titulo-s" style={{ marginTop: 6 }}>{p.texto}</p>
+                  <span className={estilos.tipo}>{p.tipo === "reel" ? "Reel" : "Pregunta"}</span>
+                  <p className={estilos.textoResultado}>{p.texto}</p>
                 </Link>
               ),
             )}
@@ -89,17 +93,17 @@ function Buscador() {
 }
 
 function ListaPerfiles({ perfiles }: { perfiles: ReturnType<typeof sugerenciasParaSeguir> }) {
-  if (perfiles.length === 0) return <p className="texto-3 pequeno">Ya sigues a todas las sugeridas.</p>;
+  if (perfiles.length === 0) return <p className="texto-2 pequeno">Ya sigues a todas las sugeridas.</p>;
   return (
-    <div className="lista">
+    <div className={estilos.lista}>
       {perfiles.map((p) => (
-        <Link key={p.id} href={rutaPerfil(p.id)} className="lista-item">
-          <Avatar ciclita={p.ciclita} fotoId={p.fotoId} tamano={44} />
-          <span className="lista-texto">
+        <Link key={p.id} href={rutaPerfil(p.id)} className={estilos.fila}>
+          <Avatar ciclita={p.ciclita} fotoId={p.fotoId} tamano={48} />
+          <span className={estilos.filaTexto}>
             <b>{p.alias}</b>
-            <span className="mini texto-3">@{p.usuario} · {numeroCorto(p.seguidoras)} en su comunidad</span>
+            <span>@{p.usuario} · {numeroCorto(p.seguidoras)} en su comunidad</span>
           </span>
-          {p.sigo && <span className="chip chip-borde">Siguiendo</span>}
+          {p.sigo && <span className={estilos.siguiendo}>Siguiendo</span>}
         </Link>
       ))}
     </div>

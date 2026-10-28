@@ -9,6 +9,7 @@ import { alternarEmbarazo, cambiarMetaAgua, elegirObjetivo, sumarAgua, VASO_ML }
 import { clases } from "@/lib/utilidades";
 import { Hoja } from "@/components/Hoja";
 import { Ilustracion } from "@/components/Ilustracion";
+import { Circulo, Estrella } from "@/components/FormasMarca";
 import { avisar } from "@/components/Avisos";
 import estilos from "./bienestar.module.css";
 
@@ -24,6 +25,7 @@ export function BebeAgua() {
   const [ajustes, setAjustes] = useState(false);
   const vasos = Math.ceil(meta / VASO_ML);
   const llenos = Math.floor(tomada / VASO_ML);
+  const cumplida = tomada >= meta;
 
   function tocarVaso(i: number) {
     if (i < llenos) {
@@ -31,47 +33,40 @@ export function BebeAgua() {
       return;
     }
     sumarAgua(VASO_ML);
-    if (tomada + VASO_ML >= meta && tomada < meta) avisar("¡Meta de agua cumplida!", "exito");
+    if (tomada + VASO_ML >= meta && tomada < meta) avisar("Meta de agua cumplida", "exito");
   }
 
   return (
-    <section className={estilos.tarjetaBlanca} aria-label="Bebe agua">
-      <div className="fila-entre" style={{ alignItems: "flex-start" }}>
-        <div>
-          <h2 className={estilos.tituloSans}>
-            Bebe agua <Droplet size={20} fill="#4aa8ff" stroke="none" style={{ verticalAlign: -2 }} />
-          </h2>
-          <p className={clases("num", estilos.aguaCuenta)}>
-            {tomada} ml / {meta} ml
-          </p>
-        </div>
-        <button className={estilos.enlaceLila} onClick={() => setAjustes(true)}>
-          Ajustes <ChevronRight size={16} />
+    <section className={estilos.tarjeta} aria-labelledby="t-agua">
+      <div className={estilos.cabeza}>
+        <h2 id="t-agua" className={estilos.titulo}>
+          Bebe <em>agua</em>
+        </h2>
+        <button className={estilos.botonSuave} onClick={() => setAjustes(true)}>
+          Meta {(meta / 1000).toLocaleString("es-CO")} L
         </button>
       </div>
-      <div className={estilos.barraAgua} role="progressbar" aria-valuemin={0} aria-valuemax={meta} aria-valuenow={tomada} aria-label="Agua de hoy">
-        <span style={{ width: `${Math.min(100, (tomada / meta) * 100)}%` }} />
-      </div>
-      <div className={estilos.vasos}>
+      <p className={estilos.cuenta}>
+        <b className="num">{tomada.toLocaleString("es-CO")}</b>
+        <span>/ {meta.toLocaleString("es-CO")} ml{cumplida ? " · cumplida" : ""}</span>
+      </p>
+      <div className={estilos.gotas} role="group" aria-label={`Vasos de agua: ${llenos} de ${vasos}`}>
         {Array.from({ length: vasos }, (_, i) => {
           const lleno = i < llenos;
           const siguiente = i === llenos;
           return (
             <button
               key={i}
-              className={clases(estilos.vaso, lleno && estilos.vasoLleno, siguiente && estilos.vasoSiguiente)}
+              className={clases(estilos.gota, lleno && estilos.gotaLlena, siguiente && estilos.gotaSiguiente)}
               onClick={() => tocarVaso(i)}
               aria-label={lleno ? `Quitar vaso ${i + 1}` : `Tomé un vaso de ${VASO_ML} ml`}
             >
-              <span className={estilos.vasoForma}>
-                {lleno && <span className={estilos.vasoAgua} />}
-                {siguiente && <Plus size={20} />}
-              </span>
-              <span className="mini">{VASO_ML} ml</span>
+              {siguiente ? <Plus size={18} /> : <Droplet size={16} fill={lleno ? "currentColor" : "none"} />}
             </button>
           );
         })}
       </div>
+      <p className={estilos.ayuda}>Cada toque suma un vaso de {VASO_ML} ml.</p>
 
       <Hoja abierta={ajustes} alCerrar={() => setAjustes(false)} titulo="Tu meta de agua">
         <p className="pequeno texto-2">¿Cuánta agua quieres tomar al día?</p>
@@ -83,7 +78,7 @@ export function BebeAgua() {
               aria-pressed={meta === ml}
               onClick={() => {
                 cambiarMetaAgua(ml);
-                avisar(`Meta: ${ml} ml al día`);
+                avisar(`Meta: ${ml.toLocaleString("es-CO")} ml al día`);
               }}
             >
               {ml.toLocaleString("es-CO")} ml
@@ -97,7 +92,7 @@ export function BebeAgua() {
 
 /* ---------- Mi objetivo ---------- */
 const OBJETIVOS = [
-  { id: "periodo", nombre: "Seguir mi periodo" },
+  { id: "periodo", nombre: "Seguir mi período" },
   { id: "concebir", nombre: "Intento concebir" },
   { id: "embarazo", nombre: "Seguir mi embarazo" },
 ] as const;
@@ -106,9 +101,9 @@ export function MiObjetivo() {
   const objetivo = useEstado((e) => e.objetivo ?? "periodo");
   const embarazo = useEstado((e) => e.embarazo ?? false);
   return (
-    <section className={estilos.tarjetaBlanca} aria-label="Mi objetivo">
-      <h2 className={clases(estilos.tituloSans, estilos.tituloCarmesiSans)}>
-        <span className={estilos.diana} aria-hidden="true" /> Mi objetivo
+    <section className={estilos.tarjeta} aria-labelledby="t-objetivo">
+      <h2 id="t-objetivo" className={estilos.titulo}>
+        Mi <em>objetivo</em>
       </h2>
       <div className={estilos.objetivos} role="radiogroup" aria-label="Objetivo">
         {OBJETIVOS.map((o) => (
@@ -126,95 +121,95 @@ export function MiObjetivo() {
           </button>
         ))}
       </div>
-      <Link href="/ajustes" className={estilos.filaAjuste}>
-        <span className={estilos.aro} aria-hidden="true" />
-        <span className="columna" style={{ gap: 0, flex: 1, minWidth: 0 }}>
-          <b>Configuración de predicción</b>
-          <span className="pequeno texto-2">Para periodos, ciclo y ovulación</span>
-        </span>
-        <ChevronRight size={20} />
-      </Link>
-      <div className={estilos.filaAjuste}>
-        <span className={estilos.barriga} aria-hidden="true" />
-        <b style={{ flex: 1 }}>Embarazo</b>
-        <button
-          className="interruptor"
-          role="switch"
-          aria-checked={embarazo}
-          aria-label="Modo embarazo"
-          onClick={() => {
-            alternarEmbarazo();
-            avisar(embarazo ? "Modo embarazo desactivado" : "Modo embarazo activado");
-          }}
-        />
+      <div className={estilos.filas}>
+        <Link href="/ajustes" className={estilos.fila}>
+          <span className={estilos.glifo} style={{ background: "#f5ebfc" }} aria-hidden="true">
+            <Estrella color="#b07ee0" tamano={22} />
+          </span>
+          <span className={estilos.filaTexto}>
+            <b>Configuración de predicción</b>
+            <span>Duración del ciclo y del período</span>
+          </span>
+          <ChevronRight size={20} className={estilos.flecha} aria-hidden="true" />
+        </Link>
+        <div className={estilos.fila}>
+          <span className={estilos.glifo} style={{ background: "#ffe4ea" }} aria-hidden="true">
+            <Circulo color="#f62c39" tamano={20} />
+          </span>
+          <span className={estilos.filaTexto}>
+            <b>Modo embarazo</b>
+            <span>Pausa las predicciones del período</span>
+          </span>
+          <button
+            className="interruptor"
+            role="switch"
+            aria-checked={embarazo}
+            aria-label="Modo embarazo"
+            onClick={() => {
+              alternarEmbarazo();
+              avisar(embarazo ? "Modo embarazo desactivado" : "Modo embarazo activado");
+            }}
+          />
+        </div>
       </div>
     </section>
   );
 }
 
 /* ---------- Productos recomendados ---------- */
-function Botella() {
-  return (
-    <svg viewBox="0 0 120 120" width="100%" height="100%" role="img" aria-label="Botella de agua rosada">
-      <rect width="120" height="120" fill="#f9dbe3" />
-      <rect x="44" y="14" width="32" height="16" rx="5" fill="#e98aa3" />
-      <path d="M76 20 h10 a6 6 0 0 1 0 12 h-10" fill="none" stroke="#e98aa3" strokeWidth="4" />
-      <rect x="38" y="28" width="44" height="80" rx="12" fill="#f4a9bc" />
-      <rect x="44" y="34" width="8" height="64" rx="4" fill="#fff" opacity=".35" />
-      <text x="60" y="76" fontSize="9" fontFamily="var(--f-display)" fill="#e01e37" textAnchor="middle" transform="rotate(-90 60 70)">
-        Mi Ciclo
-      </text>
-    </svg>
-  );
-}
-
 export function Productos() {
   const productos = [
     {
       id: "mi-ciclo",
       nombre: "Mi Ciclo",
-      detalle: "Complemento diario",
+      detalle: "Tu ritual de 30 sobres",
       url: `${TIENDA}/?${utm("caja_mi_ciclo")}`,
       // eslint-disable-next-line @next/next/no-img-element
-      imagen: <img src="/marca/conf-producto.webp" alt="Caja y sobre de Mi Ciclo" />,
+      imagen: <img src="/marca/conf-producto.webp" alt="" />,
     },
     {
       id: "almohadilla",
       nombre: "Almohadilla térmica",
-      detalle: "para cólicos",
+      detalle: "Calor para los cólicos",
       url: `${TIENDA}/?${utm("almohadilla_termica")}`,
       imagen: <Ilustracion id="bolsa" />,
     },
     {
       id: "botella",
       nombre: "Botella de agua",
-      detalle: "con recordatorios",
+      detalle: "Con recordatorios",
       url: `${TIENDA}/?${utm("botella_agua")}`,
-      imagen: <Botella />,
+      imagen: <Ilustracion id="velas" />,
     },
   ];
   return (
-    <section className={estilos.tarjetaBlanca} aria-label="Productos recomendados">
-      <div className="fila-entre">
-        <h2 className={clases("titulo-m", estilos.tituloCarmesi)}>Productos recomendados</h2>
-        <a href={`${TIENDA}/?${utm("ver_todos")}`} target="_blank" rel="noopener noreferrer" className="enlace-rojo">
-          Ver todos <ChevronRight size={15} />
+    <section className={estilos.productosSeccion} aria-labelledby="t-productos">
+      <div className={estilos.productosCabeza}>
+        <h2 id="t-productos" className={estilos.productosTitulo}>
+          Para tu <em>ritual</em>
+        </h2>
+        <a href={`${TIENDA}/?${utm("ver_todos")}`} target="_blank" rel="noopener noreferrer" className={estilos.productosEnlace}>
+          Ver tienda <ChevronRight size={16} aria-hidden="true" />
         </a>
       </div>
-      <div className={estilos.productos}>
+      <ul className={estilos.productos}>
         {productos.map((p) => (
-          <a key={p.id} href={p.url} target="_blank" rel="noopener noreferrer" className={estilos.producto}>
-            <span className={estilos.productoImagen}>{p.imagen}</span>
-            <span className={estilos.productoTexto}>
-              <b>{p.nombre}</b>
-              <span>{p.detalle}</span>
-            </span>
-            <span className={estilos.carrito} aria-label={`Comprar ${p.nombre}`}>
-              <ShoppingCart size={17} />
-            </span>
-          </a>
+          <li key={p.id}>
+            <a href={p.url} target="_blank" rel="noopener noreferrer" className={estilos.producto} aria-label={`${p.nombre}, ${p.detalle}. Abrir en la tienda`}>
+              <span className={estilos.productoImagen} aria-hidden="true">
+                {p.imagen}
+                <span className={estilos.carrito}>
+                  <ShoppingCart size={16} />
+                </span>
+              </span>
+              <span className={estilos.productoTexto}>
+                <b>{p.nombre}</b>
+                <span>{p.detalle}</span>
+              </span>
+            </a>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }

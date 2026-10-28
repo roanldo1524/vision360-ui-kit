@@ -17,12 +17,12 @@ export function TarjetaPregunta({ pub, ctx }: { pub: PublicacionPublica; ctx: Co
   return (
     <article className={estilos.pregunta}>
       <div className={estilos.postCabeza}>
-        <AvatarAutora autora={pub.autora} tamano={38} />
+        <AvatarAutora autora={pub.autora} tamano={40} />
         <div className={estilos.postAutora}>
           <span className={estilos.postNombre}>
             <NombreAutora autora={pub.autora} />
           </span>
-          <span className="mini texto-3">{haceCuanto(pub.creadaEn, ctx.ahora).replace(/^h/, "H")}</span>
+          <span className={estilos.tiempo}>{haceCuanto(pub.creadaEn, ctx.ahora).replace(/^h/, "H")}</span>
         </div>
       </div>
       {pub.enRevision && <AvisoRevision texto="En revisión · la leerá una persona del equipo" />}
@@ -36,7 +36,7 @@ export function TarjetaPregunta({ pub, ctx }: { pub: PublicacionPublica; ctx: Co
       )}
       {mejor && (
         <Link href={`/comunidad/p/${pub.id}`} className={estilos.mejorRespuesta}>
-          <Avatar ciclita={mejor.autora.ciclita} fotoId={mejor.autora.fotoId} tamano={24} />
+          <Avatar ciclita={mejor.autora.ciclita} fotoId={mejor.autora.fotoId} tamano={28} />
           <span>
             <b>{mejor.autora.alias}</b> {mejor.texto}
           </span>
@@ -44,7 +44,7 @@ export function TarjetaPregunta({ pub, ctx }: { pub: PublicacionPublica; ctx: Co
       )}
       <div className={estilos.contadores}>
         <Link href={`/comunidad/p/${pub.id}#comentar`} className={estilos.contador}>
-          <MessageCircle size={14} /> {pub.numComentarios} {pub.numComentarios === 1 ? "respuesta" : "respuestas"}
+          <MessageCircle size={16} strokeWidth={1.8} /> {pub.numComentarios} {pub.numComentarios === 1 ? "respuesta" : "respuestas"}
         </Link>
         <button
           className={estilos.contador}
@@ -54,7 +54,7 @@ export function TarjetaPregunta({ pub, ctx }: { pub: PublicacionPublica; ctx: Co
             alternarFlor(`p:${pub.id}`);
           }}
         >
-          <Flor tamano={15} activa={pub.diFlor} /> {pub.flores} flores
+          <Flor tamano={17} activa={pub.diFlor} /> {pub.flores} flores
         </button>
       </div>
     </article>

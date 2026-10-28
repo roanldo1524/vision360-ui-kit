@@ -1,46 +1,60 @@
+/* Diario · íntimo y sereno: luna violeta, teclado limpio, hoja con renglones. */
 .centro {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 12px;
-  padding-top: 20px;
+  gap: 14px;
+  padding-top: 24px;
 }
 .candado {
-  width: 64px;
-  height: 64px;
-  border-radius: 22px;
-  background: var(--lila);
-  color: var(--lila-tinta);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #efe4fb;
   display: grid;
   place-items: center;
+}
+.titulo {
+  font-family: var(--f-titulo);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--vino);
+}
+.titulo em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--carmesi);
 }
 .pin {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 22px;
+  gap: 24px;
   margin-top: 8px;
 }
 .puntos {
   display: flex;
-  gap: 14px;
+  gap: 16px;
 }
 .puntos span {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  box-shadow: inset 0 0 0 2px var(--texto-3);
-  transition: background 0.15s;
+  box-shadow: inset 0 0 0 1.5px var(--texto-3);
+  transition: background-color 160ms ease, transform 160ms var(--ease-out);
 }
 .puntos .lleno {
-  background: var(--vino);
+  background: var(--violeta-oscuro);
   box-shadow: none;
+  transform: scale(1.1);
 }
 .teclas {
   display: grid;
   grid-template-columns: repeat(3, 72px);
-  gap: 12px 22px;
+  gap: 14px 24px;
 }
 .tecla {
   width: 72px;
@@ -48,23 +62,56 @@
   border-radius: 50%;
   background: var(--blanco);
   box-shadow: var(--sombra);
-  font-size: 24px;
   font-family: var(--f-titulo);
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--vino);
   display: grid;
   place-items: center;
-  transition: transform 0.1s;
+  transition: transform 120ms var(--ease-out), background-color 160ms ease;
 }
 .tecla:active {
   transform: scale(0.93);
-  background: var(--rosa);
+  background: var(--lila);
 }
+
+/* Hoja de escribir */
 .hoja {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding: 18px;
+  border-radius: 28px;
+  box-shadow: var(--sombra);
   background:
-    repeating-linear-gradient(to bottom, transparent 0 31px, #f4e3e7 31px 32px),
+    repeating-linear-gradient(to bottom, transparent 0 31px, #f6e9ef 31px 32px),
     var(--blanco);
+}
+.fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.fecha {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texto-2);
+}
+.cifrado {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--texto-3);
+}
+.pregunta {
+  font-family: var(--f-titulo);
+  font-weight: 500;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--carmesi);
 }
 .area {
   width: 100%;
@@ -72,13 +119,93 @@
   background: transparent;
   resize: vertical;
   min-height: 160px;
-  font-size: 16px;
+  font-family: var(--f-acento);
+  font-size: 17px;
   line-height: 32px;
   outline: none;
   color: var(--vino);
 }
+.area::placeholder {
+  color: var(--texto-3);
+}
+.tituloSeccion {
+  padding-left: 4px;
+  font-family: var(--f-titulo);
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 1.15;
+  color: var(--vino);
+}
+.tituloSeccion em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--carmesi);
+}
+
+/* Entradas */
 .entrada {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  padding: 14px 10px 18px 18px;
+  border-radius: 28px;
+  background: var(--blanco);
+  box-shadow: var(--sombra);
+}
+.entradaCabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.entradaFecha {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texto-2);
+}
+.entradaFecha::first-letter {
+  text-transform: uppercase;
+}
+.entradaFecha em {
+  font-style: normal;
+  font-weight: 400;
+}
+.borrar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--texto-3);
+}
+.borrar:active {
+  background: var(--rosa-claro);
+}
+.entradaTexto {
+  padding-right: 8px;
+  font-family: var(--f-acento);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--vino);
+  white-space: pre-wrap;
+}
+.vacio {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 28px;
+  background: var(--lila);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--texto-2);
+}
+.vacioGlifo {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--blanco);
+  display: grid;
+  place-items: center;
 }

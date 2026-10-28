@@ -1,205 +1,217 @@
-/* Bienestar: agua, objetivo y productos recomendados */
-.tituloSans {
+/* Bienestar: agua y objetivo (en Mi ciclo) y productos recomendados (en Jardín).
+   Tarjeta blanca con borde fino, títulos Fraunces con acento en itálica. */
+
+/* ---------- Comunes: agua y objetivo ---------- */
+.tarjeta {
+  background: var(--blanco);
+  border-radius: 28px;
+  box-shadow: var(--sombra);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.cabeza {
   display: flex;
   align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-  font-family: var(--f-ui);
-  font-weight: 800;
-  font-size: 19px;
-  letter-spacing: -0.02em;
+  justify-content: space-between;
+  gap: 8px;
+}
+.titulo {
+  font-family: var(--f-titulo);
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 1.15;
   color: var(--vino);
 }
-
-.tituloCarmesi {
+.titulo em {
+  font-style: italic;
+  font-weight: 500;
   color: var(--carmesi);
 }
+.botonSuave {
+  flex: none;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--rosa-claro);
+  color: var(--vino);
+  font-size: 14px;
+  font-weight: 700;
+  transition: transform 160ms var(--ease-out);
+}
+.botonSuave:active {
+  transform: scale(0.97);
+}
+.ayuda {
+  font-size: 13px;
+  color: var(--texto-3);
+}
 
-.tituloCarmesiSans {
-  color: var(--carmesi);
+/* ---------- Agua ---------- */
+.cuenta {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: -4px;
+  font-size: 14px;
+  color: var(--texto-2);
+}
+.cuenta b {
+  font-family: var(--f-titulo);
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1;
+  color: var(--vino);
+}
+.gotas {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+.gota {
+  justify-self: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #f1f6fd;
+  color: #9cbfe6;
+  transition: background-color 240ms ease, color 240ms ease, transform 160ms var(--ease-out);
+}
+.gota:active {
+  transform: scale(0.9);
+}
+.gotaLlena {
+  background: #3e8fe6;
+  color: #fff;
+}
+.gotaSiguiente {
+  background: var(--blanco);
+  color: #2f78c9;
+  box-shadow: inset 0 0 0 1.5px #b9d4f1;
+}
+
+/* ---------- Objetivo ---------- */
+.objetivos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--rosa-claro);
+}
+.objetivo {
+  min-height: 44px;
+  padding: 0 6px;
+  border-radius: 999px;
+  color: var(--texto-2);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.15;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.objetivoActivo {
+  background: var(--blanco);
+  color: var(--rojo-texto);
+  box-shadow: 0 1px 3px rgba(31, 5, 38, 0.08);
+}
+.filas {
+  display: flex;
+  flex-direction: column;
+}
+.fila {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
+  min-height: 68px;
+  color: var(--vino);
+}
+.fila + .fila {
+  border-top: 1px solid var(--linea);
+}
+.glifo {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.filaTexto {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.filaTexto b {
+  font-size: 15px;
+  font-weight: 600;
+}
+.filaTexto span {
+  font-size: 13px;
+  color: var(--texto-2);
+}
+.flecha {
+  flex: none;
+  color: var(--texto-3);
 }
 
-/* ---------- Tarjetas blancas (agua, objetivo, productos) ---------- */
-.tarjetaBlanca {
-  background: var(--blanco);
-  border-radius: 24px;
-  box-shadow: var(--sombra);
-  padding: 16px;
+/* ---------- Productos recomendados ---------- */
+.productosSeccion {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.enlaceLila {
-  display: inline-flex;
-  align-items: center;
-  min-height: 36px;
-  font-weight: 800;
-  font-size: 14px;
-  color: var(--violeta-oscuro);
-}
-
-.aguaCuenta {
-  font-size: 15px;
-  color: var(--vino);
-  margin-top: 2px;
-}
-
-.barraAgua {
-  height: 6px;
-  border-radius: 6px;
-  background: #eef4ff;
-  overflow: hidden;
-}
-
-.barraAgua span {
-  display: block;
-  height: 100%;
-  border-radius: 6px;
-  background: linear-gradient(90deg, #7cc4ff, #3e9bff);
-  transition: width 400ms var(--ease-out);
-}
-
-.vasos {
+.productosCabeza {
   display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  margin: 0 -16px;
-  padding: 2px 16px 4px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-left: 4px;
 }
 
-.vasos::-webkit-scrollbar {
-  display: none;
-}
-
-.vaso {
-  flex: none;
-  display: grid;
-  justify-items: center;
-  gap: 6px;
-  color: var(--vino);
-  transition: transform 160ms var(--ease-out);
-}
-
-.vaso:active {
-  transform: scale(0.92);
-}
-
-.vasoForma {
-  position: relative;
-  width: 52px;
-  height: 64px;
-  display: grid;
-  place-items: center;
-  background: #f1eef0;
-  clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.vasoAgua {
-  position: absolute;
-  inset: 22% 0 0 0;
-  background: linear-gradient(180deg, #9fd5ff, #4aa8ff);
-  animation: llenar 420ms var(--ease-out) both;
-}
-
-.vasoSiguiente .vasoForma {
-  background: #fff;
-  outline: 2px dashed #b9b3bb;
-  outline-offset: -3px;
+.productosTitulo {
+  font-family: var(--f-titulo);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
   color: var(--vino);
 }
 
-/* Objetivo */
-.diana {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 4px solid var(--rojo);
-  position: relative;
-  flex: none;
-}
-
-.diana::after {
-  content: "";
-  position: absolute;
-  inset: 4px;
-  border-radius: 50%;
-  background: var(--rojo-accion);
-}
-
-.objetivos {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-}
-
-.objetivo {
-  min-height: 44px;
-  padding: 0 6px;
-  border-radius: 999px;
-  background: #f1eef0;
-  color: var(--vino);
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.1;
-  transition: background-color 200ms ease, transform 160ms var(--ease-out);
-}
-
-.objetivo:active {
-  transform: scale(0.96);
-}
-
-.objetivoActivo {
-  background: var(--rosa);
+.productosTitulo em {
+  font-style: italic;
   color: var(--carmesi);
 }
 
-.filaAjuste {
-  display: flex;
+.productosEnlace {
+  display: inline-flex;
   align-items: center;
-  gap: 14px;
-  min-height: 56px;
-  padding-top: 8px;
-  border-top: 1px solid var(--linea);
-  color: var(--vino);
+  gap: 2px;
+  min-height: 44px;
+  padding: 0 4px 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--rojo-texto);
 }
 
-.aro {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 4px solid var(--violeta-oscuro);
-  flex: none;
-}
-
-.barriga {
-  width: 24px;
-  height: 28px;
-  flex: none;
-  background: var(--rojo-accion);
-  border-radius: 6px 60% 50% 10px;
-}
-
-/* Productos */
 .productos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 }
 
 .producto {
   display: flex;
   flex-direction: column;
-  border-radius: 18px;
-  overflow: hidden;
-  background: #fff7f9;
-  box-shadow: inset 0 0 0 1px var(--linea);
+  gap: 8px;
   transition: transform 160ms var(--ease-out);
 }
 
@@ -208,12 +220,13 @@
 }
 
 .productoImagen {
+  position: relative;
   aspect-ratio: 1;
   max-width: 100%;
   overflow: hidden;
-  background: #fbe0e7;
-  display: grid;
-  place-items: center;
+  border-radius: 20px;
+  background: var(--rosa);
+  box-shadow: var(--sombra);
 }
 
 .productoImagen img {
@@ -225,28 +238,31 @@
 .productoTexto {
   display: flex;
   flex-direction: column;
-  padding: 8px 8px 4px;
-  font-size: 12px;
-  line-height: 1.2;
-  color: var(--vino);
-  min-height: 46px;
+  gap: 2px;
+  padding: 0 2px;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--texto-2);
 }
 
 .productoTexto b {
-  font-size: 13px;
-  font-weight: 800;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--vino);
 }
 
 .carrito {
-  align-self: center;
-  margin: 4px 0 10px;
-  width: 52px;
-  height: 34px;
-  border-radius: 999px;
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
-  background: var(--rosa);
+  background: var(--blanco);
   color: var(--rojo-texto);
+  box-shadow: 0 2px 8px rgba(31, 5, 38, 0.12);
 }
 
 @keyframes llenar {

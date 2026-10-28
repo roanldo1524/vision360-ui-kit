@@ -2,8 +2,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight, ChevronLeft, Minus, Plus } from "lucide-react";
+import { ArrowRight, Check, ChevronLeft, Minus, Plus } from "lucide-react";
 import { Ciclita, CICLITAS, CICLITAS_ELEGIBLES } from "@/components/Ciclita";
+import { Circulo, Estrella, FlorLuna, FlorOndulada, Luna } from "@/components/FormasMarca";
 import { completarBienvenida } from "@/lib/acciones";
 import { hoyColombia, sumarDias } from "@/lib/ciclo";
 import { MOTIVOS } from "@/lib/consejos";
@@ -69,8 +70,7 @@ export function Bienvenida() {
   if (paso === "inicio") {
     return (
       <main className={estilos.portada}>
-        <span className={clases("flor-agua", estilos.florA)} aria-hidden="true" />
-        <span className={clases("flor-agua", estilos.florB)} aria-hidden="true" />
+        <FlorLuna color="#ff5a66" fondo="var(--rojo)" tamano={260} className={estilos.florA} />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/marca/logo-blanco.svg" alt="Mi Ciclo" className={estilos.logo} width={150} height={40} />
         <div className={estilos.foto}>
@@ -85,7 +85,9 @@ export function Bienvenida() {
           </span>
         </div>
         <div className={estilos.portadaTexto}>
-          <h1 className={estilos.lema}>Tu cuerpo no falla. Se expresa.</h1>
+          <h1 className={estilos.lema}>
+            Tu cuerpo no falla. <em>Se expresa.</em>
+          </h1>
           <p className={estilos.bajada}>
             Registra cómo te sientes, toma tu ritual diario y acompáñate de una comunidad de mujeres que te entiende.
           </p>
@@ -110,19 +112,26 @@ export function Bienvenida() {
         >
           <ChevronLeft size={24} />
         </button>
-        <div className={estilos.progreso} aria-label={`Paso ${indice} de ${PASOS.length - 1}`}>
-          {PASOS.slice(1).map((p, i) => (
-            <span key={p} className={clases(estilos.punto, i < indice && estilos.puntoHecho)} />
-          ))}
+        <div className={estilos.progresoBloque}>
+          <span className={estilos.pasoNumero}>
+            Paso {indice} de {PASOS.length - 1}
+          </span>
+          <div className={estilos.progreso} aria-hidden="true">
+            {PASOS.slice(1).map((p, i) => (
+              <span key={p} className={clases(estilos.punto, i < indice && estilos.puntoHecho)} />
+            ))}
+          </div>
         </div>
         <span style={{ width: 44 }} />
       </div>
 
       {paso === "edad" && (
         <section className={estilos.bloque}>
-          <p className="eyebrow eyebrow-rojo">Antes de empezar</p>
-          <h1 className="titulo-l">¿Cuándo naciste?</h1>
-          <p className="texto-2">Mi Ciclo es solo para mayores de 18 años. No mostramos este dato a nadie.</p>
+          <span className={estilos.glifo} style={{ background: "#ffdced" }} aria-hidden="true">
+            <Circulo color="#f62c39" tamano={26} />
+          </span>
+          <h1 className={estilos.tituloPaso}>¿Cuándo <em>naciste</em>?</h1>
+          <p className={estilos.bajadaPaso}>Mi Ciclo es solo para mayores de 18 años. No mostramos este dato a nadie.</p>
           <div className="campo">
             <label htmlFor="nacimiento">Fecha de nacimiento</label>
             <input
@@ -154,8 +163,10 @@ export function Bienvenida() {
 
       {paso === "nombre" && (
         <section className={estilos.bloque}>
-          <p className="eyebrow eyebrow-rojo">Tu perfil</p>
-          <h1 className="titulo-l">¿Cómo te llamamos?</h1>
+          <span className={estilos.glifo} style={{ background: "#efe4fb" }} aria-hidden="true">
+            <Luna color="#5b3aaa" tamano={26} />
+          </span>
+          <h1 className={estilos.tituloPaso}>¿Cómo te <em>llamamos</em>?</h1>
           <div className="campo">
             <label htmlFor="nombre">Tu nombre</label>
             <input
@@ -194,12 +205,14 @@ export function Bienvenida() {
 
       {paso === "ciclita" && (
         <section className={estilos.bloque}>
-          <p className="eyebrow eyebrow-rojo">Tu Ciclita</p>
-          <h1 className="titulo-l">Elige tu Ciclita</h1>
-          <p className="texto-2">Es tu avatar en la comunidad. Protege tu privacidad y te da un personaje propio.</p>
+          <span className={estilos.glifo} style={{ background: "#ffdced" }} aria-hidden="true">
+            <FlorLuna color="#f62c39" fondo="#ffdced" tamano={26} />
+          </span>
+          <h1 className={estilos.tituloPaso}>Elige tu <em>Ciclita</em></h1>
+          <p className={estilos.bajadaPaso}>Es tu avatar en la comunidad. Protege tu privacidad y te da un personaje propio.</p>
           <div className={estilos.elegida}>
-            <Ciclita id={ciclita} tamano={120} feliz />
-            <p className="titulo-s">{CICLITAS[ciclita].nombre}</p>
+            <Ciclita id={ciclita} tamano={112} feliz />
+            <p className={estilos.nombreCiclita}>{CICLITAS[ciclita].nombre}</p>
           </div>
           <div className={estilos.rejillaCiclitas} role="radiogroup" aria-label="Ciclitas">
             {CICLITAS_ELEGIBLES.map((c) => (
@@ -210,8 +223,13 @@ export function Bienvenida() {
                 className={estilos.opcionCiclita}
                 onClick={() => setCiclita(c)}
               >
-                <Ciclita id={c} tamano={56} />
-                <span className="mini">{CICLITAS[c].nombre}</span>
+                <Ciclita id={c} tamano={52} />
+                <span>{CICLITAS[c].nombre}</span>
+                {ciclita === c && (
+                  <span className={estilos.marcaElegida} aria-hidden="true">
+                    <Check size={12} strokeWidth={3.5} />
+                  </span>
+                )}
               </button>
             ))}
           </div>
@@ -223,8 +241,10 @@ export function Bienvenida() {
 
       {paso === "ciclo" && (
         <section className={estilos.bloque}>
-          <p className="eyebrow eyebrow-rojo">Tu ciclo</p>
-          <h1 className="titulo-l">¿Cuándo empezó tu última regla?</h1>
+          <span className={estilos.glifo} style={{ background: "#ffe4ea" }} aria-hidden="true">
+            <FlorOndulada color="#e3202f" fondo="#ffe4ea" tamano={26} />
+          </span>
+          <h1 className={estilos.tituloPaso}>¿Cuándo empezó tu <em>última regla</em>?</h1>
           <div className="campo">
             <label htmlFor="ultimo">Primer día de tu última regla</label>
             <input
@@ -261,8 +281,10 @@ export function Bienvenida() {
 
       {paso === "final" && (
         <section className={estilos.bloque}>
-          <p className="eyebrow eyebrow-rojo">Último paso</p>
-          <h1 className="titulo-l">¿Por qué estás con Mi Ciclo?</h1>
+          <span className={estilos.glifo} style={{ background: "#efe4fb" }} aria-hidden="true">
+            <Estrella color="#5b3aaa" tamano={26} />
+          </span>
+          <h1 className={estilos.tituloPaso}>¿Por qué estás con <em>Mi Ciclo</em>?</h1>
           <div className="chips">
             {MOTIVOS.map((m) => (
               <button
@@ -320,8 +342,8 @@ function Contador({
         <button className="boton-icono boton-icono-blanco" aria-label="Menos" disabled={valor <= min} onClick={() => alCambiar(valor - 1)}>
           <Minus size={18} />
         </button>
-        <span className="titulo-l num" aria-live="polite">
-          {valor} <span className="pequeno texto-2">días</span>
+        <span className={estilos.valorContador} aria-live="polite">
+          <b className="num">{valor}</b> días
         </span>
         <button className="boton-icono boton-icono-blanco" aria-label="Más" disabled={valor >= max} onClick={() => alCambiar(valor + 1)}>
           <Plus size={18} />

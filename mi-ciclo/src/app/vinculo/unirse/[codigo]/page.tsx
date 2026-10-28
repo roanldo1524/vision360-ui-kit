@@ -7,6 +7,7 @@ import { ROLES } from "@/lib/consejos";
 import { aceptarInvitacion } from "@/lib/vinculo/acciones";
 import type { RolVinculo } from "@/lib/tipos";
 import { Ciclita } from "@/components/Ciclita";
+import { FlorLuna } from "@/components/FormasMarca";
 import { EstadoVacio } from "@/components/EstadoVacio";
 import estilos from "../../vinculo.module.css";
 
@@ -37,11 +38,11 @@ export default function PaginaUnirse() {
     return (
       <main className="pagina pagina-sin-barra" style={{ paddingTop: 48 }}>
         <div className={`tarjeta ${estilos.centro}`}>
-          <Ciclita id="flor" tamano={84} feliz />
-          <h1 className="titulo-l">
+          <FlorLuna color="var(--rojo)" tamano={72} />
+          <h1 className={estilos.tituloUnirse}>
             {vinculo.estado === "activo" ? "Ya están vinculados" : `Listo, ${vinculo.nombre ?? nombre}`}
           </h1>
-          <p className="texto-2 pequeno">
+          <p className={estilos.textoHoja}>
             {vinculo.estado === "activo"
               ? "Desde ahora recibes un consejo diario para acompañarla."
               : `${nombreElla} debe confirmar tu rol. Cuando lo haga, empezarás a recibir un consejo diario según su fase.`}
@@ -53,12 +54,15 @@ export default function PaginaUnirse() {
   }
 
   return (
-    <main className="pagina pagina-sin-barra" style={{ paddingTop: 28 }}>
+    <main className={`pagina pagina-sin-barra ${estilos.unirse}`} style={{ paddingTop: 28 }}>
       <div className={estilos.centro}>
-        <p className="marca" style={{ fontSize: 24 }}>Mi Ciclo</p>
-        <Ciclita id={perfil?.ciclita ?? "rosa"} tamano={76} />
-        <h1 className="titulo-l">{nombreElla} te invitó a acompañarla</h1>
-        <p className="texto-2 pequeno" style={{ maxWidth: 320 }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/marca/logo-rojo.svg" alt="Mi Ciclo" className={estilos.logoUnirse} width={92} height={24} />
+        <Ciclita id={perfil?.ciclita ?? "rosa"} tamano={88} feliz />
+        <h1 className={estilos.tituloUnirse}>
+          {nombreElla} te invitó a <em>acompañarla</em>
+        </h1>
+        <p className={estilos.textoHoja} style={{ maxWidth: 320 }}>
           Recibirás un consejo diario según su fase. Ella decide qué se comparte y su diario siempre es privado.
         </p>
       </div>
@@ -75,11 +79,11 @@ export default function PaginaUnirse() {
       >
         <fieldset className="columna" style={{ border: 0, padding: 0, margin: 0 }}>
           <legend className="etiqueta" style={{ marginBottom: 8 }}>¿Quién eres para {nombreElla}?</legend>
-          <div className={estilos.roles}>
+          <div className={estilos.rolesTarjetas}>
             {(Object.keys(ROLES) as RolVinculo[]).map((r) => (
-              <button type="button" key={r} className={estilos.rol} aria-pressed={rol === r} onClick={() => setRol(r)}>
-                <span className="titulo-s">{ROLES[r].nombre}</span>
-                <span className="mini texto-2">{ROLES[r].descripcion}</span>
+              <button type="button" key={r} className={estilos.rolTarjeta} aria-pressed={rol === r} onClick={() => setRol(r)}>
+                <span className={estilos.rolNombre}>{ROLES[r].nombre}</span>
+                <span className={estilos.rolTexto}>{ROLES[r].descripcion}</span>
               </button>
             ))}
           </div>

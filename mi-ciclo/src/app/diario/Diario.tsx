@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import { Delete, Lock, LockKeyhole, Trash2 } from "lucide-react";
+import { Delete, Lock, Trash2 } from "lucide-react";
+import { Luna } from "@/components/FormasMarca";
 import { useEstado } from "@/lib/almacen";
 import { FASES, hoyColombia, infoDia } from "@/lib/ciclo";
 import {
@@ -10,7 +11,6 @@ import {
 import { completarMisionPorClave } from "@/lib/misiones";
 import type { Fase } from "@/lib/tipos";
 import { Cabecera } from "@/components/Cabecera";
-import { Ciclita } from "@/components/Ciclita";
 import { Confirmar } from "@/components/Hoja";
 import { avisar } from "@/components/Avisos";
 import estilos from "./diario.module.css";
@@ -108,8 +108,10 @@ function CrearPin({ alCrear }: { alCrear: () => void }) {
 
   return (
     <section className={estilos.centro}>
-      <span className={estilos.candado}><LockKeyhole size={26} /></span>
-      <h1 className="titulo-l">{primero === null ? "Crea un PIN para tu diario" : "Confirma tu PIN"}</h1>
+      <span className={estilos.candado} aria-hidden="true"><Luna color="#5b3aaa" tamano={36} /></span>
+      <h1 className={estilos.titulo}>
+        {primero === null ? <>Un diario <em>solo tuyo</em></> : <>Confirma <em>tu PIN</em></>}
+      </h1>
       <p className="texto-2 pequeno" style={{ maxWidth: 300 }}>
         Lo que escribes se cifra en tu celular con este PIN. Nadie más puede leerlo, ni tu vínculo ni Mi Ciclo.
       </p>
@@ -139,8 +141,10 @@ function Desbloquear({ alAbrir }: { alAbrir: () => void }) {
 
   return (
     <section className={estilos.centro}>
-      <span className={estilos.candado}><Lock size={26} /></span>
-      <h1 className="titulo-l">Tu diario está cerrado</h1>
+      <span className={estilos.candado} aria-hidden="true"><Luna color="#5b3aaa" tamano={36} /></span>
+      <h1 className={estilos.titulo}>
+        Tu diario <em>te espera</em>
+      </h1>
       <p className="texto-2 pequeno">Escribe tu PIN para abrirlo.</p>
       {error && <p className="error-campo" role="alert">{error}</p>}
       <Teclado valor={pin} alCambiar={alEscribir} />
@@ -194,12 +198,12 @@ function Escritorio() {
 
   return (
     <>
-      <section className={`tarjeta ${estilos.hoja}`}>
+      <section className={estilos.hoja}>
         <div className="fila-entre">
-          <span className="eyebrow eyebrow-rojo">Hoy · {FASES[fase].corta}</span>
-          <span className="mini texto-3 fila" style={{ gap: 4 }}><Lock size={12} /> Cifrado en tu celular</span>
+          <span className={estilos.fecha}>Hoy · fase {FASES[fase].corta.toLowerCase()}</span>
+          <span className={estilos.cifrado}><Lock size={13} /> Cifrado en tu celular</span>
         </div>
-        <label htmlFor="diario-texto" className="titulo-m">{PREGUNTAS[fase]}</label>
+        <label htmlFor="diario-texto" className={estilos.pregunta}>{PREGUNTAS[fase]}</label>
         <textarea
           id="diario-texto"
           className={estilos.area}
@@ -214,27 +218,29 @@ function Escritorio() {
       </section>
 
       <section className="seccion">
-        <h2 className="titulo-m">Lo que has escrito</h2>
+        <h2 className={estilos.tituloSeccion}>Lo que has <em>escrito</em></h2>
         {entradas === null ? (
           <div className="esqueleto" style={{ height: 90 }} />
         ) : entradas.length === 0 ? (
-          <div className="tarjeta fila" style={{ gap: 14 }}>
-            <Ciclita id="lila" tamano={52} />
-            <p className="pequeno texto-2">Tu primera entrada aparecerá aquí. Escribir unas líneas cada noche ayuda a ordenar la cabeza.</p>
+          <div className={estilos.vacio}>
+            <span className={estilos.vacioGlifo} aria-hidden="true">
+              <Luna color="#5b3aaa" tamano={26} />
+            </span>
+            <p>Tu primera entrada aparecerá aquí. Escribir unas líneas cada noche ayuda a ordenar la cabeza.</p>
           </div>
         ) : (
           entradas.map((en) => (
-            <article key={en.id} className={`tarjeta ${estilos.entrada}`}>
-              <div className="fila-entre">
-                <span className="mini texto-2">
+            <article key={en.id} className={estilos.entrada}>
+              <div className={estilos.entradaCabeza}>
+                <span className={estilos.entradaFecha}>
                   {new Date(en.fecha).toLocaleDateString("es-CO", { weekday: "long", day: "numeric", month: "long" })}
-                  {en.fase && FASES[en.fase as Fase] ? ` · ${FASES[en.fase as Fase].corta}` : ""}
+                  {en.fase && FASES[en.fase as Fase] ? <em> · {FASES[en.fase as Fase].corta.toLowerCase()}</em> : null}
                 </span>
-                <button className="boton-icono" style={{ width: 36, height: 36, minHeight: 36 }} aria-label="Borrar entrada" onClick={() => setBorrar(en.id)}>
-                  <Trash2 size={16} />
+                <button className={estilos.borrar} aria-label="Borrar entrada" onClick={() => setBorrar(en.id)}>
+                  <Trash2 size={17} />
                 </button>
               </div>
-              <p style={{ whiteSpace: "pre-wrap" }}>{en.texto}</p>
+              <p className={estilos.entradaTexto}>{en.texto}</p>
             </article>
           ))
         )}

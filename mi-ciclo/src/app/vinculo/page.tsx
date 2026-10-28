@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Copy, Eye, Heart, Lock, Send, Share2, Sparkles, UserPlus, X } from "lucide-react";
+import { ChevronLeft, Copy, Eye, Lock, Send, Share2, UserPlus, X } from "lucide-react";
 import { useEstado } from "@/lib/almacen";
 import { FASES, hoyColombia, infoDia, rachaSobre } from "@/lib/ciclo";
 import { ANIMOS, CONSEJO_VINCULO, ROLES } from "@/lib/consejos";
@@ -12,17 +12,17 @@ import {
 import { useAhora } from "@/lib/vinculo/useAhora";
 import { copiarTexto } from "@/lib/jardin/acciones";
 import type { Ajustes, RolVinculo, Vinculo } from "@/lib/tipos";
-import { Cabecera } from "@/components/Cabecera";
+import { FlorLuna, FlorOndulada, Luna } from "@/components/FormasMarca";
 import { Ciclita } from "@/components/Ciclita";
 import { Hoja, Confirmar } from "@/components/Hoja";
 import { avisar } from "@/components/Avisos";
 import { clases } from "@/lib/utilidades";
 import estilos from "./vinculo.module.css";
 
-const ETIQUETA_ESTADO: Record<Vinculo["estado"], { texto: string; chip: string }> = {
-  pendiente: { texto: "Invitación enviada", chip: "chip-mantequilla" },
-  por_confirmar: { texto: "Por confirmar", chip: "chip-durazno" },
-  activo: { texto: "Activo", chip: "chip-menta" },
+const ETIQUETA_ESTADO: Record<Vinculo["estado"], { texto: string; clase: "pendiente" | "porConfirmar" | "activo" }> = {
+  pendiente: { texto: "Invitación enviada", clase: "pendiente" },
+  por_confirmar: { texto: "Por confirmar", clase: "porConfirmar" },
+  activo: { texto: "Activo", clase: "activo" },
 };
 
 const PRIVACIDAD: { clave: keyof Ajustes["privacidadVinculo"]; titulo: string; texto: string }[] = [
@@ -83,38 +83,54 @@ export default function PaginaVinculo() {
 
   return (
     <>
-      <Cabecera titulo="Modo vínculo" />
-      <main className="pagina pagina-sin-barra">
-        <section className={estilos.intro}>
-          <div className={estilos.introTexto}>
-            <p className="eyebrow eyebrow-rojo">Sincroniza tu ritmo</p>
-            <h1 className="titulo-l">Que quien te quiere te entienda un poquito más</h1>
-            <p className="pequeno texto-2">
-              Tu pareja, mamá, papá o amiga recibe un consejo diario según tu fase. Tú decides qué se comparte.
-            </p>
-          </div>
-          <button className="boton boton-principal" onClick={invitar}>
+      <main className={clases("pagina pagina-sin-barra", estilos.pagina)}>
+        {/* Portada en Violeta oscuro (variación de color del brandbook) */}
+        <section className={estilos.portada} aria-labelledby="t-vinculo">
+          <FlorOndulada color="#6c4bbb" fondo="#5b3aaa" tamano={260} className={estilos.florGigante} />
+          <Link href="/" className={estilos.volver} aria-label="Volver a Inicio">
+            <ChevronLeft size={24} />
+          </Link>
+          <h1 id="t-vinculo" className={estilos.titulo}>
+            Sincroniza <em>tu ritmo</em>
+          </h1>
+          <p className={estilos.frase}>Que quien te quiere te entienda un poquito más.</p>
+          <p className={estilos.bajada}>
+            Tu pareja, mamá, papá o amiga recibe un consejo diario según tu fase. Tú decides qué se comparte.
+          </p>
+          <button className={clases("boton boton-principal", estilos.botonPortada)} onClick={invitar}>
             <UserPlus size={18} /> Invitar a alguien
           </button>
         </section>
 
         {vinculos.length > 0 && (
-          <section className="seccion" aria-labelledby="t-vinculos">
-            <h2 id="t-vinculos" className="titulo-m">Tus vínculos</h2>
-            <ul className="lista">
+          <section className={estilos.seccion} aria-labelledby="t-vinculos">
+            <h2 id="t-vinculos" className={estilos.tituloSeccion}>
+              Tus <em>vínculos</em>
+            </h2>
+            <ul className={estilos.lista}>
               {vinculos.map((v) => (
-                <li key={v.id} className={clases("lista-item", estilos.vinculo)}>
-                  <span className="lista-icono" aria-hidden="true"><Heart size={18} /></span>
-                  <span className="lista-texto">
-                    <span className="negrita pequeno">
+                <li key={v.id} className={estilos.fila}>
+                  <span className={estilos.glifo} aria-hidden="true">
+                    <Ciclita id={v.estado === "activo" ? "lila" : "mantequilla"} tamano={44} />
+                  </span>
+                  <span className={estilos.filaTexto}>
+                    <span className={estilos.filaTitulo}>
                       {v.nombre ?? "Invitación sin abrir"}
-                      {v.rol && <span className="texto-3"> · {ROLES[v.rol].nombre}</span>}
+                      {v.rol && <span className={estilos.rol}> · {ROLES[v.rol].nombre}</span>}
                     </span>
-                    <span><span className={clases("chip", ETIQUETA_ESTADO[v.estado].chip)}>{ETIQUETA_ESTADO[v.estado].texto}</span></span>
+                    <span className={clases(estilos.estado, estilos[ETIQUETA_ESTADO[v.estado].clase])}>
+                      {ETIQUETA_ESTADO[v.estado].texto}
+                    </span>
                   </span>
                   {v.estado === "por_confirmar" ? (
-                    <span className="fila" style={{ gap: 6 }}>
-                      <button className="boton boton-chico boton-vino" onClick={() => { confirmarVinculo(v.id); avisar(`${v.nombre} ya está vinculado`); }}>
+                    <span className={estilos.accionesFila}>
+                      <button
+                        className="boton boton-chico boton-vino"
+                        onClick={() => {
+                          confirmarVinculo(v.id);
+                          avisar(`${v.nombre} ya está vinculado`);
+                        }}
+                      >
                         Confirmar
                       </button>
                       <button className="boton-icono" aria-label={`Rechazar a ${v.nombre}`} onClick={() => setPorQuitar(v)}>
@@ -122,7 +138,7 @@ export default function PaginaVinculo() {
                       </button>
                     </span>
                   ) : v.estado === "pendiente" ? (
-                    <span className="fila" style={{ gap: 0 }}>
+                    <span className={estilos.accionesFila}>
                       <button className="boton-icono" aria-label="Compartir enlace" onClick={() => compartir(v)}>
                         <Share2 size={18} />
                       </button>
@@ -131,69 +147,81 @@ export default function PaginaVinculo() {
                       </button>
                     </span>
                   ) : (
-                    <button className="boton boton-chico boton-secundario" onClick={() => setPorQuitar(v)}>Quitar</button>
+                    <button className="boton boton-chico boton-secundario" onClick={() => setPorQuitar(v)}>
+                      Quitar
+                    </button>
                   )}
                 </li>
               ))}
             </ul>
             {vinculos.some((v) => v.estado === "pendiente") && (
-              <p className="mini texto-3">
-                Cuando la persona abra el enlace, elegirá su rol y tú lo confirmarás aquí.
-              </p>
+              <p className={estilos.nota}>Cuando la persona abra el enlace, elegirá su rol y tú lo confirmarás aquí.</p>
             )}
           </section>
         )}
 
         {info && (
-          <section className="seccion" aria-labelledby="t-vista">
-            <div className="seccion-cabeza">
-              <h2 id="t-vista" className="titulo-m">Lo que ve hoy</h2>
-              <span className="mini texto-3 fila" style={{ gap: 4 }}><Eye size={14} /> Vista previa</span>
+          <section className={estilos.seccion} aria-labelledby="t-vista">
+            <div className={estilos.cabezaSeccion}>
+              <h2 id="t-vista" className={estilos.tituloSeccion}>
+                Lo que ve <em>hoy</em>
+              </h2>
+              <span className={estilos.vistaPrevia}>
+                <Eye size={16} aria-hidden="true" /> Vista previa
+              </span>
             </div>
-            <div className="chips" role="group" aria-label="Ver como">
+            <div className={estilos.roles} role="group" aria-label="Ver como">
               {(Object.keys(ROLES) as RolVinculo[]).map((r) => (
-                <button key={r} className="chip chip-borde seleccionable" aria-pressed={rol === r} onClick={() => setRolVista(r)}>
+                <button key={r} className={estilos.rolBoton} aria-pressed={rol === r} onClick={() => setRolVista(r)}>
                   {ROLES[r].nombre}
                 </button>
               ))}
             </div>
             <article className={estilos.vista}>
-              <div className="fila">
+              <div className={estilos.vistaCabeza}>
                 <Ciclita id={perfil?.ciclita ?? "rosa"} tamano={44} />
                 <div style={{ minWidth: 0 }}>
-                  <p className="negrita">{nombreElla}</p>
-                  <p className="mini texto-2">
+                  <p className={estilos.vistaNombre}>{nombreElla}</p>
+                  <p className={estilos.vistaFase}>
                     {privacidad.fase ? `${FASES[info.fase].nombre} · día ${info.diaCiclo}` : "Prefiere no compartir su fase"}
                   </p>
                 </div>
               </div>
               {privacidad.fase && (
                 <div className={estilos.consejo}>
-                  <p className="eyebrow"><Sparkles size={12} style={{ display: "inline", verticalAlign: -1 }} /> Consejo para hoy</p>
-                  <p className="titulo-s">{CONSEJO_VINCULO[rol][info.fase]}</p>
+                  <p className={estilos.consejoEtiqueta}>
+                    <Luna color="#5b3aaa" tamano={14} /> Consejo para hoy
+                  </p>
+                  <p className={estilos.consejoTexto}>{CONSEJO_VINCULO[rol][info.fase]}</p>
                 </div>
               )}
               <div className={estilos.datos}>
                 <Dato titulo="Racha compartida" valor={racha === 1 ? "1 día" : `${racha} días`} />
                 {privacidad.animo && <Dato titulo="Hoy se siente" valor={animo?.nombre ?? "Sin registrar"} />}
-                {privacidad.regla && <Dato titulo="Próximo periodo" valor={info.diasParaPeriodo <= 0 ? "Hoy" : `en ${info.diasParaPeriodo} días`} />}
+                {privacidad.regla && <Dato titulo="Próximo período" valor={info.diasParaPeriodo <= 0 ? "Hoy" : `en ${info.diasParaPeriodo} días`} />}
                 {privacidad.sintomas && (
                   <Dato titulo="Síntomas" valor={registroHoy?.sintomas.length ? registroHoy.sintomas.join(", ") : "Ninguno marcado"} />
                 )}
               </div>
-              <p className={clases("mini", estilos.nuncaDiario)}><Lock size={12} /> Su diario nunca se comparte.</p>
+              <p className={estilos.nuncaDiario}>
+                <Lock size={14} aria-hidden="true" /> Su diario nunca se comparte.
+              </p>
             </article>
           </section>
         )}
 
-        <section className="seccion" aria-labelledby="t-privacidad">
-          <h2 id="t-privacidad" className="titulo-m">Qué compartes</h2>
-          <div className="lista">
+        <section className={estilos.seccion} aria-labelledby="t-privacidad">
+          <h2 id="t-privacidad" className={estilos.tituloSeccion}>
+            Qué <em>compartes</em>
+          </h2>
+          <div className={estilos.lista}>
             {PRIVACIDAD.map((p) => (
-              <div key={p.clave} className="lista-item">
-                <span className="lista-texto">
-                  <span className="negrita pequeno" id={`priv-${p.clave}`}>{p.titulo}</span>
-                  <span className="mini texto-2">{p.texto}</span>
+              <div key={p.clave} className={estilos.fila}>
+                <span className={estilos.filaTexto}>
+                  <span className={estilos.filaTitulo} id={`priv-${p.clave}`}>
+                    {p.titulo}
+                  </span>
+                  <span className={estilos.filaSub}>{p.texto}</span>
                 </span>
                 <button
                   role="switch"
@@ -204,31 +232,38 @@ export default function PaginaVinculo() {
                 />
               </div>
             ))}
-            <div className="lista-item">
-              <span className="lista-icono" aria-hidden="true"><Lock size={18} /></span>
-              <span className="lista-texto">
-                <span className="negrita pequeno">Mi diario</span>
-                <span className="mini texto-2">Está cifrado y nunca se comparte con nadie.</span>
+            <div className={estilos.fila}>
+              <span className={estilos.filaTexto}>
+                <span className={estilos.filaTitulo}>Mi diario</span>
+                <span className={estilos.filaSub}>Está cifrado y nunca se comparte con nadie.</span>
+              </span>
+              <span className={estilos.candado} aria-hidden="true">
+                <Lock size={18} />
               </span>
             </div>
           </div>
         </section>
 
-        <section className="seccion" id="notas" aria-labelledby="t-notas">
-          <div className="seccion-cabeza">
-            <h2 id="t-notas" className="titulo-m">Tu espacio con tu amor</h2>
-            <span className="mini texto-3">Notas que duran 24 h</span>
+        <section className={estilos.seccion} id="notas" aria-labelledby="t-notas">
+          <div className={estilos.cabezaSeccion}>
+            <h2 id="t-notas" className={estilos.tituloSeccion}>
+              Tu espacio <em>con tu amor</em>
+            </h2>
           </div>
+          <p className={estilos.nota}>Notas que se borran solas en 24 horas.</p>
           <div className={estilos.notas}>
             {vigentes.length === 0 ? (
-              <p className="pequeno texto-2" style={{ textAlign: "center", padding: "18px 8px" }}>
-                Escríbele algo bonito. Las notas desaparecen después de 24 horas.
-              </p>
+              <div className={estilos.notasVacio}>
+                <FlorLuna color="#f62c39" fondo="#fff" tamano={36} />
+                <p>Escríbele algo bonito. Lo verá hoy y mañana ya no estará.</p>
+              </div>
             ) : (
               vigentes.map((n) => (
                 <div key={n.id} className={clases(estilos.burbuja, n.de === "yo" ? estilos.mia : estilos.suya)}>
                   <p>{n.texto}</p>
-                  <span className="mini">{n.de === "yo" ? "Tú" : activos[0]?.nombre ?? "Tu vínculo"} · quedan {horasRestantes(n, ahora)} h</span>
+                  <span>
+                    {n.de === "yo" ? "Tú" : activos[0]?.nombre ?? "Tu vínculo"} · quedan {horasRestantes(n, ahora)} h
+                  </span>
                 </div>
               ))
             )}
@@ -239,21 +274,23 @@ export default function PaginaVinculo() {
                 enviarNota();
               }}
             >
-              <label htmlFor="nota-vinculo" className="solo-lector">Escribe una nota</label>
+              <label htmlFor="nota-vinculo" className="solo-lector">
+                Escribe una nota
+              </label>
               <input
                 id="nota-vinculo"
-                className="entrada"
+                className={estilos.entradaNota}
                 placeholder="Escribe una nota…"
                 maxLength={280}
                 value={nota}
                 onChange={(e) => setNota(e.target.value)}
               />
-              <button type="submit" className="boton-icono boton-icono-blanco" aria-label="Enviar nota" disabled={!nota.trim()}>
+              <button type="submit" className={estilos.enviar} aria-label="Enviar nota" disabled={!nota.trim()}>
                 <Send size={18} />
               </button>
             </form>
           </div>
-          <button className="enlace-vino" style={{ alignSelf: "flex-start" }} onClick={simularRespuesta}>
+          <button className={estilos.demo} onClick={simularRespuesta}>
             Simular respuesta de tu vínculo (demo)
           </button>
         </section>
@@ -262,7 +299,7 @@ export default function PaginaVinculo() {
       <Hoja abierta={invitacion !== null} alCerrar={() => setInvitacion(null)} titulo="Invitación lista">
         {invitacion && (
           <>
-            <p className="texto-2 pequeno">
+            <p className={estilos.textoHoja}>
               Comparte este enlace. Quien lo abra elegirá si es tu pareja, mamá, papá o amiga, y tú lo confirmarás.
             </p>
             <div className={estilos.enlace}>
@@ -308,8 +345,8 @@ export default function PaginaVinculo() {
 function Dato({ titulo, valor }: { titulo: string; valor: string }) {
   return (
     <div className={estilos.dato}>
-      <span className="mini texto-3">{titulo}</span>
-      <span className="pequeno negrita">{valor}</span>
+      <span className={estilos.datoTitulo}>{titulo}</span>
+      <span className={estilos.datoValor}>{valor}</span>
     </div>
   );
 }
