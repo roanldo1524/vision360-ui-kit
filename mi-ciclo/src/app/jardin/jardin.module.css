@@ -6,13 +6,12 @@
   padding-top: 8px;
 }
 .heroe {
-  background: var(--blanco);
-  border-radius: var(--r-grande);
-  box-shadow: var(--sombra);
+  background: transparent;
+  border-top: 1px solid var(--vino);
   overflow: hidden;
 }
 .saldo {
-  padding: 18px 20px 12px;
+  padding: 14px 0 16px;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -20,17 +19,17 @@
 .florSaldo {
   display: inline-grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
-  background: var(--rosa);
+  width: 24px;
+  height: 24px;
+  background: transparent;
 }
 .numero {
   font-family: var(--f-titulo);
-  font-size: 46px;
-  line-height: 1;
+  font-size: 132px;
+  line-height: 0.8;
+  letter-spacing: -0.07em;
   font-weight: 500;
-  margin-top: 4px;
+  margin: 10px 0 6px -6px;
 }
 .jardin {
   position: relative;
@@ -99,19 +98,25 @@
   display: flex;
   gap: 14px;
   align-items: flex-start;
-  background: var(--mantequilla);
-  border-radius: var(--r-tarjeta);
-  padding: 16px 18px;
+  background: var(--vino) var(--grano);
+  color: var(--crema);
+  border-radius: 0;
+  margin: 0 calc(-1 * var(--lado-d)) 0 calc(-1 * var(--lado));
+  padding: 24px var(--lado-d) 24px var(--lado);
+}
+.racha :global(.texto-2),
+.racha :global(.texto-3) {
+  color: rgba(248, 242, 236, 0.65);
 }
 .rachaIcono {
   width: 42px;
   height: 42px;
-  border-radius: 14px;
+  border-radius: 2px;
   flex: none;
   display: grid;
   place-items: center;
-  background: var(--blanco);
-  color: var(--mantequilla-tinta);
+  background: transparent;
+  color: var(--rojo);
 }
 .rachaPuntos {
   display: flex;
@@ -121,7 +126,7 @@
 .punto {
   width: 22px;
   height: 8px;
-  border-radius: 8px;
+  border-radius: 2px;
   background: rgba(138, 100, 22, 0.18);
 }
 .puntoLleno {
@@ -131,15 +136,16 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  border-radius: var(--r-tarjeta);
-  padding: 14px;
-  background: var(--blanco);
-  box-shadow: var(--sombra);
+  border-radius: 0;
+  padding: 16px 0;
+  background: transparent;
+  border-top: 1px solid var(--linea);
 }
 .bonoIcono {
+  display: none !important;
   width: 44px;
   height: 44px;
-  border-radius: 14px;
+  border-radius: 2px;
   display: grid;
   place-items: center;
   flex: none;
@@ -165,14 +171,14 @@
 }
 .barra {
   height: 6px;
-  border-radius: 6px;
+  border-radius: 2px;
   background: var(--linea);
   overflow: hidden;
 }
 .barra span {
   display: block;
   height: 100%;
-  border-radius: 6px;
+  border-radius: 2px;
   background: var(--fase-folicular);
   transition: width 0.4s ease;
 }
@@ -206,7 +212,7 @@
   gap: 8px;
   width: 100%;
   padding: 6px 6px 6px 18px;
-  border-radius: 18px;
+  border-radius: 2px;
   border: 1.5px dashed var(--fase-folicular);
   background: var(--blanco);
   font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;

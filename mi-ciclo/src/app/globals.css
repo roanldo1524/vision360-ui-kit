@@ -1,41 +1,47 @@
-/* Mi Ciclo · sistema visual v2 (canvas "Mi Ciclo — Comunidad v2", octubre 2026)
-   Fondo crema, tarjetas blancas muy redondeadas, rojo solo para la acción principal,
-   pasteles para dar calidez. Títulos en Lora 500, interfaz en DM Sans 15 px. */
+/* Mi Ciclo · dirección editorial
+   Concepto: una revista de bienestar impresa. El crema es el papel, el vino es la tinta
+   y el rojo es el único acento eléctrico. Lora enorme y apretada, alineada a la izquierda;
+   el dato principal se vuelve una cifra gigante.
+   Retícula: márgenes iguales de 20 px, asimetría dentro de ellos, bordes de 1 px en lugar
+   de sombras difusas, esquinas rectas, iconos sueltos. Movimiento: ease-out fuerte < 300 ms. */
 
 :root {
-  /* Color · tokens del documento maestro */
-  --rojo: #e01e37; /* solo acción principal */
-  --rojo-suave: #fde3e9;
-  --vino: #3a1220; /* títulos y texto */
-  --crema: #fbf7f4; /* fondo */
-  --blanco: #ffffff;
-  --texto-2: #7a5f68;
-  --texto-3: #9c8a90;
-  --linea: #f1e6e8;
+  /* Tres colores: dominante, estructural y acento */
+  --crema: #f8f2ec; /* papel (dominante) */
+  --vino: #2b0d18; /* tinta (estructural) */
+  --rojo: #e01e37; /* acento eléctrico: solo la acción principal */
 
-  /* Pasteles */
-  --rosa: #fde3e9;
-  --durazno: #ffebdd;
-  --lila: #efeaff; /* anónima */
-  --menta: #e1f5ec;
-  --mantequilla: #fff1d6;
+  /* Pasos de tono del papel (no son colores nuevos) */
+  --blanco: #fffcf9;
+  --papel-2: #f1e8e1;
+  --papel-3: #e6d9d0;
+  --texto-2: #6b5058;
+  --texto-3: #937a80;
+  --linea: rgba(43, 13, 24, 0.14);
+  --linea-fuerte: rgba(43, 13, 24, 0.85);
 
-  /* Pasteles con un punto más de tinta para textos sobre ellos */
-  --rosa-tinta: #c2224a;
-  --lila-tinta: #6b4fb8;
-  --menta-tinta: #2c7a5a;
-  --durazno-tinta: #b25a2a;
-  --mantequilla-tinta: #8a6416;
+  /* Los antiguos pasteles se recogen en pasos de papel y tinta */
+  --rojo-suave: #f8e2e0;
+  --rosa: #f8e2e0;
+  --durazno: var(--papel-2);
+  --lila: var(--papel-2);
+  --menta: var(--papel-2);
+  --mantequilla: var(--papel-2);
+  --rosa-tinta: var(--rojo);
+  --lila-tinta: var(--vino);
+  --menta-tinta: var(--vino);
+  --durazno-tinta: var(--vino);
+  --mantequilla-tinta: var(--vino);
 
-  /* Fases (opción A, DISENO.md) */
+  /* Fases: solo como dato (calendario, anillo) */
   --fase-menstrual: #e01e37;
   --fase-folicular: #f773a1;
   --fase-ovulacion: #b14bc4;
   --fase-lutea: #5b3aaa;
 
-  --anillo-historia: linear-gradient(135deg, #e01e37, #ff8fa8 55%, #ffb38a);
-  --degradado-pregunta: linear-gradient(135deg, #efeaff, #fde3e9);
-  --degradado-inicio: linear-gradient(180deg, #fde9ee 0%, #fbf7f4 260px);
+  --anillo-historia: var(--rojo);
+  --degradado-pregunta: var(--papel-2);
+  --degradado-inicio: var(--crema);
 
   /* Tipografía */
   --f-titulo: var(--font-lora), "Lora", Georgia, serif;
@@ -43,19 +49,27 @@
   --f-mano: var(--font-caveat), "Caveat", "Segoe Script", cursive;
   --f-marca: var(--font-chonburi), "Chonburi", Georgia, serif;
 
-  /* Forma */
-  --r-tarjeta: 24px;
-  --r-grande: 30px;
-  --r-medio: 18px;
-  --r-pastilla: 999px;
-  --sombra: 0 1px 2px rgba(58, 18, 32, 0.04), 0 8px 24px rgba(58, 18, 32, 0.06);
-  --sombra-alta: 0 2px 6px rgba(58, 18, 32, 0.06), 0 18px 40px rgba(58, 18, 32, 0.12);
-  --sombra-rojo: 0 6px 18px rgba(224, 30, 55, 0.32);
+  /* Forma: esquinas rectas, bordes de 1 px, sombra dura solo en lo que flota */
+  --r-tarjeta: 2px;
+  --r-grande: 2px;
+  --r-medio: 2px;
+  --r-pastilla: 2px;
+  --sombra: 0 0 0 1px var(--linea);
+  --sombra-alta: 0 0 0 1px var(--vino), 6px 6px 0 0 var(--vino);
+  --sombra-rojo: 0 0 0 0 transparent;
+
+  /* Movimiento (Emil Kowalski) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-cajon: cubic-bezier(0.32, 0.72, 0, 1);
 
   --ancho-app: 440px;
-  --alto-barra: 68px;
-  --lado: max(16px, env(safe-area-inset-left, 0px));
-  --lado-d: max(16px, env(safe-area-inset-right, 0px));
+  --alto-barra: 64px;
+  --lado: max(20px, env(safe-area-inset-left, 0px));
+  --lado-d: max(20px, env(safe-area-inset-right, 0px));
+
+  /* Grano de papel */
+  --grano: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.05 0 0 0 0 0.09 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 
   color-scheme: light;
 }
@@ -138,38 +152,43 @@ p {
   margin: 0 auto;
   min-height: 100dvh;
   position: relative;
-  background: var(--crema);
+  background: var(--crema) var(--grano);
 }
 
 @media (min-width: 520px) {
   body {
-    background: #f3ece8;
+    background: var(--papel-3) var(--grano);
   }
   .marco {
-    box-shadow: 0 0 0 1px var(--linea), 0 30px 80px rgba(58, 18, 32, 0.08);
+    box-shadow: 0 0 0 1px var(--vino);
   }
 }
 
 .pagina {
-  padding: 12px var(--lado-d) calc(var(--alto-barra) + 28px + env(safe-area-inset-bottom, 0px)) var(--lado);
+  padding: 16px var(--lado-d) calc(var(--alto-barra) + 32px + env(safe-area-inset-bottom, 0px)) var(--lado);
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  animation: entrar 0.32s ease-out both;
+  gap: 28px;
 }
 
+/* Entrada escalonada: cada bloque sube 8 px y aparece, 40 ms después del anterior */
+.pagina > * {
+  animation: entrar 360ms var(--ease-out) both;
+}
+.pagina > *:nth-child(2) { animation-delay: 40ms; }
+.pagina > *:nth-child(3) { animation-delay: 80ms; }
+.pagina > *:nth-child(4) { animation-delay: 120ms; }
+.pagina > *:nth-child(5) { animation-delay: 160ms; }
+.pagina > *:nth-child(n + 6) { animation-delay: 200ms; }
+
 .pagina-sin-barra {
-  padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
 }
 
 @keyframes entrar {
   from {
-    opacity: 0.4;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
+    opacity: 0;
+    transform: translateY(8px);
   }
 }
 
@@ -178,44 +197,49 @@ p {
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.001ms !important;
   }
 }
 
-/* ---------- Tipos de texto ---------- */
+/* ---------- Tipos de texto: grande contra pequeño, nada en medio ---------- */
 .titulo-xl {
   font-family: var(--f-titulo);
-  font-size: 34px;
-  line-height: 1.08;
+  font-size: clamp(40px, 12vw, 52px);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
   font-weight: 500;
 }
 .titulo-l {
   font-family: var(--f-titulo);
-  font-size: 25px;
-  line-height: 1.15;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -0.035em;
   font-weight: 500;
 }
 .titulo-m {
   font-family: var(--f-titulo);
-  font-size: 20px;
-  line-height: 1.2;
+  font-size: 22px;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
   font-weight: 500;
 }
 .titulo-s {
   font-family: var(--f-titulo);
   font-size: 17px;
-  line-height: 1.25;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
   font-weight: 500;
 }
 .eyebrow {
   font-size: 10.5px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--texto-2);
 }
 .eyebrow-rojo {
-  color: var(--rojo);
+  color: var(--vino);
 }
 .texto-2 {
   color: var(--texto-2);
@@ -224,10 +248,11 @@ p {
   color: var(--texto-3);
 }
 .pequeno {
-  font-size: 13px;
+  font-size: 13.5px;
 }
 .mini {
   font-size: 11.5px;
+  letter-spacing: 0.02em;
 }
 .negrita {
   font-weight: 700;
@@ -241,149 +266,164 @@ p {
 .marca {
   font-family: var(--f-marca);
   color: var(--rojo);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   font-weight: 400;
 }
 
-/* ---------- Tarjetas ---------- */
+/* ---------- Superficies: un paso de tono y un borde de 1 px ---------- */
 .tarjeta {
   background: var(--blanco);
   border-radius: var(--r-tarjeta);
   box-shadow: var(--sombra);
-  padding: 18px;
+  padding: 20px;
 }
 .tarjeta-plana {
-  background: var(--blanco);
+  background: var(--papel-2);
   border-radius: var(--r-medio);
   padding: 14px;
-  border: 1px solid var(--linea);
 }
 
-/* ---------- Botones ---------- */
+/* ---------- Botones: planos, esquinas rectas, respuesta al tocar ---------- */
 .boton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  min-height: 44px;
-  padding: 0 20px;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 22px;
   border-radius: var(--r-pastilla);
   font-weight: 600;
-  font-size: 14.5px;
-  transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease;
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 200ms ease,
+    color 200ms ease,
+    box-shadow 200ms ease;
   white-space: nowrap;
 }
 .boton:active {
   transform: scale(0.97);
 }
 .boton:disabled {
-  opacity: 0.45;
+  opacity: 0.35;
   cursor: not-allowed;
+  transform: none;
 }
 .boton-principal {
   background: var(--rojo);
-  color: var(--blanco);
-  box-shadow: var(--sombra-rojo);
+  color: #fff;
 }
 .boton-secundario {
-  background: var(--blanco);
+  background: transparent;
   color: var(--vino);
-  box-shadow: inset 0 0 0 1.5px var(--linea);
+  box-shadow: inset 0 0 0 1px var(--vino);
 }
 .boton-vino {
   background: var(--vino);
-  color: var(--blanco);
+  color: var(--crema);
 }
 .boton-suave {
-  background: var(--rosa);
-  color: var(--rosa-tinta);
+  background: var(--papel-2);
+  color: var(--vino);
 }
 .boton-fantasma {
   color: var(--texto-2);
   padding: 0 10px;
 }
 .boton-chico {
-  min-height: 34px;
-  padding: 0 14px;
-  font-size: 13px;
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 11.5px;
 }
 .boton-ancho {
   width: 100%;
 }
+@media (hover: hover) and (pointer: fine) {
+  .boton-principal:hover {
+    background: #c8162d;
+  }
+  .boton-secundario:hover {
+    background: var(--vino);
+    color: var(--crema);
+  }
+}
+
+/* Iconos sueltos: sin círculo, con zona táctil de 44 px */
 .boton-icono {
   width: 44px;
   height: 44px;
   min-height: 44px;
   padding: 0;
-  border-radius: 50%;
   display: inline-grid;
   place-items: center;
   color: var(--vino);
+  transition: transform 160ms var(--ease-out), opacity 160ms ease;
+}
+.boton-icono:active {
+  transform: scale(0.9);
 }
 .boton-icono-blanco {
-  background: var(--blanco);
-  box-shadow: var(--sombra);
+  background: transparent;
+}
+.enlace-rojo,
+.enlace-vino {
+  white-space: nowrap;
+  color: var(--vino);
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
 }
 .enlace-rojo {
   color: var(--rojo);
-  font-weight: 600;
-  font-size: 13px;
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  min-height: 32px;
-}
-.enlace-vino {
-  color: var(--vino);
-  font-weight: 600;
-  font-size: 13px;
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  min-height: 32px;
 }
 
-/* ---------- Chips ---------- */
+/* ---------- Chips: etiquetas de texto con borde de 1 px ---------- */
 .chip {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 4px 11px;
+  padding: 5px 10px;
   border-radius: var(--r-pastilla);
-  font-size: 12px;
+  font-size: 10.5px;
   font-weight: 600;
-  background: var(--rosa);
-  color: var(--rosa-tinta);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--vino);
+  box-shadow: inset 0 0 0 1px var(--linea-fuerte);
   white-space: nowrap;
 }
-.chip-lila {
-  background: var(--lila);
-  color: var(--lila-tinta);
-}
-.chip-menta {
-  background: var(--menta);
-  color: var(--menta-tinta);
-}
-.chip-durazno {
-  background: var(--durazno);
-  color: var(--durazno-tinta);
-}
+.chip-lila,
+.chip-menta,
+.chip-durazno,
 .chip-mantequilla {
-  background: var(--mantequilla);
-  color: var(--mantequilla-tinta);
+  background: transparent;
+  color: var(--vino);
 }
 .chip-vino {
   background: var(--vino);
-  color: var(--blanco);
+  color: var(--crema);
+  box-shadow: none;
 }
 .chip-rojo {
   background: var(--rojo);
-  color: var(--blanco);
+  color: #fff;
+  box-shadow: none;
 }
 .chip-borde {
-  background: var(--blanco);
+  background: transparent;
   color: var(--vino);
-  box-shadow: inset 0 0 0 1.5px var(--linea);
+  box-shadow: inset 0 0 0 1px var(--linea);
 }
 .chips {
   display: flex;
@@ -391,64 +431,71 @@ p {
   gap: 6px;
 }
 .seleccionable {
-  min-height: 38px;
+  min-height: 40px;
   padding: 0 14px;
-  font-size: 13px;
+  font-size: 11px;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  transition: background-color 200ms ease, color 200ms ease, transform 160ms var(--ease-out);
+}
+.seleccionable:active {
+  transform: scale(0.96);
 }
 .seleccionable[aria-pressed="true"] {
   background: var(--vino);
-  color: var(--blanco);
+  color: var(--crema);
   box-shadow: none;
 }
 
-/* ---------- Pestañas tipo segmento ---------- */
+/* ---------- Pestañas tipo segmento: texto con subrayado ---------- */
 .segmento {
   display: inline-flex;
-  padding: 4px;
-  border-radius: var(--r-pastilla);
-  background: var(--blanco);
-  box-shadow: inset 0 0 0 1px var(--linea);
-  gap: 2px;
+  gap: 18px;
+  border-bottom: 1px solid var(--linea);
 }
 .segmento button {
-  min-height: 36px;
-  padding: 0 16px;
-  border-radius: var(--r-pastilla);
-  font-size: 13px;
+  min-height: 40px;
+  padding: 0;
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   font-weight: 600;
-  color: var(--texto-2);
+  color: var(--texto-3);
+  box-shadow: inset 0 -2px 0 transparent;
+  transition: color 200ms ease, box-shadow 200ms var(--ease-out);
 }
 .segmento button[aria-selected="true"] {
-  background: var(--rojo);
-  color: var(--blanco);
+  color: var(--vino);
+  box-shadow: inset 0 -2px 0 var(--rojo);
 }
 
 /* ---------- Campos ---------- */
 .campo {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 .campo label,
 .etiqueta {
-  font-size: 13px;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   font-weight: 600;
-  color: var(--vino);
+  color: var(--texto-2);
 }
 .entrada {
   width: 100%;
-  min-height: 46px;
-  padding: 12px 16px;
-  border-radius: 16px;
-  border: 1.5px solid var(--linea);
+  min-height: 50px;
+  padding: 12px 14px;
+  border-radius: var(--r-medio);
+  border: 1px solid var(--linea);
   background: var(--blanco);
   outline: none;
-  transition: border-color 0.2s;
+  font-size: 16px;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 .entrada:focus {
-  border-color: var(--fase-folicular);
+  border-color: var(--vino);
+  box-shadow: 0 0 0 1px var(--vino);
 }
 textarea.entrada {
   resize: none;
@@ -464,30 +511,29 @@ textarea.entrada {
 }
 .error-campo {
   font-size: 12.5px;
-  color: var(--rosa-tinta);
+  color: var(--rojo);
 }
 
 /* Interruptor */
 .interruptor {
   position: relative;
-  width: 48px;
-  height: 28px;
+  width: 46px;
+  height: 26px;
   flex: none;
-  border-radius: 999px;
-  background: #eadde0;
-  transition: background 0.2s;
+  border-radius: 13px;
+  background: var(--papel-3);
+  transition: background-color 200ms ease;
 }
 .interruptor::after {
   content: "";
   position: absolute;
   top: 3px;
   left: 3px;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--blanco);
-  box-shadow: 0 1px 3px rgba(58, 18, 32, 0.2);
-  transition: transform 0.2s;
+  transition: transform 220ms var(--ease-out);
 }
 .interruptor[aria-checked="true"] {
   background: var(--vino);
@@ -500,13 +546,15 @@ textarea.entrada {
 .seccion {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 .seccion-cabeza {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--vino);
 }
 .fila {
   display: flex;
@@ -554,9 +602,9 @@ textarea.entrada {
 
 /* ---------- Esqueleto de carga ---------- */
 .esqueleto {
-  background: linear-gradient(90deg, #f3e9ec 0%, #fbf3f5 50%, #f3e9ec 100%);
+  background: linear-gradient(90deg, var(--papel-2) 0%, var(--blanco) 50%, var(--papel-2) 100%);
   background-size: 200% 100%;
-  animation: brillo 1.3s linear infinite;
+  animation: brillo 1.1s linear infinite;
   border-radius: var(--r-medio);
 }
 @keyframes brillo {
@@ -565,41 +613,40 @@ textarea.entrada {
   }
 }
 
-/* ---------- Lista de ajustes ---------- */
+/* ---------- Listas: filas separadas por 1 px, iconos sueltos ---------- */
 .lista {
-  background: var(--blanco);
-  border-radius: var(--r-tarjeta);
-  box-shadow: var(--sombra);
-  overflow: hidden;
+  background: transparent;
+  border-top: 1px solid var(--vino);
+  border-bottom: 1px solid var(--linea);
 }
 .lista-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-height: 56px;
-  padding: 10px 16px;
+  gap: 14px;
+  min-height: 60px;
+  padding: 12px 0;
   width: 100%;
   text-align: left;
+  transition: background-color 200ms ease;
 }
 .lista-item + .lista-item {
   border-top: 1px solid var(--linea);
 }
 .lista-icono {
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
+  width: 24px;
+  height: 24px;
   display: grid;
   place-items: center;
   flex: none;
-  background: var(--rosa);
-  color: var(--rosa-tinta);
+  background: transparent !important;
+  color: var(--vino) !important;
 }
 .lista-texto {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
 }
 
 /* ---------- Cabecera de pantalla secundaria ---------- */
@@ -611,14 +658,16 @@ textarea.entrada {
   grid-template-columns: 44px 1fr 44px;
   align-items: center;
   gap: 8px;
-  padding: 8px var(--lado-d) 8px var(--lado);
-  background: color-mix(in srgb, var(--crema) 92%, transparent);
-  backdrop-filter: blur(12px);
+  padding: 6px calc(var(--lado-d) - 10px) 6px calc(var(--lado) - 10px);
+  background: var(--crema);
+  border-bottom: 1px solid var(--linea);
 }
 .cabecera-titulo {
   text-align: center;
-  font-weight: 700;
-  font-size: 15px;
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;

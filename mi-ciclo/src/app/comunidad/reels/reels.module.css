@@ -160,7 +160,7 @@
 .seguir {
   min-height: 32px;
   padding: 0 14px;
-  border-radius: 999px;
+  border-radius: 2px;
   border: 1.5px solid rgba(255, 255, 255, 0.85);
   color: #fff;
   font-size: 12.5px;
@@ -171,7 +171,7 @@
   font-size: 11px;
   font-weight: 700;
   padding: 3px 9px;
-  border-radius: 999px;
+  border-radius: 2px;
   background: var(--mantequilla);
   color: var(--mantequilla-tinta);
 }
@@ -202,7 +202,7 @@
   font-size: 12px;
   font-weight: 700;
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: 2px;
   background: rgba(255, 255, 255, 0.18);
 }
 .audio {

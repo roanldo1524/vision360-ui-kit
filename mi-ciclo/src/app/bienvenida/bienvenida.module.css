@@ -5,7 +5,7 @@
   justify-content: space-between;
   gap: 24px;
   padding: 28px var(--lado-d) calc(28px + env(safe-area-inset-bottom, 0px)) var(--lado);
-  background: radial-gradient(120% 60% at 50% 0%, #fde3e9 0%, var(--crema) 70%);
+  background: transparent;
 }
 .ciclitas {
   display: flex;

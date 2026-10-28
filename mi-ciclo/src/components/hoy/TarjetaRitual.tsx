@@ -19,16 +19,18 @@ export function TarjetaRitual() {
   const tomoHoy = registros[hoy]?.tomoSobre;
 
   return (
-    <section id="ritual" className={clases("tarjeta", estilos.ritual)}>
-      <div className="fila-entre" style={{ alignItems: "flex-start" }}>
-        <div className="columna" style={{ gap: 4 }}>
-          <h2 className="titulo-m">¿Ya tomaste Mi Ciclo hoy?</h2>
-          <span className={clases("pequeno fila", estilos.racha)} style={{ gap: 5 }}>
-            <Flor activa tamano={14} />
-            {racha === 0 ? "Empieza tu racha hoy" : racha === 1 ? "1 día seguido" : `${racha} días seguidos`}
+    <section id="ritual" className={estilos.ritual}>
+      <div className={estilos.ritualCabeza}>
+        <h2 className={estilos.ritualTitulo}>¿Ya tomaste Mi Ciclo hoy?</h2>
+        <div className={estilos.racha} aria-label={`Racha de ${racha} días`}>
+          <span className={estilos.rachaCifra}>{racha}</span>
+          <span className={estilos.rachaTexto}>
+            <Flor activa tamano={12} /> {racha === 1 ? "día seguido" : "días seguidos"}
           </span>
         </div>
-        <Sobre />
+        <span className={estilos.sobre}>
+          <Sobre tamano={58} />
+        </span>
       </div>
 
       <ol className={estilos.semanaRitual} aria-label="Tu semana">

@@ -5,7 +5,7 @@
   align-items: flex-start;
   padding: 22px 20px;
   border-radius: var(--r-grande);
-  background: linear-gradient(150deg, var(--rosa), var(--lila));
+  background: var(--papel-2);
 }
 .introTexto {
   display: flex;
@@ -42,7 +42,7 @@
   flex-direction: column;
   gap: 2px;
   padding: 10px 12px;
-  border-radius: 14px;
+  border-radius: 2px;
   background: var(--crema);
   min-width: 0;
   overflow-wrap: anywhere;
@@ -65,7 +65,7 @@
 .burbuja {
   max-width: 82%;
   padding: 10px 14px;
-  border-radius: 18px;
+  border-radius: 2px;
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -98,7 +98,7 @@
   align-items: center;
   gap: 8px;
   padding: 6px 6px 6px 14px;
-  border-radius: 16px;
+  border-radius: 2px;
   background: var(--blanco);
   border: 1.5px dashed var(--fase-folicular);
   font-size: 13px;

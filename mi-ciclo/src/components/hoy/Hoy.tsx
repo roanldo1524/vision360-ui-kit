@@ -1,22 +1,25 @@
 "use client";
+// Inicio como portada de revista: el día del ciclo es la cifra gigante, la Ciclita
+// se superpone a ella y la fase se lee como titular.
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Bell, CalendarDays, ChevronLeft, ChevronRight, Gift, Settings } from "lucide-react";
+import { ArrowRight, Bell, ChevronLeft, ChevronRight, Gift, Settings } from "lucide-react";
 import { useEstado } from "@/lib/almacen";
 import {
-  DIAS_CORTOS, FASES, fechaLarga, hoyColombia, infoDia, inicioSemana, numeroDia, sumarDias,
+  DIAS_LETRA, faseDelDia, FASES, fechaLarga, hoyColombia, infoDia, inicioSemana, numeroDia, sumarDias,
 } from "@/lib/ciclo";
 import { registrarPeriodo } from "@/lib/acciones";
 import type { Fecha } from "@/lib/tipos";
 import { clases } from "@/lib/utilidades";
-import { Flor } from "@/components/Flor";
+import { Ciclita } from "@/components/Ciclita";
 import { Confirmar } from "@/components/Hoja";
 import { avisar } from "@/components/Avisos";
-import { AnilloFase } from "./AnilloFase";
 import { TarjetaRitual } from "./TarjetaRitual";
 import { CheckinAnimo } from "./CheckinAnimo";
 import { ParaTi } from "./ParaTi";
 import estilos from "./hoy.module.css";
+
+const DIAS_LARGOS = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"];
 
 export function Hoy() {
   const perfil = useEstado((e) => e.perfil);
@@ -36,36 +39,42 @@ export function Hoy() {
   const fase = FASES[info.fase];
   const esHoy = elegido === hoy;
   const reglaRegistradaHoy = periodos.includes(hoy);
+  const diaSem = DIAS_LARGOS[(new Date(`${elegido}T12:00:00Z`).getUTCDay() + 6) % 7];
 
   return (
     <main className={clases("pagina", estilos.fondo)}>
-      {/* Encabezado */}
-      <header className="fila-entre" style={{ alignItems: "flex-start" }}>
-        <div className="columna" style={{ gap: 2 }}>
-          <span className="pequeno texto-2">Hola,</span>
-          <h1 className="titulo-l" style={{ fontSize: 28 }}>{perfil.nombre}</h1>
-          <span className="eyebrow fila" style={{ gap: 4 }}>
-            Tu bienestar, cada día <Flor activa tamano={12} />
+      {/* Mancheta */}
+      <header className={estilos.mancheta}>
+        <div className={estilos.saludo}>
+          <span className={estilos.fechaHoy}>
+            {DIAS_LARGOS[(new Date(`${hoy}T12:00:00Z`).getUTCDay() + 6) % 7]} {fechaLarga(hoy)}
           </span>
+          <h1 className={estilos.nombre}>
+            Hola, {perfil.nombre}<span className={estilos.punto}>.</span>
+          </h1>
         </div>
-        <div className="fila" style={{ gap: 6 }}>
-          <Link href="/ajustes" className="boton-icono boton-icono-blanco" aria-label="Ajustes">
-            <Settings size={19} />
+        <nav className={estilos.acciones} aria-label="Accesos">
+          <Link href="/ajustes" className="boton-icono" aria-label="Ajustes">
+            <Settings size={20} strokeWidth={1.5} />
           </Link>
-          <Link href="/jardin" className="boton-icono boton-icono-blanco" aria-label="Recompensas">
-            <Gift size={19} />
+          <Link href="/jardin" className="boton-icono" aria-label="Recompensas">
+            <Gift size={20} strokeWidth={1.5} />
           </Link>
-          <Link href="/notificaciones" className={clases("boton-icono boton-icono-blanco", estilos.campana)} aria-label={sinLeer ? "Notificaciones sin leer" : "Notificaciones"}>
-            <Bell size={19} />
+          <Link
+            href="/notificaciones"
+            className={clases("boton-icono", estilos.campana)}
+            aria-label={sinLeer ? "Notificaciones sin leer" : "Notificaciones"}
+          >
+            <Bell size={20} strokeWidth={1.5} />
             {sinLeer && <span className={estilos.puntoRojo} />}
           </Link>
-        </div>
+        </nav>
       </header>
 
-      {/* Semana */}
-      <section className={clases("tarjeta", estilos.semana)} aria-label="Semana">
+      {/* Semana: números crudos entre dos reglas */}
+      <section className={estilos.semana} aria-label="Semana">
         <button className={estilos.flecha} aria-label="Semana anterior" onClick={() => setSemana(semana - 1)}>
-          <ChevronLeft size={18} />
+          <ChevronLeft size={16} strokeWidth={1.5} />
         </button>
         <div className={estilos.dias}>
           {dias.map((d, i) => {
@@ -73,68 +82,94 @@ export function Hoy() {
             return (
               <button
                 key={d}
-                className={clases(estilos.dia, d === hoy && estilos.diaHoy, d === elegido && d !== hoy && estilos.diaElegido)}
+                className={clases(estilos.dia, d === hoy && estilos.diaHoy, d === elegido && estilos.diaElegido)}
                 onClick={() => setElegido(d)}
                 aria-pressed={d === elegido}
                 aria-label={`${fechaLarga(d)}, ${FASES[fd.fase].corta}`}
               >
-                <span className={estilos.diaNombre}>{d === hoy ? "HOY" : DIAS_CORTOS[i]}</span>
+                <span className={estilos.diaNombre}>{DIAS_LETRA[i]}</span>
                 <span className={estilos.diaNumero}>{numeroDia(d)}</span>
-                <span className={estilos.diaPunto} style={{ background: FASES[fd.fase].color, opacity: fd.diaCiclo <= ciclo.duracionRegla ? 1 : 0.35 }} />
+                <span
+                  className={estilos.diaRegla}
+                  style={{ opacity: fd.diaCiclo <= ciclo.duracionRegla ? 1 : 0 }}
+                  aria-hidden="true"
+                />
               </button>
             );
           })}
         </div>
         <button className={estilos.flecha} aria-label="Semana siguiente" onClick={() => setSemana(semana + 1)}>
-          <ChevronRight size={18} />
+          <ChevronRight size={16} strokeWidth={1.5} />
         </button>
       </section>
 
-      {/* Tarjeta de fase */}
-      <section className={clases("tarjeta", estilos.fase)} style={{ ["--pastel" as string]: fase.pastel, ["--tono" as string]: fase.color }}>
-        <div className={estilos.faseTexto}>
-          <span className="eyebrow eyebrow-rojo">{esHoy ? "Tu fase actual" : `El ${fechaLarga(elegido)}`}</span>
-          <h2 className={estilos.faseNombre}>
-            {fase.nombre.split(" ").slice(0, -1).join(" ")}
-            <br />
-            {fase.nombre.split(" ").slice(-1)}
-          </h2>
-          <p className="pequeno texto-2">{fase.descripcion}</p>
-          {esHoy ? (
-            <button
-              className="boton boton-principal boton-chico"
-              style={{ alignSelf: "flex-start", marginTop: 6 }}
-              onClick={() => (reglaRegistradaHoy ? avisar("Ya registraste tu regla hoy") : setConfirmarPeriodo(true))}
-            >
-              {reglaRegistradaHoy ? "Regla registrada" : "Registrar periodo"} <ChevronRight size={16} />
-            </button>
-          ) : (
-            <button className="boton boton-secundario boton-chico" style={{ alignSelf: "flex-start", marginTop: 6 }} onClick={() => { setElegido(hoy); setSemana(0); }}>
-              Volver a hoy
-            </button>
-          )}
+      {/* Portada de la fase */}
+      <section className={estilos.portada} aria-label="Tu fase">
+        <p className={estilos.kicker}>
+          {esHoy ? "Hoy estás en el día" : `El ${diaSem} ${fechaLarga(elegido)} será el día`}
+        </p>
+        <div className={estilos.cifraZona}>
+          <span className={estilos.cifra} aria-label={`Día ${info.diaCiclo} de ${ciclo.duracionCiclo}`}>
+            {info.diaCiclo}
+          </span>
+          <span className={estilos.deTotal}>/{ciclo.duracionCiclo}</span>
+          <span className={estilos.personaje}>
+            <Ciclita id={perfil.ciclita} tamano={118} feliz={info.fase !== "menstrual"} />
+          </span>
         </div>
-        <AnilloFase dia={info.diaCiclo} total={ciclo.duracionCiclo} regla={ciclo.duracionRegla} ciclita={perfil.ciclita} />
-        <div className={estilos.faseAbajo}>
-          <span className="eyebrow">En esta fase</span>
-          <div className="chips">
-            {fase.chips.map((c, i) => (
-              <span key={c} className={clases("chip", ["", "chip-lila", "chip-mantequilla"][i])}>{c}</span>
-            ))}
-          </div>
-          <p className={clases("pequeno texto-2 fila", estilos.prediccion)}>
-            <CalendarDays size={15} />
-            <span>
-              Próximo periodo en <b className="num">{info.diasParaPeriodo} días</b>
-              {" · "}
-              {info.fertil ? (
-                <>Estás en tu <b>ventana fértil</b></>
-              ) : (
-                <>Ventana fértil en <b className="num">{info.diasParaVentana} días</b></>
-              )}
-            </span>
+
+        <ReglaCiclo dia={info.diaCiclo} total={ciclo.duracionCiclo} regla={ciclo.duracionRegla} />
+
+        <div className={estilos.titular}>
+          <h2 className={estilos.faseNombre}>
+            {fase.nombre.replace("Fase ", "Fase ")}
+          </h2>
+          <p className={estilos.bajada}>
+            {fase.descripcion}. <span className="texto-2">{fase.chips.join(" · ")}.</span>
           </p>
         </div>
+
+        <dl className={estilos.datos}>
+          <div>
+            <dt>Próximo periodo</dt>
+            <dd>
+              <span className="num">{info.diasParaPeriodo}</span>
+              <small>días</small>
+            </dd>
+          </div>
+          <div>
+            <dt>{info.fertil ? "Ventana fértil" : "Ventana fértil en"}</dt>
+            <dd>
+              {info.fertil ? (
+                <span className={estilos.ahora}>ahora</span>
+              ) : (
+                <>
+                  <span className="num">{info.diasParaVentana}</span>
+                  <small>días</small>
+                </>
+              )}
+            </dd>
+          </div>
+        </dl>
+
+        {esHoy ? (
+          <button
+            className="boton boton-principal boton-ancho"
+            onClick={() => (reglaRegistradaHoy ? avisar("Ya registraste tu regla hoy") : setConfirmarPeriodo(true))}
+          >
+            {reglaRegistradaHoy ? "Regla registrada hoy" : "Registrar periodo"} <ArrowRight size={16} />
+          </button>
+        ) : (
+          <button
+            className="boton boton-secundario boton-ancho"
+            onClick={() => {
+              setElegido(hoy);
+              setSemana(0);
+            }}
+          >
+            Volver a hoy
+          </button>
+        )}
       </section>
 
       <TarjetaRitual />
@@ -153,5 +188,36 @@ export function Hoy() {
         }}
       />
     </main>
+  );
+}
+
+/** El ciclo como una regla de imprenta: un trazo por día, el de hoy en rojo y más alto. */
+function ReglaCiclo({ dia, total, regla }: { dia: number; total: number; regla: number }) {
+  const config = { ultimoPeriodo: "", duracionCiclo: total, duracionRegla: regla };
+  const fases: { nombre: string; desde: number; hasta: number }[] = [];
+  for (let d = 1; d <= total; d++) {
+    const f = FASES[faseDelDia(d, config)].corta;
+    const ultima = fases[fases.length - 1];
+    if (ultima && ultima.nombre === f) ultima.hasta = d;
+    else fases.push({ nombre: f, desde: d, hasta: d });
+  }
+  return (
+    <div className={estilos.regla} role="img" aria-label={`Día ${dia} de ${total}`}>
+      <div className={estilos.trazos} style={{ gridTemplateColumns: `repeat(${total}, 1fr)` }}>
+        {Array.from({ length: total }, (_, i) => (
+          <span
+            key={i}
+            className={clases(estilos.trazo, i + 1 < dia && estilos.trazoPasado, i + 1 === dia && estilos.trazoHoy)}
+          />
+        ))}
+      </div>
+      <div className={estilos.tramos} style={{ gridTemplateColumns: `repeat(${total}, 1fr)` }}>
+        {fases.map((f) => (
+          <span key={f.desde} style={{ gridColumn: `${f.desde} / ${f.hasta + 1}` }}>
+            {f.hasta - f.desde >= 4 ? f.nombre : ""}
+          </span>
+        ))}
+      </div>
+    </div>
   );
 }

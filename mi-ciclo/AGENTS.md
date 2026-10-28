@@ -10,8 +10,9 @@ App PWA de Mi Ciclo (EA Business Group SAS). Especificación: *Documento maestro
 
 ## Reglas
 1. Todo en español: interfaz, código y comentarios.
-2. Solo tokens y tipografías del sistema v2 (`src/app/globals.css`): Lora 500 títulos, DM Sans interfaz, Caveat solo dentro de imágenes, wordmark en Chonburi.
+2. Dirección editorial (`src/app/globals.css`): tres colores (crema papel, vino tinta, rojo acento), Lora 500 grande y apretada a la izquierda, DM Sans en la interfaz, etiquetas pequeñas en mayúsculas espaciadas, bordes de 1 px en lugar de sombras, esquinas rectas, iconos sueltos sin círculos. Caveat solo dentro de imágenes; wordmark en Chonburi.
 3. El rojo `--rojo` solo en la acción principal de cada pantalla.
+3b. Movimiento: `--ease-out` fuerte, menos de 300 ms, `scale(0.97)` al tocar, nada desde `scale(0)`, respeta `prefers-reduced-motion`.
 4. Ciclitas en lugar de fotos de personas. Nada de fotos generadas con IA.
 5. Nunca mostrar la fase ni datos del ciclo en la comunidad. El anonimato se aplica en la capa de consultas (`src/lib/comunidad/consultas.ts`): la vista pública nunca devuelve `autoraId` de lo anónimo.
 6. Zonas táctiles de 44 px mínimo. Se ve bien de 360 a 430 px.

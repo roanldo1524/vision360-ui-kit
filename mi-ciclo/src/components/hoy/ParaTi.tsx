@@ -6,6 +6,7 @@ import { Ilustracion } from "@/components/Ilustracion";
 import { Ciclita } from "@/components/Ciclita";
 import { Avatar } from "@/components/Avatar";
 import type { Comunidad } from "@/lib/tipos";
+import { clases } from "@/lib/utilidades";
 import estilos from "./hoy.module.css";
 
 const DIA = 86_400_000;
@@ -29,7 +30,7 @@ export function ParaTi() {
     <>
       <section className="seccion">
         <h2 className="titulo-m">Para ti</h2>
-        <div className="rejilla-2">
+        <div className={estilos.mosaico}>
           <Link href="/consejos" className={estilos.tarjetaFoto}>
             <div className={estilos.foto}>
               <Ilustracion id="antifaz" />
@@ -37,7 +38,7 @@ export function ParaTi() {
             <div className={estilos.tarjetaFotoTexto}>
               <h3 className="titulo-s">Consejos para tu fase</h3>
               <p className="mini texto-2">Comer, moverte y descansar</p>
-              <span className="enlace-rojo">Ver consejos <ChevronRight size={14} /></span>
+              <span className="enlace-vino">Ver consejos <ChevronRight size={14} /></span>
             </div>
           </Link>
           <Link href="/diario" className={estilos.tarjetaFoto}>
@@ -47,7 +48,7 @@ export function ParaTi() {
             <div className={estilos.tarjetaFotoTexto}>
               <h3 className="titulo-s">Mi diario</h3>
               <p className="mini texto-2">Un espacio solo para ti</p>
-              <span className="enlace-rojo">Escribir ahora <ChevronRight size={14} /></span>
+              <span className="enlace-vino">Escribir ahora <ChevronRight size={14} /></span>
             </div>
           </Link>
         </div>
@@ -55,7 +56,7 @@ export function ParaTi() {
 
       <section className="seccion">
         <h2 className="titulo-m">En pareja</h2>
-        <div className="rejilla-2">
+        <div className={clases(estilos.mosaico, estilos.mosaicoInverso)}>
           <Link href="/vinculo#notas" className={estilos.tarjetaFoto}>
             <div className={estilos.foto}>
               <Ilustracion id="bolsa" />
@@ -63,11 +64,11 @@ export function ParaTi() {
             <div className={estilos.tarjetaFotoTexto}>
               <h3 className="titulo-s">Tu espacio con tu amor</h3>
               <p className="mini texto-2">Notas que duran 24 h</p>
-              <span className="enlace-rojo">Escribir <ChevronRight size={14} /></span>
+              <span className="enlace-vino">Escribir <ChevronRight size={14} /></span>
             </div>
           </Link>
           <Link href="/vinculo" className={estilos.tarjetaFoto}>
-            <div className={estilos.foto} style={{ background: "var(--menta)", display: "grid", placeItems: "center" }}>
+            <div className={estilos.foto} style={{ background: "var(--papel-3)", display: "grid", placeItems: "center" }}>
               <div className="fila" style={{ gap: 0 }}>
                 <Ciclita id="rosa" tamano={56} />
                 <span className={estilos.masVinculo}>
@@ -80,7 +81,7 @@ export function ParaTi() {
               <p className="mini texto-2">
                 {vinculoActivo ? `Conectada con ${vinculoActivo.nombre ?? "tu vínculo"}` : "Acompáñense en cada fase"}
               </p>
-              <span className="enlace-rojo">
+              <span className="enlace-vino">
                 {vinculoActivo ? "Ver vínculo" : "Invitar a tu pareja"} <ChevronRight size={14} />
               </span>
             </div>
@@ -94,13 +95,14 @@ export function ParaTi() {
             <Avatar key={p.id} ciclita={p.ciclita} fotoId={p.fotoId} tamano={34} nombre={p.alias} />
           ))}
         </span>
-        <span className="columna" style={{ gap: 0, flex: 1, minWidth: 0 }}>
-          <span className="eyebrow" style={{ fontSize: 9.5 }}>De la comunidad</span>
+        <span className={estilos.comunidadCifra}>{autoras.length}</span>
+        <span className="columna" style={{ gap: 2, flex: 1, minWidth: 0 }}>
           <span className="pequeno negrita">
-            {autoras.length === 1 ? "1 chica compartió hoy" : `${autoras.length} chicas compartieron hoy`}
+            {autoras.length === 1 ? "chica compartió hoy" : "chicas compartieron hoy"}
           </span>
+          <span className="mini texto-2">en la comunidad</span>
         </span>
-        <span className="enlace-rojo">Ver comunidad <ChevronRight size={14} /></span>
+        <ChevronRight size={20} strokeWidth={1.5} aria-label="Ver comunidad" />
       </Link>
     </>
   );

@@ -19,16 +19,16 @@ export function EncabezadoComunidad() {
   return (
     <header className={estilos.encabezado}>
       <div className={estilos.encabezadoFila}>
+        <span className={`marca ${estilos.wordmark}`}>Mi Ciclo</span>
         {moderadora ? (
           <Link href="/admin" className="boton-icono" aria-label="Panel de moderación">
-            <ShieldCheck size={20} />
+            <ShieldCheck size={20} strokeWidth={1.5} />
           </Link>
         ) : (
           <span />
         )}
-        <span className={`marca ${estilos.wordmark}`}>Mi Ciclo</span>
         <Link href="/comunidad/buscar" className="boton-icono" aria-label="Buscar en la comunidad">
-          <Search size={21} />
+          <Search size={21} strokeWidth={1.5} />
         </Link>
       </div>
       <nav className={estilos.pestanas} aria-label="Secciones de la comunidad">
