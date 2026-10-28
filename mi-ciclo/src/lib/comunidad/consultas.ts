@@ -248,11 +248,14 @@ export function comentariosDe(
   const visibles = ctx.c.comentarios.filter((k) => k.publicacionId === publicacionId && comentarioVisible(ctx, k));
   const vista = (k: Comentario): ComentarioPublico => {
     const diFlor = ctx.c.flores.includes(`c:${k.id}`);
+    // Si la autora de una publicación anónima comenta en ella, su comentario también
+    // se muestra anónimo: si no, la etiqueta "Autora" revelaría quién es.
+    const anonima = k.anonima || Boolean(pub?.anonima && pub.autoraId === k.autoraId);
     return {
       id: k.id,
       publicacionId: k.publicacionId,
       padreId: k.padreId,
-      autora: autoraPublica(ctx, k.autoraId, k.anonima),
+      autora: autoraPublica(ctx, k.autoraId, anonima),
       esMio: k.autoraId === YO,
       // "Autora" no revela identidad: solo indica que quien comenta es quien publicó
       esDeLaAutora: Boolean(pub && pub.autoraId === k.autoraId),

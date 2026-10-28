@@ -1,0 +1,223 @@
+.cabeza {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.masOpciones {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+}
+.filaDatos {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.avatarZona {
+  position: relative;
+  flex: none;
+}
+.masAvatar {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--rojo);
+  color: var(--blanco);
+  border: 2.5px solid var(--crema);
+  display: grid;
+  place-items: center;
+}
+.numeros {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  text-align: center;
+  padding-top: 18px;
+}
+.numeros dt {
+  font-weight: 700;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+.numeros dd {
+  margin: 0;
+  font-size: 11px;
+  color: var(--texto-3);
+}
+.nombreFila {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.bio {
+  font-size: 13.5px;
+  color: var(--texto-2);
+  max-width: 36ch;
+  overflow-wrap: anywhere;
+}
+.destacadas {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin: 0 calc(-1 * var(--lado-d)) 0 calc(-1 * var(--lado));
+  padding: 4px var(--lado-d) 2px var(--lado);
+}
+.destacadas::-webkit-scrollbar {
+  display: none;
+}
+.destacada {
+  flex: none;
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.destacada > span:last-child {
+  max-width: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.destacadaImagen,
+.destacadaNueva {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 0 2px var(--crema), 0 0 0 3.5px var(--linea);
+  display: grid;
+  place-items: center;
+}
+.destacadaNueva {
+  background: var(--blanco);
+  color: var(--rojo);
+}
+.pestanas {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  border-bottom: 1px solid var(--linea);
+  margin: 0 calc(-1 * var(--lado-d)) -6px calc(-1 * var(--lado));
+}
+.pestana {
+  position: relative;
+  min-height: 46px;
+  display: grid;
+  place-items: center;
+  color: var(--texto-3);
+}
+.pestana[aria-selected="true"] {
+  color: var(--vino);
+}
+.pestana[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--rojo);
+}
+.mosaico {
+  columns: 2;
+  column-gap: 8px;
+}
+.celda {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+  border-radius: 16px;
+  overflow: hidden;
+  break-inside: avoid;
+  background: var(--rosa);
+  max-width: 100%;
+}
+.celdaTexto {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: 14px;
+  font-family: var(--f-titulo);
+  font-size: 14px;
+  text-align: center;
+  overflow: hidden;
+}
+.multiple {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #fff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+.enRevision {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--mantequilla);
+  color: var(--mantequilla-tinta);
+}
+.reels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.reel {
+  position: relative;
+  aspect-ratio: 3 / 4.4;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--vino);
+  max-width: 100%;
+}
+.vistas {
+  position: absolute;
+  left: 7px;
+  bottom: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.ciclitaOpcion {
+  border-radius: 50%;
+  padding: 2px;
+  box-shadow: 0 0 0 2px transparent;
+}
+.ciclitaOpcion[aria-pressed="true"] {
+  box-shadow: 0 0 0 2.5px var(--vino);
+}
+.portadas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.portada {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 0 2px transparent;
+  max-width: 100%;
+}
+.portada[aria-pressed="true"] {
+  box-shadow: 0 0 0 3px var(--vino);
+}

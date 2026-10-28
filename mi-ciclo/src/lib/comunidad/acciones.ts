@@ -26,6 +26,20 @@ function alternar(lista: string[], valor: string): string[] {
   return lista.includes(valor) ? lista.filter((v) => v !== valor) : [...lista, valor];
 }
 
+/** Crea el perfil de comunidad de la usuaria actual si aún no existe. */
+function asegurarYo() {
+  const e = leerEstado();
+  if (!e.perfil || e.comunidad.perfiles.some((p) => p.id === YO)) return;
+  const { nombre, usuario, bio, ciclita, fotoId } = e.perfil;
+  conComunidad((c) => ({
+    ...c,
+    perfiles: [
+      ...c.perfiles,
+      { id: YO, alias: nombre, usuario, bio, ciclita, fotoId, temas: [], seguidoras: 0, floresRecibidas: 0, postsAprobados: 0, estado: "activa" },
+    ],
+  }));
+}
+
 // ---------- Publicar ----------
 
 export interface NuevaPublicacion {
@@ -43,6 +57,7 @@ export interface ResultadoPublicar {
   id?: string;
   estado?: EstadoPublicacion;
   mensaje: string;
+  petalos?: number;
 }
 
 /** Decide si una publicación nueva sale de inmediato o queda retenida. */
@@ -57,6 +72,7 @@ function decidirEstado(p: NuevaPublicacion, postsAprobados: number): { estado: E
 }
 
 export function publicar(entrada: NuevaPublicacion): ResultadoPublicar {
+  asegurarYo();
   const e = leerEstado();
   const yo = e.comunidad.perfiles.find((p) => p.id === YO);
   if (!yo) return { ok: false, mensaje: "Completa tu perfil para publicar." };
@@ -88,14 +104,14 @@ export function publicar(entrada: NuevaPublicacion): ResultadoPublicar {
     audio: entrada.tipo === "reel" ? `original · ${yo.usuario}` : undefined,
   };
   conComunidad((c) => ({ ...c, publicaciones: [nueva, ...c.publicaciones] }));
-  completarMisionPorClave("publicar", true);
+  const petalos = completarMisionPorClave("publicar", true);
 
   const nombres: Record<TipoPublicacion, string> = {
     post: "Tu post", pregunta: "Tu pregunta", reel: "Tu reel", historia: "Tu historia",
   };
   if (estado === "retenida") {
     return {
-      ok: true, id: nueva.id, estado,
+      ok: true, id: nueva.id, estado, petalos,
       mensaje:
         motivo === "Primeras publicaciones de usuaria nueva"
           ? `${nombres[entrada.tipo]} está en revisión. Las primeras ${PUBLICACIONES_CON_REVISION_PREVIA} publicaciones de cada chica nueva las revisa el equipo antes de salir. Suele tardar pocas horas.`
@@ -104,7 +120,7 @@ export function publicar(entrada: NuevaPublicacion): ResultadoPublicar {
             : `${nombres[entrada.tipo]} está en revisión porque toca un tema que una persona del equipo debe leer primero. Te avisamos cuando salga.`,
     };
   }
-  return { ok: true, id: nueva.id, estado, mensaje: `${nombres[entrada.tipo]} ya está en la comunidad.` };
+  return { ok: true, id: nueva.id, estado, petalos, mensaje: `${nombres[entrada.tipo]} ya está en la comunidad.` };
 }
 
 export function editarPublicacion(id: string, cambios: { texto: string; titulo?: string }) {
@@ -137,6 +153,7 @@ export function eliminarPublicacion(id: string) {
 // ---------- Comentarios ----------
 
 export function comentar(publicacionId: string, texto: string, padreId?: string, anonima = false): ResultadoPublicar {
+  asegurarYo();
   const e = leerEstado();
   const limpio = texto.trim();
   if (!limpio) return { ok: false, mensaje: "Escribe un comentario." };

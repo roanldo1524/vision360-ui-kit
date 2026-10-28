@@ -77,7 +77,14 @@ function Mosaico({ pubs }: { pubs: PublicacionPublica[] }) {
   );
 }
 
-export function VistaPerfil({ id }: { id: string }) {
+interface PropsPerfil {
+  id: string;
+  /** menú "···" de la cabecera para perfiles ajenos */
+  menuAjeno?: boolean;
+  alCerrarMenuAjeno?: () => void;
+}
+
+export function VistaPerfil({ id, menuAjeno = false, alCerrarMenuAjeno }: PropsPerfil) {
   const router = useRouter();
   const ctx = useContexto();
   const perfil = useMemo(() => perfilPublico(ctx, id), [ctx, id]);
@@ -309,6 +316,18 @@ export function VistaPerfil({ id }: { id: string }) {
 
       {!perfil.esYo && (
         <>
+          <Hoja abierta={menuAjeno} alCerrar={() => alCerrarMenuAjeno?.()} titulo={perfil.alias}>
+            <MenuPerfilAjeno
+              alReportar={() => {
+                alCerrarMenuAjeno?.();
+                setHoja("reportar");
+              }}
+              alBloquear={() => {
+                alCerrarMenuAjeno?.();
+                setHoja("bloquear");
+              }}
+            />
+          </Hoja>
           <Hoja abierta={hoja === "reportar"} alCerrar={() => setHoja(null)} titulo={`Reportar a ${perfil.alias}`}>
             <div className={cs.opciones}>
               {MOTIVOS_REPORTE.map((m) => (

@@ -13,17 +13,29 @@ interface Props {
 
 export function Hoja({ abierta, alCerrar, titulo, children }: Props) {
   const ref = useRef<HTMLDialogElement>(null);
+  // Al cerrar desde el código (abierta = false) no se avisa a alCerrar:
+  // así se puede pasar de una hoja a otra sin cerrar todo.
+  const cierreProgramado = useRef(false);
   useEffect(() => {
     const d = ref.current;
     if (!d) return;
     if (abierta && !d.open) d.showModal();
-    if (!abierta && d.open) d.close();
+    if (!abierta && d.open) {
+      cierreProgramado.current = true;
+      d.close();
+    }
   }, [abierta]);
   return (
     <dialog
       ref={ref}
       className={estilos.hoja}
-      onClose={alCerrar}
+      onClose={() => {
+        if (cierreProgramado.current) {
+          cierreProgramado.current = false;
+          return;
+        }
+        alCerrar();
+      }}
       onClick={(e) => {
         if (e.target === ref.current) alCerrar();
       }}
