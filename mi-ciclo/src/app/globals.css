@@ -7,10 +7,12 @@
 
 :root {
   /* Marca */
-  --rojo: #f62c39; /* Rojo Coral (brandbook) */
+  --rojo: #f62c39; /* Rojo Coral (brandbook): logo, anillo, flor y gráficos */
+  --rojo-accion: #e3202f; /* botones con texto blanco (4,6:1) */
+  --rojo-texto: #c8102e; /* texto rojo pequeño (5,9:1 sobre blanco) */
   --rojo-hondo: #d61a2b;
-  --carmesi: #f62c39; /* títulos en Rojo Coral, como el brandbook */
-  --violeta: #e7befb; /* Violeta (brandbook) */
+  --carmesi: #d0192a; /* títulos rojos legibles */
+  --violeta: #e7bef8; /* Violeta (brandbook) */
   --violeta-oscuro: #5b3aaa; /* Violeta oscuro (brandbook) */
   --rojo-suave: #ffe3e5;
   --vino: #1f0526; /* ciruela: títulos y texto */
@@ -19,7 +21,7 @@
   --rosa: #ffdced; /* Rosa (brandbook) */
   --rosa-claro: #fdf1ef;
   --texto-2: #6e5470;
-  --texto-3: #a08ea2;
+  --texto-3: #7a667c;
   --linea: #f6e3e6;
   --papel-2: #fdf1ef;
   --papel-3: #fbe3e6;
@@ -55,7 +57,7 @@
   --f-titulo: var(--font-fraunces), "Fraunces", Georgia, serif;
   --f-ui: var(--font-manrope), "Manrope", system-ui, sans-serif;
   --f-acento: var(--font-lora), "Lora", Georgia, serif;
-  --f-mano: var(--font-caveat), "Caveat", "Segoe Script", cursive;
+  --f-mano: var(--font-lora), "Lora", Georgia, serif; /* frases dentro de imágenes */
   --f-marca: var(--f-display);
   --f-cita: var(--f-acento);
 
@@ -147,7 +149,7 @@ h2,
 h3,
 h4 {
   font-family: var(--f-titulo);
-  font-weight: 900;
+  font-weight: 600;
   margin: 0;
   text-wrap: balance;
   letter-spacing: -0.005em;
@@ -221,32 +223,32 @@ p {
 /* ---------- Tipos de texto ---------- */
 .titulo-xl {
   font-family: var(--f-titulo);
-  font-size: 36px;
-  line-height: 1.02;
-  letter-spacing: -0.025em;
-  font-weight: 900;
+  font-size: 34px;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  font-weight: 500;
   color: var(--carmesi);
 }
 .titulo-l {
   font-family: var(--f-titulo);
-  font-size: 27px;
-  line-height: 1.06;
-  letter-spacing: -0.02em;
-  font-weight: 900;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  font-weight: 500;
   color: var(--carmesi);
 }
 .titulo-m {
   font-family: var(--f-titulo);
   font-size: 21px;
-  line-height: 1.12;
-  letter-spacing: -0.015em;
-  font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  font-weight: 600;
 }
 .titulo-s {
   font-family: var(--f-titulo);
-  font-size: 16.5px;
-  line-height: 1.2;
-  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.25;
+  font-weight: 600;
 }
 /* Titular a dos tonos, como en miciclo.co */
 .dos-tonos {
@@ -257,12 +259,12 @@ p {
 .dos-tonos > :first-child {
   font-family: var(--f-ui);
   font-weight: 800;
-  color: var(--rojo);
+  color: var(--rojo-texto);
   letter-spacing: -0.02em;
 }
 .dos-tonos > :last-child {
   font-family: var(--f-titulo);
-  font-weight: 900;
+  font-weight: 500;
   font-style: italic;
   color: var(--vino);
 }
@@ -270,17 +272,17 @@ p {
   font-family: var(--f-acento);
   font-weight: 700;
   font-style: italic;
-  color: var(--rojo);
+  color: var(--rojo-texto);
 }
 .eyebrow {
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-weight: 800;
   color: var(--texto-2);
 }
 .eyebrow-rojo {
-  color: var(--rojo);
+  color: var(--rojo-texto);
 }
 .texto-2 {
   color: var(--texto-2);
@@ -289,10 +291,10 @@ p {
   color: var(--texto-3);
 }
 .pequeno {
-  font-size: 13.5px;
+  font-size: 14px;
 }
 .mini {
-  font-size: 11.5px;
+  font-size: 12px;
 }
 .negrita {
   font-weight: 800;
@@ -305,7 +307,7 @@ p {
 }
 .marca {
   font-family: var(--f-display);
-  color: var(--rojo);
+  color: var(--rojo-texto);
   font-weight: 400;
 }
 
@@ -333,7 +335,7 @@ p {
   padding: 0 22px;
   border-radius: var(--r-pastilla);
   font-weight: 800;
-  font-size: 14.5px;
+  font-size: 15px;
   transition:
     transform 160ms var(--ease-out),
     background-color 200ms ease,
@@ -350,7 +352,7 @@ p {
   transform: none;
 }
 .boton-principal {
-  background: var(--rojo);
+  background: var(--rojo-accion);
   color: #fff;
   box-shadow: var(--sombra-rojo);
 }
@@ -364,11 +366,11 @@ p {
   margin-left: 4px;
   border-radius: 50%;
   background: #fff;
-  color: var(--rojo);
+  color: var(--rojo-texto);
 }
 .boton-secundario .flecha-boton,
 .boton-vino .flecha-boton {
-  background: var(--rojo);
+  background: var(--rojo-accion);
   color: #fff;
 }
 .boton-secundario {
@@ -431,7 +433,7 @@ p {
   min-height: 32px;
 }
 .enlace-rojo {
-  color: var(--rojo);
+  color: var(--rojo-texto);
 }
 .enlace-vino {
   color: var(--vino);
@@ -471,7 +473,7 @@ p {
   color: #fff;
 }
 .chip-rojo {
-  background: var(--rojo);
+  background: var(--rojo-accion);
   color: #fff;
 }
 .chip-borde {
@@ -495,7 +497,7 @@ p {
   transform: scale(0.96);
 }
 .seleccionable[aria-pressed="true"] {
-  background: var(--rojo);
+  background: var(--rojo-accion);
   color: #fff;
   box-shadow: none;
 }
@@ -519,7 +521,7 @@ p {
   transition: background-color 200ms ease, color 200ms ease;
 }
 .segmento button[aria-selected="true"] {
-  background: var(--rojo);
+  background: var(--rojo-accion);
   color: #fff;
 }
 
@@ -547,7 +549,7 @@ p {
   transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 .entrada:focus {
-  border-color: var(--rojo);
+  border-color: var(--rojo-texto);
   box-shadow: 0 0 0 4px var(--rojo-suave);
 }
 textarea.entrada {
@@ -563,7 +565,7 @@ textarea.entrada {
   color: var(--texto-3);
 }
 .error-campo {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--rojo-hondo);
 }
 
@@ -590,7 +592,7 @@ textarea.entrada {
   transition: transform 220ms var(--ease-out);
 }
 .interruptor[aria-checked="true"] {
-  background: var(--rojo);
+  background: var(--rojo-accion);
 }
 .interruptor[aria-checked="true"]::after {
   transform: translateX(20px);
@@ -692,7 +694,7 @@ textarea.entrada {
   place-items: center;
   flex: none;
   background: var(--rojo-suave);
-  color: var(--rojo);
+  color: var(--rojo-texto);
 }
 .lista-texto {
   flex: 1;

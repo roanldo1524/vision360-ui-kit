@@ -23,16 +23,16 @@ export function CheckinAnimo({ fase }: { fase: Fase }) {
 
   return (
     <section id="animo" className={clases("seccion", estilos.tarjetaAnimo)}>
-      <div className="seccion-cabeza">
-        <h2 className={estilos.tituloSans}>¿Cómo te sientes hoy?</h2>
+      <div className={estilos.animoCabeza}>
+        <h2 className={estilos.tituloSeccion}>¿Cómo te sientes hoy?</h2>
         <button
-          className="enlace-vino"
+          className={estilos.botonSintomas}
           onClick={() => {
             setElegidos(sintomas);
             setAbierta(true);
           }}
         >
-          {sintomas.length ? `${sintomas.length} síntomas` : "Otros síntomas"} <ChevronRight size={15} />
+          {sintomas.length ? `Síntomas · ${sintomas.length}` : "Síntomas"} <ChevronRight size={16} />
         </button>
       </div>
       <div className={estilos.filaAnimos} role="radiogroup" aria-label="Ánimo de hoy">
@@ -45,14 +45,14 @@ export function CheckinAnimo({ fase }: { fase: Fase }) {
             onClick={() => registrarAnimo(a.id)}
           >
             <CaraAnimo animo={a.id} />
-            <span className="mini">{a.nombre}</span>
+            <span>{a.nombre}</span>
           </button>
         ))}
       </div>
       {animo && (
         <div className={estilos.consejoAnimo} role="status">
           <Sparkles size={18} style={{ flex: "none", marginTop: 2 }} />
-          <p className="pequeno">{consejoAnimo(animo, fase)}</p>
+          <p>{consejoAnimo(animo, fase)}</p>
         </div>
       )}
 

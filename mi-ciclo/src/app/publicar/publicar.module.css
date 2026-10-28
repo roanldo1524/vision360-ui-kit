@@ -24,9 +24,9 @@
   justify-self: end;
   min-height: 44px;
   padding: 0 8px;
-  color: var(--rojo);
+  color: var(--rojo-texto);
   font-weight: 700;
-  font-size: 14.5px;
+  font-size: 15px;
 }
 .siguiente:disabled {
   color: var(--texto-3);
@@ -113,7 +113,7 @@
   place-items: center;
 }
 .elegida .marca {
-  background: var(--rojo);
+  background: var(--rojo-accion);
 }
 .esVideo {
   position: absolute;
@@ -141,7 +141,7 @@
   padding: 0 14px;
   border-radius: 999px;
   color: rgba(255, 255, 255, 0.72);
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;

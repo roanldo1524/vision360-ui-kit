@@ -16,7 +16,7 @@
   color: var(--blanco);
   padding: 11px 18px;
   border-radius: 999px;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 600;
   box-shadow: var(--sombra-alta);
   animation: subir 0.28s ease-out both;

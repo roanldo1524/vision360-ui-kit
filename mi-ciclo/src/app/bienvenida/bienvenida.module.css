@@ -92,7 +92,7 @@
   min-height: 54px;
   border-radius: 999px;
   background: #fff;
-  color: var(--rojo);
+  color: var(--rojo-texto);
   font-weight: 800;
   font-size: 16px;
   box-shadow: 0 14px 30px rgba(90, 0, 20, 0.3);
@@ -105,7 +105,7 @@
   box-sizing: content-box;
   padding: 5px;
   border-radius: 50%;
-  background: var(--rojo);
+  background: var(--rojo-accion);
   color: #fff;
 }
 .legal {
@@ -128,7 +128,7 @@
   transition: background 0.3s;
 }
 .puntoHecho {
-  background: var(--rojo);
+  background: var(--rojo-accion);
 }
 .bloque {
   display: flex;
@@ -202,7 +202,7 @@
 .acepto input {
   width: 22px;
   height: 22px;
-  accent-color: var(--rojo);
+  accent-color: var(--rojo-texto);
   flex: none;
   margin: 0;
 }

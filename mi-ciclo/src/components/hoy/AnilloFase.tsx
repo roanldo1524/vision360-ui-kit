@@ -7,6 +7,7 @@ interface Props {
   total: number;
   regla: number;
   ciclita: CiclitaId;
+  tamano?: number;
 }
 
 // Colores de los tramos como en la referencia: rosa para la regla, lavandas para el resto
@@ -18,7 +19,8 @@ const COLOR = {
 } as const;
 
 /** Anillo grande del ciclo con la Ciclita al centro y la burbuja "Día X de N". */
-export function AnilloFase({ dia, total, regla, ciclita }: Props) {
+export function AnilloFase({ dia, total, regla, ciclita, tamano = 174 }: Props) {
+  const k = tamano / 174;
   const C0 = 110; // centro
   const R = 92; // radio del trazo
   const ANCHO = 24;
@@ -50,8 +52,8 @@ export function AnilloFase({ dia, total, regla, ciclita }: Props) {
   const marca = punto(dia - 0.5);
 
   return (
-    <div style={{ position: "relative", width: 174, height: 184, flex: "none", marginRight: -4 }}>
-      <svg viewBox="0 0 220 220" width="174" height="174" aria-hidden="true">
+    <div style={{ position: "relative", width: tamano, height: tamano + 10 * k, flex: "none" }}>
+      <svg viewBox="0 0 220 220" width={tamano} height={tamano} aria-hidden="true">
         <defs>
           <radialGradient id="anillo-centro" cx="50%" cy="40%" r="60%">
             <stop offset="0" stopColor="#fff6f8" />
@@ -81,8 +83,8 @@ export function AnilloFase({ dia, total, regla, ciclita }: Props) {
         {/* marcador del día */}
         <circle cx={marca.x} cy={marca.y} r="9" fill="#fff" stroke="#f62c39" strokeWidth="3" />
       </svg>
-      <div style={{ position: "absolute", left: 0, right: 10, top: 34, display: "grid", placeItems: "center" }}>
-        <Ciclita id={ciclita} tamano={92} feliz />
+      <div style={{ position: "absolute", left: 0, right: 0, top: 34 * k, display: "grid", placeItems: "center" }}>
+        <Ciclita id={ciclita} tamano={Math.round(92 * k)} feliz />
       </div>
       <div
         style={{
@@ -93,14 +95,14 @@ export function AnilloFase({ dia, total, regla, ciclita }: Props) {
           background: "#fff",
           borderRadius: "50% 50% 46% 46%",
           boxShadow: "0 8px 20px rgba(220, 60, 100, 0.18)",
-          width: 66,
+          width: Math.round(66 * k),
           padding: "8px 0 6px",
           textAlign: "center",
           lineHeight: 1,
         }}
       >
         <span style={{ display: "block", fontSize: 12, fontWeight: 700, color: "var(--vino)" }}>Día</span>
-        <span className="num" style={{ fontFamily: "var(--f-display)", fontSize: 26, color: "var(--rojo)" }}>
+        <span className="num" style={{ fontFamily: "var(--f-titulo)", fontWeight: 500, fontSize: Math.round(28 * k), color: "var(--rojo-texto)" }}>
           {dia}
         </span>
         <span style={{ display: "block", fontSize: 12, fontWeight: 700, color: "var(--vino)" }}>de {total}</span>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Caveat, Fraunces, Lora, Manrope } from "next/font/google";
+import { Fraunces, Lora, Manrope } from "next/font/google";
 import localFont from "next/font/local";
 import { Marco } from "@/components/Marco";
 import "./globals.css";
@@ -12,10 +12,9 @@ const glodok = localFont({
   variable: "--font-glodok",
   display: "swap",
 });
-const fraunces = Fraunces({ subsets: ["latin"], weight: ["700", "900"], style: ["normal", "italic"], variable: "--font-fraunces" });
-const lora = Lora({ subsets: ["latin"], weight: ["500", "700"], style: ["normal", "italic"], variable: "--font-lora" });
+const fraunces = Fraunces({ subsets: ["latin"], weight: ["400", "500", "600"], style: ["normal", "italic"], variable: "--font-fraunces" });
+const lora = Lora({ subsets: ["latin"], weight: ["400", "500", "700"], style: ["normal", "italic"], variable: "--font-lora" });
 const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"], variable: "--font-manrope" });
-const caveat = Caveat({ subsets: ["latin"], weight: ["500", "700"], variable: "--font-caveat" });
 
 export const metadata: Metadata = {
   title: "Mi Ciclo",
@@ -35,7 +34,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-CO" className={`${lora.variable} ${manrope.variable} ${caveat.variable} ${glodok.variable} ${fraunces.variable}`}>
+    <html lang="es-CO" className={`${lora.variable} ${manrope.variable} ${glodok.variable} ${fraunces.variable}`}>
       <body>
         <Marco>{children}</Marco>
       </body>

@@ -30,7 +30,7 @@
 .pestana {
   position: relative;
   padding: 10px 0 11px;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--texto-3);
   white-space: nowrap;
@@ -71,7 +71,7 @@
   gap: 5px;
   flex: none;
   width: 66px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--vino);
   position: relative;
@@ -91,7 +91,7 @@
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: var(--rojo);
+  background: var(--rojo-accion);
   color: var(--blanco);
   border: 2px solid var(--blanco);
 }
@@ -132,7 +132,7 @@
   white-space: nowrap;
 }
 .tema {
-  font-size: 10.5px;
+  font-size: 12px;
   padding: 2px 8px;
   font-weight: 600;
   border-radius: 999px;
@@ -150,7 +150,7 @@
   color: var(--durazno-tinta);
 }
 .seguir {
-  color: var(--rojo);
+  color: var(--rojo-texto);
   font-weight: 700;
   font-size: 13px;
   min-height: 44px;
@@ -164,7 +164,7 @@
   border-radius: 14px;
   background: var(--mantequilla);
   color: var(--mantequilla-tinta);
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
 }
 
@@ -215,7 +215,7 @@
   font-family: var(--f-titulo);
   font-size: 40px;
   line-height: 0.6;
-  color: var(--rojo);
+  color: var(--rojo-texto);
   height: 18px;
 }
 .citaTexto {
@@ -280,7 +280,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--vino);
 }
 .pila {
@@ -294,7 +294,7 @@
   border-radius: 50%;
 }
 .pie {
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.45;
   overflow-wrap: anywhere;
 }
@@ -310,7 +310,7 @@
   align-items: center;
   gap: 4px;
   color: var(--lila-tinta);
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
   overflow-wrap: anywhere;
 }
@@ -339,7 +339,7 @@
   min-height: 40px;
 }
 .publicarMini {
-  color: var(--rojo);
+  color: var(--rojo-texto);
   font-weight: 700;
   font-size: 13px;
   min-height: 40px;
@@ -371,7 +371,7 @@
   display: flex;
   flex-direction: column;
   gap: 1px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
 }
 .reelMiniPlay {
@@ -439,7 +439,7 @@
   padding: 0 18px;
   border-radius: 999px;
   background: var(--blanco);
-  color: var(--rojo);
+  color: var(--rojo-texto);
   font-weight: 700;
   font-size: 13px;
   box-shadow: inset 0 0 0 1.5px var(--linea);
@@ -474,7 +474,7 @@
   outline: none;
   background: transparent;
   min-height: 40px;
-  font-size: 13.5px;
+  font-size: 14px;
 }
 .esperan {
   width: 210px;
@@ -493,7 +493,7 @@
 }
 .esperanTexto {
   font-family: var(--f-titulo);
-  font-size: 16.5px;
+  font-size: 16px;
   line-height: 1.3;
   flex: 1;
 }
@@ -503,9 +503,9 @@
   padding: 0 16px;
   border-radius: 999px;
   background: var(--blanco);
-  color: var(--rojo);
+  color: var(--rojo-texto);
   font-weight: 700;
-  font-size: 12.5px;
+  font-size: 13px;
   display: inline-flex;
   align-items: center;
 }
@@ -520,7 +520,7 @@
 }
 .preguntaTexto {
   font-family: var(--f-titulo);
-  font-size: 17.5px;
+  font-size: 17px;
   line-height: 1.35;
   overflow-wrap: anywhere;
 }
@@ -537,7 +537,7 @@
   padding: 10px 12px;
   border-radius: 16px;
   background: var(--crema);
-  font-size: 12.5px;
+  font-size: 13px;
   line-height: 1.4;
 }
 .contadores {
@@ -578,15 +578,15 @@
   flex-wrap: wrap;
 }
 .etiquetaAutora {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   padding: 2px 7px;
   border-radius: 999px;
-  background: var(--rojo);
+  background: var(--rojo-accion);
   color: var(--blanco);
 }
 .comentarioTexto {
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.45;
   overflow-wrap: anywhere;
 }
@@ -611,7 +611,7 @@
   min-width: 40px;
   min-height: 44px;
   justify-content: center;
-  font-size: 10.5px;
+  font-size: 12px;
   color: var(--texto-3);
 }
 .respuestas {
@@ -647,7 +647,7 @@
   border-radius: 999px;
   background: var(--blanco);
   box-shadow: inset 0 0 0 1.5px var(--linea);
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
 }
 .campoComentario {
@@ -673,7 +673,7 @@
   outline: none;
   background: transparent;
   min-height: 40px;
-  font-size: 13.5px;
+  font-size: 14px;
 }
 .enviar {
   width: 40px;

@@ -36,7 +36,7 @@
   min-width: 16px;
   min-height: 16px;
   border-radius: 50%;
-  background: var(--rojo);
+  background: var(--rojo-accion);
   color: var(--blanco);
   display: grid;
   place-items: center;

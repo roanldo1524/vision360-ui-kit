@@ -10,7 +10,7 @@ import { clases } from "@/lib/utilidades";
 import { Hoja } from "@/components/Hoja";
 import { Ilustracion } from "@/components/Ilustracion";
 import { avisar } from "@/components/Avisos";
-import estilos from "./hoy.module.css";
+import estilos from "./bienestar.module.css";
 
 const TIENDA = "https://miciclo.co";
 const utm = (contenido: string) =>

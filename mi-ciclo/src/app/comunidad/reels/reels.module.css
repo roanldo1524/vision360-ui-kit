@@ -42,7 +42,7 @@
 .filtro {
   position: relative;
   min-height: 44px;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.7);
 }
@@ -131,7 +131,7 @@
   min-width: 52px;
   min-height: 52px;
   color: #fff;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.35));
 }
@@ -163,12 +163,12 @@
   border-radius: 999px;
   border: 1.5px solid rgba(255, 255, 255, 0.85);
   color: #fff;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
 }
 .revision {
   align-self: flex-start;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   padding: 3px 9px;
   border-radius: 999px;
@@ -177,7 +177,7 @@
 }
 .texto {
   text-align: left;
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.4;
   color: #fff;
   display: -webkit-box;
@@ -227,7 +227,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 11px;
+  font-size: 12px;
   opacity: 0.8;
   pointer-events: none;
 }

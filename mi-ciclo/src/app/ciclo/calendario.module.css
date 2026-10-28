@@ -6,7 +6,7 @@
 }
 .cabeza {
   text-align: center;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--texto-3);
   padding-bottom: 4px;
@@ -43,7 +43,7 @@
   background: var(--fase-lutea);
 }
 .regla {
-  background: var(--rojo);
+  background: var(--rojo-accion);
   color: var(--blanco);
 }
 .regla .marcas {

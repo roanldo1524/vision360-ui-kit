@@ -106,7 +106,7 @@
   place-items: center;
   flex: none;
   background: var(--rojo-suave);
-  color: var(--rojo);
+  color: var(--rojo-texto);
 }
 .checkHecha {
   background: var(--menta-tinta);

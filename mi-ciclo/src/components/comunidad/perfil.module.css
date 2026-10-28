@@ -25,7 +25,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--rojo);
+  background: var(--rojo-accion);
   color: var(--blanco);
   border: 2.5px solid var(--crema);
   display: grid;
@@ -49,7 +49,7 @@
 }
 .numeros dd {
   margin: 0;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--texto-3);
 }
 .nombreFila {
@@ -58,7 +58,7 @@
   gap: 10px;
 }
 .bio {
-  font-size: 13.5px;
+  font-size: 14px;
   color: var(--texto-2);
   max-width: 36ch;
   overflow-wrap: anywhere;
@@ -81,7 +81,7 @@
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
 }
 .destacada > span:last-child {
@@ -102,7 +102,7 @@
 }
 .destacadaNueva {
   background: var(--blanco);
-  color: var(--rojo);
+  color: var(--rojo-texto);
 }
 .pestanas {
   display: grid;
@@ -128,7 +128,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--rojo);
+  background: var(--rojo-accion);
 }
 .mosaico {
   columns: 2;
@@ -166,7 +166,7 @@
   position: absolute;
   left: 8px;
   bottom: 8px;
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 700;
   padding: 3px 8px;
   border-radius: 999px;
@@ -193,7 +193,7 @@
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: #fff;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);

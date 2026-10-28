@@ -1,0 +1,256 @@
+/* Bienestar: agua, objetivo y productos recomendados */
+.tituloSans {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-family: var(--f-ui);
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: -0.02em;
+  color: var(--vino);
+}
+
+.tituloCarmesi {
+  color: var(--carmesi);
+}
+
+.tituloCarmesiSans {
+  color: var(--carmesi);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ---------- Tarjetas blancas (agua, objetivo, productos) ---------- */
+.tarjetaBlanca {
+  background: var(--blanco);
+  border-radius: 24px;
+  box-shadow: var(--sombra);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.enlaceLila {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--violeta-oscuro);
+}
+
+.aguaCuenta {
+  font-size: 15px;
+  color: var(--vino);
+  margin-top: 2px;
+}
+
+.barraAgua {
+  height: 6px;
+  border-radius: 6px;
+  background: #eef4ff;
+  overflow: hidden;
+}
+
+.barraAgua span {
+  display: block;
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #7cc4ff, #3e9bff);
+  transition: width 400ms var(--ease-out);
+}
+
+.vasos {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin: 0 -16px;
+  padding: 2px 16px 4px;
+}
+
+.vasos::-webkit-scrollbar {
+  display: none;
+}
+
+.vaso {
+  flex: none;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  color: var(--vino);
+  transition: transform 160ms var(--ease-out);
+}
+
+.vaso:active {
+  transform: scale(0.92);
+}
+
+.vasoForma {
+  position: relative;
+  width: 52px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  background: #f1eef0;
+  clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.vasoAgua {
+  position: absolute;
+  inset: 22% 0 0 0;
+  background: linear-gradient(180deg, #9fd5ff, #4aa8ff);
+  animation: llenar 420ms var(--ease-out) both;
+}
+
+.vasoSiguiente .vasoForma {
+  background: #fff;
+  outline: 2px dashed #b9b3bb;
+  outline-offset: -3px;
+  color: var(--vino);
+}
+
+/* Objetivo */
+.diana {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 4px solid var(--rojo);
+  position: relative;
+  flex: none;
+}
+
+.diana::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: var(--rojo-accion);
+}
+
+.objetivos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.objetivo {
+  min-height: 44px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #f1eef0;
+  color: var(--vino);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.1;
+  transition: background-color 200ms ease, transform 160ms var(--ease-out);
+}
+
+.objetivo:active {
+  transform: scale(0.96);
+}
+
+.objetivoActivo {
+  background: var(--rosa);
+  color: var(--carmesi);
+}
+
+.filaAjuste {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 56px;
+  padding-top: 8px;
+  border-top: 1px solid var(--linea);
+  color: var(--vino);
+}
+
+.aro {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 4px solid var(--violeta-oscuro);
+  flex: none;
+}
+
+.barriga {
+  width: 24px;
+  height: 28px;
+  flex: none;
+  background: var(--rojo-accion);
+  border-radius: 6px 60% 50% 10px;
+}
+
+/* Productos */
+.productos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.producto {
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff7f9;
+  box-shadow: inset 0 0 0 1px var(--linea);
+  transition: transform 160ms var(--ease-out);
+}
+
+.producto:active {
+  transform: scale(0.97);
+}
+
+.productoImagen {
+  aspect-ratio: 1;
+  max-width: 100%;
+  overflow: hidden;
+  background: #fbe0e7;
+  display: grid;
+  place-items: center;
+}
+
+.productoImagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.productoTexto {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 8px 4px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--vino);
+  min-height: 46px;
+}
+
+.productoTexto b {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.carrito {
+  align-self: center;
+  margin: 4px 0 10px;
+  width: 52px;
+  height: 34px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: var(--rosa);
+  color: var(--rojo-texto);
+}
+
+@keyframes llenar {
+  from {
+    transform: translateY(100%);
+  }
+}

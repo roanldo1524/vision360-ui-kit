@@ -1,166 +1,178 @@
-/* Inicio · fiel a la referencia aprobada, con tipografía de miciclo.co */
+/* Inicio · un lugar tranquilo.
+   Ritmo de 8 px, tarjetas blancas sobre rosa claro, tipografía liviana
+   (Fraunces 500 con itálica de acento, Manrope) y un solo botón rojo: el ritual. */
+
 .inicio {
-  gap: 18px;
+  gap: 20px;
 }
 
-/* ---------- Saludo ---------- */
-.cabeza {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas:
-    "hola acciones"
-    "nombre nombre"
-    "lema lema";
-  align-items: end;
-  padding-top: 8px;
-}
-.saludo {
-  display: contents;
-}
-.hola {
-  grid-area: hola;
-}
-.nombre {
-  grid-area: nombre;
-}
-.lema {
-  grid-area: lema;
-}
-.hola {
-  font-family: var(--f-ui);
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: var(--vino);
-}
-.nombre {
-  font-family: var(--f-display);
-  font-weight: 400;
-  font-size: clamp(34px, 11vw, 46px);
-  line-height: 1.05;
-  color: var(--carmesi);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.lema {
-  margin-top: 6px;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--vino);
-}
-.acciones {
-  grid-area: acciones;
+/* ---------- Barra superior ---------- */
+.barraSuperior {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
 }
-.accion {
+.logo {
+  height: 22px;
+  width: auto;
+}
+.accesos {
+  display: flex;
+  gap: 4px;
+  margin-right: -8px;
+}
+.acceso {
   position: relative;
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: var(--blanco);
   color: var(--vino);
-  box-shadow: var(--sombra);
-  transition: transform 160ms var(--ease-out);
+  transition: background-color 200ms ease, transform 160ms var(--ease-out);
 }
-.accion:active {
+.acceso:active {
   transform: scale(0.92);
+  background: var(--blanco);
 }
-.accionRoja {
-  color: var(--rojo);
-}
-.punto {
+.puntito {
   position: absolute;
-  top: 1px;
-  right: 1px;
-  width: 11px;
-  height: 11px;
+  top: 10px;
+  right: 11px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--rojo);
-  border: 2px solid var(--blanco);
+  box-shadow: 0 0 0 2px var(--crema);
+}
+
+/* ---------- Saludo ---------- */
+.saludo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: -4px;
+}
+.fecha {
+  font-size: 14px;
+  color: var(--texto-2);
+}
+.fecha::first-letter {
+  text-transform: uppercase;
+}
+.hola {
+  font-family: var(--f-titulo);
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--vino);
+}
+.hola em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--carmesi);
 }
 
 /* ---------- Semana ---------- */
 .semana {
   display: grid;
-  grid-template-columns: 28px 1fr 28px;
+  grid-template-columns: 32px 1fr 32px;
   align-items: center;
-  background: var(--blanco);
-  border-radius: 24px;
-  box-shadow: var(--sombra);
-  padding: 8px 4px;
+  margin: 0 -8px;
 }
 .flecha {
-  height: 44px;
+  height: 64px;
   display: grid;
   place-items: center;
-  color: var(--vino);
+  color: var(--texto-3);
 }
 .dias {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 2px;
 }
 .dia {
   display: grid;
   justify-items: center;
   gap: 4px;
-  padding: 4px 0;
-  min-height: 58px;
+  padding: 8px 0 6px;
+  min-height: 64px;
+  border-radius: 18px;
   color: var(--vino);
-  transition: transform 160ms var(--ease-out);
+  transition: background-color 200ms ease, transform 160ms var(--ease-out);
 }
 .dia:active {
-  transform: scale(0.92);
+  transform: scale(0.94);
 }
 .diaNombre {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-size: 12px;
+  color: var(--texto-2);
 }
 .diaNumero {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 34px;
-  border-radius: 10px;
   font-size: 17px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  transition: background-color 200ms ease, color 200ms ease;
 }
-.diaHoy .diaNombre {
-  color: var(--rojo);
-  font-weight: 800;
-}
-.diaHoy .diaNumero {
+.diaRegla {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
   background: var(--rojo);
-  color: #fff;
-  box-shadow: 0 6px 14px rgba(238, 45, 94, 0.35);
 }
-.diaElegido .diaNumero {
-  background: var(--rosa);
-  color: var(--carmesi);
-}
-
-/* ---------- Fase ---------- */
-.fase {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 4px 0;
-  padding: 18px 12px 14px 18px;
-  border-radius: 28px;
+.diaHoy {
   background: var(--blanco);
   box-shadow: var(--sombra);
+}
+.diaHoy .diaNombre {
+  color: var(--rojo-texto);
+  font-weight: 700;
+}
+.diaHoy .diaNumero {
+  color: var(--rojo-texto);
+}
+.diaElegido {
+  background: var(--rosa);
+}
+
+/* ---------- Portada de la fase ---------- */
+.fase {
+  position: relative;
   overflow: hidden;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #ffe7f2 0%, var(--rosa) 100%);
+  padding: 22px 14px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  container-type: inline-size;
+}
+.florFondo {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  left: -90px;
+  bottom: -110px;
+  background: url("/marca/flor.webp") center / contain no-repeat;
+  opacity: 0.07;
+  pointer-events: none;
+}
+.faseCuerpo {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+}
+@container (max-width: 280px) {
+  .faseCuerpo {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+  .faseCuerpo > :last-child {
+    justify-self: center;
+  }
 }
 .faseTexto {
   display: flex;
@@ -168,593 +180,350 @@
   gap: 8px;
   min-width: 0;
 }
-.etiqueta {
-  font-size: 10.5px;
+.faseEtiqueta {
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--vino);
+  color: var(--texto-2);
 }
 .faseNombre {
   font-family: var(--f-titulo);
-  font-weight: 900;
-  font-size: clamp(25px, 7.4vw, 31px);
-  line-height: 0.98;
-  letter-spacing: -0.03em;
-  color: var(--carmesi);
-}
-.faseDescripcion {
-  font-size: 15px;
-  line-height: 1.3;
+  font-weight: 400;
+  font-size: clamp(26px, 7.6vw, 30px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
   color: var(--vino);
 }
-.botonFase {
-  align-self: flex-start;
-  margin-top: 4px;
-  min-height: 46px;
-  padding: 0 18px 0 22px;
+.faseNombre em {
+  display: block;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--carmesi);
+}
+.faseConsejo {
+  font-family: var(--f-acento);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--vino);
+}
+.fasePie {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(31, 5, 38, 0.08);
 }
 .prediccion {
-  grid-column: 1 / -1;
-  margin-top: 8px;
-  padding-top: 10px;
-  border-top: 1px solid var(--linea);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--texto-2);
 }
 .prediccion b {
   color: var(--vino);
+  font-weight: 700;
+}
+.enlaceFase {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--blanco);
+  color: var(--vino);
+  font-weight: 700;
+  font-size: 14px;
+  transition: transform 160ms var(--ease-out);
+}
+.enlaceFase:active {
+  transform: scale(0.97);
 }
 
 /* ---------- Ritual ---------- */
 .ritual {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   background: var(--blanco);
-  border-radius: 24px;
+  border-radius: 28px;
   box-shadow: var(--sombra);
-  overflow: hidden;
-}
-.ritualIzq {
-  padding: 16px 12px 14px 16px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  border-right: 1px solid var(--linea);
+  gap: 16px;
+}
+.ritualCabeza {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.sobreMarco {
+  flex: none;
+  width: 72px;
+  height: 72px;
+  border-radius: 22px;
+  background: var(--rosa);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.sobreMarco img {
+  width: 76px;
+  height: 76px;
+  transform: rotate(-8deg) translateY(4px);
+}
+.ritualTexto {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
 }
 .ritualTitulo {
   font-family: var(--f-titulo);
-  font-weight: 900;
-  font-size: 22px;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  color: var(--carmesi);
-}
-.siNo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-}
-.si,
-.no {
-  min-height: 44px;
-  border-radius: 14px;
-  font-weight: 800;
-  font-size: 16px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  transition: transform 160ms var(--ease-out), background-color 200ms ease, color 200ms ease;
-}
-.si:active,
-.no:active {
-  transform: scale(0.95);
-}
-.si {
-  background: var(--rojo);
-  color: #fff;
-  box-shadow: var(--sombra-rojo);
-}
-.siActivo {
-  background: var(--carmesi);
-}
-.no {
-  background: var(--rosa);
-  color: var(--carmesi);
-}
-.noActivo {
-  box-shadow: inset 0 0 0 2px var(--carmesi);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--vino);
 }
 .racha {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--rojo-hondo);
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texto-2);
 }
 .semanaRitual {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 3px;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
 }
 .marca {
-  aspect-ratio: 1;
-  max-width: 100%;
+  justify-self: center;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  font-size: 9.5px;
-  font-weight: 800;
-  color: var(--texto-3);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--texto-2);
   background: var(--rosa-claro);
+  transition: background-color 240ms ease;
 }
 .marcaHecha {
   background: var(--rojo);
   color: #fff;
-  animation: sellar 360ms var(--ease-out) both;
+  animation: sellar 380ms var(--ease-out) both;
 }
 @keyframes sellar {
   from {
-    transform: scale(0.6);
+    transform: scale(0.7);
   }
 }
 .marcaHoy {
-  background: transparent;
+  background: var(--blanco);
   box-shadow: inset 0 0 0 1.5px var(--rojo);
-  color: var(--rojo);
+  color: var(--rojo-texto);
 }
-.ritualDer {
-  position: relative;
-  padding: 16px 14px 14px;
+.ritualAcciones {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 8px;
+}
+.ritualAcciones :global(.boton) {
+  min-height: 50px;
+  padding: 0 12px;
+}
+.todaviaMarcado {
+  background: var(--rosa-claro) !important;
+}
+.listo {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-  background: var(--blanco);
-}
-.ritualFondo {
-  position: absolute;
-  right: -26px;
-  bottom: -14px;
-  width: 96px;
-  height: 96px;
-  transform: rotate(12deg);
-  opacity: 0.55;
-  pointer-events: none;
-}
-.motivoTitulo {
-  position: relative;
-  font-family: var(--f-ui);
-  font-weight: 800;
-  font-size: 14px;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: var(--carmesi);
-}
-.motivoAyuda {
-  position: relative;
-  font-size: 12px;
-  line-height: 1.3;
-  color: var(--texto-2);
-}
-.selector {
-  position: relative;
-  margin-top: auto;
-}
-.selector select {
-  appearance: none;
-  width: 100%;
-  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 50px;
+  padding: 0 6px 0 16px;
   border-radius: 999px;
-  border: 0;
-  background: var(--blanco);
-  box-shadow: var(--sombra);
-  padding: 0 30px 0 14px;
-  font-size: 12.5px;
+  background: var(--rosa-claro);
   font-weight: 600;
+  font-size: 15px;
   color: var(--vino);
-  text-overflow: ellipsis;
 }
-.selector svg {
-  position: absolute;
-  right: 11px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: var(--vino);
+.deshacer {
+  min-height: 44px;
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texto-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* ---------- Ánimo ---------- */
 .tarjetaAnimo {
   background: var(--blanco);
-  border-radius: 24px;
+  border-radius: 28px;
   box-shadow: var(--sombra);
-  padding: 16px 12px 12px 16px;
+  padding: 18px 14px 14px;
+  gap: 14px;
 }
-.tituloSans {
+.animoCabeza {
   display: flex;
   align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-  font-family: var(--f-ui);
-  font-weight: 800;
-  font-size: 19px;
-  letter-spacing: -0.02em;
+  justify-content: space-between;
+  gap: 8px;
+  padding-left: 4px;
+}
+.tituloSeccion {
+  font-family: var(--f-titulo);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
   color: var(--vino);
 }
-.filaAnimos {
-  display: flex;
-  gap: 4px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  margin-right: -12px;
-  padding-right: 12px;
+.tituloSeccion em {
+  font-style: italic;
+  color: var(--carmesi);
 }
-.filaAnimos::-webkit-scrollbar {
-  display: none;
+.botonSintomas {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-height: 44px;
+  padding: 0 10px 0 14px;
+  border-radius: 999px;
+  background: var(--rosa-claro);
+  color: var(--vino);
+  font-size: 14px;
+  font-weight: 700;
+}
+.filaAnimos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
 }
 .animo {
-  flex: none;
   display: grid;
   justify-items: center;
   gap: 6px;
-  min-width: 62px;
-  padding: 2px 0 4px;
-  font-size: 13px;
+  padding: 10px 4px;
+  border-radius: 20px;
+  font-size: 14px;
   color: var(--vino);
-  transition: transform 160ms var(--ease-out);
+  transition: background-color 200ms ease, transform 160ms var(--ease-out);
 }
 .animo:active {
-  transform: scale(0.92);
+  transform: scale(0.95);
 }
 .animo svg {
-  border-radius: 50%;
-  transition: box-shadow 200ms ease, transform 200ms var(--ease-out);
+  width: 48px;
+  height: 48px;
 }
 .animoElegido {
-  font-weight: 800;
-  color: var(--carmesi);
-}
-.animoElegido svg {
-  box-shadow: 0 0 0 3px var(--blanco), 0 0 0 5px var(--rojo);
-  transform: scale(1.04);
+  background: var(--rosa-claro);
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1.5px var(--rojo);
 }
 .consejoAnimo {
   display: flex;
   gap: 10px;
-  padding: 12px 14px;
-  border-radius: 16px;
+  padding: 14px 16px;
+  border-radius: 20px;
   background: var(--lila);
   color: var(--vino);
+  font-family: var(--f-acento);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.5;
   animation: entrar 320ms var(--ease-out) both;
 }
 .consejoAnimo svg {
-  color: var(--lavanda-honda);
+  color: var(--violeta-oscuro);
 }
 
-/* ---------- Bloques pares (Consejos/Diario, Pareja) ---------- */
-.par {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.bloque {
-  position: relative;
-  min-height: 168px;
-  border-radius: 22px;
-  overflow: hidden;
-  background: linear-gradient(150deg, #fff 0%, #fff4f7 55%, #fde3ea 100%);
-  box-shadow: var(--sombra);
-  display: flex;
-  transition: transform 160ms var(--ease-out);
-}
-.bloque:active {
-  transform: scale(0.98);
-}
-.bloqueLila {
-  background: linear-gradient(150deg, #fbf3ff 0%, #f6e6fd 55%, #e7befb 100%);
-}
-.bloqueImagen {
-  position: absolute;
-  right: -18px;
-  bottom: -18px;
-  width: 112px;
-  height: 112px;
-  border-radius: 24px;
-  overflow: hidden;
-  opacity: 0.95;
-}
-.bloqueTexto {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 14px 12px 12px 14px;
-  width: 100%;
-}
-.bloqueTitulo {
-  font-family: var(--f-titulo);
-  font-weight: 900;
-  font-size: 19px;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  color: var(--vino);
-  max-width: 9.5ch;
-}
-.tituloCarmesi {
-  color: var(--carmesi);
-}
-.tituloCarmesiSans {
-  color: var(--carmesi);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.corazonTitulo {
-  display: inline;
-  vertical-align: -3px;
-}
-.bloqueSub {
-  font-size: 12.5px;
-  line-height: 1.25;
-  color: var(--vino);
-  max-width: 13ch;
-}
-.pildora {
-  margin-top: auto;
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  min-height: 36px;
-  padding: 0 10px 0 14px;
-  border-radius: 999px;
-  background: var(--rojo);
-  color: #fff;
-  font-weight: 800;
-  font-size: 13px;
-}
-.pildoraLila {
-  background: var(--violeta-oscuro);
-}
-.corazones {
-  position: absolute;
-  right: -10px;
-  bottom: 12px;
-  display: grid;
-  filter: drop-shadow(0 8px 12px rgba(230, 80, 120, 0.25));
-}
-.corazones > :last-child {
-  margin: -30px 0 0 -26px;
-}
-.parejaAvatares {
-  position: absolute;
-  right: -6px;
-  top: 52%;
-  display: flex;
-  align-items: center;
-}
-.parejaMas {
-  width: 52px;
-  height: 52px;
-  margin-left: -8px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: var(--rojo);
-  background: var(--blanco);
-  box-shadow: 0 0 0 4px #ffd2de, var(--sombra);
-}
-
-/* ---------- Tarjetas blancas (agua, objetivo, productos) ---------- */
-.tarjetaBlanca {
-  background: var(--blanco);
-  border-radius: 24px;
-  box-shadow: var(--sombra);
-  padding: 16px;
+/* ---------- Para ti hoy ---------- */
+.paraTi {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-.enlaceLila {
-  display: inline-flex;
-  align-items: center;
-  min-height: 36px;
-  font-weight: 800;
-  font-size: 14px;
-  color: var(--violeta-oscuro);
+.paraTi .tituloSeccion {
+  padding-left: 4px;
 }
-.aguaCuenta {
-  font-size: 15px;
-  color: var(--vino);
-  margin-top: 2px;
+.lista {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  background: var(--blanco);
+  border-radius: 28px;
+  box-shadow: var(--sombra);
 }
-.barraAgua {
-  height: 6px;
-  border-radius: 6px;
-  background: #eef4ff;
-  overflow: hidden;
+.lista li + li {
+  border-top: 1px solid var(--linea);
 }
-.barraAgua span {
-  display: block;
-  height: 100%;
-  border-radius: 6px;
-  background: linear-gradient(90deg, #7cc4ff, #3e9bff);
-  transition: width 400ms var(--ease-out);
-}
-.vasos {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  margin: 0 -16px;
-  padding: 2px 16px 4px;
-}
-.vasos::-webkit-scrollbar {
-  display: none;
-}
-.vaso {
-  flex: none;
-  display: grid;
-  justify-items: center;
-  gap: 6px;
-  color: var(--vino);
-  transition: transform 160ms var(--ease-out);
-}
-.vaso:active {
-  transform: scale(0.92);
-}
-.vasoForma {
-  position: relative;
-  width: 52px;
-  height: 64px;
-  display: grid;
-  place-items: center;
-  background: #f1eef0;
-  clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
-  border-radius: 4px;
-  overflow: hidden;
-}
-.vasoAgua {
-  position: absolute;
-  inset: 22% 0 0 0;
-  background: linear-gradient(180deg, #9fd5ff, #4aa8ff);
-  animation: llenar 420ms var(--ease-out) both;
-}
-@keyframes llenar {
-  from {
-    transform: translateY(100%);
-  }
-}
-.vasoSiguiente .vasoForma {
-  background: #fff;
-  outline: 2px dashed #b9b3bb;
-  outline-offset: -3px;
-  color: var(--vino);
-}
-
-/* Objetivo */
-.diana {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 4px solid var(--rojo);
-  position: relative;
-  flex: none;
-}
-.diana::after {
-  content: "";
-  position: absolute;
-  inset: 4px;
-  border-radius: 50%;
-  background: var(--rojo);
-}
-.objetivos {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-}
-.objetivo {
-  min-height: 44px;
-  padding: 0 6px;
-  border-radius: 999px;
-  background: #f1eef0;
-  color: var(--vino);
-  font-size: 12.5px;
-  font-weight: 700;
-  line-height: 1.1;
-  transition: background-color 200ms ease, transform 160ms var(--ease-out);
-}
-.objetivo:active {
-  transform: scale(0.96);
-}
-.objetivoActivo {
-  background: var(--rosa);
-  color: var(--carmesi);
-}
-.filaAjuste {
+.fila {
   display: flex;
   align-items: center;
   gap: 14px;
-  min-height: 56px;
-  padding-top: 8px;
-  border-top: 1px solid var(--linea);
-  color: var(--vino);
+  min-height: 76px;
+  padding: 8px 8px 8px 8px;
+  border-radius: 22px;
+  transition: background-color 200ms ease;
 }
-.aro {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 4px solid #f59a24;
+.fila:active {
+  background: var(--rosa-claro);
+}
+.filaImagen {
   flex: none;
-}
-.barriga {
-  width: 24px;
-  height: 28px;
-  flex: none;
-  background: var(--rojo);
-  border-radius: 6px 60% 50% 10px;
-}
-
-/* Productos */
-.productos {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-.producto {
-  display: flex;
-  flex-direction: column;
+  width: 60px;
+  height: 60px;
   border-radius: 18px;
   overflow: hidden;
-  background: #fff7f9;
-  box-shadow: inset 0 0 0 1px var(--linea);
-  transition: transform 160ms var(--ease-out);
-}
-.producto:active {
-  transform: scale(0.97);
-}
-.productoImagen {
-  aspect-ratio: 1;
-  max-width: 100%;
-  overflow: hidden;
-  background: #fbe0e7;
+  background: var(--rosa);
   display: grid;
   place-items: center;
 }
-.productoImagen img {
+.filaImagen img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top;
 }
-.productoTexto {
+.miniCiclitas {
+  display: flex;
+}
+.miniCiclitas > * + * {
+  margin-left: -10px;
+}
+.filaTexto {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  padding: 8px 8px 4px;
-  font-size: 12px;
+  gap: 2px;
+}
+.filaTitulo {
+  font-family: var(--f-titulo);
+  font-weight: 500;
+  font-size: 17px;
   line-height: 1.2;
   color: var(--vino);
-  min-height: 46px;
 }
-.productoTexto b {
-  font-size: 12.5px;
-  font-weight: 800;
+.filaSub {
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--texto-2);
 }
-.carrito {
-  align-self: center;
-  margin: 4px 0 10px;
-  width: 52px;
-  height: 34px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  background: var(--rosa);
-  color: var(--rojo);
+.filaFlecha {
+  flex: none;
+  color: var(--texto-3);
 }
 
 /* ---------- Comunidad ---------- */
@@ -762,10 +531,14 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  background: var(--blanco);
+  min-height: 72px;
+  padding: 12px 14px;
   border-radius: 24px;
-  box-shadow: var(--sombra);
-  padding: 14px 16px;
+  background: var(--lila);
+  transition: transform 160ms var(--ease-out);
+}
+.comunidad:active {
+  transform: scale(0.98);
 }
 .pila {
   display: flex;
@@ -775,6 +548,19 @@
   margin-left: -10px;
 }
 .pila > * {
-  box-shadow: 0 0 0 2px var(--blanco);
+  box-shadow: 0 0 0 2px var(--lila);
   border-radius: 50%;
+}
+.comunidadTexto {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+  color: var(--texto-2);
+}
+.comunidadTexto b {
+  font-size: 15px;
+  color: var(--vino);
 }
