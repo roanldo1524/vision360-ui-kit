@@ -10,35 +10,65 @@
   overflow: visible;
 }
 .hoja::backdrop {
-  background: rgba(58, 18, 32, 0.36);
-  backdrop-filter: blur(2px);
+  background: rgba(31, 5, 38, 0.42);
+}
+.hoja[open]::backdrop {
+  animation: velo 240ms ease-out both;
+}
+@keyframes velo {
+  from {
+    opacity: 0;
+  }
 }
 .hoja[open] .contenido {
   animation: subir 340ms var(--ease-cajon) both;
 }
 .contenido {
-  background: var(--crema);
-  border-radius: 28px 28px 0 0;
+  background: var(--blanco);
+  border-radius: 32px 32px 0 0;
   padding: 10px max(20px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px))
     max(20px, env(safe-area-inset-left, 0px));
   max-height: 88dvh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 .asa {
-  width: 40px;
+  width: 36px;
   height: 4px;
-  border-radius: 4px;
-  background: #e5d6da;
-  margin: 0 auto 4px;
+  border-radius: 2px;
+  background: #f0dfe6;
+  margin: 0 auto;
 }
 .cabeza {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+}
+.titulo {
+  font-family: var(--f-titulo);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--vino);
+}
+.cerrar {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  margin-right: -6px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--rosa-claro);
+  color: var(--vino);
+  transition: transform 160ms var(--ease-out);
+}
+.cerrar:active {
+  transform: scale(0.92);
 }
 @keyframes subir {
   from {

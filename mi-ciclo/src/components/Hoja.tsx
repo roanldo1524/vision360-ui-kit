@@ -46,8 +46,8 @@ export function Hoja({ abierta, alCerrar, titulo, children }: Props) {
           <div className={estilos.asa} aria-hidden="true" />
           {titulo && (
             <div className={estilos.cabeza}>
-              <h2 className="titulo-m">{titulo}</h2>
-              <button className="boton-icono" onClick={alCerrar} aria-label="Cerrar">
+              <h2 className={estilos.titulo}>{titulo}</h2>
+              <button className={estilos.cerrar} onClick={alCerrar} aria-label="Cerrar">
                 <X size={20} />
               </button>
             </div>
