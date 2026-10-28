@@ -13,6 +13,7 @@ import { Hoja } from "@/components/Hoja";
 import { avisar } from "@/components/Avisos";
 import { clases } from "@/lib/utilidades";
 import { Jardin } from "./Jardin";
+import { Productos } from "@/components/hoy/Bienestar";
 import estilos from "./jardin.module.css";
 
 const formatoFecha = new Intl.DateTimeFormat("es-CO", { day: "numeric", month: "short", timeZone: "America/Bogota" });
@@ -149,6 +150,8 @@ export default function PaginaJardin() {
           })}
         </div>
       </section>
+
+      <Productos />
 
       <section className="seccion" aria-labelledby="t-mis-bonos">
         <h2 id="t-mis-bonos" className="titulo-m">Mis bonos</h2>

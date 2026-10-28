@@ -15,7 +15,6 @@ import { AnilloFase } from "./AnilloFase";
 import { TarjetaRitual } from "./TarjetaRitual";
 import { CheckinAnimo } from "./CheckinAnimo";
 import { ParaTi } from "./ParaTi";
-import { BebeAgua, MiObjetivo, Productos } from "./Bienestar";
 import estilos from "./hoy.module.css";
 
 export function Hoy() {
@@ -133,9 +132,6 @@ export function Hoy() {
       <TarjetaRitual />
       <CheckinAnimo fase={faseHoy} />
       <ParaTi fase={faseHoy} />
-      <BebeAgua />
-      <MiObjetivo />
-      <Productos />
 
       <Confirmar
         abierta={confirmarPeriodo}

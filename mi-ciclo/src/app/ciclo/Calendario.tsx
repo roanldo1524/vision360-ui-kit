@@ -11,6 +11,7 @@ import type { Fase, Fecha } from "@/lib/tipos";
 import { clases } from "@/lib/utilidades";
 import { Hoja, Confirmar } from "@/components/Hoja";
 import { avisar } from "@/components/Avisos";
+import { BebeAgua, MiObjetivo } from "@/components/hoy/Bienestar";
 import estilos from "./calendario.module.css";
 
 const ENCABEZADO = ["L", "M", "M", "J", "V", "S", "D"];
@@ -192,6 +193,9 @@ export function Calendario() {
           </ul>
         </div>
       </section>
+
+      <BebeAgua />
+      <MiObjetivo />
 
       <DetalleDia fecha={dia} alCerrar={() => setDia(null)} />
       <Confirmar
