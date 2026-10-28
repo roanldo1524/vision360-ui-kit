@@ -8,10 +8,13 @@
   assign k2 = section.settings.precio_2 | default: 232500
   assign k3 = section.settings.precio_3 | default: 295700
   assign antes = section.settings.precio_antes | default: 220000
+  assign g_files = 'au-sol-patio.png|au-navidad-patio.webp|au-mandala-real.webp|au-velitas-real.webp|au-sol-balcon.png|au-cerca-real.webp|au-kit3-real.webp|au-familia-real.webp' | split: '|'
+  assign g_caps = '-|Así se ve en Navidad|Un mandala gigante por lámpara|Noche de Velitas|También en el balcón|El calado, de cerca|Cada kit trae 3 lámparas|Para compartir en familia' | split: '|'
+  assign g_alts = 'Dos lámparas AURA en la pared del patio con mandalas de colores alrededor|Patio en Navidad con pesebre, velitas y lámparas AURA en la pared|Lámpara AURA en la pared proyectando un mandala de colores|Entrada de casa en Noche de Velitas con tres lámparas AURA en la pared|Lámpara AURA en la pared de un balcón|Lámpara AURA de cerca y colgada en la pared|Kit de tres lámparas AURA sobre una mesa|Familia en la terraza con dos lámparas AURA en la pared' | split: '|'
 -%}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Montserrat:wght@500;700;800&display=swap">
-<link rel="preload" as="image" href="{{ 'au-sol-patio.png' | file_url }}&width=900">
+{%- if section.settings.foto_1 -%}<link rel="preload" as="image" href="{{ section.settings.foto_1 | image_url: width: 900 }}">{%- else -%}<link rel="preload" as="image" href="{{ 'au-sol-patio.png' | file_url }}&width=900">{%- endif -%}
 <style>#es-sticky{opacity:0!important;pointer-events:none!important}#au-apps{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}#au-host{display:block}</style>
 <style id="au-es">
 /* Formulario EasySell, solo en la página AURA (no toca otros productos) */
@@ -68,7 +71,7 @@
 </style>
 <script>
 (function(){
-  var K=[{{ 'au-k3.webp' | file_url | append: '&width=120' | json }},{{ 'au-k6.webp' | file_url | append: '&width=120' | json }},{{ 'au-k9.webp' | file_url | append: '&width=120' | json }}];
+  var K=[{{ 'au-k3r.webp' | file_url | append: '&width=120' | json }},{{ 'au-k6r.webp' | file_url | append: '&width=120' | json }},{{ 'au-k9r.webp' | file_url | append: '&width=120' | json }}];
   var PAY={{ 'au-medios-pago.png' | file_url | append: '&width=720' | json }};
   var busy=false,q=false;
   function css(el,p,v){if(!el)return;el._au=el._au||{};var c=el.style.getPropertyValue(p);if(el._au[p]!==undefined&&c===el._au[p])return;el.style.setProperty(p,v,'important');el._au[p]=el.style.getPropertyValue(p)}
@@ -597,7 +600,7 @@
   <!-- 2 · Banner Black Friday con contador real -->
   <div class="promo" id="promo">
     <div class="w">
-      <img src="{{ 'au-kit3.png' | file_url }}&width=160" alt="" width="56" height="46">
+      <img src="{{ 'au-k3r.webp' | file_url }}&width=120" alt="" width="56" height="56">
       <p>Black Friday: kit de 3 a {{ k1 | times: 100 | money_without_trailing_zeros }}<span id="cd" data-end="{{ section.settings.fin_oferta | default: '2026-11-30T23:59:00-05:00' | escape }}">Termina en <b data-d>00</b>d <b data-h>00</b>h <b data-m>00</b>m</span></p>
       <button class="pbtn js-order" type="button">Pedir</button>
     </div>
@@ -608,23 +611,32 @@
     <div class="w">
       <div class="gal">
         <div class="gstage"><div class="slides" id="slides" aria-label="Fotos de la lámpara">
-          <figure><img src="{{ 'au-sol-patio.png' | file_url }}&width=900" srcset="{{ 'au-sol-patio.png' | file_url }}&width=540 540w, {{ 'au-sol-patio.png' | file_url }}&width=900 900w, {{ 'au-sol-patio.png' | file_url }}&width=1200 1200w" sizes="(min-width:900px) 620px, 100vw" alt="Dos lámparas AURA en la pared del patio con mandalas de colores alrededor" width="900" height="900" fetchpriority="high" decoding="async"></figure>
-          <figure class="gv"><video muted loop playsinline preload="none" poster="{{ 'au-vid-2.webp' | file_url }}" data-src="{{ 'au-vid-2.mp4' | file_url }}" aria-label="Video real: lámpara AURA prendida en una cerca"></video><span class="gcap">Video real · de noche</span></figure>
-          <figure><img src="{{ 'au-navidad-patio.webp' | file_url }}&width=900" srcset="{{ 'au-navidad-patio.webp' | file_url }}&width=540 540w, {{ 'au-navidad-patio.webp' | file_url }}&width=900 900w, {{ 'au-navidad-patio.webp' | file_url }}&width=1200 1200w" sizes="(min-width:900px) 620px, 100vw" alt="Patio en Navidad con pesebre, velitas y lámparas AURA en la pared" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">Así se ve en Navidad</span></figure>
-          <figure><img src="{{ 'au-pared.jpg' | file_url }}&width=900" srcset="{{ 'au-pared.jpg' | file_url }}&width=540 540w, {{ 'au-pared.jpg' | file_url }}&width=900 900w, {{ 'au-pared.jpg' | file_url }}&width=1200 1200w" sizes="(min-width:900px) 620px, 100vw" alt="Mandala de colores alrededor de una lámpara AURA en una pared de madera" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">Un mandala gigante por lámpara</span></figure>
-          <figure><img src="{{ 'au-velitas.webp' | file_url }}&width=900" srcset="{{ 'au-velitas.webp' | file_url }}&width=540 540w, {{ 'au-velitas.webp' | file_url }}&width=900 900w, {{ 'au-velitas.webp' | file_url }}&width=1200 1200w" sizes="(min-width:900px) 620px, 100vw" alt="Entrada de casa en la Noche de Velitas con lámparas AURA" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">Noche de Velitas</span></figure>
-          <figure><img src="{{ 'au-sol-balcon.png' | file_url }}&width=900" srcset="{{ 'au-sol-balcon.png' | file_url }}&width=540 540w, {{ 'au-sol-balcon.png' | file_url }}&width=900 900w, {{ 'au-sol-balcon.png' | file_url }}&width=1200 1200w" sizes="(min-width:900px) 620px, 100vw" alt="Lámpara AURA en la pared de un balcón" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">También en el balcón</span></figure>
-          <figure><img src="{{ 'au-cerca-real.webp' | file_url }}&width=900" srcset="{{ 'au-cerca-real.webp' | file_url }}&width=540 540w, {{ 'au-cerca-real.webp' | file_url }}&width=900 900w, {{ 'au-cerca-real.webp' | file_url }}&width=1024 1024w" sizes="(min-width:900px) 620px, 100vw" alt="Lámpara AURA de cerca y colgada en la pared" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">El calado, de cerca</span></figure>
-          <figure><img src="{{ 'au-kit3-real.webp' | file_url }}&width=900" srcset="{{ 'au-kit3-real.webp' | file_url }}&width=540 540w, {{ 'au-kit3-real.webp' | file_url }}&width=900 900w, {{ 'au-kit3-real.webp' | file_url }}&width=1024 1024w" sizes="(min-width:900px) 620px, 100vw" alt="Kit de tres lámparas AURA sobre una mesa" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">Cada kit trae 3 lámparas</span></figure>
-          
-          <figure><img src="{{ 'au-familia.png' | file_url }}&width=900" srcset="{{ 'au-familia.png' | file_url }}&width=540 540w, {{ 'au-familia.png' | file_url }}&width=900 900w, {{ 'au-familia.png' | file_url }}&width=1200 1200w" sizes="(min-width:900px) 620px, 100vw" alt="Familia en la terraza con lámparas AURA" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">Para compartir en familia</span></figure>
+{%- for n in (1..8) -%}
+            {%- assign k_img = 'foto_' | append: n -%}{%- assign k_txt = 'texto_' | append: n -%}
+            {%- assign idx = n | minus: 1 -%}
+            {%- assign g_img = section.settings[k_img] -%}
+            {%- assign g_txt = section.settings[k_txt] | default: g_caps[idx] -%}
+            {%- if g_txt == '-' -%}{%- assign g_txt = '' -%}{%- endif -%}
+            <figure>
+            {%- if g_img -%}
+              <img src="{{ g_img | image_url: width: 900 }}" srcset="{{ g_img | image_url: width: 540 }} 540w, {{ g_img | image_url: width: 720 }} 720w, {{ g_img | image_url: width: 900 }} 900w, {{ g_img | image_url: width: 1080 }} 1080w" sizes="(min-width:900px) 620px, 100vw" alt="{{ g_img.alt | default: g_alts[idx] | escape }}" width="900" height="900" {% if n == 1 %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
+            {%- else -%}
+              {%- assign g_f = g_files[idx] | file_url -%}
+              <img src="{{ g_f }}&width=900" srcset="{{ g_f }}&width=540 540w, {{ g_f }}&width=720 720w, {{ g_f }}&width=900 900w, {{ g_f }}&width=1080 1080w" sizes="(min-width:900px) 620px, 100vw" alt="{{ g_alts[idx] | escape }}" width="900" height="900" {% if n == 1 %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
+            {%- endif -%}
+            {%- if g_txt != blank -%}<span class="gcap">{{ g_txt | escape }}</span>{%- endif -%}
+            </figure>
+            {%- if n == 1 %}
+          <figure class="gv"><video muted loop playsinline preload="none" poster="{{ 'au-vid-real.webp' | file_url }}" data-src="{{ 'au-vid-real.mp4' | file_url }}" aria-label="Video real de la lámpara AURA: la caja, cómo se pone y cómo se ve de noche"></video><span class="gcap">Video real del producto</span></figure>
+            {%- endif -%}
+          {%- endfor %}
         </div>
         <div class="hov" id="hov"><p class="hey">AURA · Edición Navidad</p><h1>Tu pared, llena de mandalas.</h1></div></div>
         <button class="garr gprev" id="gprev" type="button" aria-label="Foto anterior" disabled><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
         <button class="garr gnext" id="gnext" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
         <span class="gcount" id="gcount" aria-hidden="true">1 / 9</span>
         <div class="dots" id="gdots" aria-hidden="true"><b class="on"></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
-        <div class="thumbs" id="thumbs"><button type="button" aria-label="Ver foto 1" class="on"><img src="{{ 'au-sol-patio.png' | file_url }}&width=140" alt="" loading="lazy" width="64" height="64"></button><button type="button" aria-label="Ver video" class="tv"><img src="{{ 'au-vid-2.webp' | file_url }}" alt="" loading="lazy" width="64" height="64"><i aria-hidden="true"></i></button><button type="button" aria-label="Ver foto 3"><img src="{{ 'au-navidad-patio.webp' | file_url }}&width=140" alt="" loading="lazy" width="64" height="64"></button><button type="button" aria-label="Ver foto 4"><img src="{{ 'au-pared.jpg' | file_url }}&width=140" alt="" loading="lazy" width="64" height="64"></button><button type="button" aria-label="Ver foto 5"><img src="{{ 'au-velitas.webp' | file_url }}&width=140" alt="" loading="lazy" width="64" height="64"></button><button type="button" aria-label="Ver foto 6"><img src="{{ 'au-sol-balcon.png' | file_url }}&width=140" alt="" loading="lazy" width="64" height="64"></button><button type="button" aria-label="Ver foto 7"><img src="{{ 'au-cerca-real.webp' | file_url }}&width=140" alt="" loading="lazy" width="64" height="64"></button><button type="button" aria-label="Ver foto 8"><img src="{{ 'au-kit3-real.webp' | file_url }}&width=140" alt="" loading="lazy" width="64" height="64"></button><button type="button" aria-label="Ver foto 10"><img src="{{ 'au-familia.png' | file_url }}&width=140" alt="" loading="lazy" width="64" height="64"></button></div>
+        <div class="thumbs" id="thumbs">{%- for n in (1..8) -%}{%- assign k_img = 'foto_' | append: n -%}{%- assign idx = n | minus: 1 -%}{%- assign g_img = section.settings[k_img] -%}<button type="button" aria-label="Ver foto {{ n }}"{% if n == 1 %} class="on"{% endif %}><img src="{% if g_img %}{{ g_img | image_url: width: 140 }}{% else %}{{ g_files[idx] | file_url }}&width=140{% endif %}" alt="" loading="lazy" width="64" height="64"></button>{%- if n == 1 -%}<button type="button" aria-label="Ver video" class="tv"><img src="{{ 'au-vid-real.webp' | file_url }}&width=140" alt="" loading="lazy" width="64" height="64"><i aria-hidden="true"></i></button>{%- endif -%}{%- endfor -%}</div>
       </div>
 
       <div class="info">
@@ -647,9 +659,9 @@
         <div class="pick">
           <p class="pkl"><b>Elige tu kit</b><span id="kitName">3 lámparas</span></p>
           <div class="kits" role="radiogroup" aria-label="Elige tu kit">
-            <button class="kit on" type="button" role="radio" aria-checked="true" data-k="1"><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k3.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>3 lámparas</b><small>{{ k1 | divided_by: 3 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k1 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 1 | times: 100 | money_without_trailing_zeros }}</s></span></button>
-            <button class="kit" type="button" role="radio" aria-checked="false" data-k="2"><span class="ktag">Recomendado</span><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k6.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>6 lámparas</b><small>{{ k2 | divided_by: 6 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k2 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 2 | times: 100 | money_without_trailing_zeros }}</s></span><span class="kgift">+ Guía de decoración con luz gratis</span></button>
-            <button class="kit" type="button" role="radio" aria-checked="false" data-k="3"><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k9.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>9 lámparas</b><small>{{ k3 | divided_by: 9 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k3 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 3 | times: 100 | money_without_trailing_zeros }}</s></span><span class="kgift">+ Guía de decoración con luz gratis</span></button>
+            <button class="kit on" type="button" role="radio" aria-checked="true" data-k="1"><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k3r.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>3 lámparas</b><small>{{ k1 | divided_by: 3 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k1 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 1 | times: 100 | money_without_trailing_zeros }}</s></span></button>
+            <button class="kit" type="button" role="radio" aria-checked="false" data-k="2"><span class="ktag">Recomendado</span><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k6r.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>6 lámparas</b><small>{{ k2 | divided_by: 6 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k2 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 2 | times: 100 | money_without_trailing_zeros }}</s></span><span class="kgift">+ Guía de decoración con luz gratis</span></button>
+            <button class="kit" type="button" role="radio" aria-checked="false" data-k="3"><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k9r.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>9 lámparas</b><small>{{ k3 | divided_by: 9 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k3 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 3 | times: 100 | money_without_trailing_zeros }}</s></span><span class="kgift">+ Guía de decoración con luz gratis</span></button>
           </div>
         </div>
 
@@ -679,11 +691,11 @@
   <!-- 11 · Videos (coverflow como Lummia) -->
   <section class="vc-sec" aria-label="Videos de la lámpara">
     <div class="vc" id="vc"><div class="vc-track">
-        <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-vid-2.webp' | file_url }}&width=400" data-src="{{ 'au-vid-2.mp4' | file_url }}" aria-label="Así se ve al oscurecer"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><span class="vc-hear" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>Toca para oír</span><p class="vc-cap">Así se ve al oscurecer</p></div></div>
+        <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-vid-real.webp' | file_url }}&width=400" data-src="{{ 'au-vid-real.mp4' | file_url }}" aria-label="Video real: de la caja a la pared"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><span class="vc-hear" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>Toca para oír</span><p class="vc-cap">De la caja a la pared</p></div></div><div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-vid-2.webp' | file_url }}&width=400" data-src="{{ 'au-vid-2.mp4' | file_url }}" aria-label="Así se ve al oscurecer"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><span class="vc-hear" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>Toca para oír</span><p class="vc-cap">Así se ve al oscurecer</p></div></div>
         <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-vid-3.webp' | file_url }}&width=400" data-src="{{ 'au-vid-3.mp4' | file_url }}" aria-label="La misma cerca, de noche"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><span class="vc-hear" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>Toca para oír</span><p class="vc-cap">La misma cerca, de noche</p></div></div>
         <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-vid-4.webp' | file_url }}&width=400" data-src="{{ 'au-vid-4.mp4' | file_url }}" aria-label="De cerca, y bajo la lluvia"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><span class="vc-hear" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>Toca para oír</span><p class="vc-cap">De cerca, y bajo la lluvia</p></div></div>
         <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-vid-1.webp' | file_url }}&width=400" data-src="{{ 'au-vid-1o.mp4' | file_url }}" aria-label="De la bodega a tu pared"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><span class="vc-hear" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>Toca para oír</span><p class="vc-cap">De la bodega a tu pared</p></div></div>
-        <div class="vc-slide"><div class="vc-card"><video muted loop playsinline preload="none" poster="{{ 'au-macro.png' | file_url }}&width=400" data-src="{{ 'au-v-macro.mp4' | file_url }}" aria-label="El calado de cerca"></video><span class="vc-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></span><p class="vc-cap">El calado de cerca</p></div></div>
+        
     </div></div>
     <div class="vc-nav"><button type="button" id="vcPrev" aria-label="Video anterior"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6l-6 6 6 6"/></svg></button><button type="button" id="vcSnd" aria-label="Activar sonido" aria-pressed="false"><svg class="i-off" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg><svg class="i-on" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg></button><button type="button" id="vcPlay" aria-label="Pausar video"><svg class="i-pause" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M9 7v10M15 7v10"/></svg><svg class="i-play" viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5z" fill="currentColor"/></svg></button><button type="button" id="vcNext" aria-label="Video siguiente"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6l6 6-6 6"/></svg></button></div>
   </section>
@@ -749,7 +761,7 @@
     <div class="w center">
       <h2 class="rv">AURA<br><span>Luz solar mandala</span></h2>
       <div class="pfig rv">
-        <img src="{{ 'au-producto.jpg' | file_url }}&width=600" alt="Lámpara AURA vista de lado" loading="lazy" width="376" height="500">
+        <img src="{{ 'au-real-producto.webp' | file_url }}&width=600" alt="Lámpara AURA: panel solar al frente y calado de mandala" loading="lazy" width="375" height="500">
         <svg class="doo da" viewBox="0 0 60 40" fill="none" stroke="#23201C" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 30c10-18 26-24 48-16"/><path d="M44 8l8 6-9 4"/></svg><span class="pin a"><i></i>Panel solar al frente</span>
         <span class="pin b"><i></i>Calado de mandala</span>
         <span class="pin c"><i></i>Luz LED de colores</span>
@@ -777,7 +789,7 @@
     <div class="w">
       <h2 class="rv">Donde la pongas,<br><em>pinta la noche</em></h2>
       <div class="ut rv">
-        <figure><img src="{{ 'au-colores.jpg' | file_url }}&width=500" alt="Lámparas en una cerca" loading="lazy" width="300" height="300"><figcaption>En la cerca</figcaption></figure>
+        <figure><img src="{{ 'au-vid-3.webp' | file_url }}&width=500" alt="Lámparas AURA en una cerca de noche" loading="lazy" width="300" height="300"><figcaption>En la cerca</figcaption></figure>
         <figure><img src="{{ 'au-sol-patio.png' | file_url }}&width=500" alt="Lámparas en la pared" loading="lazy" width="300" height="300"><figcaption>En la pared</figcaption></figure>
         <figure><img src="{{ 'au-sendero.jpg' | file_url }}&width=500" alt="Lámpara en el sendero" loading="lazy" width="300" height="300"><figcaption>En el sendero</figcaption></figure>
       </div>
@@ -790,7 +802,7 @@
     <div class="w center">
       <h2 class="rv">Todo lo que hace<br><em>sin que la toques</em></h2>
       <div class="ov rv">
-        <img src="{{ 'au-macro.png' | file_url }}&width=900" alt="Lámpara AURA encendida de cerca" loading="lazy" width="600" height="750">
+        <img src="{{ 'au-real-proyeccion.webp' | file_url }}&width=900" alt="Mandala real que proyecta la lámpara AURA en la pared" loading="lazy" width="600" height="750">
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><b>Encendido automático</b><span>Al oscurecer</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 12h16M12 6v12"/></svg><b>Panel solar</b><span>Carga de día</span></li>
@@ -807,7 +819,7 @@
       <h2 class="rv">Hecha para <em>tu noche</em></h2>
       <div class="bento">
         <div class="bx big rv" id="bxBig">
-          <img src="{{ 'au-pared.jpg' | file_url }}&width=900" alt="Mandala de colores en una pared" loading="lazy" width="600" height="600">
+          <img src="{{ 'au-mandala-real.webp' | file_url }}&width=720" alt="Lámpara AURA en la pared proyectando un mandala de colores" loading="lazy" width="600" height="750">
           <div class="glass"><div><b>Pruébala tú</b><span>Prende y apaga la luz</span></div><button class="tg" type="button" role="switch" aria-checked="true" aria-label="Encender o apagar la lámpara" id="tgLamp"></button></div>
         </div>
         <div class="bx rv">
@@ -820,7 +832,7 @@
         </div>
         <div class="bx wide rv">
           <div><h3>Aguanta lluvia y sol</h3><p>Es para exterior: déjala afuera todo el año, en el patio, el jardín o la terraza.</p></div>
-          <img src="{{ 'au-colores.jpg' | file_url }}&width=240" alt="Lámparas en una cerca de exterior" loading="lazy" width="112" height="112">
+          <img src="{{ 'au-vid-3.webp' | file_url }}&width=240" alt="Lámparas AURA en una cerca de exterior" loading="lazy" width="112" height="112">
         </div>
       </div>
     </div>
@@ -831,7 +843,7 @@
     <div class="w">
       <h2 class="rv">Lo que <em>trae tu kit</em></h2>
       <div class="row">
-        <div class="two rv"><figure><img src="{{ 'au-kit3-real.webp' | file_url }}&width=700" alt="Tres lámparas AURA sobre una mesa" loading="lazy" width="640" height="640"></figure><figure><img src="{{ 'au-colores.jpg' | file_url }}&width=500" alt="Lámparas AURA proyectando en una cerca" loading="lazy" width="500" height="500"></figure></div>
+        <div class="two rv"><figure><img src="{{ 'au-kit3-real.webp' | file_url }}&width=700" alt="Tres lámparas AURA sobre una mesa" loading="lazy" width="640" height="640"></figure><figure><img src="{{ 'au-real-caja.webp' | file_url }}&width=500" alt="Cada lámpara llega en su caja con el kit para pegarla" loading="lazy" width="500" height="667"></figure></div>
         <ul class="rv">
           <li><b>3×</b><span>Lámparas solares AURA<small>Por cada kit que pidas</small></span></li>
           <li><b><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3.6"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg></b><span>Panel solar y batería ya instalados<small>Listas para el primer sol</small></span></li>
@@ -1118,7 +1130,24 @@ const __runWheel=()=>{try{__wheel()}catch(_){}};if(document.readyState==='comple
     {"type":"number","id":"precio_2","label":"Precio 2 kits (6 lámparas)","default":232500},
     {"type":"number","id":"precio_3","label":"Precio 3 kits (9 lámparas)","default":295700},
     {"type":"number","id":"precio_antes","label":"Precio de antes por kit (para tachar)","default":220000},
-    {"type":"text","id":"fin_oferta","label":"Fin de la oferta Black Friday","default":"2026-11-30T23:59:00-05:00","info":"Formato: 2026-11-30T23:59:00-05:00. Cuando pasa, la barra desaparece sola."}
+    {"type":"text","id":"fin_oferta","label":"Fin de la oferta Black Friday","default":"2026-11-30T23:59:00-05:00","info":"Formato: 2026-11-30T23:59:00-05:00. Cuando pasa, la barra desaparece sola."},
+    {"type":"header","content":"Fotos del carrusel de arriba"},
+    {"type":"paragraph","content":"Cambia cualquier foto o su texto. Si dejas una vacía, se usa la foto que ya trae. El video siempre va de segundo."},
+    {"type":"image_picker","id":"foto_1","label":"Foto 1"},
+    {"type":"image_picker","id":"foto_2","label":"Foto 2"},
+    {"type":"text","id":"texto_2","label":"Texto sobre la foto 2 (opcional)","info":"Escribe - para no mostrar texto"},
+    {"type":"image_picker","id":"foto_3","label":"Foto 3"},
+    {"type":"text","id":"texto_3","label":"Texto sobre la foto 3 (opcional)","info":"Escribe - para no mostrar texto"},
+    {"type":"image_picker","id":"foto_4","label":"Foto 4"},
+    {"type":"text","id":"texto_4","label":"Texto sobre la foto 4 (opcional)","info":"Escribe - para no mostrar texto"},
+    {"type":"image_picker","id":"foto_5","label":"Foto 5"},
+    {"type":"text","id":"texto_5","label":"Texto sobre la foto 5 (opcional)","info":"Escribe - para no mostrar texto"},
+    {"type":"image_picker","id":"foto_6","label":"Foto 6"},
+    {"type":"text","id":"texto_6","label":"Texto sobre la foto 6 (opcional)","info":"Escribe - para no mostrar texto"},
+    {"type":"image_picker","id":"foto_7","label":"Foto 7"},
+    {"type":"text","id":"texto_7","label":"Texto sobre la foto 7 (opcional)","info":"Escribe - para no mostrar texto"},
+    {"type":"image_picker","id":"foto_8","label":"Foto 8"},
+    {"type":"text","id":"texto_8","label":"Texto sobre la foto 8 (opcional)","info":"Escribe - para no mostrar texto"}
   ],
   "blocks": [
     {"type":"@app"},
