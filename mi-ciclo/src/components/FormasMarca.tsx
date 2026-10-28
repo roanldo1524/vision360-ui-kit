@@ -26,11 +26,11 @@ export function Circulo({ color = "var(--rojo)", tamano = 40, className }: Props
 
 /** Estrella de cuatro pétalos redondeados en diagonal (símbolo del sobre y del logo). */
 export function Estrella({ color = "var(--rojo)", tamano = 40, className }: Props) {
-  // pétalo: gota redondeada que nace en el centro y se abre hacia la esquina
-  const petalo = "M50 50 C44 40 30 30 26 18 C22 6 36 2 44 10 C52 18 54 36 50 50 Z";
+  // pétalo simétrico: nace en el centro y termina redondeado; se reparte en diagonal
+  const petalo = "M50 50 C41 40 35 28 38 17 C41 7 59 7 62 17 C65 28 59 40 50 50 Z";
   return (
     <svg viewBox="0 0 100 100" width={tamano} height={tamano} className={className} aria-hidden="true">
-      {[0, 90, 180, 270].map((a) => (
+      {[45, 135, 225, 315].map((a) => (
         <path key={a} d={petalo} fill={color} transform={`rotate(${a} 50 50)`} />
       ))}
     </svg>

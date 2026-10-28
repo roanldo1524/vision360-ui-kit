@@ -206,9 +206,7 @@ function Publicar() {
             <X size={22} />
           </button>
           <b>Nueva pregunta</b>
-          <button className={estilos.siguiente} disabled={texto.trim().length < 5} onClick={compartir}>
-            Publicar
-          </button>
+          <span />
         </header>
         <main className={estilos.cuerpo}>
           <div className={`${estilos.lienzoPregunta} ${estilos[`fondo-${fondo}`]}`}>

@@ -8,7 +8,7 @@ import { marcarNotificacionesLeidas } from "@/lib/acciones";
 import type { Notificacion, TipoNotificacion } from "@/lib/tipos";
 import { clases, haceCuanto } from "@/lib/utilidades";
 import { Cabecera } from "@/components/Cabecera";
-import { Circulo, Estrella, FlorLuna, Luna } from "@/components/FormasMarca";
+import { Circulo, Estrella, FlorLuna, FlorOndulada, Luna } from "@/components/FormasMarca";
 import estilos from "./notificaciones.module.css";
 
 const GLIFO: Record<TipoNotificacion, { fondo: string; forma: React.ReactNode }> = {
@@ -16,7 +16,7 @@ const GLIFO: Record<TipoNotificacion, { fondo: string; forma: React.ReactNode }>
   racha: { fondo: "#ffe4ea", forma: <FlorLuna color="#f62c39" fondo="#ffe4ea" tamano={26} /> },
   fase: { fondo: "#efe4fb", forma: <Luna color="#5b3aaa" tamano={20} /> },
   comunidad: { fondo: "#fff0f5", forma: <Circulo color="#ff8fab" tamano={18} /> },
-  sistema: { fondo: "#ffe4ea", forma: <Circulo color="#f62c39" tamano={16} /> },
+  sistema: { fondo: "#ffe4ea", forma: <FlorOndulada color="#f62c39" fondo="#ffe4ea" tamano={26} /> },
 };
 
 function Fila({ n }: { n: Notificacion }) {

@@ -1,45 +1,115 @@
+/* Configuraciones · modo Operar: precisión y calma. Listas serenas con grupos
+   en frase normal (sin mayúsculas espaciadas) y un perfil con la flor-luna. */
+
 .perfil {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 14px;
-  background: var(--blanco);
-  border-radius: var(--r-tarjeta);
-  box-shadow: var(--sombra);
-  padding: 16px;
+  padding: 20px 16px 20px 18px;
+  border-radius: 28px;
+  background: var(--rosa-claro);
+}
+.perfilFlor {
+  position: absolute;
+  right: -60px;
+  bottom: -84px;
+  pointer-events: none;
+}
+.perfil > :not(.perfilFlor) {
+  position: relative;
+}
+.perfilTexto {
+  flex: 1;
+  min-width: 0;
+}
+.perfilNombre {
+  font-family: var(--f-titulo);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.2;
+  color: var(--vino);
+  overflow-wrap: anywhere;
+}
+.perfilUsuario {
+  font-size: 14px;
+  color: var(--texto-2);
+}
+.grupoTitulo {
+  padding-left: 4px;
+  font-family: var(--f-ui);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texto-2);
 }
 .paso {
+  flex: none;
   display: flex;
   align-items: center;
   gap: 2px;
-  background: var(--crema);
+  padding: 2px;
   border-radius: 999px;
-  font-size: 15px;
+  background: var(--rosa-claro);
 }
 .paso span {
-  min-width: 22px;
+  min-width: 28px;
   text-align: center;
+  font-family: var(--f-titulo);
+  font-weight: 500;
+  font-size: 19px;
+  color: var(--vino);
 }
 .paso button {
-  font-size: 20px;
-  width: 40px;
-  height: 40px;
-  min-height: 40px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--vino);
+  transition: background-color 200ms ease, transform 160ms var(--ease-out);
+}
+.paso button:active {
+  transform: scale(0.92);
+  background: var(--blanco);
 }
 .paso button:disabled {
   opacity: 0.3;
 }
 .hora {
   width: auto;
-  min-height: 40px;
-  padding: 6px 10px;
+  min-height: 44px;
+  padding: 6px 12px;
   flex: none;
+  border-radius: 999px;
+  background: var(--rosa-claro);
+  border-color: transparent;
 }
 .peligro {
-  background: var(--rosa);
-  color: var(--rosa-tinta);
+  background: var(--rosa-claro) !important;
+  color: var(--rojo-texto) !important;
 }
 .peligroTexto {
-  color: var(--rosa-tinta);
+  color: var(--rojo-texto);
+}
+.pie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0 4px;
+  font-size: 12px;
+  color: var(--texto-2);
+  text-align: center;
+}
+.pie img {
+  height: 20px;
+  width: auto;
+}
+.textoHoja {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--texto-2);
 }
 .fotoFila {
   display: flex;
@@ -47,15 +117,16 @@
   gap: 16px;
 }
 .ciclitas {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
 }
 .ciclita {
+  justify-self: center;
   border-radius: 50%;
   padding: 3px;
   box-shadow: inset 0 0 0 2px transparent;
-  transition: box-shadow 0.2s;
+  transition: box-shadow 200ms ease;
 }
 .ciclita[aria-pressed="true"] {
   box-shadow: inset 0 0 0 2.5px var(--rojo);

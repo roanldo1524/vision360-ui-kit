@@ -11,7 +11,8 @@ export default function Privacidad() {
       <Cabecera titulo="Privacidad" />
       <article className={estilos.documento}>
         <p className={estilos.borrador}>Borrador para revisión del abogado. No es la versión final.</p>
-        <p className="marca" style={{ fontSize: 20 }}>Mi Ciclo</p>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/marca/logo-rojo.svg" alt="Mi Ciclo" className={estilos.logo} width={92} height={24} />
         <h1>Política de tratamiento de datos personales</h1>
         <p className={estilos.meta}>Versión 0.1 · Última actualización: 28 de octubre de 2026</p>
 

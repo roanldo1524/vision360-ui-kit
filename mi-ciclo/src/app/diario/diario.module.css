@@ -83,9 +83,7 @@
   padding: 18px;
   border-radius: 28px;
   box-shadow: var(--sombra);
-  background:
-    repeating-linear-gradient(to bottom, transparent 0 31px, #f6e9ef 31px 32px),
-    var(--blanco);
+  background: var(--blanco);
 }
 .fila {
   display: flex;
@@ -116,9 +114,11 @@
 .area {
   width: 100%;
   border: 0;
-  background: transparent;
+  padding: 0;
+  background: repeating-linear-gradient(to bottom, transparent 0 31px, #f3e1e9 31px 32px);
+  background-attachment: local;
   resize: vertical;
-  min-height: 160px;
+  min-height: 192px;
   font-family: var(--f-acento);
   font-size: 17px;
   line-height: 32px;

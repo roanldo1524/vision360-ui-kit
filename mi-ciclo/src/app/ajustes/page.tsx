@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
-  Bell, BellRing, Camera, ChevronRight, FileText, Heart, LogOut, RotateCw, Shield, ShieldCheck, Trash2, UserRound,
+  Bell, BellRing, Camera, ChevronRight, FileText, Heart, LogOut, Minus, Plus, RotateCw, Shield, ShieldCheck, Trash2, UserRound,
 } from "lucide-react";
 import { useEstado } from "@/lib/almacen";
 import { actualizarCiclo, actualizarPerfil } from "@/lib/acciones";
@@ -14,6 +14,7 @@ import type { Ajustes, CiclitaId } from "@/lib/tipos";
 import { Avatar } from "@/components/Avatar";
 import { Cabecera } from "@/components/Cabecera";
 import { Ciclita, CICLITAS, CICLITAS_ELEGIBLES } from "@/components/Ciclita";
+import { FlorLuna } from "@/components/FormasMarca";
 import { Confirmar, Hoja } from "@/components/Hoja";
 import { avisar } from "@/components/Avisos";
 import { clases } from "@/lib/utilidades";
@@ -60,13 +61,16 @@ export default function PaginaAjustes() {
     <>
       <Cabecera titulo="Configuraciones" />
       <main className="pagina pagina-sin-barra">
-        <section className={estilos.perfil}>
-          <Avatar ciclita={perfil.ciclita} fotoId={perfil.fotoId} tamano={64} nombre={perfil.nombre} />
-          <div style={{ minWidth: 0, flex: 1 }}>
-            <p className="titulo-m">{perfil.nombre}</p>
-            <p className="pequeno texto-2">@{perfil.usuario}</p>
+        <section className={estilos.perfil} aria-label="Tu perfil">
+          <FlorLuna color="#ffdced" fondo="#fff1f6" tamano={180} className={estilos.perfilFlor} />
+          <Avatar ciclita={perfil.ciclita} fotoId={perfil.fotoId} tamano={72} nombre={perfil.nombre} />
+          <div className={estilos.perfilTexto}>
+            <p className={estilos.perfilNombre}>{perfil.nombre}</p>
+            <p className={estilos.perfilUsuario}>@{perfil.usuario}</p>
           </div>
-          <button className="boton boton-chico boton-secundario" onClick={() => setEditando(true)}>Editar</button>
+          <button className="boton boton-chico boton-secundario" onClick={() => setEditando(true)}>
+            Editar
+          </button>
         </section>
 
         <Grupo titulo="Mi ciclo">
@@ -237,9 +241,11 @@ export default function PaginaAjustes() {
           </div>
         </Grupo>
 
-        <p className="mini texto-3" style={{ textAlign: "center" }}>
-          Mi Ciclo · EA Business Group SAS · Solo para mayores de 18 años
-        </p>
+        <footer className={estilos.pie}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/marca/logo-rojo.svg" alt="Mi Ciclo" width={76} height={20} />
+          <p>EA Business Group SAS · Solo para mayores de 18 años</p>
+        </footer>
       </main>
 
       <EditarCuenta abierta={editando} alCerrar={() => setEditando(false)} />
@@ -272,7 +278,7 @@ export default function PaginaAjustes() {
 function Grupo({ titulo, children }: { titulo: string; children: React.ReactNode }) {
   return (
     <section className="seccion">
-      <h2 className="eyebrow">{titulo}</h2>
+      <h2 className={estilos.grupoTitulo}>{titulo}</h2>
       {children}
     </section>
   );
@@ -297,9 +303,15 @@ function Paso(props: {
         <span className="mini texto-2 num">{valor} {unidad}</span>
       </span>
       <div className={estilos.paso} role="group" aria-labelledby={id}>
-        <button className="boton-icono" aria-label="Menos" disabled={valor <= min} onClick={() => cambiar(valor - 1)}>−</button>
-        <span className="num negrita" aria-live="polite">{valor}</span>
-        <button className="boton-icono" aria-label="Más" disabled={valor >= max} onClick={() => cambiar(valor + 1)}>+</button>
+        <button aria-label="Menos" disabled={valor <= min} onClick={() => cambiar(valor - 1)}>
+          <Minus size={18} />
+        </button>
+        <span className="num" aria-live="polite">
+          {valor}
+        </span>
+        <button aria-label="Más" disabled={valor >= max} onClick={() => cambiar(valor + 1)}>
+          <Plus size={18} />
+        </button>
       </div>
     </div>
   );
@@ -434,7 +446,7 @@ function EliminarCuenta({ abierta, alCerrar, alEliminar }: { abierta: boolean; a
   };
   return (
     <Hoja abierta={abierta} alCerrar={cerrar} titulo="Eliminar mi cuenta">
-      <p className="texto-2 pequeno">
+      <p className={estilos.textoHoja}>
         Se borrarán para siempre tu perfil, tu ciclo, tu diario, tus pétalos y bonos, tus vínculos, y tus publicaciones, fotos y videos. Esto no se puede deshacer.
       </p>
       <div className="campo">
