@@ -96,3 +96,8 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 ### 25 oct, 7:45 a. m. — Revisión del filtro de Shopify en la hoja
 - El pedido web #6460 (Juan Luis Martínez, 7:20 a. m.) también se subió a la hoja (`Subido a Google Sheet`), así que la condición del flujo «Subir pedido Google Sheet - LucidSales» todavía no funciona. Su `json_lucid_sales` sí dice `"source": "shopify"`.
 - Pedidos de WhatsApp en el embudo 705299: 44 (19 oct), 55 (20), 74 (21), 47 (22), 50 (23), 54 (24). Por confirmar: 2 a 4 por día.
+
+### 28 oct — Dirección de oficina: «RECLAMA EN OFICINA INTERRAPIDISIMO»
+- Hallazgo: las reglas del bot (campo 456432), la espera (6 s) y la posventa (105173) volvieron a la versión original del 19 de octubre (76 reglas). Alguien restauró todo; no se volvió a poner nuestra versión.
+- Cambio pedido por Ronald: reglas 12 y 72 ahora mandan escribir como dirección exactamente «RECLAMA EN OFICINA INTERRAPIDISIMO» (otra transportadora: «RECLAMA EN OFICINA» + nombre). Respaldo previo en el scratchpad (respaldo_antes_reclama_1028.json).
+- Filtro de Shopify en la hoja: al 25 oct seguía subiendo pedidos web (#6461–#6473). La condición «Origen Directo/Ads + oportunidad abierta» no los separa; falta la línea `json_lucid_sales` no contiene `shopify` o revisar si «Subida landing»/«Confirmacion landing» también escriben en la hoja.
