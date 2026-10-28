@@ -1,0 +1,24 @@
+{
+  "appId": "co.miciclo.app",
+  "appName": "Mi Ciclo",
+  "webDir": "out",
+  "server": {
+    "url": "https://app.miciclo.co",
+    "androidScheme": "https",
+    "cleartext": false
+  },
+  "android": {
+    "backgroundColor": "#fbf7f4",
+    "allowMixedContent": false
+  },
+  "plugins": {
+    "SplashScreen": {
+      "backgroundColor": "#fbf7f4",
+      "showSpinner": false,
+      "launchShowDuration": 1200
+    },
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    }
+  }
+}

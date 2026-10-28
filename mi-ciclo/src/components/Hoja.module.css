@@ -1,0 +1,48 @@
+.hoja {
+  border: 0;
+  padding: 0;
+  margin: auto auto 0;
+  width: 100%;
+  max-width: var(--ancho-app);
+  max-height: 88dvh;
+  background: transparent;
+  color: var(--vino);
+  overflow: visible;
+}
+.hoja::backdrop {
+  background: rgba(58, 18, 32, 0.36);
+  backdrop-filter: blur(2px);
+}
+.hoja[open] .contenido {
+  animation: subir 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+.contenido {
+  background: var(--crema);
+  border-radius: 28px 28px 0 0;
+  padding: 10px max(20px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px))
+    max(20px, env(safe-area-inset-left, 0px));
+  max-height: 88dvh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.asa {
+  width: 40px;
+  height: 4px;
+  border-radius: 4px;
+  background: #e5d6da;
+  margin: 0 auto 4px;
+}
+.cabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+@keyframes subir {
+  from {
+    transform: translateY(40px);
+    opacity: 0.4;
+  }
+}

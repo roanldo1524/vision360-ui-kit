@@ -1,0 +1,59 @@
+.barra {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--ancho-app);
+  z-index: 40;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px))
+    max(8px, env(safe-area-inset-left, 0px));
+  background: color-mix(in srgb, var(--blanco) 94%, transparent);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid var(--linea);
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -8px 30px rgba(58, 18, 32, 0.06);
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-height: 52px;
+  justify-content: center;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--texto-3);
+}
+.icono {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 28px;
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+.item[aria-current="page"] {
+  color: var(--rojo);
+}
+.item[aria-current="page"] .icono {
+  background: var(--rosa);
+}
+.central {
+  justify-self: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: var(--rojo);
+  color: var(--blanco);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--sombra-rojo);
+  transition: transform 0.15s;
+}
+.central:active {
+  transform: scale(0.94);
+}

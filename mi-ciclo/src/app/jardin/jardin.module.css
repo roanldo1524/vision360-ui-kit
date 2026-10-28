@@ -1,0 +1,217 @@
+.cabeza {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 8px;
+}
+.heroe {
+  background: var(--blanco);
+  border-radius: var(--r-grande);
+  box-shadow: var(--sombra);
+  overflow: hidden;
+}
+.saldo {
+  padding: 18px 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.florSaldo {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--rosa);
+}
+.numero {
+  font-family: var(--f-titulo);
+  font-size: 46px;
+  line-height: 1;
+  font-weight: 500;
+  margin-top: 4px;
+}
+.jardin {
+  position: relative;
+}
+.jardin svg {
+  width: 100%;
+  height: auto;
+}
+.escena {
+  position: relative;
+}
+.jardinCiclita {
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  transform: translateX(-50%);
+  animation: flotar 3.6s ease-in-out infinite;
+}
+.jardinPie {
+  font-size: 12px;
+  color: var(--texto-2);
+  text-align: center;
+  padding: 10px 16px 14px;
+  background: var(--menta);
+}
+.planta {
+  animation: brotar 0.6s ease-out both;
+  transform-box: fill-box;
+  transform-origin: bottom center;
+}
+@keyframes brotar {
+  from {
+    transform: scaleY(0.3);
+    opacity: 0;
+  }
+}
+@keyframes flotar {
+  50% {
+    transform: translate(-50%, -5px);
+  }
+}
+.misiones {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.check {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: none;
+  background: var(--menta);
+  color: var(--menta-tinta);
+}
+.checkHecha {
+  background: var(--menta-tinta);
+  color: var(--blanco);
+}
+.tachada {
+  color: var(--texto-3);
+  text-decoration: line-through;
+}
+.racha {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--mantequilla);
+  border-radius: var(--r-tarjeta);
+  padding: 16px 18px;
+}
+.rachaIcono {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  background: var(--blanco);
+  color: var(--mantequilla-tinta);
+}
+.rachaPuntos {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+.punto {
+  width: 22px;
+  height: 8px;
+  border-radius: 8px;
+  background: rgba(138, 100, 22, 0.18);
+}
+.puntoLleno {
+  background: var(--mantequilla-tinta);
+}
+.bono {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: var(--r-tarjeta);
+  padding: 14px;
+  background: var(--blanco);
+  box-shadow: var(--sombra);
+}
+.bonoIcono {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.bono_rosa .bonoIcono {
+  background: var(--rosa);
+  color: var(--rosa-tinta);
+}
+.bono_lila .bonoIcono {
+  background: var(--lila);
+  color: var(--lila-tinta);
+}
+.bono_menta .bonoIcono {
+  background: var(--menta);
+  color: var(--menta-tinta);
+}
+.bonoTexto {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.barra {
+  height: 6px;
+  border-radius: 6px;
+  background: var(--linea);
+  overflow: hidden;
+}
+.barra span {
+  display: block;
+  height: 100%;
+  border-radius: 6px;
+  background: var(--fase-folicular);
+  transition: width 0.4s ease;
+}
+.florMini {
+  display: inline-block;
+  vertical-align: -2px;
+}
+.codigo {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
+}
+.gana {
+  color: var(--menta-tinta);
+}
+.gasta {
+  color: var(--rosa-tinta);
+}
+.exito {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding-top: 6px;
+}
+.codigoGrande {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 6px 6px 18px;
+  border-radius: 18px;
+  border: 1.5px dashed var(--fase-folicular);
+  background: var(--blanco);
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
+}

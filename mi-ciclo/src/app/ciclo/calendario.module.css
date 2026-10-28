@@ -1,0 +1,112 @@
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-top: 10px;
+}
+.cabeza {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--texto-3);
+  padding-bottom: 4px;
+}
+.celda {
+  position: relative;
+  aspect-ratio: 1;
+  max-width: 100%;
+  min-height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.12s;
+}
+.celda:active {
+  transform: scale(0.92);
+}
+.marcas {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  color: var(--rosa-tinta);
+}
+.puntoAnimo {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--fase-lutea);
+}
+.regla {
+  background: var(--rojo);
+  color: var(--blanco);
+}
+.regla .marcas {
+  color: var(--blanco);
+}
+.reglaPrevista {
+  background: var(--rosa);
+  color: var(--rosa-tinta);
+  box-shadow: inset 0 0 0 1.5px #f3a3b6;
+  border: 1.5px dashed #e47c95;
+}
+.fertil {
+  background: var(--lila);
+  color: var(--lila-tinta);
+}
+.ovulacion {
+  box-shadow: inset 0 0 0 2px var(--fase-ovulacion);
+}
+.hoy {
+  outline: 2px solid var(--vino);
+  outline-offset: 1px;
+}
+.leyenda {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  font-size: 12px;
+  color: var(--texto-2);
+}
+.leyenda li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.muestra {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.fases {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.faseFila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--blanco);
+  border-radius: var(--r-medio);
+  padding: 12px 14px;
+  box-shadow: inset 0 0 0 1px var(--linea);
+}
+.faseActual {
+  box-shadow: inset 0 0 0 2px var(--vino);
+}
+.faseColor {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex: none;
+}

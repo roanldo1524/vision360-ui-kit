@@ -1,0 +1,62 @@
+.perfil {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--blanco);
+  border-radius: var(--r-tarjeta);
+  box-shadow: var(--sombra);
+  padding: 16px;
+}
+.paso {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--crema);
+  border-radius: 999px;
+  font-size: 15px;
+}
+.paso span {
+  min-width: 22px;
+  text-align: center;
+}
+.paso button {
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+}
+.paso button:disabled {
+  opacity: 0.3;
+}
+.hora {
+  width: auto;
+  min-height: 40px;
+  padding: 6px 10px;
+  flex: none;
+}
+.peligro {
+  background: var(--rosa);
+  color: var(--rosa-tinta);
+}
+.peligroTexto {
+  color: var(--rosa-tinta);
+}
+.fotoFila {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.ciclitas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ciclita {
+  border-radius: 50%;
+  padding: 3px;
+  box-shadow: inset 0 0 0 2px transparent;
+  transition: box-shadow 0.2s;
+}
+.ciclita[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 2.5px var(--rojo);
+}

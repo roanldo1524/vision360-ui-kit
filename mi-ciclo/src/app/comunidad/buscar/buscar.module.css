@@ -1,0 +1,19 @@
+.caja {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--blanco);
+  border-radius: 999px;
+  padding: 0 16px;
+  box-shadow: var(--sombra);
+  color: var(--texto-3);
+}
+.caja input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  min-height: 48px;
+  color: var(--vino);
+}

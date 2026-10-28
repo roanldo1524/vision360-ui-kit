@@ -1,0 +1,44 @@
+.avatar {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  flex: none;
+}
+.foto {
+  border-radius: 50%;
+  object-fit: cover;
+}
+.nuevo {
+  background: var(--anillo-historia);
+}
+.nuevo::before,
+.visto::before {
+  content: "";
+  position: absolute;
+  inset: 2.5px;
+  border-radius: 50%;
+  background: var(--blanco);
+}
+.visto {
+  background: #eadde1;
+}
+.nuevo > :first-child,
+.visto > :first-child {
+  position: relative;
+}
+.mas {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 40%;
+  height: 40%;
+  min-width: 16px;
+  min-height: 16px;
+  border-radius: 50%;
+  background: var(--rojo);
+  color: var(--blanco);
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--blanco);
+}

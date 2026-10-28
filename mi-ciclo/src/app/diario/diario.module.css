@@ -1,0 +1,84 @@
+.centro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding-top: 20px;
+}
+.candado {
+  width: 64px;
+  height: 64px;
+  border-radius: 22px;
+  background: var(--lila);
+  color: var(--lila-tinta);
+  display: grid;
+  place-items: center;
+}
+.pin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  margin-top: 8px;
+}
+.puntos {
+  display: flex;
+  gap: 14px;
+}
+.puntos span {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px var(--texto-3);
+  transition: background 0.15s;
+}
+.puntos .lleno {
+  background: var(--vino);
+  box-shadow: none;
+}
+.teclas {
+  display: grid;
+  grid-template-columns: repeat(3, 72px);
+  gap: 12px 22px;
+}
+.tecla {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--blanco);
+  box-shadow: var(--sombra);
+  font-size: 24px;
+  font-family: var(--f-titulo);
+  display: grid;
+  place-items: center;
+  transition: transform 0.1s;
+}
+.tecla:active {
+  transform: scale(0.93);
+  background: var(--rosa);
+}
+.hoja {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 31px, #f4e3e7 31px 32px),
+    var(--blanco);
+}
+.area {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  resize: vertical;
+  min-height: 160px;
+  font-size: 16px;
+  line-height: 32px;
+  outline: none;
+  color: var(--vino);
+}
+.entrada {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}

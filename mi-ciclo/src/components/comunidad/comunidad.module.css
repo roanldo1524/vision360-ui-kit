@@ -1,0 +1,722 @@
+/* Estilos compartidos de la comunidad (canvas "Mi Ciclo — Comunidad v2") */
+
+/* ---------- Encabezado con wordmark y pestañas ---------- */
+.encabezado {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 25;
+  background: color-mix(in srgb, var(--blanco) 94%, transparent);
+  backdrop-filter: blur(14px);
+  margin: -12px calc(-1 * var(--lado-d)) 0 calc(-1 * var(--lado));
+  padding: 6px var(--lado-d) 0 var(--lado);
+  border-bottom: 1px solid var(--linea);
+}
+.encabezadoFila {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+}
+.wordmark {
+  text-align: center;
+  font-size: 22px;
+  line-height: 1;
+}
+.pestanas {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.pestana {
+  position: relative;
+  padding: 10px 0 11px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--texto-3);
+  white-space: nowrap;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.pestana[aria-current="page"] {
+  color: var(--vino);
+}
+.pestana[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2.5px;
+  border-radius: 2px;
+  background: var(--vino);
+}
+
+/* ---------- Historias ---------- */
+.historias {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  margin: 0 calc(-1 * var(--lado-d)) 0 calc(-1 * var(--lado));
+  padding: 4px var(--lado-d) 4px var(--lado);
+  scrollbar-width: none;
+}
+.historias::-webkit-scrollbar {
+  display: none;
+}
+.historia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+  width: 66px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--vino);
+  position: relative;
+}
+.historia span:last-child {
+  max-width: 66px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.masHistoria {
+  position: absolute;
+  top: 42px;
+  left: 42px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--rojo);
+  color: var(--blanco);
+  border: 2px solid var(--blanco);
+}
+
+/* ---------- Tarjeta de post ---------- */
+.post {
+  background: var(--blanco);
+  border-radius: var(--r-tarjeta);
+  box-shadow: var(--sombra);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.postCabeza {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.postAutora {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.postNombre {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  min-width: 0;
+}
+.postNombre > a,
+.postNombre > span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tema {
+  font-size: 10.5px;
+  padding: 2px 8px;
+  font-weight: 600;
+  border-radius: 999px;
+  background: var(--menta);
+  color: var(--menta-tinta);
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+.temaLila {
+  background: var(--lila);
+  color: var(--lila-tinta);
+}
+.temaDurazno {
+  background: var(--durazno);
+  color: var(--durazno-tinta);
+}
+.seguir {
+  color: var(--rojo);
+  font-weight: 700;
+  font-size: 13px;
+  min-height: 44px;
+  padding: 0 4px;
+}
+.revision {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 14px;
+  background: var(--mantequilla);
+  color: var(--mantequilla-tinta);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+/* Mosaico de fotos: una grande y dos pequeñas */
+.mosaico {
+  display: grid;
+  gap: 6px;
+  border-radius: 18px;
+  overflow: hidden;
+}
+.mosaico1 {
+  grid-template-columns: 1fr;
+  aspect-ratio: 4 / 4.2;
+}
+.mosaico2 {
+  grid-template-columns: 1fr 1fr;
+  aspect-ratio: 4 / 3;
+}
+.mosaico3 {
+  grid-template-columns: 1.15fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  aspect-ratio: 1 / 0.88;
+}
+.mosaico3 > :first-child {
+  grid-row: 1 / span 2;
+}
+.mosaicoCelda {
+  overflow: hidden;
+  border-radius: 14px;
+  min-height: 0;
+  background: var(--rosa);
+  max-width: 100%;
+}
+
+/* Post anónimo: frase sobre lila degradado */
+.cita {
+  border-radius: 20px;
+  padding: 30px 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-height: 150px;
+  justify-content: center;
+}
+.citaComillas {
+  font-family: var(--f-titulo);
+  font-size: 40px;
+  line-height: 0.6;
+  color: var(--rojo);
+  height: 18px;
+}
+.citaTexto {
+  font-family: var(--f-titulo);
+  font-size: 19px;
+  line-height: 1.35;
+  color: var(--vino);
+  text-wrap: balance;
+}
+.fondo-lila {
+  background: linear-gradient(150deg, #efeaff 0%, #fde3e9 100%);
+}
+.fondo-rosa {
+  background: linear-gradient(150deg, #fde3e9 0%, #ffebdd 100%);
+}
+.fondo-menta {
+  background: linear-gradient(150deg, #e1f5ec 0%, #efeaff 100%);
+}
+.fondo-durazno {
+  background: linear-gradient(150deg, #ffebdd 0%, #fff1d6 100%);
+}
+
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: -6px -8px -4px;
+}
+.accion {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 8px;
+  justify-content: center;
+  color: var(--vino);
+  font-size: 13px;
+  font-weight: 600;
+}
+.accion:active svg {
+  transform: scale(0.88);
+}
+.accion svg {
+  transition: transform 0.15s;
+}
+.florActiva svg {
+  animation: florecer 0.42s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+@keyframes florecer {
+  0% {
+    transform: scale(0.6) rotate(-30deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+.espaciador {
+  flex: 1;
+}
+.leDieronFlor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--vino);
+}
+.pila {
+  display: flex;
+}
+.pila > * + * {
+  margin-left: -7px;
+}
+.pila > * {
+  box-shadow: 0 0 0 2px var(--blanco);
+  border-radius: 50%;
+}
+.pie {
+  font-size: 13.5px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.pie b {
+  margin-right: 5px;
+}
+.hashtag {
+  color: var(--rosa-tinta);
+  font-weight: 600;
+}
+.enlaceExterno {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--lila-tinta);
+  font-size: 12.5px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.verComentarios {
+  color: var(--texto-3);
+  font-size: 13px;
+  text-align: left;
+  min-height: 28px;
+}
+.comentarioDestacado {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.comentarioRapido {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.comentarioRapido input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: 13px;
+  min-height: 40px;
+}
+.publicarMini {
+  color: var(--rojo);
+  font-weight: 700;
+  font-size: 13px;
+  min-height: 40px;
+  padding: 0 6px;
+}
+
+/* ---------- Reels para ti ---------- */
+.reelMini {
+  position: relative;
+  width: 118px;
+  aspect-ratio: 3 / 4.6;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #3a1220;
+  color: #fff;
+  max-width: 100%;
+}
+.reelMini::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(30, 6, 16, 0.65));
+}
+.reelMiniInfo {
+  position: absolute;
+  left: 9px;
+  bottom: 8px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.reelMiniPlay {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--vino);
+  display: grid;
+  place-items: center;
+}
+.fila3 {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ---------- Chicas para seguir ---------- */
+.sugerencia {
+  position: relative;
+  width: 148px;
+  background: var(--blanco);
+  border-radius: 22px;
+  box-shadow: var(--sombra);
+  padding: 16px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+.marcoFlor {
+  position: relative;
+  width: 92px;
+  height: 92px;
+  display: grid;
+  place-items: center;
+}
+.marcoFlor > svg:first-child {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.marcoFlor > :last-child {
+  position: relative;
+}
+.cerrarSugerencia {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  color: var(--texto-3);
+}
+.botonSeguir {
+  margin-top: 4px;
+  min-height: 36px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--blanco);
+  color: var(--rojo);
+  font-weight: 700;
+  font-size: 13px;
+  box-shadow: inset 0 0 0 1.5px var(--linea);
+}
+
+/* ---------- Preguntas ---------- */
+.tarjetaAnonima {
+  border-radius: 26px;
+  padding: 18px;
+  background: linear-gradient(150deg, #efeaff 0%, #f5e6fa 60%, #fde3e9 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.tarjetaAnonimaFila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.campoAnonimo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--blanco);
+  border-radius: 999px;
+  padding: 4px 4px 4px 16px;
+}
+.campoAnonimo input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  min-height: 40px;
+  font-size: 13.5px;
+}
+.esperan {
+  width: 210px;
+  min-height: 176px;
+  border-radius: 22px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.esperanMantequilla {
+  background: var(--mantequilla);
+}
+.esperanMenta {
+  background: var(--menta);
+}
+.esperanTexto {
+  font-family: var(--f-titulo);
+  font-size: 16.5px;
+  line-height: 1.3;
+  flex: 1;
+}
+.responder {
+  align-self: flex-start;
+  min-height: 36px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--blanco);
+  color: var(--rojo);
+  font-weight: 700;
+  font-size: 12.5px;
+  display: inline-flex;
+  align-items: center;
+}
+.pregunta {
+  background: var(--blanco);
+  border-radius: var(--r-tarjeta);
+  box-shadow: var(--sombra);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.preguntaTexto {
+  font-family: var(--f-titulo);
+  font-size: 17.5px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.preguntaFoto {
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+}
+.mejorRespuesta {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: var(--crema);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+.contadores {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.contador {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1.5px var(--linea);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ---------- Comentarios ---------- */
+.comentario {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.comentarioCuerpo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.comentarioCabeza {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+.etiquetaAutora {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--rojo);
+  color: var(--blanco);
+}
+.comentarioTexto {
+  font-size: 13.5px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.comentarioAcciones {
+  display: flex;
+  gap: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--texto-3);
+}
+.comentarioAcciones button {
+  min-height: 32px;
+}
+.verRespuestas {
+  color: var(--rojo) !important;
+}
+.florComentario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  min-width: 40px;
+  min-height: 44px;
+  justify-content: center;
+  font-size: 10.5px;
+  color: var(--texto-3);
+}
+.respuestas {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.compositor {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--crema) 94%, transparent);
+  backdrop-filter: blur(12px);
+  margin: 0 calc(-1 * var(--lado-d)) 0 calc(-1 * var(--lado));
+  padding: 10px var(--lado-d) calc(10px + env(safe-area-inset-bottom, 0px)) var(--lado);
+  border-top: 1px solid var(--linea);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rapidas {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.rapida {
+  flex: none;
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--blanco);
+  box-shadow: inset 0 0 0 1.5px var(--linea);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.campoComentario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.campoComentarioCaja {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--blanco);
+  border-radius: 999px;
+  padding: 3px 3px 3px 16px;
+  box-shadow: inset 0 0 0 1.5px var(--linea);
+}
+.campoComentarioCaja input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  min-height: 40px;
+  font-size: 13.5px;
+}
+.enviar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--rosa);
+  color: var(--rosa-tinta);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.enviar:disabled {
+  opacity: 0.5;
+}
+.respondiendo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--texto-2);
+}
+
+/* ---------- Menú en hoja ---------- */
+.opciones {
+  display: flex;
+  flex-direction: column;
+  background: var(--blanco);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.opcion {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 16px;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: left;
+}
+.opcion + .opcion {
+  border-top: 1px solid var(--linea);
+}
+.opcionPeligro {
+  color: var(--rosa-tinta);
+}
