@@ -22,9 +22,9 @@ export function CheckinAnimo({ fase }: { fase: Fase }) {
   const sintomas = registro?.sintomas ?? [];
 
   return (
-    <section id="animo" className="seccion">
+    <section id="animo" className={clases("seccion", estilos.tarjetaAnimo)}>
       <div className="seccion-cabeza">
-        <h2 className="titulo-m">¿Cómo te sientes hoy?</h2>
+        <h2 className={estilos.tituloSans}>¿Cómo te sientes hoy?</h2>
         <button
           className="enlace-vino"
           onClick={() => {
@@ -35,7 +35,7 @@ export function CheckinAnimo({ fase }: { fase: Fase }) {
           {sintomas.length ? `${sintomas.length} síntomas` : "Otros síntomas"} <ChevronRight size={15} />
         </button>
       </div>
-      <div className="carrusel" role="radiogroup" aria-label="Ánimo de hoy">
+      <div className={estilos.filaAnimos} role="radiogroup" aria-label="Ánimo de hoy">
         {ANIMOS.map((a) => (
           <button
             key={a.id}

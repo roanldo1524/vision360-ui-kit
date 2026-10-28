@@ -31,6 +31,10 @@ export function estadoInicial(): Estado {
     diario: { entradas: [] },
     comunidad: comunidadInicial(),
     moderadora: false,
+    agua: {},
+    metaAgua: 2000,
+    objetivo: "periodo",
+    embarazo: false,
   };
 }
 

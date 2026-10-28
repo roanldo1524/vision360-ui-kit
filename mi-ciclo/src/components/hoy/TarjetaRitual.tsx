@@ -8,7 +8,7 @@ import { clases } from "@/lib/utilidades";
 import { Flor } from "@/components/Flor";
 import estilos from "./hoy.module.css";
 
-/** "¿Ya tomaste Mi Ciclo hoy?": racha, semana y botones. */
+/** "¿Ya tomaste Mi Ciclo hoy?" con Sí/No, racha, semana y motivo. */
 export function TarjetaRitual() {
   const registros = useEstado((e) => e.registros);
   const motivo = useEstado((e) => e.perfil?.motivo);
@@ -19,68 +19,52 @@ export function TarjetaRitual() {
 
   return (
     <section id="ritual" className={estilos.ritual}>
-      <div className={estilos.ritualCabeza}>
-        <div className="columna" style={{ gap: 8, minWidth: 0 }}>
-          <h2 className="titulo-m">¿Ya tomaste Mi Ciclo hoy?</h2>
-          <span className={estilos.racha}>
-            <Flor activa tamano={16} />
-            {racha === 0 ? "Empieza tu racha hoy" : racha === 1 ? "1 día seguido" : `${racha} días seguidos`}
-          </span>
-        </div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/marca/ritual-sachet.webp" alt="Sobre de Mi Ciclo sabor manzana" className={estilos.sachet} width={92} height={92} />
-      </div>
-
-      <ol className={estilos.semanaRitual} aria-label="Tu semana">
-        {DIAS_LETRA.map((letra, i) => {
-          const d = sumarDias(lunes, i);
-          const tomado = registros[d]?.tomoSobre === true;
-          const esHoy = d === hoy;
-          return (
-            <li key={d} className={estilos.diaRitual}>
-              <span className="mini texto-3">{letra}</span>
-              <span
-                className={clases(estilos.marca, tomado && estilos.marcaHecha, esHoy && !tomado && estilos.marcaHoy)}
-                aria-label={tomado ? "Tomado" : esHoy ? "Hoy, pendiente" : d > hoy ? "Próximo" : "Sin registro"}
-              >
-                {tomado && <Check size={14} strokeWidth={3} />}
-              </span>
-            </li>
-          );
-        })}
-      </ol>
-
-      {tomoHoy === true ? (
-        <div className={estilos.listo}>
-          <Check size={18} /> <span>¡Listo por hoy! Tu cuerpo te lo agradece.</span>
-          <button className="enlace-vino" style={{ marginLeft: "auto" }} onClick={() => marcarSobre(false)}>
-            Deshacer
-          </button>
-        </div>
-      ) : (
-        <div className="rejilla-2">
-          <button className="boton boton-secundario" onClick={() => marcarSobre(true)}>
-            Sí, ya la tomé
+      <div className={estilos.ritualIzq}>
+        <h2 className={estilos.ritualTitulo}>¿Ya tomaste Mi Ciclo hoy?</h2>
+        <div className={estilos.siNo}>
+          <button
+            className={clases(estilos.si, tomoHoy === true && estilos.siActivo)}
+            onClick={() => marcarSobre(tomoHoy !== true)}
+            aria-pressed={tomoHoy === true}
+          >
+            {tomoHoy === true && <Check size={16} strokeWidth={3} />} Sí
           </button>
           <button
-            className={clases("boton boton-secundario", tomoHoy === false && estilos.botonMarcado)}
+            className={clases(estilos.no, tomoHoy === false && estilos.noActivo)}
             onClick={() => marcarSobre(false)}
             aria-pressed={tomoHoy === false}
           >
-            Todavía no
+            No
           </button>
         </div>
-      )}
-      {tomoHoy === false && (
-        <p className="pequeno texto-2">Te lo recordamos más tarde. Un vaso de agua y tu sobre: listo en un minuto.</p>
-      )}
+        <span className={estilos.racha}>
+          <Flor activa tamano={14} /> {racha === 1 ? "1 día seguido" : `${racha} días seguidos`}
+        </span>
+        <ol className={estilos.semanaRitual} aria-label="Tu semana">
+          {DIAS_LETRA.map((letra, i) => {
+            const d = sumarDias(lunes, i);
+            const tomado = registros[d]?.tomoSobre === true;
+            return (
+              <li key={d} className={clases(estilos.marca, tomado && estilos.marcaHecha, d === hoy && !tomado && estilos.marcaHoy)}>
+                <span className="solo-lector">{tomado ? "tomado" : "sin registro"}</span>
+                {tomado ? <Check size={10} strokeWidth={3.5} /> : letra}
+              </li>
+            );
+          })}
+        </ol>
+      </div>
 
-      <div className={estilos.motivo}>
-        <label htmlFor="motivo" className="pequeno negrita">¿Por qué estás con Mi Ciclo hoy?</label>
+      <div className={estilos.ritualDer}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/marca/ritual-sachet.webp" alt="" className={estilos.ritualFondo} aria-hidden="true" />
+        <label htmlFor="motivo" className={estilos.motivoTitulo}>
+          ¿Por qué estás con Mi Ciclo hoy?
+        </label>
+        <p className={estilos.motivoAyuda}>Cuéntanos tu motivo para acompañarte mejor.</p>
         <div className={estilos.selector}>
           <select id="motivo" value={motivo ?? ""} onChange={(e) => guardarMotivo(e.target.value)}>
             <option value="" disabled>
-              Selecciona
+              Selecciona una opción
             </option>
             {MOTIVOS.map((m) => (
               <option key={m}>{m}</option>

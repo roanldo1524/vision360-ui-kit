@@ -10,7 +10,7 @@ App PWA de Mi Ciclo (EA Business Group SAS). Especificación: *Documento maestro
 
 ## Reglas
 1. Todo en español: interfaz, código y comentarios.
-2. Sistema de marca (`src/app/globals.css`, alineado con miciclo.co y el brandbook): rojo Mi Ciclo `#F62C39`, ciruela `#1F0526` como tinta, rosa `#FFDCED` como superficie; titulares en Chonburi, interfaz en Manrope; tarjetas blancas redondeadas, botones píldora con flecha en círculo, flor-luna como sello. Fotos reales de la marca en `public/marca/` (nunca fotos de personas generadas con IA). Caveat solo dentro de imágenes.
+2. Sistema de marca (`src/app/globals.css`). **Colores del brandbook 2026**: Rojo Coral `#F62C39`, Rosa `#FFDCED`, Violeta `#E7BEF8`, Violeta oscuro `#5B3AAA`, blanco y negro (tinta ciruela `#1F0526` de la web). **Tipografías de miciclo.co**: Glodok Display (letra del logo) para el nombre y cifras, Fraunces Black para títulos, Manrope para la interfaz, Lora itálica para la palabra acento. Inicio sigue las referencias aprobadas (fondo rosa, tarjetas blancas, anillo grande con la Ciclita). Fotos reales de la marca en `public/marca/`; nunca fotos de personas generadas con IA. Skills de diseño instaladas en `.claude/skills/` (impeccable, taste-skill, ui-ux-pro-max, baoyu-design y las de Emil Kowalski).
 3. El rojo `--rojo` solo en la acción principal de cada pantalla.
 3b. Movimiento: `--ease-out` fuerte, menos de 300 ms, `scale(0.97)` al tocar, nada desde `scale(0)`, respeta `prefers-reduced-motion`.
 4. Ciclitas en lugar de fotos de personas. Nada de fotos generadas con IA.

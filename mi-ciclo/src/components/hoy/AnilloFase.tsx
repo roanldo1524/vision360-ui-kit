@@ -1,5 +1,5 @@
 import type { CiclitaId } from "@/lib/tipos";
-import { faseDelDia, FASES } from "@/lib/ciclo";
+import { faseDelDia } from "@/lib/ciclo";
 import { Ciclita } from "@/components/Ciclita";
 
 interface Props {
@@ -9,12 +9,21 @@ interface Props {
   ciclita: CiclitaId;
 }
 
-/** Anillo del ciclo: segmentos por fase, avance hasta hoy y la Ciclita al centro. */
+// Colores de los tramos como en la referencia: rosa para la regla, lavandas para el resto
+const COLOR = {
+  menstrual: "#f62c39", // Rojo Coral
+  folicular: "#e7befb", // Violeta
+  ovulacion: "#c99af0",
+  lutea: "#5b3aaa", // Violeta oscuro
+} as const;
+
+/** Anillo grande del ciclo con la Ciclita al centro y la burbuja "Día X de N". */
 export function AnilloFase({ dia, total, regla, ciclita }: Props) {
-  const R = 46;
-  const C = 2 * Math.PI * R;
+  const C0 = 110; // centro
+  const R = 92; // radio del trazo
+  const ANCHO = 24;
   const config = { ultimoPeriodo: "", duracionCiclo: total, duracionRegla: regla };
-  // tramos consecutivos de la misma fase
+
   const tramos: { fase: ReturnType<typeof faseDelDia>; desde: number; hasta: number }[] = [];
   for (let d = 1; d <= total; d++) {
     const f = faseDelDia(d, config);
@@ -22,55 +31,79 @@ export function AnilloFase({ dia, total, regla, ciclita }: Props) {
     if (ultimo && ultimo.fase === f) ultimo.hasta = d;
     else tramos.push({ fase: f, desde: d, hasta: d });
   }
-  const angulo = ((dia - 0.5) / total) * 360 - 90;
-  const rad = (angulo * Math.PI) / 180;
-  const faseHoy = faseDelDia(dia, config);
+
+  const punto = (n: number, r = R) => {
+    const a = ((n / total) * 360 - 90) * (Math.PI / 180);
+    return { x: C0 + r * Math.cos(a), y: C0 + r * Math.sin(a) };
+  };
+  const arco = (desde: number, hasta: number) => {
+    const hueco = 0.35; // separación blanca entre tramos (en días)
+    const a = punto(desde - 1 + hueco);
+    const b = punto(hasta - hueco);
+    const grande = hasta - desde + 1 > total / 2 ? 1 : 0;
+    return `M ${a.x} ${a.y} A ${R} ${R} 0 ${grande} 1 ${b.x} ${b.y}`;
+  };
+
+  const regla0 = tramos[0];
+  // la gota va en el extremo del tramo de la regla más lejano al marcador del día
+  const gota = punto(dia <= (regla0.desde + regla0.hasta) / 2 ? regla0.hasta - 0.9 : regla0.desde - 0.1);
+  const marca = punto(dia - 0.5);
+
   return (
-    <div style={{ position: "relative", width: 132, height: 132, flex: "none" }}>
-      <svg viewBox="0 0 120 120" width="132" height="132" aria-hidden="true">
-        <circle cx="60" cy="60" r={R} fill="none" stroke="#fff" strokeWidth="12" />
-        {tramos.map((t) => {
-          const largo = ((t.hasta - t.desde + 1) / total) * C - 2;
-          const offset = -((t.desde - 1) / total) * C;
-          return (
-            <circle
-              key={t.desde}
-              cx="60"
-              cy="60"
-              r={R}
-              fill="none"
-              stroke={FASES[t.fase].color}
-              strokeOpacity={t.fase === faseHoy ? 0.95 : 0.22}
-              strokeWidth="9"
-              strokeDasharray={`${Math.max(1, largo)} ${C}`}
-              strokeDashoffset={offset}
-              strokeLinecap="round"
-              transform="rotate(-90 60 60)"
-            />
-          );
-        })}
-        <circle cx={60 + R * Math.cos(rad)} cy={60 + R * Math.sin(rad)} r="7.5" fill="#fff" stroke="var(--rojo)" strokeWidth="3" />
+    <div style={{ position: "relative", width: 174, height: 184, flex: "none", marginRight: -4 }}>
+      <svg viewBox="0 0 220 220" width="174" height="174" aria-hidden="true">
+        <defs>
+          <radialGradient id="anillo-centro" cx="50%" cy="40%" r="60%">
+            <stop offset="0" stopColor="#fff6f8" />
+            <stop offset="1" stopColor="#ffdced" />
+          </radialGradient>
+        </defs>
+        <circle cx={C0} cy={C0} r={R + ANCHO / 2 + 4} fill="#fff" />
+        {tramos.map((t) => (
+          <path
+            key={t.desde}
+            d={arco(t.desde, t.hasta)}
+            fill="none"
+            stroke={COLOR[t.fase]}
+            strokeWidth={ANCHO}
+            strokeLinecap="butt"
+          />
+        ))}
+        <circle cx={C0} cy={C0} r={R - ANCHO / 2 - 5} fill="url(#anillo-centro)" />
+        {/* gota en el tramo de la regla */}
+        <path
+          transform={`translate(${gota.x - 7} ${gota.y - 9})`}
+          d="M7 0 C7 0 0 8 0 12 a7 7 0 0 0 14 0 C14 8 7 0 7 0z"
+          fill="none"
+          stroke="#fff"
+          strokeWidth="2"
+        />
+        {/* marcador del día */}
+        <circle cx={marca.x} cy={marca.y} r="9" fill="#fff" stroke="#f62c39" strokeWidth="3" />
       </svg>
-      <div style={{ position: "absolute", inset: 22, display: "grid", placeItems: "center" }}>
-        <Ciclita id={ciclita} tamano={84} feliz={faseHoy !== "menstrual"} />
+      <div style={{ position: "absolute", left: 0, right: 10, top: 34, display: "grid", placeItems: "center" }}>
+        <Ciclita id={ciclita} tamano={92} feliz />
       </div>
       <div
         style={{
           position: "absolute",
           left: "50%",
-          bottom: -10,
+          bottom: 0,
           transform: "translateX(-50%)",
-          background: "var(--blanco)",
-          borderRadius: 16,
-          boxShadow: "var(--sombra)",
-          padding: "4px 10px",
+          background: "#fff",
+          borderRadius: "50% 50% 46% 46%",
+          boxShadow: "0 8px 20px rgba(220, 60, 100, 0.18)",
+          width: 66,
+          padding: "8px 0 6px",
           textAlign: "center",
-          lineHeight: 1.05,
+          lineHeight: 1,
         }}
       >
-        <span className="mini texto-2" style={{ display: "block" }}>Día</span>
-        <span className="titulo-m num" style={{ color: "var(--rojo)" }}>{dia}</span>
-        <span className="mini texto-3" style={{ display: "block" }}>de {total}</span>
+        <span style={{ display: "block", fontSize: 12, fontWeight: 700, color: "var(--vino)" }}>Día</span>
+        <span className="num" style={{ fontFamily: "var(--f-display)", fontSize: 26, color: "var(--rojo)" }}>
+          {dia}
+        </span>
+        <span style={{ display: "block", fontSize: 12, fontWeight: 700, color: "var(--vino)" }}>de {total}</span>
       </div>
     </div>
   );

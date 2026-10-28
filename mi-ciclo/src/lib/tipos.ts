@@ -217,4 +217,8 @@ export interface Estado {
   diario: Diario;
   comunidad: Comunidad;
   moderadora: boolean;
+  agua: Record<Fecha, number>; // ml tomados por día
+  metaAgua: number; // ml
+  objetivo: "periodo" | "concebir" | "embarazo";
+  embarazo: boolean;
 }

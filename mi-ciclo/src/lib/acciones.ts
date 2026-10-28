@@ -7,7 +7,7 @@ import { CONSEJO_DIARIO_NOTIF } from "./consejos";
 import { completarMisionPorClave } from "./misiones";
 import { notificarSistema } from "./push";
 import type { Animo, ConfigCiclo, Fecha, Notificacion, Perfil, RegistroDia } from "./tipos";
-import { nuevoId } from "./utilidades";
+import { nuevoId, vibrar } from "./utilidades";
 
 export function completarBienvenida(perfil: Perfil, ciclo: ConfigCiclo) {
   actualizar((e) => ({
@@ -79,6 +79,7 @@ function conRegistro(fecha: Fecha, fn: (r: RegistroDia) => RegistroDia) {
 
 /** "Mi regla llegó hoy" (o en la fecha indicada). */
 export function registrarPeriodo(fecha: Fecha = hoyColombia()) {
+  vibrar(20);
   actualizar((e) => {
     if (!e.ciclo) return e;
     const periodos = [...new Set([...e.periodos, fecha])].sort();
@@ -97,11 +98,13 @@ export function quitarPeriodo(fecha: Fecha) {
 }
 
 export function marcarSobre(tomo: boolean, fecha: Fecha = hoyColombia()) {
+  vibrar(tomo ? 18 : 8);
   conRegistro(fecha, (r) => ({ ...r, tomoSobre: tomo }));
   if (tomo && fecha === hoyColombia()) completarMisionPorClave("tomar_sobre");
 }
 
 export function registrarAnimo(animo: Animo, fecha: Fecha = hoyColombia()) {
+  vibrar(8);
   conRegistro(fecha, (r) => ({ ...r, animo }));
   if (fecha === hoyColombia()) completarMisionPorClave("registrar_animo");
 }
@@ -182,4 +185,24 @@ export function alAbrirApp() {
   if (info.diasParaPeriodo === 2) {
     agregarNotificacion({ tipo: "fase", titulo: "Tu periodo llegaría en 2 días", texto: "Ten a mano tu kit de cuidado.", enlace: "/ciclo" });
   }
+}
+
+// ---------- Agua y objetivo ----------
+
+export const VASO_ML = 200;
+
+export function sumarAgua(ml: number = VASO_ML, fecha: Fecha = hoyColombia()) {
+  actualizar((e) => ({ ...e, agua: { ...e.agua, [fecha]: Math.max(0, (e.agua[fecha] ?? 0) + ml) } }));
+}
+
+export function cambiarMetaAgua(ml: number) {
+  actualizar((e) => ({ ...e, metaAgua: Math.min(4000, Math.max(1000, ml)) }));
+}
+
+export function elegirObjetivo(objetivo: "periodo" | "concebir" | "embarazo") {
+  actualizar((e) => ({ ...e, objetivo, embarazo: objetivo === "embarazo" ? true : e.embarazo }));
+}
+
+export function alternarEmbarazo() {
+  actualizar((e) => ({ ...e, embarazo: !e.embarazo, objetivo: !e.embarazo ? "embarazo" : "periodo" }));
 }
