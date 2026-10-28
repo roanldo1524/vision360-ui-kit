@@ -1,27 +1,21 @@
 "use client";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Heart, Plus } from "lucide-react";
 import { useEstado } from "@/lib/almacen";
-import { Circulo, FlorLuna, Luna } from "@/components/FormasMarca";
+import { FlorLuna } from "@/components/FormasMarca";
+import { Ciclita } from "@/components/Ciclita";
 import { Avatar } from "@/components/Avatar";
 import type { Comunidad, Fase } from "@/lib/tipos";
 import estilos from "./hoy.module.css";
 
 const DIA = 86_400_000;
 
-// Fotos reales de la marca según lo que más acompaña cada fase
+// Foto real de la marca para "Consejos para tu fase"
 const FOTO_FASE: Record<Fase, string> = {
   menstrual: "/marca/sint-colicos.webp",
   folicular: "/marca/sint-energia.webp",
   ovulacion: "/marca/sint-animo.webp",
   lutea: "/marca/sint-hinchazon.webp",
-};
-
-const SUB_FASE: Record<Fase, string> = {
-  menstrual: "Calor, pausa y alivio para los cólicos",
-  folicular: "Energía nueva para empezar cosas",
-  ovulacion: "Conectar y moverte con ganas",
-  lutea: "Menos exigencia, más cuidado",
 };
 
 function autorasDeHoy(c: Comunidad): string[] {
@@ -32,85 +26,83 @@ function autorasDeHoy(c: Comunidad): string[] {
   return [...new Set(ids)];
 }
 
-/** "Para ti hoy" como una lista serena, y la comunidad al final. */
+/** Consejos y diario, En pareja y el avance de la comunidad (referencia aprobada). */
 export function ParaTi({ fase }: { fase: Fase }) {
   const comunidad = useEstado((e) => e.comunidad);
   const vinculoActivo = useEstado((e) => e.vinculos.find((v) => v.estado === "activo"));
   const autoras = autorasDeHoy(comunidad);
   const perfiles = comunidad.perfiles.filter((p) => autoras.includes(p.id)).slice(0, 3);
 
-  const filas = [
-    {
-      href: "/consejos",
-      titulo: "Consejos para tu fase",
-      sub: SUB_FASE[fase],
-      // eslint-disable-next-line @next/next/no-img-element
-      imagen: <img src={FOTO_FASE[fase]} alt="" />,
-      fondo: undefined as string | undefined,
-    },
-    {
-      href: "/diario",
-      titulo: "Mi diario",
-      sub: "Un espacio solo para ti",
-      fondo: "#efe4fb",
-      imagen: <Luna color="#5b3aaa" tamano={30} />,
-    },
-    {
-      href: "/vinculo#notas",
-      titulo: "Tu espacio con tu amor",
-      sub: "Notas que se borran en 24 horas",
-      fondo: "#ffe4ea",
-      imagen: <FlorLuna color="#f62c39" fondo="#ffe4ea" tamano={34} />,
-    },
-    {
-      href: "/vinculo",
-      titulo: "Sincroniza tu ritmo",
-      sub: vinculoActivo ? `Conectada con ${vinculoActivo.nombre ?? "tu vínculo"}` : "Invita a tu pareja, mamá o amiga",
-      fondo: "#fff0f5",
-      imagen: (
-        <span className={estilos.miniCiclitas}>
-          <Circulo color="#ff8fab" tamano={22} />
-          <Circulo color="#c99af0" tamano={22} />
-        </span>
-      ),
-    },
-  ];
-
   return (
     <>
-      <section className={estilos.paraTi} aria-labelledby="t-para-ti">
-        <h2 id="t-para-ti" className={estilos.tituloSeccion}>
-          Para ti <em>hoy</em>
-        </h2>
-        <ul className={estilos.lista}>
-          {filas.map((f) => (
-            <li key={f.href + f.titulo}>
-              <Link href={f.href} className={estilos.fila}>
-                <span className={estilos.filaImagen} style={f.fondo ? { background: f.fondo } : undefined} aria-hidden="true">
-                  {f.imagen}
-                </span>
-                <span className={estilos.filaTexto}>
-                  <span className={estilos.filaTitulo}>{f.titulo}</span>
-                  <span className={estilos.filaSub}>{f.sub}</span>
-                </span>
-                <ChevronRight size={20} className={estilos.filaFlecha} aria-hidden="true" />
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <div className={estilos.par}>
+        <Link href="/consejos" className={`${estilos.bloque} ${estilos.bloqueLila}`}>
+          <span className={estilos.bloqueTexto}>
+            <span className={estilos.bloqueTitulo}>Consejos para tu fase</span>
+            <span className={`${estilos.pildora} ${estilos.pildoraLila}`}>
+              Ver consejos <ChevronRight size={16} strokeWidth={2.4} />
+            </span>
+          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={FOTO_FASE[fase]} alt="" className={estilos.bloqueFoto} aria-hidden="true" />
+        </Link>
+        <Link href="/diario" className={estilos.bloque}>
+          <span className={estilos.bloqueTexto}>
+            <span className={`${estilos.bloqueTitulo} ${estilos.tituloRojo}`}>Mi diario</span>
+            <span className={estilos.bloqueSub}>Un espacio para ti</span>
+            <span className={estilos.pildora}>
+              Escribir ahora <ChevronRight size={16} strokeWidth={2.4} />
+            </span>
+          </span>
+          <span className={estilos.bloquePieza} aria-hidden="true">
+            <FlorLuna color="var(--rojo)" fondo="#ffe6f0" tamano={58} />
+          </span>
+        </Link>
+      </div>
+
+      <div className={estilos.par}>
+        <Link href="/vinculo#notas" className={estilos.bloque}>
+          <span className={estilos.bloqueTexto}>
+            <span className={`${estilos.bloqueTitulo} ${estilos.tituloRojo}`}>
+              <Heart size={20} fill="var(--rojo)" stroke="none" className={estilos.corazon} aria-hidden="true" />
+              Tu espacio con tu amor
+            </span>
+            <span className={estilos.bloqueSub}>Lo que escribas hoy desaparecerá en 24 horas.</span>
+            <span className={estilos.pildora}>
+              Escribir <ChevronRight size={16} strokeWidth={2.4} />
+            </span>
+          </span>
+        </Link>
+        <Link href="/vinculo" className={`${estilos.bloque} ${estilos.bloqueLila}`}>
+          <span className={estilos.bloqueTexto}>
+            <span className={`${estilos.bloqueTitulo} ${estilos.tituloRojo}`}>Sincroniza tu ritmo</span>
+            <span className={estilos.bloqueSub}>
+              {vinculoActivo ? `Conectada con ${vinculoActivo.nombre ?? "tu vínculo"}` : "y tus momentos con tu pareja."}
+            </span>
+            <span className={estilos.pildora}>
+              {vinculoActivo ? "Ver vínculo" : "Invitar"} <ChevronRight size={16} strokeWidth={2.4} />
+            </span>
+          </span>
+          <span className={estilos.pareja} aria-hidden="true">
+            <Ciclita id="rosa" tamano={46} feliz />
+            <span className={estilos.parejaMas}>{vinculoActivo ? <Ciclita id="lila" tamano={40} /> : <Plus size={22} />}</span>
+          </span>
+        </Link>
+      </div>
 
       <Link href="/comunidad" className={estilos.comunidad}>
         <span className={estilos.pila} aria-hidden="true">
           {(perfiles.length ? perfiles : comunidad.perfiles.slice(0, 3)).map((p) => (
-            <Avatar key={p.id} ciclita={p.ciclita} fotoId={p.fotoId} tamano={34} />
+            <Avatar key={p.id} ciclita={p.ciclita} fotoId={p.fotoId} tamano={36} />
           ))}
         </span>
         <span className={estilos.comunidadTexto}>
+          <span className={estilos.etiqueta}>Comunidad</span>
           <b>{autoras.length === 1 ? "1 chica compartió hoy" : `${autoras.length} chicas compartieron hoy`}</b>
-          <span>Entra a la comunidad</span>
         </span>
-        <ChevronRight size={20} className={estilos.filaFlecha} aria-hidden="true" />
+        <span className={estilos.enlace} aria-hidden="true">
+          <ChevronRight size={20} />
+        </span>
       </Link>
     </>
   );

@@ -12,10 +12,10 @@ interface Props {
 
 // Colores de los tramos como en la referencia: rosa para la regla, lavandas para el resto
 const COLOR = {
-  menstrual: "#f62c39", // Rojo Coral
-  folicular: "#e7befb", // Violeta
-  ovulacion: "#c99af0",
-  lutea: "#5b3aaa", // Violeta oscuro
+  menstrual: "#ff8fb4", // Rosa del período (referencia)
+  folicular: "#f1dafb", // Violeta claro
+  ovulacion: "#e7bef8", // Violeta
+  lutea: "#d9b6f3",
 } as const;
 
 /** Anillo grande del ciclo con la Ciclita al centro y la burbuja "Día X de N". */

@@ -1,549 +1,609 @@
-/* Inicio · un lugar tranquilo.
-   Ritmo de 8 px, tarjetas blancas sobre rosa claro, tipografía liviana
-   (Fraunces 500 con itálica de acento, Manrope) y un solo botón rojo: el ritual. */
+/* Inicio · fiel a la referencia aprobada.
+   Fondo rosa suave, tarjetas blancas con sombra muy ligera,
+   rojo para el nombre y las acciones, violeta para los consejos. */
 
 .inicio {
-  gap: 20px;
+  min-height: 100dvh;
+  gap: 16px;
+  background:
+    radial-gradient(120% 60% at 100% 0%, #ffd6e8 0%, transparent 60%),
+    linear-gradient(180deg, #ffe7f1 0%, #fff3f8 38%, #fff8fb 70%, #ffffff 100%);
+  padding-top: calc(18px + env(safe-area-inset-top, 0px));
 }
 
-/* ---------- Portada roja (brandbook: campo Rojo Coral + flor-luna recortada) ---------- */
-.portada {
-  position: relative;
-  overflow: hidden;
-  margin: -14px calc(-1 * var(--lado-d)) 0 calc(-1 * var(--lado));
-  padding: 8px var(--lado-d) 24px var(--lado);
-  background: var(--rojo);
-  color: #fff;
-  border-radius: 0 0 32px 32px;
+/* Superficie común de las tarjetas */
+.semana,
+.fase,
+.ritual,
+.tarjetaAnimo,
+.comunidad {
+  background: #fff;
+  border-radius: 26px;
+  box-shadow:
+    0 1px 2px rgba(91, 58, 170, 0.04),
+    0 10px 30px -12px rgba(246, 44, 57, 0.16);
+}
+
+/* ---------- Saludo ---------- */
+.cabeza {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 2px 2px;
+}
+
+.saludo {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  min-width: 0;
 }
-.florGigante {
-  position: absolute;
-  right: -112px;
-  top: 40px;
-  pointer-events: none;
-  animation: girar 90s linear infinite;
+
+.hola {
+  font-family: var(--f-ui);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--vino);
+  letter-spacing: -0.02em;
 }
-@keyframes girar {
-  to {
-    transform: rotate(360deg);
-  }
+
+.nombre {
+  font-family: var(--f-ui);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--rojo-texto);
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
 }
-.portada > :not(.florGigante) {
-  position: relative;
+
+.lema {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--texto-2);
 }
-.barraSuperior {
+
+.acciones {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 48px;
+  gap: 8px;
+  flex: none;
+  padding-top: 4px;
 }
-.logo {
-  height: 24px;
-  width: auto;
-}
-.accesos {
-  display: flex;
-  gap: 4px;
-  margin-right: -10px;
-}
-.acceso {
+
+.accion {
   position: relative;
   width: 44px;
   height: 44px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  color: #fff;
-  transition: background-color 200ms ease, transform 160ms var(--ease-out);
-}
-.acceso:active {
-  transform: scale(0.92);
-  background: rgba(255, 255, 255, 0.16);
-}
-.puntito {
-  position: absolute;
-  top: 10px;
-  right: 11px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 0 2px var(--rojo);
-}
-.saludo {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.fecha {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.86);
-}
-.fecha::first-letter {
-  text-transform: uppercase;
-}
-.hola {
-  font-family: var(--f-titulo);
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: #fff;
-}
-.hola em {
-  font-style: italic;
-  font-weight: 500;
-}
-.dato {
-  display: flex;
-  align-items: flex-end;
-  gap: 16px;
-  margin-top: 8px;
-}
-.cifra {
-  font-family: var(--f-display);
-  font-size: 112px;
-  line-height: 0.78;
-  color: #ffdced;
-  font-variant-numeric: lining-nums;
-  margin-left: -4px;
-}
-.datoTexto {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding-bottom: 2px;
-  min-width: 0;
-}
-.datoEtiqueta {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.86);
-}
-.faseNombre {
-  font-family: var(--f-titulo);
-  font-weight: 400;
-  font-size: 26px;
-  line-height: 1.05;
-  color: #fff;
-}
-.faseNombre em {
-  display: block;
-  font-style: italic;
-  font-weight: 500;
-}
-.puntos {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(6px, 1fr));
-  gap: 4px;
-  align-items: center;
-}
-.punto {
-  justify-self: center;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.28);
-}
-.puntoRegla {
-  background: rgba(255, 220, 237, 0.55);
-}
-.puntoOvulacion {
-  background: rgba(231, 190, 248, 0.7);
-}
-.puntoPasado {
-  background: #fff;
-}
-.puntoHoy {
-  width: 14px;
-  height: 14px;
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
-}
-.consejo {
-  font-family: var(--f-acento);
-  font-style: italic;
-  font-size: 16px;
-  line-height: 1.5;
-  max-width: 32ch;
-}
-.portadaPie {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.24);
-}
-.prediccion {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
-  min-width: 0;
-}
-.prediccion b {
-  color: #fff;
-  font-weight: 700;
-}
-.enlaceBlanco {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 44px;
-  padding: 0 16px;
-  border-radius: 999px;
   background: #fff;
   color: var(--vino);
-  font-weight: 700;
-  font-size: 14px;
+  box-shadow: 0 6px 16px -6px rgba(246, 44, 57, 0.28);
   transition: transform 160ms var(--ease-out);
 }
-.enlaceBlanco:active {
-  transform: scale(0.97);
+.accion:active {
+  transform: scale(0.94);
+}
+.accionRoja {
+  color: var(--rojo-accion);
+}
+
+.punto {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--rojo);
+  box-shadow: 0 0 0 2px #fff;
 }
 
 /* ---------- Semana ---------- */
 .semana {
-  display: grid;
-  grid-template-columns: 32px 1fr 32px;
+  display: flex;
   align-items: center;
-  margin: -4px -8px 0;
+  gap: 2px;
+  padding: 10px 6px;
 }
+
 .flecha {
-  height: 64px;
+  flex: none;
+  width: 32px;
+  height: 44px;
   display: grid;
   place-items: center;
-  color: var(--texto-3);
+  color: var(--texto-2);
+  border-radius: 12px;
 }
+
 .dias {
+  flex: 1;
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(7, 1fr);
   gap: 2px;
+  min-width: 0;
 }
+
 .dia {
-  display: grid;
-  justify-items: center;
-  gap: 4px;
-  padding: 8px 0 6px;
-  min-height: 64px;
-  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  min-height: 60px;
+  border-radius: 14px;
   color: var(--vino);
-  transition: background-color 200ms ease, transform 160ms var(--ease-out);
+  transition: background 160ms var(--ease-out);
 }
-.dia:active {
-  transform: scale(0.94);
-}
+
 .diaNombre {
   font-size: 12px;
-  color: var(--texto-2);
+  font-weight: 600;
+  color: var(--texto-3);
+  letter-spacing: 0.04em;
 }
+
 .diaNumero {
-  font-size: 17px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  font-size: 16px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
-.diaRegla {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--rojo);
-}
-.diaHoy {
-  background: var(--rosa-claro);
-}
-.diaHoy .diaNombre,
-.diaHoy .diaNumero {
+
+.diaHoy .diaNombre {
   color: var(--rojo-texto);
-  font-weight: 700;
+  font-weight: 800;
 }
-.diaElegido {
-  box-shadow: inset 0 0 0 1.5px var(--linea);
+.diaHoy .diaNumero {
+  background: var(--rosa);
+  color: var(--rojo-texto);
+}
+
+.diaElegido .diaNumero {
+  background: var(--lila);
+  color: var(--violeta-oscuro);
+}
+
+/* ---------- Tarjeta de fase ---------- */
+.fase {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4px 6px;
+  padding: 22px 14px 18px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #fff6fa 55%, #ffe9f3 100%);
+  overflow: hidden;
+}
+
+.faseTexto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.etiqueta {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--texto-2);
+}
+
+.faseNombre {
+  font-family: var(--f-titulo);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.02;
+  color: var(--carmesi);
+  letter-spacing: -0.02em;
+}
+
+.faseDescripcion {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--texto-2);
+  max-width: 20ch;
+}
+
+.botonFase {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  padding: 0 14px 0 18px;
+  border-radius: 999px;
+  background: var(--rosa);
+  color: var(--rojo-texto);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: transform 160ms var(--ease-out), background 160ms var(--ease-out);
+}
+.botonFase:active {
+  transform: scale(0.97);
+}
+
+.faseAnillo {
+  display: grid;
+  place-items: center;
+}
+
+.prediccion {
+  grid-column: 1 / -1;
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--linea);
+  font-size: 13px;
+  color: var(--texto-2);
+}
+.prediccion b {
+  color: var(--vino);
+  font-weight: 700;
 }
 
 /* ---------- Ritual ---------- */
 .ritual {
-  background: var(--blanco);
-  border-radius: 28px;
-  box-shadow: var(--sombra);
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.ritualCabeza {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.sobreMarco {
-  flex: none;
-  width: 72px;
-  height: 72px;
-  border-radius: 22px;
-  background: var(--rosa);
   display: grid;
-  place-items: center;
+  grid-template-columns: 1fr 1fr;
   overflow: hidden;
 }
-.sobreMarco img {
-  width: 76px;
-  height: 76px;
-  transform: rotate(-8deg) translateY(4px);
-}
-.ritualTexto {
+
+.ritualIzq,
+.ritualDer {
+  padding: 20px 16px 18px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 12px;
   min-width: 0;
 }
+
+.ritualIzq {
+  border-right: 1px solid var(--linea);
+  padding-left: 20px;
+}
+
+.ritualDer {
+  position: relative;
+  padding-right: 16px;
+  padding-bottom: 18px;
+}
+
 .ritualTitulo {
   font-family: var(--f-titulo);
-  font-weight: 500;
-  font-size: 21px;
+  font-size: 19px;
+  font-weight: 600;
   line-height: 1.15;
-  letter-spacing: -0.01em;
-  color: var(--vino);
+  color: var(--carmesi);
 }
-.racha {
+
+.siNo {
+  display: flex;
+  gap: 8px;
+}
+
+.si,
+.no {
+  flex: 1;
+  min-height: 46px;
+  border-radius: 999px;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--texto-2);
-}
-.semanaRitual {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 6px;
-}
-.marca {
-  justify-self: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 12px;
+  justify-content: center;
+  gap: 4px;
+  font-size: 15px;
   font-weight: 700;
-  color: var(--texto-2);
-  background: var(--rosa-claro);
-  transition: background-color 240ms ease;
+  transition: transform 160ms var(--ease-out), background 160ms var(--ease-out), color 160ms var(--ease-out);
 }
-.marcaHecha {
-  background: var(--rojo);
+.si:active,
+.no:active {
+  transform: scale(0.96);
+}
+
+.si {
+  background: var(--rojo-accion);
   color: #fff;
-  animation: sellar 380ms var(--ease-out) both;
+  box-shadow: var(--sombra-rojo);
 }
-@keyframes sellar {
-  from {
-    transform: scale(0.7);
-  }
+.siHecho {
+  background: var(--carmesi);
 }
-.marcaHoy {
-  background: var(--blanco);
-  box-shadow: inset 0 0 0 1.5px var(--rojo);
+
+.no {
+  background: var(--rosa-claro);
   color: var(--rojo-texto);
 }
-.ritualAcciones {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 8px;
+.noHecho {
+  background: var(--rosa);
 }
-.ritualAcciones :global(.boton) {
-  min-height: 50px;
-  padding: 0 12px;
-}
-.todaviaMarcado {
-  background: var(--rosa-claro) !important;
-}
-.listo {
+
+.racha {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  min-height: 50px;
-  padding: 0 6px 0 16px;
-  border-radius: 999px;
-  background: var(--rosa-claro);
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--vino);
-}
-.deshacer {
-  min-height: 44px;
-  padding: 0 12px;
-  font-size: 14px;
+  gap: 6px;
+  margin-top: auto;
+  font-size: 12px;
   font-weight: 600;
   color: var(--texto-2);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+}
+
+.motivoTitulo {
+  font-family: var(--f-titulo);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--vino);
+}
+
+.motivoAyuda {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--texto-2);
+  margin-top: -6px;
+}
+
+.selector {
+  position: relative;
+  z-index: 1;
+}
+.selector select {
+  width: 100%;
+  min-height: 44px;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+  background: #fff;
+  padding: 0 32px 0 12px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vino);
+  text-overflow: ellipsis;
+}
+.selector svg {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  translate: 0 -50%;
+  color: var(--texto-2);
+  pointer-events: none;
+}
+
+.ritualProducto {
+  order: 9;
+  align-self: flex-end;
+  margin: -4px -6px -14px 0;
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 12px rgba(246, 44, 57, 0.18));
+  pointer-events: none;
 }
 
 /* ---------- Ánimo ---------- */
 .tarjetaAnimo {
-  background: var(--blanco);
-  border-radius: 28px;
-  box-shadow: var(--sombra);
-  padding: 18px 14px 14px;
+  padding: 20px 14px 18px;
+  display: flex;
+  flex-direction: column;
   gap: 14px;
 }
+
 .animoCabeza {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding-left: 4px;
+  padding: 0 6px;
 }
-.tituloSeccion {
+
+.animoTitulo {
   font-family: var(--f-titulo);
-  font-weight: 500;
-  font-size: 21px;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-size: 20px;
+  font-weight: 600;
   color: var(--vino);
 }
-.tituloSeccion em {
-  font-style: italic;
-  color: var(--carmesi);
-}
+
 .botonSintomas {
-  flex: none;
   display: inline-flex;
   align-items: center;
   gap: 2px;
   min-height: 44px;
-  padding: 0 10px 0 14px;
-  border-radius: 999px;
-  background: var(--rosa-claro);
-  color: var(--vino);
-  font-size: 14px;
+  padding: 0 2px 0 8px;
+  font-size: 13px;
   font-weight: 700;
+  color: var(--rojo-texto);
+  white-space: nowrap;
 }
+
 .filaAnimos {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
 }
+
 .animo {
-  display: grid;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 6px;
-  padding: 10px 4px;
-  border-radius: 20px;
-  font-size: 14px;
-  color: var(--vino);
-  transition: background-color 200ms ease, transform 160ms var(--ease-out);
+  padding: 6px 0 4px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--texto-2);
+  min-width: 0;
+  transition: transform 180ms var(--ease-out), background 180ms var(--ease-out);
+}
+.animo > svg,
+.animo > span:first-child {
+  max-width: 100%;
+  height: auto;
 }
 .animo:active {
-  transform: scale(0.95);
+  transform: scale(0.94);
 }
 .animoElegido {
   background: var(--rosa-claro);
-  font-weight: 700;
-  box-shadow: inset 0 0 0 1.5px var(--rojo);
+  color: var(--rojo-texto);
 }
+
 .consejoAnimo {
   display: flex;
   gap: 10px;
-  padding: 14px 16px;
-  border-radius: 20px;
+  padding: 12px 14px;
+  border-radius: 16px;
   background: var(--lila);
-  color: var(--vino);
-  font-family: var(--f-acento);
-  font-style: italic;
-  font-size: 15px;
-  line-height: 1.5;
-  animation: entrar 320ms var(--ease-out) both;
-}
-.consejoAnimo svg {
   color: var(--violeta-oscuro);
+  font-size: 14px;
+  line-height: 1.45;
 }
 
-/* ---------- Para ti hoy ---------- */
-.paraTi {
-  display: flex;
-  flex-direction: column;
+/* ---------- Consejos, diario y pareja ---------- */
+.par {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
-.paraTi .tituloSeccion {
-  padding-left: 4px;
-}
-.lista {
-  list-style: none;
-  margin: 0;
-  padding: 6px;
-  background: var(--blanco);
-  border-radius: 28px;
-  box-shadow: var(--sombra);
-}
-.lista li + li {
-  border-top: 1px solid var(--linea);
-}
-.fila {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-height: 76px;
-  padding: 8px 8px 8px 8px;
-  border-radius: 22px;
-  transition: background-color 200ms ease;
-}
-.fila:active {
-  background: var(--rosa-claro);
-}
-.filaImagen {
-  flex: none;
-  width: 60px;
-  height: 60px;
-  border-radius: 18px;
+
+.bloque {
+  position: relative;
+  min-height: 176px;
+  padding: 18px 16px 16px;
+  border-radius: 24px;
   overflow: hidden;
-  background: var(--rosa);
-  display: grid;
-  place-items: center;
-}
-.filaImagen img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
-}
-.miniCiclitas {
+  background: linear-gradient(160deg, #fff4f8 0%, #ffe1ee 100%);
+  box-shadow: 0 10px 26px -14px rgba(246, 44, 57, 0.3);
   display: flex;
+  color: var(--vino);
+  transition: transform 180ms var(--ease-out);
 }
-.miniCiclitas > * + * {
-  margin-left: -10px;
+.bloque:active {
+  transform: scale(0.98);
 }
-.filaTexto {
-  flex: 1;
-  min-width: 0;
+
+.bloqueLila {
+  background: linear-gradient(160deg, #faf0fe 0%, #ecd5fa 100%);
+  box-shadow: 0 10px 26px -14px rgba(91, 58, 170, 0.32);
+}
+
+.bloqueTexto {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
 }
-.filaTitulo {
+
+.bloqueTitulo {
   font-family: var(--f-titulo);
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 1.2;
-  color: var(--vino);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--violeta-oscuro);
+  max-width: 10ch;
 }
-.filaSub {
-  font-size: 14px;
+
+.tituloRojo {
+  color: var(--carmesi);
+  max-width: 11ch;
+}
+
+.corazon {
+  display: inline-block;
+  vertical-align: -3px;
+  margin-right: 4px;
+}
+
+.bloqueSub {
+  font-size: 13px;
   line-height: 1.35;
   color: var(--texto-2);
 }
-.filaFlecha {
-  flex: none;
-  color: var(--texto-3);
+
+.pildora {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-height: 36px;
+  padding: 0 10px 0 14px;
+  border-radius: 999px;
+  background: var(--rojo-accion);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pildoraLila {
+  background: var(--violeta-oscuro);
+}
+
+.bloqueFoto,
+.bloquePieza {
+  position: absolute;
+  right: 12px;
+  top: 14px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.7);
+}
+
+.bloquePieza {
+  box-shadow: none;
+  border-radius: 0;
+  display: grid;
+  place-items: center;
+}
+
+/* El título deja sitio a la imagen de la esquina */
+.bloque:has(.bloqueFoto) .bloqueTexto,
+.bloque:has(.bloquePieza) .bloqueTexto {
+  padding-top: 62px;
+}
+
+.pareja {
+  position: absolute;
+  right: 10px;
+  top: 14px;
+  display: flex;
+  align-items: center;
+  opacity: 0.95;
+}
+
+.parejaMas {
+  width: 40px;
+  height: 40px;
+  margin-left: -10px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  color: var(--violeta-oscuro);
+  box-shadow: 0 0 0 3px #f3e2fb;
+}
+
+/* Con la pareja arriba, el texto baja */
+.bloqueLila:has(.pareja) .bloqueTexto {
+  padding-top: 46px;
 }
 
 /* ---------- Comunidad ---------- */
@@ -551,36 +611,88 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  min-height: 72px;
-  padding: 12px 14px;
-  border-radius: 24px;
-  background: var(--lila);
-  transition: transform 160ms var(--ease-out);
+  padding: 14px 14px 14px 16px;
+  color: var(--vino);
 }
-.comunidad:active {
-  transform: scale(0.98);
-}
+
 .pila {
   display: flex;
   flex: none;
 }
-.pila > * + * {
-  margin-left: -10px;
-}
 .pila > * {
-  box-shadow: 0 0 0 2px var(--lila);
+  margin-left: -10px;
   border-radius: 50%;
+  box-shadow: 0 0 0 2px #fff;
 }
+.pila > *:first-child {
+  margin-left: 0;
+}
+
 .comunidadTexto {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
-  font-size: 14px;
-  color: var(--texto-2);
 }
 .comunidadTexto b {
-  font-size: 15px;
-  color: var(--vino);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.enlace {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--rosa-claro);
+  color: var(--rojo-texto);
+}
+
+@media (max-width: 370px) {
+  .nombre {
+    font-size: 34px;
+  }
+  .faseNombre {
+    font-size: 25px;
+  }
+  .ritualIzq,
+  .ritualDer {
+    padding-left: 14px;
+    padding-right: 12px;
+  }
+  .ritualTitulo {
+    font-size: 17px;
+  }
+  .faseAnillo {
+    margin-right: -8px;
+  }
+}
+
+/* Ánimo: título en una línea y fila deslizable en pantallas angostas */
+.animoTitulo {
+  font-size: 18px;
+  white-space: nowrap;
+}
+.racha {
+  margin-top: 4px;
+}
+@media (max-width: 380px) {
+  .filaAnimos {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin: 0 -14px;
+    padding: 0 14px;
+  }
+  .filaAnimos::-webkit-scrollbar {
+    display: none;
+  }
+  .animo {
+    flex: 0 0 64px;
+    scroll-snap-align: start;
+  }
 }

@@ -9,7 +9,7 @@ import type { Fase } from "@/lib/tipos";
 import { clases } from "@/lib/utilidades";
 import { Hoja } from "@/components/Hoja";
 import { avisar } from "@/components/Avisos";
-import { GlifoAnimo } from "./GlifoAnimo";
+import { CaraAnimo } from "./CaraAnimo";
 import estilos from "./hoy.module.css";
 
 /** "¿Cómo te sientes hoy?" con caras de ánimo, síntomas y un consejo. */
@@ -24,7 +24,7 @@ export function CheckinAnimo({ fase }: { fase: Fase }) {
   return (
     <section id="animo" className={clases("seccion", estilos.tarjetaAnimo)}>
       <div className={estilos.animoCabeza}>
-        <h2 className={estilos.tituloSeccion}>¿Cómo te sientes hoy?</h2>
+        <h2 className={estilos.animoTitulo}>¿Cómo te sientes hoy?</h2>
         <button
           className={estilos.botonSintomas}
           onClick={() => {
@@ -32,7 +32,7 @@ export function CheckinAnimo({ fase }: { fase: Fase }) {
             setAbierta(true);
           }}
         >
-          {sintomas.length ? `Síntomas · ${sintomas.length}` : "Síntomas"} <ChevronRight size={16} />
+          {sintomas.length ? `Síntomas · ${sintomas.length}` : "Otros síntomas"} <ChevronRight size={18} />
         </button>
       </div>
       <div className={estilos.filaAnimos} role="radiogroup" aria-label="Ánimo de hoy">
@@ -44,7 +44,7 @@ export function CheckinAnimo({ fase }: { fase: Fase }) {
             className={clases(estilos.animo, animo === a.id && estilos.animoElegido)}
             onClick={() => registrarAnimo(a.id)}
           >
-            <GlifoAnimo animo={a.id} />
+            <CaraAnimo animo={a.id} tamano={54} />
             <span>{a.nombre}</span>
           </button>
         ))}
