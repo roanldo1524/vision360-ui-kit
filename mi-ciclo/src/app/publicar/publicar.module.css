@@ -58,7 +58,7 @@
   background: rgba(58, 18, 32, 0.62);
   color: #fff;
   padding: 4px 11px;
-  border-radius: 2px;
+  border-radius: 999px;
   font-size: 12px;
   font-weight: 600;
 }
@@ -131,7 +131,7 @@
   display: flex;
   gap: 2px;
   padding: 5px;
-  border-radius: 2px;
+  border-radius: 999px;
   background: var(--vino);
   box-shadow: var(--sombra-alta);
   max-width: calc(100vw - 32px);
@@ -139,7 +139,7 @@
 .selector button {
   min-height: 40px;
   padding: 0 14px;
-  border-radius: 2px;
+  border-radius: 999px;
   color: rgba(255, 255, 255, 0.72);
   font-size: 11.5px;
   font-weight: 700;
@@ -163,7 +163,7 @@
 .miniatura {
   width: 84px;
   height: 84px;
-  border-radius: 2px;
+  border-radius: 16px;
   overflow: hidden;
   background: var(--rosa);
   flex: none;
@@ -174,13 +174,13 @@
   font-size: 12px;
   font-weight: 600;
   color: var(--lila-tinta);
-  background: var(--papel-2);
+  background: linear-gradient(150deg, #efeaff, #fde3e9);
 }
 .previaHistoria {
   position: relative;
   aspect-ratio: 9 / 13;
   max-height: 52dvh;
-  border-radius: 2px;
+  border-radius: 22px;
   overflow: hidden;
   background: var(--vino);
   align-self: center;
@@ -204,12 +204,12 @@
   align-items: center;
   gap: 12px;
   padding: 12px 14px;
-  border-radius: 2px;
+  border-radius: 20px;
   background: var(--lila);
 }
 .lienzoPregunta {
   min-height: 300px;
-  border-radius: 2px;
+  border-radius: 28px;
   padding: 28px 22px 16px;
   display: flex;
   flex-direction: column;
@@ -236,16 +236,16 @@
   color: color-mix(in srgb, var(--vino) 40%, transparent);
 }
 .fondo-lila {
-  background: var(--papel-2);
+  background: linear-gradient(150deg, #efeaff 0%, #fde3e9 100%);
 }
 .fondo-rosa {
-  background: var(--rosa);
+  background: linear-gradient(150deg, #fde3e9 0%, #ffebdd 100%);
 }
 .fondo-menta {
-  background: var(--papel-3);
+  background: linear-gradient(150deg, #e1f5ec 0%, #efeaff 100%);
 }
 .fondo-durazno {
-  background: #f3dfd3;
+  background: linear-gradient(150deg, #ffebdd 0%, #fff1d6 100%);
 }
 .punto {
   width: 36px;

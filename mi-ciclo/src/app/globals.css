@@ -1,75 +1,73 @@
-/* Mi Ciclo · dirección editorial
-   Concepto: una revista de bienestar impresa. El crema es el papel, el vino es la tinta
-   y el rojo es el único acento eléctrico. Lora enorme y apretada, alineada a la izquierda;
-   el dato principal se vuelve una cifra gigante.
-   Retícula: márgenes iguales de 20 px, asimetría dentro de ellos, bordes de 1 px en lugar
-   de sombras difusas, esquinas rectas, iconos sueltos. Movimiento: ease-out fuerte < 300 ms. */
+/* Mi Ciclo · sistema de marca (miciclo.co + brandbook 2026)
+   Rojo Mi Ciclo como protagonista, ciruela como tinta, rosa como superficie cálida.
+   Titulares en Chonburi (la serif gruesa de la marca), interfaz en Manrope.
+   Tarjetas blancas redondeadas, botones píldora con flecha y la flor-luna como sello. */
 
 :root {
-  /* Tres colores: dominante, estructural y acento */
-  --crema: #f8f2ec; /* papel (dominante) */
-  --vino: #2b0d18; /* tinta (estructural) */
-  --rojo: #e01e37; /* acento eléctrico: solo la acción principal */
+  /* Marca */
+  --rojo: #f62c39; /* rojo Mi Ciclo: acción principal y bloques de marca */
+  --rojo-hondo: #d0143a;
+  --rojo-suave: #ffe4e7;
+  --vino: #1f0526; /* ciruela: títulos y texto */
+  --crema: #fff7f6; /* fondo rubor */
+  --blanco: #ffffff;
+  --rosa: #ffdced;
+  --rosa-claro: #fdf1ef;
+  --texto-2: #6e5470;
+  --texto-3: #a08ea2;
+  --linea: #f6e3e6;
+  --papel-2: #fdf1ef;
+  --papel-3: #fbe3e6;
+  --linea-fuerte: #1f0526;
 
-  /* Pasos de tono del papel (no son colores nuevos) */
-  --blanco: #fffcf9;
-  --papel-2: #f1e8e1;
-  --papel-3: #e6d9d0;
-  --texto-2: #6b5058;
-  --texto-3: #937a80;
-  --linea: rgba(43, 13, 24, 0.14);
-  --linea-fuerte: rgba(43, 13, 24, 0.85);
+  /* Pasteles de la comunidad (canvas v2) */
+  --durazno: #ffebdd;
+  --lila: #f1ebff;
+  --menta: #e3f6ee;
+  --mantequilla: #fff3d9;
+  --rosa-tinta: #d0143a;
+  --lila-tinta: #6b4fb8;
+  --menta-tinta: #2c7a5a;
+  --durazno-tinta: #b25a2a;
+  --mantequilla-tinta: #8a6416;
 
-  /* Los antiguos pasteles se recogen en pasos de papel y tinta */
-  --rojo-suave: #f8e2e0;
-  --rosa: #f8e2e0;
-  --durazno: var(--papel-2);
-  --lila: var(--papel-2);
-  --menta: var(--papel-2);
-  --mantequilla: var(--papel-2);
-  --rosa-tinta: var(--rojo);
-  --lila-tinta: var(--vino);
-  --menta-tinta: var(--vino);
-  --durazno-tinta: var(--vino);
-  --mantequilla-tinta: var(--vino);
-
-  /* Fases: solo como dato (calendario, anillo) */
-  --fase-menstrual: #e01e37;
+  /* Fases */
+  --fase-menstrual: #f62c39;
   --fase-folicular: #f773a1;
   --fase-ovulacion: #b14bc4;
   --fase-lutea: #5b3aaa;
 
-  --anillo-historia: var(--rojo);
-  --degradado-pregunta: var(--papel-2);
+  --anillo-historia: conic-gradient(from 210deg, #f62c39, #ff8fb1, #ffb38a, #f62c39);
+  --degradado-pregunta: linear-gradient(135deg, #f1ebff, #ffdced);
   --degradado-inicio: var(--crema);
+  --degradado-marca: linear-gradient(160deg, #ff4655 0%, #f62c39 45%, #d0143a 100%);
 
   /* Tipografía */
-  --f-titulo: var(--font-lora), "Lora", Georgia, serif;
-  --f-ui: var(--font-dmsans), "DM Sans", system-ui, sans-serif;
+  --f-titulo: var(--font-chonburi), "Chonburi", Georgia, serif;
+  --f-ui: var(--font-manrope), "Manrope", system-ui, sans-serif;
   --f-mano: var(--font-caveat), "Caveat", "Segoe Script", cursive;
   --f-marca: var(--font-chonburi), "Chonburi", Georgia, serif;
+  --f-cita: var(--font-lora), "Lora", Georgia, serif;
 
-  /* Forma: esquinas rectas, bordes de 1 px, sombra dura solo en lo que flota */
-  --r-tarjeta: 2px;
-  --r-grande: 2px;
-  --r-medio: 2px;
-  --r-pastilla: 2px;
-  --sombra: 0 0 0 1px var(--linea);
-  --sombra-alta: 0 0 0 1px var(--vino), 6px 6px 0 0 var(--vino);
-  --sombra-rojo: 0 0 0 0 transparent;
+  /* Forma */
+  --r-tarjeta: 24px;
+  --r-grande: 32px;
+  --r-medio: 18px;
+  --r-pastilla: 999px;
+  --sombra: 0 1px 2px rgba(31, 5, 38, 0.04), 0 10px 28px rgba(246, 44, 57, 0.08);
+  --sombra-alta: 0 2px 6px rgba(31, 5, 38, 0.06), 0 22px 48px rgba(246, 44, 57, 0.18);
+  --sombra-rojo: 0 10px 24px rgba(246, 44, 57, 0.35);
 
-  /* Movimiento (Emil Kowalski) */
+  /* Movimiento */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-cajon: cubic-bezier(0.32, 0.72, 0, 1);
 
   --ancho-app: 440px;
-  --alto-barra: 64px;
-  --lado: max(20px, env(safe-area-inset-left, 0px));
-  --lado-d: max(20px, env(safe-area-inset-right, 0px));
-
-  /* Grano de papel */
-  --grano: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.05 0 0 0 0 0.09 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --alto-barra: 72px;
+  --lado: max(18px, env(safe-area-inset-left, 0px));
+  --lado-d: max(18px, env(safe-area-inset-right, 0px));
+  --grano: none;
 
   color-scheme: light;
 }
@@ -85,7 +83,8 @@ body {
   color: var(--vino);
   font-family: var(--f-ui);
   font-size: 15px;
-  line-height: 1.45;
+  font-weight: 500;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
 }
@@ -132,10 +131,10 @@ h2,
 h3,
 h4 {
   font-family: var(--f-titulo);
-  font-weight: 500;
+  font-weight: 400;
   margin: 0;
   text-wrap: balance;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
 
 p {
@@ -152,28 +151,29 @@ p {
   margin: 0 auto;
   min-height: 100dvh;
   position: relative;
-  background: var(--crema) var(--grano);
+  background: var(--crema);
+  overflow-x: clip;
 }
 
 @media (min-width: 520px) {
   body {
-    background: var(--papel-3) var(--grano);
+    background: #fbe7ea;
   }
   .marco {
-    box-shadow: 0 0 0 1px var(--vino);
+    box-shadow: 0 30px 80px rgba(246, 44, 57, 0.12);
   }
 }
 
 .pagina {
-  padding: 16px var(--lado-d) calc(var(--alto-barra) + 32px + env(safe-area-inset-bottom, 0px)) var(--lado);
+  padding: 14px var(--lado-d) calc(var(--alto-barra) + 32px + env(safe-area-inset-bottom, 0px)) var(--lado);
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 22px;
 }
 
-/* Entrada escalonada: cada bloque sube 8 px y aparece, 40 ms después del anterior */
+/* Entrada escalonada suave */
 .pagina > * {
-  animation: entrar 360ms var(--ease-out) both;
+  animation: entrar 420ms var(--ease-out) both;
 }
 .pagina > *:nth-child(2) { animation-delay: 40ms; }
 .pagina > *:nth-child(3) { animation-delay: 80ms; }
@@ -188,7 +188,7 @@ p {
 @keyframes entrar {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
   }
 }
 
@@ -202,44 +202,42 @@ p {
   }
 }
 
-/* ---------- Tipos de texto: grande contra pequeño, nada en medio ---------- */
+/* ---------- Tipos de texto ---------- */
 .titulo-xl {
   font-family: var(--f-titulo);
-  font-size: clamp(40px, 12vw, 52px);
-  line-height: 0.95;
-  letter-spacing: -0.045em;
-  font-weight: 500;
+  font-size: 34px;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  font-weight: 400;
 }
 .titulo-l {
   font-family: var(--f-titulo);
-  font-size: 30px;
-  line-height: 1;
-  letter-spacing: -0.035em;
-  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  font-weight: 400;
 }
 .titulo-m {
   font-family: var(--f-titulo);
-  font-size: 22px;
-  line-height: 1.08;
-  letter-spacing: -0.025em;
-  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 400;
 }
 .titulo-s {
   font-family: var(--f-titulo);
-  font-size: 17px;
-  line-height: 1.18;
-  letter-spacing: -0.015em;
-  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 400;
 }
 .eyebrow {
-  font-size: 10.5px;
-  letter-spacing: 0.2em;
+  font-size: 11px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 800;
   color: var(--texto-2);
 }
 .eyebrow-rojo {
-  color: var(--vino);
+  color: var(--rojo);
 }
 .texto-2 {
   color: var(--texto-2);
@@ -252,10 +250,9 @@ p {
 }
 .mini {
   font-size: 11.5px;
-  letter-spacing: 0.02em;
 }
 .negrita {
-  font-weight: 700;
+  font-weight: 800;
 }
 .mano {
   font-family: var(--f-mano);
@@ -266,24 +263,24 @@ p {
 .marca {
   font-family: var(--f-marca);
   color: var(--rojo);
-  letter-spacing: -0.02em;
   font-weight: 400;
 }
 
-/* ---------- Superficies: un paso de tono y un borde de 1 px ---------- */
+/* ---------- Tarjetas ---------- */
 .tarjeta {
   background: var(--blanco);
   border-radius: var(--r-tarjeta);
   box-shadow: var(--sombra);
-  padding: 20px;
+  padding: 18px;
 }
 .tarjeta-plana {
-  background: var(--papel-2);
+  background: var(--blanco);
   border-radius: var(--r-medio);
   padding: 14px;
+  border: 1px solid var(--linea);
 }
 
-/* ---------- Botones: planos, esquinas rectas, respuesta al tocar ---------- */
+/* ---------- Botones: píldora de marca con flecha ---------- */
 .boton {
   display: inline-flex;
   align-items: center;
@@ -292,138 +289,152 @@ p {
   min-height: 48px;
   padding: 0 22px;
   border-radius: var(--r-pastilla);
-  font-weight: 600;
-  font-size: 12.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 14.5px;
   transition:
     transform 160ms var(--ease-out),
     background-color 200ms ease,
-    color 200ms ease,
-    box-shadow 200ms ease;
+    box-shadow 200ms ease,
+    color 200ms ease;
   white-space: nowrap;
 }
 .boton:active {
   transform: scale(0.97);
 }
 .boton:disabled {
-  opacity: 0.35;
+  opacity: 0.45;
   cursor: not-allowed;
   transform: none;
 }
 .boton-principal {
   background: var(--rojo);
   color: #fff;
+  box-shadow: var(--sombra-rojo);
+}
+/* La flecha final del botón de marca va dentro de un círculo blanco */
+.boton .flecha-boton {
+  box-sizing: content-box;
+  width: 16px;
+  height: 16px;
+  padding: 5px;
+  margin-right: -12px;
+  margin-left: 4px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--rojo);
+}
+.boton-secundario .flecha-boton,
+.boton-vino .flecha-boton {
+  background: var(--rojo);
+  color: #fff;
 }
 .boton-secundario {
-  background: transparent;
+  background: var(--blanco);
   color: var(--vino);
-  box-shadow: inset 0 0 0 1px var(--vino);
+  box-shadow: inset 0 0 0 1.5px #f3d3d9;
 }
 .boton-vino {
   background: var(--vino);
-  color: var(--crema);
+  color: #fff;
 }
 .boton-suave {
-  background: var(--papel-2);
-  color: var(--vino);
+  background: var(--rojo-suave);
+  color: var(--rojo-hondo);
 }
 .boton-fantasma {
   color: var(--texto-2);
   padding: 0 10px;
 }
 .boton-chico {
-  min-height: 40px;
+  min-height: 38px;
   padding: 0 16px;
-  font-size: 11.5px;
+  font-size: 13px;
 }
 .boton-ancho {
   width: 100%;
 }
 @media (hover: hover) and (pointer: fine) {
   .boton-principal:hover {
-    background: #c8162d;
-  }
-  .boton-secundario:hover {
-    background: var(--vino);
-    color: var(--crema);
+    background: var(--rojo-hondo);
   }
 }
 
-/* Iconos sueltos: sin círculo, con zona táctil de 44 px */
 .boton-icono {
   width: 44px;
   height: 44px;
   min-height: 44px;
   padding: 0;
+  border-radius: 50%;
   display: inline-grid;
   place-items: center;
   color: var(--vino);
-  transition: transform 160ms var(--ease-out), opacity 160ms ease;
+  transition: transform 160ms var(--ease-out), background-color 200ms ease;
 }
 .boton-icono:active {
-  transform: scale(0.9);
+  transform: scale(0.92);
 }
 .boton-icono-blanco {
-  background: transparent;
+  background: var(--blanco);
+  box-shadow: var(--sombra);
 }
 .enlace-rojo,
 .enlace-vino {
   white-space: nowrap;
-  color: var(--vino);
-  font-weight: 600;
-  font-size: 11.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 13px;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
   min-height: 32px;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
 }
 .enlace-rojo {
   color: var(--rojo);
 }
+.enlace-vino {
+  color: var(--vino);
+}
 
-/* ---------- Chips: etiquetas de texto con borde de 1 px ---------- */
+/* ---------- Chips ---------- */
 .chip {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 5px 10px;
+  padding: 5px 12px;
   border-radius: var(--r-pastilla);
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  background: transparent;
-  color: var(--vino);
-  box-shadow: inset 0 0 0 1px var(--linea-fuerte);
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--rosa);
+  color: var(--rojo-hondo);
   white-space: nowrap;
 }
-.chip-lila,
-.chip-menta,
-.chip-durazno,
+.chip-lila {
+  background: var(--lila);
+  color: var(--lila-tinta);
+}
+.chip-menta {
+  background: var(--menta);
+  color: var(--menta-tinta);
+}
+.chip-durazno {
+  background: var(--durazno);
+  color: var(--durazno-tinta);
+}
 .chip-mantequilla {
-  background: transparent;
-  color: var(--vino);
+  background: var(--mantequilla);
+  color: var(--mantequilla-tinta);
 }
 .chip-vino {
   background: var(--vino);
-  color: var(--crema);
-  box-shadow: none;
+  color: #fff;
 }
 .chip-rojo {
   background: var(--rojo);
   color: #fff;
-  box-shadow: none;
 }
 .chip-borde {
-  background: transparent;
+  background: var(--blanco);
   color: var(--vino);
-  box-shadow: inset 0 0 0 1px var(--linea);
+  box-shadow: inset 0 0 0 1.5px var(--linea);
 }
 .chips {
   display: flex;
@@ -432,8 +443,8 @@ p {
 }
 .seleccionable {
   min-height: 40px;
-  padding: 0 14px;
-  font-size: 11px;
+  padding: 0 16px;
+  font-size: 13px;
   cursor: pointer;
   transition: background-color 200ms ease, color 200ms ease, transform 160ms var(--ease-out);
 }
@@ -441,61 +452,60 @@ p {
   transform: scale(0.96);
 }
 .seleccionable[aria-pressed="true"] {
-  background: var(--vino);
-  color: var(--crema);
+  background: var(--rojo);
+  color: #fff;
   box-shadow: none;
 }
 
-/* ---------- Pestañas tipo segmento: texto con subrayado ---------- */
+/* ---------- Pestañas tipo segmento ---------- */
 .segmento {
   display: inline-flex;
-  gap: 18px;
-  border-bottom: 1px solid var(--linea);
+  padding: 4px;
+  border-radius: var(--r-pastilla);
+  background: var(--blanco);
+  box-shadow: inset 0 0 0 1px var(--linea);
+  gap: 2px;
 }
 .segmento button {
-  min-height: 40px;
-  padding: 0;
-  font-size: 11.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--texto-3);
-  box-shadow: inset 0 -2px 0 transparent;
-  transition: color 200ms ease, box-shadow 200ms var(--ease-out);
+  min-height: 36px;
+  padding: 0 16px;
+  border-radius: var(--r-pastilla);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--texto-2);
+  transition: background-color 200ms ease, color 200ms ease;
 }
 .segmento button[aria-selected="true"] {
-  color: var(--vino);
-  box-shadow: inset 0 -2px 0 var(--rojo);
+  background: var(--rojo);
+  color: #fff;
 }
 
 /* ---------- Campos ---------- */
 .campo {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 .campo label,
 .etiqueta {
-  font-size: 10.5px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--texto-2);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--vino);
 }
 .entrada {
   width: 100%;
-  min-height: 50px;
-  padding: 12px 14px;
-  border-radius: var(--r-medio);
-  border: 1px solid var(--linea);
+  min-height: 48px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  border: 1.5px solid var(--linea);
   background: var(--blanco);
   outline: none;
   font-size: 16px;
   transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 .entrada:focus {
-  border-color: var(--vino);
-  box-shadow: 0 0 0 1px var(--vino);
+  border-color: var(--rojo);
+  box-shadow: 0 0 0 4px var(--rojo-suave);
 }
 textarea.entrada {
   resize: none;
@@ -511,17 +521,17 @@ textarea.entrada {
 }
 .error-campo {
   font-size: 12.5px;
-  color: var(--rojo);
+  color: var(--rojo-hondo);
 }
 
 /* Interruptor */
 .interruptor {
   position: relative;
-  width: 46px;
-  height: 26px;
+  width: 48px;
+  height: 28px;
   flex: none;
-  border-radius: 13px;
-  background: var(--papel-3);
+  border-radius: 999px;
+  background: #f1dde1;
   transition: background-color 200ms ease;
 }
 .interruptor::after {
@@ -529,14 +539,15 @@ textarea.entrada {
   position: absolute;
   top: 3px;
   left: 3px;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: var(--blanco);
+  box-shadow: 0 1px 3px rgba(31, 5, 38, 0.2);
   transition: transform 220ms var(--ease-out);
 }
 .interruptor[aria-checked="true"] {
-  background: var(--vino);
+  background: var(--rojo);
 }
 .interruptor[aria-checked="true"]::after {
   transform: translateX(20px);
@@ -546,15 +557,13 @@ textarea.entrada {
 .seccion {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 .seccion-cabeza {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--vino);
 }
 .fila {
   display: flex;
@@ -583,7 +592,7 @@ textarea.entrada {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   margin: 0 calc(-1 * var(--lado-d)) 0 calc(-1 * var(--lado));
-  padding: 4px var(--lado-d) 8px var(--lado);
+  padding: 4px var(--lado-d) 10px var(--lado);
   scrollbar-width: none;
 }
 .carrusel::-webkit-scrollbar {
@@ -602,9 +611,9 @@ textarea.entrada {
 
 /* ---------- Esqueleto de carga ---------- */
 .esqueleto {
-  background: linear-gradient(90deg, var(--papel-2) 0%, var(--blanco) 50%, var(--papel-2) 100%);
+  background: linear-gradient(90deg, #fbe6e9 0%, #fff4f5 50%, #fbe6e9 100%);
   background-size: 200% 100%;
-  animation: brillo 1.1s linear infinite;
+  animation: brillo 1.2s linear infinite;
   border-radius: var(--r-medio);
 }
 @keyframes brillo {
@@ -613,40 +622,41 @@ textarea.entrada {
   }
 }
 
-/* ---------- Listas: filas separadas por 1 px, iconos sueltos ---------- */
+/* ---------- Lista de ajustes ---------- */
 .lista {
-  background: transparent;
-  border-top: 1px solid var(--vino);
-  border-bottom: 1px solid var(--linea);
+  background: var(--blanco);
+  border-radius: var(--r-tarjeta);
+  box-shadow: var(--sombra);
+  overflow: hidden;
 }
 .lista-item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  min-height: 60px;
-  padding: 12px 0;
+  gap: 12px;
+  min-height: 58px;
+  padding: 10px 16px;
   width: 100%;
   text-align: left;
-  transition: background-color 200ms ease;
 }
 .lista-item + .lista-item {
   border-top: 1px solid var(--linea);
 }
 .lista-icono {
-  width: 24px;
-  height: 24px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
   flex: none;
-  background: transparent !important;
-  color: var(--vino) !important;
+  background: var(--rojo-suave);
+  color: var(--rojo);
 }
 .lista-texto {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 /* ---------- Cabecera de pantalla secundaria ---------- */
@@ -658,20 +668,25 @@ textarea.entrada {
   grid-template-columns: 44px 1fr 44px;
   align-items: center;
   gap: 8px;
-  padding: 6px calc(var(--lado-d) - 10px) 6px calc(var(--lado) - 10px);
-  background: var(--crema);
-  border-bottom: 1px solid var(--linea);
+  padding: 8px var(--lado-d) 8px var(--lado);
+  background: color-mix(in srgb, var(--crema) 94%, transparent);
+  backdrop-filter: blur(12px);
 }
 .cabecera-titulo {
   text-align: center;
-  font-weight: 600;
-  font-size: 11.5px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-family: var(--f-titulo);
+  font-size: 16px;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* Sello de la marca: flor-luna como marca de agua */
+.flor-agua {
+  position: absolute;
+  pointer-events: none;
+  background: url("/marca/flor.webp") center / contain no-repeat;
 }
 
 /* Visualmente oculto pero accesible */

@@ -5,7 +5,7 @@
 }
 .resumen > div {
   background: var(--blanco);
-  border-radius: 2px;
+  border-radius: 20px;
   box-shadow: var(--sombra);
   padding: 14px;
   display: flex;
@@ -30,13 +30,13 @@
   display: flex;
   gap: 12px;
   padding: 12px;
-  border-radius: 2px;
+  border-radius: 16px;
   background: var(--crema);
 }
 .miniatura {
   width: 64px;
   height: 64px;
-  border-radius: 2px;
+  border-radius: 12px;
   overflow: hidden;
   flex: none;
 }

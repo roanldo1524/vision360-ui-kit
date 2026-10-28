@@ -5,23 +5,21 @@
   position: sticky;
   top: env(safe-area-inset-top, 0px);
   z-index: 25;
-  background: var(--crema);
-  margin: -16px calc(-1 * var(--lado-d)) 0 calc(-1 * var(--lado));
+  background: color-mix(in srgb, var(--blanco) 94%, transparent);
+  backdrop-filter: blur(14px);
+  margin: -12px calc(-1 * var(--lado-d)) 0 calc(-1 * var(--lado));
   padding: 6px var(--lado-d) 0 var(--lado);
   border-bottom: 1px solid var(--linea);
 }
 .encabezadoFila {
   display: grid;
-  grid-template-columns: 1fr auto 44px;
+  grid-template-columns: 44px 1fr 44px;
   align-items: center;
-  margin-right: -10px;
-  padding-top: 6px;
 }
 .wordmark {
-  text-align: left;
-  font-size: 30px;
-  line-height: 1;
-  letter-spacing: -0.03em;
+  justify-self: center;
+  height: 25px;
+  width: auto;
 }
 .pestanas {
   display: flex;
@@ -32,12 +30,9 @@
 .pestana {
   position: relative;
   padding: 10px 0 11px;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--texto-3);
-  transition: color 200ms ease;
   white-space: nowrap;
   min-height: 44px;
   display: inline-flex;
@@ -52,14 +47,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 2px;
-  background: var(--rojo);
-  animation: subrayar 260ms var(--ease-out) both;
-}
-@keyframes subrayar {
-  from {
-    transform: scaleX(0);
-  }
+  height: 2.5px;
+  border-radius: 2px;
+  background: var(--vino);
 }
 
 /* ---------- Historias ---------- */
@@ -107,13 +97,11 @@
 }
 
 /* ---------- Tarjeta de post ---------- */
-/* Post como página de revista: a sangre, separado por una regla en tinta */
 .post {
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
-  border-top: 1px solid var(--vino);
-  padding: 14px 0 6px;
+  background: var(--blanco);
+  border-radius: var(--r-tarjeta);
+  box-shadow: var(--sombra);
+  padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 11px;
@@ -147,7 +135,7 @@
   font-size: 10.5px;
   padding: 2px 8px;
   font-weight: 600;
-  border-radius: 2px;
+  border-radius: 999px;
   background: var(--menta);
   color: var(--menta-tinta);
   text-transform: capitalize;
@@ -162,13 +150,9 @@
   color: var(--durazno-tinta);
 }
 .seguir {
-  color: var(--vino);
-  font-weight: 600;
-  font-size: 10.5px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  color: var(--rojo);
+  font-weight: 700;
+  font-size: 13px;
   min-height: 44px;
   padding: 0 4px;
 }
@@ -177,7 +161,7 @@
   align-items: center;
   gap: 8px;
   padding: 9px 12px;
-  border-radius: 2px;
+  border-radius: 14px;
   background: var(--mantequilla);
   color: var(--mantequilla-tinta);
   font-size: 12.5px;
@@ -188,7 +172,7 @@
 .mosaico {
   display: grid;
   gap: 6px;
-  border-radius: 2px;
+  border-radius: 18px;
   overflow: hidden;
 }
 .mosaico1 {
@@ -209,7 +193,7 @@
 }
 .mosaicoCelda {
   overflow: hidden;
-  border-radius: 2px;
+  border-radius: 14px;
   min-height: 0;
   background: var(--rosa);
   max-width: 100%;
@@ -217,7 +201,7 @@
 
 /* Post anónimo: frase sobre lila degradado */
 .cita {
-  border-radius: 2px;
+  border-radius: 20px;
   padding: 30px 22px;
   text-align: center;
   display: flex;
@@ -242,16 +226,16 @@
   text-wrap: balance;
 }
 .fondo-lila {
-  background: var(--papel-2);
+  background: linear-gradient(150deg, #efeaff 0%, #fde3e9 100%);
 }
 .fondo-rosa {
-  background: var(--rosa);
+  background: linear-gradient(150deg, #fde3e9 0%, #ffebdd 100%);
 }
 .fondo-menta {
-  background: var(--papel-3);
+  background: linear-gradient(150deg, #e1f5ec 0%, #efeaff 100%);
 }
 .fondo-durazno {
-  background: #f3dfd3;
+  background: linear-gradient(150deg, #ffebdd 0%, #fff1d6 100%);
 }
 
 .acciones {
@@ -367,7 +351,7 @@
   position: relative;
   width: 118px;
   aspect-ratio: 3 / 4.6;
-  border-radius: 2px;
+  border-radius: 18px;
   overflow: hidden;
   background: #3a1220;
   color: #fff;
@@ -414,7 +398,7 @@
   position: relative;
   width: 148px;
   background: var(--blanco);
-  border-radius: 2px;
+  border-radius: 22px;
   box-shadow: var(--sombra);
   padding: 16px 12px 14px;
   display: flex;
@@ -453,7 +437,7 @@
   margin-top: 4px;
   min-height: 36px;
   padding: 0 18px;
-  border-radius: 2px;
+  border-radius: 999px;
   background: var(--blanco);
   color: var(--rojo);
   font-weight: 700;
@@ -463,9 +447,9 @@
 
 /* ---------- Preguntas ---------- */
 .tarjetaAnonima {
-  border-radius: 2px;
+  border-radius: 26px;
   padding: 18px;
-  background: var(--papel-2);
+  background: linear-gradient(150deg, #efeaff 0%, #f5e6fa 60%, #fde3e9 100%);
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -480,7 +464,7 @@
   align-items: center;
   gap: 6px;
   background: var(--blanco);
-  border-radius: 2px;
+  border-radius: 999px;
   padding: 4px 4px 4px 16px;
 }
 .campoAnonimo input {
@@ -495,7 +479,7 @@
 .esperan {
   width: 210px;
   min-height: 176px;
-  border-radius: 2px;
+  border-radius: 22px;
   padding: 14px;
   display: flex;
   flex-direction: column;
@@ -517,7 +501,7 @@
   align-self: flex-start;
   min-height: 36px;
   padding: 0 16px;
-  border-radius: 2px;
+  border-radius: 999px;
   background: var(--blanco);
   color: var(--rojo);
   font-weight: 700;
@@ -541,7 +525,7 @@
   overflow-wrap: anywhere;
 }
 .preguntaFoto {
-  border-radius: 2px;
+  border-radius: 18px;
   overflow: hidden;
   aspect-ratio: 16 / 9;
   max-width: 100%;
@@ -551,7 +535,7 @@
   gap: 8px;
   align-items: flex-start;
   padding: 10px 12px;
-  border-radius: 2px;
+  border-radius: 16px;
   background: var(--crema);
   font-size: 12.5px;
   line-height: 1.4;
@@ -567,7 +551,7 @@
   gap: 5px;
   min-height: 34px;
   padding: 0 12px;
-  border-radius: 2px;
+  border-radius: 999px;
   box-shadow: inset 0 0 0 1.5px var(--linea);
   font-size: 12px;
   font-weight: 600;
@@ -597,7 +581,7 @@
   font-size: 10px;
   font-weight: 700;
   padding: 2px 7px;
-  border-radius: 2px;
+  border-radius: 999px;
   background: var(--rojo);
   color: var(--blanco);
 }
@@ -642,6 +626,7 @@
   bottom: 0;
   z-index: 20;
   background: color-mix(in srgb, var(--crema) 94%, transparent);
+  backdrop-filter: blur(12px);
   margin: 0 calc(-1 * var(--lado-d)) 0 calc(-1 * var(--lado));
   padding: 10px var(--lado-d) calc(10px + env(safe-area-inset-bottom, 0px)) var(--lado);
   border-top: 1px solid var(--linea);
@@ -659,7 +644,7 @@
   flex: none;
   min-height: 34px;
   padding: 0 14px;
-  border-radius: 2px;
+  border-radius: 999px;
   background: var(--blanco);
   box-shadow: inset 0 0 0 1.5px var(--linea);
   font-size: 12.5px;
@@ -677,7 +662,7 @@
   align-items: center;
   gap: 4px;
   background: var(--blanco);
-  border-radius: 2px;
+  border-radius: 999px;
   padding: 3px 3px 3px 16px;
   box-shadow: inset 0 0 0 1.5px var(--linea);
 }
@@ -716,7 +701,7 @@
   display: flex;
   flex-direction: column;
   background: var(--blanco);
-  border-radius: 2px;
+  border-radius: 20px;
   overflow: hidden;
 }
 .opcion {

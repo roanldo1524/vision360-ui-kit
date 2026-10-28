@@ -52,7 +52,8 @@ Para pasar a producción con Supabase:
    de lo anónimo.
 4. Medios a Supabase Storage con URLs firmadas; notificaciones push con Web Push o FCM.
 
-## Decisiones aplicadas (sección 08, opción A)
+## Decisiones aplicadas (sección 08)
 
-Rojo `#E01E37`, títulos en Lora 500, colores de fase de DISENO.md
-(Folicular `#F773A1`, Ovulación `#B14BC4`, Lútea `#5B3AAA`), última pestaña: Comunidad.
+Se alineó con la marca real (miciclo.co y brandbook): rojo `#F62C39`, títulos en Chonburi,
+interfaz en Manrope, colores de fase de DISENO.md (Folicular `#F773A1`, Ovulación `#B14BC4`,
+Lútea `#5B3AAA`) y última pestaña Comunidad. Las fotos de `public/marca/` son de miciclo.co.

@@ -6,30 +6,52 @@
   padding-top: 8px;
 }
 .heroe {
-  background: transparent;
-  border-top: 1px solid var(--vino);
+  background: var(--blanco);
+  border-radius: var(--r-grande);
+  box-shadow: var(--sombra);
   overflow: hidden;
 }
 .saldo {
-  padding: 14px 0 16px;
+  position: relative;
+  overflow: hidden;
+  padding: 20px 20px 18px;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  background: var(--degradado-marca);
+  color: #fff;
+}
+.saldo::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: -30px;
+  width: 170px;
+  height: 170px;
+  background: url("/marca/flor.webp") center / contain no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.22;
+  filter: saturate(0.4) brightness(1.6);
+}
+.saldo :global(.eyebrow),
+.saldo :global(.texto-2) {
+  color: rgba(255, 255, 255, 0.9);
 }
 .florSaldo {
   display: inline-grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
-  background: transparent;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fff;
 }
 .numero {
+  position: relative;
   font-family: var(--f-titulo);
-  font-size: 132px;
-  line-height: 0.8;
-  letter-spacing: -0.07em;
-  font-weight: 500;
-  margin: 10px 0 6px -6px;
+  font-size: 64px;
+  line-height: 1;
+  font-weight: 400;
+  margin-top: 6px;
 }
 .jardin {
   position: relative;
@@ -83,8 +105,8 @@
   display: grid;
   place-items: center;
   flex: none;
-  background: var(--menta);
-  color: var(--menta-tinta);
+  background: var(--rojo-suave);
+  color: var(--rojo);
 }
 .checkHecha {
   background: var(--menta-tinta);
@@ -98,25 +120,19 @@
   display: flex;
   gap: 14px;
   align-items: flex-start;
-  background: var(--vino) var(--grano);
-  color: var(--crema);
-  border-radius: 0;
-  margin: 0 calc(-1 * var(--lado-d)) 0 calc(-1 * var(--lado));
-  padding: 24px var(--lado-d) 24px var(--lado);
-}
-.racha :global(.texto-2),
-.racha :global(.texto-3) {
-  color: rgba(248, 242, 236, 0.65);
+  background: var(--mantequilla);
+  border-radius: var(--r-tarjeta);
+  padding: 16px 18px;
 }
 .rachaIcono {
   width: 42px;
   height: 42px;
-  border-radius: 2px;
+  border-radius: 14px;
   flex: none;
   display: grid;
   place-items: center;
-  background: transparent;
-  color: var(--rojo);
+  background: var(--blanco);
+  color: var(--mantequilla-tinta);
 }
 .rachaPuntos {
   display: flex;
@@ -126,7 +142,7 @@
 .punto {
   width: 22px;
   height: 8px;
-  border-radius: 2px;
+  border-radius: 8px;
   background: rgba(138, 100, 22, 0.18);
 }
 .puntoLleno {
@@ -136,16 +152,15 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  border-radius: 0;
-  padding: 16px 0;
-  background: transparent;
-  border-top: 1px solid var(--linea);
+  border-radius: var(--r-tarjeta);
+  padding: 14px;
+  background: var(--blanco);
+  box-shadow: var(--sombra);
 }
 .bonoIcono {
-  display: none !important;
   width: 44px;
   height: 44px;
-  border-radius: 2px;
+  border-radius: 14px;
   display: grid;
   place-items: center;
   flex: none;
@@ -171,14 +186,14 @@
 }
 .barra {
   height: 6px;
-  border-radius: 2px;
+  border-radius: 6px;
   background: var(--linea);
   overflow: hidden;
 }
 .barra span {
   display: block;
   height: 100%;
-  border-radius: 2px;
+  border-radius: 6px;
   background: var(--fase-folicular);
   transition: width 0.4s ease;
 }
@@ -212,7 +227,7 @@
   gap: 8px;
   width: 100%;
   padding: 6px 6px 6px 18px;
-  border-radius: 2px;
+  border-radius: 18px;
   border: 1.5px dashed var(--fase-folicular);
   background: var(--blanco);
   font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;

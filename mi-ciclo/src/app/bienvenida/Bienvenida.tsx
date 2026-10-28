@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChevronLeft, Minus, Plus } from "lucide-react";
+import { ArrowRight, ChevronLeft, Minus, Plus } from "lucide-react";
 import { Ciclita, CICLITAS, CICLITAS_ELEGIBLES } from "@/components/Ciclita";
 import { completarBienvenida } from "@/lib/acciones";
 import { hoyColombia, sumarDias } from "@/lib/ciclo";
@@ -69,27 +69,32 @@ export function Bienvenida() {
   if (paso === "inicio") {
     return (
       <main className={estilos.portada}>
-        <div className={estilos.ciclitas} aria-hidden="true">
-          {CICLITAS_ELEGIBLES.map((c, i) => (
-            <span key={c} className={estilos.flotante} style={{ animationDelay: `${i * 0.18}s` }}>
-              <Ciclita id={c} tamano={i % 2 ? 58 : 70} />
-            </span>
-          ))}
+        <span className={clases("flor-agua", estilos.florA)} aria-hidden="true" />
+        <span className={clases("flor-agua", estilos.florB)} aria-hidden="true" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/marca/logo-blanco.svg" alt="Mi Ciclo" className={estilos.logo} width={150} height={40} />
+        <div className={estilos.foto}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/marca/hero-foto.webp" alt="Mujer sonriendo con un vaso de Mi Ciclo junto a la caja" />
+          <span className={estilos.ciclitasFoto} aria-hidden="true">
+            {CICLITAS_ELEGIBLES.slice(0, 3).map((c, i) => (
+              <span key={c} className={estilos.flotante} style={{ animationDelay: `${i * 0.25}s` }}>
+                <Ciclita id={c} tamano={44} />
+              </span>
+            ))}
+          </span>
         </div>
         <div className={estilos.portadaTexto}>
-          <p className="marca" style={{ fontSize: 34 }}>Mi Ciclo</p>
-          <h1 className="titulo-xl">Tu cuerpo no falla. Se expresa.</h1>
-          <p className="texto-2">
+          <h1 className={estilos.lema}>Tu cuerpo no falla. Se expresa.</h1>
+          <p className={estilos.bajada}>
             Registra cómo te sientes, toma tu ritual diario y acompáñate de una comunidad de mujeres que te entiende.
           </p>
         </div>
         <div className="columna">
-          <button className="boton boton-principal boton-ancho" onClick={() => ir("edad")}>
-            Empezar
+          <button className={estilos.empezar} onClick={() => ir("edad")}>
+            Empezar <ArrowRight size={16} />
           </button>
-          <p className="mini texto-3" style={{ textAlign: "center" }}>
-            Solo para mayores de 18 años · Colombia
-          </p>
+          <p className={estilos.legal}>Solo para mayores de 18 años · Colombia</p>
         </div>
       </main>
     );

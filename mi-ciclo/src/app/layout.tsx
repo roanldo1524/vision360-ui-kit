@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Caveat, Chonburi, DM_Sans, Lora } from "next/font/google";
+import { Caveat, Chonburi, Lora, Manrope } from "next/font/google";
 import { Marco } from "@/components/Marco";
 import "./globals.css";
 
 const lora = Lora({ subsets: ["latin"], weight: ["500", "600"], style: ["normal", "italic"], variable: "--font-lora" });
-const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-dmsans" });
+const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"], variable: "--font-manrope" });
 const caveat = Caveat({ subsets: ["latin"], weight: ["500", "700"], variable: "--font-caveat" });
 const chonburi = Chonburi({ subsets: ["latin"], weight: "400", variable: "--font-chonburi" });
 
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fbf7f4",
+  themeColor: "#f62c39",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -26,7 +26,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-CO" className={`${lora.variable} ${dmSans.variable} ${caveat.variable} ${chonburi.variable}`}>
+    <html lang="es-CO" className={`${lora.variable} ${manrope.variable} ${caveat.variable} ${chonburi.variable}`}>
       <body>
         <Marco>{children}</Marco>
       </body>

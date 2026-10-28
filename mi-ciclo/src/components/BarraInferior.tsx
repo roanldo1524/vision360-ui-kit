@@ -21,7 +21,7 @@ export function BarraInferior() {
       {ITEMS.map(({ href, etiqueta, Icono, central }) =>
         central ? (
           <Link key={href} href={href} className={estilos.central} aria-label={etiqueta}>
-            <Icono size={22} strokeWidth={2.2} />
+            <Icono size={24} strokeWidth={2.6} />
           </Link>
         ) : (
           <Link
@@ -31,7 +31,7 @@ export function BarraInferior() {
             aria-current={activo(href) ? "page" : undefined}
           >
             <span className={estilos.icono}>
-              <Icono size={20} strokeWidth={activo(href) ? 2 : 1.5} />
+              <Icono size={20} strokeWidth={activo(href) ? 2.3 : 1.8} />
             </span>
             <span>{etiqueta}</span>
           </Link>

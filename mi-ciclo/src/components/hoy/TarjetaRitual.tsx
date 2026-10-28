@@ -6,7 +6,6 @@ import { guardarMotivo, marcarSobre } from "@/lib/acciones";
 import { MOTIVOS } from "@/lib/consejos";
 import { clases } from "@/lib/utilidades";
 import { Flor } from "@/components/Flor";
-import { Sobre } from "./Sobre";
 import estilos from "./hoy.module.css";
 
 /** "¿Ya tomaste Mi Ciclo hoy?": racha, semana y botones. */
@@ -21,16 +20,15 @@ export function TarjetaRitual() {
   return (
     <section id="ritual" className={estilos.ritual}>
       <div className={estilos.ritualCabeza}>
-        <h2 className={estilos.ritualTitulo}>¿Ya tomaste Mi Ciclo hoy?</h2>
-        <div className={estilos.racha} aria-label={`Racha de ${racha} días`}>
-          <span className={estilos.rachaCifra}>{racha}</span>
-          <span className={estilos.rachaTexto}>
-            <Flor activa tamano={12} /> {racha === 1 ? "día seguido" : "días seguidos"}
+        <div className="columna" style={{ gap: 8, minWidth: 0 }}>
+          <h2 className="titulo-m">¿Ya tomaste Mi Ciclo hoy?</h2>
+          <span className={estilos.racha}>
+            <Flor activa tamano={16} />
+            {racha === 0 ? "Empieza tu racha hoy" : racha === 1 ? "1 día seguido" : `${racha} días seguidos`}
           </span>
         </div>
-        <span className={estilos.sobre}>
-          <Sobre tamano={58} />
-        </span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/marca/ritual-sachet.webp" alt="Sobre de Mi Ciclo sabor manzana" className={estilos.sachet} width={92} height={92} />
       </div>
 
       <ol className={estilos.semanaRitual} aria-label="Tu semana">
