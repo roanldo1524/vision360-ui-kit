@@ -2,8 +2,7 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { useEstado } from "@/lib/almacen";
-import { Ilustracion } from "@/components/Ilustracion";
-import { Ciclita } from "@/components/Ciclita";
+import { Circulo, FlorLuna, Luna } from "@/components/FormasMarca";
 import { Avatar } from "@/components/Avatar";
 import type { Comunidad, Fase } from "@/lib/tipos";
 import estilos from "./hoy.module.css";
@@ -47,27 +46,31 @@ export function ParaTi({ fase }: { fase: Fase }) {
       sub: SUB_FASE[fase],
       // eslint-disable-next-line @next/next/no-img-element
       imagen: <img src={FOTO_FASE[fase]} alt="" />,
+      fondo: undefined as string | undefined,
     },
     {
       href: "/diario",
       titulo: "Mi diario",
       sub: "Un espacio solo para ti",
-      imagen: <Ilustracion id="cuaderno" texto="Hoy me siento…" />,
+      fondo: "#efe4fb",
+      imagen: <Luna color="#5b3aaa" tamano={30} />,
     },
     {
       href: "/vinculo#notas",
       titulo: "Tu espacio con tu amor",
       sub: "Notas que se borran en 24 horas",
-      imagen: <Ilustracion id="bolsa" />,
+      fondo: "#ffe4ea",
+      imagen: <FlorLuna color="#f62c39" fondo="#ffe4ea" tamano={34} />,
     },
     {
       href: "/vinculo",
       titulo: "Sincroniza tu ritmo",
       sub: vinculoActivo ? `Conectada con ${vinculoActivo.nombre ?? "tu vínculo"}` : "Invita a tu pareja, mamá o amiga",
+      fondo: "#fff0f5",
       imagen: (
         <span className={estilos.miniCiclitas}>
-          <Ciclita id="rosa" tamano={34} feliz />
-          <Ciclita id="lila" tamano={34} />
+          <Circulo color="#ff8fab" tamano={22} />
+          <Circulo color="#c99af0" tamano={22} />
         </span>
       ),
     },
@@ -83,7 +86,7 @@ export function ParaTi({ fase }: { fase: Fase }) {
           {filas.map((f) => (
             <li key={f.href + f.titulo}>
               <Link href={f.href} className={estilos.fila}>
-                <span className={estilos.filaImagen} aria-hidden="true">
+                <span className={estilos.filaImagen} style={f.fondo ? { background: f.fondo } : undefined} aria-hidden="true">
                   {f.imagen}
                 </span>
                 <span className={estilos.filaTexto}>

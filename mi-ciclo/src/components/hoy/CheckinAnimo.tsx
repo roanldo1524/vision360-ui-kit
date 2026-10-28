@@ -9,7 +9,7 @@ import type { Fase } from "@/lib/tipos";
 import { clases } from "@/lib/utilidades";
 import { Hoja } from "@/components/Hoja";
 import { avisar } from "@/components/Avisos";
-import { CaraAnimo } from "./CaraAnimo";
+import { GlifoAnimo } from "./GlifoAnimo";
 import estilos from "./hoy.module.css";
 
 /** "¿Cómo te sientes hoy?" con caras de ánimo, síntomas y un consejo. */
@@ -44,7 +44,7 @@ export function CheckinAnimo({ fase }: { fase: Fase }) {
             className={clases(estilos.animo, animo === a.id && estilos.animoElegido)}
             onClick={() => registrarAnimo(a.id)}
           >
-            <CaraAnimo animo={a.id} />
+            <GlifoAnimo animo={a.id} />
             <span>{a.nombre}</span>
           </button>
         ))}

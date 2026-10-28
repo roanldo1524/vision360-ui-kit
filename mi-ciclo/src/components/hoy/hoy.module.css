@@ -6,21 +6,48 @@
   gap: 20px;
 }
 
-/* ---------- Barra superior ---------- */
+/* ---------- Portada roja (brandbook: campo Rojo Coral + flor-luna recortada) ---------- */
+.portada {
+  position: relative;
+  overflow: hidden;
+  margin: -14px calc(-1 * var(--lado-d)) 0 calc(-1 * var(--lado));
+  padding: 8px var(--lado-d) 24px var(--lado);
+  background: var(--rojo);
+  color: #fff;
+  border-radius: 0 0 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.florGigante {
+  position: absolute;
+  right: -112px;
+  top: 40px;
+  pointer-events: none;
+  animation: girar 90s linear infinite;
+}
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.portada > :not(.florGigante) {
+  position: relative;
+}
 .barraSuperior {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 44px;
+  min-height: 48px;
 }
 .logo {
-  height: 22px;
+  height: 24px;
   width: auto;
 }
 .accesos {
   display: flex;
   gap: 4px;
-  margin-right: -8px;
+  margin-right: -10px;
 }
 .acceso {
   position: relative;
@@ -29,12 +56,12 @@
   border-radius: 50%;
   display: grid;
   place-items: center;
-  color: var(--vino);
+  color: #fff;
   transition: background-color 200ms ease, transform 160ms var(--ease-out);
 }
 .acceso:active {
   transform: scale(0.92);
-  background: var(--blanco);
+  background: rgba(255, 255, 255, 0.16);
 }
 .puntito {
   position: absolute;
@@ -43,20 +70,17 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--rojo);
-  box-shadow: 0 0 0 2px var(--crema);
+  background: #fff;
+  box-shadow: 0 0 0 2px var(--rojo);
 }
-
-/* ---------- Saludo ---------- */
 .saludo {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-top: -4px;
 }
 .fecha {
   font-size: 14px;
-  color: var(--texto-2);
+  color: rgba(255, 255, 255, 0.86);
 }
 .fecha::first-letter {
   text-transform: uppercase;
@@ -64,15 +88,123 @@
 .hola {
   font-family: var(--f-titulo);
   font-weight: 400;
-  font-size: 34px;
-  line-height: 1.08;
+  font-size: 32px;
+  line-height: 1.1;
   letter-spacing: -0.02em;
-  color: var(--vino);
+  color: #fff;
 }
 .hola em {
   font-style: italic;
   font-weight: 500;
-  color: var(--carmesi);
+}
+.dato {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: 8px;
+}
+.cifra {
+  font-family: var(--f-display);
+  font-size: 112px;
+  line-height: 0.78;
+  color: #ffdced;
+  font-variant-numeric: lining-nums;
+  margin-left: -4px;
+}
+.datoTexto {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 2px;
+  min-width: 0;
+}
+.datoEtiqueta {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.86);
+}
+.faseNombre {
+  font-family: var(--f-titulo);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.05;
+  color: #fff;
+}
+.faseNombre em {
+  display: block;
+  font-style: italic;
+  font-weight: 500;
+}
+.puntos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6px, 1fr));
+  gap: 4px;
+  align-items: center;
+}
+.punto {
+  justify-self: center;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+}
+.puntoRegla {
+  background: rgba(255, 220, 237, 0.55);
+}
+.puntoOvulacion {
+  background: rgba(231, 190, 248, 0.7);
+}
+.puntoPasado {
+  background: #fff;
+}
+.puntoHoy {
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+}
+.consejo {
+  font-family: var(--f-acento);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 32ch;
+}
+.portadaPie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.24);
+}
+.prediccion {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  min-width: 0;
+}
+.prediccion b {
+  color: #fff;
+  font-weight: 700;
+}
+.enlaceBlanco {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--vino);
+  font-weight: 700;
+  font-size: 14px;
+  transition: transform 160ms var(--ease-out);
+}
+.enlaceBlanco:active {
+  transform: scale(0.97);
 }
 
 /* ---------- Semana ---------- */
@@ -80,7 +212,7 @@
   display: grid;
   grid-template-columns: 32px 1fr 32px;
   align-items: center;
-  margin: 0 -8px;
+  margin: -4px -8px 0;
 }
 .flecha {
   height: 64px;
@@ -99,7 +231,7 @@
   gap: 4px;
   padding: 8px 0 6px;
   min-height: 64px;
-  border-radius: 18px;
+  border-radius: 16px;
   color: var(--vino);
   transition: background-color 200ms ease, transform 160ms var(--ease-out);
 }
@@ -122,123 +254,15 @@
   background: var(--rojo);
 }
 .diaHoy {
-  background: var(--blanco);
-  box-shadow: var(--sombra);
+  background: var(--rosa-claro);
 }
-.diaHoy .diaNombre {
-  color: var(--rojo-texto);
-  font-weight: 700;
-}
+.diaHoy .diaNombre,
 .diaHoy .diaNumero {
   color: var(--rojo-texto);
+  font-weight: 700;
 }
 .diaElegido {
-  background: var(--rosa);
-}
-
-/* ---------- Portada de la fase ---------- */
-.fase {
-  position: relative;
-  overflow: hidden;
-  border-radius: 28px;
-  background: linear-gradient(180deg, #ffe7f2 0%, var(--rosa) 100%);
-  padding: 22px 14px 16px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  container-type: inline-size;
-}
-.florFondo {
-  position: absolute;
-  width: 240px;
-  height: 240px;
-  left: -90px;
-  bottom: -110px;
-  background: url("/marca/flor.webp") center / contain no-repeat;
-  opacity: 0.07;
-  pointer-events: none;
-}
-.faseCuerpo {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 8px;
-}
-@container (max-width: 280px) {
-  .faseCuerpo {
-    grid-template-columns: 1fr;
-    justify-items: start;
-  }
-  .faseCuerpo > :last-child {
-    justify-self: center;
-  }
-}
-.faseTexto {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 0;
-}
-.faseEtiqueta {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--texto-2);
-}
-.faseNombre {
-  font-family: var(--f-titulo);
-  font-weight: 400;
-  font-size: clamp(26px, 7.6vw, 30px);
-  line-height: 1.04;
-  letter-spacing: -0.02em;
-  color: var(--vino);
-}
-.faseNombre em {
-  display: block;
-  font-style: italic;
-  font-weight: 500;
-  color: var(--carmesi);
-}
-.faseConsejo {
-  font-family: var(--f-acento);
-  font-style: italic;
-  font-size: 15px;
-  line-height: 1.45;
-  color: var(--vino);
-}
-.fasePie {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(31, 5, 38, 0.08);
-}
-.prediccion {
-  font-size: 14px;
-  color: var(--texto-2);
-}
-.prediccion b {
-  color: var(--vino);
-  font-weight: 700;
-}
-.enlaceFase {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 44px;
-  padding: 0 16px;
-  border-radius: 999px;
-  background: var(--blanco);
-  color: var(--vino);
-  font-weight: 700;
-  font-size: 14px;
-  transition: transform 160ms var(--ease-out);
-}
-.enlaceFase:active {
-  transform: scale(0.97);
+  box-shadow: inset 0 0 0 1.5px var(--linea);
 }
 
 /* ---------- Ritual ---------- */
@@ -421,10 +445,6 @@
 }
 .animo:active {
   transform: scale(0.95);
-}
-.animo svg {
-  width: 48px;
-  height: 48px;
 }
 .animoElegido {
   background: var(--rosa-claro);

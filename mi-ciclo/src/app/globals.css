@@ -16,13 +16,13 @@
   --violeta-oscuro: #5b3aaa; /* Violeta oscuro (brandbook) */
   --rojo-suave: #ffe3e5;
   --vino: #1f0526; /* ciruela: títulos y texto */
-  --crema: #fff6fa; /* fondo rubor */
+  --crema: #ffffff; /* fondo blanco limpio, como el brandbook */
   --blanco: #ffffff;
   --rosa: #ffdced; /* Rosa (brandbook) */
-  --rosa-claro: #fdf1ef;
+  --rosa-claro: #fff1f6;
   --texto-2: #6e5470;
   --texto-3: #7a667c;
-  --linea: #f6e3e6;
+  --linea: #f3e6ec;
   --papel-2: #fdf1ef;
   --papel-3: #fbe3e6;
   --linea-fuerte: #1f0526;
@@ -50,7 +50,7 @@
   --degradado-pregunta: linear-gradient(135deg, #f1ebff, #ffdced);
   --degradado-inicio: var(--crema);
   --degradado-marca: linear-gradient(160deg, #ff5260 0%, #f62c39 50%, #d61a2b 100%);
-  --degradado-fondo: linear-gradient(180deg, #ffe4f1 0%, #fff4f9 340px, #fff8fb 100%);
+  --degradado-fondo: #ffffff;
 
   /* Tipografía */
   --f-display: var(--font-glodok), "Glodok Display", Georgia, serif; /* letra del logo */
@@ -66,9 +66,9 @@
   --r-grande: 32px;
   --r-medio: 18px;
   --r-pastilla: 999px;
-  --sombra: 0 1px 2px rgba(31, 5, 38, 0.04), 0 10px 28px rgba(200, 60, 120, 0.09);
+  --sombra: 0 0 0 1px #f3e6ec, 0 1px 2px rgba(31, 5, 38, 0.04);
   --sombra-alta: 0 2px 6px rgba(31, 5, 38, 0.06), 0 22px 48px rgba(246, 44, 57, 0.18);
-  --sombra-rojo: 0 10px 22px rgba(246, 44, 57, 0.3);
+  --sombra-rojo: 0 6px 16px rgba(227, 32, 47, 0.22);
 
   /* Movimiento */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -175,7 +175,7 @@ p {
 
 @media (min-width: 520px) {
   body {
-    background: #fbe7ea;
+    background: #f6eef2;
   }
   .marco {
     box-shadow: 0 30px 80px rgba(246, 44, 57, 0.12);
@@ -742,4 +742,10 @@ textarea.entrada {
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+/* Las formas de las piezas gráficas llenan su caja */
+.pieza-forma {
+  width: 100%;
+  height: 100%;
 }
