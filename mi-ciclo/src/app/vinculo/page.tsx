@@ -29,7 +29,7 @@ const PRIVACIDAD: { clave: keyof Ajustes["privacidadVinculo"]; titulo: string; t
   { clave: "fase", titulo: "Mi fase del ciclo", texto: "Ve en qué fase estás y recibe su consejo del día." },
   { clave: "animo", titulo: "Cómo me siento", texto: "Ve el ánimo que registres hoy." },
   { clave: "sintomas", titulo: "Mis síntomas", texto: "Ve los síntomas que marques." },
-  { clave: "regla", titulo: "Mi próximo periodo", texto: "Ve cuándo llegaría tu próxima regla." },
+  { clave: "regla", titulo: "Mi próximo período", texto: "Ve cuándo llegaría tu próxima regla." },
 ];
 
 export default function PaginaVinculo() {

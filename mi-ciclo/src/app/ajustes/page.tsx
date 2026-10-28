@@ -23,7 +23,7 @@ import estilos from "./ajustes.module.css";
 const TIPOS_NOTIF: { clave: keyof Ajustes["notificaciones"]; titulo: string; texto: string }[] = [
   { clave: "consejo", titulo: "Consejo diario", texto: "Un consejo según tu fase, cada mañana." },
   { clave: "racha", titulo: "Racha", texto: "Te recordamos tomar tu sobre para no perder la racha." },
-  { clave: "fase", titulo: "Cambio de fase y periodo", texto: "Cuando empieza una fase o se acerca tu regla." },
+  { clave: "fase", titulo: "Cambio de fase y período", texto: "Cuando empieza una fase o se acerca tu regla." },
   { clave: "comunidad", titulo: "Comunidad", texto: "Respuestas, flores y nuevas seguidoras." },
 ];
 
@@ -147,7 +147,7 @@ export default function PaginaAjustes() {
             <div className="lista-item">
               <span className="lista-icono" aria-hidden="true"><Bell size={18} /></span>
               <label htmlFor="hora-recordatorio" className="lista-texto">
-                <span className="negrita pequeno">Hora del recordatorio</span>
+                <span className="negrita pequeno">Recordatorio</span>
                 <span className="mini texto-2">Para tomar tu sobre</span>
               </label>
               <input
@@ -167,7 +167,7 @@ export default function PaginaAjustes() {
               <span className="lista-icono" aria-hidden="true"><Heart size={18} /></span>
               <span className="lista-texto">
                 <span className="negrita pequeno">Qué comparto con mi vínculo</span>
-                <span className="mini texto-2">Fase, ánimo, síntomas y próximo periodo</span>
+                <span className="mini texto-2">Fase, ánimo, síntomas y próximo período</span>
               </span>
               <ChevronRight size={18} className="texto-3" />
             </Link>

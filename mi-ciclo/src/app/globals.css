@@ -592,7 +592,7 @@ textarea.entrada {
   transition: transform 220ms var(--ease-out);
 }
 .interruptor[aria-checked="true"] {
-  background: var(--rojo-accion);
+  background: var(--violeta-oscuro);
 }
 .interruptor[aria-checked="true"]::after {
   transform: translateX(20px);
