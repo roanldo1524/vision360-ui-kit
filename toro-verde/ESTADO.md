@@ -107,3 +107,7 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - Nuevas 77-84: responder siempre, mensaje inicial una sola vez, palabras prohibidas + dosis, precios oficiales, datos en un solo mensaje y esperar todos antes del resumen, un solo recordatorio, limón por enlace, prioridad.
 - Espera para agrupar mensajes: 6 → 10 s. Respaldo: scratchpad respaldo_antes_flujo_1028.json.
 - Ventas WhatsApp por día: 41 (26 oct), 45 (27 oct). Pendiente: el nombre del producto en Lucid Sales → Productos y el mensaje inicial siguen diciendo «Orgánico».
+
+### 28 oct, 7:30 p. m. — Medición tras los arreglos del bot
+- Reglas siguen en 84 y espera en 10 s (no las restauraron).
+- Pedidos de WhatsApp el 28 oct: 61 hasta las 7:30 p. m. (el mejor día de la semana; 26 oct: 40, 27 oct: 46). Después de las 11:45 a. m.: 44 (días anteriores en la misma franja: 28 a 36). Pendientes por confirmar después del cambio: 0.
