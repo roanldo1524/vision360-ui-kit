@@ -81,6 +81,12 @@ Todo código que se genere o edite pasa por este filtro antes de subirse. Equiva
   - `cofoundy/brand-skills` (16 skills de marca: brand, naming, brand-voice, brand-identity…);
   - **Impeccable** (`npx impeccable install`): la skill `impeccable`, su motor y sus agentes. Usarla para criticar, auditar y pulir toda interfaz antes de publicar.
   - **Taste** (`leonxlnx/taste-skill`, skill `design-taste-frontend`).
+  - **Páginas de venta (instaladas el 29 oct 2026):**
+    - `frontend-design` (anthropics/skills): dirección visual propia, nada de plantilla. Se usa al diseñar una página nueva.
+    - `landing-page-design` (elayadesign/ai-design-skills): estructura, textos y reglas visuales de una landing que vende. Se usa al armar cualquier página de venta.
+    - `stop-slop` (hardikpandya/stop-slop): quita las muletillas de texto hecho por IA. Se pasa por todo texto antes de publicar.
+    - Ya instaladas y que siguen mandando en textos: `copywriting`, `cro`, `marketing-psychology`, `offers`, `copy-editing`.
+  - **Orden al construir una página de venta:** 1) `cro` + `landing-page-design` para la estructura; 2) `copywriting` + `stop-slop` para los textos; 3) `frontend-design` + `design-taste-frontend` para el diseño; 4) `emil-design-eng` para el movimiento; 5) `impeccable` para auditar antes de publicar. Si una skill choca con este archivo, manda este archivo.
 - **Nombres que no existen:** los nombres `anthropic/design-taste-frontend`, `ui-engine/impeccable` y `composio/brand-guidelines` no existen.
 - **Mientras tanto:** estas reglas aplican igual.
 
