@@ -173,6 +173,9 @@
 .ct-page .pcd span{padding:0;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
 .ct-page .pcd b{display:block;font:800 16px/1 var(--display);font-variant-numeric:tabular-nums;color:#FFFEFC;letter-spacing:-.02em}
 .ct-page .pcd small{display:block;margin-top:3px;font:600 8.5px/1 var(--text);letter-spacing:.12em;text-transform:uppercase;color:#A39B92}
+.ct-page .promo .psub{margin:6px 0 0;font:500 11.5px/1.3 var(--text)!important;letter-spacing:0!important;color:#C9C0B5!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ct-page .promo.urg .pcd span{border-color:rgba(242,169,69,.45);background:rgba(232,150,46,.12)}
+.ct-page .promo .pl span{all:unset}
 .ct-page .pcd .pseg b{color:var(--amber-2)}
 .ct-page .pcd b.tk{animation:pcdtk 260ms cubic-bezier(.23,1,.32,1)}
 @keyframes pcdtk{from{transform:translateY(-35%);opacity:.35}to{transform:none;opacity:1}}
@@ -610,7 +613,7 @@
   <div class="promo" id="promo">
     <div class="w">
       <img src="{{ 'au-k3r.webp' | file_url }}&width=120" alt="" width="56" height="56">
-      <div class="pt"><p class="pl">Black Friday · {{ k1 | times: 100 | money_without_trailing_zeros }}</p><div class="pcd" id="cd" data-end="{{ section.settings.fin_oferta | default: '2026-11-30T23:59:00-05:00' | escape }}" role="timer" aria-label="Tiempo que falta para que termine la oferta"><span><b data-d>00</b><small>días</small></span><span><b data-h>00</b><small>hrs</small></span><span><b data-m>00</b><small>min</small></span><span class="pseg"><b data-s>00</b><small>seg</small></span></div></div>
+      <div class="pt"><p class="pl"><span class="plt">Black Friday</span> · {{ k1 | times: 100 | money_without_trailing_zeros }}</p><div class="pcd" id="cd" data-end="{{ section.settings.fin_oferta | default: '2026-11-30T23:59:00-05:00' | escape }}" role="timer" aria-label="Tiempo que falta para que termine la oferta"><span><b data-d>00</b><small>días</small></span><span><b data-h>00</b><small>hrs</small></span><span><b data-m>00</b><small>min</small></span><span class="pseg"><b data-s>00</b><small>seg</small></span></div><p class="psub">{%- if section.settings.precio_despues > 0 -%}Desde el 1 de dic. sube a {{ section.settings.precio_despues | times: 100 | money_without_trailing_zeros }}{%- else -%}Desde el 1 de diciembre sube de precio{%- endif -%}</p></div>
       <button class="pbtn js-order" type="button">Pedir</button>
     </div>
   </div>
@@ -1034,7 +1037,7 @@ $('#tgLamp').addEventListener('click',function(){vib(10);const on=this.getAttrib
 (function(){const cd=$('#cd');const end=new Date(cd.dataset.end).getTime();const p=n=>String(n).padStart(2,'0');
   const el={d:cd.querySelector('[data-d]'),h:cd.querySelector('[data-h]'),m:cd.querySelector('[data-m]'),s:cd.querySelector('[data-s]')};
   const put=(k,v)=>{const e=el[k];if(e.textContent===v)return;e.textContent=v;e.classList.remove('tk');void e.offsetWidth;e.classList.add('tk')};
-  const tick=()=>{const t=end-Date.now();if(!(t>0)){$('#promo').remove();clearInterval(iv);return}put('d',p(Math.floor(t/864e5)));put('h',p(Math.floor(t/36e5)%24));put('m',p(Math.floor(t/6e4)%60));put('s',p(Math.floor(t/1e3)%60))};
+  const pr=$('#promo'),lt=pr.querySelector('.plt');const tick=()=>{const t=end-Date.now();if(!(t>0)){pr.remove();clearInterval(iv);return}if(t<1728e5&&!pr.classList.contains('urg')){pr.classList.add('urg');if(lt)lt.textContent='Últimas horas'}put('d',p(Math.floor(t/864e5)));put('h',p(Math.floor(t/36e5)%24));put('m',p(Math.floor(t/6e4)%60));put('s',p(Math.floor(t/1e3)%60))};
   const iv=setInterval(()=>{if(!document.hidden)tick()},1000);tick();})();
 /* Cortinas: fotos grandes que se destapan de abajo hacia arriba */
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window){const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.cur').forEach(c=>c.classList.remove('hide'));cio.unobserve(e.target)}}),{threshold:.15});$$('.cur').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('hide');cio.observe(el.parentElement)}})}
@@ -1159,7 +1162,8 @@ const __runWheel=()=>{try{__wheel()}catch(_){}};if(document.readyState==='comple
     {"type":"number","id":"precio_2","label":"Precio 2 kits (6 lámparas)","default":232500},
     {"type":"number","id":"precio_3","label":"Precio 3 kits (9 lámparas)","default":295700},
     {"type":"number","id":"precio_antes","label":"Precio de antes por kit (para tachar)","default":220000},
-    {"type":"text","id":"fin_oferta","label":"Fin de la oferta Black Friday","default":"2026-11-30T23:59:00-05:00","info":"Formato: 2026-11-30T23:59:00-05:00. Cuando pasa, la barra desaparece sola."},
+    {"type":"text","id":"fin_oferta","label":"Fin de la oferta Black Friday","default":"2026-11-30T23:59:00-05:00","info":"Formato: 2026-11-30T23:59:00-05:00. Cuando pasa, la barra desaparece sola."},,
+    {"type":"number","id":"precio_despues","label":"Precio del kit de 3 después del Black Friday (opcional)","info":"Si lo llenas, la barra dice: Desde el 1 de dic. sube a ese precio. Pon solo el precio real."}
     {"type":"checkbox","id":"musica","label":"Música de Navidad","default":true,"info":"Apágala unos días y compara las ventas para saber si ayuda."},
     {"type":"header","content":"Fotos del carrusel de arriba"},
     {"type":"paragraph","content":"Cambia cualquier foto o su texto. Si dejas una vacía, se usa la foto que ya trae. El video siempre va de segundo."},
