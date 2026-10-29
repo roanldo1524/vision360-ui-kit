@@ -166,12 +166,21 @@
 .ct-page .bar{background:var(--ink);color:#EDE6DC;text-align:center;font:600 13px/1 var(--text);padding:11px 16px;letter-spacing:.01em}
 .ct-page .bar b{color:var(--amber-2);font-weight:700}
 /* 2 · Banner Black Friday */
-.ct-page .promo{background:var(--sand);border-bottom:1px solid var(--line)}
+.ct-page .promo{background:#1B1815;border-bottom:1px solid rgba(255,255,255,.05);color:#EDE6DC}
+.ct-page .promo .pt{flex:1;min-width:0}
+.ct-page .promo .pl{font:700 10.5px/1.2 var(--text)!important;letter-spacing:.14em!important;text-transform:uppercase;color:var(--amber-2)!important;margin:0 0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ct-page .pcd{display:flex;gap:5px}
+.ct-page .pcd span{padding:0;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+.ct-page .pcd b{display:block;font:800 16px/1 var(--display);font-variant-numeric:tabular-nums;color:#FFFEFC;letter-spacing:-.02em}
+.ct-page .pcd small{display:block;margin-top:3px;font:600 8.5px/1 var(--text);letter-spacing:.12em;text-transform:uppercase;color:#A39B92}
+.ct-page .pcd .pseg b{color:var(--amber-2)}
+.ct-page .pcd b.tk{animation:pcdtk 260ms cubic-bezier(.23,1,.32,1)}
+@keyframes pcdtk{from{transform:translateY(-35%);opacity:.35}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.ct-page .pcd b.tk{animation:none}}
 .ct-page .promo .w{display:flex;align-items:center;gap:10px;padding-top:8px;padding-bottom:8px}
-.ct-page .promo img{width:56px;height:46px;object-fit:cover;border-radius:10px;flex:none}
-.ct-page .promo p{flex:1}
+.ct-page .promo img{width:48px;height:48px;object-fit:cover;border-radius:12px;flex:none;background:#EFE7DC}
 .ct-page .promo p span b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
-.ct-page .pbtn{flex:none;background:var(--ink);color:#F7EFE4;font:700 13px/1 var(--display);padding:0 20px;min-height:44px;display:inline-flex;align-items:center;border-radius:999px;transition:transform 160ms var(--ease)}
+.ct-page .pbtn{flex:none;background:var(--amber);color:var(--amber-ink);font:700 13px/1 var(--display);padding:0 20px;min-height:44px;display:inline-flex;align-items:center;border-radius:999px;transition:transform 160ms var(--ease)}
 .ct-page .pbtn:active{transform:scale(.96)}
 .ct-page .promo p{font:700 14px/1.2 var(--display);letter-spacing:-.01em;color:var(--ink)}
 .ct-page .promo p span{display:block;font:500 13px/1.3 var(--text);color:var(--body);letter-spacing:0}
@@ -601,7 +610,7 @@
   <div class="promo" id="promo">
     <div class="w">
       <img src="{{ 'au-k3r.webp' | file_url }}&width=120" alt="" width="56" height="56">
-      <p>Black Friday: kit de 3 a {{ k1 | times: 100 | money_without_trailing_zeros }}<span id="cd" data-end="{{ section.settings.fin_oferta | default: '2026-11-30T23:59:00-05:00' | escape }}">Termina en <b data-d>00</b>d <b data-h>00</b>h <b data-m>00</b>m</span></p>
+      <div class="pt"><p class="pl">Black Friday · {{ k1 | times: 100 | money_without_trailing_zeros }}</p><div class="pcd" id="cd" data-end="{{ section.settings.fin_oferta | default: '2026-11-30T23:59:00-05:00' | escape }}" role="timer" aria-label="Tiempo que falta para que termine la oferta"><span><b data-d>00</b><small>días</small></span><span><b data-h>00</b><small>hrs</small></span><span><b data-m>00</b><small>min</small></span><span class="pseg"><b data-s>00</b><small>seg</small></span></div></div>
       <button class="pbtn js-order" type="button">Pedir</button>
     </div>
   </div>
@@ -1023,8 +1032,10 @@ $('#tgLamp').addEventListener('click',function(){vib(10);const on=this.getAttrib
 })();
 /* Contador real del Black Friday */
 (function(){const cd=$('#cd');const end=new Date(cd.dataset.end).getTime();const p=n=>String(n).padStart(2,'0');
-  const tick=()=>{const t=end-Date.now();if(!(t>0)){$('#promo').remove();clearInterval(iv);return}cd.querySelector('[data-d]').textContent=p(Math.floor(t/864e5));cd.querySelector('[data-h]').textContent=p(Math.floor(t/36e5)%24);cd.querySelector('[data-m]').textContent=p(Math.floor(t/6e4)%60)};
-  const iv=setInterval(tick,15000);tick();})();
+  const el={d:cd.querySelector('[data-d]'),h:cd.querySelector('[data-h]'),m:cd.querySelector('[data-m]'),s:cd.querySelector('[data-s]')};
+  const put=(k,v)=>{const e=el[k];if(e.textContent===v)return;e.textContent=v;e.classList.remove('tk');void e.offsetWidth;e.classList.add('tk')};
+  const tick=()=>{const t=end-Date.now();if(!(t>0)){$('#promo').remove();clearInterval(iv);return}put('d',p(Math.floor(t/864e5)));put('h',p(Math.floor(t/36e5)%24));put('m',p(Math.floor(t/6e4)%60));put('s',p(Math.floor(t/1e3)%60))};
+  const iv=setInterval(()=>{if(!document.hidden)tick()},1000);tick();})();
 /* Cortinas: fotos grandes que se destapan de abajo hacia arriba */
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window){const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.cur').forEach(c=>c.classList.remove('hide'));cio.unobserve(e.target)}}),{threshold:.15});$$('.cur').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('hide');cio.observe(el.parentElement)}})}
 /* Video grande: carga y reproduce solo cuando está a la vista */
