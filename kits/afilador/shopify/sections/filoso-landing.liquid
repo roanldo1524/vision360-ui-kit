@@ -405,7 +405,7 @@
           <div class="slides" id="slides" aria-label="Fotos y videos del afilador">
             <figure><img src="{{ 'fl-p-hero-900.webp' | file_url }}" srcset="{{ 'fl-p-hero-600.webp' | file_url }} 600w, {{ 'fl-p-hero-900.webp' | file_url }} 900w" sizes="(min-width:900px) 600px, 100vw" alt="Afilador FILOSO naranja montado sobre la espada de una motosierra" width="900" height="1125" fetchpriority="high" decoding="async"></figure>
             <figure><video muted loop playsinline preload="none" poster="{{ 'fl-vid-uso.webp' | file_url }}" data-src="{{ 'fl-vid-uso.mp4' | file_url }}" aria-label="Video real: cómo se usa el afilador"></video><span class="gcap">Video real · así se usa</span></figure>
-            <figure><img src="{{ 'fl-p-taller.webp' | file_url }}&width=900" srcset="{{ 'fl-p-taller.webp' | file_url }}&width=540 540w, {{ 'fl-p-taller.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Manos girando la manivela del afilador FILOSO sobre la cadena, en un taller de noche" width="900" height="1125" loading="lazy" decoding="async"><span class="gcap">Giras la manivela. Eso es todo.</span></figure>
+            <figure><img src="{{ 'fl-p-taller.webp' | file_url }}&width=900" srcset="{{ 'fl-p-taller.webp' | file_url }}&width=540 540w, {{ 'fl-p-taller.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Manos girando la manivela del afilador FILOSO sobre la cadena, en un taller de noche" width="900" height="1125" loading="lazy" decoding="async"><span class="gcap">Se afila a pura manivela</span></figure>
             <figure><img src="{{ 'fl-astillas.webp' | file_url }}&width=900" srcset="{{ 'fl-astillas.webp' | file_url }}&width=540 540w, {{ 'fl-astillas.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Motosierra con la cadena afilada sacando astillas gruesas" width="900" height="1125" loading="lazy" decoding="async"><span class="gcap">Astilla gruesa otra vez</span></figure>
             <figure><img src="{{ 'fl-p-kit.webp' | file_url }}&width=900" srcset="{{ 'fl-p-kit.webp' | file_url }}&width=540 540w, {{ 'fl-p-kit.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Todo lo que trae la caja: afilador, manivela, 3 limas, llave, 2 perillas y tuercas" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">Lo que trae tu caja</span></figure>
             <figure><img src="{{ 'fl-macro.webp' | file_url }}&width=900" srcset="{{ 'fl-macro.webp' | file_url }}&width=540 540w, {{ 'fl-macro.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Afilador FILOSO montado sobre la espada y la cadena" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">Va encima de la espada</span></figure>
@@ -414,7 +414,7 @@
             <figure><img src="{{ 'fl-producto.webp' | file_url }}&width=900" srcset="{{ 'fl-producto.webp' | file_url }}&width=540 540w, {{ 'fl-producto.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Foto real del afilador FILOSO en aluminio naranja" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">Así es en la vida real</span></figure>
           </div>
           <span class="gcount" id="gcount" aria-live="polite">1 / 9</span>
-          <div class="hov" id="hov"><p class="hey">FILOSO · Afilador de cadena</p><h1>Filo de cadena nueva, sin bajar al pueblo.</h1></div>
+          <div class="hov" id="hov"><h1>Filo de cadena nueva, sin bajar al pueblo.</h1></div>
           <button class="garr gprev" id="gprev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
           <button class="garr gnext" id="gnext" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
         </div>
@@ -433,7 +433,7 @@
 
       <div class="info">
         <p class="nm"><span translate="no">FILOSO</span> · Afilador de cadena para motosierra</p>
-        <p class="sub">Lo montas encima de la espada, giras la manivela y la cadena vuelve a sacar astilla gruesa. Sin luz, sin desarmar nada y sin pagar afiladas cada semana.</p>
+        <p class="sub">Lo montas encima de la espada, giras la manivela y la cadena vuelve a sacar astilla gruesa. Funciona a mano, con la cadena puesta, y lo pagas una sola vez.</p>
         <div class="price"><b id="pNow">{{ k1 | times: 100 | money_without_trailing_zeros }}</b><s id="pWas">{{ antes | times: 100 | money_without_trailing_zeros }}</s><span class="off" id="pOff">Ahorras {{ ahorro1 | times: 100 | money_without_trailing_zeros }}</span></div>
         <div class="pay"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></svg><p><b>Pagas cuando te llegue.</b> Le pagas al transportador cuando el afilador llega a tu casa.</p></div>
 
@@ -457,9 +457,9 @@
 
         <ul class="bens">
           <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg><span><b>Afilas donde estés.</b> Va encima de la espada, con la cadena puesta.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span><b>Cero cables.</b> Funciona a pura manivela, aunque no haya luz en la vereda.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span><b>Sirve donde no llega la luz.</b> Funciona a pura manivela.</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15l3-5 3 5 3-5 3 5 3-5 3 5"/><path d="M3 19h18"/></svg><span><b>Todos los dientes iguales.</b> La guía deja la lima a la misma altura, aunque nunca hayas afilado.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 7V5h6v2"/></svg><span><b>Aluminio, no plástico.</b> Cabe en la caja de herramientas y aguanta el trajín.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 7V5h6v2"/></svg><span><b>Cuerpo de aluminio.</b> Cabe en la caja de herramientas y aguanta el trajín.</span></li>
         </ul>
 
         <div class="fit" id="compat">
@@ -477,7 +477,7 @@
   <section class="specs dark" aria-label="En cifras">
     <div class="w"><ul>
       <li class="rv"><b>3</b><span>limas en la caja, para cadenas 3/8″, .325″ y .404″</span></li>
-      <li class="rv"><b>0</b><span>cables, pilas o enchufes</span></li>
+      <li class="rv"><b>0</b><span>enchufes: se mueve a pura manivela</span></li>
       <li class="rv"><b>1</b><span>pieza de aluminio que cabe en la mano</span></li>
     </ul></div>
   </section>
@@ -485,9 +485,8 @@
   <!-- Problema -->
   <section class="sec prob">
     <div class="w">
-      <p class="kick rv">Lo que pasa con una cadena sin filo</p>
       <h2 class="rv">Mira el diente. Ahí se te va la plata.</h2>
-      <p class="lede rv">Una cadena sin filo no corta, raspa. Y el resto lo pagas tú: el motor, la gasolina y la espalda.</p>
+      <p class="lede rv">Con la cadena sin filo, el trabajo que debería hacer el diente lo terminan haciendo el motor, la gasolina y tu espalda.</p>
       <div class="grid">
         <figure class="tooth rv" id="tooth" data-s="0">
           <img class="t0" src="{{ 'fl-p-sin.webp' | file_url }}&width=800" srcset="{{ 'fl-p-sin.webp' | file_url }}&width=540 540w, {{ 'fl-p-sin.webp' | file_url }}&width=800 800w" sizes="(min-width:900px) 560px, 100vw" alt="Diente de cadena sin filo, redondeado y lleno de mugre" width="800" height="800" loading="lazy" decoding="async">
@@ -518,7 +517,6 @@
     <div class="w">
       <div class="vcard rv"><video id="vUso" muted loop playsinline preload="none" poster="{{ 'fl-vid-uso.webp' | file_url }}" data-src="{{ 'fl-vid-uso.mp4' | file_url }}" aria-label="Video: cómo se usa el afilador paso a paso"></video><button class="vsnd" id="vSnd" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9l4 6M21 9l-4 6"/></svg><span>Toca para oír la explicación</span></button></div>
       <div>
-        <p class="kick rv">Cómo se usa</p>
         <h2 class="rv">Si sabes apretar una tuerca, sabes usarlo.</h2>
         <p class="lede rv">Mira el video: un señor lo explica en su finca, en un minuto.</p>
         <ol class="steps rv" style="margin-top:24px">
@@ -534,7 +532,6 @@
   <!-- Comparación -->
   <section class="sec cmpx">
     <div class="w">
-      <p class="kick rv">Las cuentas claras</p>
       <h2 class="rv">¿Y si sigo como siempre?</h2>
       <p class="lede rv">Las cuatro formas de afilar una cadena, una al lado de la otra.</p>
       <div class="cmp rv">
@@ -556,7 +553,7 @@
   <section class="sec parts" style="background:var(--dust)">
     <div class="w">
       <h2 class="rv">Todo en una pieza de aluminio.</h2>
-      <p class="lede rv">Cada parte tiene un trabajo. Ninguna necesita pilas ni cable.</p>
+      <p class="lede rv">Las cuatro partes que vas a usar cada vez que afiles.</p>
       <div class="pfig rv">
         <img src="{{ 'fl-producto.webp' | file_url }}" alt="Afilador FILOSO de aluminio naranja con sus perillas y palanca" width="500" height="500" loading="lazy" decoding="async">
         <span class="pin a"><i></i>Palanca: frena el diente</span>
@@ -589,7 +586,6 @@
   <!-- Qué trae -->
   <section class="sec box" style="background:var(--dust)">
     <div class="w">
-      <p class="kick rv">Sin sorpresas</p>
       <h2 class="rv">Lo que trae tu caja.</h2>
       <div class="row">
         <figure class="rv"><img src="{{ 'fl-p-kit.webp' | file_url }}&width=900" srcset="{{ 'fl-p-kit.webp' | file_url }}&width=540 540w, {{ 'fl-p-kit.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 540px, 100vw" alt="Todo lo de la caja ordenado: afilador, manivela, 3 limas, llave, 2 perillas y tuercas" width="900" height="900" loading="lazy" decoding="async"></figure>
@@ -627,7 +623,7 @@
         <div class="q"><button type="button" aria-expanded="false">¿Necesito electricidad?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>No. Funciona con la manivela, a mano. Lo puedes usar en la finca, en el monte o en el carro.</p></div></div></div>
         <div class="q"><button type="button" aria-expanded="false">¿Es difícil de usar?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Son tres pasos: lo montas en la espada, pones la lima y giras la manivela. Arriba hay un video donde lo explican completo. La primera vez te demoras un poco más mientras le coges el tiro.</p></div></div></div>
         <div class="q"><button type="button" aria-expanded="false">¿Tengo que desarmar la motosierra?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>No. El afilador se monta encima de la espada con la cadena puesta. Solo la aflojas un poco para correrla de diente en diente.</p></div></div></div>
-        <div class="q"><button type="button" aria-expanded="false">¿Cuánto duran las limas?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Depende de cuánto afiles y de qué tan gastada esté la cadena. Como todo lo que afila, se van gastando con el uso.</p></div></div></div>
+        <div class="q"><button type="button" aria-expanded="false">¿Cuánto duran las limas?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Se gastan con el uso, como cualquier lima. Cuánto duran depende de qué tan seguido afiles y de qué tan gastada esté la cadena.</p></div></div></div>
         <div class="q"><button type="button" aria-expanded="false">¿Cuánto se demora en llegar?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Entre 2 y 5 días hábiles, según tu ciudad. Antes de enviarlo te escribimos por WhatsApp para confirmar tu dirección.</p></div></div></div>
         <div class="q"><button type="button" aria-expanded="false">¿Cómo pago?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Pagas cuando te llega, directamente al transportador. No tienes que pagar nada por adelantado.</p></div></div></div>
         <div class="q"><button type="button" aria-expanded="false">¿Qué pasa si me llega dañado?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Escríbenos por WhatsApp con una foto apenas lo recibas y te ayudamos a solucionarlo.</p></div></div></div>
