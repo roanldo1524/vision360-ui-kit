@@ -284,6 +284,7 @@
 .calc .res b{display:block;font:700 30px/1 var(--display);color:var(--saw2);font-variant-numeric:tabular-nums}
 .calc .res span{display:block;margin-top:6px;font-size:13px;line-height:1.35;color:var(--bodyd)}
 .calc .note{margin-top:14px;font-size:13px;color:var(--bodyd)}
+.mid{max-width:460px;margin:20px auto 0}
 /* 8 · Comparación */
 .cmp{margin-top:32px;border-radius:24px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:var(--sh1)}
 .cmp table{width:100%;border-collapse:collapse;font-size:14px}
@@ -508,6 +509,7 @@
         <div class="res"><div><b id="rAno">$360.000</b><span>se te van al año en afiladas</span></div><div><b id="rPaga">9</b><span>afiladas y el afilador ya se pagó</span></div></div>
         <p class="note">Mueve las barras con lo que pagas tú, sin contar pasajes ni el día perdido. El cálculo usa el precio de 1 afilador: {{ k1 | times: 100 | money_without_trailing_zeros }}.</p>
       </div>
+      <div class="mid rv"><button class="cta js-order" type="button">Dejar de pagar afiladas · {{ k1 | times: 100 | money_without_trailing_zeros }}</button><p class="micro">Pagas al recibir · Envío gratis · Llega en 2 a 5 días hábiles</p></div>
     </div>
   </section>
 
