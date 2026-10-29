@@ -86,7 +86,10 @@ Todo código que se genere o edite pasa por este filtro antes de subirse. Equiva
     - `landing-page-design` (elayadesign/ai-design-skills): estructura, textos y reglas visuales de una landing que vende. Se usa al armar cualquier página de venta.
     - `stop-slop` (hardikpandya/stop-slop): quita las muletillas de texto hecho por IA. Se pasa por todo texto antes de publicar.
     - Ya instaladas y que siguen mandando en textos: `copywriting`, `cro`, `marketing-psychology`, `offers`, `copy-editing`.
-  - **Orden al construir una página de venta:** 1) `cro` + `landing-page-design` para la estructura; 2) `copywriting` + `stop-slop` para los textos; 3) `frontend-design` + `design-taste-frontend` para el diseño; 4) `emil-design-eng` para el movimiento; 5) `impeccable` para auditar antes de publicar. Si una skill choca con este archivo, manda este archivo.
+    - `huashu-design` (alchaincyf/huashu-design): antes de diseñar algo nuevo, presenta 3 direcciones visuales en HTML para que el dueño elija una. Tiene 84 estilos de referencia. Es la que más originalidad da.
+    - `redesign-existing-projects` (elayadesign/redesign-skill): diagnostica una página ya hecha (patrones genéricos de IA, estados débiles, código flojo) y la sube de nivel sin romperla.
+    - `web-design-guidelines` (vercel-labs/agent-skills): auditoría contra más de 100 reglas de Vercel (accesibilidad, rendimiento, UX). Se corre antes de publicar.
+  - **Orden al construir una página de venta:** 1) `cro` + `landing-page-design` para la estructura; 2) `copywriting` + `stop-slop` para los textos; 3) `huashu-design` para elegir dirección (3 propuestas), luego `frontend-design` + `design-taste-frontend` para el diseño; si la página ya existe, `redesign-existing-projects`; 4) `emil-design-eng` para el movimiento; 5) `impeccable` + `web-design-guidelines` para auditar antes de publicar. Si una skill choca con este archivo, manda este archivo.
 - **Nombres que no existen:** los nombres `anthropic/design-taste-frontend`, `ui-engine/impeccable` y `composio/brand-guidelines` no existen.
 - **Mientras tanto:** estas reglas aplican igual.
 
