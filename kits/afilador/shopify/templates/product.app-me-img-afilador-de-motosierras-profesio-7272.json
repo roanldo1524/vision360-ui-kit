@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "filoso-landing",
+      "blocks": {
+        "easysell_cod": {
+          "type": "shopify://apps/easysell-cod-form/blocks/app-block/7bfd0a95-6839-4f02-b2ee-896832dbe67e",
+          "settings": { "product": "afilador-de-motosierras-profesional" }
+        }
+      },
+      "block_order": ["easysell_cod"],
+      "settings": { "precio_1": 129000, "precio_2": 219000, "precio_antes": 169000, "whatsapp": "573217493251" }
+    }
+  },
+  "order": ["main"]
+}
