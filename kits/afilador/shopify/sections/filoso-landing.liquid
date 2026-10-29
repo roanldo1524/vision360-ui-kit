@@ -13,8 +13,9 @@
   assign wa = section.settings.whatsapp | default: '573217493251'
 -%}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap">
-<link rel="preload" as="image" href="{{ 'fl-hero-900.webp' | file_url }}" imagesrcset="{{ 'fl-hero-600.webp' | file_url }} 600w, {{ 'fl-hero-900.webp' | file_url }} 900w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" href="{{ 'fl-p-hero-900.webp' | file_url }}" imagesrcset="{{ 'fl-p-hero-600.webp' | file_url }} 600w, {{ 'fl-p-hero-900.webp' | file_url }} 900w" imagesizes="(min-width:900px) 600px, 100vw" fetchpriority="high">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap"></noscript>
 <style>#es-sticky{opacity:0!important;pointer-events:none!important}#fl-apps{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}#fl-host{display:block}</style>
 <style id="fl-es">
 /* Formulario EasySell, solo en la página FILOSO */
@@ -223,6 +224,12 @@
 .fit a{display:inline-flex;align-items:center;gap:6px;margin-top:12px;min-height:44px;font-weight:600;color:var(--sawt);text-decoration:none}
 /* 4 · Cinta en loop */
 .tick{overflow:hidden;background:var(--saw);color:var(--sawink);padding:13px 0;margin-top:40px}
+.specs{padding:56px 0}
+.specs ul{display:grid;grid-template-columns:1fr 1fr;gap:28px 20px}
+.specs li:first-child{grid-column:span 2}
+.specs b{display:block;font:700 96px/.85 var(--display);letter-spacing:-.04em;color:var(--saw2);font-variant-numeric:tabular-nums}
+.specs li:first-child b{font-size:132px}
+.specs span{display:block;margin-top:10px;font-size:15px;line-height:1.45;color:var(--bodyd);max-width:260px}
 .tick div{display:flex;width:max-content;animation:tk 32s linear infinite}
 .tick span{display:inline-flex;align-items:center;gap:22px;padding-right:22px;font:700 17px/1 var(--display);letter-spacing:.02em;white-space:nowrap}
 .tick span i{width:6px;height:6px;border-radius:999px;background:var(--sawink);opacity:.45}
@@ -235,16 +242,28 @@
 .vsnd:active{transform:translateX(-50%) scale(.97)}
 .vsnd svg{width:18px;height:18px;stroke:#fff}
 .steps{display:grid;gap:12px;counter-reset:s}
-.steps li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start;padding:16px;border-radius:16px;background:var(--bark2);border:1px solid var(--lined)}
-.steps li::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--saw);color:var(--sawink);font:700 24px/1 var(--display)}
+.steps li{position:relative;display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:center;padding:10px 16px 10px 10px;border-radius:24px;background:var(--bark2);border:1px solid var(--lined)}
+.steps li img{width:96px;height:120px;object-fit:cover;border-radius:14px}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:18px;top:18px;z-index:1;display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--saw);color:var(--sawink);font:700 17px/1 var(--display)}
 .steps b{display:block;font:700 21px/1.1 var(--display);color:#F3EFE8}
 .steps p{margin-top:4px;font-size:15px;line-height:1.5}
 /* 6 · Problema */
 .prob .grid{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;margin-top:32px}
 .prob figure{border-radius:24px;overflow:hidden;position:relative}
 .prob figure img{width:100%;aspect-ratio:1/1;object-fit:cover}
-.prob .lbl{position:absolute;top:14px;padding:6px 11px;border-radius:999px;background:rgba(0,0,0,.6);color:#fff;font:700 11px/1 var(--text);letter-spacing:.12em;text-transform:uppercase}
-.prob .lbl.l{left:14px}.prob .lbl.r{right:14px;background:var(--saw);color:var(--sawink)}
+.kick{font:700 11px/1.2 var(--text);letter-spacing:.15em;text-transform:uppercase;color:var(--sawt);margin-bottom:14px}
+.dark .kick{color:var(--saw2)}
+.tooth{position:relative;aspect-ratio:1/1;background:#0E0F0C;box-shadow:var(--sh2)}
+.tooth img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.prob .tooth img{aspect-ratio:auto}
+.tooth .t1{opacity:0;filter:blur(8px);transform:scale(1.03);transition:opacity 300ms var(--ease),filter 300ms var(--ease),transform 500ms var(--ease)}
+.tooth[data-s="1"] .t1{opacity:1;filter:none;transform:none}
+.seg{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:999px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);width:min(300px,calc(100% - 32px))}
+.seg .pill{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:#fff;transition:transform 260ms var(--ease)}
+.tooth[data-s="1"] .seg .pill{transform:translateX(100%);background:var(--saw)}
+.seg button{position:relative;min-height:44px;font:700 15px/1 var(--text);color:#fff;transition:color 200ms ease}
+.seg button[aria-pressed="true"]{color:var(--ink)}
+.seg button:active{transform:scale(.97)}
 .pains{display:grid;gap:14px}
 .pains li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:16px;line-height:1.5;color:var(--body)}
 .pains li b{color:var(--ink)}
@@ -363,13 +382,15 @@
   .uses .bento{grid-template-columns:repeat(3,1fr)}
   .uses .bx.big{grid-row:span 2}
   .box .row{grid-template-columns:1fr 1fr;align-items:start}
+  .specs ul{grid-template-columns:1.4fr 1fr 1fr;align-items:end}
+  .specs li:first-child{grid-column:auto}
   .sk{display:none}
 }
 @media (prefers-reduced-motion:reduce){
   .tick div{animation:none}
   .js .rv{opacity:1;transform:none;transition:none}
   .tag p span{transition:none}
-  .cta,.kit,.q .a,.sk,.hov{transition:none}
+  .cta,.kit,.q .a,.sk,.hov,.tooth .t1,.seg .pill{transition:none}
 }
 </style>
 <div class="pg" id="pg">
@@ -381,44 +402,44 @@
       <div class="gal">
         <div class="gstage">
           <div class="slides" id="slides" aria-label="Fotos y videos del afilador">
-            <figure><img src="{{ 'fl-hero-900.webp' | file_url }}" srcset="{{ 'fl-hero-600.webp' | file_url }} 600w, {{ 'fl-hero-900.webp' | file_url }} 900w" sizes="(min-width:900px) 600px, 100vw" alt="Campesino afilando la cadena de su motosierra con el afilador FILOSO en su finca" width="900" height="1125" fetchpriority="high" decoding="async"></figure>
+            <figure><img src="{{ 'fl-p-hero-900.webp' | file_url }}" srcset="{{ 'fl-p-hero-600.webp' | file_url }} 600w, {{ 'fl-p-hero-900.webp' | file_url }} 900w" sizes="(min-width:900px) 600px, 100vw" alt="Afilador FILOSO naranja montado sobre la espada de una motosierra" width="900" height="1125" fetchpriority="high" decoding="async"></figure>
             <figure><video muted loop playsinline preload="none" poster="{{ 'fl-vid-uso.webp' | file_url }}" data-src="{{ 'fl-vid-uso.mp4' | file_url }}" aria-label="Video real: cómo se usa el afilador"></video><span class="gcap">Video real · así se usa</span></figure>
-            <figure><img src="{{ 'fl-astillas.webp' | file_url }}&width=900" srcset="{{ 'fl-astillas.webp' | file_url }}&width=540 540w, {{ 'fl-astillas.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Motosierra con la cadena afilada sacando astillas gruesas" width="900" height="1125" loading="lazy" decoding="async"><span class="gcap">Así corta con filo</span></figure>
-            <figure><img src="{{ 'fl-macro.webp' | file_url }}&width=900" srcset="{{ 'fl-macro.webp' | file_url }}&width=540 540w, {{ 'fl-macro.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Afilador FILOSO montado sobre la espada y la cadena" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">Se monta encima de la espada</span></figure>
-            <figure><img src="{{ 'fl-antes.webp' | file_url }}&width=900" srcset="{{ 'fl-antes.webp' | file_url }}&width=540 540w, {{ 'fl-antes.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Cadena sin filo frente a cadena afilada" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">Sin filo y con filo</span></figure>
+            <figure><img src="{{ 'fl-p-taller.webp' | file_url }}&width=900" srcset="{{ 'fl-p-taller.webp' | file_url }}&width=540 540w, {{ 'fl-p-taller.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Manos girando la manivela del afilador FILOSO sobre la cadena, en un taller de noche" width="900" height="1125" loading="lazy" decoding="async"><span class="gcap">Giras la manivela. Eso es todo.</span></figure>
+            <figure><img src="{{ 'fl-astillas.webp' | file_url }}&width=900" srcset="{{ 'fl-astillas.webp' | file_url }}&width=540 540w, {{ 'fl-astillas.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Motosierra con la cadena afilada sacando astillas gruesas" width="900" height="1125" loading="lazy" decoding="async"><span class="gcap">Astilla gruesa otra vez</span></figure>
+            <figure><img src="{{ 'fl-p-kit.webp' | file_url }}&width=900" srcset="{{ 'fl-p-kit.webp' | file_url }}&width=540 540w, {{ 'fl-p-kit.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Todo lo que trae la caja: afilador, manivela, 3 limas, llave, 2 perillas y tuercas" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">Lo que trae tu caja</span></figure>
+            <figure><img src="{{ 'fl-macro.webp' | file_url }}&width=900" srcset="{{ 'fl-macro.webp' | file_url }}&width=540 540w, {{ 'fl-macro.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Afilador FILOSO montado sobre la espada y la cadena" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">Va encima de la espada</span></figure>
             <figure><img src="{{ 'fl-mano.webp' | file_url }}&width=900" srcset="{{ 'fl-mano.webp' | file_url }}&width=540 540w, {{ 'fl-mano.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="El afilador FILOSO cabe en una mano" width="900" height="1125" loading="lazy" decoding="async"><span class="gcap">Cabe en una mano</span></figure>
-            <figure><img src="{{ 'fl-uso-real.webp' | file_url }}&width=900" srcset="{{ 'fl-uso-real.webp' | file_url }}&width=540 540w, {{ 'fl-uso-real.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Girando la manivela del afilador sobre la cadena" width="900" height="773" loading="lazy" decoding="async"><span class="gcap">Giras la manivela y listo</span></figure>
-            <figure><img src="{{ 'fl-partes.webp' | file_url }}&width=900" srcset="{{ 'fl-partes.webp' | file_url }}&width=540 540w, {{ 'fl-partes.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Partes del afilador: perillas, 3 limas, manivela y llave" width="894" height="883" loading="lazy" decoding="async" style="object-fit:contain;background:#fff"><span class="gcap">Trae 3 limas y su llave</span></figure>
-            <figure><img src="{{ 'fl-hero.webp' | file_url }}&width=900" srcset="{{ 'fl-hero.webp' | file_url }}&width=540 540w, {{ 'fl-hero.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Afilando la cadena sobre un tronco en la finca" width="900" height="1125" loading="lazy" decoding="async"><span class="gcap">En la finca, sin ir al pueblo</span></figure>
+            <figure><img src="{{ 'fl-p-campo.webp' | file_url }}&width=900" srcset="{{ 'fl-p-campo.webp' | file_url }}&width=540 540w, {{ 'fl-p-campo.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Campesino con la motosierra al hombro al atardecer, en la montaña" width="900" height="1125" loading="lazy" decoding="async"><span class="gcap">Para el que vive del monte</span></figure>
+            <figure><img src="{{ 'fl-producto.webp' | file_url }}&width=900" srcset="{{ 'fl-producto.webp' | file_url }}&width=540 540w, {{ 'fl-producto.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 600px, 100vw" alt="Foto real del afilador FILOSO en aluminio naranja" width="900" height="900" loading="lazy" decoding="async"><span class="gcap">Así es en la vida real</span></figure>
           </div>
           <span class="gcount" id="gcount" aria-live="polite">1 / 9</span>
-          <div class="hov" id="hov"><p class="hey">FILOSO · Afilador de cadena</p><h1>Afila tu motosierra sin salir de la finca.</h1></div>
+          <div class="hov" id="hov"><p class="hey">FILOSO · Afilador de cadena</p><h1>Filo de cadena nueva, sin bajar al pueblo.</h1></div>
           <button class="garr gprev" id="gprev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
           <button class="garr gnext" id="gnext" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
         </div>
         <div class="thumbs" id="thumbs">
-          <button type="button" class="on" aria-label="Ver foto 1"><img src="{{ 'fl-hero-600.webp' | file_url }}" alt="" width="60" height="60" loading="lazy"></button>
+          <button type="button" class="on" aria-label="Ver foto 1"><img src="{{ 'fl-p-hero-600.webp' | file_url }}" alt="" width="60" height="60" loading="lazy"></button>
           <button type="button" class="tv" aria-label="Ver video"><img src="{{ 'fl-vid-uso.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
-          <button type="button" aria-label="Ver foto 3"><img src="{{ 'fl-astillas.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
-          <button type="button" aria-label="Ver foto 4"><img src="{{ 'fl-macro.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
-          <button type="button" aria-label="Ver foto 5"><img src="{{ 'fl-antes.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
-          <button type="button" aria-label="Ver foto 6"><img src="{{ 'fl-mano.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
-          <button type="button" aria-label="Ver foto 7"><img src="{{ 'fl-uso-real.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
-          <button type="button" aria-label="Ver foto 8"><img src="{{ 'fl-partes.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
-          <button type="button" aria-label="Ver foto 9"><img src="{{ 'fl-hero.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
+          <button type="button" aria-label="Ver foto 3"><img src="{{ 'fl-p-taller.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
+          <button type="button" aria-label="Ver foto 4"><img src="{{ 'fl-astillas.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
+          <button type="button" aria-label="Ver foto 5"><img src="{{ 'fl-p-kit.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
+          <button type="button" aria-label="Ver foto 6"><img src="{{ 'fl-macro.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
+          <button type="button" aria-label="Ver foto 7"><img src="{{ 'fl-mano.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
+          <button type="button" aria-label="Ver foto 8"><img src="{{ 'fl-p-campo.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
+          <button type="button" aria-label="Ver foto 9"><img src="{{ 'fl-producto.webp' | file_url }}&width=140" alt="" width="60" height="60" loading="lazy"></button>
         </div>
       </div>
 
       <div class="info">
         <p class="nm">FILOSO · Afilador de cadena para motosierra</p>
-        <p class="sub">Le devuelves el filo a tu cadena en la finca, con una manivela. Sin electricidad y sin pagar afiladas en el pueblo.</p>
+        <p class="sub">Lo montas encima de la espada, giras la manivela y la cadena vuelve a sacar astilla gruesa. Sin luz, sin desarmar nada y sin pagar afiladas cada semana.</p>
         <div class="price"><b id="pNow">{{ k1 | times: 100 | money_without_trailing_zeros }}</b><s id="pWas">{{ antes | times: 100 | money_without_trailing_zeros }}</s><span class="off" id="pOff">Ahorras {{ ahorro1 | times: 100 | money_without_trailing_zeros }}</span></div>
         <div class="pay"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></svg><p><b>Pagas cuando te llegue.</b> Le pagas al transportador cuando el afilador llega a tu casa.</p></div>
 
         <div class="pick"><span class="pkl">¿Cuántos quieres?</span><span id="kitName">1 afilador</span></div>
         <div class="kits" role="radiogroup" aria-label="Cantidad">
           <button class="kit on" type="button" role="radio" aria-checked="true" data-k="1"><span class="rd" aria-hidden="true"></span><span class="kph"><img src="{{ 'fl-k.webp' | file_url }}&width=120" alt="" width="56" height="56" loading="lazy"></span><span class="kt"><b>1 afilador</b><small>Trae 3 limas, manivela y llave</small></span><span class="kp"><b>{{ k1 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 100 | money_without_trailing_zeros }}</s></span></button>
-          <button class="kit" type="button" role="radio" aria-checked="false" data-k="2"><span class="ktag">Ahorras {{ ahorro2 | times: 100 | money_without_trailing_zeros }}</span><span class="rd" aria-hidden="true"></span><span class="kph"><img src="{{ 'fl-k.webp' | file_url }}&width=120" alt="" width="56" height="56" loading="lazy"><i>×2</i></span><span class="kt"><b>2 afiladores</b><small>{{ k2 | divided_by: 2 | times: 100 | money_without_trailing_zeros }} cada uno. Uno para ti y otro para el trabajador o un amigo</small></span><span class="kp"><b>{{ k2 | times: 100 | money_without_trailing_zeros }}</b><s>{{ doble | times: 100 | money_without_trailing_zeros }}</s></span></button>
+          <button class="kit" type="button" role="radio" aria-checked="false" data-k="2"><span class="ktag">Ahorras {{ ahorro2 | times: 100 | money_without_trailing_zeros }}</span><span class="rd" aria-hidden="true"></span><span class="kph"><img src="{{ 'fl-k.webp' | file_url }}&width=120" alt="" width="56" height="56" loading="lazy"><i>×2</i></span><span class="kt"><b>2 afiladores</b><small>{{ k2 | divided_by: 2 | times: 100 | money_without_trailing_zeros }} cada uno. Uno para tu finca y otro para el compadre o el trabajador</small></span><span class="kp"><b>{{ k2 | times: 100 | money_without_trailing_zeros }}</b><s>{{ doble | times: 100 | money_without_trailing_zeros }}</s></span></button>
         </div>
 
         <div class="buybtn">
@@ -434,10 +455,10 @@
         <p class="seller">Vendido y enviado por <b>alcomprar</b>, tienda en Colombia.</p>
 
         <ul class="bens">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg><span><b>Afilas en el sitio.</b> Lo montas encima de la espada, sin desarmar la motosierra.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span><b>Sin electricidad.</b> Funciona con manivela, a mano, donde estés.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19L19 5M8 4l12 12M4 8l12 12"/></svg><span><b>Todos los dientes parejos.</b> La guía mantiene la lima a la misma altura en cada diente.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 7V5h6v2"/></svg><span><b>Cuerpo de aluminio.</b> Cabe en la caja de herramientas o en el bolsillo del maletín.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg><span><b>Afilas donde estés.</b> Va encima de la espada, con la cadena puesta.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span><b>Cero cables.</b> Funciona a pura manivela, aunque no haya luz en la vereda.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15l3-5 3 5 3-5 3 5 3-5 3 5"/><path d="M3 19h18"/></svg><span><b>Todos los dientes iguales.</b> La guía deja la lima a la misma altura, aunque nunca hayas afilado.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 7V5h6v2"/></svg><span><b>Aluminio, no plástico.</b> Cabe en la caja de herramientas y aguanta el trajín.</span></li>
         </ul>
 
         <div class="fit" id="compat">
@@ -452,27 +473,40 @@
 
   <div class="tick" aria-hidden="true"><div><span>Pagas al recibir<i></i>Envío gratis<i></i>Sin electricidad<i></i>3 limas incluidas<i></i>Te confirmamos por WhatsApp<i></i></span><span>Pagas al recibir<i></i>Envío gratis<i></i>Sin electricidad<i></i>3 limas incluidas<i></i>Te confirmamos por WhatsApp<i></i></span></div></div>
 
+  <section class="specs dark" aria-label="En cifras">
+    <div class="w"><ul>
+      <li class="rv"><b>3</b><span>limas en la caja, para cadenas 3/8", .325" y .404"</span></li>
+      <li class="rv"><b>0</b><span>cables, pilas o enchufes</span></li>
+      <li class="rv"><b>1</b><span>pieza de aluminio que cabe en la mano</span></li>
+    </ul></div>
+  </section>
+
   <!-- Problema -->
   <section class="sec prob">
     <div class="w">
-      <h2 class="rv">Cadena sin filo, motosierra que sufre.</h2>
-      <p class="lede rv">Cuando la cadena pierde el filo, todo el trabajo se vuelve más pesado.</p>
+      <p class="kick rv">Lo que pasa con una cadena sin filo</p>
+      <h2 class="rv">Mira el diente. Ahí se te va la plata.</h2>
+      <p class="lede rv">Una cadena sin filo no corta, raspa. Y el resto lo pagas tú: el motor, la gasolina y la espalda.</p>
       <div class="grid">
-        <figure class="rv"><img src="{{ 'fl-antes.webp' | file_url }}&width=900" alt="A la izquierda, cadena sin filo sacando polvo; a la derecha, cadena afilada sacando astillas" width="900" height="900" loading="lazy" decoding="async"><span class="lbl l">Sin filo</span><span class="lbl r">Con filo</span></figure>
+        <figure class="tooth rv" id="tooth" data-s="0">
+          <img class="t0" src="{{ 'fl-p-sin.webp' | file_url }}&width=800" srcset="{{ 'fl-p-sin.webp' | file_url }}&width=540 540w, {{ 'fl-p-sin.webp' | file_url }}&width=800 800w" sizes="(min-width:900px) 560px, 100vw" alt="Diente de cadena sin filo, redondeado y lleno de mugre" width="800" height="800" loading="lazy" decoding="async">
+          <img class="t1" src="{{ 'fl-p-con.webp' | file_url }}&width=800" srcset="{{ 'fl-p-con.webp' | file_url }}&width=540 540w, {{ 'fl-p-con.webp' | file_url }}&width=800 800w" sizes="(min-width:900px) 560px, 100vw" alt="El mismo tipo de diente recién afilado, con la punta brillante y en ángulo" width="800" height="800" loading="lazy" decoding="async">
+          <div class="seg" role="group" aria-label="Ver el diente de la cadena"><span class="pill" aria-hidden="true"></span><button type="button" data-s="0" aria-pressed="true">Sin filo</button><button type="button" data-s="1" aria-pressed="false">Con FILOSO</button></div>
+        </figure>
         <ul class="pains rv">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Saca polvito en vez de astilla</b> y el corte no avanza aunque la empujes.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Calienta el motor y gasta más gasolina,</b> porque la máquina trabaja forzada.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Brinca y se va de lado,</b> y eso es más riesgo para tus manos.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Llevarla al pueblo es medio día perdido</b> y plata cada vez que la mandas a afilar.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Saca aserrín en vez de astilla.</b> Empujas, la máquina ruge y el palo no baja.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Se recalienta y se bebe la gasolina,</b> porque el motor trabaja forzado.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Brinca y se tuerce.</b> Con una cadena así, las manos corren peligro.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Bajar al pueblo es medio día perdido,</b> el pasaje y la afilada. Y a la semana, otra vez.</span></li>
         </ul>
       </div>
 
       <div class="calc rv" id="calc">
-        <h3>¿Cuánto llevas pagando en afiladas?</h3>
+        <h3>¿Cuánto te ha costado el pueblo?</h3>
         <div class="row"><label for="cVeces">Veces que la mandas a afilar al mes <output id="oVeces">2</output></label><input id="cVeces" type="range" min="1" max="8" step="1" value="2"></div>
         <div class="row"><label for="cPrecio">Lo que te cobran por afilada <output id="oPrecio">$15.000</output></label><input id="cPrecio" type="range" min="5000" max="40000" step="1000" value="15000"></div>
         <div class="res"><div><b id="rAno">$360.000</b><span>se te van al año en afiladas</span></div><div><b id="rPaga">9</b><span>afiladas y el afilador ya se pagó</span></div></div>
-        <p class="note">Mueve las barras con lo que pagas tú. El cálculo usa el precio de 1 afilador: {{ k1 | times: 100 | money_without_trailing_zeros }}.</p>
+        <p class="note">Mueve las barras con lo que pagas tú, sin contar pasajes ni el día perdido. El cálculo usa el precio de 1 afilador: {{ k1 | times: 100 | money_without_trailing_zeros }}.</p>
       </div>
     </div>
   </section>
@@ -482,12 +516,13 @@
     <div class="w">
       <div class="vcard rv"><video id="vUso" muted loop playsinline preload="none" poster="{{ 'fl-vid-uso.webp' | file_url }}" data-src="{{ 'fl-vid-uso.mp4' | file_url }}" aria-label="Video: cómo se usa el afilador paso a paso"></video><button class="vsnd" id="vSnd" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9l4 6M21 9l-4 6"/></svg><span>Toca para oír la explicación</span></button></div>
       <div>
-        <h2 class="rv">Así de fácil se usa.</h2>
-        <p class="lede rv">Mira el video: lo explica un señor en su finca, en un minuto.</p>
+        <p class="kick rv">Cómo se usa</p>
+        <h2 class="rv">Si sabes apretar una tuerca, sabes usarlo.</h2>
+        <p class="lede rv">Mira el video: un señor lo explica en su finca, en un minuto.</p>
         <ol class="steps rv" style="margin-top:24px">
-          <li><div><b>Móntalo encima de la espada</b><p>Lo pones sobre la cadena y aprietas las dos perillas. Revisa que la cadena gire libre.</p></div></li>
-          <li><div><b>Pon la lima de tu cadena</b><p>Escoges la lima de tu medida y la apoyas en el diente. La perilla del medio arrima el diente a la lima.</p></div></li>
-          <li><div><b>Gira la manivela</b><p>Afilas el diente, corres la cadena al siguiente y repites. Al terminar un lado, volteas el afilador y haces el otro.</p></div></li>
+          <li><img src="{{ 'fl-p-paso1.webp' | file_url }}&width=240" alt="Afilador montado sobre la espada de la motosierra" width="96" height="120" loading="lazy" decoding="async"><div><b>Móntalo sobre la espada</b><p>Lo pones encima de la cadena y aprietas las dos perillas. No hay que quitar nada.</p></div></li>
+          <li><img src="{{ 'fl-p-paso2.webp' | file_url }}&width=240" alt="Mano ajustando la perilla del medio del afilador" width="96" height="120" loading="lazy" decoding="async"><div><b>Arrima el diente a la lima</b><p>Escoges la lima de tu cadena. La perilla del medio empuja el diente contra ella.</p></div></li>
+          <li><img src="{{ 'fl-p-paso3.webp' | file_url }}&width=240" alt="Afilador con la manivela puesta, listo para girar" width="96" height="120" loading="lazy" decoding="async"><div><b>Gira la manivela</b><p>Unas vueltas por diente, corres la cadena al siguiente y repites. Terminado un lado, volteas el afilador.</p></div></li>
         </ol>
       </div>
     </div>
@@ -497,8 +532,9 @@
   <!-- Comparación -->
   <section class="sec cmpx">
     <div class="w">
-      <h2 class="rv">¿Por qué FILOSO?</h2>
-      <p class="lede rv">Las otras formas de afilar, una al lado de la otra.</p>
+      <p class="kick rv">Las cuentas claras</p>
+      <h2 class="rv">¿Y si sigo como siempre?</h2>
+      <p class="lede rv">Las cuatro formas de afilar una cadena, una al lado de la otra.</p>
       <div class="cmp rv">
         <table>
           <thead><tr><th scope="col"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Qué comparamos</span></th><th scope="col" class="me">FILOSO</th><th scope="col">Taller del pueblo</th><th scope="col">Lima a pulso</th><th scope="col">Afilador eléctrico</th></tr></thead>
@@ -539,8 +575,8 @@
     <div class="w">
       <h2 class="rv">Para el que vive con la motosierra en la mano.</h2>
       <div class="bento">
-        <div class="bx big rv"><img src="{{ 'fl-hero.webp' | file_url }}&width=900" alt="Campesino afilando la cadena sobre un tronco" width="900" height="1125" loading="lazy" decoding="async"><div class="cap"><b>En la finca</b><span>Leña, cercas, potreros y árboles caídos.</span></div></div>
-        <div class="bx rv"><img src="{{ 'fl-astillas.webp' | file_url }}&width=540" alt="Motosierra cortando un tronco con astillas grandes" width="540" height="675" loading="lazy" decoding="async"><div class="cap"><b>Leña</b><span>Para el fogón o el asado.</span></div></div>
+        <div class="bx big rv"><img src="{{ 'fl-hero.webp' | file_url }}&width=900" alt="Campesino afilando la cadena sobre un tronco" width="900" height="1125" loading="lazy" decoding="async"><div class="cap"><b>En la finca</b><span>Leña, cercas, potreros y el árbol que se cayó anoche.</span></div></div>
+        <div class="bx rv"><img src="{{ 'fl-p-taller.webp' | file_url }}&width=540" alt="Manos afilando la cadena con el afilador en un taller de noche" width="540" height="675" loading="lazy" decoding="async"><div class="cap"><b>En el taller</b><span>De noche, lista para mañana.</span></div></div>
         <div class="bx txt rv"><b>Poda y jardinería</b><span>Para los que trabajan por días y no pueden parar a afilar en el pueblo.</span></div>
         <div class="bx txt rv" style="background:var(--bark);color:#F3EFE8"><b>Madera y obra</b><span style="color:var(--bodyd)">Carpinteros y maestros de obra que cortan todos los días.</span></div>
         <div class="bx rv"><img src="{{ 'fl-mano.webp' | file_url }}&width=540" alt="El afilador en la mano" width="540" height="675" loading="lazy" decoding="async"><div class="cap"><b>Va contigo</b><span>Cabe en una mano.</span></div></div>
@@ -551,9 +587,10 @@
   <!-- Qué trae -->
   <section class="sec box" style="background:var(--dust)">
     <div class="w">
+      <p class="kick rv">Sin sorpresas</p>
       <h2 class="rv">Lo que trae tu caja.</h2>
       <div class="row">
-        <figure class="rv"><img src="{{ 'fl-partes.webp' | file_url }}&width=900" alt="Afilador con sus perillas, tornillos, 3 limas, manivela y llave" width="894" height="883" loading="lazy" decoding="async"></figure>
+        <figure class="rv"><img src="{{ 'fl-p-kit.webp' | file_url }}&width=900" srcset="{{ 'fl-p-kit.webp' | file_url }}&width=540 540w, {{ 'fl-p-kit.webp' | file_url }}&width=900 900w" sizes="(min-width:900px) 540px, 100vw" alt="Todo lo de la caja ordenado: afilador, manivela, 3 limas, llave, 2 perillas y tuercas" width="900" height="900" loading="lazy" decoding="async"></figure>
         <div>
           <ul class="rv">
             <li><b class="n">1</b><span>Afilador de aluminio<small>El cuerpo naranja con sus perillas</small></span></li>
@@ -570,10 +607,10 @@
 
   <!-- Hero 2 -->
   <section class="h2x">
-    <img src="{{ 'fl-astillas.webp' | file_url }}&width=1080" srcset="{{ 'fl-astillas.webp' | file_url }}&width=720 720w, {{ 'fl-astillas.webp' | file_url }}&width=1080 1080w" sizes="100vw" alt="Motosierra afilada cortando un tronco" width="1080" height="1350" loading="lazy" decoding="async">
+    <img src="{{ 'fl-p-campo.webp' | file_url }}&width=1024" srcset="{{ 'fl-p-campo.webp' | file_url }}&width=720 720w, {{ 'fl-p-campo.webp' | file_url }}&width=1024 1024w" sizes="100vw" alt="Campesino con la motosierra al hombro bajando de la montaña al atardecer" width="1024" height="1280" loading="lazy" decoding="async">
     <div class="w"><div class="in">
       <h2 class="rv">Que vuelva a cortar como el primer día.</h2>
-      <p class="rv">Astilla gruesa, corte derecho y menos esfuerzo para ti y para la máquina.</p>
+      <p class="rv">Astilla gruesa, corte derecho y la tarde libre, porque el trabajo se acabó temprano.</p>
       <button class="cta js-order rv" type="button">Pedir mi afilador</button>
       <p class="micro">Pagas al recibir · Envío gratis a toda Colombia</p>
     </div></div>
@@ -657,6 +694,11 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)vids.forEac
 const cV=$('#cVeces'),cP=$('#cPrecio');
 const calc=()=>{const v=+cV.value,p=+cP.value;$('#oVeces').textContent=v;$('#oPrecio').textContent=fmt(p);$('#rAno').textContent=fmt(v*p*12);$('#rPaga').textContent=Math.ceil(P[1]/p)};
 cV.addEventListener('input',calc);cP.addEventListener('input',calc);calc();
+/* Diente: sin filo / con FILOSO */
+const tooth=$('#tooth');if(tooth){let touched=false;const segB=[...tooth.querySelectorAll('.seg button')];
+  const setT=v=>{tooth.dataset.s=v;segB.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.s===v)))};
+  segB.forEach(b=>b.addEventListener('click',()=>{touched=true;setT(b.dataset.s)}));
+  if(!RM&&'IntersectionObserver' in window){const tio=new IntersectionObserver(es=>{if(es[0].isIntersecting){tio.disconnect();setTimeout(()=>{if(!touched)setT('1')},1400)}},{threshold:.6});tio.observe(tooth)}}
 /* Preguntas */
 $$('.q button').forEach(b=>b.addEventListener('click',()=>{const q=b.parentElement,o=!q.classList.contains('open');q.classList.toggle('open',o);b.setAttribute('aria-expanded',o)}));
 /* Frase que se revela palabra por palabra */
