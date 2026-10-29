@@ -36,7 +36,12 @@
 #easysell-modal .es-offer-image img{width:52px!important;height:52px!important;border-radius:12px;object-fit:cover;display:block}
 #easysell-modal .es-qo-container .mb-1{font:700 18px/1.15 'Barlow Condensed',system-ui,sans-serif!important;color:var(--q-ink)!important;margin-bottom:4px!important}
 #easysell-modal .es-qo-container .mb-1 .fl-g{display:block;margin-top:3px;font:500 13px/1.35 'Barlow',system-ui,sans-serif;color:#525252}
-#easysell-modal .es-offer-badge{display:none!important}
+#easysell-modal .es-offer-badge,#easysell-modal .offer-badge,#easysell-modal .offer-label{display:none!important}
+#easysell-modal .es-title-container{row-gap:2px!important}
+#easysell-modal .fl-g2{flex-basis:100%;font:500 13px/1.35 'Barlow',system-ui,sans-serif;color:#525252}
+#easysell-modal .offer-radio{border-color:rgba(27,29,24,.3)!important}
+#easysell-modal .es-qo-container[offer-selected="true"] .offer-radio{border-color:#1B1D18!important;background:#1B1D18!important;box-shadow:inset 0 0 0 4px #fff!important}
+#easysell-modal .offer-radio::before,#easysell-modal .offer-radio::after{background:#1B1D18!important;border-color:#1B1D18!important}
 #easysell-modal .es-o-p{font:700 18px/1.1 'Barlow Condensed',system-ui,sans-serif!important;color:var(--q-ink)!important}
 #easysell-modal .es-o-cp{font:500 12px/1.3 'Barlow',system-ui,sans-serif!important;color:var(--q-mut)!important}
 #easysell-modal .total-container{background:var(--q-dust)!important;border:1px solid var(--q-ln)!important;border-radius:16px!important;color:var(--q-ink)!important;padding:6px 10px!important;margin:10px 0 4px!important}
@@ -83,6 +88,9 @@
         var im=c.querySelector('.offer-image');if(im&&im.getAttribute('src')!==K){im.setAttribute('src',K);im.removeAttribute('srcset')}
         var t=c.querySelector('.d-flex.flex-column .mb-1');
         if(t&&T[i]&&t.getAttribute('data-fl')!==t.textContent){t.innerHTML=T[i]+'<span class="fl-g">'+G[i]+'</span>';t.setAttribute('data-fl',t.textContent)}
+        var t2=c.querySelector('.offer-title');
+        if(t2&&T[i]){if(t2.textContent!==T[i])t2.textContent=T[i];css(t2,'font-family',"'Barlow Condensed',system-ui,sans-serif");css(t2,'font-size','19px');css(t2,'font-weight','700');css(t2,'color','#1B1D18');
+          var tc=t2.parentNode;if(tc&&!tc.querySelector('.fl-g2'))tc.insertAdjacentHTML('beforeend','<span class="fl-g2">'+G[i]+'</span>')}
       });
       var fn=m.querySelector('.es-first_name-group');
       if(fn&&!m.querySelector('.fl-qk2')){fn.insertAdjacentHTML('beforebegin','<span class="fl-qk fl-qk2">¿A dónde te lo enviamos?</span>')}
