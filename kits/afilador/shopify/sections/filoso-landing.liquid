@@ -16,7 +16,7 @@
 <link rel="preload" as="image" href="{{ 'fl-p-hero-900.webp' | file_url }}" imagesrcset="{{ 'fl-p-hero-600.webp' | file_url }} 600w, {{ 'fl-p-hero-900.webp' | file_url }} 900w" imagesizes="(min-width:900px) 600px, 100vw" fetchpriority="high">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap"></noscript>
-<style>#es-sticky{opacity:0!important;pointer-events:none!important}#fl-apps{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}#fl-host{display:block}</style>
+<style>#es-sticky{opacity:0!important;pointer-events:none!important}#fl-apps{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}#fl-host{display:block}@media (max-width:899px){html{scroll-padding-bottom:84px}}</style>
 <style id="fl-es">
 /* Formulario EasySell, solo en la página FILOSO */
 #easysell-modal{--q-ink:#1B1D18;--q-saw:#EE6A1E;--q-sawt:#B4470B;--q-mut:#6B6B63;--q-ln:rgba(27,29,24,.10);--q-dust:#F1EADF}
@@ -146,7 +146,7 @@
 /* Botón principal */
 .cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;padding:8px 24px;border-radius:999px;background:var(--saw);color:var(--sawink);font:700 20px/1 var(--display);letter-spacing:.01em;text-decoration:none;transition:transform 200ms var(--ease),background-color 200ms ease;user-select:none}
 .cta:active{transform:scale(.98)}
-@media (hover:hover){.cta:hover{transform:scale(1.01);background:var(--saw2)}}
+@media (hover:hover){.cta:hover{transform:scale(1.01);background:var(--saw2)}.kit:hover{border-color:rgba(27,29,24,.28)}.q button:hover{color:var(--sawt)}.garr:hover{background:#fff}.thumbs button:hover{opacity:.85}.seg button:hover{opacity:.85}.fit a:hover{text-decoration:underline}}
 .cta .sep{opacity:.5}
 .micro{margin-top:10px;text-align:center;font-size:13px;color:var(--muted)}
 .dark .micro{color:var(--bodyd)}
@@ -432,7 +432,7 @@
       </div>
 
       <div class="info">
-        <p class="nm">FILOSO · Afilador de cadena para motosierra</p>
+        <p class="nm"><span translate="no">FILOSO</span> · Afilador de cadena para motosierra</p>
         <p class="sub">Lo montas encima de la espada, giras la manivela y la cadena vuelve a sacar astilla gruesa. Sin luz, sin desarmar nada y sin pagar afiladas cada semana.</p>
         <div class="price"><b id="pNow">{{ k1 | times: 100 | money_without_trailing_zeros }}</b><s id="pWas">{{ antes | times: 100 | money_without_trailing_zeros }}</s><span class="off" id="pOff">Ahorras {{ ahorro1 | times: 100 | money_without_trailing_zeros }}</span></div>
         <div class="pay"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></svg><p><b>Pagas cuando te llegue.</b> Le pagas al transportador cuando el afilador llega a tu casa.</p></div>
@@ -465,7 +465,7 @@
         <div class="fit" id="compat">
           <b>¿Le sirve a mi motosierra?</b>
           <p>Trae 3 limas para las medidas de cadena más comunes. Mira el número que viene marcado en la espada o en la cadena.</p>
-          <div class="sizes"><span>3/8"</span><span>.325"</span><span>.404"</span></div>
+          <div class="sizes"><span>3/8″</span><span>.325″</span><span>.404″</span></div>
           <a href="https://wa.me/{{ wa }}?text={{ 'Hola, quiero saber si el afilador FILOSO le sirve a mi motosierra' | url_encode }}" target="_blank" rel="noopener">¿No sabes cuál tienes? Mándanos una foto por WhatsApp</a>
         </div>
       </div>
@@ -476,7 +476,7 @@
 
   <section class="specs dark" aria-label="En cifras">
     <div class="w"><ul>
-      <li class="rv"><b>3</b><span>limas en la caja, para cadenas 3/8", .325" y .404"</span></li>
+      <li class="rv"><b>3</b><span>limas en la caja, para cadenas 3/8″, .325″ y .404″</span></li>
       <li class="rv"><b>0</b><span>cables, pilas o enchufes</span></li>
       <li class="rv"><b>1</b><span>pieza de aluminio que cabe en la mano</span></li>
     </ul></div>
@@ -623,7 +623,7 @@
     <div class="w">
       <h2 class="rv">Preguntas frecuentes</h2>
       <div class="qs">
-        <div class="q"><button type="button" aria-expanded="false">¿Le sirve a mi motosierra?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Trae 3 limas para las cadenas más comunes: 3/8", .325" y .404". La medida viene marcada en la espada o en la cadena. Si no la encuentras, mándanos una foto por WhatsApp y te decimos.</p></div></div></div>
+        <div class="q"><button type="button" aria-expanded="false">¿Le sirve a mi motosierra?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Trae 3 limas para las cadenas más comunes: 3/8″, .325″ y .404″. La medida viene marcada en la espada o en la cadena. Si no la encuentras, mándanos una foto por WhatsApp y te decimos.</p></div></div></div>
         <div class="q"><button type="button" aria-expanded="false">¿Necesito electricidad?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>No. Funciona con la manivela, a mano. Lo puedes usar en la finca, en el monte o en el carro.</p></div></div></div>
         <div class="q"><button type="button" aria-expanded="false">¿Es difícil de usar?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Son tres pasos: lo montas en la espada, pones la lima y giras la manivela. Arriba hay un video donde lo explican completo. La primera vez te demoras un poco más mientras le coges el tiro.</p></div></div></div>
         <div class="q"><button type="button" aria-expanded="false">¿Tengo que desarmar la motosierra?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>No. El afilador se monta encima de la espada con la cadena puesta. Solo la aflojas un poco para correrla de diente en diente.</p></div></div></div>
@@ -638,7 +638,7 @@
   <!-- Cierre -->
   <section class="sec dark close">
     <div class="w">
-      <span class="logo" aria-label="FILOSO"><svg viewBox="0 0 132 30" aria-hidden="true"><path d="M2 26 L10 18 L18 26 L26 18 L34 26" fill="none" stroke="#EE6A1E" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><text x="42" y="25" font-family="Barlow Condensed,Arial,sans-serif" font-weight="700" font-size="28" letter-spacing=".5" fill="#F3EFE8">FILOSO</text></svg></span>
+      <span class="logo" aria-label="FILOSO" translate="no"><svg viewBox="0 0 132 30" aria-hidden="true"><path d="M2 26 L10 18 L18 26 L26 18 L34 26" fill="none" stroke="#EE6A1E" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><text x="42" y="25" font-family="Barlow Condensed,Arial,sans-serif" font-weight="700" font-size="28" letter-spacing=".5" fill="#F3EFE8">FILOSO</text></svg></span>
       <h2 class="rv">Tu motosierra lista para mañana.</h2>
       <p class="lede rv">Pídelo hoy, lo pagas cuando llegue y la próxima vez que la cadena pierda el filo, lo arreglas tú en la finca.</p>
       <button class="cta js-order rv" type="button">Pedir mi afilador</button>
@@ -681,7 +681,7 @@ const slides=$('#slides'),th=$$('#thumbs button'),gc=$('#gcount'),hv=$('#hov'),N
 const gi=()=>Math.round(slides.scrollLeft/slides.clientWidth);
 const gsync=()=>{const i=gi();hv.classList.toggle('off',i>0);gc.textContent=(i+1)+' / '+N;th.forEach((b,j)=>b.classList.toggle('on',i===j));
   const tb=th[i];if(tb){const tw=$('#thumbs');tw.scrollTo({left:tb.offsetLeft-tw.clientWidth/2+tb.clientWidth/2,behavior:RM?'auto':'smooth'})}
-  [...slides.children].forEach((f,k)=>{const v=f.querySelector('video');if(!v)return;if(k===i){if(!v.src)v.src=v.dataset.src;v.play().catch(()=>{})}else v.pause()})};
+  [...slides.children].forEach((f,k)=>{const v=f.querySelector('video');if(!v)return;if(k===i){if(!v.src)v.src=v.dataset.src;if(RM){v.controls=true}else v.play().catch(()=>{})}else v.pause()})};
 const ggo=i=>slides.scrollTo({left:Math.max(0,Math.min(N-1,i))*slides.clientWidth,behavior:RM?'auto':'smooth'});
 slides.addEventListener('scroll',()=>requestAnimationFrame(gsync),{passive:true});
 th.forEach((b,j)=>b.addEventListener('click',()=>ggo(j)));
@@ -690,7 +690,7 @@ $('#gprev').addEventListener('click',()=>ggo(gi()-1));$('#gnext').addEventListen
 const vids=[[$('#vUso'),$('#vSnd'),'Toca para oír la explicación'],[$('#vCaja'),$('#vSnd2'),'Toca para oír']];
 vids.forEach(([v,b,lbl])=>{if(!v)return;
   b.addEventListener('click',()=>{if(!v.src)v.src=v.dataset.src;const on=v.muted;vids.forEach(([o,ob,ol])=>{if(o&&o!==v){o.muted=true;ob.setAttribute('aria-pressed','false');ob.querySelector('span').textContent=ol}});v.muted=!on;if(on){v.currentTime=0;v.play().catch(()=>{})}b.setAttribute('aria-pressed',String(on));b.querySelector('span').textContent=on?'Silenciar':lbl});
-  if('IntersectionObserver' in window)new IntersectionObserver(es=>{const x=es[0];if(x.isIntersecting){if(!v.src)v.src=v.dataset.src;v.play().catch(()=>{})}else{v.pause();if(!v.muted){v.muted=true;b.setAttribute('aria-pressed','false');b.querySelector('span').textContent=lbl}}},{threshold:.35}).observe(v)});
+  if('IntersectionObserver' in window)new IntersectionObserver(es=>{const x=es[0];if(x.isIntersecting){if(RM)return;if(!v.src)v.src=v.dataset.src;v.play().catch(()=>{})}else{v.pause();if(!v.muted){v.muted=true;b.setAttribute('aria-pressed','false');b.querySelector('span').textContent=lbl}}},{threshold:.35}).observe(v)});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)vids.forEach(([v])=>v&&v.pause())});
 /* Calculadora */
 const cV=$('#cVeces'),cP=$('#cPrecio');
