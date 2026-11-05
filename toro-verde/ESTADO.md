@@ -111,3 +111,11 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 ### 28 oct, 7:30 p. m. — Medición tras los arreglos del bot
 - Reglas siguen en 84 y espera en 10 s (no las restauraron).
 - Pedidos de WhatsApp el 28 oct: 61 hasta las 7:30 p. m. (el mejor día de la semana; 26 oct: 40, 27 oct: 46). Después de las 11:45 a. m.: 44 (días anteriores en la misma franja: 28 a 36). Pendientes por confirmar después del cambio: 0.
+
+### 5 nov — Diagnóstico tras reinstalar la plantilla de Lucid
+- Ronald reinstaló la plantilla de Lucid (8 flujos LucidSales nuevos) y pidió el bot «como el original», sin agregar cosas ni flujos. Se probaron reglas 85-89 y se quitaron enseguida; las reglas quedan en 84.
+- La secuencia «RC Recompra Toro Verde» (306056) y los 21 flujos «RC …» siguen existiendo: mientras existan, siguen escribiendo a clientes (causa de «no he aplicado aún» → pedido nuevo).
+- «Faltan campos obligatorios»: pedidos con departamento vacío (Bogotá sin Cundinamarca, Neiva #6680 sin Huila). #6629 (Janer): «quantity debe ser numérico» — el producto de Shopify «Herbicida Regenerativo Toro Verde» no está vinculado a una variación en Lucid Sales.
+- #6663 (Juan Moreno, 3174779474): cliente de marzo; etiquetas «Fallo mensaje de confirmacion landing». Hipótesis: en recompras por Shopify la etiqueta «Shopify» ya existe y el disparador de confirmación no vuelve a correr.
+- Mensaje inicial de Lucid Sales («HERBICIDA EL TORO») promete «corrige pH», «no mata microorganismos», «fijadores de nitrógeno y fósforo», «60 días de garantía»; el otro producto dice «Orgánico» y «elimina de raíz». Se cambia solo en Lucid Sales → Productos.
+- Pedidos WhatsApp: 18 (30 oct), 10, 9, 13, 15 (3 nov), 60 (4 nov).
