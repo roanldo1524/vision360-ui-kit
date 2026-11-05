@@ -119,3 +119,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - #6663 (Juan Moreno, 3174779474): cliente de marzo; etiquetas «Fallo mensaje de confirmacion landing». Hipótesis: en recompras por Shopify la etiqueta «Shopify» ya existe y el disparador de confirmación no vuelve a correr.
 - Mensaje inicial de Lucid Sales («HERBICIDA EL TORO») promete «corrige pH», «no mata microorganismos», «fijadores de nitrógeno y fósforo», «60 días de garantía»; el otro producto dice «Orgánico» y «elimina de raíz». Se cambia solo en Lucid Sales → Productos.
 - Pedidos WhatsApp: 18 (30 oct), 10, 9, 13, 15 (3 nov), 60 (4 nov).
+- 5 nov: textos listos para potenciar el producto en Lucid Sales → Productos (mensaje inicial, descripción, preguntas frecuentes), sin crear flujos: `toro-verde/lucid-sales/potenciar-producto.md`. Los pega Ronald (si se cambian por la API, Lucid Sales los vuelve a escribir).
