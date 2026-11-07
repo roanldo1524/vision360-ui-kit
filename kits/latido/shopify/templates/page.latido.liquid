@@ -247,12 +247,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 /* ===== v3 · estructura de venta ===== */
 .how{padding-top:56px;padding-bottom:24px}
 .how .steps{gap:10px}
-.who .wg{display:grid;gap:0;border-top:1px solid var(--line)}
-.who .wg>div{padding:20px 0;border-bottom:1px solid var(--line)}
-.who .wg p{margin-top:4px;color:var(--soft);font-size:16px}
 .price .anchor{margin:-4px 0 14px;font-size:14.5px;color:var(--soft)}
-@media (min-width:900px){.who .wg{grid-template-columns:repeat(4,1fr);gap:28px;border-top:0}.who .wg>div{border:0;border-top:1px solid var(--line);padding:20px 0 0}}
-
 /* ===== v4 · regalo, soplido y minuto a minuto ===== */
 [hidden]{display:none!important}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
@@ -275,6 +270,17 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .mins h2{color:#2A0A1B;max-width:15em}
 .mins p{margin-top:14px;font-size:18px;color:#3F1229;max-width:30em}
 @media (min-width:900px){.mins .w{grid-template-columns:auto 1fr;gap:64px;align-items:center}.mins{padding:96px 0}}
+
+/* ===== v6 · mosaico de personas ===== */
+.mosaic{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+.m{position:relative;margin:0;border-radius:24px;overflow:hidden;aspect-ratio:1/1.1;background:var(--ink2)}
+.m.big,.m.wide{grid-column:1/-1;aspect-ratio:3/2}
+.m img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.m::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(26,13,14,.88) 0%,rgba(26,13,14,.4) 45%,rgba(26,13,14,0) 75%)}
+.m figcaption{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:16px}
+.m h3{font-size:20px;color:#fff}
+.m p{margin-top:4px;font-size:14.5px;line-height:1.4;color:#EBDCD8}
+@media (min-width:900px){.mosaic{grid-template-columns:repeat(6,1fr);gap:16px}.m{grid-column:span 2;aspect-ratio:4/5}.m.big{grid-column:span 4;aspect-ratio:auto;min-height:480px}.m.wide{grid-column:span 4;aspect-ratio:auto;min-height:480px}.m h3{font-size:26px}.m p{font-size:16px}.m figcaption{padding:24px}}
 </style>
 </head>
 <body>
@@ -288,13 +294,13 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <main id="top">
 <!-- Hero -->
 <section class="hero">
-  <img class="hbg" src="{% endraw %}{{ 'lt-abuela.webp' | file_url }}{% raw %}" width="1500" height="1000" alt="Una abuela llora de emoción al escuchar un mensaje de voz por teléfono, frente a una torta con una vela" fetchpriority="high">
+  <img class="hbg" src="{% endraw %}{{ 'lt-pareja.webp' | file_url }}{% raw %}" width="1500" height="1000" alt="Una pareja en un balcón: ella le acerca el celular al oído y él se tapa la boca, conmovido, mientras ella ríe entre lágrimas" fetchpriority="high">
   <div class="w"><div class="ht">
-    <h1 class="rv">Hay cosas que ella lleva años esperando oírte decir.</h1>
-    <p class="lead rv" style="--i:2">Dilas con tu voz. Nosotros las convertimos en una sorpresa que ella abre desde su celular: una rosa que florece, velas que apaga, una carta con su nombre.</p>
+    <h1 class="rv">Hay cosas que alguien lleva años esperando oírte decir.</h1>
+    <p class="lead rv" style="--i:2">Dilas con tu voz. Nosotros las convertimos en una sorpresa para su celular: una rosa que florece, velas que se soplan, un regalo escondido y una carta con su nombre.</p>
     <div class="cta-row rv" style="--i:3">
       <a class="btn" href="#crear" id="heroCta">Quiero sorprenderla · $15 USD</a>
-      <p class="micro">Un solo pago · Lista en 20 minutos · Funciona desde cualquier país</p>
+      <p class="micro">Un solo pago · Lista en 20 minutos · Para toda Latinoamérica</p>
     </div>
   </div></div>
 </section>
@@ -303,7 +309,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section class="mins"><div class="w">
   <div class="big20 rv" aria-hidden="true">20<span>min</span></div>
   <div class="mt">
-    <h2 class="rv">Pagas, nos mandas tu audio, y en 20 minutos ella tiene su sorpresa.</h2>
+    <h2 class="rv">Pagas, nos mandas tu audio, y en 20 minutos su sorpresa está lista.</h2>
     <p class="rv" style="--i:1">Sin esperar días ni quedarte con la duda de si llega a tiempo. Si el cumpleaños es hoy, todavía llegas.</p>
   </div>
 </div></section>
@@ -313,8 +319,8 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="sh"><h2 class="rv">Tres pasos y ya está.</h2></div>
   <div class="steps">
     <div class="step rv"><div><h3>Dile lo que nunca le has dicho</h3><p>Escribe su nombre y tu mensaje. Graba tu voz o sube una nota que ya tengas. No tiene que quedar perfecto, tiene que sonar a ti.</p></div></div>
-    <div class="step rv" style="--i:1"><div><h3>Nosotros armamos la sorpresa</h3><p>Pagas $15 USD una sola vez. Ponemos su nombre, tu voz y tus palabras dentro de algo hecho solo para ella.</p></div></div>
-    <div class="step rv" style="--i:2"><div><h3>Le pasas la tarjeta y esperas su audio</h3><p>En 20 minutos te enviamos por WhatsApp una tarjeta bonita con un QR en forma de corazón. Se la das a ella, impresa o por chat. Escanea, y empieza todo.</p></div></div>
+    <div class="step rv" style="--i:1"><div><h3>Nosotros armamos la sorpresa</h3><p>Pagas $15 USD una sola vez. Ponemos su nombre, tu voz y tus palabras dentro de algo hecho solo para esa persona.</p></div></div>
+    <div class="step rv" style="--i:2"><div><h3>Le pasas la tarjeta y esperas su audio</h3><p>En 20 minutos te enviamos por WhatsApp una tarjeta bonita con un QR en forma de corazón. Se la das, impresa o por chat. Escanea, y empieza todo.</p></div></div>
   </div>
 </div></section>
 
@@ -324,17 +330,17 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="stx">
     <h2 class="rv">Un ramo se marchita. Tu voz se queda.</h2>
     <p class="lead rv" style="--i:1">Piensa en un audio que tengas guardado de alguien que quieres. Lo has escuchado más veces de las que admitirías.</p>
-    <p class="lead rv" style="--i:2">Ahora imagina ser tú esa voz. La que ella busca cuando te extraña. Eso no lo da ninguna tienda, y empieza con un minuto tuyo.</p>
+    <p class="lead rv" style="--i:2">Ahora imagina ser tú esa voz. La que busca cuando te extraña. Eso no lo da ninguna tienda, y empieza con un minuto tuyo.</p>
   </div>
 </div></section>
 
 <!-- Minuto a minuto -->
 <section class="mom"><div class="w">
-  <div class="sh"><h2 class="rv">Lo que va a sentir, minuto a minuto.</h2><p class="lead rv" style="--i:1">Tú ya sabes cómo se pone cuando algo la emociona.</p></div>
+  <div class="sh"><h2 class="rv">Lo que va a sentir, minuto a minuto.</h2><p class="lead rv" style="--i:1">Tú sabes cómo se pone cuando algo le llega al corazón.</p></div>
   <ol class="tl">
     <li class="rv"><time>0:00</time><div><h3>Escanea el corazón</h3><p>Abre la tarjeta que le diste. Todavía no sabe qué es.</p></div></li>
-    <li class="rv" style="--i:1"><time>0:10</time><div><h3>La rosa se abre despacio</h3><p>Y aparece su nombre, escrito para ella.</p></div></li>
-    <li class="rv" style="--i:2"><time>0:25</time><div><h3>Escucha tu voz</h3><p>Se queda quieta. Lo que le dices ya no es un texto, eres tú.</p></div></li>
+    <li class="rv" style="--i:1"><time>0:10</time><div><h3>La rosa se abre despacio</h3><p>Y aparece su nombre, escrito solo para esa persona.</p></div></li>
+    <li class="rv" style="--i:2"><time>0:25</time><div><h3>Escucha tu voz</h3><p>Se queda en silencio. Lo que le dices ya no es un texto, eres tú.</p></div></li>
     <li class="rv" style="--i:3"><time>1:30</time><div><h3>Raspa y encuentra su regalo</h3><p>Dinero, un plan o lo que hayas escondido. Aquí empieza la risa.</p></div></li>
     <li class="rv" style="--i:4"><time>2:00</time><div><h3>Sopla las velas y pide un deseo</h3><p>Sopla de verdad, y las llamas se apagan una por una.</p></div></li>
     <li class="rv" style="--i:5"><time>2:30</time><div><h3>Lee tu carta, y te escribe</h3><p>Es lo último que ve. Prepárate, porque te va a contestar.</p></div></li>
@@ -343,7 +349,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <!-- La rosa -->
 <section class="rosa"><div class="w">
-  <div class="sh" style="text-align:center;justify-items:center"><h2 class="rv">Así empieza: una rosa que se abre con el dedo.</h2><p class="lead rv" style="--i:1">Es lo primero que ve ella. Mantenla presionada.</p></div>
+  <div class="sh" style="text-align:center;justify-items:center"><h2 class="rv">Así empieza: una rosa que se abre con el dedo.</h2><p class="lead rv" style="--i:1">Es lo primero que se ve al abrirla. Mantenla presionada.</p></div>
   <div class="stage rv" id="stage" style="--i:2" role="button" tabindex="0" aria-label="Mantén presionada la rosa para abrirla">
     <svg class="rose" id="roseSvg" viewBox="-120 -130 240 300" aria-hidden="true"></svg>
     <div class="name" id="stageName" aria-hidden="true">Para ti</div>
@@ -353,7 +359,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <!-- Así se siente -->
 <section><div class="w">
-  <div class="sh"><h2 class="rv">Esto es lo que ella vive, momento a momento.</h2><p class="lead rv" style="--i:1">Pruébalo tú. Así lo siente quien la recibe.</p></div>
+  <div class="sh"><h2 class="rv">Esto es lo que se vive, momento a momento.</h2><p class="lead rv" style="--i:1">Pruébalo tú. Así lo siente quien la recibe.</p></div>
   <div class="bento">
     <article class="card span2 rv">
       <span class="demo">Demo</span>
@@ -365,8 +371,8 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <article class="card rv" style="--i:1">
       <span class="demo">Demo</span>
       <h3>Su regalo escondido</h3>
-      <p class="s">Ella raspa con el dedo y descubre qué le regalas: dinero, un plan o lo que tú quieras.</p>
-      <div class="scr" id="scr"><div><b id="gB">Te quiero muchísimo</b><small id="gS">Lo que escondiste para ella</small></div><canvas id="scrC" aria-label="Raspa con el dedo para descubrir el mensaje"></canvas></div>
+      <p class="s">Se raspa con el dedo y descubre qué le regalas: dinero, un plan o lo que tú quieras.</p>
+      <div class="scr" id="scr"><div><b id="gB">Te quiero muchísimo</b><small id="gS">Lo que escondiste aquí</small></div><canvas id="scrC" aria-label="Raspa con el dedo para descubrir el mensaje"></canvas></div>
     </article>
     <article class="card rv" style="--i:2">
       <span class="demo">Demo</span>
@@ -380,19 +386,19 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <span class="demo">Se arma con lo que tú escribas</span>
       <h3>Una carta con tus palabras</h3>
       <p class="s">Escribe abajo, en “Crea la tuya”, y mira cómo se llena esta carta.</p>
-      <div class="paper"><div class="hi" id="pHi">Querida Valentina,</div><p id="pMsg">Gracias por ser la persona que eres. Hoy quería decirte, con mi voz y con estas palabras, cuánto te quiero.</p><div class="sig" id="pSig">Con cariño</div></div>
+      <div class="paper"><div class="hi" id="pHi">Para Alex,</div><p id="pMsg">Gracias por ser la persona que eres. Hoy quería decirte, con mi voz y con estas palabras, cuánto te quiero.</p><div class="sig" id="pSig">Con cariño</div></div>
     </article>
   </div>
 </div></section>
 
 <!-- Para quién -->
 <section class="who"><div class="w">
-  <div class="sh"><h2 class="rv">Para esas personas a las que un "feliz cumple" les queda corto.</h2><p class="lead rv" style="--i:1">Funciona igual si viven a tres cuadras o a tres mil kilómetros.</p></div>
-  <div class="wg">
-    <div class="rv"><h3>Tu mamá</h3><p>Lleva toda la vida cuidándote. Que oiga, por fin, cuánto lo sabes.</p></div>
-    <div class="rv" style="--i:1"><h3>Tu novia</h3><p>Más que un "te amo" por chat. Algo que abre, escucha y guarda.</p></div>
-    <div class="rv" style="--i:2"><h3>Tu hermana o tu mejor amiga</h3><p>La que te aguanta todo. Dile lo que vale para ti.</p></div>
-    <div class="rv" style="--i:3"><h3>Tu familia lejos</h3><p>Si los separa un océano, esto llega en un segundo y se siente como estar ahí.</p></div>
+  <div class="sh"><h2 class="rv">Para quien sea. Mamá, papá, tu pareja, tu mejor amigo.</h2><p class="lead rv" style="--i:1">Hombres y mujeres, jóvenes y viejos. Funciona igual a tres cuadras o a tres mil kilómetros, en cualquier país de Latinoamérica.</p></div>
+  <div class="mosaic">
+    <figure class="m big rv"><img src="{% endraw %}{{ 'lt-abuela.webp' | file_url }}{% raw %}" width="1500" height="1000" loading="lazy" alt="Una abuela llora de emoción al escuchar un mensaje de voz por teléfono, frente a una torta con una vela"><figcaption><h3>Tu mamá o tu papá</h3><p>Llevan toda la vida cuidándote. Que oigan, por fin, cuánto lo sabes.</p></figcaption></figure>
+    <figure class="m rv" style="--i:1"><img src="{% endraw %}{{ 'lt-hombre.webp' | file_url }}{% raw %}" width="900" height="900" loading="lazy" alt="Un hombre con audífonos llora y sonríe al escuchar un audio en su cuarto, con una vela de cumpleaños"><figcaption><h3>Tu pareja</h3><p>Más que un "te amo" por chat. Algo que se abre, se escucha y se guarda.</p></figcaption></figure>
+    <figure class="m rv" style="--i:2"><img src="{% endraw %}{{ 'lt-amigas.webp' | file_url }}{% raw %}" width="900" height="900" loading="lazy" alt="Dos amigas en una terraza, una llora de risa mientras escucha un audio en el celular"><figcaption><h3>Tu mejor amiga o amigo</h3><p>El que te aguanta todo. Dile lo que vale para ti.</p></figcaption></figure>
+    <figure class="m wide rv" style="--i:3"><img src="{% endraw %}{{ 'lt-papa.webp' | file_url }}{% raw %}" width="900" height="900" loading="lazy" alt="Un señor de bigote gris escucha el audio de su hija en el celular, con los ojos rojos y orgulloso"><figcaption><h3>Tu familia, cerca o lejos</h3><p>Si los separa un país, esto llega en un segundo y se siente como estar ahí.</p></figcaption></figure>
   </div>
 </div></section>
 
@@ -401,9 +407,9 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="sh"><h2 class="rv">Crea la suya.</h2><p class="lead rv" style="--i:1">Escribe su nombre y tu mensaje. Aquí ves cómo se va a ver en su celular.</p></div>
   <div class="make">
     <form class="form rv" id="form" novalidate>
-      <div><label for="fTo">¿Para quién es?</label><input class="inp" id="fTo" name="to" maxlength="24" autocomplete="off" placeholder="Valentina" aria-describedby="eTo"><p class="err" id="eTo" role="alert">Escribe el nombre de quien cumple años.</p></div>
+      <div><label for="fTo">¿Para quién es?</label><input class="inp" id="fTo" name="to" maxlength="24" autocomplete="off" placeholder="Alex" aria-describedby="eTo"><p class="err" id="eTo" role="alert">Escribe el nombre de quien cumple años.</p></div>
       <div><label for="fFrom">¿De parte de quién? <small>(opcional)</small></label><input class="inp" id="fFrom" name="from" maxlength="30" autocomplete="given-name" placeholder="Tu nombre"></div>
-      <div><label for="fMsg">Tu mensaje</label><textarea class="inp" id="fMsg" name="msg" maxlength="400" placeholder="Escribe como si ella estuviera enfrente. Un recuerdo, un gracias, lo que no le has dicho." aria-describedby="eMsg"></textarea><div class="cnt"><span>Lo que escribas aparece en su carta.</span><span id="fCnt">0/400</span></div><p class="err" id="eMsg" role="alert">Cuéntale un poquito más (mínimo 10 letras).</p></div>
+      <div><label for="fMsg">Tu mensaje</label><textarea class="inp" id="fMsg" name="msg" maxlength="400" placeholder="Escribe como si estuviera enfrente. Un recuerdo, un gracias, lo que no le has dicho." aria-describedby="eMsg"></textarea><div class="cnt"><span>Lo que escribas aparece en su carta.</span><span id="fCnt">0/400</span></div><p class="err" id="eMsg" role="alert">Cuéntale un poquito más (mínimo 10 letras).</p></div>
       <div><span class="lbl" id="gLbl">¿Qué le vas a regalar? <small>(opcional)</small></span>
         <div class="chips" id="gChips" role="group" aria-labelledby="gLbl">
           <button type="button" class="chip" data-g="money" aria-pressed="false">Dinero</button>
@@ -412,7 +418,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           <button type="button" class="chip on" data-g="love" aria-pressed="true">Solo mi cariño</button>
         </div>
         <input class="inp" id="fGift" maxlength="40" autocomplete="off" hidden aria-label="Qué le vas a regalar">
-        <p class="micro" id="gNote" hidden style="margin-top:8px">Ella lo descubre raspando la tarjeta. El regalo se lo das tú; nosotros solo lo escondemos en la sorpresa.</p>
+        <p class="micro" id="gNote" hidden style="margin-top:8px">Lo descubre raspando la tarjeta. El regalo se lo das tú; nosotros solo lo escondemos en la sorpresa.</p>
       </div>
       <div><span class="lbl">Tu audio <small>(opcional, pero es lo que más emociona)</small></span>
         <div class="drop">
@@ -456,10 +462,10 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section><div class="w">
   <div class="sh"><h2 class="rv">Lo que casi todos preguntan</h2></div>
   <div class="faq rv" id="faq">
-    <div class="q"><button type="button" aria-expanded="false">¿Cómo le llega el dinero o el regalo?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Se lo das tú, como prefieras: Nequi, transferencia o en persona. En la sorpresa escribimos lo que le regalas, y ella lo descubre raspando la tarjeta. Es el momento de contárselo.</p></div></div></div>
-    <div class="q"><button type="button" aria-expanded="false">¿Y si me da pena grabar?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>A casi todos les da. Grábalo como si le escribieras un audio por WhatsApp. Lo que emociona no es una voz perfecta, es que sea la tuya. Y puedes repetirlo las veces que quieras antes de enviarlo.</p></div></div></div>
-    <div class="q"><button type="button" aria-expanded="false">¿Funciona si vive en otro país?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Sí. Es un link: se abre en cualquier celular con internet, en cualquier país. Tú pagas en dólares, ella no paga nada.</p></div></div></div>
-    <div class="q"><button type="button" aria-expanded="false">¿Cómo la recibe la persona?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Tú recibes por WhatsApp una tarjeta bonita con un QR en forma de corazón, y se la pasas a ella: impresa, o como imagen por chat. Ella lo escanea con la cámara del celular y la sorpresa arranca sola. No necesita app ni cuenta.</p></div></div></div>
+    <div class="q"><button type="button" aria-expanded="false">¿Cómo le llega el dinero o el regalo?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Se lo das tú, como prefieras: transferencia, Nequi, Yape, Mercado Pago o en persona. En la sorpresa escribimos lo que le regalas, y se descubre raspando la tarjeta. Es el momento de contárselo.</p></div></div></div>
+    <div class="q"><button type="button" aria-expanded="false">¿Y si me da vergüenza grabar?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>A casi todos les da. Grábalo como si le escribieras un audio por WhatsApp. Lo que emociona no es una voz perfecta, es que sea la tuya. Y puedes repetirlo las veces que quieras antes de enviarlo.</p></div></div></div>
+    <div class="q"><button type="button" aria-expanded="false">¿Funciona si vive en otro país?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Sí. Es un link: se abre en cualquier celular con internet, en cualquier país de Latinoamérica o del mundo. Tú pagas en dólares, la otra persona no paga nada.</p></div></div></div>
+    <div class="q"><button type="button" aria-expanded="false">¿Cómo la recibe la persona?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Tú recibes por WhatsApp una tarjeta bonita con un QR en forma de corazón, y se la pasas: impresa, o como imagen por chat. La otra persona la escanea con la cámara del celular y la sorpresa arranca sola. No necesita app ni cuenta.</p></div></div></div>
     <div class="q"><button type="button" aria-expanded="false">¿Cuánto me demoro en tenerla?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Te la entregamos en 20 minutos, después de que nos mandes tu audio y tu mensaje. Si el cumpleaños es hoy, todavía llegas.</p></div></div></div>
     <div class="q"><button type="button" aria-expanded="false">¿Y si no tengo audio?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>La sorpresa funciona igual solo con tu mensaje escrito. Pero con tu voz se siente distinto, y casi siempre vale la pena grabar un minuto.</p></div></div></div>
     <div class="q"><button type="button" aria-expanded="false">¿Cómo pago?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Con tarjeta, en una página de Stripe. Pagas $15 USD una sola vez. Nosotros nunca vemos los datos de tu tarjeta.</p></div></div></div>
@@ -595,10 +601,10 @@ $$('#faq .q button').forEach(b=>b.addEventListener('click',()=>{const q=b.parent
 
 /* ====== Configurador con vista previa en vivo ====== */
 const st={to:'',from:'',msg:'',audio:null,audioName:'',gt:'love',gift:''};
-const DEF={to:'Valentina',msg:'Gracias por ser la persona que eres. Hoy quería decirte, con mi voz y con estas palabras, cuánto te quiero.'};
+const DEF={to:'Alex',msg:'Gracias por ser la persona que eres. Hoy quería decirte, con mi voz y con estas palabras, cuánto te quiero.'};
 const $to=$('#fTo'),$fr=$('#fFrom'),$ms=$('#fMsg');
 function render(){const to=st.to.trim(),msg=st.msg.trim(),fr=st.from.trim();
-  $('#sWho').textContent=to||DEF.to;$('#pHi').textContent='Querida '+(to||DEF.to)+',';
+  $('#sWho').textContent=to||DEF.to;$('#pHi').textContent='Para '+(to||DEF.to)+',';
   const m=msg||DEF.msg;$('#sMsg').textContent=m;$('#pMsg').textContent=m;$('#pSig').textContent=fr?'Con cariño, '+fr:'Con cariño';
   $('#fCnt').textContent=st.msg.length+'/400';window.__setStageName&&window.__setStageName(to);
   const GD={money:'$100.000 para ti',plan:'Una cena para dos',gift:'Un regalo te espera',love:'Te quiero muchísimo'};
