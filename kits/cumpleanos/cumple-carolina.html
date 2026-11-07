@@ -157,7 +157,7 @@ h2{font:400 var(--t-hero)/1.1 var(--display);letter-spacing:-.015em;text-wrap:ba
 .s7 .wrap{overflow-y:auto;scrollbar-width:none;padding-bottom:8px;text-align:left}
 .s7 .wrap::-webkit-scrollbar{display:none}
 .letter{margin-top:14px;padding:26px 22px 22px;border-radius:24px;background:var(--cream);color:#3A1F25;box-shadow:0 30px 60px -15px rgba(0,0,0,.55)}
-.letter p{font:400 17px/1.68 var(--display);margin-bottom:14px;opacity:0;transform:translateY(8px);transition:opacity 800ms var(--ease),transform 800ms var(--ease)}
+.letter p{font:400 17px/1.62 var(--serif);margin-bottom:14px;opacity:0;transform:translateY(8px);transition:opacity 800ms var(--ease),transform 800ms var(--ease)}
 .letter p.on{opacity:1;transform:none}
 .letter .hi{font:400 40px/1 var(--script);color:#E2533A}
 .letter .sg{font:400 30px/1.1 var(--script);color:#E2533A;margin:4px 0 0}
@@ -183,7 +183,7 @@ h2{font:400 var(--t-hero)/1.1 var(--display);letter-spacing:-.015em;text-wrap:ba
 .ps{margin-top:14px;font:400 16px/1.45 var(--display);color:var(--soft);opacity:0;transition:opacity 900ms var(--ease) 600ms}
 .ps.on{opacity:1}
 .ps cite{display:block;font-style:normal;font-size:14px;color:var(--gold);margin-top:4px}
-.toast{position:absolute;left:50%;top:calc(10px + env(safe-area-inset-top));z-index:50;display:flex;align-items:center;gap:10px;padding:10px 18px 10px 12px;border-radius:99px;background:var(--gold);color:var(--bg);font:600 15px/1.2 var(--serif);white-space:nowrap;box-shadow:0 18px 40px -14px rgba(0,0,0,.6);transform:translate(-50%,-140%) scale(.96);opacity:0;transition:transform 520ms cubic-bezier(.34,1.56,.64,1),opacity 300ms var(--ease);pointer-events:none}
+.toast{position:absolute;left:50%;top:auto;bottom:calc(98px + env(safe-area-inset-bottom));z-index:50;display:flex;align-items:center;gap:10px;padding:10px 18px 10px 12px;border-radius:99px;background:var(--gold);color:var(--bg);font:600 15px/1.2 var(--serif);white-space:nowrap;box-shadow:0 18px 40px -14px rgba(0,0,0,.6);transform:translate(-50%,40px) scale(.96);opacity:0;transition:transform 520ms cubic-bezier(.34,1.56,.64,1),opacity 300ms var(--ease);pointer-events:none}
 .toast.on{transform:translate(-50%,0);opacity:1}
 .toast svg{width:22px;height:22px;flex:none}
 /* Entrada: lluvia de letras + cuenta regresiva */
@@ -518,13 +518,13 @@ function ride(to,cb){moving=true;const fr=pos,d=RM?10:2600,t0=performance.now();
     if(falling){wii.setAttribute('x',o.p.x);wii.setAttribute('y',o.p.y-48);wii.setAttribute('opacity','1');buzz(8)}else wii.setAttribute('opacity','0');
     if(k<1)requestAnimationFrame(s);else{moving=false;rcEl.classList.remove('shake');wii.setAttribute('opacity','0');cb()}})(t0)}
 function arrive(i){at=i;$$('#stops .stop').forEach((c,k)=>c.classList.toggle('on',k<=i));$$('#ecard article').forEach((a,k)=>a.classList.toggle('on',k===i));$('#rcT').textContent=ST[i].h;chime();
-  burst(i===4?140:26,innerWidth/2,innerHeight*.42);if(i===4){petals(40);reward('Montaña rusa completada')}$('#rcBtn').textContent=i<4?'Siguiente parada':'Bajarme de la montaña rusa'}
+  burst(i===4?140:26,innerWidth/2,innerHeight*.42);if(i===4){reward('Montaña rusa completada')}$('#rcBtn').textContent=i<4?'Siguiente parada':'Bajarme de la montaña rusa'}
 let started=false;
 $('#rcBtn').addEventListener('click',()=>{if(moving)return;if(!started){started=true;arrive(0);return}if(at>=4){go(2);return}const n=at+1;ride(FR[n],()=>arrive(n))});
 /* Ruleta de razones */
 const RZ=[{"s": "Tu sonrisa", "l": "Tu sonrisa contagia a todos"}, {"s": "Tu fuerza", "l": "Nunca te rindes"}, {"s": "Tu corazón", "l": "Tienes un corazón enorme"}, {"s": "Tu energía", "l": "Eres pura buena energía"}, {"s": "Tu talento", "l": "Aprendes rapidísimo"}, {"s": "Tu lealtad", "l": "Contigo se puede contar"}, {"s": "Tu luz", "l": "Iluminas la oficina"}, {"s": "Tu empeño", "l": "Haces todo con amor"}];const wh=$('#wheel'),segA=360/RZ.length;
 RZ.forEach((r,i)=>{const a0=(i*segA-90)*Math.PI/180,a1=((i+1)*segA-90)*Math.PI/180,R0=104;
-  wh.insertAdjacentHTML('beforeend',`<path d="M0 0 L${R0*Math.cos(a0)} ${R0*Math.sin(a0)} A${R0} ${R0} 0 0 1 ${R0*Math.cos(a1)} ${R0*Math.sin(a1)}Z" fill="${C.wheel[i%C.wheel.length]}"/><text transform="rotate(${i*segA+segA/2-90}) translate(58 3)" text-anchor="middle">${r.s}</text>`)});
+  wh.insertAdjacentHTML('beforeend',`<path d="M0 0 L${R0*Math.cos(a0)} ${R0*Math.sin(a0)} A${R0} ${R0} 0 0 1 ${R0*Math.cos(a1)} ${R0*Math.sin(a1)}Z" fill="${C.wheel[i%C.wheel.length]}"/><text transform="rotate(${i*segA+segA/2-90}) translate(58 3)${(((i*segA+segA/2-90)%360)+360)%360>90&&(((i*segA+segA/2-90)%360)+360)%360<270?' rotate(180) translate(0 -6)':''}" text-anchor="middle">${r.s}</text>`)});
 let rot=0,spins=0,spinning=false;const usedR=new Set();
 $('#spin').addEventListener('click',()=>{if(spinning||spins>=3)return;spinning=true;$('#spin').disabled=true;let k;do{k=Math.floor(Math.random()*RZ.length)}while(usedR.has(k));usedR.add(k);
   const target=360-(k*segA+segA/2);rot+=360*(4+Math.floor(Math.random()*2))+((target-rot%360)+360)%360;wh.style.transform=`rotate(${rot}deg)`;
@@ -537,7 +537,7 @@ $('#goR').addEventListener('click',()=>go(3));
 const EN=[{"w": "dudes de ti", "m": "Mira todo lo que ya lograste. La misma mujer que llegó hasta aquí es capaz de llegar mucho más lejos."}, {"w": "tengas un mal día", "m": "Los días grises también pasan. Respira, tómate un tinto y recuerda que aquí tienes un equipo que te quiere."}, {"w": "cumplas una meta", "m": "¡Te lo dijimos! Celébralo en grande, que te lo ganaste. Estamos orgullosos de ti."}, {"w": "necesites sonreír", "m": "Piensa en todas las veces que nos hiciste reír. Hoy nos toca devolverte un poquito de esa alegría."}];let opened=0;
 $('#env4').innerHTML=EN.map((e,i)=>`<button class="ecd" type="button" aria-label="Carta: ábrela cuando ${e.w}"><span class="in"><span class="fr"><svg viewBox="0 0 64 44" aria-hidden="true"><rect x="1" y="1" width="62" height="42" rx="6" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M2 4 L32 26 L62 4" fill="none" stroke="currentColor" stroke-width="2.5"/></svg><b>Ábrela</b><small>cuando ${e.w}</small></span><span class="bk">${e.m}</span></span></button>`).join('');
 $$('#env4 .ecd').forEach(b=>b.addEventListener('click',()=>{if(b.classList.contains('open'))return;b.classList.add('open');opened++;const r=b.getBoundingClientRect();burst(30,r.left+r.width/2,r.top+r.height/2);chime();buzz([15,30,15]);
-  if(opened===4){reward('Cartas abiertas');$('#caT').textContent='Guárdalas para siempre';setTimeout(()=>{petals(40);$('#goC').hidden=false;$('#goC').focus()},1200)}}));
+  if(opened===4){reward('Cartas abiertas');$('#caT').textContent='Guárdalas para siempre';setTimeout(()=>{$('#goC').hidden=false;$('#goC').focus()},1200)}}));
 $('#goC').addEventListener('click',()=>go(5));
 /* 2 · Jardín: 6 arbustos, 3 rosas */
 const PH=["Eres joven, tienes talento y tienes ganas. Esa combinación no la frena nadie.", "Tus sueños no tienen fecha de vencimiento. Ve por ellos con todo.", "Lo que siembras con disciplina, un día florece sin pedir permiso."],HAS=[1,0,1,0,0,1],EMPTY=['Aquí no está','Sigue buscando','Casi…'];let found=0,ei=0;
@@ -551,7 +551,7 @@ HAS.forEach((h,i)=>{const bt=document.createElement('button');bt.className='bush
     const t0=performance.now();(function a(n){const k=Math.min(1,(n-t0)/(RM?10:1200));setR(k);if(k<1)requestAnimationFrame(a)})(t0);
     const r=bt.getBoundingClientRect();burst(36,r.left+r.width/2,r.top+r.height/2);chime();
     $('#phr').innerHTML=`<p>${PH[found]}</p>`;requestAnimationFrame(()=>requestAnimationFrame(()=>$('#phr p').classList.add('on')));
-    $$('#count i')[found].classList.add('on');found++;if(found===3)setTimeout(()=>{petals(40);reward('Jardín descubierto');$('#go3').hidden=false;$('#go3').focus()},1400)})});
+    $$('#count i')[found].classList.add('on');found++;if(found===3)setTimeout(()=>{reward('Jardín descubierto');$('#go3').hidden=false;$('#go3').focus()},1400)})});
 $('#count').innerHTML=[0,1,2].map(()=>`<i><svg viewBox="-14 -14 28 28"><circle r="10" fill="${C.rose[0]}"/><circle r="5" fill="${C.rose[1]}"/></svg></i>`).join('');
 $('#go3').addEventListener('click',()=>go(4));
 /* 3 · Torta */
@@ -560,7 +560,7 @@ const cr=$('#cakeRoses');[[96,170,.18],[150,172,.2],[204,170,.18],[110,106,.15],
 let outN=0;const cds=$$('.cnd');
 function blowOne(c){if(c.classList.contains('out'))return;c.classList.add('out');outN++;if(outN===3)allOut()}
 cds.forEach(c=>c.addEventListener('click',()=>blowOne(c)));
-function allOut(){stopMic();reward('Deseo pedido');$('#cakeW').classList.add('dark');$('#cakeT').textContent='Tu deseo ya va en camino';burst(150);setTimeout(()=>petals(50),300);$('#blow').hidden=true;$('#blowH').hidden=true;$('#ps20').classList.add('on');$('#go4').hidden=false;setTimeout(()=>$('#go4').focus(),400)}
+function allOut(){stopMic();reward('Deseo pedido');$('#cakeW').classList.add('dark');$('#cakeT').textContent='Tu deseo ya va en camino';burst(150);$('#blow').hidden=true;$('#blowH').hidden=true;$('#ps20').classList.add('on');$('#go4').hidden=false;setTimeout(()=>$('#go4').focus(),400)}
 let mic=null,mr=0;function stopMic(){if(mic){mic.getTracks().forEach(t=>t.stop());mic=null}cancelAnimationFrame(mr)}
 $('#blow').addEventListener('click',async()=>{ensure();try{mic=await navigator.mediaDevices.getUserMedia({audio:true})}catch(e){$('#blowH').textContent='No se pudo usar el micrófono. Toca cada llama para apagarla.';return}
   $('#blow').textContent='Sopla fuerte cerca del celular';const an=ac.createAnalyser();an.fftSize=512;ac.createMediaStreamSource(mic).connect(an);const buf=new Uint8Array(512);let h=0;
@@ -599,7 +599,7 @@ function vdraw(){const fr=voz.duration?voz.currentTime/voz.duration:0;vpr.style.
 function play(){vwire();if(ac)ac.resume();duck(true);voz.play();$('#vic').innerHTML=ICS;$('#vplay').setAttribute('aria-label','Pausar el mensaje');vdraw()}
 $('#vplay').addEventListener('click',()=>{if(voz.paused)play();else{voz.pause();duck(false);$('#vic').innerHTML=ICP;$('#vplay').setAttribute('aria-label','Escuchar el mensaje')}});
 $$('#who2 button').forEach(b=>b.addEventListener('click',()=>{voz.pause();load(+b.dataset.i);play()}));
-voz.addEventListener('ended',()=>{heard.add(ti);bars.forEach(b=>b.style.height='6px');burst(120);petals(30);
+voz.addEventListener('ended',()=>{heard.add(ti);bars.forEach(b=>b.style.height='6px');burst(120);
   if(ti===0&&!heard.has(1)){$('#cap').textContent='Ahora escucha a Ronaldo';setTimeout(()=>{load(1);play()},1800)}else{duck(false);if(!heard.r){heard.r=1;reward('Mensajes escuchados')}$('#vic').innerHTML=ICP;$('#go6').hidden=false;setTimeout(()=>$('#go6').focus(),300)}});
 $('#go6').addEventListener('click',()=>{voz.pause();duck(false);go(8)});
 /* 6 · Lluvia de bendiciones */
@@ -608,8 +608,8 @@ const VS=[['Porque yo sé los pensamientos que tengo acerca de vosotros, dice Je
  ['Jehová te bendiga, y te guarde; Jehová haga resplandecer su rostro sobre ti, y tenga de ti misericordia.','Números 6:24-25']];
 let vn=0;$$('.lan').forEach(l=>l.addEventListener('click',()=>{if(l.classList.contains('up'))return;l.classList.add('up');const r=l.getBoundingClientRect();burst(40,r.left+r.width/2,r.top+r.height/2);chime();
   const [t,c]=VS[vn++];$('#verse').innerHTML=`<div><p>“${t}”</p><cite>${c}</cite></div>`;requestAnimationFrame(()=>requestAnimationFrame(()=>$('#verse div').classList.add('on')));
-  if(vn===3){reward('Bendiciones recibidas');$('#lanT').textContent='Tu año viene lleno de bendiciones';setTimeout(()=>{petals(50);burst(120);$('#go7').hidden=false;$('#go7').focus()},1600)}}));
-$('#go7').addEventListener('click',()=>{go(9);$$('#letter p').forEach((p,i)=>setTimeout(()=>p.classList.add('on'),RM?0:600+i*1200));setTimeout(()=>petals(40),800)});
+  if(vn===3){reward('Bendiciones recibidas');$('#lanT').textContent='Tu año viene lleno de bendiciones';setTimeout(()=>{burst(120);$('#go7').hidden=false;$('#go7').focus()},1600)}}));
+$('#go7').addEventListener('click',()=>{go(9);$$('#letter p').forEach((p,i)=>setTimeout(()=>p.classList.add('on'),RM?0:600+i*1200));});
 /* 6 · Final */
 $('#again').addEventListener('click',()=>{burst(220);petals(70);startMusic()});
 $('#replay').addEventListener('click',()=>location.reload());
