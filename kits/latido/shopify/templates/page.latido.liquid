@@ -252,6 +252,20 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .who .wg p{margin-top:4px;color:var(--soft);font-size:16px}
 .price .anchor{margin:-4px 0 14px;font-size:14.5px;color:var(--soft)}
 @media (min-width:900px){.who .wg{grid-template-columns:repeat(4,1fr);gap:28px;border-top:0}.who .wg>div{border:0;border-top:1px solid var(--line);padding:20px 0 0}}
+
+/* ===== v4 · regalo, soplido y minuto a minuto ===== */
+[hidden]{display:none!important}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.chip{min-height:44px;padding:0 16px;border-radius:99px;background:var(--glass2);border:1px solid var(--line);font:600 15px/1 var(--sans);color:var(--soft);transition:transform 160ms var(--ease),background-color 200ms ease,color 200ms ease}
+.chip:active{transform:scale(.97)}
+.chip.on{background:var(--rose);color:#2A0A1B;border-color:transparent}
+.blow{margin:10px auto 0;display:flex}
+.mom{padding-top:24px}
+.tl{list-style:none;display:grid;gap:0;max-width:680px}
+.tl li{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:18px 0}
+.tl time{font:400 26px/1.1 var(--display);color:var(--gold);font-variant-numeric:tabular-nums}
+.tl h3{margin-bottom:4px}
+.tl p{color:var(--soft);font-size:16px}
 </style>
 </head>
 <body>
@@ -296,6 +310,19 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   </div>
 </div></section>
 
+<!-- Minuto a minuto -->
+<section class="mom"><div class="w">
+  <div class="sh"><h2 class="rv">Lo que va a sentir, minuto a minuto.</h2><p class="lead rv" style="--i:1">Tú ya sabes cómo se pone cuando algo la emociona.</p></div>
+  <ol class="tl">
+    <li class="rv"><time>0:00</time><div><h3>Escanea el corazón</h3><p>Abre la tarjeta que le diste. Todavía no sabe qué es.</p></div></li>
+    <li class="rv" style="--i:1"><time>0:10</time><div><h3>La rosa se abre despacio</h3><p>Y aparece su nombre, escrito para ella.</p></div></li>
+    <li class="rv" style="--i:2"><time>0:25</time><div><h3>Escucha tu voz</h3><p>Se queda quieta. Lo que le dices ya no es un texto, eres tú.</p></div></li>
+    <li class="rv" style="--i:3"><time>1:30</time><div><h3>Raspa y encuentra su regalo</h3><p>Dinero, un plan o lo que hayas escondido. Aquí empieza la risa.</p></div></li>
+    <li class="rv" style="--i:4"><time>2:00</time><div><h3>Sopla las velas y pide un deseo</h3><p>Sopla de verdad, y las llamas se apagan una por una.</p></div></li>
+    <li class="rv" style="--i:5"><time>2:30</time><div><h3>Lee tu carta, y te escribe</h3><p>Es lo último que ve. Prepárate, porque te va a contestar.</p></div></li>
+  </ol>
+</div></section>
+
 <!-- La rosa -->
 <section class="rosa"><div class="w">
   <div class="sh" style="text-align:center;justify-items:center"><h2 class="rv">Así empieza: una rosa que se abre con el dedo.</h2><p class="lead rv" style="--i:1">Es lo primero que ve ella. Mantenla presionada.</p></div>
@@ -319,16 +346,17 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     </article>
     <article class="card rv" style="--i:1">
       <span class="demo">Demo</span>
-      <h3>La tarjeta secreta</h3>
-      <p class="s">Se raspa con el dedo.</p>
-      <div class="scr" id="scr"><div><b>Te quiero muchísimo</b><small>Esto lo escribes tú</small></div><canvas id="scrC" aria-label="Raspa con el dedo para descubrir el mensaje"></canvas></div>
+      <h3>Su regalo escondido</h3>
+      <p class="s">Ella raspa con el dedo y descubre qué le regalas: dinero, un plan o lo que tú quieras.</p>
+      <div class="scr" id="scr"><div><b id="gB">Te quiero muchísimo</b><small id="gS">Lo que escondiste para ella</small></div><canvas id="scrC" aria-label="Raspa con el dedo para descubrir el mensaje"></canvas></div>
     </article>
     <article class="card rv" style="--i:2">
       <span class="demo">Demo</span>
       <h3>Las velas</h3>
-      <p class="s">Se apagan al tocar.</p>
+      <p class="s">Se apagan soplando de verdad, como en una torta. Prueba tú.</p>
       <div class="cndls" id="cndls"><button class="c" type="button" aria-label="Apagar vela 1"><i class="w1"></i><i class="fl"></i><i class="sm"></i></button><button class="c" type="button" aria-label="Apagar vela 2"><i class="w1"></i><i class="fl"></i><i class="sm"></i></button><button class="c" type="button" aria-label="Apagar vela 3"><i class="w1"></i><i class="fl"></i><i class="sm"></i></button></div>
       <div class="wish" id="wish" aria-live="polite">Pide un deseo</div>
+      <button class="btn ghost sm blow" id="blow" type="button">Sopla de verdad</button>
     </article>
     <article class="card span2 rv">
       <span class="demo">Se arma con lo que tú escribas</span>
@@ -358,6 +386,16 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div><label for="fTo">¿Para quién es?</label><input class="inp" id="fTo" name="to" maxlength="24" autocomplete="off" placeholder="Valentina" aria-describedby="eTo"><p class="err" id="eTo" role="alert">Escribe el nombre de quien cumple años.</p></div>
       <div><label for="fFrom">¿De parte de quién? <small>(opcional)</small></label><input class="inp" id="fFrom" name="from" maxlength="30" autocomplete="given-name" placeholder="Tu nombre"></div>
       <div><label for="fMsg">Tu mensaje</label><textarea class="inp" id="fMsg" name="msg" maxlength="400" placeholder="Escribe como si ella estuviera enfrente. Un recuerdo, un gracias, lo que no le has dicho." aria-describedby="eMsg"></textarea><div class="cnt"><span>Lo que escribas aparece en su carta.</span><span id="fCnt">0/400</span></div><p class="err" id="eMsg" role="alert">Cuéntale un poquito más (mínimo 10 letras).</p></div>
+      <div><span class="lbl" id="gLbl">¿Qué le vas a regalar? <small>(opcional)</small></span>
+        <div class="chips" id="gChips" role="group" aria-labelledby="gLbl">
+          <button type="button" class="chip" data-g="money" aria-pressed="false">Dinero</button>
+          <button type="button" class="chip" data-g="plan" aria-pressed="false">Un plan</button>
+          <button type="button" class="chip" data-g="gift" aria-pressed="false">Un regalo</button>
+          <button type="button" class="chip on" data-g="love" aria-pressed="true">Solo mi cariño</button>
+        </div>
+        <input class="inp" id="fGift" maxlength="40" autocomplete="off" hidden aria-label="Qué le vas a regalar">
+        <p class="micro" id="gNote" hidden style="margin-top:8px">Ella lo descubre raspando la tarjeta. El regalo se lo das tú; nosotros solo lo escondemos en la sorpresa.</p>
+      </div>
       <div><span class="lbl">Tu audio <small>(opcional, pero es lo que más emociona)</small></span>
         <div class="drop">
           <div class="row"><button class="btn ghost" id="recBtn" type="button"><span class="dot" hidden></span><span id="recT">Grabar ahora</span></button><label class="btn ghost" for="fFile" style="margin:0;cursor:pointer">Subir un audio</label><input id="fFile" type="file" accept="audio/*"></div>
@@ -384,7 +422,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <p class="anchor">Un ramo cuesta más y dura una semana. Esto lo escucha cuando quiera.</p>
         <ul>
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Tu voz y tu mensaje dentro de una sorpresa para su celular</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Rosa que se abre, velas, raspadita y carta con su nombre</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Rosa que se abre, velas que se soplan, regalo escondido y carta con su nombre</li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Ajustes si algo no quedó como querías</li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Tarjeta bonita con QR en corazón, enviada a tu WhatsApp</li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Lista en 24 horas</li>
@@ -400,6 +438,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section><div class="w">
   <div class="sh"><h2 class="rv">Lo que casi todos preguntan</h2></div>
   <div class="faq rv" id="faq">
+    <div class="q"><button type="button" aria-expanded="false">¿Cómo le llega el dinero o el regalo?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Se lo das tú, como prefieras: Nequi, transferencia o en persona. En la sorpresa escribimos lo que le regalas, y ella lo descubre raspando la tarjeta. Es el momento de contárselo.</p></div></div></div>
     <div class="q"><button type="button" aria-expanded="false">¿Y si me da pena grabar?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>A casi todos les da. Grábalo como si le escribieras un audio por WhatsApp. Lo que emociona no es una voz perfecta, es que sea la tuya. Y puedes repetirlo las veces que quieras antes de enviarlo.</p></div></div></div>
     <div class="q"><button type="button" aria-expanded="false">¿Funciona si vive en otro país?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Sí. Es un link: se abre en cualquier celular con internet, en cualquier país. Tú pagas en dólares, ella no paga nada.</p></div></div></div>
     <div class="q"><button type="button" aria-expanded="false">¿Cómo la recibe la persona?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Tú recibes por WhatsApp una tarjeta bonita con un QR en forma de corazón, y se la pasas a ella: impresa, o como imagen por chat. Ella lo escanea con la cámara del celular y la sorpresa arranca sola. No necesita app ni cuenta.</p></div></div></div>
@@ -512,6 +551,22 @@ const RC=['#FF5C93','#B01E5A','#FFD4E2'];
   cs.forEach(c=>c.addEventListener('click',()=>{if(c.classList.contains('out'))return;c.classList.add('out');buzz(12);out++;
     if(out===3){wish.textContent='Pide un deseo';wish.classList.add('on');const q=wish.getBoundingClientRect();burst(60,q.left+q.width/2,q.top);setTimeout(()=>{cs.forEach(x=>x.classList.remove('out'));out=0;wish.classList.remove('on')},3600)}}))})();
 
+/* ====== Soplar las velas (micrófono, con alternativa de toque) ====== */
+(()=>{const cs=$$('#cndls .c'),wish=$('#wish'),btn=$('#blow');let busy=false;
+  const reset=()=>setTimeout(()=>{cs.forEach(x=>x.classList.remove('out'));wish.classList.remove('on');wish.textContent='Pide un deseo';busy=false;btn.disabled=false},3600);
+  const done=()=>{wish.textContent='Pide un deseo';wish.classList.add('on');const q=wish.getBoundingClientRect();burst(60,q.left+q.width/2,q.top);reset()};
+  btn.addEventListener('click',async()=>{if(busy)return;busy=true;btn.disabled=true;
+    let stream;try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false}})}catch(e){busy=false;btn.disabled=false;toast('No pudimos usar el micrófono. Toca las velas.');return}
+    const ac=new (window.AudioContext||window.webkitAudioContext)(),an=ac.createAnalyser();an.fftSize=512;ac.createMediaStreamSource(stream).connect(an);
+    const buf=new Uint8Array(an.fftSize);let hot=0,t0=performance.now();wish.textContent='Sopla fuerte, como en una torta';wish.classList.add('on');
+    const stop=()=>{stream.getTracks().forEach(t=>t.stop());ac.close()};
+    (function loop(){an.getByteTimeDomainData(buf);let m=0;for(let i=0;i<buf.length;i++){const v=Math.abs(buf[i]-128)/128;if(v>m)m=v}
+      hot=m>.35?hot+1:Math.max(0,hot-1);
+      if(hot>6){const left=cs.filter(c=>!c.classList.contains('out'));if(left.length){left[0].classList.add('out');buzz(12);hot=3}}
+      if(cs.every(c=>c.classList.contains('out'))){stop();done();return}
+      if(performance.now()-t0>12000){stop();wish.textContent='Toca las velas para apagarlas';busy=false;btn.disabled=false;return}
+      requestAnimationFrame(loop)})()})})();
+
 /* ====== FAQ ====== */
 $$('#faq .q button').forEach(b=>b.addEventListener('click',()=>{const q=b.parentElement,o=!q.classList.contains('open');q.classList.toggle('open',o);b.setAttribute('aria-expanded',o)}));
 
@@ -521,13 +576,20 @@ $$('#faq .q button').forEach(b=>b.addEventListener('click',()=>{const q=b.parent
   addEventListener('scroll',upd,{passive:true})})();
 
 /* ====== Configurador con vista previa en vivo ====== */
-const st={to:'',from:'',msg:'',audio:null,audioName:''};
+const st={to:'',from:'',msg:'',audio:null,audioName:'',gt:'love',gift:''};
 const DEF={to:'Valentina',msg:'Gracias por ser la persona que eres. Hoy quería decirte, con mi voz y con estas palabras, cuánto te quiero.'};
 const $to=$('#fTo'),$fr=$('#fFrom'),$ms=$('#fMsg');
 function render(){const to=st.to.trim(),msg=st.msg.trim(),fr=st.from.trim();
   $('#sWho').textContent=to||DEF.to;$('#pHi').textContent='Querida '+(to||DEF.to)+',';
   const m=msg||DEF.msg;$('#sMsg').textContent=m;$('#pMsg').textContent=m;$('#pSig').textContent=fr?'Con cariño, '+fr:'Con cariño';
-  $('#fCnt').textContent=st.msg.length+'/400';window.__setStageName&&window.__setStageName(to)}
+  $('#fCnt').textContent=st.msg.length+'/400';window.__setStageName&&window.__setStageName(to);
+  const GD={money:'$100.000 para ti',plan:'Una cena para dos',gift:'Un regalo te espera',love:'Te quiero muchísimo'};
+  $('#gB').textContent=st.gift.trim()||GD[st.gt]}
+const GP={money:'Ej: $200.000 para que te consientas',plan:'Ej: Una cena para dos el sábado',gift:'Ej: Un regalo que te espera en casa'};
+const $g=$('#fGift');
+$$('#gChips .chip').forEach(b=>b.addEventListener('click',()=>{st.gt=b.dataset.g;$$('#gChips .chip').forEach(x=>{const on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
+  const has=st.gt!=='love';$g.hidden=!has;$('#gNote').hidden=!has;if(has){$g.placeholder=GP[st.gt];$g.focus()}else{st.gift='';$g.value=''}render()}));
+$g.addEventListener('input',()=>{st.gift=$g.value;render()});
 [[$to,'to'],[$fr,'from'],[$ms,'msg']].forEach(([el,k])=>el.addEventListener('input',()=>{st[k]=el.value;render();if(k==='to')$('#eTo').classList.remove('on');if(k==='msg')$('#eMsg').classList.remove('on')}));
 render();
 /* wave del teléfono */
@@ -562,10 +624,10 @@ function pay(){let ok=true;
   if(st.msg.trim().length<10){$('#eMsg').classList.add('on');if(ok)$ms.focus();ok=false}
   if(!ok){document.getElementById('crear').scrollIntoView({behavior:RM?'auto':'smooth'});return}
   const id='lt'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
-  try{localStorage.setItem('latido_draft',JSON.stringify({id,to:st.to.trim(),from:st.from.trim(),msg:st.msg.trim(),hasAudio:!!st.audio,audioName:st.audioName,t:Date.now()}))}catch(e){}
+  try{localStorage.setItem('latido_draft',JSON.stringify({id,to:st.to.trim(),from:st.from.trim(),msg:st.msg.trim(),hasAudio:!!st.audio,audioName:st.audioName,gt:st.gt,gift:st.gift.trim(),t:Date.now()}))}catch(e){}
   if(CONFIG.variantId){
     const b=$('#payBtn');b.disabled=true;
-    fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:[{id:+CONFIG.variantId,quantity:1,properties:{'Para':st.to.trim(),'De parte de':st.from.trim(),'Mensaje':st.msg.trim(),'Audio':st.audio?'Sí ('+(st.audioName||'grabado')+')':'Lo enviará por WhatsApp','Pedido':id}}]})})
+    fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:[{id:+CONFIG.variantId,quantity:1,properties:{'Para':st.to.trim(),'De parte de':st.from.trim(),'Mensaje':st.msg.trim(),'Regalo escondido':st.gt==='love'?'Solo cariño':({money:'Dinero',plan:'Un plan',gift:'Un regalo'})[st.gt]+(st.gift.trim()?': '+st.gift.trim():''),'Audio':st.audio?'Sí ('+(st.audioName||'grabado')+')':'Lo enviará por WhatsApp','Pedido':id}}]})})
       .then(r=>{if(!r.ok)throw 0;location.href='/checkout'}).catch(()=>{b.disabled=false;toast('No pudimos abrir el pago. Intenta de nuevo.')});
     return}
   if(!CONFIG.stripeLink){toast('Modo de prueba: aquí se abre el pago de Stripe.');buzz(10);return}
