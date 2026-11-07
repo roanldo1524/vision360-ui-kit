@@ -8,13 +8,17 @@
   assign k2 = section.settings.precio_2 | default: 232500
   assign k3 = section.settings.precio_3 | default: 295700
   assign antes = section.settings.precio_antes | default: 220000
+  assign lista = section.settings.precio_lista | default: 43300
+  assign a1 = lista | times: 3
+  assign a2 = lista | times: 6
+  assign a3 = lista | times: 9
   assign g_files = 'au-sol-patio.png|au-navidad-patio.webp|au-mandala-real.webp|au-velitas-real.webp|au-sol-balcon.png|au-cerca-real.webp|au-kit3-real.webp|au-familia-real.webp' | split: '|'
   assign g_caps = '-|Así se ve en Navidad|Un mandala gigante por lámpara|Noche de Velitas|También en el balcón|El calado, de cerca|Cada kit trae 3 lámparas|Para compartir en familia' | split: '|'
   assign g_alts = 'Dos lámparas AURA en la pared del patio con mandalas de colores alrededor|Patio en Navidad con pesebre, velitas y lámparas AURA en la pared|Lámpara AURA en la pared proyectando un mandala de colores|Entrada de casa en Noche de Velitas con tres lámparas AURA en la pared|Lámpara AURA en la pared de un balcón|Lámpara AURA de cerca y colgada en la pared|Kit de tres lámparas AURA sobre una mesa|Familia en la terraza con dos lámparas AURA en la pared' | split: '|'
 -%}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Montserrat:wght@500;700;800&display=swap">
-{%- if section.settings.foto_1 -%}<link rel="preload" as="image" href="{{ section.settings.foto_1 | image_url: width: 900 }}">{%- else -%}<link rel="preload" as="image" href="{{ 'au-hero-900.webp' | file_url }}" imagesrcset="{{ 'au-hero-600.webp' | file_url }} 600w, {{ 'au-hero-900.webp' | file_url }} 900w" imagesizes="100vw" fetchpriority="high">{%- endif -%}
+{%- if section.settings.foto_1 -%}<link rel="preload" as="image" href="{{ 'au-mandala-real.webp' | file_url }}&width=720" fetchpriority="high">{%- else -%}<link rel="preload" as="image" href="{{ 'au-mandala-real.webp' | file_url }}&width=720" fetchpriority="high">{%- endif -%}
 <style>#es-sticky{opacity:0!important;pointer-events:none!important}#au-apps{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}#au-host{display:block}</style>
 <style id="au-es">
 /* Formulario EasySell, solo en la página AURA (no toca otros productos) */
@@ -93,6 +97,8 @@
         if(t&&t.getAttribute('data-au')!==t.textContent){var s=t.textContent,mm=s.match(/(\d+)\s*l[aá]mparas/i);if(mm){t.innerHTML=mm[1]+' lámparas'+(/gu[ií]a/i.test(s)?'<span class="au-g">+ Guía de decoración gratis</span>':'');t.setAttribute('data-au',t.textContent)}}
       });
       /* datos: subtítulo antes del nombre */
+      var ap=function(sel,a,v){var e=m.querySelector(sel);if(e&&e.getAttribute(a)!==v)e.setAttribute(a,v)};
+      ap('.es-first_name-group input','autocomplete','given-name');ap('.es-last_name-group input','autocomplete','family-name');ap('.es-phone-group input','inputmode','numeric');ap('.es-phone-group input','autocomplete','tel');ap('input[type="tel"]','inputmode','numeric');
       var fn=m.querySelector('.es-first_name-group');
       if(fn&&!m.querySelector('.au-qk2')){fn.insertAdjacentHTML('beforebegin','<span class="au-qk au-qk2">¿A dónde te lo enviamos?</span>')}
       /* botón principal */
@@ -603,6 +609,34 @@
 .ct-page .wh-conf{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .ct-page .wh-conf i{position:absolute;top:-12px;width:8px;height:12px;border-radius:2px;animation:whc 1.6s cubic-bezier(.2,.7,.3,1) forwards}
 @keyframes whc{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),520px) rotate(var(--r));opacity:0}}
+
+/* ===== v25 · Primera pantalla del celular que vende sola ===== */
+.ct-page .hcta{margin-top:12px}
+.ct-page .hmicro{margin-top:8px;text-align:center;font:500 12.5px/1.4 var(--text);color:var(--muted)}
+.ct-page .hbf{margin-top:6px;text-align:center;font:700 12.5px/1.35 var(--text);color:var(--red)}
+.ct-page .gv .gcap{bottom:auto;top:14px}
+@media (min-width:900px){.ct-page .hcta{display:none}}
+@media (max-width:899px){
+  .ct-page .bar{display:none}
+  .ct-page .promo img,.ct-page .promo .psub{display:none}
+  .ct-page .promo .w{padding-top:6px;padding-bottom:6px;gap:10px}
+  .ct-page .promo .pl{margin:0 0 3px;font-size:10px!important}
+  .ct-page .pcd{gap:4px}
+  .ct-page .pcd span{min-width:36px;height:28px;border-radius:8px;flex-direction:row;gap:1px}
+  .ct-page .pcd b{font-size:13px}
+  .ct-page .pcd small{display:none}
+  .ct-page .pcd b::after{font:600 9px/1 var(--text);opacity:.65;margin-left:1px}
+  .ct-page .pcd b[data-d]::after{content:"d"}.ct-page .pcd b[data-h]::after{content:"h"}.ct-page .pcd b[data-m]::after{content:"m"}.ct-page .pcd b[data-s]::after{content:"s"}
+  .ct-page .pbtn{min-height:38px;padding:0 16px}
+  .ct-page .buy{padding-top:8px}
+  .ct-page .buy .w{gap:10px}
+  .ct-page .slides figure{aspect-ratio:4/3}
+  .ct-page .dots{margin-top:8px}
+  .ct-page .info{display:flex;flex-direction:column}
+  .ct-page .info .nm{order:1}.ct-page .info .rtop{order:2}.ct-page .info .price{order:3;margin-top:8px}.ct-page .info .pay{order:4;margin-top:10px;padding:9px 12px}
+  .ct-page .info .pay p{font-size:13px;line-height:1.35}
+  .ct-page .info .hcta{order:5}.ct-page .info .rq{order:6;margin-top:14px}.ct-page .info .sub{order:7}.ct-page .info .pick{order:8}.ct-page .info .buybtn{order:9}.ct-page .info .bens{order:10}.ct-page .info .desc{order:11}
+}
 </style>
 <div class="ct-page" id="ct-root">
 
@@ -629,6 +663,7 @@
             {%- assign g_img = section.settings[k_img] -%}
             {%- assign g_txt = section.settings[k_txt] | default: g_caps[idx] -%}
             {%- if g_txt == '-' -%}{%- assign g_txt = '' -%}{%- endif -%}
+            {%- if n == 1 -%}<figure class="gv"><video muted loop playsinline preload="none" poster="{{ 'au-mandala-real.webp' | file_url }}&width=720" data-src="{{ 'au-vid-real.mp4' | file_url }}#t=18.6" data-start="18.6" data-end="30.6" aria-label="Video real de la lámpara AURA proyectando mandalas de colores en la pared de noche"></video><span class="gcap">Video real · así se ve de noche</span></figure>{%- endif -%}
             <figure>
             {%- if g_img -%}
               <img src="{{ g_img | image_url: width: 900 }}" srcset="{{ g_img | image_url: width: 540 }} 540w, {{ g_img | image_url: width: 720 }} 720w, {{ g_img | image_url: width: 900 }} 900w, {{ g_img | image_url: width: 1080 }} 1080w" sizes="(min-width:900px) 620px, 100vw" alt="{{ g_img.alt | default: g_alts[idx] | escape }}" width="900" height="900" {% if n == 1 %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
@@ -640,9 +675,6 @@
             {%- endif -%}
             {%- if g_txt != blank -%}<span class="gcap">{{ g_txt | escape }}</span>{%- endif -%}
             </figure>
-            {%- if n == 1 %}
-          <figure class="gv"><video muted loop playsinline preload="none" poster="{{ 'au-vid-real.webp' | file_url }}" data-src="{{ 'au-vid-real.mp4' | file_url }}" aria-label="Video real de la lámpara AURA: la caja, cómo se pone y cómo se ve de noche"></video><span class="gcap">Video real del producto</span></figure>
-            {%- endif -%}
           {%- endfor %}
         </div>
         <div class="hov" id="hov"><p class="hey">AURA · Edición Navidad</p><h1>Tu pared, llena de mandalas.</h1></div></div>
@@ -650,7 +682,7 @@
         <button class="garr gnext" id="gnext" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
         <span class="gcount" id="gcount" aria-hidden="true">1 / 9</span>
         <div class="dots" id="gdots" aria-hidden="true"><b class="on"></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
-        <div class="thumbs" id="thumbs">{%- for n in (1..8) -%}{%- assign k_img = 'foto_' | append: n -%}{%- assign idx = n | minus: 1 -%}{%- assign g_img = section.settings[k_img] -%}<button type="button" aria-label="Ver foto {{ n }}"{% if n == 1 %} class="on"{% endif %}><img src="{% if g_img %}{{ g_img | image_url: width: 140 }}{% else %}{{ g_files[idx] | file_url }}&width=140{% endif %}" alt="" loading="lazy" width="64" height="64"></button>{%- if n == 1 -%}<button type="button" aria-label="Ver video" class="tv"><img src="{{ 'au-vid-real.webp' | file_url }}&width=140" alt="" loading="lazy" width="64" height="64"><i aria-hidden="true"></i></button>{%- endif -%}{%- endfor -%}</div>
+        <div class="thumbs" id="thumbs">{%- for n in (1..8) -%}{%- assign k_img = 'foto_' | append: n -%}{%- assign idx = n | minus: 1 -%}{%- assign g_img = section.settings[k_img] -%}{%- if n == 1 -%}<button type="button" aria-label="Ver video" class="tv on"><img src="{{ 'au-mandala-real.webp' | file_url }}&width=140" alt="" loading="lazy" width="64" height="64"><i aria-hidden="true"></i></button>{%- endif -%}<button type="button" aria-label="Ver foto {{ n }}"><img src="{% if g_img %}{{ g_img | image_url: width: 140 }}{% else %}{{ g_files[idx] | file_url }}&width=140{% endif %}" alt="" loading="lazy" width="64" height="64"></button>{%- endfor -%}</div>
       </div>
 
       <div class="info">
@@ -666,16 +698,18 @@
         <p class="nm">AURA · Luz solar mandala</p>
         <a class="rtop" href="#resenas" aria-label="5,0 de 5 estrellas, 3 reseñas de clientes. Ver reseñas"><span class="rst"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span><b>5,0</b><span>· 3 reseñas de clientes</span></a>
         <p class="sub">Cuélgala en la pared y esta Navidad tu casa se llena de mandalas de colores. Sin cables.</p>
-        <div class="price"><strong id="pNow">{{ k1 | times: 100 | money_without_trailing_zeros }}</strong><s id="pWas">{{ antes | times: 100 | money_without_trailing_zeros }}</s><span class="off" id="pOff">Ahorras {{ antes | minus: k1 | times: 100 | money_without_trailing_zeros }}</span></div>
+        <div class="price"><strong id="pNow">{{ k1 | times: 100 | money_without_trailing_zeros }}</strong><s id="pWas">{{ a1 | times: 100 | money_without_trailing_zeros }}</s><span class="off" id="pOff">Ahorras {{ a1 | minus: k1 | times: 100 | money_without_trailing_zeros }}</span></div>
 
         <div class="pay"><svg viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="10" fill="#23201C"/><path d="M9 13.5h16v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 9 22.5zM9 13.5l2.4-3.5h11.2l2.4 3.5M17 17v4" stroke="#F2A945" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><p><b>Pagas cuando te llegue.</b> Pagas directamente al transportador cuando el kit llega a tu puerta.</p></div>
+
+        <div class="hcta"><button class="cta js-order" type="button" id="heroBtn"><span id="heroTxt">Pedir mi kit de 3</span><span class="sep">·</span><span id="heroPrice">{{ k1 | times: 100 | money_without_trailing_zeros }}</span></button><p class="hmicro">Envío gratis · Llega en 2 a 5 días hábiles · Te confirmamos por WhatsApp</p>{%- if section.settings.precio_despues > 0 -%}<p class="hbf">Black Friday: desde el 1 de diciembre el kit de 3 sube a {{ section.settings.precio_despues | times: 100 | money_without_trailing_zeros }}</p>{%- endif -%}</div>
 
         <div class="pick">
           <p class="pkl"><b>Elige tu kit</b><span id="kitName">3 lámparas</span></p>
           <div class="kits" role="radiogroup" aria-label="Elige tu kit">
-            <button class="kit on" type="button" role="radio" aria-checked="true" data-k="1"><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k3r.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>3 lámparas</b><small>{{ k1 | divided_by: 3 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k1 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 1 | times: 100 | money_without_trailing_zeros }}</s></span></button>
-            <button class="kit" type="button" role="radio" aria-checked="false" data-k="2"><span class="ktag">Recomendado</span><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k6r.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>6 lámparas</b><small>{{ k2 | divided_by: 6 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k2 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 2 | times: 100 | money_without_trailing_zeros }}</s></span><span class="kgift">+ Guía de decoración con luz gratis</span></button>
-            <button class="kit" type="button" role="radio" aria-checked="false" data-k="3"><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k9r.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>9 lámparas</b><small>{{ k3 | divided_by: 9 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k3 | times: 100 | money_without_trailing_zeros }}</b><s>{{ antes | times: 3 | times: 100 | money_without_trailing_zeros }}</s></span><span class="kgift">+ Guía de decoración con luz gratis</span></button>
+            <button class="kit on" type="button" role="radio" aria-checked="true" data-k="1"><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k3r.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>3 lámparas</b><small>{{ k1 | divided_by: 3 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k1 | times: 100 | money_without_trailing_zeros }}</b><s>{{ a1 | times: 100 | money_without_trailing_zeros }}</s></span></button>
+            <button class="kit" type="button" role="radio" aria-checked="false" data-k="2"><span class="ktag">Recomendado</span><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k6r.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>6 lámparas</b><small>{{ k2 | divided_by: 6 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k2 | times: 100 | money_without_trailing_zeros }}</b><s>{{ a2 | times: 100 | money_without_trailing_zeros }}</s></span><span class="kgift">+ Guía de decoración con luz gratis</span></button>
+            <button class="kit" type="button" role="radio" aria-checked="false" data-k="3"><span class="rd" aria-hidden="true"></span><img class="kph" src="{{ 'au-k9r.webp' | file_url }}" alt="" width="52" height="52" loading="lazy"><span class="kt"><b>9 lámparas</b><small>{{ k3 | divided_by: 9 | times: 100 | money_without_trailing_zeros }} por lámpara</small></span><span class="kp"><b>{{ k3 | times: 100 | money_without_trailing_zeros }}</b><s>{{ a3 | times: 100 | money_without_trailing_zeros }}</s></span><span class="kgift">+ Guía de decoración con luz gratis</span></button>
           </div>
         </div>
 
@@ -966,15 +1000,15 @@
 const host=document.getElementById('au-host');if(!host||host.shadowRoot)return;
 const root=host.attachShadow({mode:'open'});root.appendChild(document.getElementById('au-tpl').content.cloneNode(true));
 const $=s=>root.querySelector(s),$$=s=>[...root.querySelectorAll(s)];
-const PRICES={1:{{ k1 }},2:{{ k2 }},3:{{ k3 }}},ANTES={{ antes }};
+const PRICES={1:{{ k1 }},2:{{ k2 }},3:{{ k3 }}},AN={1:{{ a1 }},2:{{ a2 }},3:{{ a3 }}};
 const fmt=n=>'$'+n.toLocaleString('es-CO');
 let kit=1;
 const vib=ms=>{try{navigator.vibrate&&navigator.vibrate(ms)}catch(_){}};
 const setKit=(k,src)=>{const LM=$('#lmps');if(LM)LM.dataset.n=k*3;if(k!==kit){vib(10);const sw=['#pNow','#pWas','#pOff','#btnPrice'].map(s=>$(s));sw.forEach(e=>e.classList.add('swap'));setTimeout(()=>sw.forEach(e=>e.classList.remove('swap')),160)}kit=k;const p=PRICES[k];
   $$('.kit').forEach(b=>{const on=+b.dataset.k===k;b.classList.toggle('on',on);b.setAttribute('aria-checked',on)});
   $$('.sk button').forEach(b=>b.classList.toggle('on',+b.dataset.k===k));
-  $('#kitName').textContent=(k*3)+' lámparas';$('#pNow').textContent=fmt(p);$('#pWas').textContent=fmt(ANTES*k);$('#pOff').textContent='Ahorras '+fmt(ANTES*k-p);
-  $('#btnTxt').textContent='Pedir mi kit de '+(k*3);$('#btnPrice').textContent=fmt(p);$('#stBtn').textContent='Pedir · '+fmt(p);const SN=$('#stName');if(SN)SN.textContent='Kit de '+(k*3)+' lámparas';
+  $('#kitName').textContent=(k*3)+' lámparas';$('#pNow').textContent=fmt(p);$('#pWas').textContent=fmt(AN[k]);$('#pOff').textContent='Ahorras '+fmt(AN[k]-p);
+  $('#btnTxt').textContent='Pedir mi kit de '+(k*3);const HT=$('#heroTxt');if(HT){HT.textContent='Pedir mi kit de '+(k*3);$('#heroPrice').textContent=fmt(p)}$('#btnPrice').textContent=fmt(p);$('#stBtn').textContent='Pedir · '+fmt(p);const SN=$('#stName');if(SN)SN.textContent='Kit de '+(k*3)+' lámparas';
   if(src==='up'&&k===2){toast('Listo: tu pedido ahora es de 6 lámparas')}
 };
 $$('.kit,.sk button').forEach(b=>b.addEventListener('click',()=>setKit(+b.dataset.k)));
@@ -994,6 +1028,8 @@ const gi=()=>Math.round(slides.scrollLeft/slides.clientWidth);
 const gc=$('#gcount'),hv=$('#hov');const gsync=()=>{const i=gi();if(hv)hv.classList.toggle('off',i>0);[...slides.children].forEach((f,k)=>{const v=f.querySelector('video');if(!v)return;if(Math.abs(k-i)<=1&&!v.src)v.src=v.dataset.src;if(k===i)v.play().catch(()=>{});else v.pause()});if(gc)gc.textContent=(i+1)+' / '+slides.children.length;dots.forEach((d,j)=>d.classList.toggle('on',i===j));th.forEach((d,j)=>d.classList.toggle('on',i===j));const tw=$('#thumbs');if(tw&&th[i]){const t=th[i];const x=t.offsetLeft-(tw.clientWidth-t.offsetWidth)/2;tw.scrollTo({left:Math.max(0,x),behavior:'smooth'})}gp.disabled=i<=0;gn.disabled=i>=slides.children.length-1};
 const ggo=i=>slides.scrollTo({left:i*slides.clientWidth,behavior:'smooth'});
 slides.addEventListener('scroll',()=>requestAnimationFrame(gsync),{passive:true});
+$$('video[data-end]').forEach(v=>{const a=+v.dataset.start,b=+v.dataset.end;v.addEventListener('loadedmetadata',()=>{if(v.currentTime<a-1)v.currentTime=a});v.addEventListener('timeupdate',()=>{if(v.currentTime>=b)v.currentTime=a})});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)gsync();
 (function(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;let touched=false;['pointerdown','touchstart','wheel'].forEach(e=>slides.addEventListener(e,()=>{touched=true},{passive:true,once:true}));setTimeout(()=>{if(touched||slides.scrollLeft>4)return;const r=slides.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;slides.scrollTo({left:64,behavior:'smooth'});setTimeout(()=>{if(!touched)slides.scrollTo({left:0,behavior:'smooth'})},520)},2600)})();
 gp.onclick=()=>ggo(gi()-1);gn.onclick=()=>ggo(gi()+1);th.forEach((b,i)=>b.onclick=()=>ggo(i));
 /* Coverflow de videos: centro reproduce, los demás pausados; swipe, flechas y pausa */
@@ -1161,6 +1197,7 @@ const __runWheel=()=>{try{__wheel()}catch(_){}};if(document.readyState==='comple
     {"type":"number","id":"precio_1","label":"Precio 1 kit (3 lámparas), en pesos","default":129900},
     {"type":"number","id":"precio_2","label":"Precio 2 kits (6 lámparas)","default":232500},
     {"type":"number","id":"precio_3","label":"Precio 3 kits (9 lámparas)","default":295700},
+    {"type":"number","id":"precio_lista","label":"Precio normal de UNA lámpara (para tachar: x3, x6, x9)","default":43300},
     {"type":"number","id":"precio_antes","label":"Precio de antes por kit (para tachar)","default":220000},
     {"type":"text","id":"fin_oferta","label":"Fin de la oferta Black Friday","default":"2026-11-30T23:59:00-05:00","info":"Formato: 2026-11-30T23:59:00-05:00. Cuando pasa, la barra desaparece sola."},
     {"type":"number","id":"precio_despues","label":"Precio del kit de 3 después del Black Friday (opcional)","info":"Si lo llenas, la barra dice: Desde el 1 de dic. sube a ese precio. Pon solo el precio real."},
