@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#1A0D0E">
 <title>Latido · Regala una sorpresa de cumpleaños con tu voz</title>
-<meta name="description" content="Sube tu audio, escribe tu mensaje y armamos una sorpresa interactiva que se abre desde el celular. $15 USD, pago seguro con Stripe.">
+<meta name="description" content="Sube tu audio, escribe tu mensaje y en 20 minutos tienes una sorpresa de cumpleaños que se abre desde el celular. $15 USD.">
 <meta property="og:title" content="Latido · Una sorpresa de cumpleaños que se abre con tu voz">
 <meta property="og:description" content="Sube tu audio y tu mensaje. Nosotros armamos la sorpresa. $15 USD.">
 <meta property="og:type" content="website">
@@ -266,6 +266,15 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .tl time{font:400 26px/1.1 var(--display);color:var(--gold);font-variant-numeric:tabular-nums}
 .tl h3{margin-bottom:4px}
 .tl p{color:var(--soft);font-size:16px}
+
+/* ===== v5 · 20 minutos ===== */
+.mins{background:var(--rose);color:#2A0A1B;padding:72px 0}
+.mins .w{display:grid;gap:20px;align-items:end}
+.big20{font:400 clamp(160px,52vw,320px)/.78 var(--display);letter-spacing:-.06em;color:#2A0A1B}
+.big20 span{font-size:.24em;letter-spacing:-.02em;margin-left:.12em}
+.mins h2{color:#2A0A1B;max-width:15em}
+.mins p{margin-top:14px;font-size:18px;color:#3F1229;max-width:30em}
+@media (min-width:900px){.mins .w{grid-template-columns:auto 1fr;gap:64px;align-items:center}.mins{padding:96px 0}}
 </style>
 </head>
 <body>
@@ -285,10 +294,19 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <p class="lead rv" style="--i:2">Dilas con tu voz. Nosotros las convertimos en una sorpresa que ella abre desde su celular: una rosa que florece, velas que apaga, una carta con su nombre.</p>
     <div class="cta-row rv" style="--i:3">
       <a class="btn" href="#crear" id="heroCta">Quiero sorprenderla · $15 USD</a>
-      <p class="micro">Un solo pago · Lista en 24 horas · Funciona desde cualquier país</p>
+      <p class="micro">Un solo pago · Lista en 20 minutos · Funciona desde cualquier país</p>
     </div>
   </div></div>
 </section>
+
+<!-- 20 minutos -->
+<section class="mins"><div class="w">
+  <div class="big20 rv" aria-hidden="true">20<span>min</span></div>
+  <div class="mt">
+    <h2 class="rv">Pagas, nos mandas tu audio, y en 20 minutos ella tiene su sorpresa.</h2>
+    <p class="rv" style="--i:1">Sin esperar días ni quedarte con la duda de si llega a tiempo. Si el cumpleaños es hoy, todavía llegas.</p>
+  </div>
+</div></section>
 
 <!-- Pasos -->
 <section class="how"><div class="w">
@@ -296,7 +314,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="steps">
     <div class="step rv"><div><h3>Dile lo que nunca le has dicho</h3><p>Escribe su nombre y tu mensaje. Graba tu voz o sube una nota que ya tengas. No tiene que quedar perfecto, tiene que sonar a ti.</p></div></div>
     <div class="step rv" style="--i:1"><div><h3>Nosotros armamos la sorpresa</h3><p>Pagas $15 USD una sola vez. Ponemos su nombre, tu voz y tus palabras dentro de algo hecho solo para ella.</p></div></div>
-    <div class="step rv" style="--i:2"><div><h3>Le pasas la tarjeta y esperas su audio</h3><p>En 24 horas te enviamos por WhatsApp una tarjeta bonita con un QR en forma de corazón. Se la das a ella, impresa o por chat. Escanea, y empieza todo.</p></div></div>
+    <div class="step rv" style="--i:2"><div><h3>Le pasas la tarjeta y esperas su audio</h3><p>En 20 minutos te enviamos por WhatsApp una tarjeta bonita con un QR en forma de corazón. Se la das a ella, impresa o por chat. Escanea, y empieza todo.</p></div></div>
   </div>
 </div></section>
 
@@ -425,7 +443,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Rosa que se abre, velas que se soplan, regalo escondido y carta con su nombre</li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Ajustes si algo no quedó como querías</li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Tarjeta bonita con QR en corazón, enviada a tu WhatsApp</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Lista en 24 horas</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Lista en 20 minutos</li>
         </ul>
         <button class="btn" id="payBtn" type="button">Pagar $15 USD</button>
         <div class="lock"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Pago con tarjeta, procesado por Stripe</div>
@@ -442,7 +460,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <div class="q"><button type="button" aria-expanded="false">¿Y si me da pena grabar?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>A casi todos les da. Grábalo como si le escribieras un audio por WhatsApp. Lo que emociona no es una voz perfecta, es que sea la tuya. Y puedes repetirlo las veces que quieras antes de enviarlo.</p></div></div></div>
     <div class="q"><button type="button" aria-expanded="false">¿Funciona si vive en otro país?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Sí. Es un link: se abre en cualquier celular con internet, en cualquier país. Tú pagas en dólares, ella no paga nada.</p></div></div></div>
     <div class="q"><button type="button" aria-expanded="false">¿Cómo la recibe la persona?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Tú recibes por WhatsApp una tarjeta bonita con un QR en forma de corazón, y se la pasas a ella: impresa, o como imagen por chat. Ella lo escanea con la cámara del celular y la sorpresa arranca sola. No necesita app ni cuenta.</p></div></div></div>
-    <div class="q"><button type="button" aria-expanded="false">¿Cuánto me demoro en tenerla?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Te la entregamos en 24 horas después de que nos mandes tu audio y tu mensaje. Si el cumpleaños es mañana, escríbenos apenas pagues y la priorizamos.</p></div></div></div>
+    <div class="q"><button type="button" aria-expanded="false">¿Cuánto me demoro en tenerla?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Te la entregamos en 20 minutos, después de que nos mandes tu audio y tu mensaje. Si el cumpleaños es hoy, todavía llegas.</p></div></div></div>
     <div class="q"><button type="button" aria-expanded="false">¿Y si no tengo audio?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>La sorpresa funciona igual solo con tu mensaje escrito. Pero con tu voz se siente distinto, y casi siempre vale la pena grabar un minuto.</p></div></div></div>
     <div class="q"><button type="button" aria-expanded="false">¿Cómo pago?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Con tarjeta, en una página de Stripe. Pagas $15 USD una sola vez. Nosotros nunca vemos los datos de tu tarjeta.</p></div></div></div>
     <div class="q"><button type="button" aria-expanded="false">¿Qué pasa con mi audio y mi mensaje?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Solo los usamos para armar tu sorpresa. Quien tenga el link puede verla, así que mándaselo solo a quien quieras.</p></div></div></div>
@@ -634,6 +652,7 @@ function pay(){let ok=true;
   const u=CONFIG.stripeLink+(CONFIG.stripeLink.includes('?')?'&':'?')+'client_reference_id='+encodeURIComponent(id);
   location.href=u}
 $('#payBtn').addEventListener('click',pay);
+if(!RM)setTimeout(()=>burst(36,innerWidth/2,Math.min(innerHeight*.3,220)),900);
 })();
 </script>
 </body>
