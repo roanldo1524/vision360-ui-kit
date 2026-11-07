@@ -153,3 +153,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 7 nov, 7:20 a. m. (revisión automática): subido Pedro Alfonso Narváez (Consacá, 1 L), por el obsequio.
 - 7 nov, 8:20 a. m. (revisión automática): subidos Hammer Manosalva (El Carmen, N. de Santander) y Luis Domínguez (Dagua), por el obsequio.
 - 7 nov, 9:20 a. m. (revisión automática): subidos Gelmir Molina (Oporapa, 2 L; obsequio y nombre del producto), Jorge Cervera (Tuluá; obsequio) y Elías Vallejo (página, Medellín sin departamento → Antioquia).
+- 7 nov, 10:20 a. m. (revisión automática): subidos Pablo Antonio Gómez (Gramalote, 4 L), Gloria Rueda (San Alberto, 2 L) y Miguel Ángel (Herrera, 4 L), por el obsequio.
