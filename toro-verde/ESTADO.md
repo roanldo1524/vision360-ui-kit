@@ -157,3 +157,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 7 nov, 10:20 a. m.: Meta otra vez rechaza los eventos de compra de Lucid Sales: «la sesión fue invalidada porque el usuario cambió la contraseña o Facebook cambió la sesión». Hay que reconectar Meta en Lucid Sales.
 - 7 nov, 11:20 a. m. (revisión automática): subidos Elvia Molina (2 L), Jherson Ávila (Pitalito), Fernando Alonso (Itagüí, 2 L) y Nidia Peláez (Bituima), por el obsequio.
 - 7 nov, 12:20 p. m. (revisión automática): subido Drigelio Castillo (Villanueva, Casanare, 4 L), por el obsequio.
+- 7 nov, 1:20 p. m. (revisión automática): subidos Jony Erazo (Albán), Luis López (Gachetá) y Edgar Omen (Bruselas, Huila), por el obsequio.
