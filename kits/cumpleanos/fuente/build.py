@@ -49,8 +49,8 @@ def letter(n):
 P={
  's':dict(NAME='Samantha',BG='#3A0A3F',BG2='#6A1460',ROSE='#FF4F8B',BLUSH='#FFC2D9',GOLD='#FFD25E',LEAF='#38B27A',SOFTT='#F4CDE2',SIG='#D62A6B',
    AMOUNT='$500.000',AMTCLS='',rose=['#FF4F8B','#B3125A','#FFD3E2'],pet=['#FF6FA0','#FF4F8B','#FFC2D9','#FF9F7A'],conf=['#FFD25E','#FF4F8B','#7FE3C0','#FFFFFF','#FF9F7A'],leafs=['#2E9E6A','#38B27A','#24845A'],foil=['#E6B53C','#FFE599','#D89F28','#FFD873']),
- 'c':dict(NAME='Carolina',BG='#0D2A44',BG2='#14507A',ROSE='#FF7A5C',BLUSH='#FFD1C2',GOLD='#FFDF6E',LEAF='#33B587',SOFTT='#CFE3F2',SIG='#E2533A',
-   AMOUNT='$200.000',AMTCLS='',rose=['#FF7A5C','#C73A27','#FFE0D3'],pet=['#FF9478','#FF7A5C','#FFD1C2','#FFB86B'],conf=['#FFDF6E','#FF7A5C','#6EE7D8','#FFFFFF','#B79CFF'],leafs=['#2A9C72','#33B587','#22825F'],foil=['#E6B53C','#FFE599','#D89F28','#FFD873'])}
+ 'c':dict(NAME='Carolina',BG='#2B0E2E',BG2='#5A2154',ROSE='#F75F93',BLUSH='#FFCBDE',GOLD='#F0CE74',LEAF='#5E8A62',SOFTT='#EAC9DD',SIG='#C7336E',
+   AMOUNT='$200.000',AMTCLS='',rose=['#F75F93','#B01E5A','#FFD4E2'],pet=['#FF8BB0','#F75F93','#FFCBDE','#D2437E'],conf=['#F0CE74','#FFCBDE','#F75F93','#FFFFFF','#C9A6EE'],leafs=['#4C7A52','#5E8A62','#3B6542'],foil=['#E6B53C','#FFE599','#D89F28','#FFD873'])}
 
 REASONS=[{'s':'Tu sonrisa','l':'Tu sonrisa contagia a todos'},{'s':'Tu fuerza','l':'Nunca te rindes'},{'s':'Tu corazón','l':'Tienes un corazón enorme'},
  {'s':'Tu energía','l':'Eres pura buena energía'},{'s':'Tu talento','l':'Aprendes rapidísimo'},{'s':'Tu lealtad','l':'Contigo se puede contar'},

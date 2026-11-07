@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0D2A44">
+<meta name="theme-color" content="#2B0E2E">
 <title>Feliz cumpleaños, Carolina</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
-:root{--bg:#0D2A44;--bg2:#14507A;--rose:#FF7A5C;--blush:#FFD1C2;--gold:#FFDF6E;--cream:#FFF4EC;--leaf:#33B587;--soft:#CFE3F2;
+:root{--bg:#2B0E2E;--bg2:#5A2154;--rose:#F75F93;--blush:#FFCBDE;--gold:#F0CE74;--cream:#FFF4EC;--leaf:#5E8A62;--soft:#EAC9DD;
   --ease:cubic-bezier(.23,1,.32,1);--io:cubic-bezier(.77,0,.175,1);--script:'Pinyon Script',cursive;--serif:'Figtree',system-ui,sans-serif;--display:'Young Serif',Georgia,serif;
   --t-hero:clamp(30px,8.4vw,40px);--t-quote:20px;--t-body:17px;--t-small:14px;--t-micro:12px}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -159,8 +159,8 @@ h2{font:400 var(--t-hero)/1.1 var(--display);letter-spacing:-.015em;text-wrap:ba
 .letter{margin-top:14px;padding:26px 22px 22px;border-radius:24px;background:var(--cream);color:#3A1F25;box-shadow:0 30px 60px -15px rgba(0,0,0,.55)}
 .letter p{font:400 17px/1.62 var(--serif);margin-bottom:14px;opacity:0;transform:translateY(8px);transition:opacity 800ms var(--ease),transform 800ms var(--ease)}
 .letter p.on{opacity:1;transform:none}
-.letter .hi{font:400 40px/1 var(--script);color:#E2533A}
-.letter .sg{font:400 30px/1.1 var(--script);color:#E2533A;margin:4px 0 0}
+.letter .hi{font:400 40px/1 var(--script);color:#C7336E}
+.letter .sg{font:400 30px/1.1 var(--script);color:#C7336E;margin:4px 0 0}
 .letter .sg small{display:block;font:500 var(--t-small)/1.3 var(--serif);color:#7A4B54;margin-top:6px}
 .fin{margin:30px 0 8px;text-align:center}
 .fin .name{display:block;margin-top:2px}
@@ -400,13 +400,14 @@ h2{font:400 var(--t-hero)/1.1 var(--display);letter-spacing:-.015em;text-wrap:ba
     </div>
   </section>
 </div>
-<audio id="voz" preload="auto"></audio>
+<audio id="voz" preload="auto" crossorigin="anonymous"></audio>
+<audio id="song" preload="none" loop src="https://cdn.shopify.com/s/files/1/0811/4595/4517/files/cancion-torta.mp3?v=1794028308"></audio>
 <script>
 (()=>{
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 $('#prog').innerHTML=$$('.st').map((_,i)=>`<i class="${i?'':'on now'}"></i>`).join('');
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const C={"rose": ["#FF7A5C", "#C73A27", "#FFE0D3"], "pet": ["#FF9478", "#FF7A5C", "#FFD1C2", "#FFB86B"], "conf": ["#FFDF6E", "#FF7A5C", "#6EE7D8", "#FFFFFF", "#B79CFF"], "leaf": "#33B587", "leafs": ["#2A9C72", "#33B587", "#22825F"], "foil": ["#E6B53C", "#FFE599", "#D89F28", "#FFD873"], "wheel": ["#FF7A5C", "#FFDF6E", "#FFD1C2", "#FFF4EC"]};
+const C={"rose": ["#F75F93", "#B01E5A", "#FFD4E2"], "pet": ["#FF8BB0", "#F75F93", "#FFCBDE", "#D2437E"], "conf": ["#F0CE74", "#FFCBDE", "#F75F93", "#FFFFFF", "#C9A6EE"], "leaf": "#5E8A62", "leafs": ["#4C7A52", "#5E8A62", "#3B6542"], "foil": ["#E6B53C", "#FFE599", "#D89F28", "#FFD873"], "wheel": ["#F75F93", "#F0CE74", "#FFCBDE", "#FFF4EC"]};
 /* ---------- Rosa dibujada en código ---------- */
 const NS='http://www.w3.org/2000/svg';
 const PET='M0 0 C-20 -8 -26 -40 -13 -56 C-6 -64 6 -64 13 -56 C26 -40 20 -8 0 0Z';
@@ -436,9 +437,10 @@ function startMusic(){ensure();if(!ac)return;ac.resume();if(musicOn)return;music
   const loop=()=>{if(!musicOn)return;loopT=setTimeout(loop,song()+2400)};loop();setMus()}
 function stopMusic(){musicOn=false;clearTimeout(loopT);if(master)master.gain.setTargetAtTime(.0001,ac.currentTime,.12);setMus()}
 const duck=on=>{if(master&&musicOn)master.gain.setTargetAtTime(on?.12:.85,ac.currentTime,.3)};
+function fanfare(){if(!ac)return;const t=ac.currentTime;[523.25,659.25,783.99,1046.5].forEach((f,i)=>bell(f,t+i*.08,.5,.17));[523.25,659.25,783.99,1046.5,1318.5].forEach(f=>bell(f,t+.42,1.2,.1));[1568,2093].forEach((f,i)=>bell(f,t+.62+i*.1,.7,.07));}
 function chime(){if(!ac||!musicOn)return;const t=ac.currentTime;[1046.5,1318.5,1568,2093].forEach((f,i)=>bell(f,t+i*.07,.4,.1))}
 function setMus(){const b=$('#mus');b.classList.toggle('off',!musicOn);b.setAttribute('aria-pressed',musicOn);b.setAttribute('aria-label',musicOn?'Apagar música':'Encender música')}
-$('#mus').addEventListener('click',()=>musicOn?stopMusic():startMusic());
+$('#mus').addEventListener('click',()=>{const sg=document.getElementById('song');if(songStarted&&sg&&!sg.paused){sg.pause();stopMusic();return}if(songStarted&&sg&&sg.paused&&!musicOn){sg.play().catch(()=>{});return}musicOn?stopMusic():startMusic()});
 document.addEventListener('visibilitychange',()=>{if(!ac)return;if(document.hidden){ac.suspend();$('#voz').pause()}else if(musicOn)ac.resume()});
 /* ---------- Pétalos y confeti ---------- */
 const cv=$('#fx'),cx=cv.getContext('2d');let P=[],raf=0;
@@ -538,7 +540,7 @@ const EN=[{"w": "dudes de ti", "m": "Mira todo lo que ya lograste. La misma muje
 $('#env4').innerHTML=EN.map((e,i)=>`<button class="ecd" type="button" aria-label="Carta: ábrela cuando ${e.w}"><span class="in"><span class="fr"><svg viewBox="0 0 64 44" aria-hidden="true"><rect x="1" y="1" width="62" height="42" rx="6" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M2 4 L32 26 L62 4" fill="none" stroke="currentColor" stroke-width="2.5"/></svg><b>Ábrela</b><small>cuando ${e.w}</small></span><span class="bk">${e.m}</span></span></button>`).join('');
 $$('#env4 .ecd').forEach(b=>b.addEventListener('click',()=>{if(b.classList.contains('open'))return;b.classList.add('open');opened++;const r=b.getBoundingClientRect();burst(30,r.left+r.width/2,r.top+r.height/2);chime();buzz([15,30,15]);
   if(opened===4){reward('Cartas abiertas');$('#caT').textContent='Guárdalas para siempre';setTimeout(()=>{$('#goC').hidden=false;$('#goC').focus()},1200)}}));
-$('#goC').addEventListener('click',()=>go(5));
+let songStarted=false;$('#goC').addEventListener('click',()=>{go(5);const sg=$('#song');stopMusic();sg.currentTime=0;sg.volume=.95;sg.play().catch(()=>{});songStarted=true});
 /* 2 · Jardín: 6 arbustos, 3 rosas */
 const PH=["Eres joven, tienes talento y tienes ganas. Esa combinación no la frena nadie.", "Tus sueños no tienen fecha de vencimiento. Ve por ellos con todo.", "Lo que siembras con disciplina, un día florece sin pedir permiso."],HAS=[1,0,1,0,0,1],EMPTY=['Aquí no está','Sigue buscando','Casi…'];let found=0,ei=0;
 const gd=$('#garden');
@@ -563,8 +565,16 @@ cds.forEach(c=>c.addEventListener('click',()=>blowOne(c)));
 function allOut(){stopMic();reward('Deseo pedido');$('#cakeW').classList.add('dark');$('#cakeT').textContent='Tu deseo ya va en camino';burst(150);$('#blow').hidden=true;$('#blowH').hidden=true;$('#ps20').classList.add('on');$('#go4').hidden=false;setTimeout(()=>$('#go4').focus(),400)}
 let mic=null,mr=0;function stopMic(){if(mic){mic.getTracks().forEach(t=>t.stop());mic=null}cancelAnimationFrame(mr)}
 $('#blow').addEventListener('click',async()=>{ensure();try{mic=await navigator.mediaDevices.getUserMedia({audio:true})}catch(e){$('#blowH').textContent='No se pudo usar el micrófono. Toca cada llama para apagarla.';return}
-  $('#blow').textContent='Sopla fuerte cerca del celular';const an=ac.createAnalyser();an.fftSize=512;ac.createMediaStreamSource(mic).connect(an);const buf=new Uint8Array(512);let h=0;
-  (function l(){an.getByteTimeDomainData(buf);let s=0;for(const v of buf){const x=(v-128)/128;s+=x*x}if(Math.sqrt(s/512)>.15){if(++h>6){h=0;const c=cds.find(c=>!c.classList.contains('out'));c&&blowOne(c)}}else h=Math.max(0,h-1);if(mic)mr=requestAnimationFrame(l)})()});
+  $('#blow').textContent='Acerca el celular a la boca y sopla';$('#blowH').textContent='Sopla suave, las velas sienten tu aire.';
+  const an=ac.createAnalyser();an.fftSize=1024;an.smoothingTimeConstant=.6;ac.createMediaStreamSource(mic).connect(an);
+  const td=new Uint8Array(an.fftSize),fd=new Uint8Array(an.frequencyBinCount);let h=0,cool=0;
+  (function l(){an.getByteTimeDomainData(td);an.getByteFrequencyData(fd);
+    let s=0;for(const v of td){const x=(v-128)/128;s+=x*x}const rms=Math.sqrt(s/td.length);
+    let lo=0;for(let i=1;i<28;i++)lo+=fd[i];lo/=27*255;/* energia de aire (graves) */
+    const puff=rms>.055||lo>.34;
+    if(cool>0)cool--;
+    if(puff){if(++h>2&&cool===0){h=0;cool=16;const c=cds.find(c=>!c.classList.contains('out'));if(c){blowOne(c);$('#blowH').textContent='¡Se apagó una! Sigue soplando…'}}}else h=0;
+    if(mic)mr=requestAnimationFrame(l)})()});
 $('#go4').addEventListener('click',()=>go(6));
 /* 4 · Regalo */
 let taps=0;const box=$('#box'),HT=['Más fuerte','Una vez más… ya casi'];
@@ -580,7 +590,7 @@ function scratch(){const c=$('#scr'),r=c.getBoundingClientRect(),d=devicePixelRa
   const dr=e=>{const[x,y]=pt(e);g.lineWidth=46;g.lineCap='round';g.beginPath();g.moveTo(...(lp||[x,y]));g.lineTo(x+.1,y+.1);g.stroke();lp=[x,y];if(++n%8===0)chk()};
   c.addEventListener('pointerdown',e=>{dw=true;lp=null;c.setPointerCapture(e.pointerId);dr(e)});c.addEventListener('pointermove',e=>{if(dw)dr(e)});c.addEventListener('pointerup',()=>{dw=false;chk()});
   function chk(){if(rev)return;const a=g.getImageData(0,0,c.width,c.height).data;let k=0;for(let i=3;i<a.length;i+=64)if(a[i]===0)k++;if(k/(a.length/64)>.45)reveal()}}
-function reveal(){if(rev)return;rev=true;reward('Regalo destapado');$('#scr').classList.add('clear');$('#giftT').textContent='¡Es todo tuyo!';$('#giftH').textContent='Te lo ganaste con todo lo que das cada día.';$('#scrBtn').hidden=true;$('#go5').hidden=false;
+function reveal(){if(rev)return;rev=true;reward('Regalo destapado');ensure();fanfare();$('#scr').classList.add('clear');$('#giftT').textContent='¡Es todo tuyo!';$('#giftH').textContent='Te lo ganaste con todo lo que das cada día.';$('#scrBtn').hidden=true;$('#go5').hidden=false;
   burst(200);setTimeout(()=>burst(150,innerWidth*.2,innerHeight*.3),300);setTimeout(()=>burst(150,innerWidth*.8,innerHeight*.3),600);petals(60);setTimeout(()=>$('#go5').focus(),500)}
 $('#scrBtn').addEventListener('click',reveal);
 $('#go5').addEventListener('click',()=>go(7));
@@ -588,19 +598,19 @@ $('#go5').addEventListener('click',()=>go(7));
 const TR=[{"who": "Leidy", "src": "https://cdn.shopify.com/s/files/1/0811/4595/4517/files/voz-leidy-carolina.mp3?v=1794026189", "caps": [{"t": 0, "x": "Hola, mi cariño. Queríamos desearte un feliz, feliz cumpleaños de parte de todo el equipo."}, {"t": 6.1, "x": "Queríamos aprovechar este día para decirte que te admiramos mucho, con tu energía."}, {"t": 13.7, "x": "Siempre nos contagias de esa alegría tan bonita. Gracias por hacerlo."}, {"t": 20.1, "x": "Gracias por la dedicación y el empeño que siempre le pones a todas las cosas."}, {"t": 25.5, "x": "Te deseamos un año lleno de éxitos y de momentos muy felices."}, {"t": 29.6, "x": "No me cabe duda de que Dios tiene cosas hermosas preparadas para ti,"}, {"t": 33.0, "x": "porque eres una mujer muy dedicada, muy entregada,"}, {"t": 38.0, "x": "y sé que vas a impactar la vida de muchas personas."}, {"t": 44.5, "x": "Disfruta muchísimo este día. ¡Feliz, feliz cumpleaños!"}]}, {"who": "Ronaldo", "src": "https://cdn.shopify.com/s/files/1/0811/4595/4517/files/voz-ronaldo.mp3?v=1794026189", "caps": [{"t": 0, "x": "Hola, señorita. Hoy quiero dedicarte unas palabras muy especiales."}, {"t": 5.6, "x": "Primero que todo, feliz cumpleaños de corazón. Deseo que Dios te bendiga muchísimo."}, {"t": 10.9, "x": "Que te regale mucha salud, tranquilidad y muchas oportunidades para cumplir los sueños que llevas en tu corazón."}, {"t": 16.1, "x": "Quiero aprovechar este día para agradecerte por ser parte de este equipo y de todo lo que estamos construyendo."}, {"t": 25.3, "x": "A veces, entre la responsabilidad y tantas cosas del día a día, se nos olvida reconocerlo:"}, {"t": 30.5, "x": "tenemos a nuestro alrededor personas increíbles como ustedes, de las que aprendemos cada día."}, {"t": 36.0, "x": "Gracias por aportar tu granito de arena."}, {"t": 39.5, "x": "Te mando un abrazo. Disfruta muchísimo este día, y que Dios te bendiga."}]}];let ti=0;const heard=new Set();
 const voz=$('#voz'),vpr=$('#vpr');const W=$('#wave');W.innerHTML='<i></i>'.repeat(24);const bars=[...W.children];
 let van=null;
-function vwire(){ensure();if(van||!ac)return;try{const s=ac.createMediaElementSource(voz);van=ac.createAnalyser();van.fftSize=64;s.connect(van);van.connect(ac.destination)}catch(e){}}
+function vwire(){ensure();if(van||!ac)return;try{const s=ac.createMediaElementSource(voz);van=ac.createAnalyser();van.fftSize=64;s.connect(van);van.connect(ac.destination)}catch(e){van=null}}
 const ICP='<path d="M8 5.5v13l10.5-6.5z"/>',ICS='<path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/>';
-function load(i){ti=i;voz.src=TR[i].src;$$('#who2 button').forEach((b,k)=>{b.classList.toggle('on',k===i);b.setAttribute('aria-pressed',k===i)});$('#vname').textContent=TR[i].who;$('#cap').textContent='Toca para escuchar';$('#cap').dataset.k='';vpr.style.strokeDashoffset=540;$('#vic').innerHTML=ICP}
+function load(i){ti=i;voz.crossOrigin='anonymous';voz.src=TR[i].src;$$('#who2 button').forEach((b,k)=>{b.classList.toggle('on',k===i);b.setAttribute('aria-pressed',k===i)});$('#vname').textContent=TR[i].who;$('#cap').textContent='Toca para escuchar';$('#cap').dataset.k='';vpr.style.strokeDashoffset=540;$('#vic').innerHTML=ICP}
 load(0);
 function vdraw(){const fr=voz.duration?voz.currentTime/voz.duration:0;vpr.style.strokeDashoffset=540*(1-fr);
   if(van){const d=new Uint8Array(van.frequencyBinCount);van.getByteFrequencyData(d);bars.forEach((b,i)=>b.style.height=(6+d[(i%16)+2]/255*40)+'px')}
   const t=voz.currentTime,c=TR[ti].caps.filter(c=>c.t<=t).pop();if(c&&$('#cap').dataset.k!==String(c.t)){$('#cap').dataset.k=c.t;$('#cap').textContent=c.x}
   if(!voz.paused)requestAnimationFrame(vdraw)}
-function play(){vwire();if(ac)ac.resume();duck(true);voz.play();$('#vic').innerHTML=ICS;$('#vplay').setAttribute('aria-label','Pausar el mensaje');vdraw()}
-$('#vplay').addEventListener('click',()=>{if(voz.paused)play();else{voz.pause();duck(false);$('#vic').innerHTML=ICP;$('#vplay').setAttribute('aria-label','Escuchar el mensaje')}});
+function play(){vwire();if(ac)ac.resume();try{$('#song').pause()}catch(e){}duck(true);voz.play();$('#vic').innerHTML=ICS;$('#vplay').setAttribute('aria-label','Pausar el mensaje');vdraw()}
+$('#vplay').addEventListener('click',()=>{if(voz.paused)play();else{voz.pause();duck(false);try{if(songStarted)$('#song').play().catch(()=>{})}catch(e){}$('#vic').innerHTML=ICP;$('#vplay').setAttribute('aria-label','Escuchar el mensaje')}});
 $$('#who2 button').forEach(b=>b.addEventListener('click',()=>{voz.pause();load(+b.dataset.i);play()}));
 voz.addEventListener('ended',()=>{heard.add(ti);bars.forEach(b=>b.style.height='6px');burst(120);
-  if(ti===0&&!heard.has(1)){$('#cap').textContent='Ahora escucha a Ronaldo';setTimeout(()=>{load(1);play()},1800)}else{duck(false);if(!heard.r){heard.r=1;reward('Mensajes escuchados')}$('#vic').innerHTML=ICP;$('#go6').hidden=false;setTimeout(()=>$('#go6').focus(),300)}});
+  if(ti===0&&!heard.has(1)){$('#cap').textContent='Ahora escucha a Ronaldo';setTimeout(()=>{load(1);play()},1800)}else{duck(false);try{if(songStarted)$('#song').play().catch(()=>{})}catch(e){}if(!heard.r){heard.r=1;reward('Mensajes escuchados')}$('#vic').innerHTML=ICP;$('#go6').hidden=false;setTimeout(()=>$('#go6').focus(),300)}});
 $('#go6').addEventListener('click',()=>{voz.pause();duck(false);go(8)});
 /* 6 · Lluvia de bendiciones */
 const VS=[['Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz, y no de mal, para daros el fin que esperáis.','Jeremías 29:11'],
@@ -611,7 +621,7 @@ let vn=0;$$('.lan').forEach(l=>l.addEventListener('click',()=>{if(l.classList.co
   if(vn===3){reward('Bendiciones recibidas');$('#lanT').textContent='Tu año viene lleno de bendiciones';setTimeout(()=>{burst(120);$('#go7').hidden=false;$('#go7').focus()},1600)}}));
 $('#go7').addEventListener('click',()=>{go(9);$$('#letter p').forEach((p,i)=>setTimeout(()=>p.classList.add('on'),RM?0:600+i*1200));});
 /* 6 · Final */
-$('#again').addEventListener('click',()=>{burst(220);petals(70);startMusic()});
+$('#again').addEventListener('click',()=>{ensure();fanfare();burst(220);petals(70);startMusic()});
 $('#replay').addEventListener('click',()=>location.reload());
 })();
 </script>
