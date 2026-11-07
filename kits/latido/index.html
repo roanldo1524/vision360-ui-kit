@@ -74,7 +74,7 @@ section{padding:64px 0}
 .card h3{margin-bottom:4px}
 .card p.s{font-size:14.5px;color:var(--soft);line-height:1.5}
 .card.span2{grid-column:span 2}
-.demo{display:inline-block;margin-bottom:10px;font:700 10px/1 var(--sans);letter-spacing:.15em;text-transform:uppercase;color:var(--mute)}
+.demo{display:inline-block;margin-bottom:10px;font:700 11px/1 var(--sans);letter-spacing:.15em;text-transform:uppercase;color:var(--mute)}
 /* Voz */
 .voice{display:flex;align-items:center;gap:14px;margin-top:16px}
 .play{flex:none;width:56px;height:56px;border-radius:50%;background:var(--rose);display:grid;place-items:center;transition:transform 160ms var(--ease);box-shadow:0 10px 22px -10px rgba(0,0,0,.55)}
@@ -243,6 +243,15 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .story .w{grid-template-columns:1.15fr 1fr;gap:56px}
   .vfig{float:none}
 }
+
+/* ===== v3 · estructura de venta ===== */
+.how{padding-top:56px;padding-bottom:24px}
+.how .steps{gap:10px}
+.who .wg{display:grid;gap:0;border-top:1px solid var(--line)}
+.who .wg>div{padding:20px 0;border-bottom:1px solid var(--line)}
+.who .wg p{margin-top:4px;color:var(--soft);font-size:16px}
+.price .anchor{margin:-4px 0 14px;font-size:14.5px;color:var(--soft)}
+@media (min-width:900px){.who .wg{grid-template-columns:repeat(4,1fr);gap:28px;border-top:0}.who .wg>div{border:0;border-top:1px solid var(--line);padding:20px 0 0}}
 </style>
 </head>
 <body>
@@ -258,22 +267,32 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section class="hero">
   <img class="hbg" src="img/lt-abuela.webp" width="1500" height="1000" alt="Una abuela llora de emoción al escuchar un mensaje de voz por teléfono, frente a una torta con una vela" fetchpriority="high">
   <div class="w"><div class="ht">
-    <h1 class="rv">Regálale lo que no se compra: tu voz.</h1>
-    <p class="lead rv" style="--i:2">Grabas un audio, escribes lo que sientes y lo convertimos en una sorpresa que ella abre desde su celular. Se queda con eso para siempre.</p>
+    <h1 class="rv">Hay cosas que ella lleva años esperando oírte decir.</h1>
+    <p class="lead rv" style="--i:2">Dilas con tu voz. Nosotros las convertimos en una sorpresa que ella abre desde su celular: una rosa que florece, velas que apaga, una carta con su nombre.</p>
     <div class="cta-row rv" style="--i:3">
-      <a class="btn" href="#crear" id="heroCta">Crear mi sorpresa · $15 USD</a>
-      <p class="micro">Pago seguro con Stripe · Lista en 24 horas · Sin crear cuenta</p>
+      <a class="btn" href="#crear" id="heroCta">Quiero sorprenderla · $15 USD</a>
+      <p class="micro">Un solo pago · Lista en 24 horas · Funciona desde cualquier país</p>
     </div>
   </div></div>
 </section>
+
+<!-- Pasos -->
+<section class="how"><div class="w">
+  <div class="sh"><h2 class="rv">Tres pasos y ya está.</h2></div>
+  <div class="steps">
+    <div class="step rv"><div><h3>Dile lo que nunca le has dicho</h3><p>Escribe su nombre y tu mensaje. Graba tu voz o sube una nota que ya tengas. No tiene que quedar perfecto, tiene que sonar a ti.</p></div></div>
+    <div class="step rv" style="--i:1"><div><h3>Nosotros armamos la sorpresa</h3><p>Pagas $15 USD una sola vez. Ponemos su nombre, tu voz y tus palabras dentro de algo hecho solo para ella.</p></div></div>
+    <div class="step rv" style="--i:2"><div><h3>Le pasas la tarjeta y esperas su audio</h3><p>En 24 horas te enviamos por WhatsApp una tarjeta bonita con un QR en forma de corazón. Se la das a ella, impresa o por chat. Escanea, y empieza todo.</p></div></div>
+  </div>
+</div></section>
 
 <!-- Historia -->
 <section class="story"><div class="w">
   <figure class="sfig rv"><img src="img/lt-noche.webp" width="1000" height="1000" loading="lazy" alt="Una mujer sentada en el piso de su cuarto llora y sonríe mientras escucha una nota de voz, con un pedazo de torta a su lado"></figure>
   <div class="stx">
-    <h2 class="rv">Un mensaje de texto se lee y se borra. Tu voz se guarda.</h2>
-    <p class="lead rv" style="--i:1">Piensa en la última vez que alguien te dijo algo bonito con su propia voz. Se te quedó, ¿cierto?</p>
-    <p class="lead rv" style="--i:2">Eso es lo que le vas a dar a tu mamá, a tu pareja, a tu mejor amiga. Cinco minutos tuyos, y un cumpleaños que no se parece a ningún otro.</p>
+    <h2 class="rv">Un ramo se marchita. Tu voz se queda.</h2>
+    <p class="lead rv" style="--i:1">Piensa en un audio que tengas guardado de alguien que quieres. Lo has escuchado más veces de las que admitirías.</p>
+    <p class="lead rv" style="--i:2">Ahora imagina ser tú esa voz. La que ella busca cuando te extraña. Eso no lo da ninguna tienda, y empieza con un minuto tuyo.</p>
   </div>
 </div></section>
 
@@ -289,7 +308,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <!-- Así se siente -->
 <section><div class="w">
-  <div class="sh"><h2 class="rv">Y después, ella juega con tu sorpresa.</h2><p class="lead rv" style="--i:1">Estos son algunos de los momentos. Pruébalos tú, tal como los vive quien la recibe.</p></div>
+  <div class="sh"><h2 class="rv">Esto es lo que ella vive, momento a momento.</h2><p class="lead rv" style="--i:1">Pruébalo tú. Así lo siente quien la recibe.</p></div>
   <div class="bento">
     <article class="card span2 rv">
       <span class="demo">Demo</span>
@@ -320,20 +339,20 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   </div>
 </div></section>
 
-<!-- Cómo funciona -->
-<section><div class="w">
-  <div class="sh"><h2 class="rv">Tú pones la voz. Nosotros hacemos el resto.</h2></div>
-  <figure class="vfig rv"><img src="img/lt-voz.webp" width="800" height="800" loading="lazy" alt="Manos sosteniendo un celular que graba un audio, con un regalo y una rosa al lado"></figure>
-  <div class="steps">
-    <div class="step rv"><div><h3>Subes tu audio y escribes tu mensaje</h3><p>Lo grabas ahí mismo o subes una nota de voz que ya tengas. Un minuto basta.</p></div></div>
-    <div class="step rv" style="--i:1"><div><h3>Armamos la sorpresa</h3><p>Le ponemos su nombre, sus colores y tus palabras. La tienes lista en 24 horas.</p></div></div>
-    <div class="step rv" style="--i:2"><div><h3>Se la mandas por WhatsApp</h3><p>Te damos un link y un QR en forma de corazón para imprimir. Ella escanea y todo empieza.</p></div></div>
+<!-- Para quién -->
+<section class="who"><div class="w">
+  <div class="sh"><h2 class="rv">Para esas personas a las que un "feliz cumple" les queda corto.</h2><p class="lead rv" style="--i:1">Funciona igual si viven a tres cuadras o a tres mil kilómetros.</p></div>
+  <div class="wg">
+    <div class="rv"><h3>Tu mamá</h3><p>Lleva toda la vida cuidándote. Que oiga, por fin, cuánto lo sabes.</p></div>
+    <div class="rv" style="--i:1"><h3>Tu novia</h3><p>Más que un "te amo" por chat. Algo que abre, escucha y guarda.</p></div>
+    <div class="rv" style="--i:2"><h3>Tu hermana o tu mejor amiga</h3><p>La que te aguanta todo. Dile lo que vale para ti.</p></div>
+    <div class="rv" style="--i:3"><h3>Tu familia lejos</h3><p>Si los separa un océano, esto llega en un segundo y se siente como estar ahí.</p></div>
   </div>
 </div></section>
 
 <!-- Crear -->
 <section id="crear"><div class="w">
-  <div class="sh"><h2 class="rv">Crea la tuya.</h2><p class="lead rv" style="--i:1">Escribe su nombre y tu mensaje. A la derecha ves cómo se va a ver en su celular.</p></div>
+  <div class="sh"><h2 class="rv">Crea la suya.</h2><p class="lead rv" style="--i:1">Escribe su nombre y tu mensaje. Aquí ves cómo se va a ver en su celular.</p></div>
   <div class="make">
     <form class="form rv" id="form" novalidate>
       <div><label for="fTo">¿Para quién es?</label><input class="inp" id="fTo" name="to" maxlength="24" autocomplete="off" placeholder="Valentina" aria-describedby="eTo"><p class="err" id="eTo" role="alert">Escribe el nombre de quien cumple años.</p></div>
@@ -362,11 +381,12 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="price rv" style="--i:2">
         <span class="tag">Precio de lanzamiento</span>
         <div class="big"><b>$15</b><span>USD · pago único</span></div>
+        <p class="anchor">Un ramo cuesta más y dura una semana. Esto lo escucha cuando quiera.</p>
         <ul>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Tu voz y tu mensaje dentro de una sorpresa interactiva</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Rosa que florece, montaña rusa, ruleta, velas, regalo y carta</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Su nombre y colores propios</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Link para WhatsApp y QR en corazón para imprimir</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Tu voz y tu mensaje dentro de una sorpresa para su celular</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Rosa que se abre, velas, raspadita y carta con su nombre</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Ajustes si algo no quedó como querías</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Tarjeta bonita con QR en corazón, enviada a tu WhatsApp</li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Lista en 24 horas</li>
         </ul>
         <button class="btn" id="payBtn" type="button">Pagar $15 USD</button>
@@ -380,7 +400,9 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section><div class="w">
   <div class="sh"><h2 class="rv">Lo que casi todos preguntan</h2></div>
   <div class="faq rv" id="faq">
-    <div class="q"><button type="button" aria-expanded="false">¿Cómo la recibe la persona?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Tú le mandas un link por WhatsApp, o le entregas el QR en corazón impreso. Lo abre desde el celular y la sorpresa arranca sola. No necesita app ni cuenta.</p></div></div></div>
+    <div class="q"><button type="button" aria-expanded="false">¿Y si me da pena grabar?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>A casi todos les da. Grábalo como si le escribieras un audio por WhatsApp. Lo que emociona no es una voz perfecta, es que sea la tuya. Y puedes repetirlo las veces que quieras antes de enviarlo.</p></div></div></div>
+    <div class="q"><button type="button" aria-expanded="false">¿Funciona si vive en otro país?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Sí. Es un link: se abre en cualquier celular con internet, en cualquier país. Tú pagas en dólares, ella no paga nada.</p></div></div></div>
+    <div class="q"><button type="button" aria-expanded="false">¿Cómo la recibe la persona?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Tú recibes por WhatsApp una tarjeta bonita con un QR en forma de corazón, y se la pasas a ella: impresa, o como imagen por chat. Ella lo escanea con la cámara del celular y la sorpresa arranca sola. No necesita app ni cuenta.</p></div></div></div>
     <div class="q"><button type="button" aria-expanded="false">¿Cuánto me demoro en tenerla?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Te la entregamos en 24 horas después de que nos mandes tu audio y tu mensaje. Si el cumpleaños es mañana, escríbenos apenas pagues y la priorizamos.</p></div></div></div>
     <div class="q"><button type="button" aria-expanded="false">¿Y si no tengo audio?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>La sorpresa funciona igual solo con tu mensaje escrito. Pero con tu voz se siente distinto, y casi siempre vale la pena grabar un minuto.</p></div></div></div>
     <div class="q"><button type="button" aria-expanded="false">¿Cómo pago?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Con tarjeta, en una página de Stripe. Pagas $15 USD una sola vez. Nosotros nunca vemos los datos de tu tarjeta.</p></div></div></div>
@@ -390,15 +412,15 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <!-- Cierre -->
 <section class="end"><img class="ebg" src="img/lt-noche.webp" width="1000" height="1000" loading="lazy" alt=""><div class="w">
-  <h2 class="rv">Dentro de diez años no se acordará de lo que costó. Se acordará de que la escuchaste.</h2>
-  <p class="lead rv" style="--i:1">Hoy todavía estás a tiempo.</p>
-  <a class="btn rv" style="--i:2" href="#crear">Crear mi sorpresa · $15 USD</a>
+  <h2 class="rv">Dentro de diez años no recordará qué le regalaste. Recordará lo que le dijiste.</h2>
+  <p class="lead rv" style="--i:1">Todavía estás a tiempo de que sea este cumpleaños.</p>
+  <a class="btn rv" style="--i:2" href="#crear">Quiero sorprenderla · $15 USD</a>
 </div></section>
 </main>
 
 <footer><div class="w"><span>Latido · Hecho con cariño</span><span>Pagos procesados por Stripe</span></div></footer>
 
-<div class="sk" id="sk" aria-hidden="true"><div class="t"><b>$15 USD</b><span>Precio de lanzamiento</span></div><a class="btn" href="#crear" tabindex="-1">Crear mi sorpresa</a></div>
+<div class="sk" id="sk" aria-hidden="true"><div class="t"><b>$15 USD</b><span>Precio de lanzamiento</span></div><a class="btn" href="#crear" tabindex="-1">Quiero sorprenderla</a></div>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
