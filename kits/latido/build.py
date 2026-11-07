@@ -6,4 +6,5 @@ def mk(src,dst,thanks=None):
     if thanks: s=s.replace("thanksUrl:'gracias.html'","thanksUrl:'%s'"%thanks)
     open(dst,'w').write('{% layout none %}{% raw %}'+s+'{% endraw %}')
 mk('index.html','shopify/templates/page.latido.liquid','/pages/latido-gracias')
+mk('index.html','shopify/templates/product.latido.liquid','/pages/latido-gracias')
 mk('gracias.html','shopify/templates/page.latido-gracias.liquid')
