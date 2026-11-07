@@ -428,6 +428,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 'use strict';
 /* ====== CONFIGURACIÓN (lo único que hay que tocar para publicar) ====== */
 const CONFIG={
+  variantId:'',                  // Shopify: id de la variante del producto (lo pone el armado)
   stripeLink:'',                 // Payment Link de Stripe, por ejemplo https://buy.stripe.com/xxxx
   whatsapp:'573217493251',       // WhatsApp que recibe los audios (con 57, sin +)
   thanksUrl:'gracias.html'
@@ -562,6 +563,11 @@ function pay(){let ok=true;
   if(!ok){document.getElementById('crear').scrollIntoView({behavior:RM?'auto':'smooth'});return}
   const id='lt'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
   try{localStorage.setItem('latido_draft',JSON.stringify({id,to:st.to.trim(),from:st.from.trim(),msg:st.msg.trim(),hasAudio:!!st.audio,audioName:st.audioName,t:Date.now()}))}catch(e){}
+  if(CONFIG.variantId){
+    const b=$('#payBtn');b.disabled=true;
+    fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:[{id:+CONFIG.variantId,quantity:1,properties:{'Para':st.to.trim(),'De parte de':st.from.trim(),'Mensaje':st.msg.trim(),'Audio':st.audio?'Sí ('+(st.audioName||'grabado')+')':'Lo enviará por WhatsApp','Pedido':id}}]})})
+      .then(r=>{if(!r.ok)throw 0;location.href='/checkout'}).catch(()=>{b.disabled=false;toast('No pudimos abrir el pago. Intenta de nuevo.')});
+    return}
   if(!CONFIG.stripeLink){toast('Modo de prueba: aquí se abre el pago de Stripe.');buzz(10);return}
   const u=CONFIG.stripeLink+(CONFIG.stripeLink.includes('?')?'&':'?')+'client_reference_id='+encodeURIComponent(id);
   location.href=u}
