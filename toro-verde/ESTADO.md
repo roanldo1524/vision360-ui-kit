@@ -147,3 +147,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 6 nov, 7:20 p. m. (revisión automática): subidos Jesús Lauriano Ortega (El Rosario, 2 L) y Santiago Ramírez Hoyos (Manzanares, 1 L), los dos por el obsequio.
 - 6 nov, 8:20 p. m. (revisión automática): subidos Edwin Bernardo Morales (Buesaco, 1 L) y Rubén Darío Higuita (Antioquia, 4 L + 2 L), por el obsequio.
 - 6 nov, 9:20 p. m. (revisión automática): subidos Juverney Acevedo (Risaralda, Caldas), José Miro López (Funes, Nariño) y Mateo Verona (Chigorodó, 2 L), por el obsequio.
+- 6 nov, 10:20 p. m. (revisión automática): subido Nay Hernández Osorio (San Gil, 2 L), por el obsequio.
