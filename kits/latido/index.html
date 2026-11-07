@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1C0A20">
+<title>Latido · Regala una sorpresa de cumpleaños con tu voz</title>
+<meta name="description" content="Sube tu audio, escribe tu mensaje y armamos una sorpresa interactiva que se abre desde el celular. $15 USD, pago seguro con Stripe.">
+<meta property="og:title" content="Latido · Una sorpresa de cumpleaños que se abre con tu voz">
+<meta property="og:description" content="Sube tu audio y tu mensaje. Nosotros armamos la sorpresa. $15 USD.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --ink:#1C0A20;--ink2:#26102C;--rose:#FF5C93;--rose2:#FF8DB3;--gold:#F5CF72;
+  --text:#F6EAF1;--soft:#C9B3C6;--mute:#9C849A;
+  --line:rgba(255,255,255,.07);--glass:rgba(255,255,255,.04);--glass2:rgba(255,255,255,.07);
+  --ease:cubic-bezier(.23,1,.32,1);--io:cubic-bezier(.77,0,.175,1);
+  --display:'Young Serif',Georgia,serif;--sans:'Figtree',system-ui,sans-serif;--script:'Pinyon Script',cursive;
+  --sh1:0 4px 20px -2px rgba(0,0,0,.28),0 2px 8px -1px rgba(0,0,0,.2);
+  --sh2:0 30px 60px -15px rgba(0,0,0,.55),0 15px 30px -10px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:var(--text);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,input,textarea{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+img,svg,canvas{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:10px}
+.w{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.02em;line-height:1.06;text-wrap:balance}
+h1{font-size:clamp(40px,11.4vw,76px)}
+h2{font-size:clamp(30px,8.2vw,46px)}
+h3{font-size:22px;letter-spacing:-.01em}
+p{text-wrap:pretty}
+.lead{color:var(--soft);font-size:18px;max-width:34em}
+.tag{display:inline-block;font:700 11px/1 var(--sans);letter-spacing:.15em;text-transform:uppercase;color:var(--gold);padding:7px 11px;border-radius:99px;background:rgba(245,207,114,.1);border:1px solid rgba(245,207,114,.22)}
+/* Botón principal */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:58px;padding:0 30px;border-radius:99px;background:var(--rose);color:#2A0A1B;font:700 18px/1 var(--sans);letter-spacing:.005em;text-decoration:none;transition:transform 160ms var(--ease),background-color 200ms ease,opacity 200ms ease;box-shadow:0 14px 30px -14px rgba(0,0,0,.55),0 4px 10px -4px rgba(0,0,0,.35);user-select:none;-webkit-user-select:none}
+.btn:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){.btn:hover{background:var(--rose2);transform:translateY(-1px)}.btn:hover:active{transform:scale(.97)}}
+.btn.ghost{background:var(--glass2);color:var(--text);box-shadow:none;border:1px solid var(--line)}
+.btn.sm{min-height:44px;padding:0 20px;font-size:15px}
+.micro{margin-top:12px;font-size:13.5px;color:var(--mute)}
+/* Barra superior */
+.nav{position:absolute;top:0;left:0;right:0;z-index:5;padding:calc(14px + env(safe-area-inset-top)) 0 0}
+.nav .w{display:flex;align-items:center;justify-content:space-between}
+.logo{display:inline-flex;align-items:center;gap:9px;font:400 24px/1 var(--display);letter-spacing:-.02em;text-decoration:none}
+.logo svg{width:28px;height:20px}
+/* Hero */
+.hero{position:relative;padding:92px 0 56px;overflow:hidden}
+.hero::before{content:'';position:absolute;left:50%;top:150px;width:520px;height:520px;margin-left:-260px;background:radial-gradient(closest-side,rgba(255,92,147,.10),transparent);pointer-events:none}
+.hero .w{position:relative;display:grid;gap:28px}
+.hero h1{max-width:11.5em}
+.hero .lead{margin-top:16px}
+.stage{position:relative;width:min(300px,74vw);aspect-ratio:1/1.22;margin:4px auto 0;touch-action:none;cursor:pointer;-webkit-user-select:none;user-select:none}
+.stage svg.rose{width:100%;height:100%;overflow:visible}
+.stage .hint{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);white-space:nowrap;font:600 13.5px/1 var(--sans);color:var(--soft);padding:9px 14px;border-radius:99px;background:var(--glass2);border:1px solid var(--line);transition:opacity 300ms var(--ease),transform 300ms var(--ease)}
+.stage.done .hint{opacity:0;transform:translate(-50%,6px)}
+.stage .name{position:absolute;left:0;right:0;bottom:-18px;text-align:center;font:400 54px/1 var(--script);color:var(--rose2);opacity:0;transform:translateY(8px);transition:opacity 500ms var(--ease),transform 600ms var(--ease);pointer-events:none}
+.stage.done .name{opacity:1;transform:none}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:60}
+.cta-row{margin-top:26px}
+.cta-row .btn{width:100%;max-width:420px}
+/* Secciones */
+section{padding:64px 0}
+.sh{display:grid;gap:12px;margin-bottom:28px}
+.sh .lead{font-size:17px}
+/* Bento */
+.bento{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{position:relative;padding:18px;border-radius:24px;background:var(--glass);border:1px solid var(--line);box-shadow:var(--sh1);overflow:hidden}
+.card h3{margin-bottom:4px}
+.card p.s{font-size:14.5px;color:var(--soft);line-height:1.5}
+.card.span2{grid-column:span 2}
+.demo{display:inline-block;margin-bottom:10px;font:700 10px/1 var(--sans);letter-spacing:.15em;text-transform:uppercase;color:var(--mute)}
+/* Voz */
+.voice{display:flex;align-items:center;gap:14px;margin-top:16px}
+.play{flex:none;width:56px;height:56px;border-radius:50%;background:var(--rose);display:grid;place-items:center;transition:transform 160ms var(--ease);box-shadow:0 10px 22px -10px rgba(0,0,0,.55)}
+.play:active{transform:scale(.95)}
+.play svg{width:22px;height:22px;fill:#2A0A1B}
+.play .pa{display:none}.play.on .pl{display:none}.play.on .pa{display:block}
+.wave{flex:1;display:flex;align-items:center;gap:3px;height:48px}
+.wave i{flex:1;max-width:5px;min-height:5px;height:var(--h,14px);border-radius:3px;background:var(--rose2);opacity:.7;transform-origin:center;transition:opacity 200ms}
+.wave.on i{animation:bar 900ms var(--ease) infinite alternate;animation-delay:calc(var(--i)*-60ms);opacity:1}
+@keyframes bar{from{transform:scaleY(.35)}to{transform:scaleY(1.9)}}
+.cap{margin-top:12px;min-height:46px;font:400 17px/1.35 var(--display);color:var(--text)}
+.cap span{display:block;opacity:0;transform:translateY(6px);transition:opacity 280ms var(--ease),transform 280ms var(--ease)}
+.cap span.on{opacity:1;transform:none}
+/* Rascar */
+.scr{position:relative;margin-top:12px;height:112px;border-radius:16px;overflow:hidden;background:#FFF3F7;color:#3A1626;display:grid;place-items:center;text-align:center;padding:10px}
+.scr b{font:400 26px/1.05 var(--display)}
+.scr small{display:block;font:500 12px/1.3 var(--sans);color:#8A5368;margin-top:4px}
+.scr canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;transition:opacity 500ms var(--ease)}
+.scr canvas.off{opacity:0;pointer-events:none}
+/* Velas */
+.cndls{display:flex;justify-content:center;gap:12px;margin-top:10px;height:96px;align-items:flex-end}
+.c{position:relative;width:46px;height:96px;display:flex;justify-content:center}
+.c .w1{position:absolute;bottom:0;width:13px;height:50px;border-radius:4px;background:repeating-linear-gradient(135deg,#FFF3F7 0 6px,var(--rose2) 6px 12px)}
+.c .fl{position:absolute;bottom:54px;width:15px;height:26px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:radial-gradient(circle at 50% 75%,#fff 0 18%,#FFE08A 32%,#FF9A3C 66%,rgba(255,120,40,0) 72%);transform-origin:50% 90%;animation:fk 120ms ease-in-out infinite alternate;filter:drop-shadow(0 0 4px rgba(255,190,90,.6));transition:transform 220ms var(--ease),opacity 220ms var(--ease)}
+.c.out .fl{transform:scale(.3);opacity:0;animation:none}
+.c .sm{position:absolute;bottom:60px;width:9px;height:34px;border-radius:99px;background:radial-gradient(rgba(255,255,255,.35),transparent 70%);filter:blur(3px);opacity:0}
+.c.out .sm{animation:smk 1.4s var(--ease) forwards}
+@keyframes fk{from{transform:rotate(-3deg)}to{transform:rotate(3deg) scaleY(1.08)}}
+@keyframes smk{0%{opacity:.8}100%{opacity:0;transform:translateY(-36px) scaleX(2.2)}}
+.wish{min-height:20px;margin-top:8px;text-align:center;font:600 14px/1.3 var(--sans);color:var(--gold);opacity:0;transform:translateY(4px);transition:opacity 260ms var(--ease),transform 260ms var(--ease)}
+.wish.on{opacity:1;transform:none}
+/* Carta */
+.paper{margin-top:14px;padding:18px 18px 16px;border-radius:16px;background:#FFF3F7;color:#3A1626}
+.paper .hi{font:400 34px/1 var(--script);color:#C7336E}
+.paper p{margin-top:8px;font:400 15.5px/1.55 var(--sans);color:#4A2535;max-width:34em;min-height:3.1em}
+.paper .sig{margin-top:8px;font:400 24px/1 var(--script);color:#C7336E}
+/* Pasos */
+.steps{display:grid;gap:12px;counter-reset:s}
+.step{display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:start;padding:18px;border-radius:24px;background:var(--glass);border:1px solid var(--line)}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:48px;height:48px;border-radius:16px;background:var(--glass2);border:1px solid var(--line);font:400 24px/1 var(--display);color:var(--gold)}
+.step h3{margin-bottom:4px}
+.step p{font-size:15.5px;color:var(--soft);line-height:1.5}
+/* Crear */
+.make{display:grid;gap:24px}
+.form{display:grid;gap:16px}
+label,.lbl{display:block;font:600 14px/1.2 var(--sans);color:var(--text);margin-bottom:8px}
+.lbl small,label small{font-weight:500;color:var(--mute)}
+.inp{width:100%;min-height:54px;padding:0 16px;border-radius:16px;background:var(--glass);border:1px solid var(--line);color:var(--text);font-size:17px;transition:border-color 200ms ease,box-shadow 200ms ease,background-color 200ms ease}
+textarea.inp{min-height:132px;padding:14px 16px;resize:vertical;line-height:1.5}
+.inp::placeholder{color:var(--mute)}
+.inp:focus{outline:0;border-color:var(--rose);box-shadow:0 0 0 4px rgba(255,92,147,.18);background:var(--glass2)}
+.cnt{display:flex;justify-content:space-between;margin-top:6px;font-size:12.5px;color:var(--mute)}
+.err{margin-top:6px;font-size:13.5px;color:#FFB3C9;min-height:0;display:none}
+.err.on{display:block}
+.drop{display:grid;gap:10px;padding:14px;border-radius:16px;background:var(--glass);border:1px dashed rgba(255,255,255,.18)}
+.drop .row{display:flex;gap:8px;flex-wrap:wrap}
+.drop .btn{min-height:46px;padding:0 16px;font-size:15px;box-shadow:none}
+.drop input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.aud{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;background:var(--glass2);font-size:14px;color:var(--soft)}
+.aud b{color:var(--text);font-weight:600;word-break:break-all}
+.aud .play{width:40px;height:40px;box-shadow:none}
+.aud .play svg{width:16px;height:16px}
+.rec .dot{width:10px;height:10px;border-radius:50%;background:#FF4D6D;animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+/* Teléfono vista previa */
+.phoneW{display:grid;place-items:center}
+.phone{position:relative;width:min(300px,82vw);aspect-ratio:9/17;border-radius:38px;padding:10px;background:#0F0512;border:1px solid rgba(255,255,255,.12);box-shadow:var(--sh2)}
+.screen{position:relative;height:100%;border-radius:30px;overflow:hidden;background:var(--ink2);display:flex;flex-direction:column;align-items:center;padding:34px 20px 20px;text-align:center}
+.screen::before{content:'';position:absolute;top:10px;left:50%;width:72px;height:6px;margin-left:-36px;border-radius:99px;background:rgba(255,255,255,.1)}
+.screen .for{margin-top:14px;font:400 15px/1.2 var(--sans);color:var(--soft)}
+.screen .who{font:400 46px/1.05 var(--script);color:var(--rose2);min-height:1.1em;max-width:100%;overflow-wrap:anywhere;transition:opacity 200ms ease}
+.screen .rs{width:96px;margin-top:6px}
+.screen .msg{margin-top:12px;font:400 14px/1.5 var(--sans);color:var(--text);max-height:7.6em;overflow:hidden;position:relative}
+.screen .msg::after{content:'';position:absolute;left:0;right:0;bottom:0;height:24px;background:linear-gradient(transparent,var(--ink2))}
+.screen .pill{margin-top:auto;width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:99px;background:var(--glass2);border:1px solid var(--line);font-size:12.5px;color:var(--soft)}
+.screen .pill .play{width:34px;height:34px;box-shadow:none}
+.screen .pill .play svg{width:14px;height:14px}
+.screen .pill .wave{height:26px}
+.screen .pill .wave i{min-height:4px}
+.prev-note{margin-top:12px;font-size:13px;color:var(--mute);text-align:center}
+/* Precio */
+.price{padding:22px;border-radius:24px;background:var(--glass);border:1px solid rgba(245,207,114,.3);box-shadow:var(--sh1)}
+.price .big{display:flex;align-items:baseline;gap:10px;margin:12px 0 4px}
+.price .big b{font:400 60px/1 var(--display);letter-spacing:-.03em;color:var(--gold);font-variant-numeric:tabular-nums}
+.price .big span{color:var(--soft);font-size:16px}
+.price ul{list-style:none;display:grid;gap:10px;margin:16px 0 20px}
+.price li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:15.5px;line-height:1.45;color:var(--text)}
+.price li svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+.price .btn{width:100%}
+.lock{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:12px;font-size:13px;color:var(--mute)}
+.lock svg{width:15px;height:15px;stroke:var(--mute);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* FAQ */
+.faq{border-top:1px solid var(--line)}
+.q{border-bottom:1px solid var(--line)}
+.q button{display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;min-height:60px;padding:14px 0;text-align:left;font:600 17px/1.35 var(--sans)}
+.q button svg{flex:none;width:20px;height:20px;stroke:var(--text);fill:none;stroke-width:1.8;stroke-linecap:round;transition:transform 240ms var(--ease)}
+.q.open button svg{transform:rotate(45deg)}
+.q .a{display:grid;grid-template-rows:0fr;transition:grid-template-rows 260ms var(--ease)}
+.q.open .a{grid-template-rows:1fr}
+.q .a>div{overflow:hidden}
+.q .a p{padding:0 0 18px;color:var(--soft);font-size:16px;max-width:40em}
+/* Cierre */
+.end{text-align:center}
+.end h2{max-width:11em;margin:0 auto}
+.end .lead{margin:14px auto 0}
+.end .btn{margin-top:26px;width:100%;max-width:420px}
+footer{padding:28px 0 calc(110px + env(safe-area-inset-bottom));border-top:1px solid var(--line);color:var(--mute);font-size:13.5px}
+footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+/* Barra fija */
+.sk{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(28,10,32,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform 260ms var(--ease)}
+.sk.show{transform:none}
+.sk .t{flex:1;min-width:0;line-height:1.2}
+.sk .t b{display:block;font:400 18px/1.1 var(--display)}
+.sk .t span{font-size:12.5px;color:var(--mute)}
+.sk .btn{min-height:50px;padding:0 22px;font-size:16px;box-shadow:none}
+/* Toast */
+.toast{position:fixed;left:50%;width:max-content;bottom:calc(92px + env(safe-area-inset-bottom));z-index:70;max-width:calc(100vw - 32px);text-align:center;padding:12px 18px;border-radius:16px;background:var(--gold);color:#2A1A06;font:600 14.5px/1.35 var(--sans);box-shadow:var(--sh2);transform:translate(-50%,16px);opacity:0;pointer-events:none;transition:transform 260ms var(--ease),opacity 220ms ease}
+.toast.on{transform:translate(-50%,0);opacity:1}
+/* Entradas */
+.js .rv{opacity:0;transform:translateY(10px);transition:opacity 280ms var(--ease),transform 280ms var(--ease);transition-delay:calc(var(--i,0)*50ms)}
+.js .rv.in{opacity:1;transform:none}
+/* Escritorio */
+@media (min-width:900px){
+  body{font-size:18px}
+  .hero{padding:120px 0 84px}
+  .hero .w{grid-template-columns:1.05fr .95fr;align-items:center;gap:56px}
+  .stage{width:360px;margin:0 auto}
+  .bento{grid-template-columns:repeat(6,1fr)}
+  .card.span2{grid-column:span 4}.card:not(.span2){grid-column:span 2}
+  .steps{grid-template-columns:repeat(3,1fr)}
+  .step{grid-template-columns:1fr;gap:12px}
+  .make{grid-template-columns:1fr 360px;gap:48px;align-items:start}
+  .make .col2{display:grid;gap:20px;position:sticky;top:24px}
+  .sk{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:1ms!important;animation-iteration-count:1!important;transition-duration:1ms!important;transition-delay:0ms!important;scroll-behavior:auto!important}
+  .js .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<header class="nav"><div class="w">
+  <a class="logo" href="#top" aria-label="Latido"><svg viewBox="0 0 28 20" fill="none" stroke="#FF5C93" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 11h5l3-8 5 15 3-9 2 2h8"/></svg>Latido</a>
+  <a class="btn sm ghost" href="#crear">Crear la mía</a>
+</div></header>
+
+<main id="top">
+<!-- Hero -->
+<section class="hero"><div class="w">
+  <div>
+    <h1 class="rv">Regálale una sorpresa que se abre con tu voz.</h1>
+    <p class="lead rv" style="--i:1">Subes tu audio, escribes tu mensaje y armamos una sorpresa interactiva que esa persona abre desde su celular. Sin enviar nada y sin descargar nada.</p>
+    <div class="cta-row rv" style="--i:2">
+      <a class="btn" href="#crear" id="heroCta">Crear mi sorpresa · $15 USD</a>
+      <p class="micro">Pago seguro con Stripe · Lista en 24 horas · Sin crear cuenta</p>
+    </div>
+  </div>
+  <div class="stage rv" id="stage" style="--i:2" role="button" tabindex="0" aria-label="Mantén presionada la rosa para abrirla">
+    <svg class="rose" id="roseSvg" viewBox="-120 -130 240 300" aria-hidden="true"></svg>
+    <div class="name" id="stageName" aria-hidden="true">Para ti</div>
+    <div class="hint" id="stageHint">Mantén presionada la rosa</div>
+  </div>
+</div></section>
+
+<!-- Así se siente -->
+<section><div class="w">
+  <div class="sh"><h2 class="rv">Cada parte se toca, se raspa o se sopla.</h2><p class="lead rv" style="--i:1">Estos son cuatro momentos de la sorpresa. Pruébalos aquí, tal como los vive quien la recibe.</p></div>
+  <div class="bento">
+    <article class="card span2 rv">
+      <span class="demo">Demo</span>
+      <h3>Tu voz, tal cual la grabaste</h3>
+      <p class="s">Tu audio suena en la sorpresa y tus palabras aparecen en pantalla mientras hablas.</p>
+      <div class="voice"><button class="play" id="vPlay" type="button" aria-label="Ver la demo de voz"><svg class="pl" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg><svg class="pa" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button><div class="wave" id="vWave" aria-hidden="true"></div></div>
+      <div class="cap" id="vCap" aria-live="polite"><span class="on">Toca play para ver cómo se lee tu voz.</span></div>
+    </article>
+    <article class="card rv" style="--i:1">
+      <span class="demo">Demo</span>
+      <h3>La tarjeta secreta</h3>
+      <p class="s">Se raspa con el dedo.</p>
+      <div class="scr" id="scr"><div><b>Te quiero muchísimo</b><small>Esto lo escribes tú</small></div><canvas id="scrC" aria-label="Raspa con el dedo para descubrir el mensaje"></canvas></div>
+    </article>
+    <article class="card rv" style="--i:2">
+      <span class="demo">Demo</span>
+      <h3>Las velas</h3>
+      <p class="s">Se apagan al tocar.</p>
+      <div class="cndls" id="cndls"><button class="c" type="button" aria-label="Apagar vela 1"><i class="w1"></i><i class="fl"></i><i class="sm"></i></button><button class="c" type="button" aria-label="Apagar vela 2"><i class="w1"></i><i class="fl"></i><i class="sm"></i></button><button class="c" type="button" aria-label="Apagar vela 3"><i class="w1"></i><i class="fl"></i><i class="sm"></i></button></div>
+      <div class="wish" id="wish" aria-live="polite">Pide un deseo</div>
+    </article>
+    <article class="card span2 rv">
+      <span class="demo">Se arma con lo que tú escribas</span>
+      <h3>Una carta con tus palabras</h3>
+      <p class="s">Escribe abajo, en “Crea la tuya”, y mira cómo se llena esta carta.</p>
+      <div class="paper"><div class="hi" id="pHi">Querida Valentina,</div><p id="pMsg">Gracias por ser la persona que eres. Hoy quería decirte, con mi voz y con estas palabras, cuánto te quiero.</p><div class="sig" id="pSig">Con cariño</div></div>
+    </article>
+  </div>
+</div></section>
+
+<!-- Cómo funciona -->
+<section><div class="w">
+  <div class="sh"><h2 class="rv">Tú pones la voz. Nosotros hacemos el resto.</h2></div>
+  <div class="steps">
+    <div class="step rv"><div><h3>Subes tu audio y escribes tu mensaje</h3><p>Lo grabas ahí mismo o subes una nota de voz que ya tengas. Un minuto basta.</p></div></div>
+    <div class="step rv" style="--i:1"><div><h3>Armamos la sorpresa</h3><p>Le ponemos su nombre, sus colores y tus palabras. La tienes lista en 24 horas.</p></div></div>
+    <div class="step rv" style="--i:2"><div><h3>Se la mandas por WhatsApp</h3><p>Te damos un link y un QR en forma de corazón para imprimir. Ella escanea y todo empieza.</p></div></div>
+  </div>
+</div></section>
+
+<!-- Crear -->
+<section id="crear"><div class="w">
+  <div class="sh"><h2 class="rv">Crea la tuya.</h2><p class="lead rv" style="--i:1">Escribe su nombre y tu mensaje. A la derecha ves cómo se va a ver en su celular.</p></div>
+  <div class="make">
+    <form class="form rv" id="form" novalidate>
+      <div><label for="fTo">¿Para quién es?</label><input class="inp" id="fTo" name="to" maxlength="24" autocomplete="off" placeholder="Valentina" aria-describedby="eTo"><p class="err" id="eTo" role="alert">Escribe el nombre de quien cumple años.</p></div>
+      <div><label for="fFrom">¿De parte de quién? <small>(opcional)</small></label><input class="inp" id="fFrom" name="from" maxlength="30" autocomplete="given-name" placeholder="Tu nombre"></div>
+      <div><label for="fMsg">Tu mensaje</label><textarea class="inp" id="fMsg" name="msg" maxlength="400" placeholder="Escribe como si ella estuviera enfrente. Un recuerdo, un gracias, lo que no le has dicho." aria-describedby="eMsg"></textarea><div class="cnt"><span>Lo que escribas aparece en su carta.</span><span id="fCnt">0/400</span></div><p class="err" id="eMsg" role="alert">Cuéntale un poquito más (mínimo 10 letras).</p></div>
+      <div><span class="lbl">Tu audio <small>(opcional, pero es lo que más emociona)</small></span>
+        <div class="drop">
+          <div class="row"><button class="btn ghost" id="recBtn" type="button"><span class="dot" hidden></span><span id="recT">Grabar ahora</span></button><label class="btn ghost" for="fFile" style="margin:0;cursor:pointer">Subir un audio</label><input id="fFile" type="file" accept="audio/*"></div>
+          <div class="aud" id="aud" hidden><button class="play" id="aPlay" type="button" aria-label="Escuchar tu audio"><svg class="pl" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg><svg class="pa" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button><span><b id="aName">Tu audio</b><br><span id="aInfo"></span></span></div>
+          <p class="micro" style="margin:0" id="audNote">Después del pago, te mostramos cómo enviarnos el audio por WhatsApp en un toque.</p>
+          <p class="err" id="eAud" role="alert"></p>
+        </div>
+      </div>
+    </form>
+    <div class="col2">
+      <div class="phoneW rv" style="--i:1"><div>
+        <div class="phone"><div class="screen">
+          <div class="for">Alguien te dejó algo</div>
+          <div class="who" id="sWho">Valentina</div>
+          <svg class="rs" id="sRose" viewBox="-120 -130 240 300" aria-hidden="true"></svg>
+          <div class="msg" id="sMsg">Gracias por ser la persona que eres. Hoy quería decirte, con mi voz y con estas palabras, cuánto te quiero.</div>
+          <div class="pill"><button class="play" id="sPlay" type="button" aria-label="Escuchar el audio" disabled><svg class="pl" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg><svg class="pa" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button><div class="wave" id="sWave" aria-hidden="true"></div><span id="sTag">Tu audio</span></div>
+        </div></div>
+        <p class="prev-note">Vista previa. La sorpresa completa trae mucho más.</p>
+      </div></div>
+      <div class="price rv" style="--i:2">
+        <span class="tag">Precio de lanzamiento</span>
+        <div class="big"><b>$15</b><span>USD · pago único</span></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Tu voz y tu mensaje dentro de una sorpresa interactiva</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Rosa que florece, montaña rusa, ruleta, velas, regalo y carta</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Su nombre y colores propios</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Link para WhatsApp y QR en corazón para imprimir</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Lista en 24 horas</li>
+        </ul>
+        <button class="btn" id="payBtn" type="button">Pagar $15 USD</button>
+        <div class="lock"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Pago con tarjeta, procesado por Stripe</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Preguntas -->
+<section><div class="w">
+  <div class="sh"><h2 class="rv">Lo que casi todos preguntan</h2></div>
+  <div class="faq rv" id="faq">
+    <div class="q"><button type="button" aria-expanded="false">¿Cómo la recibe la persona?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Tú le mandas un link por WhatsApp, o le entregas el QR en corazón impreso. Lo abre desde el celular y la sorpresa arranca sola. No necesita app ni cuenta.</p></div></div></div>
+    <div class="q"><button type="button" aria-expanded="false">¿Cuánto me demoro en tenerla?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Te la entregamos en 24 horas después de que nos mandes tu audio y tu mensaje. Si el cumpleaños es mañana, escríbenos apenas pagues y la priorizamos.</p></div></div></div>
+    <div class="q"><button type="button" aria-expanded="false">¿Y si no tengo audio?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>La sorpresa funciona igual solo con tu mensaje escrito. Pero con tu voz se siente distinto, y casi siempre vale la pena grabar un minuto.</p></div></div></div>
+    <div class="q"><button type="button" aria-expanded="false">¿Cómo pago?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Con tarjeta, en una página de Stripe. Pagas $15 USD una sola vez. Nosotros nunca vemos los datos de tu tarjeta.</p></div></div></div>
+    <div class="q"><button type="button" aria-expanded="false">¿Qué pasa con mi audio y mi mensaje?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><div class="a"><div><p>Solo los usamos para armar tu sorpresa. Quien tenga el link puede verla, así que mándaselo solo a quien quieras.</p></div></div></div>
+  </div>
+</div></section>
+
+<!-- Cierre -->
+<section class="end"><div class="w">
+  <h2 class="rv">Un minuto de tu voz puede valer más que cualquier regalo.</h2>
+  <p class="lead rv" style="--i:1">Que este cumpleaños se acuerde de ti.</p>
+  <a class="btn rv" style="--i:2" href="#crear">Crear mi sorpresa · $15 USD</a>
+</div></section>
+</main>
+
+<footer><div class="w"><span>Latido · Hecho con cariño</span><span>Pagos procesados por Stripe</span></div></footer>
+
+<div class="sk" id="sk" aria-hidden="true"><div class="t"><b>$15 USD</b><span>Precio de lanzamiento</span></div><a class="btn" href="#crear" tabindex="-1">Crear mi sorpresa</a></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(()=>{
+'use strict';
+/* ====== CONFIGURACIÓN (lo único que hay que tocar para publicar) ====== */
+const CONFIG={
+  stripeLink:'',                 // Payment Link de Stripe, por ejemplo https://buy.stripe.com/xxxx
+  whatsapp:'573217493251',       // WhatsApp que recibe los audios (con 57, sin +)
+  thanksUrl:'gracias.html'
+};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.documentElement.classList.add('js');
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),3200)};
+const buzz=x=>{try{navigator.vibrate&&navigator.vibrate(x)}catch(e){}};
+
+/* ====== Entradas al hacer scroll (rápidas, una sola vez) ====== */
+(()=>{const els=$$('.rv');if(!('IntersectionObserver' in window)||RM){els.forEach(e=>e.classList.add('in'));return}
+  const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{rootMargin:'0px 0px -6% 0px'});els.forEach(e=>io.observe(e))})();
+
+/* ====== Confeti y pétalos ====== */
+const cv=$('#fx'),cx=cv.getContext('2d');let P=[],raf=0;
+const COL=['#FF5C93','#FF8DB3','#F5CF72','#FFD4E2','#FFFFFF'];
+function fit(){const r=Math.min(devicePixelRatio||1,2);cv.width=innerWidth*r;cv.height=innerHeight*r;cx.setTransform(r,0,0,r,0,0)}fit();addEventListener('resize',fit);
+function burst(n,x,y){if(RM)n=Math.min(n,14);for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,s=3+Math.random()*6;P.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-4,r:Math.random()*6,vr:(Math.random()-.5)*.3,w:7+Math.random()*7,c:COL[i%COL.length],l:90+Math.random()*40,pet:i%3===0})}if(!raf)tick()}
+function tick(){cx.clearRect(0,0,innerWidth,innerHeight);P=P.filter(p=>p.l-->0&&p.y<innerHeight+30);for(const p of P){p.vy+=.17;p.vx*=.985;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.globalAlpha=Math.min(1,p.l/30);cx.fillStyle=p.c;if(p.pet){cx.beginPath();cx.ellipse(0,0,p.w*.5,p.w*.28,0,0,Math.PI*2);cx.fill()}else cx.fillRect(-p.w/2,-p.w/4,p.w,p.w/2);cx.restore()}raf=P.length?requestAnimationFrame(tick):0;if(!raf)cx.clearRect(0,0,innerWidth,innerHeight)}
+
+/* ====== Rosa dibujada en código ====== */
+const NS='http://www.w3.org/2000/svg',PET='M0 0 C-20 -8 -26 -40 -13 -56 C-6 -64 6 -64 13 -56 C26 -40 20 -8 0 0Z';let gid=0;
+function makeRose(svg,size,cols,stem){
+  const id='g'+(gid++);svg.insertAdjacentHTML('beforeend',`<defs><radialGradient id="${id}a" cx="50%" cy="100%" r="100%"><stop offset="0" stop-color="${cols[2]}"/><stop offset=".7" stop-color="${cols[0]}"/><stop offset="1" stop-color="${cols[1]}"/></radialGradient><radialGradient id="${id}b" cx="50%" cy="100%" r="100%"><stop offset="0" stop-color="${cols[2]}"/><stop offset="1" stop-color="${cols[0]}"/></radialGradient></defs>`);
+  if(stem)svg.insertAdjacentHTML('beforeend',`<path d="M0 60 C-4 100 6 130 0 170" stroke="#4F8A63" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M2 110 C30 92 58 96 72 108 C52 124 26 124 2 110Z" fill="#4F8A63"/><path d="M-1 138 C-28 120 -56 124 -70 136 C-50 152 -24 152 -1 138Z" fill="#3F7A53" opacity=".9"/>`);
+  const g=document.createElementNS(NS,'g');svg.appendChild(g);
+  const rings=[[8,1.25,0,`url(#${id}a)`],[7,1,25,`url(#${id}a)`],[6,.78,10,`url(#${id}b)`],[5,.56,40,`url(#${id}b)`],[4,.36,5,`url(#${id}b)`]],ps=[];
+  rings.forEach(([n,sc,off,fill],r)=>{for(let i=0;i<n;i++){const p=document.createElementNS(NS,'path');p.setAttribute('d',PET);p.setAttribute('fill',fill);p.setAttribute('stroke','rgba(0,0,0,.14)');p.setAttribute('stroke-width','.8');g.appendChild(p);ps.push({p,a:off+i*360/n,sc,r})}});
+  const set=b=>{b=Math.max(0,Math.min(1,b));ps.forEach(({p,a,sc,r})=>{const t=Math.max(0,Math.min(1,(b-r*.1)/.6)),e=1-Math.pow(1-t,3),s=sc*(.42+.58*e),tilt=(1-e)*(r<2?0:6);p.setAttribute('transform',`rotate(${a+(1-e)*30}) translate(0 ${-tilt}) scale(${s*(.75+.25*e)} ${s})`)});g.setAttribute('transform',`scale(${size}) rotate(${b*40})`)};
+  set(0);return set}
+const RC=['#FF5C93','#B01E5A','#FFD4E2'];
+
+/* ====== Hero: la rosa que se abre con resorte ====== */
+(()=>{const stage=$('#stage'),svg=$('#roseSvg');const set=makeRose(svg,1.25,RC,true);
+  let v=0,vel=0,target=.5,hold=false,done=false,last=0;
+  const K=RM?400:110,D=RM?60:17; /* resorte: rigidez y amortiguación */
+  function step(t){const dt=Math.min(.032,(t-last)/1000||.016);last=t;const f=-K*(v-target)-D*vel;vel+=f*dt;v+=vel*dt;set(v);
+    if(hold&&!done){target=Math.min(1.02,target+dt*(RM?3:.62));}
+    if(!done&&v>=.985&&hold){done=true;target=1;stage.classList.add('done');const r=stage.getBoundingClientRect();burst(70,r.left+r.width/2,r.top+r.height*.4);buzz([20,40,20])}
+    if(Math.abs(v-target)>.0008||Math.abs(vel)>.002||hold||!done&&target<.5)requestAnimationFrame(step);else raf2=0}
+  let raf2=0;const kick=()=>{if(!raf2){last=performance.now();raf2=requestAnimationFrame(step)}};
+  /* al cargar: se abre un poco sola, como invitación */
+  setTimeout(()=>{target=.5;kick()},120);
+  const down=e=>{if(done)return;e&&e.preventDefault&&e.preventDefault();hold=true;if(target<.55)target=.6;kick()};
+  const up=()=>{if(!hold)return;hold=false;if(!done)target=.5;kick()};
+  stage.addEventListener('pointerdown',down);addEventListener('pointerup',up);addEventListener('pointercancel',up);
+  stage.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!hold){e.preventDefault();down()}});stage.addEventListener('keyup',up);
+  stage.addEventListener('contextmenu',e=>e.preventDefault());
+  window.__setStageName=n=>{$('#stageName').textContent='Para '+(n||'ti')};
+  kick()})();
+/* rosa pequeña en la vista previa */
+(()=>{const s=makeRose($('#sRose'),1.25,RC,true);s(.92)})();
+
+/* ====== Demo de voz ====== */
+(()=>{const wv=$('#vWave'),btn=$('#vPlay'),cap=$('#vCap');
+  for(let i=0;i<30;i++){const b=document.createElement('i');b.style.setProperty('--i',i);b.style.setProperty('--h',(8+Math.abs(Math.sin(i*1.3)*30)+Math.random()*8)+'px');wv.appendChild(b)}
+  const L=['Hola, feliz cumpleaños.','Quería decirte esto con mi voz,','porque algunas cosas no caben en un mensaje.','Gracias por tanto. Te quiero.'];
+  cap.innerHTML=L.map(t=>`<span>${t}</span>`).join('');const sp=[...cap.children];sp[0].textContent='Toca play para ver cómo se lee tu voz.';sp[0].classList.add('on');
+  let on=false,timers=[];
+  const stop=()=>{on=false;btn.classList.remove('on');wv.classList.remove('on');timers.forEach(clearTimeout);timers=[]};
+  btn.addEventListener('click',()=>{if(on){stop();return}on=true;btn.classList.add('on');wv.classList.add('on');buzz(10);
+    sp.forEach(s=>s.classList.remove('on'));
+    L.forEach((t,i)=>timers.push(setTimeout(()=>{sp.forEach(s=>s.classList.remove('on'));sp[i].textContent=t;sp[i].classList.add('on')},i*1700)));
+    timers.push(setTimeout(()=>{stop();sp.forEach(s=>s.classList.remove('on'));sp[3].classList.add('on')},L.length*1700+400))})})();
+
+/* ====== Demo: tarjeta que se raspa ====== */
+(()=>{const c=$('#scrC'),box=$('#scr');function init(){const r=box.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);c.width=r.width*d;c.height=r.height*d;const g=c.getContext('2d');g.scale(d,d);
+    const gr=g.createLinearGradient(0,0,r.width,r.height);['#C9A050','#F1D896','#B8893A','#EBCB7F'].forEach((x,i,a)=>gr.addColorStop(i/(a.length-1),x));g.fillStyle=gr;g.fillRect(0,0,r.width,r.height);
+    g.globalAlpha=.16;for(let i=0;i<260;i++){g.fillStyle=Math.random()>.5?'#fff':'#000';g.fillRect(Math.random()*r.width,Math.random()*r.height,1.3,1.3)}g.globalAlpha=1;
+    g.fillStyle='rgba(255,255,255,.92)';g.font='600 14px Figtree, sans-serif';g.textAlign='center';g.fillText('Raspa aquí',r.width/2,r.height/2+5);
+    g.globalCompositeOperation='destination-out';let dw=false,lp=null,n=0,done=false;
+    const pt=e=>{const q=c.getBoundingClientRect();return[e.clientX-q.left,e.clientY-q.top]};
+    const dr=e=>{const[x,y]=pt(e);g.lineWidth=36;g.lineCap='round';g.beginPath();g.moveTo(...(lp||[x,y]));g.lineTo(x+.1,y+.1);g.stroke();lp=[x,y];if(++n%6===0)chk()};
+    function chk(){if(done)return;const a=g.getImageData(0,0,c.width,c.height).data;let k=0;for(let i=3;i<a.length;i+=64)if(a[i]===0)k++;if(k/(a.length/64)>.4){done=true;c.classList.add('off');buzz([15,30,15]);const q=box.getBoundingClientRect();burst(40,q.left+q.width/2,q.top+q.height/2)}}
+    c.addEventListener('pointerdown',e=>{dw=true;lp=null;c.setPointerCapture(e.pointerId);dr(e)});c.addEventListener('pointermove',e=>{if(dw)dr(e)});c.addEventListener('pointerup',()=>{dw=false;chk()})}
+  const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){io.disconnect();init()}});io.observe(box)})();
+
+/* ====== Demo: velas ====== */
+(()=>{const cs=$$('#cndls .c'),wish=$('#wish');let out=0;
+  cs.forEach(c=>c.addEventListener('click',()=>{if(c.classList.contains('out'))return;c.classList.add('out');buzz(12);out++;
+    if(out===3){wish.textContent='Pide un deseo';wish.classList.add('on');const q=wish.getBoundingClientRect();burst(60,q.left+q.width/2,q.top);setTimeout(()=>{cs.forEach(x=>x.classList.remove('out'));out=0;wish.classList.remove('on')},3600)}}))})();
+
+/* ====== FAQ ====== */
+$$('#faq .q button').forEach(b=>b.addEventListener('click',()=>{const q=b.parentElement,o=!q.classList.contains('open');q.classList.toggle('open',o);b.setAttribute('aria-expanded',o)}));
+
+/* ====== Barra fija ====== */
+(()=>{const sk=$('#sk'),hero=$('#heroCta'),crear=$('#crear');let hv=true,cv2=false;const upd=()=>sk.classList.toggle('show',!hv&&!cv2&&scrollY>300);
+  if('IntersectionObserver' in window){new IntersectionObserver(es=>{hv=es[0].isIntersecting;upd()}).observe(hero);new IntersectionObserver(es=>{cv2=es[0].isIntersecting;upd()},{threshold:.15}).observe(crear)}
+  addEventListener('scroll',upd,{passive:true})})();
+
+/* ====== Configurador con vista previa en vivo ====== */
+const st={to:'',from:'',msg:'',audio:null,audioName:''};
+const DEF={to:'Valentina',msg:'Gracias por ser la persona que eres. Hoy quería decirte, con mi voz y con estas palabras, cuánto te quiero.'};
+const $to=$('#fTo'),$fr=$('#fFrom'),$ms=$('#fMsg');
+function render(){const to=st.to.trim(),msg=st.msg.trim(),fr=st.from.trim();
+  $('#sWho').textContent=to||DEF.to;$('#pHi').textContent='Querida '+(to||DEF.to)+',';
+  const m=msg||DEF.msg;$('#sMsg').textContent=m;$('#pMsg').textContent=m;$('#pSig').textContent=fr?'Con cariño, '+fr:'Con cariño';
+  $('#fCnt').textContent=st.msg.length+'/400';window.__setStageName&&window.__setStageName(to)}
+[[$to,'to'],[$fr,'from'],[$ms,'msg']].forEach(([el,k])=>el.addEventListener('input',()=>{st[k]=el.value;render();if(k==='to')$('#eTo').classList.remove('on');if(k==='msg')$('#eMsg').classList.remove('on')}));
+render();
+/* wave del teléfono */
+(()=>{const w=$('#sWave');for(let i=0;i<18;i++){const b=document.createElement('i');b.style.setProperty('--i',i);b.style.setProperty('--h',(5+Math.abs(Math.sin(i*1.1)*16))+'px');w.appendChild(b)}})();
+
+/* audio: subir o grabar, con vista previa */
+const au=new Audio();let playing=false;
+const setPlay=on=>{playing=on;['#aPlay','#sPlay'].forEach(s=>$(s).classList.toggle('on',on));$('#sWave').classList.toggle('on',on)};
+au.addEventListener('ended',()=>setPlay(false));
+function setAudio(url,name,info){st.audio=url;st.audioName=name;au.src=url;$('#aud').hidden=false;$('#aName').textContent=name;$('#aInfo').textContent=info||'';$('#sPlay').disabled=false;$('#sTag').textContent=name.length>16?name.slice(0,15)+'…':name;setPlay(false)}
+function togglePlay(){if(!st.audio)return;if(playing){au.pause();setPlay(false)}else{au.play().then(()=>setPlay(true)).catch(()=>{})}}
+$('#aPlay').addEventListener('click',togglePlay);$('#sPlay').addEventListener('click',togglePlay);
+const aerr=m=>{const e=$('#eAud');e.textContent=m;e.classList.toggle('on',!!m)};
+$('#fFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;aerr('');
+  if(!/^audio\//.test(f.type)){aerr('Ese archivo no es un audio. Sube una nota de voz o un mp3.');return}
+  if(f.size>15*1024*1024){aerr('Pesa más de 15 MB. Sube un audio más corto (un minuto es suficiente).');return}
+  setAudio(URL.createObjectURL(f),f.name,(f.size/1024/1024).toFixed(1)+' MB');toast('Audio listo. Dale play y escúchalo.')});
+let mr=null,chunks=[],strm=null,t0=0,rt=0;
+const recBtn=$('#recBtn');
+async function startRec(){aerr('');
+  if(!navigator.mediaDevices||!window.MediaRecorder){aerr('Este navegador no deja grabar aquí. Usa “Subir un audio” con una nota de voz.');return}
+  try{strm=await navigator.mediaDevices.getUserMedia({audio:true})}catch(e){aerr('No pudimos usar el micrófono. Revisa el permiso del navegador o sube una nota de voz.');return}
+  chunks=[];mr=new MediaRecorder(strm);mr.ondataavailable=e=>e.data.size&&chunks.push(e.data);
+  mr.onstop=()=>{clearInterval(rt);strm.getTracks().forEach(t=>t.stop());const blob=new Blob(chunks,{type:mr.mimeType||'audio/webm'});recBtn.classList.remove('rec');recBtn.querySelector('.dot').hidden=true;$('#recT').textContent='Grabar de nuevo';setAudio(URL.createObjectURL(blob),'Tu grabación',Math.round((Date.now()-t0)/1000)+' s')};
+  mr.start();t0=Date.now();recBtn.classList.add('rec');recBtn.querySelector('.dot').hidden=false;
+  rt=setInterval(()=>{const s=Math.round((Date.now()-t0)/1000);$('#recT').textContent='Detener · '+s+' s';if(s>=90)mr.state==='recording'&&mr.stop()},300)}
+recBtn.addEventListener('click',()=>{if(mr&&mr.state==='recording'){mr.stop();return}startRec()});
+
+/* pago */
+function pay(){let ok=true;
+  if(st.to.trim().length<2){$('#eTo').classList.add('on');ok=false;$to.focus()}
+  if(st.msg.trim().length<10){$('#eMsg').classList.add('on');if(ok)$ms.focus();ok=false}
+  if(!ok){document.getElementById('crear').scrollIntoView({behavior:RM?'auto':'smooth'});return}
+  const id='lt'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  try{localStorage.setItem('latido_draft',JSON.stringify({id,to:st.to.trim(),from:st.from.trim(),msg:st.msg.trim(),hasAudio:!!st.audio,audioName:st.audioName,t:Date.now()}))}catch(e){}
+  if(!CONFIG.stripeLink){toast('Modo de prueba: aquí se abre el pago de Stripe.');buzz(10);return}
+  const u=CONFIG.stripeLink+(CONFIG.stripeLink.includes('?')?'&':'?')+'client_reference_id='+encodeURIComponent(id);
+  location.href=u}
+$('#payBtn').addEventListener('click',pay);
+})();
+</script>
+</body>
+</html>
