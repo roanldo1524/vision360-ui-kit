@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#1C0A20">
+<meta name="theme-color" content="#1A0D0E">
 <title>Latido · Regala una sorpresa de cumpleaños con tu voz</title>
 <meta name="description" content="Sube tu audio, escribe tu mensaje y armamos una sorpresa interactiva que se abre desde el celular. $15 USD, pago seguro con Stripe.">
 <meta property="og:title" content="Latido · Una sorpresa de cumpleaños que se abre con tu voz">
@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
 :root{
-  --ink:#1C0A20;--ink2:#26102C;--rose:#FF5C93;--rose2:#FF8DB3;--gold:#F5CF72;
+  --ink:#1A0D0E;--ink2:#26141A;--rose:#FF5C93;--rose2:#FF8DB3;--gold:#F5CF72;
   --text:#F6EAF1;--soft:#C9B3C6;--mute:#9C849A;
   --line:rgba(255,255,255,.07);--glass:rgba(255,255,255,.04);--glass2:rgba(255,255,255,.07);
   --ease:cubic-bezier(.23,1,.32,1);--io:cubic-bezier(.77,0,.175,1);
@@ -214,6 +214,35 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   *,*::before,*::after{animation-duration:1ms!important;animation-iteration-count:1!important;transition-duration:1ms!important;transition-delay:0ms!important;scroll-behavior:auto!important}
   .js .rv{opacity:1;transform:none}
 }
+
+/* ===== v2 · fotos y emoción ===== */
+.eyebrow{font:700 12px/1 var(--sans);letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.hero{padding:0;min-height:100svh;display:flex;align-items:flex-end;isolation:isolate}
+.hero::before{display:none}
+.hbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:42% 30%;z-index:-2}
+.hero::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(26,13,14,.96) 0%,rgba(26,13,14,.82) 38%,rgba(26,13,14,.25) 72%,rgba(26,13,14,.1) 100%)}
+.hero .w{display:block;padding-top:110px;padding-bottom:44px}
+.hero h1{max-width:12em;font-size:clamp(38px,10.6vw,72px)}
+.hero .lead{color:#E8D6D2}
+.story{padding-top:72px}
+.story .w{display:grid;gap:28px;align-items:center}
+.sfig img,.vfig img{width:100%;height:auto;border-radius:24px;box-shadow:var(--sh2)}
+.sfig,.vfig{margin:0}
+.stx{display:grid;gap:14px}
+.vfig{max-width:520px;margin:0 auto 28px}
+.vfig img{aspect-ratio:4/3;object-fit:cover}
+.rosa{padding-top:24px}
+.rosa .stage{margin-top:8px}
+.end{position:relative;overflow:hidden;isolation:isolate}
+.ebg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%;z-index:-2;opacity:.5}
+.end::after{content:'';position:absolute;inset:0;z-index:-1;background:rgba(26,13,14,.62)}
+@media (min-width:900px){
+  .hero .w{padding-bottom:84px}
+  .hero::after{background:linear-gradient(to right,rgba(26,13,14,.94) 0%,rgba(26,13,14,.78) 42%,rgba(26,13,14,.1) 80%)}
+  .hbg{object-position:70% 25%}
+  .story .w{grid-template-columns:1.15fr 1fr;gap:56px}
+  .vfig{float:none}
+}
 </style>
 </head>
 <body>
@@ -226,15 +255,32 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <main id="top">
 <!-- Hero -->
-<section class="hero"><div class="w">
-  <div>
-    <h1 class="rv">Regálale una sorpresa que se abre con tu voz.</h1>
-    <p class="lead rv" style="--i:1">Subes tu audio, escribes tu mensaje y armamos una sorpresa interactiva que esa persona abre desde su celular. Sin enviar nada y sin descargar nada.</p>
-    <div class="cta-row rv" style="--i:2">
+<section class="hero">
+  <img class="hbg" src="img/lt-abuela.webp" width="1500" height="1000" alt="Una abuela llora de emoción al escuchar un mensaje de voz por teléfono, frente a una torta con una vela" fetchpriority="high">
+  <div class="w"><div class="ht">
+    <p class="eyebrow rv">Regalo de cumpleaños</p>
+    <h1 class="rv" style="--i:1">Regálale lo que no se compra: tu voz.</h1>
+    <p class="lead rv" style="--i:2">Grabas un audio, escribes lo que sientes y lo convertimos en una sorpresa que ella abre desde su celular. Se queda con eso para siempre.</p>
+    <div class="cta-row rv" style="--i:3">
       <a class="btn" href="#crear" id="heroCta">Crear mi sorpresa · $15 USD</a>
       <p class="micro">Pago seguro con Stripe · Lista en 24 horas · Sin crear cuenta</p>
     </div>
+  </div></div>
+</section>
+
+<!-- Historia -->
+<section class="story"><div class="w">
+  <figure class="sfig rv"><img src="img/lt-noche.webp" width="1000" height="1000" loading="lazy" alt="Una mujer sentada en el piso de su cuarto llora y sonríe mientras escucha una nota de voz, con un pedazo de torta a su lado"></figure>
+  <div class="stx">
+    <h2 class="rv">Un mensaje de texto se lee y se borra. Tu voz se guarda.</h2>
+    <p class="lead rv" style="--i:1">Piensa en la última vez que alguien te dijo algo bonito con su propia voz. Se te quedó, ¿cierto?</p>
+    <p class="lead rv" style="--i:2">Eso es lo que le vas a dar a tu mamá, a tu pareja, a tu mejor amiga. Cinco minutos tuyos, y un cumpleaños que no se parece a ningún otro.</p>
   </div>
+</div></section>
+
+<!-- La rosa -->
+<section class="rosa"><div class="w">
+  <div class="sh" style="text-align:center;justify-items:center"><h2 class="rv">Así empieza: una rosa que se abre con el dedo.</h2><p class="lead rv" style="--i:1">Es lo primero que ve ella. Mantenla presionada.</p></div>
   <div class="stage rv" id="stage" style="--i:2" role="button" tabindex="0" aria-label="Mantén presionada la rosa para abrirla">
     <svg class="rose" id="roseSvg" viewBox="-120 -130 240 300" aria-hidden="true"></svg>
     <div class="name" id="stageName" aria-hidden="true">Para ti</div>
@@ -244,7 +290,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <!-- Así se siente -->
 <section><div class="w">
-  <div class="sh"><h2 class="rv">Cada parte se toca, se raspa o se sopla.</h2><p class="lead rv" style="--i:1">Estos son cuatro momentos de la sorpresa. Pruébalos aquí, tal como los vive quien la recibe.</p></div>
+  <div class="sh"><h2 class="rv">Y después, ella juega con tu sorpresa.</h2><p class="lead rv" style="--i:1">Estos son algunos de los momentos. Pruébalos tú, tal como los vive quien la recibe.</p></div>
   <div class="bento">
     <article class="card span2 rv">
       <span class="demo">Demo</span>
@@ -278,6 +324,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <!-- Cómo funciona -->
 <section><div class="w">
   <div class="sh"><h2 class="rv">Tú pones la voz. Nosotros hacemos el resto.</h2></div>
+  <figure class="vfig rv"><img src="img/lt-voz.webp" width="800" height="800" loading="lazy" alt="Manos sosteniendo un celular que graba un audio, con un regalo y una rosa al lado"></figure>
   <div class="steps">
     <div class="step rv"><div><h3>Subes tu audio y escribes tu mensaje</h3><p>Lo grabas ahí mismo o subes una nota de voz que ya tengas. Un minuto basta.</p></div></div>
     <div class="step rv" style="--i:1"><div><h3>Armamos la sorpresa</h3><p>Le ponemos su nombre, sus colores y tus palabras. La tienes lista en 24 horas.</p></div></div>
@@ -343,9 +390,9 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </div></section>
 
 <!-- Cierre -->
-<section class="end"><div class="w">
-  <h2 class="rv">Un minuto de tu voz puede valer más que cualquier regalo.</h2>
-  <p class="lead rv" style="--i:1">Que este cumpleaños se acuerde de ti.</p>
+<section class="end"><img class="ebg" src="img/lt-noche.webp" width="1000" height="1000" loading="lazy" alt=""><div class="w">
+  <h2 class="rv">Dentro de diez años no se acordará de lo que costó. Se acordará de que la escuchaste.</h2>
+  <p class="lead rv" style="--i:1">Hoy todavía estás a tiempo.</p>
   <a class="btn rv" style="--i:2" href="#crear">Crear mi sorpresa · $15 USD</a>
 </div></section>
 </main>
