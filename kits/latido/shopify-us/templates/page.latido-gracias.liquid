@@ -1,39 +1,77 @@
 {% layout none %}{% raw %}<!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Gracias · Latido</title><meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A0D0E'/%3E%3Cpath d='M3 17h6l3-9 5 17 3-10 2 2h7' fill='none' stroke='%23FF5C93' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1C0A20;--rose:#FF5C93;--gold:#F5CF72;--text:#F7EAF1;--soft:#CDB8C6;--ease:cubic-bezier(.23,1,.32,1)}
+:root{--ink:#1A0D0E;--ink2:#26141A;--rose:#FF5C93;--gold:#F5CF72;--text:#F6EAF1;--soft:#C9B3C6;--mute:#9C849A;--line:rgba(255,255,255,.08);--ease:cubic-bezier(.23,1,.32,1)}
 *{box-sizing:border-box;margin:0}
-body{min-height:100svh;background:var(--ink);color:var(--text);font:400 17px/1.6 'Figtree',system-ui,sans-serif;display:grid;place-items:center;padding:28px 20px}
-main{width:100%;max-width:460px}
-h1{font:400 clamp(32px,9vw,42px)/1.1 'Young Serif',Georgia,serif;letter-spacing:-.02em;text-wrap:balance}
-p{color:var(--soft);margin-top:12px}
-.card{margin-top:24px;padding:20px;border-radius:24px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);box-shadow:0 8px 30px rgba(0,0,0,.25)}
-.card b{display:block;color:var(--text);font-weight:600}
-ol{margin:12px 0 0 20px;color:var(--soft)}li{margin-top:6px}
-.btn{display:flex;align-items:center;justify-content:center;min-height:58px;margin-top:20px;border-radius:99px;background:var(--rose);color:#2A0A1B;font:700 18px/1 'Figtree',sans-serif;text-decoration:none;transition:transform 160ms var(--ease)}
+body{min-height:100svh;background:var(--ink);color:var(--text);font:400 17px/1.6 'Figtree',system-ui,sans-serif;display:grid;place-items:center;padding:28px 20px;-webkit-font-smoothing:antialiased}
+main{width:100%;max-width:480px}
+.logo{font:400 26px/1 'Young Serif',Georgia,serif;letter-spacing:-.02em;margin-bottom:28px}
+h1{font:400 clamp(34px,9.5vw,46px)/1.06 'Young Serif',Georgia,serif;letter-spacing:-.02em;text-wrap:balance}
+p{color:var(--soft);margin-top:12px;text-wrap:pretty}
+.card{margin-top:24px;padding:22px;border-radius:24px;background:rgba(255,255,255,.05);border:1px solid var(--line);box-shadow:0 8px 30px rgba(0,0,0,.25)}
+.card b{display:block;color:var(--text);font-weight:600;font-size:18px}
+.aud{margin-top:14px;padding:14px;border-radius:16px;background:rgba(255,255,255,.06)}
+.aud audio{width:100%;height:40px}
+.aud small{display:block;margin-top:8px;color:var(--mute);font-size:13.5px}
+.btn{display:flex;align-items:center;justify-content:center;min-height:58px;width:100%;margin-top:16px;border:0;cursor:pointer;border-radius:99px;background:var(--rose);color:#2A0A1B;font:700 18px/1 'Figtree',sans-serif;text-decoration:none;transition:transform 160ms var(--ease);-webkit-tap-highlight-color:transparent}
 .btn:active{transform:scale(.97)}
-small{display:block;margin-top:14px;color:var(--soft);font-size:13px;text-align:center}
+.btn.ghost{background:rgba(255,255,255,.08);color:var(--text)}
+ol{margin:14px 0 0 20px;color:var(--soft)}li{margin-top:6px}
+small.n{display:block;margin-top:16px;color:var(--mute);font-size:13.5px;text-align:center}
+[hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body>
 <main>
-<h1 id="h">Listo, ya casi está tu sorpresa.</h1>
-<p>Recibimos tu pago. Solo falta que nos mandes el audio por WhatsApp.</p>
-<div class="card"><b>Haz esto ahora (1 minuto):</b>
-<ol><li>Toca el botón verde de abajo.</li><li>Envía el audio que quieres que escuche.</li><li>Si tienes una foto, mándala también.</li></ol>
-<a class="btn" id="wa" href="#">Enviar mi audio por WhatsApp</a>
-<small>Te la entregamos en 20 minutos.</small></div>
+<div class="logo">Latido</div>
+<h1 id="h">Gracias. Ya casi está tu sorpresa.</h1>
+<p>Recibimos tu pago. Solo falta que nos mandes tu voz.</p>
+
+<div class="card" id="withAudio" hidden>
+  <b>Tu audio está listo</b>
+  <div class="aud"><audio id="pl" controls preload="metadata"></audio><small id="an"></small></div>
+  <button class="btn" id="share" type="button">Enviar mi audio por WhatsApp</button>
+  <a class="btn ghost" id="wa2" href="#">Solo escribirles por WhatsApp</a>
+  <small class="n" id="shareNote">Se abre WhatsApp con tu audio listo para enviar.</small>
+</div>
+
+<div class="card" id="noAudio" hidden>
+  <b>Haz esto ahora (1 minuto):</b>
+  <ol><li>Toca el botón de abajo.</li><li>Envía el audio que quieres que escuche.</li><li>Si tienes una foto, mándala también.</li></ol>
+  <a class="btn" id="wa" href="#">Enviar mi audio por WhatsApp</a>
+</div>
+<small class="n">Te la entregamos en 20 minutos.</small>
 </main>
 <script>
 (function(){
 var NUM='573217493251',d={};
 try{d=JSON.parse(localStorage.getItem('latido_draft')||'{}')}catch(e){}
 var to=(d.to||'').trim(),from=(d.from||'').trim(),msg=(d.msg||'').trim();
-if(to)document.getElementById('h').textContent='Listo, la sorpresa para '+to+' va en camino.';
-var t='Hola, acabo de pagar mi sorpresa Latido.'+(d.id?' Pedido: '+d.id+'.':'')+(to?'\nPara: '+to:'')+(from?'\nDe parte de: '+from:'')+(msg?'\nMensaje: '+msg:'')+'\nAquí va mi audio:';
-document.getElementById('wa').href='https://wa.me/'+NUM+'?text='+encodeURIComponent(t);
+if(to)document.getElementById('h').textContent='Gracias. La sorpresa para '+to+' va en camino.';
+var t='Hola, acabo de pagar mi sorpresa Latido.'+(d.id?' Pedido: '+d.id+'.':'')+(to?'\nPara: '+to:'')+(from?'\nDe parte de: '+from:'')+(msg?'\nMensaje: '+msg:'')+(d.gt&&d.gt!=='love'?'\nRegalo escondido: '+(d.gift||d.gt):'')+'\nAquí va mi audio:';
+var link='https://wa.me/'+NUM+'?text='+encodeURIComponent(t);
+document.getElementById('wa').href=link;document.getElementById('wa2').href=link;
+function $(i){return document.getElementById(i)}
+function noAud(){$('noAudio').hidden=false}
+try{
+  var r=indexedDB.open('latido',1);
+  r.onupgradeneeded=function(){r.result.createObjectStore('f')};
+  r.onerror=noAud;
+  r.onsuccess=function(){var g=r.result.transaction('f').objectStore('f').get('audio');
+    g.onerror=noAud;
+    g.onsuccess=function(){var v=g.result;if(!v||!v.blob){noAud();return}
+      $('withAudio').hidden=false;var url=URL.createObjectURL(v.blob);$('pl').src=url;$('an').textContent=v.name||'Tu audio';
+      var ext=(v.type||'').indexOf('mp4')>-1||(v.type||'').indexOf('m4a')>-1?'m4a':(v.type||'').indexOf('ogg')>-1?'ogg':(v.type||'').indexOf('mpeg')>-1?'mp3':'webm';
+      var file=new File([v.blob],'latido-audio.'+ext,{type:v.type||'audio/webm'});
+      $('share').addEventListener('click',function(){
+        if(navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file],text:t}).catch(function(){})}
+        else{var a=document.createElement('a');a.href=url;a.download=file.name;document.body.appendChild(a);a.click();a.remove();$('shareNote').textContent='Guardamos tu audio en el celular. Ahora adjúntalo en el chat de WhatsApp.';setTimeout(function(){location.href=link},900)}
+      });
+    }}
+}catch(e){noAud()}
 })();
 </script></body></html>
 {% endraw %}

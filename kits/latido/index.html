@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#1A0D0E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A0D0E'/%3E%3Cpath d='M3 17h6l3-9 5 17 3-10 2 2h7' fill='none' stroke='%23FF5C93' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <title>Latido · Regala una sorpresa de cumpleaños con tu voz</title>
 <meta name="description" content="Sube tu audio, escribe tu mensaje y en 20 minutos tienes una sorpresa de cumpleaños que se abre desde el celular. $15 USD.">
 <meta property="og:title" content="Latido · Una sorpresa de cumpleaños que se abre con tu voz">
 <meta property="og:description" content="Sube tu audio y tu mensaje. Nosotros armamos la sorpresa. $15 USD.">
 <meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
 :root{
@@ -287,13 +288,67 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .m h3{font-size:20px;color:#fff}
 .m p{margin-top:4px;font-size:14.5px;line-height:1.4;color:#EBDCD8}
 @media (min-width:900px){.mosaic{grid-template-columns:repeat(6,1fr);gap:16px}.m{grid-column:span 2;aspect-ratio:4/5}.m.big{grid-column:span 4;aspect-ratio:auto;min-height:480px}.m.wide{grid-column:span 4;aspect-ratio:auto;min-height:480px}.m h3{font-size:26px}.m p{font-size:16px}.m figcaption{padding:24px}}
+
+/* ===== v9 · plataforma premium ===== */
+body::after{content:'';position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.nav{position:fixed;transition:background-color 240ms var(--ease),border-color 240ms var(--ease);border-bottom:1px solid transparent;padding-bottom:12px}
+.nav.solid{background:rgba(26,13,14,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.form{padding:22px;border-radius:24px;background:var(--glass);border:1px solid var(--line);box-shadow:var(--sh1);gap:20px;align-content:start}
+.prog{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.prog i{height:4px;border-radius:99px;background:var(--glass2);transition:background-color 260ms var(--ease)}
+.prog i.on{background:var(--rose)}
+.stepn{margin-top:10px;font:600 13px/1 var(--sans);color:var(--mute)}
+.stp{display:none;gap:16px}
+.stp.on{display:grid}
+@media (prefers-reduced-motion:no-preference){.stp.on{animation:stin 280ms var(--ease)}@keyframes stin{from{opacity:0;transform:translateY(10px)}}}
+.sq{font-size:clamp(28px,7.4vw,38px);line-height:1.08}
+.sub2{color:var(--soft);font-size:16px;margin-top:-6px}
+.inp{min-height:56px}
+textarea.inp{min-height:150px}
+.chip.sm{min-height:40px;padding:0 14px;font-size:14.5px}
+.nav2{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.nav2 .btn{min-width:120px}
+.nav2 #bNext{margin-left:auto}
+.sum{display:grid;gap:0;border-radius:16px;overflow:hidden;background:var(--glass2)}
+.sum>div{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:14px 16px}
+.sum>div+div{border-top:1px solid var(--line)}
+.sum dt{font:600 13px/1.5 var(--sans);color:var(--mute)}
+.sum dd{font:500 15.5px/1.5 var(--sans);color:var(--text);overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+#payBtn2{width:100%}
+.phone{background:linear-gradient(#17090F,#0F0512);border-color:rgba(255,255,255,.16);box-shadow:var(--sh2),inset 0 0 0 1px rgba(255,255,255,.04)}
+.screen::before{top:12px;width:84px;height:22px;margin-left:-42px;border-radius:99px;background:#050205}
+.screen{padding-top:44px}
+footer{padding:48px 0 calc(120px + env(safe-area-inset-bottom));background:var(--ink2);border-top:0;color:var(--soft)}
+footer .fb{display:grid;gap:28px}
+footer .fl{font:400 30px/1 var(--display);color:var(--text);letter-spacing:-.02em}
+footer .fl small{display:block;margin-top:10px;font:400 15px/1.5 var(--sans);color:var(--soft);max-width:26em}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+footer nav a{color:var(--text);text-decoration:none;font:500 15px/1.6 var(--sans);min-height:32px}
+footer .fc{font-size:13px;color:var(--mute)}
+@media (min-width:900px){footer .fb{grid-template-columns:1.4fr 1fr;align-items:start}footer .fc{grid-column:1/-1}.form{padding:32px}}
+
+/* ===== v10 · frase central y detalles ===== */
+.say{padding:96px 0}
+.say .reveal{font:400 clamp(30px,8.4vw,60px)/1.1 var(--display);letter-spacing:-.025em;max-width:17em;text-wrap:balance}
+.say .reveal span{opacity:.28;transition:opacity 500ms var(--ease)}
+.say .reveal span.on{opacity:1}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;padding:12px 16px;border-radius:12px;background:var(--gold);color:#2A1A06;font:700 15px/1 var(--sans);text-decoration:none;transition:transform 200ms var(--ease)}
+.skip:focus{transform:translateY(72px)}
+@media (min-width:900px){.say{padding:140px 0}}
+@media (prefers-reduced-motion:reduce){.say .reveal span{opacity:1;transition:none}}
+/* ===== v11 · guías de interfaz ===== */
+html{color-scheme:dark}
+section[id],section{scroll-margin-top:80px}
+.stepn{min-height:1em}
 </style>
 </head>
 <body>
+<a class="skip" href="#top">Saltar al contenido</a>
 <canvas id="fx" aria-hidden="true"></canvas>
 
 <header class="nav"><div class="w">
-  <a class="logo" href="#top" aria-label="Latido"><svg viewBox="0 0 28 20" fill="none" stroke="#FF5C93" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 11h5l3-8 5 15 3-9 2 2h8"/></svg>Latido</a>
+  <a class="logo" href="#top" aria-label="Latido" translate="no"><svg viewBox="0 0 28 20" fill="none" stroke="#FF5C93" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 11h5l3-8 5 15 3-9 2 2h8"/></svg>Latido</a>
   <a class="btn sm ghost" href="#crear">Crear la mía</a>
 </div></header>
 
@@ -353,6 +408,11 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   </ol>
 </div></section>
 
+<!-- Frase central -->
+<section class="say"><div class="w">
+  <p class="reveal" id="say">Tu voz es lo único que no se puede comprar, copiar ni reemplazar. Hoy puedes dejársela a alguien para siempre.</p>
+</div></section>
+
 <!-- La rosa -->
 <section class="rosa"><div class="w">
   <div class="sh" style="text-align:center;justify-items:center"><h2 class="rv">Así empieza: una rosa que se abre con el dedo.</h2><p class="lead rv" style="--i:1">Es lo primero que se ve al abrirla. Mantenla presionada.</p></div>
@@ -402,7 +462,7 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="sh"><h2 class="rv">Para quien sea. Mamá, papá, tu pareja, tu mejor amigo.</h2><p class="lead rv" style="--i:1">Hombres y mujeres, jóvenes y viejos. Funciona igual a tres cuadras o a tres mil kilómetros, en cualquier país de Latinoamérica.</p></div>
   <div class="mosaic">
     <figure class="m big rv"><img src="img/lt-cocina.webp" width="1500" height="1500" loading="lazy" alt="Una mamá llora de emoción en su cocina al escuchar un audio en el celular, frente a una torta con velas"><figcaption><h3>Tu mamá o tu papá</h3><p>Llevan toda la vida cuidándote. Que oigan, por fin, cuánto lo sabes.</p></figcaption></figure>
-    <figure class="m rv" style="--i:1"><img src="img/lt-cama.webp" width="900" height="900" loading="lazy" alt="Una joven acostada en su cama lee y escucha un mensaje en el celular, sonriendo con los ojos húmedos, con luces y una rosa al fondo"><figcaption><h3>Tu pareja</h3><p>Más que un "te amo" por chat. Algo que se abre, se escucha y se guarda.</p></figcaption></figure>
+    <figure class="m rv" style="--i:1"><img src="img/lt-cama.webp" width="900" height="900" loading="lazy" alt="Una joven acostada en su cama lee y escucha un mensaje en el celular, sonriendo con los ojos húmedos, con luces y una rosa al fondo"><figcaption><h3>Tu pareja</h3><p>Más que un “te amo” por chat. Algo que se abre, se escucha y se guarda.</p></figcaption></figure>
     <figure class="m rv" style="--i:2"><img src="img/lt-bus.webp" width="900" height="900" loading="lazy" alt="Una joven en un bus escucha un audio con audífonos, sonriendo con los ojos húmedos"><figcaption><h3>Tu mejor amiga o amigo</h3><p>Quien te aguanta todo, aunque viva lejos. Dile lo que vale para ti.</p></figcaption></figure>
     <figure class="m wide rv" style="--i:3"><img src="img/lt-papa.webp" width="900" height="900" loading="lazy" alt="Un señor de bigote gris escucha el audio de su hija en el celular, con los ojos rojos y orgulloso"><figcaption><h3>Tu familia, cerca o lejos</h3><p>Si los separa un país, esto llega en un segundo y se siente como estar ahí.</p></figcaption></figure>
   </div>
@@ -410,30 +470,76 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <!-- Crear -->
 <section id="crear"><div class="w">
-  <div class="sh"><h2 class="rv">Crea la suya.</h2><p class="lead rv" style="--i:1">Escribe su nombre y tu mensaje. Aquí ves cómo se va a ver en su celular.</p></div>
+  <div class="sh"><h2 class="rv">Creemos su sorpresa.</h2><p class="lead rv" style="--i:1">Cinco pasos cortos. A la derecha ves, en vivo, cómo la va a recibir.</p></div>
   <div class="make">
     <form class="form rv" id="form" novalidate>
-      <div><label for="fTo">¿Para quién es?</label><input class="inp" id="fTo" name="to" maxlength="24" autocomplete="off" placeholder="Alex" aria-describedby="eTo"><p class="err" id="eTo" role="alert">Escribe el nombre de quien cumple años.</p></div>
-      <div><label for="fFrom">¿De parte de quién? <small>(opcional)</small></label><input class="inp" id="fFrom" name="from" maxlength="30" autocomplete="given-name" placeholder="Tu nombre"></div>
-      <div><label for="fMsg">Tu mensaje</label><textarea class="inp" id="fMsg" name="msg" maxlength="400" placeholder="Escribe como si estuviera enfrente. Un recuerdo, un gracias, lo que no le has dicho." aria-describedby="eMsg"></textarea><div class="cnt"><span>Lo que escribas aparece en su carta.</span><span id="fCnt">0/400</span></div><p class="err" id="eMsg" role="alert">Cuéntale un poquito más (mínimo 10 letras).</p></div>
-      <div><span class="lbl" id="gLbl">¿Qué le vas a regalar? <small>(opcional)</small></span>
-        <div class="chips" id="gChips" role="group" aria-labelledby="gLbl">
+      <div class="wiz-top"><div class="prog" id="prog" role="progressbar" aria-label="Progreso" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1"><i class="on"></i><i></i><i></i><i></i><i></i></div><p class="stepn" id="stepn" aria-live="polite">Paso 1 de 5</p></div>
+
+      <div class="stp on" data-s="1">
+        <h3 class="sq">¿Para quién es la sorpresa?</h3>
+        <div><label for="fTo">Su nombre</label><input class="inp" id="fTo" name="to" maxlength="24" autocomplete="off" placeholder="Por ejemplo: Alex…" aria-describedby="eTo"><p class="err" id="eTo" role="alert">Escribe el nombre de quien cumple años.</p></div>
+        <div><span class="lbl" id="rLbl">¿Quién es para ti?</span>
+          <div class="chips" id="rChips" role="group" aria-labelledby="rLbl">
+            <button type="button" class="chip" data-r="Mamá" aria-pressed="false">Mamá</button>
+            <button type="button" class="chip" data-r="Papá" aria-pressed="false">Papá</button>
+            <button type="button" class="chip" data-r="Pareja" aria-pressed="false">Mi pareja</button>
+            <button type="button" class="chip" data-r="Amigo/a" aria-pressed="false">Mi amigo/a</button>
+            <button type="button" class="chip" data-r="Familia" aria-pressed="false">Familia</button>
+            <button type="button" class="chip" data-r="Otro" aria-pressed="false">Otro</button>
+          </div></div>
+        <div><label for="fFrom">¿De parte de quién? <small>(opcional)</small></label><input class="inp" id="fFrom" name="from" maxlength="30" autocomplete="given-name" placeholder="Tu nombre…"></div>
+      </div>
+
+      <div class="stp" data-s="2">
+        <h3 class="sq">Dile lo que sientes</h3>
+        <p class="sub2">Escribe como si estuviera enfrente. No tiene que ser perfecto, tiene que ser tuyo.</p>
+        <div><label for="fMsg" class="sr">Tu mensaje</label><textarea class="inp" id="fMsg" name="msg" maxlength="400" placeholder="Un recuerdo, un gracias, lo que no le has dicho." aria-describedby="eMsg"></textarea><div class="cnt"><span>Lo que escribas aparece en su carta.</span><span id="fCnt">0/400</span></div><p class="err" id="eMsg" role="alert">Cuéntale un poquito más (mínimo 10 letras).</p></div>
+        <div><span class="lbl">¿No sabes cómo empezar? Toca una idea</span>
+          <div class="chips" id="sChips">
+            <button type="button" class="chip sm" data-t="Gracias por todo lo que has hecho por mí.">Gracias por…</button>
+            <button type="button" class="chip sm" data-t="Nunca te dije lo mucho que significas para mí.">Nunca te dije…</button>
+            <button type="button" class="chip sm" data-t="Lo que más admiro de ti es">Lo que admiro…</button>
+            <button type="button" class="chip sm" data-t="Te extraño, y hoy quería que me escucharas.">Te extraño…</button>
+          </div></div>
+      </div>
+
+      <div class="stp" data-s="3">
+        <h3 class="sq">¿Qué escondemos en su regalo?</h3>
+        <p class="sub2">Ella lo descubre raspando la tarjeta. Puede ser dinero, un plan o solo tu cariño.</p>
+        <div class="chips" id="gChips" role="group" aria-label="Qué le vas a regalar">
           <button type="button" class="chip" data-g="money" aria-pressed="false">Dinero</button>
           <button type="button" class="chip" data-g="plan" aria-pressed="false">Un plan</button>
           <button type="button" class="chip" data-g="gift" aria-pressed="false">Un regalo</button>
           <button type="button" class="chip on" data-g="love" aria-pressed="true">Solo mi cariño</button>
         </div>
         <input class="inp" id="fGift" maxlength="40" autocomplete="off" hidden aria-label="Qué le vas a regalar">
-        <p class="micro" id="gNote" hidden style="margin-top:8px">Lo descubre raspando la tarjeta. El regalo se lo das tú; nosotros solo lo escondemos en la sorpresa.</p>
+        <p class="micro" id="gNote" hidden>El regalo se lo das tú; nosotros solo lo escondemos en la sorpresa.</p>
       </div>
-      <div><span class="lbl">Tu audio <small>(opcional, pero es lo que más emociona)</small></span>
+
+      <div class="stp" data-s="4">
+        <h3 class="sq">Ahora, tu voz</h3>
+        <p class="sub2">Es lo que más emociona. Grábala aquí o sube una nota de voz que ya tengas.</p>
         <div class="drop">
           <div class="row"><button class="btn ghost" id="recBtn" type="button"><span class="dot" hidden></span><span id="recT">Grabar ahora</span></button><label class="btn ghost" for="fFile" style="margin:0;cursor:pointer">Subir un audio</label><input id="fFile" type="file" accept="audio/*"></div>
           <div class="aud" id="aud" hidden><button class="play" id="aPlay" type="button" aria-label="Escuchar tu audio"><svg class="pl" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg><svg class="pa" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button><span><b id="aName">Tu audio</b><br><span id="aInfo"></span></span></div>
-          <p class="micro" style="margin:0" id="audNote">Después del pago, te mostramos cómo enviarnos el audio por WhatsApp en un toque.</p>
+          <p class="micro" style="margin:0" id="audNote">Se queda guardado en tu celular. Después del pago te ayudamos a enviárnoslo por WhatsApp en un toque.</p>
           <p class="err" id="eAud" role="alert"></p>
         </div>
       </div>
+
+      <div class="stp" data-s="5">
+        <h3 class="sq">Todo listo para sorprender</h3>
+        <dl class="sum">
+          <div><dt>Para</dt><dd id="sumTo">—</dd></div>
+          <div><dt>Mensaje</dt><dd id="sumMsg">—</dd></div>
+          <div><dt>Regalo escondido</dt><dd id="sumGift">Solo mi cariño</dd></div>
+          <div><dt>Tu voz</dt><dd id="sumAud">Sin audio</dd></div>
+        </dl>
+        <button class="btn" id="payBtn2" type="button">Pagar $15 USD</button>
+        <p class="micro" style="text-align:center">Pago seguro con tarjeta · Lista en 20 minutos</p>
+      </div>
+
+      <div class="nav2"><button type="button" class="btn ghost sm" id="bPrev" hidden>Atrás</button><button type="button" class="btn sm" id="bNext">Siguiente</button></div>
     </form>
     <div class="col2">
       <div class="phoneW rv" style="--i:1"><div>
@@ -451,14 +557,14 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <div class="big"><b>$15</b><span>USD · pago único</span></div>
         <p class="anchor">Un ramo cuesta más y dura una semana. Esto lo escucha cuando quiera.</p>
         <ul>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Tu voz y tu mensaje dentro de una sorpresa para su celular</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Rosa que se abre, velas que se soplan, regalo escondido y carta con su nombre</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Ajustes si algo no quedó como querías</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Tarjeta bonita con QR en corazón, enviada a tu WhatsApp</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Lista en 20 minutos</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Tu voz y tu mensaje dentro de una sorpresa para su celular</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Rosa que se abre, velas que se soplan, regalo escondido y carta con su nombre</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Ajustes si algo no quedó como querías</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Tarjeta bonita con QR en corazón, enviada a tu WhatsApp</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Lista en 20 minutos</li>
         </ul>
         <button class="btn" id="payBtn" type="button">Pagar $15 USD</button>
-        <div class="lock"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Pago con tarjeta, procesado por Stripe</div>
+        <div class="lock"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Pago con tarjeta, procesado por Stripe</div>
       </div>
     </div>
   </div>
@@ -487,7 +593,11 @@ footer .w{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 </div></section>
 </main>
 
-<footer><div class="w"><span>Latido · Hecho con cariño</span><span>Pagos procesados por Stripe</span></div></footer>
+<footer><div class="w fb">
+  <div class="fl"><span translate="no">Latido</span><small>Sorpresas de cumpleaños que se abren con tu voz. Hechas con cariño para toda Latinoamérica.</small></div>
+  <nav aria-label="Información"><a href="/pages/politica-de-reembolsos">Reembolsos</a><a href="/pages/politica-de-privacidad">Privacidad</a><a href="/pages/terminos-del-servicio">Términos</a><a href="https://wa.me/573217493251">Escríbenos por WhatsApp</a></nav>
+  <p class="fc">© 2026 Latido, de ROKOL GROUP LLC · Pagos procesados de forma segura</p>
+</div></footer>
 
 <div class="sk" id="sk" aria-hidden="true"><div class="t"><b>$15 USD</b><span>Precio de lanzamiento</span></div><a class="btn" href="#crear" tabindex="-1">Quiero sorprenderla</a></div>
 <div class="toast" id="toast" role="status"></div>
@@ -606,7 +716,7 @@ $$('#faq .q button').forEach(b=>b.addEventListener('click',()=>{const q=b.parent
   addEventListener('scroll',upd,{passive:true})})();
 
 /* ====== Configurador con vista previa en vivo ====== */
-const st={to:'',from:'',msg:'',audio:null,audioName:'',gt:'love',gift:''};
+const st={to:'',from:'',msg:'',audio:null,audioName:'',gt:'love',gift:'',rel:''};
 const DEF={to:'Alex',msg:'Gracias por ser la persona que eres. Hoy quería decirte, con mi voz y con estas palabras, cuánto te quiero.'};
 const $to=$('#fTo'),$fr=$('#fFrom'),$ms=$('#fMsg');
 function render(){const to=st.to.trim(),msg=st.msg.trim(),fr=st.from.trim();
@@ -649,21 +759,46 @@ async function startRec(){aerr('');
 recBtn.addEventListener('click',()=>{if(mr&&mr.state==='recording'){mr.stop();return}startRec()});
 
 /* pago */
-function pay(){let ok=true;
+async function pay(){let ok=true;
   if(st.to.trim().length<2){$('#eTo').classList.add('on');ok=false;$to.focus()}
   if(st.msg.trim().length<10){$('#eMsg').classList.add('on');if(ok)$ms.focus();ok=false}
-  if(!ok){document.getElementById('crear').scrollIntoView({behavior:RM?'auto':'smooth'});return}
+  if(!ok){go(st.to.trim().length<2?1:2);document.getElementById('crear').scrollIntoView({behavior:RM?'auto':'smooth'});return}
   const id='lt'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
   try{localStorage.setItem('latido_draft',JSON.stringify({id,to:st.to.trim(),from:st.from.trim(),msg:st.msg.trim(),hasAudio:!!st.audio,audioName:st.audioName,gt:st.gt,gift:st.gift.trim(),t:Date.now()}))}catch(e){}
+  await saveAudio(id);
   if(CONFIG.variantId){
     const b=$('#payBtn'),b0=b.textContent;b.disabled=true;b.textContent='Abriendo el pago…';
-    fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:[{id:+CONFIG.variantId,quantity:1,properties:{'Para':st.to.trim(),'De parte de':st.from.trim(),'Mensaje':st.msg.trim(),'Regalo escondido':st.gt==='love'?'Solo cariño':({money:'Dinero',plan:'Un plan',gift:'Un regalo'})[st.gt]+(st.gift.trim()?': '+st.gift.trim():''),'Audio':st.audio?'Sí ('+(st.audioName||'grabado')+')':'Lo enviará por WhatsApp','Pedido':id}}]})})
+    fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:[{id:+CONFIG.variantId,quantity:1,properties:{'Para':st.to.trim(),'De parte de':st.from.trim(),'Relación':st.rel||'—','Mensaje':st.msg.trim(),'Regalo escondido':st.gt==='love'?'Solo cariño':({money:'Dinero',plan:'Un plan',gift:'Un regalo'})[st.gt]+(st.gift.trim()?': '+st.gift.trim():''),'Audio':st.audio?'Sí ('+(st.audioName||'grabado')+')':'Lo enviará por WhatsApp','Pedido':id}}]})})
       .then(r=>{if(!r.ok)throw 0;location.href='/checkout'}).catch(()=>{b.disabled=false;b.textContent=b0;toast('No pudimos abrir el pago. Intenta de nuevo.')});
     return}
   if(!CONFIG.stripeLink){toast('Modo de prueba: aquí se abre el pago de Stripe.');buzz(10);return}
   const u=CONFIG.stripeLink+(CONFIG.stripeLink.includes('?')?'&':'?')+'client_reference_id='+encodeURIComponent(id);
   location.href=u}
-$('#payBtn').addEventListener('click',pay);
+(()=>{const p=document.getElementById('say');if(!p)return;const w=p.textContent.trim().split(/\s+/);p.setAttribute('aria-label',p.textContent.trim());p.innerHTML=w.map(x=>'<span aria-hidden="true">'+x+'</span>').join(' ');
+  const sp=[...p.children];if(RM||!('IntersectionObserver' in window)){sp.forEach(x=>x.classList.add('on'));return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{rootMargin:'0px 0px -38% 0px'});sp.forEach(x=>io.observe(x))})();
+(()=>{const n=document.querySelector('.nav');const f=()=>n.classList.toggle('solid',scrollY>40);addEventListener('scroll',f,{passive:true});f()})();
+$('#payBtn').addEventListener('click',pay);$('#payBtn2').addEventListener('click',pay);
+/* ===== asistente de 5 pasos ===== */
+let cur=1;const steps=$$('.stp'),prog=$$('#prog i'),bP=$('#bPrev'),bN=$('#bNext');
+function go(n,focus){cur=Math.max(1,Math.min(5,n));steps.forEach(e=>e.classList.toggle('on',+e.dataset.s===cur));prog.forEach((e,k)=>e.classList.toggle('on',k<cur));
+  $('#prog').setAttribute('aria-valuenow',cur);$('#stepn').textContent='Paso '+cur+' de 5';bP.hidden=cur===1;bN.hidden=cur===5;
+  if(cur===5)sum();
+  if(focus!==false){const f=steps[cur-1].querySelector('input:not([hidden]):not([type=file]),textarea');if(f&&(cur===1||cur===2)&&!matchMedia('(pointer:coarse)').matches)f.focus({preventScroll:true})}}
+function next(){if(cur===1&&st.to.trim().length<2){$('#eTo').classList.add('on');$to.focus();buzz(10);return}
+  if(cur===2&&st.msg.trim().length<10){$('#eMsg').classList.add('on');$ms.focus();buzz(10);return}
+  go(cur+1);buzz(8);const f=$('#form');if(f.getBoundingClientRect().top<0)f.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'})}
+bN.addEventListener('click',next);bP.addEventListener('click',()=>go(cur-1));
+$to.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();next()}});
+$('#rChips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;st.rel=b.dataset.r;$$('#rChips .chip').forEach(x=>{const on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});buzz(8)});
+$('#sChips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;const t=b.dataset.t;$ms.value=$ms.value.trim()?($ms.value.trim()+' '+t):t;$ms.dispatchEvent(new Event('input'));$('#eMsg').classList.remove('on');$ms.focus();buzz(8)});
+function sum(){$('#sumTo').textContent=(st.rel?st.rel+' · ':'')+st.to.trim();$('#sumMsg').textContent=st.msg.trim();
+  $('#sumGift').textContent=st.gt==='love'?'Solo mi cariño':({money:'Dinero',plan:'Un plan',gift:'Un regalo'})[st.gt]+(st.gift.trim()?': '+st.gift.trim():'');
+  $('#sumAud').textContent=st.audio?(st.audioName||'Tu audio grabado'):'Sin audio (lo envías por WhatsApp)'}
+/* guardar el audio en el celular para poder enviarlo después del pago */
+const idb=()=>new Promise((res,rej)=>{const r=indexedDB.open('latido',1);r.onupgradeneeded=()=>r.result.createObjectStore('f');r.onsuccess=()=>res(r.result);r.onerror=()=>rej()});
+async function saveAudio(id){try{const d=await idb();let b=null;if(st.audio)b=await (await fetch(st.audio)).blob();
+  await new Promise(k=>{const t=d.transaction('f','readwrite'),o=t.objectStore('f');if(b)o.put({blob:b,name:st.audioName||'audio',id,type:b.type},'audio');else o.delete('audio');t.oncomplete=k;t.onerror=k;t.onabort=k})}catch(e){}}
 (()=>{const n=document.querySelector('.big20');if(!n||RM)return;const t=n.firstChild;const io=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;io.disconnect();
   const T=700,t0=performance.now();(function f(now){const k=Math.min(1,(now-t0)/T),e=1-Math.pow(1-k,3);t.nodeValue=Math.round(20*e);if(k<1)requestAnimationFrame(f)})(t0)},{threshold:.5});
   t.nodeValue='0';io.observe(n)})();
