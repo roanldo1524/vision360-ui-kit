@@ -163,3 +163,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 
 - 2026-11-07 7:19 p. m. (revisión automática): 4 pedidos de WhatsApp fallaban por el «Obsequio» (producto 2 que Lucid Sales no reconoce). Se quitó la línea del regalo del resumen y se volvieron a subir; los 4 quedaron bien: Jorge Coral (Mocoa, 4 L), José Abdon Forero (Sardinata, 1 L), Robinson López (San Lorenzo, 1 L) y Diego Alberto (Samaná, 4 L). La causa sigue siendo el obsequio puesto en el producto/bundles de Lucid Sales.
 - 2026-11-07 8:20 p. m. (revisión automática): 1 pedido con el error del «Obsequio» subido bien: Robinson Andrés Orozco Duque (Sonsón, 1 L, recoge en oficina Interrapidísimo).
+- 2026-11-07 9:19 p. m. (revisión automática): 4 pedidos con el error del «Obsequio» subidos bien: Darío Olimpo Benavides (Pasto, 1 L), Melkin Romaña (Chigorodó, 1 L, oficina), Hernando Ariel León (Supía, 1 L) y Josué Amaya (Santa María, Huila, 1 L, oficina).
