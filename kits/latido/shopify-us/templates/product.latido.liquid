@@ -10,7 +10,7 @@
 <meta property="og:title" content="Latido · Una sorpresa de cumpleaños que se abre con tu voz">
 <meta property="og:description" content="Sube tu audio y tu mensaje. Nosotros armamos la sorpresa. $15 USD.">
 <meta property="og:type" content="website">
-<link rel="preconnect" href="https://cdn.shopify.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="{% endraw %}{{ 'lt-hogar.webp' | file_url }}{% raw %}" fetchpriority="high"><link rel="preconnect" href="https://cdn.shopify.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
 :root{
@@ -341,6 +341,11 @@ footer .fc{font-size:13px;color:var(--mute)}
 html{color-scheme:dark}
 section[id],section{scroll-margin-top:80px}
 .stepn{min-height:1em}
+
+/* ===== v13 · experiencia ===== */
+.seeit{display:inline-flex;align-items:center;min-height:44px;margin-top:4px;color:#fff;font:600 15px/1 var(--sans);text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.4);transition:text-decoration-color 200ms ease}
+.seeit:hover{text-decoration-color:#fff}
+.hero .cta-row .micro{margin-bottom:0}
 </style>
 </head>
 <body>
@@ -352,6 +357,7 @@ section[id],section{scroll-margin-top:80px}
   <a class="btn sm ghost" href="#crear">Crear la mía</a>
 </div></header>
 
+<noscript><p style="padding:16px;text-align:center;background:#F5CF72;color:#2A1A06;font:600 15px/1.4 Figtree,sans-serif">Para crear tu sorpresa necesitas activar JavaScript. O escríbenos por <a href="https://wa.me/573217493251" style="color:inherit">WhatsApp</a> y la armamos contigo.</p></noscript>
 <main id="top">
 <!-- Hero -->
 <section class="hero">
@@ -362,6 +368,7 @@ section[id],section{scroll-margin-top:80px}
     <div class="cta-row rv" style="--i:3">
       <a class="btn" href="#crear" id="heroCta">Quiero sorprenderla · $15 USD</a>
       <p class="micro">Un solo pago · Lista en 20 minutos · Para toda Latinoamérica</p>
+      <a class="seeit" href="#vivo">Ver cómo la recibe</a>
     </div>
   </div></div>
 </section>
@@ -424,7 +431,7 @@ section[id],section{scroll-margin-top:80px}
 </div></section>
 
 <!-- Así se siente -->
-<section><div class="w">
+<section id="vivo"><div class="w">
   <div class="sh"><h2 class="rv">Esto es lo que se vive, momento a momento.</h2><p class="lead rv" style="--i:1">Pruébalo tú. Así lo siente quien la recibe.</p></div>
   <div class="bento">
     <article class="card span2 rv">
@@ -750,7 +757,7 @@ $('#fFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return
 let mr=null,chunks=[],strm=null,t0=0,rt=0;
 const recBtn=$('#recBtn');
 async function startRec(){aerr('');
-  if(!navigator.mediaDevices||!window.MediaRecorder){aerr('Este navegador no deja grabar aquí. Usa “Subir un audio” con una nota de voz.');return}
+  if(!navigator.mediaDevices||!window.MediaRecorder){aerr('Desde Facebook o Instagram a veces no se puede grabar. Toca ⋯ y “Abrir en el navegador”, o usa “Subir un audio” con una nota de voz.');return}
   try{strm=await navigator.mediaDevices.getUserMedia({audio:true})}catch(e){aerr('No pudimos usar el micrófono. Revisa el permiso del navegador o sube una nota de voz.');return}
   chunks=[];mr=new MediaRecorder(strm);mr.ondataavailable=e=>e.data.size&&chunks.push(e.data);
   mr.onstop=()=>{clearInterval(rt);strm.getTracks().forEach(t=>t.stop());const blob=new Blob(chunks,{type:mr.mimeType||'audio/webm'});recBtn.classList.remove('rec');recBtn.querySelector('.dot').hidden=true;$('#recT').textContent='Grabar de nuevo';setAudio(URL.createObjectURL(blob),'Tu grabación',Math.round((Date.now()-t0)/1000)+' s')};
@@ -783,7 +790,7 @@ $('#payBtn').addEventListener('click',pay);$('#payBtn2').addEventListener('click
 let cur=1;const steps=$$('.stp'),prog=$$('#prog i'),bP=$('#bPrev'),bN=$('#bNext');
 function go(n,focus){cur=Math.max(1,Math.min(5,n));steps.forEach(e=>e.classList.toggle('on',+e.dataset.s===cur));prog.forEach((e,k)=>e.classList.toggle('on',k<cur));
   $('#prog').setAttribute('aria-valuenow',cur);$('#stepn').textContent='Paso '+cur+' de 5';bP.hidden=cur===1;bN.hidden=cur===5;
-  if(cur===5)sum();
+  if(cur===5){sum();if(!RM)burst(28,innerWidth/2,innerHeight*.35)}
   if(focus!==false){const f=steps[cur-1].querySelector('input:not([hidden]):not([type=file]),textarea');if(f&&(cur===1||cur===2)&&!matchMedia('(pointer:coarse)').matches)f.focus({preventScroll:true})}}
 function next(){if(cur===1&&st.to.trim().length<2){$('#eTo').classList.add('on');$to.focus();buzz(10);return}
   if(cur===2&&st.msg.trim().length<10){$('#eMsg').classList.add('on');$ms.focus();buzz(10);return}
@@ -795,6 +802,15 @@ $('#sChips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!
 function sum(){$('#sumTo').textContent=(st.rel?st.rel+' · ':'')+st.to.trim();$('#sumMsg').textContent=st.msg.trim();
   $('#sumGift').textContent=st.gt==='love'?'Solo mi cariño':({money:'Dinero',plan:'Un plan',gift:'Un regalo'})[st.gt]+(st.gift.trim()?': '+st.gift.trim():'');
   $('#sumAud').textContent=st.audio?(st.audioName||'Tu audio grabado'):'Sin audio (lo envías por WhatsApp)'}
+/* recuperar lo que ya escribiste si cierras o recargas */
+const wipSave=()=>{try{localStorage.setItem('latido_wip',JSON.stringify({to:st.to,from:st.from,msg:st.msg,gt:st.gt,gift:st.gift,rel:st.rel,t:Date.now()}))}catch(e){}};
+$('#form').addEventListener('input',wipSave);$('#form').addEventListener('click',e=>{if(e.target.closest('.chip'))setTimeout(wipSave,0)});
+try{const w=JSON.parse(localStorage.getItem('latido_wip')||'null');
+  if(w&&Date.now()-w.t<7*864e5&&(w.to||w.msg)){
+    $to.value=st.to=w.to||'';$fr.value=st.from=w.from||'';$ms.value=st.msg=w.msg||'';
+    if(w.rel){const b=document.querySelector('#rChips [data-r="'+w.rel+'"]');b&&b.click()}
+    if(w.gt&&w.gt!=='love'){const b=document.querySelector('#gChips [data-g="'+w.gt+'"]');b&&b.click();$g.value=st.gift=w.gift||''}
+    render();setTimeout(()=>toast('Recuperamos lo que habías escrito.'),1200)}}catch(e){}
 /* guardar el audio en el celular para poder enviarlo después del pago */
 const idb=()=>new Promise((res,rej)=>{const r=indexedDB.open('latido',1);r.onupgradeneeded=()=>r.result.createObjectStore('f');r.onsuccess=()=>res(r.result);r.onerror=()=>rej()});
 async function saveAudio(id){try{const d=await idb();let b=null;if(st.audio)b=await (await fetch(st.audio)).blob();
