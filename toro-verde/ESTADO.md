@@ -160,3 +160,5 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 7 nov, 1:20 p. m. (revisión automática): subidos Jony Erazo (Albán), Luis López (Gachetá) y Edgar Omen (Bruselas, Huila), por el obsequio.
 - 7 nov, 2:20 p. m. (revisión automática): subido Luis Guillermo Imbachi (Popayán), por el obsequio.
 - 7 nov, 4:20 p. m. (revisión automática): subido David Morelo (San Bernardo del Viento, 2 L), por el obsequio.
+
+- 2026-11-07 7:19 p. m. (revisión automática): 4 pedidos de WhatsApp fallaban por el «Obsequio» (producto 2 que Lucid Sales no reconoce). Se quitó la línea del regalo del resumen y se volvieron a subir; los 4 quedaron bien: Jorge Coral (Mocoa, 4 L), José Abdon Forero (Sardinata, 1 L), Robinson López (San Lorenzo, 1 L) y Diego Alberto (Samaná, 4 L). La causa sigue siendo el obsequio puesto en el producto/bundles de Lucid Sales.
