@@ -185,3 +185,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-08 4:19 p. m. (revisión automática): 1 pedido con el error del «Obsequio» subido bien: Luis Felipe Seguro Varela (Pereira, 2 L). Meta sigue sin recibir las ventas.
 - 2026-11-08 5:49 p. m. (revisión automática): 2 pedidos con el error del «Obsequio» subidos bien: Alba Lilia Melo (Guaitarilla, Nariño, 4 L) y Nicanor García Moreno (Guadalupe, Huila, 1 L). Meta sigue sin recibir las ventas.
 - 2026-11-08 6:19 p. m. (revisión automática): 2 pedidos con el error del «Obsequio» subidos bien: Edier Alexis Solarte (Buesaco, 1 L, oficina) y Jhon Robinson Bedoya (Jamundí, 1 L). Meta sigue sin recibir las ventas.
+- 2026-11-08 6:49 p. m. (revisión automática): 2 pedidos con el error del «Obsequio» subidos bien: Wuilian Angulo (Fresno, Tolima, 1 L, oficina) y Luis Hernando Giraldo (Cajamarca, Tolima, 2 L, oficina). Meta sigue sin recibir las ventas.
