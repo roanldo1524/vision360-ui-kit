@@ -172,3 +172,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-08 6:19 a. m. (revisión automática): 2 pedidos con el error del «Obsequio» subidos bien: Jairo Toro (Los Andes Sotomayor, Nariño, 1 L, oficina) y Blanca Ardila (Bogotá, 1 L).
 - 2026-11-08 7:19 a. m. (revisión automática): 2 pedidos con el error del «Obsequio» subidos bien: José Moisés Abril (Socha, 2 L, oficina) y Luis Guillermo Ospina Medina (Abejorral, 1 L).
 - 2026-11-08 8:19 a. m. (revisión automática): 2 pedidos con el error del «Obsequio» subidos bien: Wilson Alberto Chocue (Belalcázar, Cauca, 1 L, oficina) y Víctor Manuel Parra (Amalfi, 2 L, oficina).
+- 2026-11-08 9:19 a. m. (revisión automática): 2 pedidos con el error del «Obsequio» subidos bien: Antonio Bustamante (Argelia, Valle, 1 L, oficina) y Yeison Muñoz (El Bordo, Cauca, 1 L, oficina).
