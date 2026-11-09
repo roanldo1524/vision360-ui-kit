@@ -209,3 +209,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-09 2:19 p. m.: subido el pedido de Tilcia Mora (321 715 2116, Aracataca, 4 unidades) tras quitar el «Obsequio».
 - 2026-11-09 4:19 p. m.: subido el pedido de Edwin Jamir Oviedo Perdomo (304 529 9322, Planadas) tras quitar el «Obsequio».
 - 2026-11-09 4:49 p. m.: subido el pedido de Juan Guzmán (Timba, Valle) tras quitar el «Obsequio». El pedido trae el celular 320 715 2592 y el WhatsApp es 310 847 6037; dirección corta («En la bomba del Valle»).
+- 2026-11-09 5:22 p. m.: subido el pedido de José Abelardo Vega (322 604 3609, La Victoria, Boyacá) tras quitar el «Obsequio».
