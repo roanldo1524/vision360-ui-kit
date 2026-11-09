@@ -197,3 +197,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-09 6:22 a. m.: subido el pedido de Duvan Camilo Torres Alvarado (313 287 2398, 1 litro, Fómeque) que fallaba por el «Obsequio». Lucid Sales id 7592255.
 - 2026-11-09 6:50 a. m.: subido el pedido de María Capera González (321 683 6172, 4 unidades, Agustín Codazzi) que fallaba por el «Obsequio». Lucid Sales id 7592927.
 - 2026-11-09 7:25 a. m.: subido el pedido de Eduard González Abaunza (316 753 4991, 4 unidades, Girón) que fallaba por departamento vacío; se puso Santander.
+- 2026-11-09 8:25 a. m.: subidos 3 pedidos que fallaban por el «Obsequio»: María Paulina Tavera (Sopetrán; el pedido trae el celular 301 903 5012 y el WhatsApp es 314 554 4073), Lino Adrián Zapata (316 532 5713, Caloto) y Jesús Bueno (323 363 6817, San Gil).
