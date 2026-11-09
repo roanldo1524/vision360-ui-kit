@@ -193,3 +193,5 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-08 8:49 p. m.: ¡Meta volvió a recibir las ventas! Pedido de Felipe Díaz Peñaloza (Fusagasugá, 2 L, oficina; venía del anuncio FK006 AD 2 con ctwa) subió sin el error «not authorized»: el evento de compra llegó a Meta. Ese pedido se había trabado por el «Obsequio» y se arregló.
 - 2026-11-08 9:19 p. m. (revisión automática): 1 pedido con el error del «Obsequio» subido bien y sin error de Meta: Magdaleno Caballero Jiménez (El Banco, Magdalena, 2 L, oficina).
 - 2026-11-09 5:19 a. m. (revisión automática): 1 pedido con el error del «Obsequio» subido bien: Álvaro Camargo Oliver (Puerto Colombia, Atlántico, 1 L). OJO: en el pedido quedó el celular 310 609 7607, pero escribió por WhatsApp desde el 310 609 7507: revisar cuál es el correcto antes del envío.
+
+- 2026-11-09 6:22 a. m.: subido el pedido de Duvan Camilo Torres Alvarado (313 287 2398, 1 litro, Fómeque) que fallaba por el «Obsequio». Lucid Sales id 7592255.
