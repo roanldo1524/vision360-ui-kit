@@ -203,3 +203,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-09 9:50 a. m.: subidos 3 pedidos que fallaban por el «Obsequio»: Mario Hernández (304 409 7104, Abejorral), Robinson Hernández Olivero (310 301 4895, Río Blanco; «20 x» por $995.000, revisar en Dropi que salga como poma de 20 L) y Rubén Darío Arias (311 384 3537, Roldanillo).
 - 2026-11-09 10:49 a. m.: subidos 2 pedidos que fallaban por el «Obsequio»: Miguel Ángel Yepez Ruiz (301 564 8709, Sincelejo) e Isabel Pérez Suárez (320 670 4853, Cáceres).
 - 2026-11-09 11:20 a. m.: subidos 2 pedidos que fallaban por el «Obsequio»: Gratulina Estrada Cabezas (316 672 1575, Consacá) y Fredy Hernando Plazas Gonzales (322 589 3236, Tello).
+- 2026-11-09 11:49 a. m.: subidos 2 pedidos: Miguel Peteche (312 854 7799, Toribío; quitado el «Obsequio») y Ramiro Mora (322 574 5502, Cumbitara; decía «1 x 4 litros» por $269.000, se cambió a 4 unidades y se quitó el «Obsequio»).
