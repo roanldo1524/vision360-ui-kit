@@ -201,6 +201,16 @@ EVITAR = ("evitar: modelo, cara perfecta, piel de plástico, maquillaje de revis
           "manos deformes, dedos de más, texto deformado, logos inventados")
 
 
+def prompt_corto(b, e, limite=900):
+    """Versión breve del prompt para modelos con límite de texto (texto → imagen)."""
+    partes = [e["imagen"]]
+    if "personaje" in e.get("usa", []) and b.get("personaje"): partes.append(b["personaje"])
+    if b.get("lugar"): partes.append(b["lugar"])
+    partes.append("fotograma cinematográfico hiperrealista, lente 35mm, luz natural, persona común con piel real, vertical 9:16, sin texto"
+                  if b.get("realismo") == "cine" else "foto realista de celular, persona común, luz natural, vertical 9:16, sin texto")
+    return ". ".join(partes)[:limite]
+
+
 def refs_escena(b, e, ab):
     """Fotos reales de referencia de la escena: las propias ("refs") o las de la biblia según "usa"."""
     if e.get("refs"):
@@ -286,6 +296,7 @@ def main():
     if simular and not a.simular:
         print("No hay FAL_KEY: modo simulación (gratis). Para generar de verdad, guarda la clave de fal.ai como secreto del entorno.")
     resumen = []
+    ref_persona_auto = None
     for e, c in plan:
         out = os.path.join(dtomas, f"{e['id']}.mp4")
         if e.get("fuente") == "foto" or simular:
@@ -305,6 +316,8 @@ def main():
         if prov == "kie":
             pi = prompt_imagen(b, e); pv = prompt_video(b, e)
             refs = refs_escena(b, e, ab)
+            if "personaje" in e.get("usa", []) and not b.get("ref_personaje") and ref_persona_auto:
+                refs = refs + [ref_persona_auto]   # misma mujer en todas las escenas
             h = hashlib.sha1(("kie" + mi["id"] + pi + "".join(refs)).encode()).hexdigest()
             img = os.path.join(CACHE, h + ".png")
             if not os.path.exists(img):
@@ -312,9 +325,11 @@ def main():
                     url_img, _ = kie_tarea(mi["id"], kie_entrada_imagen(mi, pi, [kie_subir(r, key) for r in refs]), key)
                 else:
                     sin_ref = KIE["imagen"]["flux-kontext"]
-                    url_img, _ = kie_tarea(sin_ref["model"], kie_entrada_imagen(sin_ref, pi, []), key)
+                    url_img, _ = kie_tarea(sin_ref["model"], kie_entrada_imagen(sin_ref, prompt_corto(b, e), []), key)
                 bajar(url_img, img)
             shutil.copy(img, os.path.join(dimg, f"{e['id']}.png"))
+            if "personaje" in e.get("usa", []) and not ref_persona_auto:
+                ref_persona_auto = img
             hv = hashlib.sha1(("kie" + mv["id"] + pv + h + str(e.get("dur", 4))).encode()).hexdigest()
             vid = os.path.join(CACHE, hv + ".mp4")
             gastado = None
