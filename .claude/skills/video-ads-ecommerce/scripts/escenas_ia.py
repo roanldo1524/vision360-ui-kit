@@ -30,7 +30,8 @@ Storyboard (storyboard.json):
      "movimiento": "slow push-in, ella suspira", "usa": ["personaje"]},
     {"id": "e02", "dur": 3, "imagen": "mano tomando el frasco del producto en la encimera", "movimiento": "handheld, gira el frasco hacia cámara",
      "usa": ["producto"]},
-    {"id": "e03", "dur": 4, "fuente": "foto", "foto": "fotos/producto.png", "texto_precio": "2x1"}   # escena sin IA (gratis)
+    {"id": "e03", "dur": 4, "fuente": "foto", "foto": "fotos/producto.png", "texto_precio": "2x1"},  # escena sin IA (gratis)
+    {"id": "e04", "dur": 3, "imagen": "...", "usa": ["producto"], "refs": ["fotos/caja_abierta.jpg"]}  # foto propia de esta escena
   ]
 }
 Uso: python escenas_ia.py storyboard.json carpeta_salida [--simular] [--proveedor kie|fal]
@@ -190,9 +191,21 @@ REALISMO = ("foto/video casero tomado con un celular por una persona común, luz
             "cabello natural un poco desordenado, ropa cotidiana, gestos naturales, "
             "lugar real y cotidiano con objetos del día a día y algo de desorden normal, "
             "encuadre imperfecto, leve grano, colores naturales sin filtros")
+# "cine": look cinematográfico (lente, luz, profundidad de campo) pero con gente del común y lugares reales.
+CINE = ("fotograma de película hiperrealista, cámara de cine con lente de 35mm, poca profundidad de campo, luz natural suave "
+        "y cálida, color cinematográfico sutil, persona del común con rasgos y cuerpo normales (no modelo), piel real con "
+        "textura y pequeñas imperfecciones, gestos naturales, lugar real y cotidiano con detalles de la vida diaria")
 EVITAR = ("evitar: modelo, cara perfecta, piel de plástico, maquillaje de revista, dientes perfectos, pose de estudio, "
           "iluminación de estudio, look cinematográfico, render 3D, CGI, ilustración, simetría perfecta, fondo vacío, "
           "manos deformes, dedos de más, texto deformado, logos inventados")
+
+
+def refs_escena(b, e, ab):
+    """Fotos reales de referencia de la escena: las propias ("refs") o las de la biblia según "usa"."""
+    if e.get("refs"):
+        return [ab(r) for r in e["refs"] if os.path.exists(ab(r))]
+    return [ab(b[k]) for k, u in (("ref_producto", "producto"), ("ref_personaje", "personaje"))
+            if b.get(k) and u in e.get("usa", []) and os.path.exists(ab(b[k]))]
 
 
 def prompt_imagen(b, e):
@@ -202,15 +215,19 @@ def prompt_imagen(b, e):
     if "producto" in usa and b.get("producto"): partes.append(f"producto exactamente como en la referencia: {b['producto']}")
     if b.get("lugar"): partes.append(f"lugar: {b['lugar']}")
     partes.append(b.get("estilo", "realista, vertical 9:16, sin texto"))
-    if b.get("realismo", "celular") != "libre":
+    if b.get("realismo", "celular") == "cine":
+        partes.append(CINE); partes.append(EVITAR)
+    elif b.get("realismo", "celular") != "libre":
         partes.append(REALISMO); partes.append(EVITAR)
     partes.append("formato vertical 9:16, sin texto en pantalla, sin marcas de agua, manos y rostros naturales")
     return ". ".join(partes)
 
 
 def prompt_video(b, e):
-    real = (" Cámara en mano de celular con leve movimiento natural, movimientos humanos normales y sin cámara lenta,"
-            " sin efectos ni look cinematográfico." if b.get("realismo", "celular") != "libre" else "")
+    modo = b.get("realismo", "celular")
+    real = {"celular": " Cámara en mano de celular con leve movimiento natural, movimientos humanos normales y sin cámara lenta,"
+                       " sin efectos ni look cinematográfico.",
+            "cine": " Movimiento de cámara cinematográfico suave y estable, movimientos humanos naturales, sin efectos artificiales."}.get(modo, "")
     return (f"{e.get('movimiento', 'movimiento de cámara suave')}. {e['imagen']}. "
             f"{b.get('estilo', '')}.{real} Mantén el producto y la persona idénticos a la imagen, sin texto.")
 
@@ -282,8 +299,7 @@ def main():
             continue
         if prov == "kie":
             pi = prompt_imagen(b, e); pv = prompt_video(b, e)
-            refs = [ab(b[k]) for k, u in (("ref_producto", "producto"), ("ref_personaje", "personaje"))
-                    if b.get(k) and u in e.get("usa", []) and os.path.exists(ab(b[k]))]
+            refs = refs_escena(b, e, ab)
             h = hashlib.sha1(("kie" + mi["id"] + pi + "".join(refs)).encode()).hexdigest()
             img = os.path.join(CACHE, h + ".png")
             if not os.path.exists(img):
@@ -308,8 +324,7 @@ def main():
             continue
         # 1) imagen clave (con referencias reales para coherencia) — fal.ai
         pi = prompt_imagen(b, e)
-        refs = [ab(b[k]) for k, u in (("ref_producto", "producto"), ("ref_personaje", "personaje"))
-                if b.get(k) and u in e.get("usa", []) and os.path.exists(ab(b[k]))]
+        refs = refs_escena(b, e, ab)
         h = hashlib.sha1((mi["id"] + pi + "".join(refs)).encode()).hexdigest()
         img = os.path.join(CACHE, h + ".png")
         if not os.path.exists(img):
