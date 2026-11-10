@@ -67,8 +67,9 @@ KIE = {
         "flux-kontext": dict(model="flux1-kontext", creditos=5, refs=False),   # texto→imagen sin referencias
     },
     "video": {
-        "seedance": dict(model="bytedance/seedance-2", creditos_s=11.5, dur=(4, 15)),
-        "kling3": dict(model="kling-3.0-omni/image-to-video", creditos_s=15.1, dur=(3, 15)),
+        # Seedance 2 a 720p cobró ~40 créditos/s en uso real (nov 2026), no el "desde" de la tabla
+        "seedance": dict(model="bytedance/seedance-2", creditos_s=40, dur=(4, 15)),
+        "kling3": dict(model="kling-3.0-omni/image-to-video", creditos_s=30, dur=(3, 15)),  # estimado prudente, sin confirmar
         "hailuo": dict(model="hailuo/02-image-to-video-standard", creditos_video=24, dur=(6, 10)),
         "veo3-fast": dict(model="veo-3-1", creditos_video=60, dur=(4, 8)),
     },
@@ -212,7 +213,11 @@ def prompt_imagen(b, e):
     partes = [e["imagen"]]
     usa = e.get("usa", [])
     if "personaje" in usa and b.get("personaje"): partes.append(f"personaje: {b['personaje']}")
-    if "producto" in usa and b.get("producto"): partes.append(f"producto exactamente como en la referencia: {b['producto']}")
+    if "producto" in usa and b.get("producto"):
+        partes.append(f"producto exactamente como en la referencia: {b['producto']}. Respeta los colores EXACTOS del "
+                      "empaque de la referencia (no los cambies por la luz ni por el color de la escena), la forma, el logo y la tipografía")
+    if "personaje" not in usa:
+        partes.append("sin personas, sin manos ni partes del cuerpo en la imagen")
     if b.get("lugar"): partes.append(f"lugar: {b['lugar']}")
     partes.append(b.get("estilo", "realista, vertical 9:16, sin texto"))
     if b.get("realismo", "celular") == "cine":
@@ -320,7 +325,8 @@ def main():
                             "-vf", "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30,format=yuv420p",
                             "-c:v", "libx264", "-preset", "veryfast", "-crf", "17", out], check=True)
             resumen.append(dict(id=e["id"], modo="ia-kie", costo=round(c, 3), creditos_video=gastado, prompt_imagen=pi, prompt_video=pv))
-            print(f"  {e['id']}: IA lista (≈ USD {c:.2f}) → {out}")
+            real = f" · video cobró {gastado:.0f} créditos (≈ USD {gastado * 0.005:.2f})" if gastado else ""
+            print(f"  {e['id']}: IA lista (estimado ≈ USD {c:.2f}{real}) → {out}")
             continue
         # 1) imagen clave (con referencias reales para coherencia) — fal.ai
         pi = prompt_imagen(b, e)
