@@ -40,6 +40,61 @@ def dims(video):
                         "stream=width,height", "-of", "csv=p=0", video], capture_output=True, text=True).stdout
     w, h = o.strip().split(",")[:2]; return int(w), int(h)
 
+FONTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "fonts")
+
+def crear_ass(segs, W, H, ass_path, estilo="palabras", fuente="Montserrat", color="FFFFFF",
+              resaltado=None, pos=None, tamano=None, zonas=(), extra_estilos="", extra_eventos=()):
+    """Escribe el archivo .ass con los subtítulos (lo usa también editar_auto.py)."""
+    size = int(W * (tamano or {"palabras": 0.075, "frase": 0.05, "caja": 0.045}[estilo]))
+    pos = pos if pos is not None else {"palabras": 0.55, "frase": 0.74, "caja": 0.74}[estilo]
+    border = 1 if estilo != "caja" else 3
+    outline = max(2, size // 9) if estilo != "caja" else max(4, size // 4)
+    back = "&H00000000" if estilo != "caja" else "&H50000000"
+    oc = "&H00000000" if estilo != "caja" else "&H50000000"
+    hdr = f"""[Script Info]
+ScriptType: v4.00+
+PlayResX: {W}
+PlayResY: {H}
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub,{fuente},{size},{bgr(color)},{bgr(color)},{oc},{back},-1,0,0,0,100,100,0,0,{border},{outline},{0 if estilo=='caja' else 2},5,{int(W*0.07)},{int(W*0.07)},0,1
+Style: Tapa,{fuente},{int(W*0.045)},&H00FFFFFF,&H00FFFFFF,&H50000000,&H50000000,-1,0,0,0,100,100,0,0,3,{max(4,int(W*0.012))},0,5,10,10,0,1
+{extra_estilos}
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+"""
+    ev = []
+    x, y = W // 2, int(H * pos)
+    pop = r"{\fscx80\fscy80\t(0,90,\fscx105\fscy105)\t(90,160,\fscx100\fscy100)}"  # efecto "pop" al entrar
+    for s in segs:
+        if estilo == "palabras":
+            for i, (t0, t1, c) in enumerate(trocear(s, 3)):
+                col = r"{\c" + bgr(resaltado) + "}" if resaltado and i % 3 == 1 else ""
+                ev.append(f"Dialogue: 0,{ts(t0)},{ts(t1)},Sub,,0,0,0,,{{\\pos({x},{y})}}{pop}{col}{c.upper()}")
+        else:
+            ev.append(f"Dialogue: 0,{ts(s['start'])},{ts(s['end'])},Sub,,0,0,0,,{{\\pos({x},{y})}}{s['text']}")
+    for z in zonas:
+        if z.get("text"):
+            fs = r"{\fs" + str(int(z["size"] * W / 360)) + "}" if z.get("size") else ""
+            ev.append(f"Dialogue: 1,{ts(z['start'])},{ts(z['end'])},Tapa,,0,0,0,,{{\\pos({z['x']+z['w']//2},{z['y']+z['h']//2})}}{fs}{z['text']}")
+    ev.extend(extra_eventos)
+    open(ass_path, "w").write(hdr + "\n".join(ev) + "\n")
+    return ass_path
+
+def filtro_tapar(zonas, entrada="v0"):
+    """Cadena de filtros que desenfoca las zonas (para tapar textos/marcas viejas)."""
+    fg, cur = "", entrada
+    for i, z in enumerate(zonas):
+        lr = max(1, min(20, z["h"] // 2 - 1)); cr = max(1, min(10, z["h"] // 4 - 1))
+        fg += (f";[{cur}]split[m{i}][c{i}];[c{i}]crop={z['w']}:{z['h']}:{z['x']}:{z['y']},"
+               f"boxblur=lr={lr}:lp=4:cr={cr}:cp=4[b{i}];[m{i}][b{i}]overlay={z['x']}:{z['y']}:"
+               f"enable='between(t,{z['start']},{z['end']})'[t{i}]")
+        cur = f"t{i}"
+    return fg, cur
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("video"); ap.add_argument("segmentos"); ap.add_argument("salida")
@@ -54,53 +109,11 @@ def main():
     a = ap.parse_args()
     W, H = dims(a.video)
     segs = json.load(open(a.segmentos)) if a.segmentos != "-" else []
-    size = int(W * (a.tamano or {"palabras": 0.075, "frase": 0.05, "caja": 0.045}[a.estilo]))
-    pos = a.pos if a.pos is not None else {"palabras": 0.55, "frase": 0.74, "caja": 0.74}[a.estilo]
-    bold = -1
-    border = 1 if a.estilo != "caja" else 3
-    outline = max(2, size // 9) if a.estilo != "caja" else max(4, size // 4)
-    back = "&H00000000" if a.estilo != "caja" else "&H50000000"
-    oc = "&H00000000" if a.estilo != "caja" else "&H50000000"
-    hdr = f"""[Script Info]
-ScriptType: v4.00+
-PlayResX: {W}
-PlayResY: {H}
-WrapStyle: 0
-ScaledBorderAndShadow: yes
-
-[V4+ Styles]
-Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Sub,{a.fuente},{size},{bgr(a.color)},{bgr(a.color)},{oc},{back},{bold},0,0,0,100,100,0,0,{border},{outline},{0 if a.estilo=='caja' else 2},5,{int(W*0.07)},{int(W*0.07)},0,1
-Style: Tapa,{a.fuente},{int(W*0.045)},&H00FFFFFF,&H00FFFFFF,&H50000000,&H50000000,-1,0,0,0,100,100,0,0,3,{max(4,int(W*0.012))},0,5,10,10,0,1
-
-[Events]
-Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-"""
-    ev = []
-    x, y = W // 2, int(H * pos)
-    pop = r"{\fscx80\fscy80\t(0,90,\fscx105\fscy105)\t(90,160,\fscx100\fscy100)}"  # efecto "pop" al entrar
-    for s in segs:
-        if a.estilo == "palabras":
-            for i, (t0, t1, c) in enumerate(trocear(s, 3)):
-                col = r"{\c" + bgr(a.resaltado) + "}" if a.resaltado and i % 3 == 1 else ""
-                ev.append(f"Dialogue: 0,{ts(t0)},{ts(t1)},Sub,,0,0,0,,{{\\pos({x},{y})}}{pop}{col}{c.upper()}")
-        else:
-            ev.append(f"Dialogue: 0,{ts(s['start'])},{ts(s['end'])},Sub,,0,0,0,,{{\\pos({x},{y})}}{s['text']}")
     zonas = json.load(open(a.tapar)) if a.tapar else []
-    for z in zonas:
-        if z.get("text"):
-            fs = r"{\fs" + str(int(z["size"] * W / 360)) + "}" if z.get("size") else ""
-            ev.append(f"Dialogue: 1,{ts(z['start'])},{ts(z['end'])},Tapa,,0,0,0,,{{\\pos({z['x']+z['w']//2},{z['y']+z['h']//2})}}{fs}{z['text']}")
-    ass = os.path.splitext(a.salida)[0] + ".ass"
-    open(ass, "w").write(hdr + "\n".join(ev) + "\n")
-    fg = "[0:v]null[v0]"
-    for i, z in enumerate(zonas):
-        lr = max(1, min(20, z["h"] // 2 - 1)); cr = max(1, min(10, z["h"] // 4 - 1))
-        fg += (f";[v{i}]split[m{i}][c{i}];[c{i}]crop={z['w']}:{z['h']}:{z['x']}:{z['y']},"
-               f"boxblur=lr={lr}:lp=4:cr={cr}:cp=4[b{i}];[m{i}][b{i}]overlay={z['x']}:{z['y']}:"
-               f"enable='between(t,{z['start']},{z['end']})'[v{i+1}]")
-    fonts = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "fonts")
-    fg += f";[v{len(zonas)}]ass={ass}:fontsdir={fonts}[out]"
+    ass = crear_ass(segs, W, H, os.path.splitext(a.salida)[0] + ".ass", a.estilo, a.fuente, a.color,
+                    a.resaltado, a.pos, a.tamano, zonas)
+    fg, cur = filtro_tapar(zonas)
+    fg = "[0:v]null[v0]" + fg + f";[{cur}]ass={ass}:fontsdir={FONTS}[out]"
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", a.video, "-filter_complex", fg, "-map", "[out]",
                     "-map", "0:a?", "-c:v", "libx264", "-preset", "medium", "-crf", a.crf, "-pix_fmt", "yuv420p",
                     "-c:a", "copy", "-movflags", "+faststart", a.salida], check=True)

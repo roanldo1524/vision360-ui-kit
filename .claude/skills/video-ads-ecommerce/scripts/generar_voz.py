@@ -17,11 +17,49 @@ Motores (--motor):
 Uso: python3 generar_voz.py guion.json carpeta_salida --motor auto --idioma es
         [--voz ID] [--referencia voz.wav] [--velocidad 1.1] [--fonetica "Clean Nutra=Clin Nutra"]
      python3 generar_voz.py --buscar-voces es mujer      (lista voces de Fish)
+     --unir voz.wav  además une todas las frases (sin silencios, con pausas cortas) en un solo
+                     audio y escribe voz.json con los tiempos reales de cada frase, listo para
+                     editar_auto.py (--voz voz.wav --subs voz.json). Útil para videos nuevos.
+
+Ahorro de créditos: cada frase se guarda en caché (~/.cache/video-ads/voces) según
+motor+voz+texto; si otro video usa la misma frase (CTA, oferta, ganchos repetidos) no se
+vuelve a pagar ni a generar.
 
 --fonetica reemplaza palabras SOLO en el audio (no en subtítulos). Úsalo para marcas en
 inglés que el motor pronuncia mal: "Clean Nutra=Clin Nutra;BCAA=be ce a a".
 """
-import argparse, json, os, subprocess, sys, urllib.request, urllib.error
+import argparse, hashlib, json, os, shutil, subprocess, sys, urllib.request, urllib.error
+
+CACHE = os.path.expanduser(os.environ.get("VIDEO_ADS_CACHE", "~/.cache/video-ads/voces"))
+
+def clave_cache(motor, voz, idioma, vel, texto, ref):
+    h = hashlib.sha1()
+    for x in (motor, voz or "", idioma, f"{vel:.2f}", texto):
+        h.update(str(x).encode()); h.update(b"|")
+    if ref and os.path.exists(ref):
+        h.update(hashlib.sha1(open(ref, "rb").read()).digest())
+    return os.path.join(CACHE, h.hexdigest() + ".wav")
+
+def unir(segs, carpeta, salida, hueco=0.15, tempo=1.0):
+    """Une seg_###.wav en un audio y devuelve la línea de tiempo real de cada frase."""
+    import tempfile
+    tmp = tempfile.mkdtemp(); partes = []; t = 0.0; tiempos = []
+    sil = os.path.join(tmp, "sil.wav")
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", f"anullsrc=r=48000:cl=mono", "-t", str(hueco), sil], check=True)
+    for i, s in enumerate(segs):
+        o = os.path.join(tmp, f"{i}.wav")
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", os.path.join(carpeta, f"seg_{i:03d}.wav"), "-af",
+                        "silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:"
+                        f"start_threshold=-45dB,areverse,atempo={tempo},aresample=48000", "-ac", "1", o], check=True)
+        d = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", o],
+                                 capture_output=True, text=True).stdout)
+        tiempos.append({"start": round(t, 2), "end": round(t + d, 2), "text": s["text"]})
+        partes += [o, sil]; t += d + hueco
+    lista = os.path.join(tmp, "l.txt"); open(lista, "w").write("".join(f"file '{p}'\n" for p in partes[:-1]))
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", lista, "-ar", "48000", salida], check=True)
+    json.dump(tiempos, open(os.path.splitext(salida)[0] + ".json", "w"), ensure_ascii=False, indent=1)
+    shutil.rmtree(tmp)
+    print(f"voz unida: {salida} ({t - hueco:.1f}s) + tiempos en {os.path.splitext(salida)[0]}.json")
 
 FISH = "https://api.fish.audio"
 
@@ -90,6 +128,8 @@ def main():
     ap.add_argument("--fonetica", default="")
     ap.add_argument("--rehacer", default="", help="índices a regenerar, ej: 0,4,7")
     ap.add_argument("--buscar-voces", nargs="*")
+    ap.add_argument("--unir", default=None, help="une las frases en un solo audio + json de tiempos")
+    ap.add_argument("--sin-cache", action="store_true")
     a = ap.parse_args()
     if a.buscar_voces is not None:
         return buscar_voces(a.buscar_voces[0] if a.buscar_voces else "es", " ".join(a.buscar_voces[1:]))
@@ -103,19 +143,31 @@ def main():
         saldo = fish_saldo()
         motor = "fish" if saldo and saldo > 0 else "xtts"
         print(f"motor elegido: {motor} (saldo API Fish: {saldo})")
-    pend = []
+    pend = []; cache_de = {}
+    os.makedirs(CACHE, exist_ok=True)
     for i, s in enumerate(segs):
         p = os.path.join(a.salida, f"seg_{i:03d}.wav")
         if os.path.exists(p) and os.path.getsize(p) > 0: continue
         t = s["text"]
         for x, y in reemplazos: t = t.replace(x, y)
-        pend.append((t, p))
-    if not pend: return print("nada que generar (ya existen)")
+        k = clave_cache(motor, a.voz, a.idioma, a.velocidad, t, a.referencia if motor == "xtts" else None)
+        if not a.sin_cache and os.path.exists(k):
+            shutil.copy(k, p); print("caché", os.path.basename(p)); continue
+        cache_de[p] = k; pend.append((t, p))
+    def guardar_cache():
+        for p, k in cache_de.items():
+            if os.path.exists(p) and os.path.getsize(p) > 0: shutil.copy(p, k)
+    if not pend:
+        print("nada que generar (todo en caché o ya existe)")
+        if a.unir: unir(segs, a.salida, a.unir)
+        return
     if motor == "xtts":
         if not a.referencia: sys.exit("xtts necesita --referencia voz.wav (6-15 s de voz limpia)")
         ref = os.path.join(a.salida, "_ref.wav")
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", a.referencia, "-t", "15", "-ac", "1", "-ar", "22050", ref], check=True)
-        return correr_xtts(pend, a.idioma, ref, a.velocidad)
+        correr_xtts(pend, a.idioma, ref, a.velocidad); guardar_cache()
+        if a.unir: unir(segs, a.salida, a.unir)
+        return
     for t, p in pend:
         try:
             if motor == "fish": tts_fish(t, p, a.voz, a.modelo_fish)
@@ -127,6 +179,8 @@ def main():
                 sys.exit("Fish dice SIN SALDO DE API (402). Los créditos gratis de la web no sirven para la API: "
                          "recarga en fish.audio/app/developers o usa --motor xtts.")
             sys.exit(f"Error {e.code} del motor {motor}: {msg}")
+    guardar_cache()
+    if a.unir: unir(segs, a.salida, a.unir)
 
 if __name__ == "__main__":
     main()
