@@ -25,6 +25,7 @@ El equipo no es técnico: habla en español sencillo, poco texto, y entrega arch
 | Video de persona hablando (UGC) | `references/estilos.md` | `editar_auto.py ugc` |
 | Frankenstein (varios videos → uno nuevo) y tomas IA | `references/frankenstein.md` | `inventario_tomas.py`, `animar_producto.py` |
 | Video 100% IA (escenas generadas, hiperrealista, gente del común) | `references/videos-ia.md` | `escenas_ia.py` → `generar_voz.py` → `editar_auto.py montaje --en-orden` |
+| Video cinematográfico/lifestyle sin palabras (marca, orgánico) | `references/videos-ia.md` | `escenas_ia.py` (`"realismo": "cine"`) → `musica_ia.py` → `editar_auto.py montaje --cine` |
 | Muchas variantes / 30+ al día / ahorrar créditos | `references/productividad.md` | `lote.py` |
 | Que los videos no se parezcan (Meta Andromeda) | `references/diversidad-meta.md` | `lote.py` con `"conceptos"` |
 | Formatos y medidas | `references/formatos.md` | `reformatear.py` |

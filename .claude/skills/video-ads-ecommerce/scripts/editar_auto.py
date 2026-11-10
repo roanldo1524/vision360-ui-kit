@@ -125,6 +125,18 @@ def render_plano(src, ss, d, out, zoom_ini, zoom_fin, es_img, con_audio):
     sh(cmd)
 
 
+def planos_completos(clips, beats):
+    """Cada clip una vez, en orden, recortado para terminar en el beat más cercano a su final."""
+    planos, t = [], 0.0
+    for c in clips:
+        es_img = c.lower().endswith(IMG_EXT); ld = 3.5 if es_img else dur(c)
+        fin_ideal = t + ld - 0.15
+        fin = max([b for b in beats if t + 1.0 <= b <= fin_ideal] or [fin_ideal])
+        d = max(1.0, fin - t)
+        planos.append(dict(src=c, ss=0.0, d=d, img=es_img)); t += d
+    return planos
+
+
 def planos_montaje(clips, beats, total, preset, rnd):
     """Reparte la duración total en planos que empiezan y terminan en beats."""
     planos, i, t = [], 0, 0.0
@@ -218,6 +230,12 @@ def main():
     ap.add_argument("--clips", nargs="*", default=[], help="archivos o carpetas con clips/fotos (montaje)")
     ap.add_argument("--en-orden", action="store_true", help="usar los clips en el orden dado (videos Frankenstein con guion)")
     ap.add_argument("--inicio", help="clip o foto con el que arranca el video (la toma del gancho)")
+    ap.add_argument("--planos-completos", action="store_true",
+                    help="cada clip se usa una vez, casi completo, cortado en el beat (escenas IA / cine)")
+    ap.add_argument("--look", default=None, choices=["calido", "lifestyle", "frio", "contraste"],
+                    help="color final: calido/lifestyle (dorado suave), frio, contraste")
+    ap.add_argument("--cine", action="store_true",
+                    help="atajo de video cinematográfico: sin textos ni subtítulos, sin barra, sin SFX llamativos, planos completos, look lifestyle")
     ap.add_argument("--video", help="video crudo con persona hablando (ugc)")
     ap.add_argument("--musica"); ap.add_argument("--biblioteca"); ap.add_argument("--mood"); ap.add_argument("--temporada")
     ap.add_argument("--bpm", type=float)
@@ -241,6 +259,9 @@ def main():
     a = ap.parse_args()
     P = PRESETS[a.preset]; rnd = random.Random(a.semilla)
     plan = json.load(open(a.plan)) if a.plan else []
+    if a.cine:
+        a.sin_barra = True; a.sin_sfx = True; a.planos_completos = True; a.en_orden = True
+        a.look = a.look or "lifestyle"; a.gancho = a.gancho if a.gancho else ""
     off_musica = None
     tmp = tempfile.mkdtemp(prefix="edit_")
     try:
@@ -287,10 +308,16 @@ def main():
                     beats = [b - off_musica for b in beats if b >= off_musica]
             else:
                 beats = [i * 0.5 for i in range(int(total * 2) + 4)]
-            planos = planos_montaje(clips, beats, total, P, rnd)
+            if a.planos_completos:
+                planos = planos_completos(clips, beats)
+                total = sum(p["d"] for p in planos)
+            else:
+                planos = planos_montaje(clips, beats, total, P, rnd)
 
         # ---------- zooms por plano y render en paralelo ----------
         for i, p in enumerate(planos):
+            if a.planos_completos and not p["img"]:
+                p["z"] = (1.0, 1.0); continue
             if a.modo == "ugc":
                 p["z"] = (P["punch"], P["punch"]) if i % 2 else (1.0, 1.0)  # jump cut alterno
             elif p["img"]:
@@ -370,10 +397,16 @@ def main():
                         0.6, None, (), ext_estilos, eventos)
 
         # ---------- video final: zoom de cortes ya está; añadir barra, oscurecer CTA, textos ----------
-        vf = "[0:v]null[v]"
+        LOOKS = {"lifestyle": "colorbalance=rs=0.04:gs=0.01:bs=-0.03:rm=0.03:bm=-0.02,eq=contrast=1.04:saturation=1.06:gamma=1.02,vignette=PI/6",
+                 "calido": "colorbalance=rs=0.06:bs=-0.05:rm=0.04:bm=-0.03,eq=saturation=1.08",
+                 "frio": "colorbalance=bs=0.05:rs=-0.03,eq=saturation=0.95",
+                 "contraste": "eq=contrast=1.12:saturation=1.1,unsharp=5:5:0.5"}
+        vf = f"[0:v]{LOOKS[a.look] if a.look else 'null'}[vl]"
         if a.cta:
-            vf = (f"[0:v]boxblur=14:2:enable='gte(t,{cta_ini:.2f})',"
-                  f"eq=brightness=-0.22:saturation=0.75:enable='gte(t,{cta_ini:.2f})'[v]")
+            vf += (f";[vl]boxblur=14:2:enable='gte(t,{cta_ini:.2f})',"
+                   f"eq=brightness=-0.22:saturation=0.75:enable='gte(t,{cta_ini:.2f})'[v]")
+        else:
+            vf += ";[vl]null[v]"
         if not a.sin_barra:
             vf += f";[v]drawbox=x=0:y=0:w='iw*t/{D:.3f}':h=10:color=0x{a.resaltado}@0.95:t=fill[v2]"
         else:
