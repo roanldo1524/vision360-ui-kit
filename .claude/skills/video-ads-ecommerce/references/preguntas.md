@@ -20,11 +20,11 @@ Reglas para que lean y comprendan:
    - Solo guiones — "Te entrego guiones y ganchos para que alguien los grabe."
    - Mejorar un video — "Le doy ritmo, subtítulos, música y cierre a un video que ya tienes."
 2. **¿Para qué país?** ("País") — el de la configuración primero (Recomendado), luego Chile, México, Otro. Descripción: "La voz, las palabras y los precios suenan como de ese país."
-3. **¿Cuántas versiones?** ("Cantidad")
+3. **¿Cuántos videos?** ("Cantidad") — se reparten en conceptos distintos para Meta (diversidad-meta.md)
    - 1 de prueba — "Para revisar el estilo antes de hacer más." (Recomendado la primera vez con un producto)
-   - 5 variantes — "Mismo video con 5 ganchos distintos, para testear en Meta."
-   - 10 variantes — "Más pruebas: 10 ganchos/ángulos."
-   - 30 o más — "Producción del día: varios ángulos y formatos."
+   - 5 videos — "5 conceptos distintos (formato, ángulo, voz y música diferentes), para testear en Meta."
+   - 10 videos — "5 conceptos × 2 ganchos: más pruebas sin que se parezcan entre sí."
+   - 30 o más — "Producción del día: 8-10 conceptos con sus variantes y formatos."
 4. **¿Qué tipo de edición?** ("Edición")
    - Dinámica (dopamina) — "Cortes rápidos al ritmo, zooms, efectos y textos grandes. Para frío en Reels/TikTok." (Recomendado para la mayoría)
    - Natural UGC — "Parece grabado por una clienta: menos efectos, más confianza."

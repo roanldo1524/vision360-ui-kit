@@ -25,6 +25,7 @@ El equipo no es técnico: habla en español sencillo, poco texto, y entrega arch
 | Video de persona hablando (UGC) | `references/estilos.md` | `editar_auto.py ugc` |
 | Frankenstein (varios videos → uno nuevo) y tomas IA | `references/frankenstein.md` | `inventario_tomas.py`, `animar_producto.py` |
 | Muchas variantes / 30+ al día / ahorrar créditos | `references/productividad.md` | `lote.py` |
+| Que los videos no se parezcan (Meta Andromeda) | `references/diversidad-meta.md` | `lote.py` con `"conceptos"` |
 | Formatos y medidas | `references/formatos.md` | `reformatear.py` |
 | Audio: música, SFX, voces, mezcla | `references/audio.md` | `generar_sfx.py`, `generar_musica.py` |
 | Grabación e iluminación (para creadoras) | `references/grabacion.md` | — |
@@ -76,8 +77,10 @@ subtítulos, solo voz (imagen intacta) o ambos, si no está claro.
 4. Produce con `editar_auto.py` (o `lote.py` para variantes). Si faltan tomas: `animar_producto.py` o IA (frankenstein.md).
 5. Revisión (abajo) y entrega.
 
-**D. Lote / muchas variantes** → productividad.md: un `pedido.json` por producto, muestra 1
-video primero, luego `lote.py --rapido`.
+**D. Lote / "necesito X videos"** → productividad.md + diversidad-meta.md: reparte X en 4-6
+**conceptos** distintos (formato, ángulo, toma inicial, voz, música, look) con 1-3 ganchos cada
+uno, en un `pedido.json` con `"conceptos"`; muestra 1 video por concepto primero, luego
+`lote.py --rapido`, y revisa que ningún par se parezca en el primer segundo.
 
 Si el pedido admite dos lecturas que cambian mucho el trabajo, pregunta una vez (con opciones
 y tu recomendación) y sigue.
@@ -90,7 +93,7 @@ y tu recomendación) y sigue.
 - **Voz natural** (≤1.25x): si no cabe, se acorta el guion. Marcas en inglés: `--fonetica`.
 - **Edición**: gancho en el fotograma 0, cortes entre palabras, efectos con sentido (no en cada corte), música ~18 dB bajo la voz con su parte fuerte en el momento fuerte, -14 LUFS, subtítulos en zona segura y nunca sobre la cara.
 - **Música y material con derechos**: nunca canciones comerciales en pauta (aunque se les quite la voz). Usa biblioteca con licencia o `generar_musica.py`.
-- **Cada video distinto**: otro gancho, otro orden, otra semilla, otro plan; nada de plantilla repetida.
+- **Cada video, un concepto distinto** (Meta Andromeda agrupa los parecidos): cambia al menos 3 de: ángulo/persona, formato, toma inicial, voz, música, look. Cambiar solo el gancho es una variante, no un concepto.
 
 ## Revisión antes de decir "listo"
 ```bash

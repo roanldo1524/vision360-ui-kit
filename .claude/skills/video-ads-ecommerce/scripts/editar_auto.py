@@ -215,6 +215,7 @@ def main():
     ap.add_argument("modo", choices=["montaje", "ugc"])
     ap.add_argument("--clips", nargs="*", default=[], help="archivos o carpetas con clips/fotos (montaje)")
     ap.add_argument("--en-orden", action="store_true", help="usar los clips en el orden dado (videos Frankenstein con guion)")
+    ap.add_argument("--inicio", help="clip o foto con el que arranca el video (la toma del gancho)")
     ap.add_argument("--video", help="video crudo con persona hablando (ugc)")
     ap.add_argument("--musica"); ap.add_argument("--biblioteca"); ap.add_argument("--mood"); ap.add_argument("--temporada")
     ap.add_argument("--bpm", type=float)
@@ -261,6 +262,8 @@ def main():
                     clips.append(c)
             if not clips: sys.exit("modo montaje necesita --clips")
             if not a.en_orden: rnd.shuffle(clips)
+            if a.inicio:  # la toma del gancho manda en los primeros segundos
+                clips = [a.inicio] + [c for c in clips if os.path.abspath(c) != os.path.abspath(a.inicio)]
             total_voz = dur(voz) if voz else (a.duracion or 20.0)
         total = total_voz + (a.cta_dur if a.cta else 0) + 0.3
 

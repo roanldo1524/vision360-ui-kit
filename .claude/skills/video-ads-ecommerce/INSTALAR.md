@@ -85,6 +85,17 @@ Quedan estas carpetas:
 | `Pedidos/` | pedidos de lote (muchas variantes de un producto) |
 
 ## 5. Cómo se usa (lo que le escribes a Claude)
+
+**La receta más simple:** pon el material en `1 Material crudo/<producto>/` (o súbelo al chat) y escribe
+**«Necesito 10 videos de <producto>»**. Claude lee o crea la ficha del producto, te muestra opciones para
+elegir y reparte los 10 en conceptos distintos (formato, ángulo, voz, música y look diferentes) para que
+Meta no los trate como el mismo anuncio.
+
+Qué conviene darle (mientras más, mejor resultado):
+- 3 a 6 videos del producto (en uso, resultado, unboxing, una persona hablando) y 2-3 fotos;
+- nombre, precio y oferta real, a quién se le vende, link del producto;
+- opcional: un video de referencia del estilo que te gusta y los colores de la tienda.
+
 No tienes que saber editar ni escribir instrucciones largas: **Claude te muestra opciones y tú
 eliges** (qué quieres hacer, país, cuántas versiones, tipo de edición, ángulo de venta, voz,
 música, oferta). Ejemplos para empezar:

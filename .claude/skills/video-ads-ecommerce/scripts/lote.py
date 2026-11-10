@@ -25,6 +25,17 @@ Pedido de ejemplo (pedido.json):
   "preset": "dopamina", "colores": {"gancho": "E6007E", "cta": "FFD400", "resaltado": "FFD400"},
   "formatos": ["9x16"]                      # además puede sacar "4x5", "1x1"
 }
+Diversidad creativa (recomendado para Meta): en vez de muchos ganchos sobre el mismo video,
+usa "conceptos": cada uno cambia lo que quieras del pedido (modo, preset, angulo, clips,
+musica, voz, colores, fuente, cuerpo, ganchos, plan). Ver references/diversidad-meta.md.
+  "conceptos": [
+    {"angulo": "ropa", "preset": "dopamina", "clips": ["crudo/probandose"], "musica": {"mood": "urbano"},
+     "ganchos": [{"voz": "...", "texto": "..."}], "cuerpo": ["..."]},
+    {"angulo": "testimonio", "modo": "ugc", "preset": "ugc", "crudos": ["crudo/clienta.mp4"],
+     "musica": {"mood": "chill"}, "ganchos": [{"texto": "LO QUE NADIE TE CUENTA"}]},
+    {"angulo": "sinvoz", "preset": "premium", "fuente": "Anton", "duracion": 15, "ganchos": [{"texto": "..."}],
+     "cuerpo": [], "cta_voz": "", "colores": {"gancho": "111111", "cta": "FFFFFF"}}
+  ]
 Uso: python3 lote.py pedido.json [--paralelo 2] [--rapido]
 Resultado: un video por gancho (y formato) + resumen.csv con nombres, duración y gancho.
 """
@@ -52,8 +63,22 @@ def main():
     ap.add_argument("--rapido", action="store_true", help="codificación veloz (recomendado en lotes)")
     ap.add_argument("--solo", type=int, nargs="*", help="solo estas variantes (índices)")
     a = ap.parse_args()
-    P = json.load(open(a.pedido)); base = os.path.dirname(os.path.abspath(a.pedido))
+    P = json.load(open(a.pedido, encoding="utf-8")); base = os.path.dirname(os.path.abspath(a.pedido))
     ab = lambda p: p if os.path.isabs(p) else os.path.join(base, p)
+    if P.get("conceptos"):
+        # Diversidad creativa (Meta Andromeda): cada concepto es otro anuncio de verdad
+        # (formato, ángulo, tomas, música, voz, colores). Se produce cada uno con sus ganchos.
+        comun_p = {k: v for k, v in P.items() if k != "conceptos"}
+        for i, c in enumerate(P["conceptos"], 1):
+            m = {**comun_p, **c}; m.setdefault("angulo", f"concepto{i}")
+            m["_resumen"] = f"resumen_{i:02d}_{m['angulo']}.csv"
+            tmp = os.path.join(base, f".pedido_concepto_{i:02d}.json")
+            json.dump(m, open(tmp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+            print(f"\n=== concepto {i}/{len(P['conceptos'])}: {m['angulo']} ({m.get('modo', 'montaje')}, {m.get('preset', 'dopamina')}) ===", flush=True)
+            extra = (["--rapido"] if a.rapido else []) + ["--paralelo", str(a.paralelo)]
+            subprocess.run([PY, os.path.abspath(__file__), tmp, *extra])
+            os.remove(tmp)
+        return
     out = ab(P.get("salida", "Resultados")); os.makedirs(out, exist_ok=True)
     trabajo = os.path.join(out, "_trabajo"); os.makedirs(trabajo, exist_ok=True)
     prod, ang, idioma = P.get("producto", "producto"), P.get("angulo", "general"), P.get("idioma", "es")
@@ -96,10 +121,15 @@ def main():
     def hacer(tr):
         i, crudo = tr
         g = ganchos[i]; nombre = f"{prod}_{ang}_{modo}_h{i+1:02d}"
-        comun = ["--preset", P.get("preset", "dopamina"), "--semilla", str(i + 1),
+        # semilla distinta por concepto y por variante: otro orden de tomas y otro arranque
+        semilla = (sum(ord(ch) for ch in ang) * 7919 + i + 1) % 100000
+        comun = ["--preset", P.get("preset", "dopamina"), "--semilla", str(semilla),
                  "--gancho", g.get("texto", ""), "--cta", P.get("cta", ""), "--oferta", P.get("oferta", ""),
                  "--color-gancho", C.get("gancho", "E6007E"), "--color-cta", C.get("cta", "FFD400"),
-                 "--resaltado", C.get("resaltado", "FFD400")]
+                 "--resaltado", C.get("resaltado", "FFD400"), "--fuente", P.get("fuente", "Montserrat")]
+        if P.get("musica_climax") is False: comun += ["--sin-climax"]
+        ini = g.get("inicio") or P.get("inicio")   # toma con la que arranca (los primeros 3 s)
+        if ini and modo != "ugc": comun += ["--inicio", ab(ini)]
         if plan: comun += ["--plan", plan]
         if M.get("archivo"): comun += ["--musica", ab(M["archivo"])]
         elif M.get("biblioteca"):
@@ -139,7 +169,7 @@ def main():
         for tr, fut in [(tr, ex.submit(hacer, tr)) for tr in trabajos]:
             try: filas.append(fut.result())
             except Exception as e: errores.append((tr[0] + 1, str(e))); print(f"ERROR variante {tr[0]+1}: {e}", flush=True)
-    with open(os.path.join(out, "resumen.csv"), "w", newline="") as f:
+    with open(os.path.join(out, P.get("_resumen", "resumen.csv")), "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["variante", "gancho", "duracion", "archivos"]); w.writeheader(); w.writerows(filas)
     print(f"\nlisto: {len(filas)} videos en {time.time() - t_ini:.0f}s → {out}  (errores: {len(errores)})")
     for v, e in errores: print(f"  variante {v}: {e.splitlines()[0]}")
