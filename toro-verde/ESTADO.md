@@ -218,3 +218,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-09 9:21 p. m.: subido el pedido de Yober Carvajal Agudelo (320 329 8013, Caicedo) tras quitar el «Obsequio». Siguen pendientes sin dirección: José Albeiro Cano y Ramón David Curacica.
 - 2026-11-09 9:49 p. m.: subido el pedido de William Andrés Serna (302 428 9156, Belén de Umbría) tras quitar el «Obsequio». Siguen pendientes sin dirección: José Albeiro Cano y Ramón David Curacica.
 - 2026-11-09 10:19 p. m.: subido el pedido de Nicolás Alzate (313 515 3203, Yolombó) tras quitar el «Obsequio».
+- 2026-11-09 10:49 p. m.: subido el pedido de Orlando Albeiro Villa Cartagena (319 376 1089, Barbosa, Antioquia) tras quitar el «Obsequio».
