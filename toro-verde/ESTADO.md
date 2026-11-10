@@ -221,3 +221,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-09 10:49 p. m.: subido el pedido de Orlando Albeiro Villa Cartagena (319 376 1089, Barbosa, Antioquia) tras quitar el «Obsequio».
 - 2026-11-10 12:49 a. m.: subido el pedido de Carlos Andrés Molina Valderrama (316 329 2235, Medellín) que fallaba por departamento vacío; se puso Antioquia.
 - 2026-11-10 3:49 a. m.: subido el pedido de Gildefonso Sánchez (311 839 9770, San Luis, Tolima); estaba en «Error al subir» sin mensaje y solo hubo que correr de nuevo el flujo de subida.
+- 2026-11-10 4:19 a. m.: subido el pedido de Fidencio Salazar (322 572 5019, Patía - El Bordo, 4 unidades) tras quitar el «Obsequio».
