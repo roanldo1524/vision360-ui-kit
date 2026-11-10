@@ -16,7 +16,7 @@ eso se ve "IA" a kilómetros y el público colombiano lo descarta.
    - Estilo: "video vertical de celular, hiperrealista, sin texto ni logos". El script añade solo el **kit de realismo** (persona del común, piel con textura, luz natural, desorden normal, cámara en mano) y la lista de lo que se debe evitar.
 3. **Storyboard** (`storyboard.json`, ver cabecera de `escenas_ia.py`): por escena `imagen` (qué se ve, una acción simple), `movimiento` (cámara y acción: "handheld", "se acerca", "gira el frasco"), `dur`, `usa` (personaje/producto). Las escenas de precio/oferta/producto solo pueden ser `"fuente": "foto"` (gratis, foto real animada).
 4. **Simular primero (gratis)**: `python escenas_ia.py storyboard.json salida --simular` → muestra prompts y costo, y arma tomas de prueba para revisar ritmo con el editor. Enséñale al usuario el costo estimado y pide confirmación antes de gastar.
-5. **Generar**: `python escenas_ia.py storyboard.json salida --presupuesto 5` (requiere `FAL_KEY` guardada como secreto del entorno). Primero imagen clave por escena (con las fotos reales de referencia), luego imagen→video. Todo queda en caché: repetir no vuelve a cobrar.
+5. **Generar** (solo cuando el usuario lo ordene y apruebe el costo): `python escenas_ia.py storyboard.json salida --presupuesto 5`. Proveedor por defecto **kie.ai** (más barato): clave en `KIE_API_KEY` o en `~/.video-ads/credenciales.env` (`KIE_API_KEY=...`); en la nube, si la clave está guardada como secreto del entorno, corre con `KIE_API_KEY=proxy-injected` (el entorno pone la real). Antes de generar muestra el saldo y no sigue si no alcanza. fal.ai como alternativa (`--proveedor fal`, `FAL_KEY`). Primero imagen clave por escena (con las fotos reales de referencia), luego imagen→video. Todo queda en caché: repetir no vuelve a cobrar.
 6. **Control de realismo** (mira `salida/imagenes/*.png` y una hoja de contactos de las tomas): manos y dedos, rostro consistente entre escenas, producto idéntico al real (etiqueta, color, forma), sin texto deformado, sin "brillo IA". Rehaz solo las malas: `--solo e02,e05`.
 7. **Voz y edición**: `generar_voz.py guion.json voz/ --unir voz/voz.wav` (voz del país) → `editar_auto.py montaje --clips salida/tomas/e01.mp4 ... --en-orden --voz voz/voz.wav --subs voz/voz.json --gancho ... --cta ... --oferta ...`.
 8. **Etiqueta IA**: al subir a Meta, marca el contenido como hecho con IA (personas realistas generadas); en pantalla puede ir un aviso pequeño "Imágenes generadas con IA".
@@ -27,11 +27,13 @@ eso se ve "IA" a kilómetros y el público colombiano lo descarta.
 - Testimonios: solo de clientes reales, con su permiso.
 - El producto siempre fiel al real (devoluciones si no).
 
-## Modelos y costos (aproximados; cambian seguido, revisa fal.ai/models)
-| Uso | Modelo (fal.ai) | Costo aprox. |
+## Modelos y costos (aproximados, nov 2026; cambian seguido: verifica en kie.ai/pricing)
+| Uso | kie.ai (`--modelo-...`) | Costo aprox. |
 |---|---|---|
-| Imagen clave con referencia de producto/personaje | Nano Banana edit, Flux Kontext | ~USD 0.04 por imagen |
-| Imagen → video, buena relación costo/calidad | Kling 2.1 standard, Seedance lite, Hailuo 02 | ~USD 0.04-0.05 por segundo |
-| Máximo realismo y personas hablando con audio | Veo 3 | ~USD 0.25+ por segundo |
-Un video de 25 s con 8 escenas IA de 3-5 s ≈ USD 2-4 con Kling. Para bajar costos: 5-7 escenas IA + 1-3 escenas de foto real animada (gratis) + reutilizar escenas entre conceptos parecidos.
+| Imagen clave con referencia de producto/personaje | `nano-banana` (por defecto), `seedream` | ~USD 0.02-0.03 por imagen |
+| Imagen → video, mejor costo | `seedance` (por defecto, Seedance 2, 720p) | ~USD 0.057 por segundo |
+| Imagen → video, más calidad de movimiento | `kling3` (Kling 3.0 omni, 720p) | ~USD 0.075 por segundo |
+| Imagen → video, el más barato por clip | `hailuo` (Hailuo 02, 6 s) | ~USD 0.06-0.12 por clip |
+| Máximo realismo | `veo3-fast` (Veo 3.1 rápido) | ~USD 0.25-0.30 por clip |
+Un video de 25 s con 7 escenas IA de 3-4 s ≈ USD 1.5-2.5 con Seedance. `--simular` siempre da el estimado exacto antes de gastar. Las tareas que fallan no se cobran. Para bajar costos: 5-7 escenas IA + 1-3 escenas de foto real animada (gratis) + reutilizar escenas entre conceptos parecidos.
 Para personas hablando a cámara en español (UGC IA): Veo 3 con diálogo, o plataformas de avatares (HeyGen, Arcads, Creatify) con clave propia; aplica las mismas reglas de arriba.

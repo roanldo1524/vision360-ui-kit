@@ -118,7 +118,7 @@ deja en `3 Resultados` y actualiza la ficha.
 ## 6. Reglas del equipo
 - Música: solo con licencia comercial o la generada por la skill. Nunca canciones famosas (aunque se les quite la voz): Meta silencia o bloquea el anuncio.
 - Material de otras marcas: solo como referencia o con permiso del proveedor.
-- Claves de APIs (Fish, ElevenLabs): se configuran como variables de entorno `FISH_API_KEY` / `ELEVENLABS_API_KEY`, nunca pegadas en el chat. Fish necesita **saldo de API** (los créditos gratis de la web no sirven para la API).
+- Claves de APIs: en el computador, en el archivo `~/.video-ads/credenciales.env` (una por línea: `KIE_API_KEY=...`, `FISH_API_KEY=...`, `ELEVENLABS_API_KEY=...`) o como variables de entorno; nunca pegadas en el chat. kie.ai es el proveedor de videos con IA (Kling, Seedance, Veo): Claude siempre muestra el costo antes de generar y solo genera si tú lo ordenas. Fish necesita **saldo de API** (los créditos gratis de la web no sirven para la API).
 
 ## 7. Si algo falla
 | Lo que pasa | Qué hacer |

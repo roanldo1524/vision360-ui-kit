@@ -118,5 +118,6 @@ línea los riesgos, con la versión segura.
 ## Claves y servicios
 - Las claves de API se guardan como secreto del entorno (Fish: `api.fish.audio`, `Authorization: Bearer`; ElevenLabs: `api.elevenlabs.io`, `xi-api-key`). No pidas que las peguen en el chat; si alguien lo hace, úsala si hace falta y recomiéndale cambiarla.
 - Fish: los créditos gratis de la web no sirven para la API (error 402). Alternativas: XTTS local, o generar en la web y subir los audios.
+- Video IA: kie.ai es el proveedor por defecto (`KIE_API_KEY`; en la nube con secreto guardado se corre con `KIE_API_KEY=proxy-injected`). **Nunca generes escenas IA sin que el usuario lo ordene**: primero `--simular`, muestra costo y saldo, y genera solo tras su sí.
 - Antes de gastar en APIs (voz, video IA), di el costo aproximado y usa lo gratis para pruebas. Si un servicio falla, sigue con la mejor alternativa y di qué faltó.
 - Máquina Creativa (Toro Verde): solo para marcas de esa plataforma; ahí sus reglas (`instrucciones_marca`) mandan.
