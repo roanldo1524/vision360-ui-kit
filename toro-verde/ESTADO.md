@@ -225,3 +225,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-10 5:19 a. m.: subidos 2 pedidos que fallaban por el «Obsequio»: Luis Helmer Mabesoy Guzmán (312 775 4577, San Sebastián, 2 unidades) y José Sepúlveda (320 748 8930, Ituango).
 - 2026-11-10 5:54 a. m.: subido el pedido de Rosaura Zapata (313 685 5211, El Cerrito) tras quitar el «Obsequio».
 - 2026-11-10 6:19 a. m.: subido el pedido de Anael Novoa (321 392 5981, Puerto Caicedo) tras quitar el «Obsequio».
+- 2026-11-10 6:49 a. m.: subidos 3 pedidos que fallaban por el «Obsequio»: Frander Moreno Cano (Planadas; el pedido trae 311 205 4371 y el WhatsApp es 300 230 5188), Miguel Ángel Guerrón Oviedo (313 686 6132, San Miguel) y Yolanda Arciniegas (317 692 1276, Bucaramanga).
