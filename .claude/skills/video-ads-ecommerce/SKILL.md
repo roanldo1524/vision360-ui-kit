@@ -24,6 +24,7 @@ El equipo no es técnico: habla en español sencillo, poco texto, y entrega arch
 | Video nuevo con clips/fotos + voz (montaje) | `references/edicion.md`, `references/estilos.md` | `generar_voz.py --unir` → `editar_auto.py montaje` |
 | Video de persona hablando (UGC) | `references/estilos.md` | `editar_auto.py ugc` |
 | Frankenstein (varios videos → uno nuevo) y tomas IA | `references/frankenstein.md` | `inventario_tomas.py`, `animar_producto.py` |
+| Video 100% IA (escenas generadas, hiperrealista, gente del común) | `references/videos-ia.md` | `escenas_ia.py` → `generar_voz.py` → `editar_auto.py montaje --en-orden` |
 | Muchas variantes / 30+ al día / ahorrar créditos | `references/productividad.md` | `lote.py` |
 | Que los videos no se parezcan (Meta Andromeda) | `references/diversidad-meta.md` | `lote.py` con `"conceptos"` |
 | Formatos y medidas | `references/formatos.md` | `reformatear.py` |
@@ -93,6 +94,7 @@ y tu recomendación) y sigue.
 - **Voz natural** (≤1.25x): si no cabe, se acorta el guion. Marcas en inglés: `--fonetica`.
 - **Edición**: gancho en el fotograma 0, cortes entre palabras, efectos con sentido (no en cada corte), música ~18 dB bajo la voz con su parte fuerte en el momento fuerte, -14 LUFS, subtítulos en zona segura y nunca sobre la cara.
 - **Música y material con derechos**: nunca canciones comerciales en pauta (aunque se les quite la voz). Usa biblioteca con licencia o `generar_musica.py`.
+- **IA hiperrealista y honesta**: personas del común en lugares comunes (kit de realismo de `escenas_ia.py`), producto idéntico al real; una persona IA nunca da un testimonio como si fuera clienta real; se marca como IA.
 - **Cada video, un concepto distinto** (Meta Andromeda agrupa los parecidos): cambia al menos 3 de: ángulo/persona, formato, toma inicial, voz, música, look. Cambiar solo el gancho es una variante, no un concepto.
 
 ## Revisión antes de decir "listo"

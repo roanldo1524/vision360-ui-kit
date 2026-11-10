@@ -23,7 +23,7 @@ pecho), lenguaje sexual ("no podrá quitarle los ojos de encima a tu trasero") o
 avergonzar el cuerpo ("pompis planas") aumentan rechazos y bajan la distribución. Ten
 versiones más suaves listas.
 
-**Contenido IA**: si hay personas, voces o imágenes realistas generadas con IA, márcalo
+**Contenido IA**: una persona generada con IA puede actuar escenas o usar el producto, pero nunca presentarse como clienta real con testimonio o resultados (es una reseña falsa). Si hay personas, voces o imágenes realistas generadas con IA, márcalo
 (etiqueta "Creado con IA" al subir y/o aviso en pantalla), sobre todo si alguien parece
 real dando un testimonio.
 

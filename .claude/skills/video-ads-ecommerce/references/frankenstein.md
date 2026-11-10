@@ -32,7 +32,7 @@ escena de dolor (persona frustrada), un detalle (textura), una animación del me
 **Primero lo gratis**: `animar_producto.py` (producto animado con fondo de marca), fotos con
 zoom (Ken Burns en `editar_auto.py`), b-roll de bancos libres (Pexels, Pixabay) si el equipo lo baja.
 
-**Con IA** (pago por segundo; usar solo para tomas que de verdad mueven la venta):
+**Con IA** (pago por segundo; usar solo para tomas que de verdad mueven la venta). Para generarlas usa `scripts/escenas_ia.py` (ver videos-ia.md: kit de realismo, simulación gratis y costo antes de gastar):
 | Herramienta | Bueno para | Nota |
 |---|---|---|
 | Google Veo 3 | escenas realistas con personas y sonido | caro, muy bueno |
