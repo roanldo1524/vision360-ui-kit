@@ -50,7 +50,7 @@ mercado (Colombia/México/Latam neutro/España). Una clienta de 25 años confía
 |---|---|---|---|
 | **Fish Audio** (API) | Muy buena, miles de voces en español | Pago por uso | Necesita **saldo de API**, distinto a los créditos gratis de la web (si no, error 402). `generar_voz.py --buscar-voces es mujer` |
 | **ElevenLabs** (API) | Excelente, muy expresiva | Suscripción | `eleven_multilingual_v2`; clon de voz profesional |
-| **XTTS-v2** (local) | Buena; clona la voz original | Gratis | Lento en CPU. `setup_xtts.sh` una vez. Ideal para doblar manteniendo la voz de la creadora |
+| **XTTS-v2** (local) | Buena; clona la voz original | Gratis | Lento en CPU. `setup_xtts.py` una vez. Ideal para doblar manteniendo la voz de la creadora |
 | Web de Fish/ElevenLabs (manual) | — | Usa créditos gratis | El equipo genera los audios en la web y los sube; el script los mezcla |
 
 Buenas prácticas:
@@ -76,4 +76,4 @@ ffmpeg -i voz.wav -i musica.mp3 -filter_complex "[1:a][0:a]sidechaincompress=thr
 ```
 - Normaliza el final a **-14 LUFS, pico -1.5 dB** (`loudnorm=I=-14:TP=-1.5:LRA=11`); `mezclar_doblaje.py` ya lo hace.
 - Limpieza de voz grabada con celular: `highpass=f=80,afftdn=nf=-25,acompressor=threshold=-18dB:ratio=3,loudnorm=I=-14`.
-- Separar voz de música de un video existente: `separar_voz.sh` (Demucs).
+- Separar voz de música de un video existente: `separar_voz.py` (Demucs).

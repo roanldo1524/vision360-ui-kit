@@ -6,7 +6,7 @@ cualquier guion o editar cualquier video de un producto, **lee su ficha**. Si no
 antes de escribir (es lo que separa un anuncio genérico de uno que vende).
 
 ## Dónde se guarda
-- Repositorio del equipo: `fichas/<tienda>/<producto>.md` (persistente entre sesiones; súbela con commit).
+- En el computador: `<carpeta de trabajo>/Fichas/<producto>.md` (ver `~/.video-ads/config.json`). En la nube: `fichas/<tienda>/<producto>.md` del repositorio, con commit.
 - Si hay Google Drive conectado: también como documento dentro de la carpeta del producto en la categoría de la tienda (ej. `Salud y belleza/Faja lipo/Ficha - Faja lipo`).
 - Si el usuario no indica tienda, pregunta una vez y anótala.
 

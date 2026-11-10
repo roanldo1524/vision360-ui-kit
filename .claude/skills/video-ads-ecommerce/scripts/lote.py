@@ -33,6 +33,8 @@ from concurrent.futures import ThreadPoolExecutor
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 PY = sys.executable
+sys.path.insert(0, AQUI)
+from reformatear import reformatear  # noqa: E402
 
 def run(cmd):
     r = subprocess.run(cmd, capture_output=True, text=True)
@@ -55,7 +57,9 @@ def main():
     out = ab(P.get("salida", "Resultados")); os.makedirs(out, exist_ok=True)
     trabajo = os.path.join(out, "_trabajo"); os.makedirs(trabajo, exist_ok=True)
     prod, ang, idioma = P.get("producto", "producto"), P.get("angulo", "general"), P.get("idioma", "es")
-    modo = P.get("modo", "montaje"); M = P.get("musica", {}); V = P.get("voz", {}); C = P.get("colores", {})
+    modo = P.get("modo", "montaje"); M = P.get("musica", {}); V = P.get("voz", {})
+    from comun import leer_config
+    cfg = leer_config(); C = {**cfg.get("colores", {}), **P.get("colores", {})}
     ganchos = P.get("ganchos") or [{"voz": "", "texto": ""}]
     idx = a.solo if a.solo is not None else range(len(ganchos))
     if modo == "ugc":
@@ -125,8 +129,7 @@ def main():
             if fmt == "9x16":
                 os.replace(tmp_out, f)
             else:
-                run(["bash", os.path.join(AQUI, "reformatear.sh"), tmp_out if os.path.exists(tmp_out) else finales[0], f, fmt])
-                run(["bash", os.path.join(AQUI, "limpiar_metadatos.sh"), f])
+                reformatear(tmp_out if os.path.exists(tmp_out) else finales[0], f, fmt, "rapido" if a.rapido else "final")
             finales.append(f)
         print(f"[{time.time() - t_ini:5.0f}s] ok h{i+1:02d}: {os.path.basename(finales[0])}", flush=True)
         return dict(variante=i + 1, gancho=g.get("texto") or g.get("voz"), duracion=round(D, 1), archivos=" | ".join(map(os.path.basename, finales)))

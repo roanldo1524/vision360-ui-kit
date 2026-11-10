@@ -9,7 +9,7 @@ Estilos:
 También puede TAPAR texto quemado del original (ej. textos en inglés) con un
 desenfoque en una zona y poner encima el texto nuevo: usa --tapar con un JSON
 [{"x":50,"y":150,"w":260,"h":70,"start":0,"end":3,"text":"Texto nuevo","size":16}]
-(coordenadas en píxeles del video real; mídelas con hoja_contactos.sh).
+(coordenadas en píxeles del video real; mídelas con hoja_contactos.py).
 
 Uso: python3 subtitulos.py video.mp4 segmentos.json salida.mp4 [--estilo palabras]
        [--fuente Montserrat|Anton] [--color FFFFFF] [--resaltado 00E5FF] [--pos 0.62] [--tapar zonas.json]
@@ -40,7 +40,9 @@ def dims(video):
                         "stream=width,height", "-of", "csv=p=0", video], capture_output=True, text=True).stdout
     w, h = o.strip().split(",")[:2]; return int(w), int(h)
 
-FONTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "fonts")
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from comun import FONTS, codificador, ff_ruta
 
 def crear_ass(segs, W, H, ass_path, estilo="palabras", fuente="Montserrat", color="FFFFFF",
               resaltado=None, pos=None, tamano=None, zonas=(), extra_estilos="", extra_eventos=()):
@@ -113,10 +115,12 @@ def main():
     ass = crear_ass(segs, W, H, os.path.splitext(a.salida)[0] + ".ass", a.estilo, a.fuente, a.color,
                     a.resaltado, a.pos, a.tamano, zonas)
     fg, cur = filtro_tapar(zonas)
-    fg = "[0:v]null[v0]" + fg + f";[{cur}]ass={ass}:fontsdir={FONTS}[out]"
+    fg = "[0:v]null[v0]" + fg + f";[{cur}]ass='{ff_ruta(ass)}':fontsdir='{ff_ruta(FONTS)}'[out]"
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", a.video, "-filter_complex", fg, "-map", "[out]",
-                    "-map", "0:a?", "-c:v", "libx264", "-preset", "medium", "-crf", a.crf, "-pix_fmt", "yuv420p",
-                    "-c:a", "copy", "-movflags", "+faststart", a.salida], check=True)
+                    "-map", "0:a?", *codificador("final"),
+                    "-c:a", "copy", "-fflags", "+bitexact", "-flags:v", "+bitexact", "-movflags", "+faststart", a.salida], check=True)
+    from comun import limpiar_metadatos
+    limpiar_metadatos(a.salida)
     print(f"ok: {a.salida}  (subtítulos editables en {ass})")
 
 if __name__ == "__main__":

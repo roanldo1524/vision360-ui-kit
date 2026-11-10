@@ -9,7 +9,7 @@
 
 Uso: python3 mezclar_doblaje.py video.mp4 guion.json carpeta_voces fondo.wav salida.mp4
         [--vol-fondo 0.9] [--adelanto 1.0]
-fondo.wav = pista sin voz de separar_voz.sh. Si el video no tenía voz, usa su audio tal cual.
+fondo.wav = pista sin voz de separar_voz.py. Si el video no tenía voz, usa su audio tal cual.
 """
 import argparse, json, os, subprocess, tempfile
 

@@ -10,8 +10,8 @@ Motores (--motor):
               --voz = ID de un modelo de voz de Fish (búscalo con --buscar-voces).
   elevenlabs  ElevenLabs API. Necesita ELEVENLABS_API_KEY. --voz = voice_id.
   xtts        Local y gratis (Coqui XTTS-v2). Clona la voz de --referencia (6-15 s de voz
-              limpia, ej. voz.wav de separar_voz.sh). Lento en CPU (~1-2x tiempo real).
-              Instálalo una vez con setup_xtts.sh.
+              limpia, ej. voz.wav de separar_voz.py). Lento en CPU (~1-2x tiempo real).
+              Instálalo una vez con setup_xtts.py.
   auto        fish si hay clave con saldo, si no xtts.
 
 Uso: python3 generar_voz.py guion.json carpeta_salida --motor auto --idioma es
@@ -30,7 +30,7 @@ inglés que el motor pronuncia mal: "Clean Nutra=Clin Nutra;BCAA=be ce a a".
 """
 import argparse, hashlib, json, os, shutil, subprocess, sys, urllib.request, urllib.error
 
-CACHE = os.path.expanduser(os.environ.get("VIDEO_ADS_CACHE", "~/.cache/video-ads/voces"))
+CACHE = os.environ.get("VIDEO_ADS_CACHE") or os.path.join(os.path.expanduser("~"), ".video-ads", "cache_voces")
 
 def clave_cache(motor, voz, idioma, vel, texto, ref):
     h = hashlib.sha1()
@@ -101,18 +101,36 @@ def tts_eleven(texto, path, voz, idioma):
 
 def correr_xtts(items, idioma, ref, velocidad):
     """XTTS vive en su propio entorno de Python (torch/torchaudio con versiones fijas)."""
-    py = os.environ.get("XTTS_PYTHON", os.path.expanduser("~/.xtts-venv/bin/python"))
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from comun import leer_config, python_venv
+    py = os.environ.get("XTTS_PYTHON") or leer_config().get("xtts_python") or python_venv(os.path.join(os.path.expanduser("~"), ".xtts-venv"))
     if not os.path.exists(py):
-        sys.exit(f"No encuentro XTTS en {py}. Corre primero: bash {os.path.dirname(__file__)}/setup_xtts.sh")
+        sys.exit(f"No encuentro XTTS en {py}. Corre primero: python {os.path.join(os.path.dirname(os.path.abspath(__file__)), 'setup_xtts.py')}")
     code = r'''
-import json,sys,os
+import json,sys,os,wave,shutil
+import torch
 from TTS.api import TTS
 items,idioma,ref,vel=json.loads(sys.argv[1]),sys.argv[2],sys.argv[3],float(sys.argv[4])
-t=TTS("tts_models/multilingual/multi-dataset/xtts_v2").to("cpu")
+dev="cuda" if torch.cuda.is_available() else "cpu"
+t=TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(dev)
+def dur(p):
+    with wave.open(p) as w: return w.getnframes()/w.getframerate()
 for texto,path in items:
     if os.path.exists(path) and os.path.getsize(path)>0: continue
-    t.tts_to_file(text=texto,speaker_wav=ref,language=idioma,file_path=path,speed=vel)
-    print("ok",os.path.basename(path),flush=True)
+    # XTTS a veces "alucina" y alarga una frase corta: si dura mucho más de lo normal, se repite
+    esperado=len(texto)/13.0/vel+0.8; mejor=None
+    for intento in range(3):
+        tmp=path+f".try{intento}.wav"
+        t.tts_to_file(text=texto,speaker_wav=ref,language=idioma,file_path=tmp,speed=vel)
+        d=dur(tmp)
+        if mejor is None or abs(d-esperado)<abs(mejor[1]-esperado): mejor=(tmp,d)
+        if d<=esperado*1.8+1.0: break
+        print(f"  frase larga de más ({d:.1f}s, esperado ~{esperado:.1f}s), repitiendo",flush=True)
+    shutil.move(mejor[0],path)
+    for intento in range(3):
+        x=path+f".try{intento}.wav"
+        if os.path.exists(x): os.remove(x)
+    print("ok",os.path.basename(path),f"{mejor[1]:.1f}s",flush=True)
 '''
     env = dict(os.environ, COQUI_TOS_AGREED="1")
     subprocess.run([py, "-c", code, json.dumps(items), idioma, ref, str(velocidad)], env=env, check=True)
@@ -173,6 +191,10 @@ def main():
             if motor == "fish": tts_fish(t, p, a.voz, a.modelo_fish)
             else: tts_eleven(t, p, a.voz, a.idioma)
             print("ok", os.path.basename(p), flush=True)
+            d = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", p],
+                                     capture_output=True, text=True).stdout or 0)
+            if d > len(t) / 13.0 / a.velocidad * 1.8 + 1.8:
+                print(f"  AVISO: {os.path.basename(p)} dura {d:.1f}s, más de lo normal para su texto: revísala o usa --rehacer")
         except urllib.error.HTTPError as e:
             msg = e.read().decode(errors="ignore")[:300]
             if e.code == 402:

@@ -5,7 +5,7 @@ Cuando el usuario diga "edita como este video" o suba referentes: se copia la **
 (ritmo, gancho, subtítulos, música, efectos), nunca el contenido (frases, datos, marca).
 
 1. Mide: `python3 scripts/inventario_tomas.py trabajo/ref ref.mp4 --sin-texto` (cortes y duración de cada plano) + `python3 scripts/transcribir.py ref.mp4 ref.json` + volumen con `verificar.py`.
-2. Mira: `bash scripts/hoja_contactos.sh ref.mp4 hoja.png 0.5 10`.
+2. Mira: `python3 scripts/hoja_contactos.py ref.mp4 hoja.png 0.5 10`.
 3. Escribe la ficha del estilo en `estilos/<nombre>.md` (repositorio del equipo), con:
    - Gancho (0-3 s): qué se ve, qué se dice, texto en pantalla, sonido.
    - Estructura (bloques y tiempos).
@@ -36,7 +36,7 @@ Cuando el usuario diga "edita como este video" o suba referentes: se copia la **
 ## Revisión antes de entregar (hoja de cuadros)
 Claude no oye: lo que se puede verificar se verifica con números e imágenes, y lo que no, se dice.
 - `verificar.py` (volumen, picos, metadatos, voz vs guion).
-- Hoja de fotogramas del video final (`hoja_contactos.sh final.mp4 hoja.png 0.5 10`): textos dentro de zona segura, nada sobre la cara, sin restos de texto viejo, gancho legible en el fotograma 0, CTA completo al final.
+- Hoja de fotogramas del video final (`hoja_contactos.py final.mp4 hoja.png 0.5 10`): textos dentro de zona segura, nada sobre la cara, sin restos de texto viejo, gancho legible en el fotograma 0, CTA completo al final.
 - Al entregar, di qué no pudiste comprobar: si la música va con el ánimo, si un SFX suena bien, palabras dudosas en subtítulos, fechas/ofertas.
 
 ## Muestrarios (para que el humano elija rápido)

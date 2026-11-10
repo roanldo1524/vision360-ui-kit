@@ -106,7 +106,7 @@ def main():
         zonas = detectar(a.video)
     print("zonas:", json.dumps(zonas))
     if a.solo_detectar or not zonas:
-        if not zonas: print("No detecté marcas. Si la ves, pásala con --zona x,y,w,h (mídela con hoja_contactos.sh).")
+        if not zonas: print("No detecté marcas. Si la ves, pásala con --zona x,y,w,h (mídela con hoja_contactos.py).")
         return
     if a.metodo == "recorte":
         # zoom mínimo para que todas las zonas queden fuera del cuadro, manteniendo el centro
@@ -133,8 +133,11 @@ def main():
         else:
             vf = vf + f"[{cur}]null"
     sub = ["-vf", vf] if a.metodo != "blur" else ["-filter_complex", vf.rstrip(";") + "[out]", "-map", "[out]", "-map", "0:a?"]
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", a.video, *sub, "-c:v", "libx264", "-preset", "medium",
-                    "-crf", "18", "-pix_fmt", "yuv420p", "-c:a", "copy", "-movflags", "+faststart", a.salida], check=True)
+    sys.path.insert(0, __import__("os").path.dirname(__import__("os").path.abspath(__file__)))
+    from comun import codificador, limpiar_metadatos
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", a.video, *sub, *codificador("final"),
+                    "-c:a", "copy", "-fflags", "+bitexact", "-flags:v", "+bitexact", "-movflags", "+faststart", a.salida], check=True)
+    limpiar_metadatos(a.salida)
     print("ok:", a.salida)
 
 if __name__ == "__main__":

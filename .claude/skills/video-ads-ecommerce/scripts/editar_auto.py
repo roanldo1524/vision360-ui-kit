@@ -30,9 +30,9 @@ import argparse, glob, json, os, random, shutil, subprocess, sys, tempfile
 from concurrent.futures import ThreadPoolExecutor
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-SFX = os.path.join(AQUI, "..", "assets", "sfx")
 sys.path.insert(0, AQUI)
-from subtitulos import crear_ass, ts, FONTS  # noqa: E402
+from subtitulos import crear_ass, ts  # noqa: E402
+from comun import FONTS, SFX, codificador, ff_ruta, hilos, limpiar_metadatos, whisper_opciones  # noqa: E402
 
 W, H, FPS = 1080, 1920, 30
 PRESETS = {
@@ -118,7 +118,7 @@ def render_plano(src, ss, d, out, zoom_ini, zoom_fin, es_img, con_audio):
         cmd += ["-map", "0:v", "-map", "0:a", "-af", "aresample=48000,aformat=channel_layouts=stereo"]
     else:
         cmd += ["-f", "lavfi", "-t", f"{d:.3f}", "-i", "anullsrc=r=48000:cl=stereo", "-map", "0:v", "-map", "1:a"]
-    cmd += ["-vf", vf, "-frames:v", str(n), "-c:v", "libx264", "-preset", "ultrafast", "-crf", "14",
+    cmd += ["-vf", vf, "-frames:v", str(n), *codificador("intermedio"),
             "-r", str(FPS), "-c:a", "aac", "-ar", "48000", "-ac", "2", "-t", f"{n / FPS:.3f}", out]
     sh(cmd)
 
@@ -145,11 +145,12 @@ def planos_montaje(clips, beats, total, preset, rnd):
     return planos
 
 
-def palabras_de(video, modelo="small"):
+def palabras_de(video):
     """Palabras con tiempos (Whisper). Se usan para cortar SOLO entre palabras y para subtítulos exactos."""
     from transcribir import cargar_audio
     from faster_whisper import WhisperModel
-    segs, info = WhisperModel(modelo, device="cpu", compute_type="int8").transcribe(
+    dev, ct, mod = whisper_opciones()
+    segs, info = WhisperModel(mod, device=dev, compute_type=ct).transcribe(
         cargar_audio(video), word_timestamps=True, vad_filter=True)
     pal = [dict(start=w.start, end=w.end, word=w.word.strip()) for s in segs for w in s.words if w.word.strip()]
     return pal, info.language
@@ -223,8 +224,10 @@ def main():
     ap.add_argument("--gancho", default=""); ap.add_argument("--gancho-dur", type=float, default=2.8)
     ap.add_argument("--cta", default=""); ap.add_argument("--oferta", default=""); ap.add_argument("--cta-dur", type=float, default=2.6)
     ap.add_argument("--preset", default="dopamina", choices=list(PRESETS))
-    ap.add_argument("--resaltado", default="FFD400"); ap.add_argument("--fuente", default="Montserrat")
-    ap.add_argument("--color-cta", default="FFD400"); ap.add_argument("--color-gancho", default="E6007E")
+    from comun import leer_config
+    _col = leer_config().get("colores", {})
+    ap.add_argument("--resaltado", default=_col.get("resaltado", "FFD400")); ap.add_argument("--fuente", default="Montserrat")
+    ap.add_argument("--color-cta", default=_col.get("cta", "FFD400")); ap.add_argument("--color-gancho", default=_col.get("gancho", "E6007E"))
     ap.add_argument("--plan", help="json de escenas: [{t, dur, texto, estilo: grande|caja|precio, pos, sfx}]")
     ap.add_argument("--sin-barra", action="store_true"); ap.add_argument("--sin-sfx", action="store_true")
     ap.add_argument("--semilla", type=int, default=None, help="misma semilla = misma edición (para variantes)")
@@ -296,7 +299,7 @@ def main():
             o = os.path.join(tmp, f"p{i:03d}.mp4")
             render_plano(p["src"], p["ss"], p["d"], o, p["z"][0], p["z"][1], p["img"], con_audio)
             return o
-        with ThreadPoolExecutor(max_workers=max(1, min(4, (os.cpu_count() or 2) // 2))) as ex:
+        with ThreadPoolExecutor(max_workers=hilos()) as ex:
             files = list(ex.map(hacer, enumerate(planos)))
         lista = os.path.join(tmp, "lista.txt")
         open(lista, "w").write("".join(f"file '{f}'\n" for f in files))
@@ -358,7 +361,7 @@ def main():
             vf += f";[v]drawbox=x=0:y=0:w='iw*t/{D:.3f}':h=10:color=0x{a.resaltado}@0.95:t=fill[v2]"
         else:
             vf += ";[v]null[v2]"
-        vf += f";[v2]ass={ass}:fontsdir={FONTS}[vout]"
+        vf += f";[v2]ass='{ff_ruta(ass)}':fontsdir='{ff_ruta(FONTS)}'[vout]"
 
         # ---------- audio: voz/original + música con ducking + SFX ----------
         inputs = ["-i", base]; af = []; mezcla = []
@@ -412,15 +415,14 @@ def main():
         af.append("".join(mezcla) + f"amix=inputs={len(mezcla)}:normalize=0:duration=longest,atrim=0:{D:.3f},"
                   f"loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,alimiter=limit=0.84:level=false,afade=t=out:st={max(0, D-0.35):.2f}:d=0.35[aout]")
         fc = vf + ";" + ";".join(af)
-        preset = "veryfast" if a.rapido else "medium"
         os.makedirs(os.path.dirname(os.path.abspath(a.salida)), exist_ok=True)
         sh(["ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", fc, "-map", "[vout]", "-map", "[aout]",
-            "-c:v", "libx264", "-preset", preset, "-crf", "20", "-pix_fmt", "yuv420p", "-r", str(FPS),
+            *codificador("rapido" if a.rapido else "final"), "-r", str(FPS),
             "-c:a", "aac", "-b:a", "192k", "-t", f"{D:.3f}",
             "-map_metadata", "-1", "-map_chapters", "-1", "-metadata:s:v", "encoder=", "-metadata:s:v", "handler_name=",
             "-metadata:s:a", "handler_name=", "-fflags", "+bitexact", "-flags:v", "+bitexact", "-flags:a", "+bitexact",
-            "-x264-params", "no-info=1", "-movflags", "+faststart", a.salida])
-        sh(["bash", os.path.join(AQUI, "limpiar_metadatos.sh"), a.salida], stdout=subprocess.DEVNULL)
+            "-movflags", "+faststart", a.salida])
+        limpiar_metadatos(a.salida)
         print(f"ok: {a.salida}  ({D:.1f}s, {len(planos)} planos, {len(eventos_sfx)} efectos de sonido)")
         json.dump(dict(planos=[{k: v for k, v in p.items()} for p in planos], cortes=cortes, sfx=eventos_sfx,
                        musica=musica, gancho=a.gancho, cta=a.cta), open(os.path.splitext(a.salida)[0] + ".plan.json", "w"),

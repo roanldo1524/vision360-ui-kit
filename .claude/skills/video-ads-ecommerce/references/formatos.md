@@ -17,7 +17,7 @@ superior y el 20-25% inferior, y unos 120 px a la derecha (íconos de like/compa
 Textos clave y subtítulos entre el 15% y el 75% de la altura. El script `subtitulos.py`
 usa por defecto alturas dentro de esta zona.
 
-Un mismo video 9:16 se adapta a 4:5, 1:1 y 16:9 con `scripts/reformatear.sh` (rellena con
+Un mismo video 9:16 se adapta a 4:5, 1:1 y 16:9 con `scripts/reformatear.py` (rellena con
 fondo desenfocado). Si se graba pensando en varios formatos, deja el producto en el centro.
 
 ## Catálogo de formatos creativos

@@ -20,36 +20,44 @@ El equipo no es técnico: habla en español sencillo, poco texto, y entrega arch
 | Guion que vende (ganchos, curiosidad progresiva, puntuación) | `references/metodo-guion.md`, `references/guiones.md` | — |
 | Categoría del producto (qué emoción, formato, tomas, riesgos) | `references/categorias.md` | — |
 | Colombia: tono, temporadas, música | `references/colombia.md` | `generar_musica.py`, `biblioteca_musica.py` |
-| Traducir/doblar a español de un país | `references/doblaje.md`, `references/paises.md` | `transcribir.py` → `separar_voz.sh` → `generar_voz.py` → `mezclar_doblaje.py` |
+| Traducir/doblar a español de un país | `references/doblaje.md`, `references/paises.md` | `transcribir.py` → `separar_voz.py` → `generar_voz.py` → `mezclar_doblaje.py` |
 | Video nuevo con clips/fotos + voz (montaje) | `references/edicion.md`, `references/estilos.md` | `generar_voz.py --unir` → `editar_auto.py montaje` |
 | Video de persona hablando (UGC) | `references/estilos.md` | `editar_auto.py ugc` |
 | Frankenstein (varios videos → uno nuevo) y tomas IA | `references/frankenstein.md` | `inventario_tomas.py`, `animar_producto.py` |
 | Muchas variantes / 30+ al día / ahorrar créditos | `references/productividad.md` | `lote.py` |
-| Formatos y medidas | `references/formatos.md` | `reformatear.sh` |
+| Formatos y medidas | `references/formatos.md` | `reformatear.py` |
 | Audio: música, SFX, voces, mezcla | `references/audio.md` | `generar_sfx.py`, `generar_musica.py` |
 | Grabación e iluminación (para creadoras) | `references/grabacion.md` | — |
 | Políticas y derechos | `references/cumplimiento.md` | — |
 | Marcas de agua / textos quemados | — | `quitar_marca.py`, `subtitulos.py --tapar` |
-| Estudiar un estilo de referencia | `references/estilos.md` | `inventario_tomas.py`, `hoja_contactos.sh` |
+| Estudiar un estilo de referencia | `references/estilos.md` | `inventario_tomas.py`, `hoja_contactos.py` |
 | Herramientas externas opcionales (Converzzo, HyperFrames, Remotion) | `references/herramientas-externas.md` | — |
-| Revisión final | — | `verificar.py`, `hoja_contactos.sh`, `limpiar_metadatos.sh` |
+| Revisión final | — | `verificar.py`, `hoja_contactos.py`, `limpiar_metadatos.py` |
+| Brief por selección (qué preguntar y cómo) | `references/preguntas.md` | — |
+| Instalar / revisar el computador | `INSTALAR.md` | `verificar_equipo.py`, `configurar.py`, `setup_xtts.py` |
 
 Todos los scripts traen su ayuda (`--help` o cabecera). Formato común de guion/subtítulos:
 `[{"start": 0.0, "end": 3.1, "text": "frase"}]`.
 
-## Preparación (una vez por entorno; se salta lo que ya esté)
-```bash
-command -v ffmpeg >/dev/null || (apt-get update && apt-get install -y ffmpeg)
-pip install -q faster-whisper demucs librosa scipy pillow numpy
-bash scripts/setup_xtts.sh      # voz IA local gratis (solo si se va a usar)
-python3 scripts/generar_sfx.py  # ya vienen en assets/sfx; regenera si faltan
-```
-Sin tarjeta gráfica todo funciona en CPU. Fuentes en `assets/fonts` (Montserrat, Anton).
+## Primera vez en un computador
+Si el usuario dice "configura la skill" o falta algo (no hay `~/.video-ads/config.json` o una herramienta falla):
+1. `python scripts/verificar_equipo.py` (en Mac/Linux `python3`). Dice qué falta y el comando exacto para Windows/Mac; guía al usuario línea por línea hasta que diga "LISTO".
+2. Pregunta (con selección) dónde quiere la carpeta de trabajo, la tienda, el país y los colores, y corre `python scripts/configurar.py "<carpeta>" --tienda "..." --pais CO --colores E6007E,FFD400,FFD400`. Crea `1 Material crudo`, `2 Referentes`, `3 Resultados`, `Fichas`, `Estilos`, `Musica`, `Voces`, `Pedidos` y deja música base generada.
+3. Voz gratis opcional: `python scripts/setup_xtts.py` (con NVIDIA: `--cuda`).
+La guía para personas está en `INSTALAR.md`. Todo funciona en Windows, Mac y Linux; con tarjeta
+NVIDIA o chip de Mac va más rápido (se detecta solo), sin ella también funciona.
+En Windows los comandos son `python ...`; en Mac/Linux `python3 ...`. Las rutas de los
+ejemplos usan `scripts/` relativo a la carpeta de esta skill.
 
-## Cómo recibir el material
-Pide que **suban los videos/fotos directo al chat**: es lo más rápido y lo que menos créditos
-gasta. Google Drive sirve para entregar y archivar (el conector no baja videos pesados sin
-gastar muchísimo). Si el entorno tiene una carpeta del computador del usuario conectada, usa esa.
+## Cómo recibir el pedido: el equipo elige, no escribe
+Antes de trabajar, haz el **brief por selección** de `references/preguntas.md`: preguntas de
+opción múltiple (qué quiere, país, cantidad, tipo de edición; luego ángulo de venta, voz,
+música, oferta), cada opción explicada en una línea simple y con la recomendada primero.
+No preguntes lo que ya está en la configuración, la ficha o el mensaje. Máximo 2 rondas.
+
+Material: en su computador, que lo ponga en `1 Material crudo/<producto>/` y te diga la
+carpeta; en el chat web, que lo suba directo al chat. Google Drive sirve para entregar y
+archivar (el conector no baja videos pesados sin gastar muchísimo).
 
 ## Flujo según el pedido
 Primero identifica el tipo de pedido; aplica solo sus pasos.
@@ -62,7 +70,7 @@ Guarda/actualiza la ficha.
 subtítulos, solo voz (imagen intacta) o ambos, si no está claro.
 
 **C. Editar video(s) que suben** (UGC, montaje, Frankenstein) →
-1. Revisa el material: `transcribir.py` y `hoja_contactos.sh` (o `inventario_tomas.py` si son varios).
+1. Revisa el material: `transcribir.py` y `hoja_contactos.py` (o `inventario_tomas.py` si son varios).
 2. Lee/crea la ficha del producto; elige ángulo y formato (categorias.md, formatos.md).
 3. Guion + plan creativo: qué texto/efecto va en qué palabra (`--plan`), colores de la tienda, música por mood/temporada. Para material con persona hablando, el guion es el que dice (se corta y se refuerza con textos, no se inventa).
 4. Produce con `editar_auto.py` (o `lote.py` para variantes). Si faltan tomas: `animar_producto.py` o IA (frankenstein.md).
@@ -87,7 +95,7 @@ y tu recomendación) y sigue.
 ## Revisión antes de decir "listo"
 ```bash
 python3 scripts/verificar.py final.mp4 [--guion guion.json --idioma es]
-bash scripts/hoja_contactos.sh final.mp4 hoja.png 0.5 10    # y mira la imagen
+python3 scripts/hoja_contactos.py final.mp4 hoja.png 0.5 10    # y mira la imagen
 ```
 Comprueba: gancho legible en el fotograma 0, textos dentro de la zona segura, nada tapa la
 cara, sin restos de texto viejo o marca, CTA completo, volumen y metadatos. Claude no oye:
@@ -96,11 +104,11 @@ Si algo falla, corrige y verifica de nuevo. Pasa la lista de cumplimiento.md y a
 línea los riesgos, con la versión segura.
 
 ## Entrega
-- Metadatos limpios (los scripts de salida ya lo hacen; para archivos de otros editores: `limpiar_metadatos.sh`).
+- Metadatos limpios (los scripts de salida ya lo hacen; para archivos de otros editores: `limpiar_metadatos.py`).
 - Nombres: `producto_angulo_formato_h##_duracion_formato_idioma.mp4`. Varios archivos → .zip.
-- Envía los archivos con la herramienta de archivos del chat. Trabajas en la nube: no puedes guardar en "Descargas" del usuario ni darle una ruta de su computador; dale el archivo y dile dónde queda al descargarlo.
+- En su computador: guarda en `3 Resultados/<producto>/<fecha>/` y dile la ruta. En la nube (chat web): envía los archivos con la herramienta de archivos; ahí no puedes guardar en su computador ni darle una ruta local.
 - Si hay Drive y la tienda tiene carpetas por categoría (ej. `Salud y belleza/<Producto>`): crea la carpeta del producto en su categoría, deja ahí la ficha y los guiones como documento, y explica que los videos se arrastran desde el .zip.
-- Actualiza la ficha del producto (historial de creativos) y súbela al repositorio si la sesión tiene uno.
+- Actualiza la ficha del producto en `Fichas/` (historial de creativos, ángulos y ganchos usados) para que la próxima vez se parta de ahí.
 
 ## Claves y servicios
 - Las claves de API se guardan como secreto del entorno (Fish: `api.fish.audio`, `Authorization: Bearer`; ElevenLabs: `api.elevenlabs.io`, `xi-api-key`). No pidas que las peguen en el chat; si alguien lo hace, úsala si hace falta y recomiéndale cambiarla.

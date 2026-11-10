@@ -1,0 +1,12 @@
+# Librerías de la skill video-ads-ecommerce (instalar con: python -m pip install -r requirements.txt)
+numpy
+pillow
+scipy
+librosa
+soundfile
+faster-whisper
+demucs
+# Opcionales:
+# rembg onnxruntime      -> quitar fondo de fotos de producto
+# yt-dlp                 -> descargar videos de referencia para estudiar estilo
+# La voz IA local (XTTS) se instala aparte con: python scripts/setup_xtts.py

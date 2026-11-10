@@ -12,7 +12,7 @@ Si no está claro, pregunta: rehacer un doblaje cuesta más que una pregunta.
 ## Paso 1. Revisar el material
 ```bash
 python3 scripts/transcribir.py video.mp4 orig.json        # idioma + texto con tiempos
-bash scripts/hoja_contactos.sh video.mp4 hoja.png 0.5 13   # ver textos quemados y cortes
+python3 scripts/hoja_contactos.py video.mp4 hoja.png 0.5 13   # ver textos quemados y cortes
 ```
 - Si la transcripción tiene 1-2 segmentos o confianza baja, probablemente es **solo una canción**: no se dobla (en el caso real el video 4 era una canción con letra; quedó con su audio).
 - Anota qué textos quemados hay, dónde (píxeles) y entre qué segundos aparecen.
@@ -32,7 +32,7 @@ python3 scripts/subtitulos.py video.mp4 guion.json salida.mp4 --estilo palabras 
 
 ## Paso 4. Separar voz y fondo, generar voces
 ```bash
-bash scripts/separar_voz.sh video.mp4 sep/            # sep/voz.wav y sep/fondo.wav
+python3 scripts/separar_voz.py video.mp4 sep/            # sep/voz.wav y sep/fondo.wav
 python3 scripts/generar_voz.py guion.json voces/ --motor auto --idioma es \
    --referencia sep/voz.wav --fonetica "Clean Nutra=Clin Nutra"
 ```

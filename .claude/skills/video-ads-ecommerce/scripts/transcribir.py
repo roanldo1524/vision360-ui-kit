@@ -24,12 +24,15 @@ def ts_srt(t):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("entrada"); ap.add_argument("salida")
-    ap.add_argument("--modelo", default="small")
+    ap.add_argument("--modelo", default=None, help="small (CPU) / medium (NVIDIA). Por defecto según el equipo")
     ap.add_argument("--idioma", default=None, help="forzar idioma (en, es...). Por defecto lo detecta")
     ap.add_argument("--srt")
     a = ap.parse_args()
     from faster_whisper import WhisperModel
-    m = WhisperModel(a.modelo, device="cpu", compute_type="int8")
+    sys.path.insert(0, __import__("os").path.dirname(__import__("os").path.abspath(__file__)))
+    from comun import whisper_opciones
+    dev, ct, mod = whisper_opciones()
+    m = WhisperModel(a.modelo or mod, device=dev, compute_type=ct)
     segs, info = m.transcribe(cargar_audio(a.entrada), language=a.idioma, vad_filter=True)
     out = [{"start": round(s.start, 2), "end": round(s.end, 2), "text": s.text.strip()} for s in segs]
     json.dump(out, open(a.salida, "w"), ensure_ascii=False, indent=1)

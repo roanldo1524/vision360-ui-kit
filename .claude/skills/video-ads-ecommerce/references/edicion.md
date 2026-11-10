@@ -60,7 +60,7 @@ El 70-85% ve sin sonido: los subtítulos no son opcionales.
 
 Script: `scripts/subtitulos.py` (tres estilos, resaltado, y modo `--tapar` para cubrir texto
 quemado del original con desenfoque y poner el texto traducido en la misma posición).
-Para ubicar textos quemados: `scripts/hoja_contactos.sh` (fotogramas con tiempo) y luego
+Para ubicar textos quemados: `scripts/hoja_contactos.py` (fotogramas con tiempo) y luego
 un fotograma a tamaño real para medir la zona en píxeles.
 
 Lección aprendida: el desenfoque en rectángulo se nota; combínalo con el estilo caja
@@ -106,5 +106,5 @@ ffmpeg -i in.mp4 -vf "drawbox=x=0:y=0:w=iw*t/$(ffprobe -v error -show_entries fo
 
 - **ffmpeg + scripts** (esta skill): traducir, doblar, subtitular, reformatear, limpiar, cortes, overlays. Rápido y sin tarjeta gráfica.
 - **Remotion** (React → video): plantillas animadas reutilizables (listicles, ofertas, textos cinéticos, precios, contadores), muchas variantes desde datos. Requiere Node y Chromium (Playwright ya lo trae en estos entornos); vale la pena cuando el equipo va a sacar decenas de variantes con el mismo diseño.
-- **CapCut / Premiere / DaVinci**: edición fina manual por el equipo. Al exportar desde ellos, pasa siempre `limpiar_metadatos.sh` (dejan su nombre en el archivo).
+- **CapCut / Premiere / DaVinci**: edición fina manual por el equipo. Al exportar desde ellos, pasa siempre `limpiar_metadatos.py` (dejan su nombre en el archivo).
 - Sin tarjeta gráfica (servidores en la nube): todo funciona en CPU; la voz IA local (XTTS) tarda 1-2x el tiempo real.

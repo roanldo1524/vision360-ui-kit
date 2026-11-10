@@ -7,7 +7,7 @@ metadatos y rastros del editor, y opcionalmente que la voz diga el guion
 
 Uso: python3 verificar.py video.mp4 [--guion guion.json --idioma es]
 """
-import argparse, difflib, json, re, subprocess, sys, unicodedata
+import argparse, difflib, json, os, re, subprocess, sys, unicodedata
 
 def run(c): return subprocess.run(c, capture_output=True, text=True)
 
@@ -37,15 +37,18 @@ def main():
     tags = {**p["format"].get("tags", {})}
     for s in p["streams"]: tags.update({f"{s['codec_type']}.{k}": x for k, x in s.get("tags", {}).items()})
     raros = {k: x for k, x in tags.items() if not re.search(r"major_brand|minor_version|compatible_brands|language|handler_name|vendor_id", k)}
-    rastros = run(["sh", "-c", f"strings '{a.video}' | grep -i -E 'x264 - core|lavf[0-9]|lavc[0-9]|com\\.apple|android|capcut|premiere|davinci' | head -3"]).stdout.strip()
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from comun import rastros as buscar_rastros
+    rastros = ", ".join(buscar_rastros(a.video))
     if raros or rastros:
         print("metadatos: QUEDAN RASTROS ->", raros, rastros[:120]); ok = False
     else: print("metadatos: limpios")
     if a.guion:
-        sys.path.insert(0, __import__("os").path.dirname(__file__))
         from transcribir import cargar_audio
+        from comun import whisper_opciones
         from faster_whisper import WhisperModel
-        segs, _ = WhisperModel("small", device="cpu", compute_type="int8").transcribe(cargar_audio(a.video), language=a.idioma)
+        dev, ct, mod = whisper_opciones()
+        segs, _ = WhisperModel(mod, device=dev, compute_type=ct).transcribe(cargar_audio(a.video), language=a.idioma)
         oido = " ".join(s.text for s in segs)
         esperado = " ".join(s["text"] for s in json.load(open(a.guion)))
         r = difflib.SequenceMatcher(None, norm(esperado), norm(oido)).ratio()

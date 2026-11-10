@@ -39,7 +39,9 @@ def main():
         sys.path.insert(0, AQUI)
         from transcribir import cargar_audio
         from faster_whisper import WhisperModel
-        m = WhisperModel("small", device="cpu", compute_type="int8")
+        from comun import whisper_opciones
+        dev, ct, mod = whisper_opciones()
+        m = WhisperModel(mod, device=dev, compute_type=ct)
         for v in a.videos:
             segs, _ = m.transcribe(cargar_audio(v), vad_filter=True)
             trans[v] = [(s.start, s.end, s.text.strip()) for s in segs]
@@ -53,14 +55,17 @@ def main():
         for s, e in tramos:
             n += 1; tid = f"t{n:03d}"; f = os.path.join(a.salida, "tomas", tid + ".mp4")
             subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", f"{s:.3f}", "-t", f"{e - s:.3f}", "-i", v, "-an",
-                            "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", f], check=True)
+                            "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-x264-params", "no-info=1",
+                            "-fflags", "+bitexact", "-flags:v", "+bitexact", f], check=True)
             texto = " ".join(t for (a0, a1, t) in trans.get(v, []) if a0 < e and a1 > s)
             inv.append(dict(id=tid, origen=os.path.basename(v), ini=round(s, 2), fin=round(e, 2), dur=round(e - s, 2),
                             texto=texto, archivo=os.path.relpath(f, a.salida)))
     json.dump(inv, open(os.path.join(a.salida, "inventario.json"), "w"), ensure_ascii=False, indent=1)
     # hoja numerada: un fotograma del medio de cada toma
     cols = 6; filas = (len(inv) + cols - 1) // cols
-    font = subprocess.run(["fc-match", "-f", "%{file}", "DejaVu Sans:bold"], capture_output=True, text=True).stdout
+    sys.path.insert(0, AQUI)
+    from comun import ff_ruta, fuente_texto
+    font = "'" + ff_ruta(fuente_texto()) + "'"
     lista = []
     for t in inv:
         img = os.path.join(a.salida, "tomas", t["id"] + ".jpg")

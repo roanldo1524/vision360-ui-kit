@@ -14,6 +14,9 @@ Uso: python3 animar_producto.py foto.png salida.mp4 [--dur 3.5] [--colores 0B1F3
 """
 import argparse, math, os, subprocess
 import numpy as np
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from comun import codificador  # noqa: E402
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
@@ -66,7 +69,7 @@ def main():
     def f_tit(sz): return ImageFont.truetype(FUENTE, sz)
     n = int(a.dur * FPS)
     cmd = ["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
-           "-c:v", "libx264", "-preset", "veryfast", "-crf", "17", "-pix_fmt", "yuv420p", "-movflags", "+faststart", a.salida]
+           *codificador("final"), "-fflags", "+bitexact", "-flags:v", "+bitexact", "-movflags", "+faststart", a.salida]
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     for k in range(n):
         t = k / FPS; u = k / max(1, n - 1)
@@ -115,6 +118,8 @@ def main():
             if sp > 0.8: d.text((W / 2 - tw / 2, H * 0.8), txt, font=f, fill=(17, 17, 17, 255))
         p.stdin.write(frame.convert("RGB").tobytes())
     p.stdin.close(); p.wait()
+    from comun import limpiar_metadatos
+    limpiar_metadatos(a.salida)
     print(f"ok: {a.salida} ({a.dur}s, {W}x{H})")
 
 if __name__ == "__main__":
