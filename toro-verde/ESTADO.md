@@ -211,3 +211,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-09 4:49 p. m.: subido el pedido de Juan Guzmán (Timba, Valle) tras quitar el «Obsequio». El pedido trae el celular 320 715 2592 y el WhatsApp es 310 847 6037; dirección corta («En la bomba del Valle»).
 - 2026-11-09 5:22 p. m.: subido el pedido de José Abelardo Vega (322 604 3609, La Victoria, Boyacá) tras quitar el «Obsequio».
 - 2026-11-09 6:19 p. m.: subidos 3 pedidos que fallaban por el «Obsequio»: Fredi Wilson Rivera (310 268 9482, Palocabildo), Héctor Cuéllar Meneses (310 810 5630, Oporapa, 4 unidades) y Ferney Román (317 585 4000, Guaitarilla).
+- 2026-11-09 7:19 p. m.: subidos 2 pedidos que fallaban por el «Obsequio»: Erley Ocampo (313 676 2028, Morales, Cauca) y Octavio Rubiano Celis (Bogotá; el pedido trae el celular 302 335 7011 y el WhatsApp es 320 377 6075).
