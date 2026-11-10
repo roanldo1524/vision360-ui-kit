@@ -70,6 +70,7 @@ def main():
                             "festivo": "energetico", "tropical": "tropical", "epico": "epico"}.items():
                 if f.startswith(est) and md not in mood: mood.append(md)
             if f.startswith("festivo") and "navidad" not in temp: temp.append("navidad")
+            if f.startswith(("electro", "trap", "dembow")) and "black_friday" not in temp: temp.append("black_friday")
             d, bpm = analizar(p)
             pistas.append(dict(archivo=rel, dur=round(d, 1), bpm=bpm, mood=mood, temporada=temp))
             print(f"{rel:55s} {d:6.1f}s  {bpm or '?':>5} bpm  {mood} {temp}")

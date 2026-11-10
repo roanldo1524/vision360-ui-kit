@@ -64,7 +64,7 @@ Final    OFERTA + CTA Qué gana HOY + qué hacer ("toca el enlace", "pide el tuy
 Reglas que explican por qué funciona:
 - El gancho decide el 80% del resultado: si nadie pasa de 3 s, el resto no existe. Escribe 5-10 ganchos por guion y testea.
 - Un anuncio = una idea. Si hablas de 6 beneficios no recuerdan ninguno; elige el que más le duele al persona y usa 1-2 de apoyo.
-- El "mecanismo" (por qué funciona) es lo que vuelve creíble la promesa y diferencia de la competencia: "las mujeres almacenan 70-80% menos creatina" → por eso la necesitan.
+- El "mecanismo" (por qué funciona) es lo que vuelve creíble la promesa y diferencia de la competencia: "la creatina lleva agua y energía al músculo" → por eso el entrenamiento rinde más. Usa solo datos con fuente (están en la ficha); una cifra sin fuente es un riesgo de política y de credibilidad.
 - Beneficio > característica: no "5 g de creatina", sino "5 g de creatina que llenan de agua y energía tus músculos para que el entrenamiento por fin construya".
 - La urgencia debe ser real (oferta con fecha, stock limitado verdadero); la falsa quema la marca y Meta la penaliza.
 
@@ -159,7 +159,7 @@ GANCHOS (5+):        1) ... 2) ... 3) ...
 
 | Tiempo | Lo que se VE (plano, acción) | Lo que se OYE (voz/SFX/música) | Texto en pantalla |
 |--------|------------------------------|--------------------------------|-------------------|
-| 0-3 s  | Primer plano, mano abre el bote | "Si haces sentadillas y..." + whoosh | "¿TUS GLÚTEOS NO CRECEN?" |
+| 0-3 s  | Primer plano, mano abre el bote | "Yo hacía sentadillas todos los días y nada cambiaba" + whoosh | "LO QUE ME FALTABA NO ERA OTRA RUTINA" |
 | ...    | ...                          | ...                            | ...               |
 
 CTA: | OFERTA: | MÚSICA (mood/BPM): | NOTAS DE GRABACIÓN:

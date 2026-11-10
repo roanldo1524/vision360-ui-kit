@@ -18,10 +18,11 @@ Uso:
   python3 quitar_marca.py video.mp4 salida.mp4 --metodo blur
   python3 quitar_marca.py video.mp4 salida.mp4 --zona 20,40,220,70 [--zona x,y,w,h,t0,t1 ...]
   python3 quitar_marca.py video.mp4 - --solo-detectar          (muestra las zonas, no edita)
+  python3 quitar_marca.py carpeta_videos/ carpeta_salida/ [--zona ...]   (todos los videos de una carpeta)
 Revisa SIEMPRE un fotograma del resultado: la detección automática puede fallar en
 videos con cámara fija (todo está quieto) o marcas muy transparentes; ahí usa --zona.
 """
-import argparse, json, subprocess, sys
+import argparse, json, os, subprocess, sys
 import numpy as np
 
 def info(v):
@@ -95,6 +96,14 @@ def main():
     ap.add_argument("--metodo", default="delogo", choices=["delogo", "blur", "recorte"])
     ap.add_argument("--solo-detectar", action="store_true")
     a = ap.parse_args()
+    if os.path.isdir(a.video):   # carpeta: procesa todos los videos (misma --zona o detección en cada uno)
+        os.makedirs(a.salida, exist_ok=True)
+        for f in sorted(os.listdir(a.video)):
+            if f.lower().endswith((".mp4", ".mov", ".m4v")):
+                cmd = [sys.executable, os.path.abspath(__file__), os.path.join(a.video, f), os.path.join(a.salida, f),
+                       "--metodo", a.metodo] + sum([["--zona", z] for z in a.zona], [])
+                print("→", f); subprocess.run(cmd)
+        return
     W, H, D = info(a.video)
     if a.zona:
         zonas = []

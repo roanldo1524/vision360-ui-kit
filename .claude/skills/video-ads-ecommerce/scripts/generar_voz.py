@@ -30,6 +30,15 @@ inglés que el motor pronuncia mal: "Clean Nutra=Clin Nutra;BCAA=be ce a a".
 """
 import argparse, hashlib, json, os, shutil, subprocess, sys, urllib.request, urllib.error
 
+def limpiar_texto(t, motor):
+    """XTTS inventa palabras después de '...' o con puntuación rara: se normaliza el texto del audio."""
+    import re
+    t = t.replace("…", ".").replace("...", ".")
+    t = re.sub(r"\s+", " ", t).strip()
+    if motor == "xtts" and t and t[-1] not in ".!?": t += "."
+    return t
+
+
 CACHE = os.environ.get("VIDEO_ADS_CACHE") or os.path.join(os.path.expanduser("~"), ".video-ads", "cache_voces")
 
 def clave_cache(motor, voz, idioma, vel, texto, ref):
@@ -165,10 +174,14 @@ def main():
     os.makedirs(CACHE, exist_ok=True)
     for i, s in enumerate(segs):
         p = os.path.join(a.salida, f"seg_{i:03d}.wav")
-        if os.path.exists(p) and os.path.getsize(p) > 0: continue
-        t = s["text"]
+        t = limpiar_texto(s["text"], motor)
         for x, y in reemplazos: t = t.replace(x, y)
         k = clave_cache(motor, a.voz, a.idioma, a.velocidad, t, a.referencia if motor == "xtts" else None)
+        huella = p + ".huella"
+        if os.path.exists(p) and os.path.getsize(p) > 0 and os.path.exists(huella) and open(huella).read() == k:
+            continue  # ya existe y es de esta misma frase/voz
+        if os.path.exists(p): os.remove(p)  # archivo de otra frase u otra voz: se rehace
+        open(huella, "w").write(k)
         if not a.sin_cache and os.path.exists(k):
             shutil.copy(k, p); print("caché", os.path.basename(p)); continue
         cache_de[p] = k; pend.append((t, p))

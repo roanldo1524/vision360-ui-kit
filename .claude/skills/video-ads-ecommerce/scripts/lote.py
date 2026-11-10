@@ -76,11 +76,12 @@ def main():
             json.dump(m, open(tmp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
             print(f"\n=== concepto {i}/{len(P['conceptos'])}: {m['angulo']} ({m.get('modo', 'montaje')}, {m.get('preset', 'dopamina')}) ===", flush=True)
             extra = (["--rapido"] if a.rapido else []) + ["--paralelo", str(a.paralelo)]
+            if a.solo is not None: extra += ["--solo", *map(str, a.solo)]   # p. ej. --solo 0 = 1 muestra por concepto
             subprocess.run([PY, os.path.abspath(__file__), tmp, *extra])
             os.remove(tmp)
         return
     out = ab(P.get("salida", "Resultados")); os.makedirs(out, exist_ok=True)
-    trabajo = os.path.join(out, "_trabajo"); os.makedirs(trabajo, exist_ok=True)
+    trabajo = os.path.join(out, "_trabajo", P.get("angulo", "general")); os.makedirs(trabajo, exist_ok=True)
     prod, ang, idioma = P.get("producto", "producto"), P.get("angulo", "general"), P.get("idioma", "es")
     modo = P.get("modo", "montaje"); M = P.get("musica", {}); V = P.get("voz", {})
     from comun import leer_config
@@ -130,6 +131,7 @@ def main():
         if P.get("musica_climax") is False: comun += ["--sin-climax"]
         ini = g.get("inicio") or P.get("inicio")   # toma con la que arranca (los primeros 3 s)
         if ini and modo != "ugc": comun += ["--inicio", ab(ini)]
+        if P.get("en_orden") and modo != "ugc": comun += ["--en-orden"]   # respeta el orden de "clips" (tabla del guion)
         if plan: comun += ["--plan", plan]
         if M.get("archivo"): comun += ["--musica", ab(M["archivo"])]
         elif M.get("biblioteca"):

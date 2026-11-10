@@ -24,7 +24,7 @@ Cuando el usuario diga "edita como este video" o suba referentes: se copia la **
 - **Segundo 0 = conflicto o resultado**, nunca saludo ni logo. Siempre con texto en pantalla. Fórmula: pregunta que duele, paradoja o comparación + número concreto o "tú/usted".
 - **Nunca cortar la voz a mitad de palabra**: los cortes van en huecos entre palabras (`editar_auto.py ugc` ya lo hace con tiempos por palabra). Para quitar algo del medio, se quita la frase entera.
 - **Pausas muertas** ≥0.30 s → 0.12 s. Excepción: pausa después de "mira/mire/fíjate/aquí" (la persona está mostrando algo): se deja.
-- **Gráficos en la palabra que los nombra**: el texto/precio/dato aparece justo cuando se dice (`--plan` con el tiempo de esa palabra, sacado del json de la voz/subtítulos).
+- **Gráficos en la palabra que los nombra**: el texto/precio/dato aparece justo cuando se dice. En el plan usa `"en": "cinco gramos"` (se ancla solo a esa frase de la voz) en vez de segundos fijos; así funciona aunque la voz cambie de duración y en lotes, sin generar la voz primero.
 - **Movimiento rápido**: entradas y salidas ≤0.16 s; transiciones ~0.2 s, máximo una por corte y nunca dentro de una frase. Punch-in 100↔112% en pausas, separados ≥3-4 s si es UGC.
 - **Duración**: 24-32 s rinde bien para la mayoría; 15 s para retargeting; 45-90 s solo si hay mecanismo que explicar.
 - **Subtítulos**: 3 palabras por grupo o corte en la puntuación; una sola palabra clave resaltada por pantalla; nunca sobre la boca ni la cara (tarjetas/burbujas arriba de la cabeza).

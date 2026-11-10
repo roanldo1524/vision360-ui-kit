@@ -21,7 +21,9 @@ Ejemplos:
 
 Opciones de estilo: --preset dopamina|ugc|premium, --resaltado FFD400, --fuente Montserrat|Anton,
   --color-gancho E6007E, --color-cta FFD400 (usa los colores de la marca/tienda).
-Plan creativo (lo que hace que el video NO sea genérico): --plan escenas.json, p. ej.
+Plan creativo (lo que hace que el video NO sea genérico): --plan escenas.json. Cada elemento va
+en un segundo ("t") o, mejor, anclado a lo que se dice ("en": "cinco gramos"): así cae justo en
+la palabra aunque la voz cambie de duración. P. ej.
   [{"t": 3.2, "dur": 1.5, "texto": "5 g de creatina", "estilo": "caja", "sfx": "pop"},
    {"t": 9.0, "dur": 2, "texto": "$89.900", "estilo": "precio", "pos": 0.3, "sfx": "cha_ching"}]
 Velocidad: --rapido usa codificación más veloz (para lotes grandes); ~1-2 min por video de 30 s en CPU.
@@ -344,6 +346,18 @@ def main():
             if a.oferta:
                 eventos.append(f"Dialogue: 3,{ts(cta_ini + 0.3)},{ts(D)},Oferta,,0,0,0,,{{\\pos({W//2},{int(H*0.55)})}}{pop}{a.oferta.upper()}")
         # plan creativo por escenas: textos/efectos en momentos concretos (ver --plan)
+        def anclar(e):
+            """'en': texto dicho → segundo en que se dice (usa los subtítulos/tiempos de la voz)."""
+            if "t" in e: return float(e["t"])
+            buscado = e.get("en", "").lower()
+            for sg in subs:
+                txt = sg["text"].lower(); k = txt.find(buscado)
+                if buscado and k >= 0:
+                    return sg["start"] + (sg["end"] - sg["start"]) * k / max(1, len(txt))
+            print(f"aviso: no encontré '{e.get('en')}' en la voz; ese elemento del plan se omite"); return None
+        for e in plan:
+            e["t"] = anclar(e)
+        plan[:] = [e for e in plan if e.get("t") is not None]
         for e in plan:
             t0 = float(e["t"]); t1 = t0 + float(e.get("dur", 1.5))
             if e.get("texto"):
