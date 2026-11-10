@@ -4,6 +4,8 @@
 <link rel="preload" as="image" href="{{ 'ct-1-principal.jpg' | file_url }}&width=540" imagesrcset="{{ 'ct-1-principal.jpg' | file_url }}&width=360 360w, {{ 'ct-1-principal.jpg' | file_url }}&width=540 540w, {{ 'ct-1-principal.jpg' | file_url }}&width=720 720w" imagesizes="(max-width:480px) 92vw, 440px" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Barlow:wght@400;600;700;800&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
 <style>.shopify-section-group-header-group,.shopify-section-group-footer-group,#shopify-section-announcement-bar,#shopify-section-header,#shopify-section-footer{display:none!important}main#MainContent,#MainContent{padding:0!important;margin:0!important;max-width:none!important}body{background:#cfd8de;margin:0!important;padding:0!important}#ct-host{all:initial!important;display:block!important;min-height:100vh;margin:0!important;padding:0!important;letter-spacing:normal!important;word-spacing:normal!important;text-transform:none!important}.ct-form{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}</style>
+<script>(function(){try{var pm=window.postMessage;if(pm&&!pm.__ct){var w=function(){try{return pm.apply(this,arguments)}catch(e){}};w.__ct=1;window.postMessage=w}}catch(e){}
+addEventListener('error',function(e){var m=(e&&e.message)||'';if(/java object is gone|Script error/i.test(m)){if(e.preventDefault)e.preventDefault();return true}},true)})();</script>
 <div id="ct-host"></div>
 {%- liquid
   assign rv_count = 0
@@ -191,6 +193,19 @@
 .ct-page .wh-conf{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .ct-page .wh-conf i{position:absolute;top:-12px;width:8px;height:12px;border-radius:2px;animation:whc 1.6s cubic-bezier(.2,.7,.3,1) forwards}
 @keyframes whc{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),520px) rotate(var(--r));opacity:0}}
+.ct-page .quick{padding:2px 14px 20px;background:#fff}
+.ct-page .q-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.ct-page .q{position:relative;display:grid;gap:3px;justify-items:center;align-content:center;min-height:92px;padding:16px 4px 10px;border-radius:12px;border:2px solid #d7e0e6;background:#fff;color:var(--deep);font:inherit;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:transform 160ms cubic-bezier(.23,1,.32,1),border-color 160ms ease,box-shadow 160ms ease}
+.ct-page .q:active{transform:scale(.97)}
+.ct-page .q.on{border-color:var(--deep);box-shadow:0 0 0 3px rgba(246,184,38,.45)}
+.ct-page .q b{font:800 15px/1.1 var(--text)}
+.ct-page .q span{font:800 17px/1.1 var(--text)}
+.ct-page .q em{font:700 11.5px/1.2 var(--text);color:#1d6b40;font-style:normal}
+.ct-page .q i{position:absolute;top:-10px;left:50%;transform:translateX(-50%);white-space:nowrap;font:800 10.5px/1 var(--text);padding:5px 8px;border-radius:999px;background:var(--gold);color:var(--deep);font-style:normal}
+.ct-page .q-trust{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin:12px 0 0;padding:0;font:600 13px/1.2 var(--text);color:var(--deep)}
+.ct-page .q-trust li::before{content:"\2713";color:#1d6b40;font-weight:800;margin-right:5px}
+.ct-page .quick .cta{margin-top:14px;width:100%}
+.ct-page .cut{display:none!important}
 </style><div class="ct-page no-js" id="ct-root">
 <div class="page">
   <div class="promo" id="promo">
@@ -211,6 +226,15 @@
     <div class="pricing"><b>$109.000</b><s>$150.000</s><span>-27% Black Friday</span></div>
     <p class="perks">Cuerda 10 m + guía digital de regalo · Pagas al recibir</p>
   </div>
+  <section class="quick" aria-label="Elige cuántos imanes quieres">
+    <div class="q-opts" role="group" aria-label="Cantidad">
+      <button class="q" type="button" data-qty="1" aria-pressed="false"><b>1 imán</b><span>$109.000</span><em>Ahorras $41.000</em></button>
+      <button class="q on" type="button" data-qty="2" aria-pressed="true"><i>Más popular</i><b>2 imanes</b><span>$172.900</span><em>Ahorras $127.100</em></button>
+      <button class="q" type="button" data-qty="3" aria-pressed="false"><i>Mejor precio</i><b>3 imanes</b><span>$229.200</span><em>Ahorras $220.800</em></button>
+    </div>
+    <button class="cta pulse js-order" type="button">Pídelo y paga al recibir<small id="quickSub">2 imanes · $172.900</small></button>
+    <ul class="q-trust"><li>Pagas al recibir</li><li>Envío gratis</li><li>Cuerda y guía de regalo</li></ul>
+  </section>
   <section class="gallery" aria-label="Fotos del producto">
     <div class="gstage">
     <div class="slides" id="slides">
@@ -243,43 +267,6 @@
       <button aria-label="Cómo pedir"><img decoding="async" loading="lazy" src="{{ 'ct-5-contraentrega.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
     </div>
   </section>
-  <section class="incl" aria-labelledby="inclTitle">
-    <h2 id="inclTitle">Tu pedido incluye</h2>
-    <ul>
-      <li><img decoding="async" loading="lazy" src="{{ 'ct-producto-mini.jpg' | file_url }}&width=160" alt="" width="64" height="64"><div><b>Imán de neodimio 140 kg</b><small>60 mm (como una tapa de frasco) · argolla inox</small></div><span class="free inc">Incluido</span></li>
-      <li><img decoding="async" loading="lazy" src="{{ 'ct-mosqueton.jpg' | file_url }}&width=160" alt="" width="64" height="64"><div><b>Cuerda de 10 m con mosquetón</b><small>Alta resistencia, lista para lanzar</small></div><span class="free">Gratis</span></li>
-      <li><img decoding="async" loading="lazy" src="{{ 'ct-guia-entierros-oro.jpg' | file_url }}&width=160" alt="" width="64" height="64"><div><b>Guía digital "Entierros y Oro"</b><small>Cómo buscar entierros, sacar oro del río y encontrar joyas perdidas</small></div><span class="free">Gratis</span></li>
-    </ul>
-    <p class="incl-note">La guía te llega por WhatsApp apenas confirmamos tu pedido.</p>
-  </section>
-  <section class="intro" aria-labelledby="introTitle">
-    <h2 id="introTitle" class="intro-h">Una búsqueda de tesoros en cada salida</h2>
-    <p class="lead">Lánzalo al río, arrástralo por el fondo y sácalo con lo que el agua lleva años escondiendo. Agarra hasta 140 kg: lo probamos en máquina hidráulica.</p>
-    <p><b>El problema:</b> los fines de semana se repiten: el mismo plan, el celular, nada nuevo. Mientras tanto, en el fondo de cada río, lago y muelle hay herramientas, monedas y piezas de metal que nadie ha sacado.</p>
-    <p><b>La solución:</b> un imán de neodimio con 140 kg de agarre, argolla de acero inoxidable y cuerda de 10 metros de regalo. No necesitas bote, licencia ni experiencia: lo enganchas, lo lanzas y lo recoges.</p>
-    <p><b>Lo que vas a vivir:</b></p>
-    <ul class="result">
-      <li><b>Primer lanzamiento:</b> el tirón cuando algo se pega allá abajo. Ese momento engancha.</li>
-      <li><b>Primera tarde:</b> monedas, llaves, anzuelos, herramientas, candados.</li>
-      <li><b>El sueño de todo cazador:</b> en el mundo hay quienes han sacado hasta cajas fuertes del agua.</li>
-      <li><b>Cada salida:</b> un plan barato y distinto para hacer solo, con los parceros o con los hijos.</li>
-    </ul>
-    <figure class="life"><img decoding="async" src="{{ 'ct-ugc-guatape.jpg' | file_url }}&width=540" srcset="{{ 'ct-ugc-guatape.jpg' | file_url }}&width=360 360w, {{ 'ct-ugc-guatape.jpg' | file_url }}&width=540 540w, {{ 'ct-ugc-guatape.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Amigos lanzando el imán desde un muelle" loading="lazy"><figcaption>Un plan distinto para el fin de semana</figcaption></figure>
-  </section>
-  <div class="finds" aria-label="Lo que puedes encontrar">
-    <span>Monedas</span><span>Llaves</span><span>Herramientas</span><span>Anzuelos</span><span>Rines</span><span>Candados</span><span>Cadenas</span><span>Cajas fuertes</span>
-  </div>
-  <section class="proof" aria-labelledby="proofTitle">
-    <div class="kick-g">Prueba real</div>
-    <h2 id="proofTitle">Probado en máquina hidráulica</h2>
-    <figure class="proof-hero"><img decoding="async" loading="lazy" src="{{ 'ct-prueba-hidraulica.jpg' | file_url }}&width=540" srcset="{{ 'ct-prueba-hidraulica.jpg' | file_url }}&width=360 360w, {{ 'ct-prueba-hidraulica.jpg' | file_url }}&width=540 540w, {{ 'ct-prueba-hidraulica.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="El imán en la máquina hidráulica de tracción" width="600" height="480"><div class="seal" aria-hidden="true"><b>140</b><span>kg</span></div><span class="pill">Halado hacia arriba hasta soltar</span></figure>
-    <ul class="proof-list">
-      <li><b>140 kg</b> de agarre</li>
-      <li><b>60 mm</b> de diámetro</li>
-      <li><b>0</b> pilas</li>
-    </ul>
-    <p class="proof-tip"><b>Truco de cazador:</b> sube derecho y sin tirones, así rinde sus 140 kg.</p>
-  </section>
   <section class="offer" id="oferta">
     <div class="kicker">Elige tu oferta</div>
     <button class="opt" data-qty="1" data-price="109000" aria-pressed="false">
@@ -291,15 +278,15 @@
     </button>
     <button class="opt on" data-qty="2" data-price="172900" aria-pressed="true">
       <span class="flag">Más popular</span><span class="ph"><img decoding="async" loading="lazy" src="{{ 'ct-producto-mini.jpg' | file_url }}&width=160" alt="" width="72" height="72"><i>×2</i></span>
-      <span class="info"><h3>2 imanes</h3><small>Uno para ti y otro para tu parcero</small><span class="save">Ahorras $45.100</span></span>
-      <span class="price"><b>$172.900</b><s>$218.000</s><em>$86.450 c/u</em></span>
+      <span class="info"><h3>2 imanes</h3><small>Uno para ti y otro para tu parcero</small><span class="save">Ahorras $127.100</span></span>
+      <span class="price"><b>$172.900</b><s>$300.000</s><em>$86.450 c/u</em></span>
       <span class="dot" aria-hidden="true"></span>
       <span class="gifts"><em>Cuerda 10 m</em><em>Guía digital</em><em>Envío gratis</em></span>
     </button>
     <button class="opt" data-qty="3" data-price="229200" aria-pressed="false">
       <span class="flag best">Mejor precio</span><span class="ph"><img decoding="async" loading="lazy" src="{{ 'ct-producto-mini.jpg' | file_url }}&width=160" alt="" width="72" height="72"><i>×3</i></span>
-      <span class="info"><h3>3 imanes</h3><small>Para salir en grupo o regalar</small><span class="save">Ahorras $97.800</span></span>
-      <span class="price"><b>$229.200</b><s>$327.000</s><em>$76.400 c/u</em></span>
+      <span class="info"><h3>3 imanes</h3><small>Para salir en grupo o regalar</small><span class="save">Ahorras $220.800</span></span>
+      <span class="price"><b>$229.200</b><s>$450.000</s><em>$76.400 c/u</em></span>
       <span class="dot" aria-hidden="true"></span>
       <span class="gifts"><em>Cuerda 10 m</em><em>Guía digital</em><em>Envío gratis</em></span>
     </button>
@@ -370,45 +357,39 @@
       <figure><video class="vid" src="{{ 'ct-video-pozo-s.mp4' | file_url }}" poster="{{ 'ct-video-pozo.jpg' | file_url }}&width=480" muted loop playsinline preload="none" aria-label="Lanzando el imán en un pozo antiguo"></video><figcaption>Lo lanzamos a un pozo antiguo para ver qué sale</figcaption></figure>
     </div>
   </section>
-  <section class="sec">
-    <h2 class="h2-under rv"><span>¿Qué ganas con tu</span> <span>IMÁN DE PESCA?</span></h2>
-    <div class="cards" id="cards">
-      <article class="card"><h3>Fuerza de 140 kg</h3><p>Neodimio, el imán permanente más fuerte que existe. Lo que toca, lo sube.</p><img decoding="async" src="{{ 'ct-submarina.jpg' | file_url }}&width=540" srcset="{{ 'ct-submarina.jpg' | file_url }}&width=360 360w, {{ 'ct-submarina.jpg' | file_url }}&width=540 540w, {{ 'ct-submarina.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 90vw, 440px" alt="El imán atrayendo metal bajo el agua" loading="lazy"></article>
-      <article class="card"><h3>No se oxida</h3><p>Argolla y carcasa de acero inoxidable: aguanta agua dulce, barro y piedras salida tras salida.</p><img decoding="async" src="{{ 'ct-producto-argolla.jpg' | file_url }}&width=540" srcset="{{ 'ct-producto-argolla.jpg' | file_url }}&width=360 360w, {{ 'ct-producto-argolla.jpg' | file_url }}&width=540 540w, {{ 'ct-producto-argolla.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 90vw, 440px" alt="Argolla de acero inoxidable 304" loading="lazy"></article>
-      <article class="card"><h3>Para cualquier persona</h3><p>No necesitas licencia, bote ni equipo. Un puente, un muelle o la orilla del río bastan.</p><img decoding="async" src="{{ 'ct-papa-hijo.jpg' | file_url }}&width=540" srcset="{{ 'ct-papa-hijo.jpg' | file_url }}&width=360 360w, {{ 'ct-papa-hijo.jpg' | file_url }}&width=540 540w, {{ 'ct-papa-hijo.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 90vw, 440px" alt="Papá e hijo con sus hallazgos en el río" loading="lazy"></article>
-      <article class="card"><h3>Todo incluido</h3><p>Imán de 60 mm y, de regalo, cuerda roja de 10 metros con mosquetón. Lo abres y sales.</p><img decoding="async" src="{{ 'ct-hero-rio.jpg' | file_url }}&width=540" srcset="{{ 'ct-hero-rio.jpg' | file_url }}&width=360 360w, {{ 'ct-hero-rio.jpg' | file_url }}&width=540 540w, {{ 'ct-hero-rio.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 90vw, 440px" alt="Imán, cuerda roja de 10 m y mosquetón" loading="lazy"></article>
-    </div>
-    <div class="dots"><button id="prev" aria-label="Anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A2233" stroke-width="2.4"><path d="M19 12H5m6-6-6 6 6 6"/></svg></button><i id="dots"></i><button id="next" aria-label="Siguiente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A2233" stroke-width="2.4"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button></div>
+  <section class="incl" aria-labelledby="inclTitle">
+    <h2 id="inclTitle">Tu pedido incluye</h2>
+    <ul>
+      <li><img decoding="async" loading="lazy" src="{{ 'ct-producto-mini.jpg' | file_url }}&width=160" alt="" width="64" height="64"><div><b>Imán de neodimio 140 kg</b><small>60 mm (como una tapa de frasco) · argolla inox</small></div><span class="free inc">Incluido</span></li>
+      <li><img decoding="async" loading="lazy" src="{{ 'ct-mosqueton.jpg' | file_url }}&width=160" alt="" width="64" height="64"><div><b>Cuerda de 10 m con mosquetón</b><small>Alta resistencia, lista para lanzar</small></div><span class="free">Gratis</span></li>
+      <li><img decoding="async" loading="lazy" src="{{ 'ct-guia-entierros-oro.jpg' | file_url }}&width=160" alt="" width="64" height="64"><div><b>Guía digital "Entierros y Oro"</b><small>Cómo buscar entierros, sacar oro del río y encontrar joyas perdidas</small></div><span class="free">Gratis</span></li>
+    </ul>
+    <p class="incl-note">La guía te llega por WhatsApp apenas confirmamos tu pedido.</p>
   </section>
-  <section class="lift">
-    <h2 class="rv">¿Lo levanta o no?</h2>
-    <p class="txt rv">Toca un objeto y mira cuánta de la fuerza del imán necesita.</p>
-    <img class="sec-img" decoding="async" loading="lazy" src="{{ 'ct-rin.jpg' | file_url }}&width=540" srcset="{{ 'ct-rin.jpg' | file_url }}&width=360 360w, {{ 'ct-rin.jpg' | file_url }}&width=540 540w, {{ 'ct-rin.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Sacando un rin de carro del río con el imán" width="600" height="480">
-    <div class="objs" id="objs">
-      <button data-kg="0.05">Llaves<small>~0,05 kg</small></button>
-      <button data-kg="1.2">Herramienta<small>~1,2 kg</small></button>
-      <button data-kg="4">Cadena<small>~4 kg</small></button>
-      <button data-kg="9" class="on">Rin de carro<small>~9 kg</small></button>
-      <button data-kg="120">Caja fuerte<small>~120 kg</small></button>
-      <button data-kg="200">Ancla de barco<small>~200 kg</small></button>
-    </div>
-    <div class="meter" aria-live="polite">
-      <div class="row"><span id="objName">Rin de carro</span><span id="objPct">6% de la fuerza</span></div>
-      <div class="track"><div class="fill" id="fill"></div></div>
-      <div class="verdict" id="verdict">¡Lo sube!</div>
-      <p class="note">140 kg es tirando derecho sobre acero grueso, plano y limpio. Con óxido, pintura, lámina delgada, superficies curvas o tirando de lado, la fuerza baja. Para cosas pesadas: hala recto hacia arriba, despacio y sin tirones.</p>
-    </div>
+  <section class="intro" aria-labelledby="introTitle">
+    <h2 id="introTitle" class="intro-h">Una búsqueda de tesoros en cada salida</h2>
+    <p class="lead">Lánzalo al río, arrástralo por el fondo y sácalo con lo que el agua lleva años escondiendo. Agarra hasta 140 kg: lo probamos en máquina hidráulica.</p>
+    <p><b>El problema:</b> los fines de semana se repiten: el mismo plan, el celular, nada nuevo. Mientras tanto, en el fondo de cada río, lago y muelle hay herramientas, monedas y piezas de metal que nadie ha sacado.</p>
+    <p><b>La solución:</b> un imán de neodimio con 140 kg de agarre, argolla de acero inoxidable y cuerda de 10 metros de regalo. No necesitas bote, licencia ni experiencia: lo enganchas, lo lanzas y lo recoges.</p>
+    <p><b>Lo que vas a vivir:</b></p>
+    <ul class="result">
+      <li><b>Primer lanzamiento:</b> el tirón cuando algo se pega allá abajo. Ese momento engancha.</li>
+      <li><b>Primera tarde:</b> monedas, llaves, anzuelos, herramientas, candados.</li>
+      <li><b>El sueño de todo cazador:</b> en el mundo hay quienes han sacado hasta cajas fuertes del agua.</li>
+      <li><b>Cada salida:</b> un plan barato y distinto para hacer solo, con los parceros o con los hijos.</li>
+    </ul>
+    <figure class="life"><img decoding="async" src="{{ 'ct-ugc-guatape.jpg' | file_url }}&width=540" srcset="{{ 'ct-ugc-guatape.jpg' | file_url }}&width=360 360w, {{ 'ct-ugc-guatape.jpg' | file_url }}&width=540 540w, {{ 'ct-ugc-guatape.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Amigos lanzando el imán desde un muelle" loading="lazy"><figcaption>Un plan distinto para el fin de semana</figcaption></figure>
   </section>
-  <section class="how">
-    <h2 class="rv">Del pedido al primer tesoro</h2>
-    <p class="txt rv">Así se ve tu semana desde que lo pides.</p>
-    <ol class="tl">
-      <li class="rv"><span class="when">Hoy</span><h3>Haces tu pedido</h3><p>Llenas el formulario en un minuto. No pagas nada por adelantado.</p></li>
-      <li class="rv"><span class="when">Día 1</span><h3>Confirmamos y despachamos</h3><p>Te escribimos para confirmar la dirección y sale con prioridad.</p></li>
-      <li class="rv"><span class="when">Día 2 a 7</span><h3>Llega a tu puerta</h3><p>Pagas en efectivo al transportador cuando lo tienes en la mano.</p></li>
-      <li class="rv"><span class="when">El fin de semana</span><h3>Primer lanzamiento</h3><p>Río, lago, quebrada o muelle. El primer tirón no se olvida.</p></li>
-    </ol>
-    <div class="box rv">Un solo imán te dura años: <b>no tiene pilas, no se descarga y no se oxida.</b> Cada salida cuesta cero pesos.</div>
+  <section class="proof" aria-labelledby="proofTitle">
+    <div class="kick-g">Prueba real</div>
+    <h2 id="proofTitle">Probado en máquina hidráulica</h2>
+    <figure class="proof-hero"><img decoding="async" loading="lazy" src="{{ 'ct-prueba-hidraulica.jpg' | file_url }}&width=540" srcset="{{ 'ct-prueba-hidraulica.jpg' | file_url }}&width=360 360w, {{ 'ct-prueba-hidraulica.jpg' | file_url }}&width=540 540w, {{ 'ct-prueba-hidraulica.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="El imán en la máquina hidráulica de tracción" width="600" height="480"><div class="seal" aria-hidden="true"><b>140</b><span>kg</span></div><span class="pill">Halado hacia arriba hasta soltar</span></figure>
+    <ul class="proof-list">
+      <li><b>140 kg</b> de agarre</li>
+      <li><b>60 mm</b> de diámetro</li>
+      <li><b>0</b> pilas</li>
+    </ul>
+    <p class="proof-tip"><b>Truco de cazador:</b> sube derecho y sin tirones, así rinde sus 140 kg.</p>
   </section>
   <section class="steps">
     <h2 class="rv">Cómo se usa</h2>
@@ -471,6 +452,49 @@
     <h2>Tu próximo sábado, en el río</h2>
     <p>Pídelo hoy y paga cuando lo tengas en la mano.</p>
     <a class="cta gold" href="#oferta">Quiero mi imán de pesca<small>Pago contra entrega</small></a>
+  </section>
+  <section class="sec cut">
+    <h2 class="h2-under rv"><span>¿Qué ganas con tu</span> <span>IMÁN DE PESCA?</span></h2>
+    <div class="cards" id="cards">
+      <article class="card"><h3>Fuerza de 140 kg</h3><p>Neodimio, el imán permanente más fuerte que existe. Lo que toca, lo sube.</p><img decoding="async" src="{{ 'ct-submarina.jpg' | file_url }}&width=540" srcset="{{ 'ct-submarina.jpg' | file_url }}&width=360 360w, {{ 'ct-submarina.jpg' | file_url }}&width=540 540w, {{ 'ct-submarina.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 90vw, 440px" alt="El imán atrayendo metal bajo el agua" loading="lazy"></article>
+      <article class="card"><h3>No se oxida</h3><p>Argolla y carcasa de acero inoxidable: aguanta agua dulce, barro y piedras salida tras salida.</p><img decoding="async" src="{{ 'ct-producto-argolla.jpg' | file_url }}&width=540" srcset="{{ 'ct-producto-argolla.jpg' | file_url }}&width=360 360w, {{ 'ct-producto-argolla.jpg' | file_url }}&width=540 540w, {{ 'ct-producto-argolla.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 90vw, 440px" alt="Argolla de acero inoxidable 304" loading="lazy"></article>
+      <article class="card"><h3>Para cualquier persona</h3><p>No necesitas licencia, bote ni equipo. Un puente, un muelle o la orilla del río bastan.</p><img decoding="async" src="{{ 'ct-papa-hijo.jpg' | file_url }}&width=540" srcset="{{ 'ct-papa-hijo.jpg' | file_url }}&width=360 360w, {{ 'ct-papa-hijo.jpg' | file_url }}&width=540 540w, {{ 'ct-papa-hijo.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 90vw, 440px" alt="Papá e hijo con sus hallazgos en el río" loading="lazy"></article>
+      <article class="card"><h3>Todo incluido</h3><p>Imán de 60 mm y, de regalo, cuerda roja de 10 metros con mosquetón. Lo abres y sales.</p><img decoding="async" src="{{ 'ct-hero-rio.jpg' | file_url }}&width=540" srcset="{{ 'ct-hero-rio.jpg' | file_url }}&width=360 360w, {{ 'ct-hero-rio.jpg' | file_url }}&width=540 540w, {{ 'ct-hero-rio.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 90vw, 440px" alt="Imán, cuerda roja de 10 m y mosquetón" loading="lazy"></article>
+    </div>
+    <div class="dots"><button id="prev" aria-label="Anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A2233" stroke-width="2.4"><path d="M19 12H5m6-6-6 6 6 6"/></svg></button><i id="dots"></i><button id="next" aria-label="Siguiente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A2233" stroke-width="2.4"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button></div>
+  </section>
+  <section class="how cut">
+    <h2 class="rv">Del pedido al primer tesoro</h2>
+    <p class="txt rv">Así se ve tu semana desde que lo pides.</p>
+    <ol class="tl">
+      <li class="rv"><span class="when">Hoy</span><h3>Haces tu pedido</h3><p>Llenas el formulario en un minuto. No pagas nada por adelantado.</p></li>
+      <li class="rv"><span class="when">Día 1</span><h3>Confirmamos y despachamos</h3><p>Te escribimos para confirmar la dirección y sale con prioridad.</p></li>
+      <li class="rv"><span class="when">Día 2 a 7</span><h3>Llega a tu puerta</h3><p>Pagas en efectivo al transportador cuando lo tienes en la mano.</p></li>
+      <li class="rv"><span class="when">El fin de semana</span><h3>Primer lanzamiento</h3><p>Río, lago, quebrada o muelle. El primer tirón no se olvida.</p></li>
+    </ol>
+    <div class="box rv">Un solo imán te dura años: <b>no tiene pilas, no se descarga y no se oxida.</b> Cada salida cuesta cero pesos.</div>
+  </section>
+  <div class="finds cut" aria-label="Lo que puedes encontrar">
+    <span>Monedas</span><span>Llaves</span><span>Herramientas</span><span>Anzuelos</span><span>Rines</span><span>Candados</span><span>Cadenas</span><span>Cajas fuertes</span>
+  </div>
+  <section class="lift cut">
+    <h2 class="rv">¿Lo levanta o no?</h2>
+    <p class="txt rv">Toca un objeto y mira cuánta de la fuerza del imán necesita.</p>
+    <img class="sec-img" decoding="async" loading="lazy" src="{{ 'ct-rin.jpg' | file_url }}&width=540" srcset="{{ 'ct-rin.jpg' | file_url }}&width=360 360w, {{ 'ct-rin.jpg' | file_url }}&width=540 540w, {{ 'ct-rin.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Sacando un rin de carro del río con el imán" width="600" height="480">
+    <div class="objs" id="objs">
+      <button data-kg="0.05">Llaves<small>~0,05 kg</small></button>
+      <button data-kg="1.2">Herramienta<small>~1,2 kg</small></button>
+      <button data-kg="4">Cadena<small>~4 kg</small></button>
+      <button data-kg="9" class="on">Rin de carro<small>~9 kg</small></button>
+      <button data-kg="120">Caja fuerte<small>~120 kg</small></button>
+      <button data-kg="200">Ancla de barco<small>~200 kg</small></button>
+    </div>
+    <div class="meter" aria-live="polite">
+      <div class="row"><span id="objName">Rin de carro</span><span id="objPct">6% de la fuerza</span></div>
+      <div class="track"><div class="fill" id="fill"></div></div>
+      <div class="verdict" id="verdict">¡Lo sube!</div>
+      <p class="note">140 kg es tirando derecho sobre acero grueso, plano y limpio. Con óxido, pintura, lámina delgada, superficies curvas o tirando de lado, la fuerza baja. Para cosas pesadas: hala recto hacia arriba, despacio y sin tirones.</p>
+    </div>
   </section>
   <footer>
     <a class="seal-link" href="/" aria-label="alcomprar, inicio"><svg class="seal" viewBox="0 0 200 200" role="img" aria-label="alcomprar.shop, tienda oficial, pago contra entrega en Colombia"><defs><path id="sealA" d="M100,100 m-72,0 a72,72 0 1,1 144,0"/><path id="sealB" d="M100,100 m-80,0 a80,80 0 0,0 160,0"/></defs><circle cx="100" cy="100" r="96" fill="#F6B826"/><circle cx="100" cy="100" r="88" fill="#0A2233"/><circle cx="100" cy="100" r="60" fill="none" stroke="#F6B826" stroke-width="1.5"/><text font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="17" letter-spacing="5" fill="#F6B826"><textPath href="#sealA" startOffset="50%" text-anchor="middle">TIENDA OFICIAL</textPath></text><text font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="12.5" letter-spacing="2.2" fill="#fff"><textPath href="#sealB" startOffset="50%" text-anchor="middle">PAGO CONTRA ENTREGA · COLOMBIA</textPath></text><text x="100" y="93" text-anchor="middle" font-family="Fugaz One,Arial Black,sans-serif" font-size="25" fill="#fff">alcomprar</text><rect x="62" y="102" width="76" height="2" fill="#F6B826"/><text x="100" y="122" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="14" letter-spacing="4" fill="#F6B826">.SHOP</text><path d="M21 100l4-3 4 3-4 3z M171 100l4-3 4 3-4 3z" fill="#F6B826"/></svg></a>
@@ -556,8 +580,10 @@ $$('.opt').forEach(o=>o.onclick=()=>{
   o.classList.add('on');o.setAttribute('aria-pressed','true');
   qty=+o.dataset.qty;price=+o.dataset.price;
   const t=`${qty} ${qty>1?'imanes':'imán'} · ${fmt(price)}`;
-  $('#ctaSub').textContent=t;$('#stickySub').textContent=t;
+  $('#ctaSub').textContent=t;$('#stickySub').textContent=t;const qs=$('#quickSub');if(qs)qs.textContent=t;
+  $$('.q').forEach(x=>{const on=+x.dataset.qty===qty;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on?'true':'false')});
 });
+$$('.q').forEach(q=>q.addEventListener('click',()=>{const o=$('.opt[data-qty="'+q.dataset.qty+'"]');if(o)o.click()}));
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200)}
 async function order(e){
   e.preventDefault();
@@ -571,6 +597,9 @@ async function order(e){
   }catch(_){toast('No pudimos abrir el formulario. Escríbenos por WhatsApp y te tomamos el pedido.')}
 }
 $$('.js-order').forEach(b=>b.addEventListener('click',order));
+  const clr=(n)=>{try{window.clarity&&clarity('event',n)}catch(_){}};
+  root.addEventListener('click',e=>{if(e.target.closest('.js-order')&&!e.target.closest('.wh'))clr('abrir_formulario');if(e.target.closest('.q,.opt'))clr('elegir_oferta')},true);
+  document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('.es-modal button,.es-modal [type="submit"]');if(b&&/pedir|comprar|completar|confirmar|enviar|finalizar/i.test(b.textContent||''))clr('enviar_formulario')},true);
 const SND_OFF='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m22 9-6 6M16 9l6 6"/></svg><span>Toca para oír</span>';
 const SND_ON='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg><span>Sonido</span>';
 const vids=$$('video.vid');
@@ -632,17 +661,16 @@ const __wheel=(function(){const wh=$('#wh');if(!wh)return;const KEY='ct_ruleta_v
   ['pointerdown','touchstart','keydown'].forEach(ev=>addEventListener(ev,unlock,{once:true,passive:true,capture:true}));
   const fanfare=()=>{if(!ac||ac.state!=='running')return;sweep(220,1320,.45,.07,0);[523,659,784,1047].forEach(f=>tone(f,.9,'triangle',.055,.42));[2093,2637,3136,2637,3136].forEach((f,i)=>tone(f,.09,'sine',.035,.5+i*.07))};
   let shown=false;const open=()=>{if(shown)return;shown=true;pend.hidden=true;wh.hidden=false;requestAnimationFrame(()=>wh.classList.add('in'));fanfare();try{navigator.vibrate&&navigator.vibrate(40)}catch(_){}track('RuletaVista',{})};
-  /* Cuándo se abre: a los 8 s si ya bajó un poco, a los 6 s de ver las ofertas, o de una si intenta irse (sube rápido o vuelve de otra pestaña) */
+  /* Cuándo se abre: nunca al entrar. Solo si intenta irse (sube rápido o vuelve de otra pestaña) o después de bajar la mitad de la página */
   const t0=Date.now();let maxY=0,smp=[];
   root.addEventListener('click',e=>{if(e.target.closest('.js-order')&&!e.target.closest('.wh'))ordering=true},true);
   const can=()=>!shown&&!ordering&&!formOpen();
   if(wasClosed){pend.hidden=false}
   else{
-    setInterval(()=>{if(can()&&Date.now()-t0>=8000&&maxY>=250)open()},500);
     addEventListener('scroll',()=>{const y=scrollY,n=Date.now();maxY=Math.max(maxY,y);smp.push([n,y]);while(smp.length&&n-smp[0][0]>350)smp.shift();
-      if(can()&&n-t0>4000&&maxY>600&&smp[0][1]-y>160)open()},{passive:true});
+      if(can()&&n-t0>4000&&maxY>600&&smp[0][1]-y>160)open();
+      const dh=document.documentElement.scrollHeight-innerHeight;if(can()&&n-t0>6000&&dh>0&&maxY>=dh*.5)open()},{passive:true});
     document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&can()&&Date.now()-t0>3000&&maxY>0)open()});
-    const of=$('#oferta');if(of&&'IntersectionObserver' in window){let tm=null;new IntersectionObserver(es=>{if(es[0].isIntersecting&&!tm)tm=setTimeout(()=>{if(can())open()},6000)},{threshold:.3}).observe(of)}
   }
   pend.addEventListener('click',()=>{unlock();shown=false;ordering=false;track('RuletaPendienteClic',{});open()});
   const close=()=>{wh.classList.remove('in');setTimeout(()=>wh.hidden=true,220);if(!saved){pend.hidden=false;try{localStorage.setItem(KEY,JSON.stringify({closed:1}))}catch(_){}}};
