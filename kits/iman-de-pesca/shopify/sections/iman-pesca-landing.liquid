@@ -206,6 +206,12 @@ addEventListener('error',function(e){var m=(e&&e.message)||'';if(/java object is
 .ct-page .q-trust li::before{content:"\2713";color:#1d6b40;font-weight:800;margin-right:5px}
 .ct-page .quick .cta{margin-top:14px;width:100%}
 .ct-page .cut{display:none!important}
+.ct-page .quick .cta{position:relative;overflow:hidden}
+.ct-page .quick .cta::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.26) 50%,transparent 70%);transform:translateX(-120%);animation:ctshine 4s cubic-bezier(.23,1,.32,1) 1.4s infinite}
+@keyframes ctshine{0%,55%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.ct-page .cta small.bump{display:inline-block;animation:ctbump 320ms cubic-bezier(.23,1,.32,1)}
+@keyframes ctbump{0%{transform:scale(.96);opacity:.6}60%{transform:scale(1.06)}100%{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.ct-page .quick .cta::after{animation:none;display:none}.ct-page .cta small.bump{animation:none}}
 </style><div class="ct-page no-js" id="ct-root">
 <div class="page">
   <div class="promo" id="promo">
@@ -237,10 +243,10 @@ addEventListener('error',function(e){var m=(e&&e.message)||'';if(/java object is
     <div class="gstage">
     <div class="slides" id="slides">
       <img decoding="async" src="{{ 'ct-1-principal.jpg' | file_url }}&width=540" srcset="{{ 'ct-1-principal.jpg' | file_url }}&width=360 360w, {{ 'ct-1-principal.jpg' | file_url }}&width=540 540w, {{ 'ct-1-principal.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Imán de pesca de 140 kg con cuerda de 10 metros de regalo" fetchpriority="high" width="800" height="1000">
+      <video class="vid" src="{{ 'ct-video-frasco-s.mp4' | file_url }}" poster="{{ 'ct-video-frasco.jpg' | file_url }}&width=480" muted loop playsinline preload="none" aria-label="Video: monedas saltando al imán a través de una bolsa"></video>
       <img decoding="async" src="{{ 'ct-submarina.jpg' | file_url }}&width=540" srcset="{{ 'ct-submarina.jpg' | file_url }}&width=360 360w, {{ 'ct-submarina.jpg' | file_url }}&width=540 540w, {{ 'ct-submarina.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Bajo el agua: el imán atrae una llave, monedas y un candado" loading="lazy">
       <img decoding="async" data-src="{{ 'ct-ugc-caja-fuerte.jpg' | file_url }}&width=540" data-srcset="{{ 'ct-ugc-caja-fuerte.jpg' | file_url }}&width=360 360w, {{ 'ct-ugc-caja-fuerte.jpg' | file_url }}&width=540 540w, {{ 'ct-ugc-caja-fuerte.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Dos amigos sacando una caja fuerte oxidada del río con el imán" loading="lazy">
       <img decoding="async" data-src="{{ 'ct-papa-hijo.jpg' | file_url }}&width=540" data-srcset="{{ 'ct-papa-hijo.jpg' | file_url }}&width=360 360w, {{ 'ct-papa-hijo.jpg' | file_url }}&width=540 540w, {{ 'ct-papa-hijo.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Papá e hijo sacando una herradura del río desde un puente" loading="lazy">
-      <img decoding="async" data-src="{{ 'ct-3-ofertas.jpg' | file_url }}&width=540" data-srcset="{{ 'ct-3-ofertas.jpg' | file_url }}&width=360 360w, {{ 'ct-3-ofertas.jpg' | file_url }}&width=540 540w, {{ 'ct-3-ofertas.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Combos: 1 imán $109.000, 2 imanes $172.900, 3 imanes $229.200" loading="lazy">
       <img decoding="async" data-src="{{ 'ct-ugc-mano.jpg' | file_url }}&width=540" data-srcset="{{ 'ct-ugc-mano.jpg' | file_url }}&width=360 360w, {{ 'ct-ugc-mano.jpg' | file_url }}&width=540 540w, {{ 'ct-ugc-mano.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Monedas, llaves y un anzuelo pegados al imán" loading="lazy">
       <video class="vid" src="{{ 'ct-video-unboxing-s.mp4' | file_url }}" poster="{{ 'ct-video-unboxing.jpg' | file_url }}&width=480" muted loop playsinline preload="none" aria-label="Video: el imán con su cuerda roja y mosquetón"></video>
       <img decoding="async" data-src="{{ 'ct-navidad.jpg' | file_url }}&width=540" data-srcset="{{ 'ct-navidad.jpg' | file_url }}&width=360 360w, {{ 'ct-navidad.jpg' | file_url }}&width=540 540w, {{ 'ct-navidad.jpg' | file_url }}&width=720 720w" sizes="(max-width:480px) 92vw, 440px" alt="Papá e hijo abriendo el imán como regalo de Navidad" loading="lazy">
@@ -254,10 +260,10 @@ addEventListener('error',function(e){var m=(e&&e.message)||'';if(/java object is
     </div>
     <div class="thumbs" id="thumbs">
       <button class="on" aria-label="Foto principal"><img decoding="async" loading="lazy" src="{{ 'ct-1-principal.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
+      <button aria-label="Video: monedas saltando al imán" class="tvid"><img decoding="async" loading="lazy" src="{{ 'ct-video-frasco.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
       <button aria-label="Bajo el agua"><img decoding="async" loading="lazy" src="{{ 'ct-submarina.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
       <button aria-label="Caja fuerte"><img decoding="async" loading="lazy" src="{{ 'ct-ugc-caja-fuerte.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
       <button aria-label="Papá e hijo"><img decoding="async" loading="lazy" src="{{ 'ct-papa-hijo.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
-      <button aria-label="Combos"><img decoding="async" loading="lazy" src="{{ 'ct-3-ofertas.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
       <button aria-label="Lo que se pega"><img decoding="async" loading="lazy" src="{{ 'ct-ugc-mano.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
       <button aria-label="Video del producto" class="tvid"><img decoding="async" loading="lazy" src="{{ 'ct-video-unboxing.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
       <button aria-label="Regalo de Navidad"><img decoding="async" loading="lazy" src="{{ 'ct-navidad.jpg' | file_url }}&width=140" alt="" width="58" height="58"></button>
@@ -367,8 +373,8 @@ addEventListener('error',function(e){var m=(e&&e.message)||'';if(/java object is
   <section class="intro" aria-labelledby="introTitle">
     <h2 id="introTitle" class="intro-h">Una búsqueda de tesoros en cada salida</h2>
     <p class="lead">Lánzalo al río, arrástralo por el fondo y sácalo con lo que el agua lleva años escondiendo. Agarra hasta 140 kg: lo probamos en máquina hidráulica.</p>
-    <p><b>El problema:</b> los fines de semana se repiten: el mismo plan, el celular, nada nuevo. Mientras tanto, en el fondo de cada río, lago y muelle hay herramientas, monedas y piezas de metal que nadie ha sacado.</p>
-    <p><b>La solución:</b> un imán de neodimio con 140 kg de agarre, argolla de acero inoxidable y cuerda de 10 metros de regalo. No necesitas bote, licencia ni experiencia: lo enganchas, lo lanzas y lo recoges.</p>
+    <p class="cut"><b>El problema:</b> los fines de semana se repiten: el mismo plan, el celular, nada nuevo. Mientras tanto, en el fondo de cada río, lago y muelle hay herramientas, monedas y piezas de metal que nadie ha sacado.</p>
+    <p class="cut"><b>La solución:</b> un imán de neodimio con 140 kg de agarre, argolla de acero inoxidable y cuerda de 10 metros de regalo. No necesitas bote, licencia ni experiencia: lo enganchas, lo lanzas y lo recoges.</p>
     <p><b>Lo que vas a vivir:</b></p>
     <ul class="result">
       <li><b>Primer lanzamiento:</b> el tirón cuando algo se pega allá abajo. Ese momento engancha.</li>
@@ -578,7 +584,7 @@ $$('.opt').forEach(o=>o.onclick=()=>{
   o.classList.add('on');o.setAttribute('aria-pressed','true');
   qty=+o.dataset.qty;price=+o.dataset.price;
   const t=`${qty} ${qty>1?'imanes':'imán'} · ${fmt(price)}`;
-  $('#ctaSub').textContent=t;$('#stickySub').textContent=t;const qs=$('#quickSub');if(qs)qs.textContent=t;
+  $('#ctaSub').textContent=t;$('#stickySub').textContent=t;const qs=$('#quickSub');if(qs){qs.textContent=t;qs.classList.remove('bump');void qs.offsetWidth;qs.classList.add('bump')}try{navigator.vibrate&&navigator.vibrate(8)}catch(_){}
   $$('.q').forEach(x=>{const on=+x.dataset.qty===qty;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on?'true':'false')});
 });
 $$('.q').forEach(q=>q.addEventListener('click',()=>{const o=$('.opt[data-qty="'+q.dataset.qty+'"]');if(o)o.click()}));
