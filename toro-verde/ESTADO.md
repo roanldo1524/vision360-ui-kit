@@ -252,3 +252,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-11 6:50 a. m.: subidos Iván Enrique Rodríguez (2 unidades) y José Carlos Osorio (sin obsequio).
 - 2026-11-11 7:20 a. m.: subido Yovany Vidal (2 unidades, sin obsequio).
 - 2026-11-11 7:50 a. m.: subido Rubén Darío Quiñónez (2 unidades, sin obsequio).
+- 2026-11-11 8:20 a. m.: subidos Juan Diego Morales, John Fayder Pules, José Domingo Jiménez y Antonio Álvarez (galón → 4 unidades), sin obsequio.
