@@ -238,3 +238,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-10 7:50 p. m.: Leonel Arteaga subido (Currulao, Antioquia, existe en Dropi; su resumen estaba mal editado a mano). Wilson Camacho subido (galón → 4 unidades).
 - 2026-11-10 8:10 p. m.: Ronald confirma que el galón es otro envase (otra variable del mismo producto en Dropi). Mientras él no avise del cambio de id, los pedidos de galón se siguen subiendo como 4 unidades. Galones subidos así hoy: Yasmin Cuspian, Armando Arenas, Isidoro Rivero, Wilson Camacho.
 - 2026-11-10 8:20 p. m.: subidos Eladio Tapia, Isaac Moreno (galón → 4 u.) y Daniel Álvarez.
+- 2026-11-10 8:30 p. m.: el galón como producto aparte en Dropi llega con el próximo lote de Toro Verde. Hasta entonces el galón se sube como 4 unidades de 1 litro (no hay que cambiar nada en Dropi).
