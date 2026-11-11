@@ -248,3 +248,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-11 4:50 a. m.: subido Jovanny Andrés González (2 unidades, sin obsequio).
 - 2026-11-11 5:20 a. m.: subido Martín Iceda Daza (sin obsequio).
 - 2026-11-11 5:50 a. m.: subido William Galván Ruiz (sin obsequio).
+- 2026-11-11 6:20 a. m.: subidos Deiro Flor, Mauricio Carrillo y José Raúl Bolaños (Acevedo, poma de 20 L por $995.000: subió como 20 unidades; revisar en Dropi que salga como poma). Arreglado el cambio de cantidad para «20 litros».
