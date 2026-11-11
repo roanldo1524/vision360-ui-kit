@@ -253,3 +253,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-11 7:20 a. m.: subido Yovany Vidal (2 unidades, sin obsequio).
 - 2026-11-11 7:50 a. m.: subido Rubén Darío Quiñónez (2 unidades, sin obsequio).
 - 2026-11-11 8:20 a. m.: subidos Juan Diego Morales, John Fayder Pules, José Domingo Jiménez y Antonio Álvarez (galón → 4 unidades), sin obsequio.
+- 2026-11-11 8:40 a. m.: causa encontrada: el producto en Lucid Sales trae un «Obsequio» (semilla) configurado y el catálogo del bot dice «+ semilla de regalo» en cada presentación; el bot lo mete como producto 2. La «regla 0» del 6 nov ya no estaba. Se volvió a poner al inicio de Reglas_adicionales2_LucidSales (74 reglas; respaldo en el scratchpad): Productos solo herbicida, sin semilla, y cantidades 2 L=2, galón=4, poma=20. Falta que Ronald quite el «Obsequio» del producto en Lucid Sales → Productos (eso no se puede por API).
