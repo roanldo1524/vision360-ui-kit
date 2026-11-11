@@ -265,3 +265,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-11 1:50 p. m.: subidos José Díaz, Aurora Aguirre (2 u.), Eduard Franco Romero (2 u.), José Julián Casas (4 u.) e Ismaelina Paz Rengifo (ciudad «El Bordo, Patía» → «El Bordo»), sin obsequio.
 - 2026-11-11 2:20 p. m.: subido Kevin Alexis García (2 unidades, sin obsequio).
 - 2026-11-11 3:20 p. m.: resubidos Edilberto Serrano (1 L) y Jaime Estepa (1 L); se les quitó el obsequio del resumen. Ambos quedaron ok en Lucid Sales.
+- 2026-11-11 3:50 p. m.: resubidos Yamile Ortega, Naisdy Quintero, Arnulfo Umaña Sánchez y Edwar Pasaje (galón, va como 4 unidades); se les quitó el obsequio. Los 4 quedaron ok en Lucid Sales.
