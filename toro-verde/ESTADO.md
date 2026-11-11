@@ -262,3 +262,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-11 11:50 a. m.: subido Luis Fernando Ardila Cala (galón, 4 unidades, sin obsequio).
 - 2026-11-11 12:50 p. m.: subido Manuel Pinzón (sin obsequio).
 - 2026-11-11 1:20 p. m.: subidos Misael Parada, Cristóbal Benavides, Juan Carlos Chavarría (4 u.), Mirley Chavarro y Deiver Burbano (sin obsequio). El obsequio sigue configurado en Lucid Sales.
+- 2026-11-11 1:50 p. m.: subidos José Díaz, Aurora Aguirre (2 u.), Eduard Franco Romero (2 u.), José Julián Casas (4 u.) e Ismaelina Paz Rengifo (ciudad «El Bordo, Patía» → «El Bordo»), sin obsequio.
