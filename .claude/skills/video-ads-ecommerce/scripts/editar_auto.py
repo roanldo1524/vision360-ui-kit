@@ -232,8 +232,8 @@ def main():
     ap.add_argument("--inicio", help="clip o foto con el que arranca el video (la toma del gancho)")
     ap.add_argument("--planos-completos", action="store_true",
                     help="cada clip se usa una vez, casi completo, cortado en el beat (escenas IA / cine)")
-    ap.add_argument("--look", default=None, choices=["calido", "lifestyle", "frio", "contraste"],
-                    help="color final: calido/lifestyle (dorado suave), frio, contraste")
+    ap.add_argument("--look", default=None, choices=["suave", "calido", "lifestyle", "frio", "contraste"],
+                    help="color final: suave (luminoso y delicado, marcas de bienestar/belleza), calido, lifestyle (más dramático), frio, contraste")
     ap.add_argument("--cine", action="store_true",
                     help="atajo de video cinematográfico: sin textos ni subtítulos, sin barra, sin SFX llamativos, planos completos, look lifestyle")
     ap.add_argument("--video", help="video crudo con persona hablando (ugc)")
@@ -261,7 +261,7 @@ def main():
     plan = json.load(open(a.plan)) if a.plan else []
     if a.cine:
         a.sin_barra = True; a.sin_sfx = True; a.planos_completos = True; a.en_orden = True
-        a.look = a.look or "lifestyle"; a.gancho = a.gancho if a.gancho else ""
+        a.look = a.look or "suave"; a.gancho = a.gancho if a.gancho else ""
     off_musica = None
     tmp = tempfile.mkdtemp(prefix="edit_")
     try:
@@ -397,7 +397,8 @@ def main():
                         0.6, None, (), ext_estilos, eventos)
 
         # ---------- video final: zoom de cortes ya está; añadir barra, oscurecer CTA, textos ----------
-        LOOKS = {"lifestyle": "colorbalance=rs=0.04:gs=0.01:bs=-0.03:rm=0.03:bm=-0.02,eq=contrast=1.04:saturation=1.06:gamma=1.02,vignette=PI/6",
+        LOOKS = {"suave": "eq=brightness=0.035:contrast=0.94:saturation=0.9:gamma=1.04,colorbalance=rh=0.02:bh=0.015:rs=0.01,curves=all='0/0.04 0.5/0.53 1/0.98'",
+                 "lifestyle": "colorbalance=rs=0.04:gs=0.01:bs=-0.03:rm=0.03:bm=-0.02,eq=contrast=1.04:saturation=1.06:gamma=1.02,vignette=PI/6",
                  "calido": "colorbalance=rs=0.06:bs=-0.05:rm=0.04:bm=-0.03,eq=saturation=1.08",
                  "frio": "colorbalance=bs=0.05:rs=-0.03,eq=saturation=0.95",
                  "contraste": "eq=contrast=1.12:saturation=1.1,unsharp=5:5:0.5"}
