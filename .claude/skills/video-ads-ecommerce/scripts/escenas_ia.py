@@ -253,6 +253,8 @@ def main():
     ap.add_argument("--simular", action="store_true", help="no gasta: muestra prompts y costo, crea tomas de prueba gratis")
     ap.add_argument("--modelo-imagen", default=None); ap.add_argument("--modelo-video", default=None)
     ap.add_argument("--proveedor", default=None, choices=["kie", "fal"])
+    ap.add_argument("--solo-imagenes", action="store_true",
+                    help="genera solo las imágenes clave (baratas) para revisarlas antes de animar (lo caro)")
     ap.add_argument("--solo", default="", help="ids a (re)generar, ej. e02,e05")
     ap.add_argument("--presupuesto", type=float, default=None, help="USD máximos para esta corrida")
     a = ap.parse_args()
@@ -284,6 +286,8 @@ def main():
             dur_v = int(min(mv["dur"], key=lambda d: abs(int(d) - e.get("dur", 4))))
             c = mi["precio"] + mv["precio"] * dur_v
         costo += c; plan.append((e, c))
+    if a.solo_imagenes and prov == "kie":
+        costo = sum(mi["creditos"] * 0.005 for e, _ in plan if e.get("fuente") != "foto")
     print(f"Proveedor {prov} · escenas: {len(plan)} · imagen {mi['id']} · video {mv['id']} · costo estimado ≈ USD {costo:.2f}"
           + (f" (≈ {costo / 0.005:.0f} créditos)" if prov == "kie" else "") + " (aproximado)")
     if prov == "kie" and key and not a.simular:
@@ -330,6 +334,10 @@ def main():
             shutil.copy(img, os.path.join(dimg, f"{e['id']}.png"))
             if "personaje" in e.get("usa", []) and not ref_persona_auto:
                 ref_persona_auto = img
+            if a.solo_imagenes:
+                resumen.append(dict(id=e["id"], modo="imagen", prompt_imagen=pi))
+                print(f"  {e['id']}: imagen clave lista → {os.path.join(dimg, e['id'] + '.png')}")
+                continue
             hv = hashlib.sha1(("kie" + mv["id"] + pv + h + str(e.get("dur", 4))).encode()).hexdigest()
             vid = os.path.join(CACHE, hv + ".mp4")
             gastado = None
