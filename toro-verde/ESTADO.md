@@ -242,3 +242,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-10 8:50 p. m.: subidos Jhancarlos Corredor y José Arcadio Caro Rueda (sin obsequio).
 - 2026-11-10 9:00 p. m.: Ramón David Curacica no compra (no quiso por el precio). Se saca de la revisión; no subir.
 - 2026-11-10 9:20 p. m.: subidos Mauro Yohsua Díaz y Humberto Jara Rincón (sin obsequio).
+- 2026-11-10 10:20 p. m.: subido Raúl Cano Suárez (Cajamarca). La revisión lo había frenado por «¿cómo lo cancelo?» (quería decir pagar); ya no confunde «cancelar» con pagar. Búsqueda de reclamos por semilla que no llegó en 1.084 chats desde el 28 oct: ninguno escrito.
