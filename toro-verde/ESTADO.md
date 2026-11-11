@@ -257,3 +257,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-11 8:50 a. m.: subidos Davinson Chocho (2 unidades) y Geiner Horta Salazar, sin obsequio.
 - 2026-11-11 9:20 a. m.: subidos 7 (Virgilio Velasco, Vosmal Alarcón, Orlando Sánchez, Juan Ulises Bautista, Luz Marina Posso, José Arneth Anaya, José Antonio Salamanca). La regla 0 no basta: de 10 pedidos nuevos, 7 traen el obsequio. El resumen del chat ya trae la línea «🎁 Obsequio:» aparte; esa línea es del formato de Lucid Sales (producto con obsequio configurado) y el sistema la convierte en producto 2. Se arregla solo quitando el obsequio en Lucid Sales → Productos.
 - 2026-11-11 9:50 a. m.: subidos Alexander Coral Perdomo y Juan Carlos Caviedes (sin obsequio) y Carlos Mesa (pedido pagado de la página, Envigado: faltaba el departamento, se puso Antioquia).
+- 2026-11-11 10:50 a. m.: subido Carlos Sánchez (4 unidades, sin obsequio).
