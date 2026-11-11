@@ -235,3 +235,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-10 4:50 p. m.: subidos Orlando Lozada y Ubaldo Hernández (2 unidades c/u), Manuela Deluque (2 unidades; la revisión la confundió con una cancelación por «Bueno quiero…», ya corregido) y Jhon Fredy Palechor (Paispamba → municipio Sotará, Cauca).
 - 2026-11-10 5:20 p. m.: subidos José Zárate, Alberto Rodríguez Arévalo y Martha Rocío Torres (sin obsequio).
 - 2026-11-10 6:50–7:20 p. m.: subidos Ernesto González (2 u.), Armando Arenas (4 u.), Isidoro Rivero (4 u.), Cesar Mauricio González, Jarley de Jesús Correa y Doris Amaya. El bot todavía mete la semilla en algunos pedidos. Leonel Arteaga respondió que quiere recoger en la oficina Interrapidísimo de Currulao (Turbo); falta que Ronald decida.
+- 2026-11-10 7:50 p. m.: Leonel Arteaga subido (Currulao, Antioquia, existe en Dropi; su resumen estaba mal editado a mano). Wilson Camacho subido (galón → 4 unidades).
