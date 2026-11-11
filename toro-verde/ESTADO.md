@@ -269,3 +269,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-11 4:20 p. m.: resubidos Jhon Quintero (2 L), Luis Andrés Franco Bedoya y Alvaro Castriyon (1 L); se les quitó el obsequio. Los 3 quedaron ok en Lucid Sales.
 - 2026-11-11 4:50 p. m.: resubido Tito Fernández (2 L); se le quitó el obsequio. Quedó ok en Lucid Sales.
 - 2026-11-11 5:20 p. m.: resubidos Wilson Ramírez (1 L), Jhon Nupan (galón, 4 unidades), Gonzalo Hurtado Huertas (1 L) y Wuilian Urrego (1 L); se les quitó el obsequio. Los 4 quedaron ok en Lucid Sales.
+- 2026-11-11 6:20 p. m.: resubidos Andrus Padilla (1 L) y Arley Sohacha Rincón (galón, 4 unidades); se les quitó el obsequio. Ambos quedaron ok en Lucid Sales.
