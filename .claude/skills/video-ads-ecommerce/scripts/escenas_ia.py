@@ -243,8 +243,9 @@ def prompt_video(b, e):
     real = {"celular": " Cámara en mano de celular con leve movimiento natural, movimientos humanos normales y sin cámara lenta,"
                        " sin efectos ni look cinematográfico.",
             "cine": " Movimiento de cámara cinematográfico suave y estable, movimientos humanos naturales, sin efectos artificiales."}.get(modo, "")
+    sin_gente = "" if "personaje" in e.get("usa", []) else " No aparecen personas, manos ni partes del cuerpo en ningún momento."
     return (f"{e.get('movimiento', 'movimiento de cámara suave')}. {e['imagen']}. "
-            f"{b.get('estilo', '')}.{real} Mantén el producto y la persona idénticos a la imagen, sin texto.")
+            f"{b.get('estilo', '')}.{real}{sin_gente} Mantén el producto y la persona idénticos a la imagen, sin texto.")
 
 
 def main():
