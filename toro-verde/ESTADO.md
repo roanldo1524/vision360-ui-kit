@@ -275,3 +275,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-11 7:50 p. m.: resubidos Abel Moreno (2 L) y Ferney Mateus (1 L); se les quitó el obsequio. Ambos quedaron ok en Lucid Sales.
 - 2026-11-11 8:20 p. m.: resubidos Ronal Quintana y Sandra Patricia Ramírez Amaya (1 L cada uno); se les quitó el obsequio. Ambos quedaron ok en Lucid Sales.
 - 2026-11-11 8:50 p. m.: resubido Robinson Alberto Ciro (4 unidades); se le quitó el obsequio. Quedó ok en Lucid Sales.
+- 2026-11-11 9:20 p. m.: José Alirio Calorado Benítez (galón, 3163328524): se le quitó el obsequio pero ahora Sales responde «quantity debe ser numérico si no hay variations» (el producto en Sales parece tener presentaciones nuevas, Ronald está migrando al producto nuevo de Dropi). Queda pendiente hasta terminar la migración.
