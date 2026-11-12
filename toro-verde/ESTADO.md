@@ -272,3 +272,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-11 6:20 p. m.: resubidos Andrus Padilla (1 L) y Arley Sohacha Rincón (galón, 4 unidades); se les quitó el obsequio. Ambos quedaron ok en Lucid Sales.
 - 2026-11-11 6:55 p. m.: resubidos José Merardo Suárez, Héctor Barón, Juvenal Velandia y Juan Leopoldo Varón Sierra (1 L cada uno); se les quitó el obsequio. Los 4 quedaron ok en Lucid Sales.
 - 2026-11-11 7:20 p. m.: resubido Yorki José Márquez (2 L); se le quitó el obsequio. Quedó ok en Lucid Sales.
+- 2026-11-11 7:50 p. m.: resubidos Abel Moreno (2 L) y Ferney Mateus (1 L); se les quitó el obsequio. Ambos quedaron ok en Lucid Sales.
