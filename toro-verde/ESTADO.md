@@ -296,3 +296,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-12 9:50 a. m.: resubidos por la semilla Álvaro Paternina (2 L), José Wilinton Galindo (1 poma $995.000) y Darío Cortés (1 L); Diego Arboleda (Bogotá, 1 L) por departamento vacío: el arreglador puso Cundinamarca solo.
 - 2026-11-12 10:20 a. m.: resubidos por la semilla Jhon Edwin (2 L), Ovidio Álvarez (galón), Ligia Peña (1 L), Luis Fernando Gutiérrez (4 unidades sin presentación → corregido por el valor), Diego Fernando Arias (galón) y Eliécer Rivera (1 L).
 - 2026-11-12 10:50 a. m.: resubidos por la semilla Héctor Gallo (galón), Carmen Ibarra (1 L), Yuri Miguel Castro (galón) y Pablo Andrés Espinoza (1 L).
+- 2026-11-12 11:00 a. m.: Ronald volvió a asociar el producto y en Lucid Sales se borraron las presentaciones (LITRO/GALON/POMA) de los dos productos. Se le dio prompt para restaurarlas y volver a asociarlas al Lote 22.
