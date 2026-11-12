@@ -1,0 +1,1 @@
+Estas 4 pistas pueden tener voz o silbidos (medición dudosa). Escúchenlas: si están bien, muévanlas a su carpeta en Musica/ y corran biblioteca_musica.py.

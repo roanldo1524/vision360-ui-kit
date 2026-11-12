@@ -1,0 +1,11 @@
+BIBLIOTECA DE MÚSICA (instrumental, creada con IA: Suno vía kie.ai, nov 2026)
+34 pistas de ~65 s, organizadas por estilo/temporada. indice.json tiene duración, ritmo (bpm),
+mood y temporada de cada pista: editar_auto.py la usa con --biblioteca Musica --mood X / --temporada Y.
+
+Moods: campo, tropical, urbano, energetico, chill, emotivo, epico, divertido
+Temporadas: navidad, madres, black_friday
+
+Antes de pautar: escuchen la canción. Claude no oye; se verificó por medición que no tengan voz.
+Derechos: kie.ai no publica una declaración clara de uso comercial de la música generada.
+Para orgánico el riesgo es bajo; para pauta, consideren música con licencia comercial explícita.
+Para más estilos: python crear_biblioteca.py Musica (los que ya existen se saltan).

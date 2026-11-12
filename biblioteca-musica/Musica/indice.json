@@ -1,0 +1,312 @@
+[
+ {
+  "archivo": "tropical/cumbia/tropical_cumbia_1.mp3",
+  "dur": 64.9,
+  "bpm": 103,
+  "mood": [
+   "tropical"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "tropical/cumbia/tropical_cumbia_2.mp3",
+  "dur": 64.0,
+  "bpm": 103,
+  "mood": [
+   "tropical"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "tropical/salsa/tropical_salsa_1.mp3",
+  "dur": 65.4,
+  "bpm": 136,
+  "mood": [
+   "tropical"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "tropical/salsa/tropical_salsa_2.mp3",
+  "dur": 65.7,
+  "bpm": 99,
+  "mood": [
+   "tropical"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "tropical/champeta/tropical_champeta_1.mp3",
+  "dur": 66.0,
+  "bpm": 112,
+  "mood": [
+   "tropical"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "tropical/champeta/tropical_champeta_2.mp3",
+  "dur": 64.8,
+  "bpm": 152,
+  "mood": [
+   "tropical"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "epico/trailer/epico_trailer_1.mp3",
+  "dur": 64.0,
+  "bpm": 129,
+  "mood": [
+   "epico"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "epico/trailer/epico_trailer_2.mp3",
+  "dur": 64.8,
+  "bpm": 144,
+  "mood": [
+   "epico"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "chill/lofi/chill_lofi_1.mp3",
+  "dur": 65.0,
+  "bpm": 144,
+  "mood": [
+   "chill"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "chill/lofi/chill_lofi_2.mp3",
+  "dur": 65.6,
+  "bpm": 72,
+  "mood": [
+   "chill"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "chill/lifestyle/chill_lifestyle_1.mp3",
+  "dur": 64.8,
+  "bpm": 117,
+  "mood": [
+   "chill"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "chill/lifestyle/chill_lifestyle_2.mp3",
+  "dur": 67.2,
+  "bpm": 123,
+  "mood": [
+   "chill"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "campo/llanera/campo_llanera_1.mp3",
+  "dur": 64.8,
+  "bpm": 103,
+  "mood": [
+   "campo"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "campo/llanera/campo_llanera_2.mp3",
+  "dur": 64.8,
+  "bpm": 136,
+  "mood": [
+   "campo"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "campo/popular/campo_popular_1.mp3",
+  "dur": 64.8,
+  "bpm": 99,
+  "mood": [
+   "campo"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "campo/popular/campo_popular_2.mp3",
+  "dur": 65.6,
+  "bpm": 108,
+  "mood": [
+   "campo"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "campo/vallenato/campo_vallenato_1.mp3",
+  "dur": 66.4,
+  "bpm": 99,
+  "mood": [
+   "campo",
+   "tropical"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "campo/vallenato/campo_vallenato_2.mp3",
+  "dur": 64.9,
+  "bpm": 103,
+  "mood": [
+   "campo",
+   "tropical"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "campo/carranga/campo_carranga_1.mp3",
+  "dur": 64.8,
+  "bpm": 112,
+  "mood": [
+   "campo"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "campo/carranga/campo_carranga_2.mp3",
+  "dur": 65.6,
+  "bpm": 103,
+  "mood": [
+   "campo"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "energetico/electro/energetico_electro_1.mp3",
+  "dur": 66.8,
+  "bpm": 129,
+  "mood": [
+   "energetico"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "energetico/electro/energetico_electro_2.mp3",
+  "dur": 64.8,
+  "bpm": 129,
+  "mood": [
+   "energetico"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "energetico/rock/energetico_rock_2.mp3",
+  "dur": 64.6,
+  "bpm": 89,
+  "mood": [
+   "energetico"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "urbano/afrobeat/urbano_afrobeat_1.mp3",
+  "dur": 66.0,
+  "bpm": 108,
+  "mood": [
+   "urbano",
+   "tropical"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "urbano/afrobeat/urbano_afrobeat_2.mp3",
+  "dur": 65.5,
+  "bpm": 103,
+  "mood": [
+   "urbano",
+   "tropical"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "divertido/ukulele/divertido_ukulele_2.mp3",
+  "dur": 64.4,
+  "bpm": 152,
+  "mood": [
+   "divertido"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "temporadas/navidad/temporadas_navidad_1.mp3",
+  "dur": 64.7,
+  "bpm": 108,
+  "mood": [],
+  "temporada": [
+   "navidad"
+  ]
+ },
+ {
+  "archivo": "temporadas/navidad/temporadas_navidad_2.mp3",
+  "dur": 64.9,
+  "bpm": 112,
+  "mood": [],
+  "temporada": [
+   "navidad"
+  ]
+ },
+ {
+  "archivo": "temporadas/black_friday/temporadas_black_friday_1.mp3",
+  "dur": 64.8,
+  "bpm": 112,
+  "mood": [],
+  "temporada": [
+   "black_friday"
+  ]
+ },
+ {
+  "archivo": "temporadas/black_friday/temporadas_black_friday_2.mp3",
+  "dur": 65.2,
+  "bpm": 136,
+  "mood": [],
+  "temporada": [
+   "black_friday"
+  ]
+ },
+ {
+  "archivo": "temporadas/madres/temporadas_madres_1.mp3",
+  "dur": 65.0,
+  "bpm": 136,
+  "mood": [],
+  "temporada": [
+   "madres"
+  ]
+ },
+ {
+  "archivo": "temporadas/madres/temporadas_madres_2.mp3",
+  "dur": 155.0,
+  "bpm": 136,
+  "mood": [],
+  "temporada": [
+   "madres"
+  ]
+ },
+ {
+  "archivo": "emotivo/piano/emotivo_piano_1.mp3",
+  "dur": 64.8,
+  "bpm": 136,
+  "mood": [
+   "emotivo"
+  ],
+  "temporada": []
+ },
+ {
+  "archivo": "emotivo/piano/emotivo_piano_2.mp3",
+  "dur": 64.8,
+  "bpm": 136,
+  "mood": [
+   "emotivo"
+  ],
+  "temporada": []
+ }
+]
