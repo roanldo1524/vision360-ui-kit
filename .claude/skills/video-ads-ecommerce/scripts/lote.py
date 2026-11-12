@@ -102,6 +102,7 @@ def main():
         c = ["--motor", V.get("motor", "auto"), "--idioma", idioma, "--velocidad", str(V.get("velocidad", 1.1))]
         if V.get("voz"): c += ["--voz", V["voz"]]
         if V.get("referencia"): c += ["--referencia", ab(V["referencia"])]
+        if V.get("hablante"): c += ["--hablante", V["hablante"]]
         if V.get("fonetica"): c += ["--fonetica", V["fonetica"]]
         return c
 
@@ -132,6 +133,8 @@ def main():
         ini = g.get("inicio") or P.get("inicio")   # toma con la que arranca (los primeros 3 s)
         if ini and modo != "ugc": comun += ["--inicio", ab(ini)]
         if P.get("en_orden") and modo != "ugc": comun += ["--en-orden"]   # respeta el orden de "clips" (tabla del guion)
+        if P.get("pos_subs") is not None: comun += ["--pos-subs", str(P["pos_subs"])]
+        if P.get("subs_caja"): comun += ["--subs-caja"]
         if plan: comun += ["--plan", plan]
         if M.get("archivo"): comun += ["--musica", ab(M["archivo"])]
         elif M.get("biblioteca"):

@@ -230,6 +230,8 @@ def main():
     ap.add_argument("--clips", nargs="*", default=[], help="archivos o carpetas con clips/fotos (montaje)")
     ap.add_argument("--en-orden", action="store_true", help="usar los clips en el orden dado (videos Frankenstein con guion)")
     ap.add_argument("--inicio", help="clip o foto con el que arranca el video (la toma del gancho)")
+    ap.add_argument("--pos-subs", type=float, default=0.6, help="altura de los subtítulos (0 arriba, 1 abajo); útil para tapar zonas desenfocadas")
+    ap.add_argument("--subs-caja", action="store_true", help="subtítulos sobre caja oscura (tapa mejor textos viejos)")
     ap.add_argument("--planos-completos", action="store_true",
                     help="cada clip se usa una vez, casi completo, cortado en el beat (escenas IA / cine)")
     ap.add_argument("--look", default=None, choices=["suave", "calido", "lifestyle", "frio", "contraste"],
@@ -393,8 +395,8 @@ def main():
                                f"{{\\pos({W//2},{int(H*float(e.get('pos', 0.32)))})}}{pop}{e['texto'].upper() if est != 'NotaCaja' else e['texto']}")
         # los subtítulos se apagan cuando entra el CTA (si no, se pisan)
         subs_ok = [dict(x, end=min(x["end"], cta_ini - 0.05)) for x in subs if x["start"] < cta_ini - 0.3]
-        ass = crear_ass(subs_ok, W, H, os.path.join(tmp, "t.ass"), P["estilo"], a.fuente, "FFFFFF", a.resaltado,
-                        0.6, None, (), ext_estilos, eventos)
+        ass = crear_ass(subs_ok, W, H, os.path.join(tmp, "t.ass"), "caja" if a.subs_caja else P["estilo"], a.fuente, "FFFFFF",
+                        a.resaltado, a.pos_subs, None, (), ext_estilos, eventos)
 
         # ---------- video final: zoom de cortes ya está; añadir barra, oscurecer CTA, textos ----------
         LOOKS = {"suave": "eq=brightness=0.035:contrast=0.94:saturation=0.9:gamma=1.04,colorbalance=rh=0.02:bh=0.015:rs=0.01,curves=all='0/0.04 0.5/0.53 1/0.98'",

@@ -130,6 +130,9 @@ for texto,path in items:
     esperado=len(texto)/13.0/vel+0.8; mejor=None
     for intento in range(3):
         tmp=path+f".try{intento}.wav"
+        if ref.startswith("@"):  # voz genérica del modelo (no es una persona real)
+        t.tts_to_file(text=texto,speaker=ref[1:],language=idioma,file_path=tmp,speed=vel)
+    else:
         t.tts_to_file(text=texto,speaker_wav=ref,language=idioma,file_path=tmp,speed=vel)
         d=dur(tmp)
         if mejor is None or abs(d-esperado)<abs(mejor[1]-esperado): mejor=(tmp,d)
@@ -150,6 +153,8 @@ def main():
     ap.add_argument("--motor", default="auto", choices=["auto", "fish", "elevenlabs", "xtts"])
     ap.add_argument("--idioma", default="es")
     ap.add_argument("--voz"); ap.add_argument("--referencia")
+    ap.add_argument("--hablante", help="xtts: voz genérica incluida en el modelo (no clona a nadie), ej. 'Luis Moray', "
+                                       "'Gilberto Mathias', 'Damien Black' (hombre) o 'Ana Florence', 'Alma María' (mujer)")
     ap.add_argument("--modelo-fish", default="s1")
     ap.add_argument("--velocidad", type=float, default=1.1)
     ap.add_argument("--fonetica", default="")
@@ -176,7 +181,7 @@ def main():
         p = os.path.join(a.salida, f"seg_{i:03d}.wav")
         t = limpiar_texto(s["text"], motor)
         for x, y in reemplazos: t = t.replace(x, y)
-        k = clave_cache(motor, a.voz, a.idioma, a.velocidad, t, a.referencia if motor == "xtts" else None)
+        k = clave_cache(motor, a.voz or a.hablante, a.idioma, a.velocidad, t, a.referencia if motor == "xtts" and not a.hablante else None)
         huella = p + ".huella"
         if os.path.exists(p) and os.path.getsize(p) > 0 and os.path.exists(huella) and open(huella).read() == k:
             continue  # ya existe y es de esta misma frase/voz
@@ -193,9 +198,12 @@ def main():
         if a.unir: unir(segs, a.salida, a.unir)
         return
     if motor == "xtts":
-        if not a.referencia: sys.exit("xtts necesita --referencia voz.wav (6-15 s de voz limpia)")
-        ref = os.path.join(a.salida, "_ref.wav")
-        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", a.referencia, "-t", "15", "-ac", "1", "-ar", "22050", ref], check=True)
+        if a.hablante:
+            ref = "@" + a.hablante
+        else:
+            if not a.referencia: sys.exit("xtts necesita --referencia voz.wav (6-15 s de voz limpia, con permiso) o --hablante")
+            ref = os.path.join(a.salida, "_ref.wav")
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", a.referencia, "-t", "15", "-ac", "1", "-ar", "22050", ref], check=True)
         correr_xtts(pend, a.idioma, ref, a.velocidad); guardar_cache()
         if a.unir: unir(segs, a.salida, a.unir)
         return
