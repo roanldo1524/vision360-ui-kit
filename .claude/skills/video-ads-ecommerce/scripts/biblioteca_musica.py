@@ -16,7 +16,8 @@ import argparse, json, os, subprocess, sys
 AQUI = os.path.dirname(os.path.abspath(__file__))
 EXT = (".mp3", ".wav", ".m4a", ".ogg", ".flac", ".aac")
 # palabras del nombre/carpeta → etiquetas
-MOODS = {"energetico": ["energ", "gym", "fitness", "electro", "house", "edm", "upbeat", "hype"],
+MOODS = {"campo": ["campo", "popular", "carranga", "llanera", "vallenato", "ranchera", "despecho"],
+         "energetico": ["energ", "gym", "fitness", "electro", "house", "edm", "upbeat", "hype"],
          "urbano": ["dembow", "regueton", "reggaeton", "urban", "trap", "hiphop", "hip-hop"],
          "tropical": ["tropical", "champeta", "salsa", "cumbia", "vallenato", "caribe", "afro"],
          "chill": ["chill", "lofi", "lo-fi", "relax", "acoustic", "acustic", "soft"],
