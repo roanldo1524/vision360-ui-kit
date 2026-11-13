@@ -21,7 +21,7 @@ for c in $(grep -vxFf no_subir.txt errs.txt); do
   case "$q" in CANCELA*) echo "CANCELA $c $q"; continue;; esac
   curl -s -H "X-ACCESS-TOKEN: $K" "https://panel.lucidbot.co/api/contacts/$c/custom_fields/880500" | python3 -c "import json,sys;d=json.load(sys.stdin);d=d.get('data',d);json.dump(d,open('regalo/$c.json','w'))"
   echo "ERR $c $v"; python3 -c "import json;print('RES', json.load(open('regalo/$c.json'))['value'])"
-  if python3 -c "import json,re,sys;v=json.load(open('regalo/$c.json'))['value'];sys.exit(0 if re.search(r'1 x [^)]*(Poma|Gal[oó]n|[2-9]0? [Ll]itros)',v) else 1)"; then echo "OJO_CANTIDAD $c (se pasa a N unidades)"; fi
+  if python3 -c "import json,re,sys;v=re.sub(r'(?i)gal[oó]n *\(4 litros\)','GALON',json.load(open('regalo/$c.json'))['value']);sys.exit(0 if re.search(r'1 x [^)]*(Poma|Gal[oó]n|[2-9]0? [Ll]itros)',v) else 1)"; then echo "OJO_CANTIDAD $c (se pasa a N unidades)"; fi
   case "$v" in *'Producto 2'*|*'Faltan campos'*|*'Ciudad o departamento'*|*'quantity'*|*'variation'*) if python3 -I regalo/fix2.py $c >/dev/null; then curl -s -o /dev/null -H "X-ACCESS-TOKEN: $K" --data-urlencode "value@regalo/${c}_nuevo.txt" "https://panel.lucidbot.co/api/contacts/$c/custom_fields/880500"; curl -s -o /dev/null -X POST -H "X-ACCESS-TOKEN: $K" "https://panel.lucidbot.co/api/contacts/$c/send/1773882547097"; FIX="$FIX $c"; fi;; esac
   [ -z "$v" ] && { curl -s -o /dev/null -X POST -H "X-ACCESS-TOKEN: $K" "https://panel.lucidbot.co/api/contacts/$c/send/1773882547097"; FIX="$FIX $c"; }
 done
