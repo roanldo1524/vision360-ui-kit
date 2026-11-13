@@ -38,27 +38,40 @@ el 80% deben ser **cortes secos**; las transiciones con efecto son la sal, no el
 | Fundido (crossfade) | Founder/lujo/emocional; casi nunca en UGC | `xfade=fade` 0.2-0.4 s |
 | Mano/objeto que tapa cámara | Transición "orgánica" UGC | Grabarla |
 
-Receta xfade entre dos clips (mismo tamaño/fps):
-```bash
-ffmpeg -i a.mp4 -i b.mp4 -filter_complex \
-"[0:v][1:v]xfade=transition=slideleft:duration=0.25:offset=$(echo "$(ffprobe -v error -show_entries format=duration -of csv=p=0 a.mp4) - 0.25" | bc)[v];[0:a][1:a]acrossfade=d=0.25[a]" \
--map "[v]" -map "[a]" out.mp4
-```
-Transiciones xfade útiles: `fade`, `fadewhite`, `slideleft`, `smoothleft`, `circleopen`, `zoomin`, `pixelize`, `wipeleft`.
+### Transiciones automáticas en `editar_auto.py` (ya probadas)
+`--transiciones auto` (por defecto) mete transiciones con efecto de sonido en el corte, según el preset:
+
+| Preset | Proporción de cortes con transición | Tipos (nunca la misma dos veces seguidas) |
+|---|---|---|
+| dopamina | ~55% | hlwind (barrido), zoomin, slideleft, hblur, fadewhite (flash), pixelize |
+| ugc | ~25% | smoothleft, zoomin, fade (que parezca celular, no edición de TV) |
+| premium | ~60% | fade, fadeblack, smoothleft, circleopen (lentas, 0.3-0.4 s) |
+| cine | ~45% | fade, fadeblack (fundidos suaves, sin efectos de sonido fuertes) |
+
+Reglas que aplica solo: transición únicamente si las dos tomas duran ≥0.9 s (en tomas cortas
+se ve como error), el whoosh/hit va centrado en el corte, y los cortes secos llevan a veces un
+whoosh corto. `--transiciones todas` (más energía) o `no` (solo cortes secos).
+Técnica: todas las entradas se normalizan a `fps=30,settb=1/30` antes de `xfade` (si no,
+ffmpeg falla con "Error reinitializing filters").
 
 ## 3. Subtítulos y texto en pantalla
 
-El 70-85% ve sin sonido: los subtítulos no son opcionales.
-- **Estilo palabras** (por defecto en UGC): 2-4 palabras, MAYÚSCULAS, fuente gruesa (Montserrat ExtraBold / Anton), borde negro, efecto "pop", 1 palabra clave resaltada en color (amarillo FFD400, cian 00E5FF, verde 39FF14).
-- **Estilo frase**: para testimonios largos o tono premium.
-- **Estilo caja**: texto blanco sobre caja negra translúcida; tapa textos viejos y se lee sobre cualquier fondo.
-- Tamaño: 6-8% del ancho para el estilo palabras; nunca menos de 4%.
-- Posición: centro-bajo (55-70% de la altura), fuera de las zonas que tapa la app (ver formatos.md).
-- Sincronización: cada bloque aparece cuando se dice, no antes.
+El 70-85% ve sin sonido: los subtítulos no son opcionales, y son la mitad de la retención.
+- **Estilo dopamina** (por defecto en `dopamina` y `ugc`): karaoke palabra por palabra
+  (cada palabra se pinta amarilla FFD400 justo cuando se dice), 3 palabras por bloque,
+  MAYÚSCULAS, Montserrat ExtraBold ~11% del ancho, borde negro grueso, entrada "pop".
+  Las **palabras clave** (`--claves "filo,ángulo,..."`) y los números salen en verde 00E676
+  y 12% más grandes. Elige 5-12 claves: beneficio, dolor, mecanismo, cifra, nombre del producto.
+- **Estilo palabras**: igual pero sin karaoke (para voces muy rápidas).
+- **Estilo frase**: testimonios largos o tono premium. **Estilo caja** (`--subs-caja`): fondo
+  oscuro; úsalo solo para tapar texto viejo del video original, porque la caja achica la letra.
+- Tamaño: el texto dopamina ocupa casi todo el ancho de la toma; nunca menos de 6% del ancho.
+- Posición: 62-70% de la altura (`--pos-subs 0.66`), fuera de la cara y de la zona de botones de la app.
+- Sincronización: cada palabra aparece cuando se dice (palabras con tiempo de faster-whisper).
 - **Texto de gancho** arriba (15-25% de la altura) en los primeros 3 s: la pregunta o promesa.
 - Emojis: libass no pinta emojis en color; si son importantes, ponlos como imagen PNG (overlay) o quítalos.
 
-Script: `scripts/subtitulos.py` (tres estilos, resaltado, y modo `--tapar` para cubrir texto
+Script: `scripts/subtitulos.py` (cuatro estilos, dopamina por defecto, resaltado, y modo `--tapar` para cubrir texto
 quemado del original con desenfoque y poner el texto traducido en la misma posición).
 Para ubicar textos quemados: `scripts/hoja_contactos.py` (fotogramas con tiempo) y luego
 un fotograma a tamaño real para medir la zona en píxeles.

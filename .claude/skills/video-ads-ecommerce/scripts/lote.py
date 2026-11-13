@@ -22,6 +22,8 @@ Pedido de ejemplo (pedido.json):
   "cta_voz": "Pídela hoy y pagas cuando te llegue.",
   "cta": "PÍDELA HOY", "oferta": "PAGO CONTRAENTREGA · ENVÍO GRATIS",
   "plan": [{"t": 6, "dur": 1.5, "texto": "Invisible bajo la ropa", "estilo": "caja", "sfx": "pop"}],
+  "claves": ["faja", "cintura", "invisible", "contraentrega"],   # palabras de venta en verde en los subtítulos
+  "pos_subs": 0.66, "transiciones": "auto",  # altura de subtítulos (0-1) · auto | todas | no
   "preset": "dopamina", "colores": {"gancho": "E6007E", "cta": "FFD400", "resaltado": "FFD400"},
   "formatos": ["9x16"]                      # además puede sacar "4x5", "1x1"
 }
@@ -136,6 +138,8 @@ def main():
         if P.get("pos_subs") is not None: comun += ["--pos-subs", str(P["pos_subs"])]
         if P.get("subs_caja"): comun += ["--subs-caja"]
         if P.get("gancho_dur"): comun += ["--gancho-dur", str(P["gancho_dur"])]
+        if P.get("claves"): comun += ["--claves", ",".join(P["claves"])]
+        if P.get("transiciones"): comun += ["--transiciones", P["transiciones"]]
         if plan: comun += ["--plan", plan]
         if M.get("archivo"): comun += ["--musica", ab(M["archivo"])]
         elif M.get("biblioteca"):

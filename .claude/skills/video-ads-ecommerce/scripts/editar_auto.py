@@ -37,11 +37,25 @@ from subtitulos import crear_ass, ts  # noqa: E402
 from comun import FONTS, SFX, codificador, ff_ruta, hilos, limpiar_metadatos, whisper_opciones  # noqa: E402
 
 W, H, FPS = 1080, 1920, 30
+# Transiciones entre tomas (montaje): (nombre xfade de ffmpeg, duración s, efecto de sonido).
+# Regla de oficio: cortas (0.15-0.25 s), mezcladas con cortes secos, nunca la misma dos veces seguidas,
+# deslizamientos siempre hacia el mismo lado, y cada una con su sonido.
+TRANSICIONES = {
+    "dopamina": dict(prob=0.55, pool=[("hlwind", 0.22, "whoosh"), ("zoomin", 0.24, "whoosh_corto"),
+                                      ("slideleft", 0.2, "whoosh"), ("hblur", 0.22, "whoosh_corto"),
+                                      ("fadewhite", 0.16, "impacto"), ("pixelize", 0.2, "glitch")]),
+    "ugc":      dict(prob=0.25, pool=[("hblur", 0.2, "whoosh_corto"), ("zoomin", 0.22, "whoosh_corto"),
+                                      ("smoothleft", 0.22, "whoosh")]),
+    "premium":  dict(prob=0.6, pool=[("fade", 0.35, None), ("smoothleft", 0.3, "whoosh"), ("fadeblack", 0.35, None),
+                                     ("circleopen", 0.35, "sparkle")]),
+    "cine":     dict(prob=0.45, pool=[("fade", 0.4, None), ("smoothleft", 0.35, None), ("hblur", 0.3, None)]),
+}
+
 PRESETS = {
     # beats por plano, zoom punch, probabilidad de whoosh por corte, volumen música con voz
     # música con voz ≈ -18 dB bajo la voz (a -11/-14 dB "se come la voz"); sfx_gap = mínimo entre efectos
-    "dopamina": dict(beats=(1, 2), punch=1.12, push=0.06, whoosh=0.8, sfx_gap=1.2, musica_con_voz=0.13, estilo="palabras"),
-    "ugc":      dict(beats=(2, 4), punch=1.10, push=0.04, whoosh=0.5, sfx_gap=2.0, musica_con_voz=0.11, estilo="palabras"),
+    "dopamina": dict(beats=(2, 2, 3), punch=1.12, push=0.06, whoosh=0.8, sfx_gap=1.2, musica_con_voz=0.13, estilo="dopamina"),
+    "ugc":      dict(beats=(2, 4), punch=1.10, push=0.04, whoosh=0.5, sfx_gap=2.0, musica_con_voz=0.11, estilo="dopamina"),
     "premium":  dict(beats=(4, 8), punch=1.0,  push=0.05, whoosh=0.3, sfx_gap=3.0, musica_con_voz=0.12, estilo="frase"),
 }
 VIDEO_EXT = (".mp4", ".mov", ".m4v", ".webm", ".mkv")
@@ -99,8 +113,10 @@ def elegir_musica(biblioteca, mood=None, temporada=None, min_dur=0):
     f = random.choice(filtro); print("música:", f); return f, None
 
 
-def render_plano(src, ss, d, out, zoom_ini, zoom_fin, es_img, con_audio):
-    """Un plano normalizado a 1080x1920/30fps. Zoom fijo (punch) o animado (push-in / Ken Burns)."""
+def render_plano(src, ss, d, out, zoom_ini, zoom_fin, es_img, con_audio, extra=0.0):
+    """Un plano normalizado a 1080x1920/30fps. Zoom fijo (punch) o animado (push-in / Ken Burns).
+    extra: segundos de más al final, que se solapan con el plano siguiente en una transición."""
+    d = d + extra
     n = max(1, int(round(d * FPS)))
     cubrir = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},setsar=1"
     if abs(zoom_fin - zoom_ini) > 1e-3:
@@ -111,7 +127,7 @@ def render_plano(src, ss, d, out, zoom_ini, zoom_fin, es_img, con_audio):
               f"crop={W}:{H},setsar=1,fps={FPS}")
     else:
         vf = f"{cubrir},fps={FPS}"
-    vf += ",format=yuv420p"
+    vf += ",tpad=stop_mode=clone:stop_duration=1,format=yuv420p"   # nunca quedarse corto de cuadros
     if es_img:
         cmd = ["ffmpeg", "-v", "error", "-y", "-loop", "1", "-framerate", str(FPS), "-t", f"{d:.3f}", "-i", src]
     else:
@@ -121,7 +137,8 @@ def render_plano(src, ss, d, out, zoom_ini, zoom_fin, es_img, con_audio):
     else:
         cmd += ["-f", "lavfi", "-t", f"{d:.3f}", "-i", "anullsrc=r=48000:cl=stereo", "-map", "0:v", "-map", "1:a"]
     cmd += ["-vf", vf, "-frames:v", str(n), *codificador("intermedio"),
-            "-r", str(FPS), "-c:a", "aac", "-ar", "48000", "-ac", "2", "-t", f"{n / FPS:.3f}", out]
+            "-r", str(FPS), "-c:a", "aac", "-ar", "48000", "-ac", "2", "-af" if not con_audio else "-af",
+            "apad" if not con_audio else "aresample=48000,aformat=channel_layouts=stereo,apad", "-t", f"{n / FPS:.3f}", out]
     sh(cmd)
 
 
@@ -230,7 +247,11 @@ def main():
     ap.add_argument("--clips", nargs="*", default=[], help="archivos o carpetas con clips/fotos (montaje)")
     ap.add_argument("--en-orden", action="store_true", help="usar los clips en el orden dado (videos Frankenstein con guion)")
     ap.add_argument("--inicio", help="clip o foto con el que arranca el video (la toma del gancho)")
+    ap.add_argument("--transiciones", default="auto", choices=["auto", "todas", "no"],
+                    help="auto: mezcla cortes secos y transiciones según el preset; todas: una en cada corte; no: solo cortes")
     ap.add_argument("--pos-subs", type=float, default=0.6, help="altura de los subtítulos (0 arriba, 1 abajo); útil para tapar zonas desenfocadas")
+    ap.add_argument("--claves", default="", help="palabras clave del producto (se resaltan en los subtítulos)")
+    ap.add_argument("--color-clave", default="00E676", help="color de las palabras clave en subtítulos")
     ap.add_argument("--subs-caja", action="store_true", help="subtítulos sobre caja oscura (tapa mejor textos viejos)")
     ap.add_argument("--planos-completos", action="store_true",
                     help="cada clip se usa una vez, casi completo, cortado en el beat (escenas IA / cine)")
@@ -327,18 +348,55 @@ def main():
             else:
                 p["z"] = rnd.choice([(1.0, 1.0 + P["push"]), (1.0 + P["push"], 1.0), (P["punch"], P["punch"]), (1.0, 1.0)])
         con_audio = a.modo == "ugc" and tiene_audio(a.video)
+        # transiciones: solo en montaje (en UGC el audio de la persona no se puede solapar)
+        cat = TRANSICIONES.get("cine" if a.cine else a.preset) if (a.modo == "montaje" and a.transiciones != "no") else None
+        ultima = None
+        for i, p in enumerate(planos):
+            p["trans"] = None
+            largos = i < len(planos) - 1 and p["d"] >= 0.9 and planos[i + 1]["d"] >= 0.9   # en tomas cortas, corte seco
+            if cat and largos and (a.transiciones == "todas" or rnd.random() < cat["prob"]):
+                opciones = [t for t in cat["pool"] if t[0] != ultima] or cat["pool"]
+                p["trans"] = rnd.choice(opciones); ultima = p["trans"][0]
+            elif cat:
+                ultima = None
 
         def hacer(ip):
             i, p = ip
             o = os.path.join(tmp, f"p{i:03d}.mp4")
-            render_plano(p["src"], p["ss"], p["d"], o, p["z"][0], p["z"][1], p["img"], con_audio)
+            render_plano(p["src"], p["ss"], p["d"], o, p["z"][0], p["z"][1], p["img"], con_audio,
+                         extra=p["trans"][1] if p.get("trans") else 0.0)
             return o
         with ThreadPoolExecutor(max_workers=hilos()) as ex:
             files = list(ex.map(hacer, enumerate(planos)))
-        lista = os.path.join(tmp, "lista.txt")
-        open(lista, "w").write("".join(f"file '{f}'\n" for f in files))
         base = os.path.join(tmp, "base.mp4")
-        sh(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", lista, "-c", "copy", base])
+        if any(p.get("trans") for p in planos):
+            # cadena: corte seco = concat; transición = xfade que solapa los segundos "extra" del plano anterior
+            inp, fc, cur, largo = [], [], "[n0]", 0.0
+            for i, f in enumerate(files):
+                inp += ["-i", f]
+                fc.append(f"[{i}:v]fps={FPS},settb=1/{FPS},format=yuv420p,setsar=1[n{i}]")   # misma base de tiempo
+
+            largo = planos[0]["d"] + (planos[0]["trans"][1] if planos[0].get("trans") else 0)
+            for i in range(1, len(files)):
+                prev = planos[i - 1]; Li = planos[i]["d"] + (planos[i]["trans"][1] if planos[i].get("trans") else 0)
+                if prev.get("trans"):
+                    nombre, td, _ = prev["trans"]
+                    fc.append(f"{cur}[n{i}]xfade=transition={nombre}:duration={td}:offset={largo - td:.3f},settb=1/{FPS}[x{i}]")
+                    largo += Li - td
+                else:
+                    fc.append(f"{cur}[n{i}]concat=n=2:v=1:a=0,fps={FPS},settb=1/{FPS}[x{i}]")
+                    largo += Li
+                cur = f"[x{i}]"
+            fc.append(f"{cur}format=yuv420p[vout]")
+            sh(["ffmpeg", "-v", "error", "-y", *inp, "-f", "lavfi", "-t", f"{largo:.3f}", "-i", "anullsrc=r=48000:cl=stereo",
+                "-filter_complex", ";".join(fc), "-map", "[vout]", "-map", f"{len(files)}:a", *codificador("intermedio"),
+                "-r", str(FPS), "-c:a", "aac", "-t", f"{largo:.3f}", base])
+            print(f"transiciones: {sum(1 for p in planos if p.get('trans'))} de {len(planos) - 1} cortes "
+                  f"({', '.join(p['trans'][0] for p in planos if p.get('trans'))})")
+        else:
+            lista = os.path.join(tmp, "lista.txt")
+            open(lista, "w").write("".join(f"file '{f}'\n" for f in files))
+            sh(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", lista, "-c", "copy", base])
         D = dur(base)
         cortes, t = [], 0.0
         for p in planos[:-1]:
@@ -400,8 +458,11 @@ def main():
                                f"{{\\pos({W//2},{int(H*float(e.get('pos', 0.32)))})}}{pop}{e['texto'].upper() if est != 'NotaCaja' else e['texto']}")
         # los subtítulos se apagan cuando entra el CTA (si no, se pisan)
         subs_ok = [dict(x, end=min(x["end"], cta_ini - 0.05)) for x in subs if x["start"] < cta_ini - 0.3]
-        ass = crear_ass(subs_ok, W, H, os.path.join(tmp, "t.ass"), "caja" if a.subs_caja else P["estilo"], a.fuente, "FFFFFF",
-                        a.resaltado, a.pos_subs, None, (), ext_estilos, eventos)
+        claves = [c.strip() for c in a.claves.split(",") if c.strip()] + [e["en"] for e in plan if e.get("en")]
+        estilo_subs = P["estilo"] if P["estilo"] == "dopamina" else ("caja" if a.subs_caja else P["estilo"])
+        ass = crear_ass(subs_ok, W, H, os.path.join(tmp, "t.ass"), estilo_subs, a.fuente, "FFFFFF",
+                        a.resaltado, a.pos_subs, None, (), ext_estilos, eventos,
+                        claves=claves, caja=a.subs_caja, color_clave=a.color_clave)
 
         # ---------- video final: zoom de cortes ya está; añadir barra, oscurecer CTA, textos ----------
         LOOKS = {"suave": "eq=brightness=0.035:contrast=0.94:saturation=0.9:gamma=1.04,colorbalance=rh=0.02:bh=0.015:rs=0.01,curves=all='0/0.04 0.5/0.53 1/0.98'",
@@ -454,9 +515,13 @@ def main():
             eventos_sfx.append(("impacto", 0.0, 0.55))
             if a.gancho: eventos_sfx.append(("pop", 0.05, 0.5))
             ocupado = [0.0] + [float(e["t"]) for e in plan if e.get("sfx")]  # no pisar momentos importantes
-            for c in cortes:
-                if c < cta_ini - 0.6 and rnd.random() < P["whoosh"] and all(abs(c - o) >= P["sfx_gap"] for o in ocupado):
-                    eventos_sfx.append((rnd.choice(["whoosh", "whoosh_corto"]), max(0, c - 0.18), 0.28)); ocupado.append(c)
+            for p_i, c in zip(planos[:-1], cortes):
+                tr = p_i.get("trans")
+                if tr:   # la transición siempre suena (es parte de ella), centrada en el corte
+                    if tr[2]: eventos_sfx.append((tr[2], max(0, c - tr[1] / 2 - 0.08), 0.32 if tr[2] != "impacto" else 0.4))
+                    ocupado.append(c)
+                elif c < cta_ini - 0.6 and rnd.random() < P["whoosh"] * 0.3 and all(abs(c - o) >= P["sfx_gap"] for o in ocupado):
+                    eventos_sfx.append(("whoosh_corto", max(0, c - 0.15), 0.22)); ocupado.append(c)
             if a.cta:
                 eventos_sfx.append(("riser", max(0, cta_ini - 1.6), 0.35))
                 eventos_sfx.append(("cha_ching" if a.oferta else "ding", cta_ini, 0.55))

@@ -21,6 +21,8 @@ Cuando el usuario diga "edita como este video" o suba referentes: se copia la **
 4. Para referentes en internet, el usuario puede subirlos al chat (o con yt-dlp si está instalado); úsalos solo para estudiar.
 
 ## Reglas finas que suben la calidad
+- Subtítulo dopamina: karaoke amarillo + claves verdes, grande (≈11% del ancho), sin caja salvo para tapar texto viejo. Prueba en 6 fotogramas que se lea en un celular a un brazo de distancia.
+- Transición con razón y con sonido: barrido o zoom en cambio de idea, flash en el antes/después, nunca sobre tomas de menos de 0.9 s.
 - **Segundo 0 = conflicto o resultado**, nunca saludo ni logo. Siempre con texto en pantalla. Fórmula: pregunta que duele, paradoja o comparación + número concreto o "tú/usted".
 - **Nunca cortar la voz a mitad de palabra**: los cortes van en huecos entre palabras (`editar_auto.py ugc` ya lo hace con tiempos por palabra). Para quitar algo del medio, se quita la frase entera.
 - **Pausas muertas** ≥0.30 s → 0.12 s. Excepción: pausa después de "mira/mire/fíjate/aquí" (la persona está mostrando algo): se deja.

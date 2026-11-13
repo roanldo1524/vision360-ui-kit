@@ -45,10 +45,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from comun import FONTS, codificador, ff_ruta
 
 def crear_ass(segs, W, H, ass_path, estilo="palabras", fuente="Montserrat", color="FFFFFF",
-              resaltado=None, pos=None, tamano=None, zonas=(), extra_estilos="", extra_eventos=()):
+              resaltado=None, pos=None, tamano=None, zonas=(), extra_estilos="", extra_eventos=(),
+              claves=(), caja=False, color_clave="00E676"):
     """Escribe el archivo .ass con los subtítulos (lo usa también editar_auto.py)."""
-    size = int(W * (tamano or {"palabras": 0.075, "frase": 0.05, "caja": 0.054}[estilo]))
-    pos = pos if pos is not None else {"palabras": 0.55, "frase": 0.74, "caja": 0.74}[estilo]
+    size = int(W * (tamano or {"palabras": 0.075, "frase": 0.05, "caja": 0.054, "dopamina": 0.112}[estilo]))
+    pos = pos if pos is not None else {"palabras": 0.55, "frase": 0.74, "caja": 0.74, "dopamina": 0.6}[estilo]
     border = 1 if estilo != "caja" else 3
     outline = max(2, size // 9) if estilo != "caja" else max(4, size // 4)
     back = "&H00000000" if estilo != "caja" else "&H50000000"
@@ -68,10 +69,32 @@ Style: Tapa,{fuente},{int(W*0.045)},&H00FFFFFF,&H00FFFFFF,&H50000000,&H50000000,
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
+    if estilo == "dopamina":
+        # Karaoke: cada palabra se "llena" de color mientras se dice (\kf: Secondary → Primary).
+        res = resaltado or "FFD400"
+        caja_txt = (f"3,{int(W*0.02)},0" if caja else f"1,{max(4, size // 7)},{max(3, size // 14)}")
+        hdr = hdr.replace("Style: Tapa,", f"Style: Dop,{fuente},{size},{bgr(res)},{bgr(color)},&H00000000,"
+                                          f"{'&H70000000' if caja else '&H96000000'},-1,0,0,0,100,100,1,0,{caja_txt},5,"
+                                          f"{int(W*0.06)},{int(W*0.06)},0,1\nStyle: Tapa,")
     ev = []
     x, y = W // 2, int(H * pos)
     pop = r"{\fscx80\fscy80\t(0,90,\fscx105\fscy105)\t(90,160,\fscx100\fscy100)}"  # efecto "pop" al entrar
+    claves_l = [c.lower() for c in claves if c]
     for s in segs:
+        if estilo == "dopamina":
+            for t0, t1, c in trocear(s, 3):
+                palabras = c.split(); total_cs = max(1, int((t1 - t0) * 100))
+                letras = sum(len(w) for w in palabras) or 1
+                partes = []
+                for w in palabras:
+                    k = max(6, int(total_cs * len(w) / letras))
+                    limpia = w.lower().strip(".,;:!?¿¡")
+                    es_clave = any(ch.isdigit() for ch in w) or any(cl in limpia or limpia in cl for cl in claves_l if len(limpia) > 3)
+                    tag = (r"{\kf" + str(k) + r"\fscx112\fscy112\1c" + bgr(color_clave) + r"\2c" + bgr(color_clave) + "}"
+                           if es_clave else r"{\kf" + str(k) + r"\fscx100\fscy100\1c" + bgr(res) + r"\2c" + bgr(color) + "}")
+                    partes.append(tag + w.upper())
+                ev.append(f"Dialogue: 0,{ts(t0)},{ts(t1)},Dop,,0,0,0,,{{\\pos({x},{y})}}{pop}" + " ".join(partes))
+            continue
         if estilo == "palabras":
             for i, (t0, t1, c) in enumerate(trocear(s, 3)):
                 col = r"{\c" + bgr(resaltado) + "}" if resaltado and i % 3 == 1 else ""
@@ -100,7 +123,9 @@ def filtro_tapar(zonas, entrada="v0"):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("video"); ap.add_argument("segmentos"); ap.add_argument("salida")
-    ap.add_argument("--estilo", default="palabras", choices=["palabras", "frase", "caja"])
+    ap.add_argument("--estilo", default="dopamina", choices=["dopamina", "palabras", "frase", "caja"])
+    ap.add_argument("--claves", default="", help="palabras clave separadas por coma (se resaltan en otro color)")
+    ap.add_argument("--caja", action="store_true", help="estilo dopamina sobre caja oscura (tapa textos viejos)")
     ap.add_argument("--fuente", default="Montserrat")
     ap.add_argument("--color", default="FFFFFF")
     ap.add_argument("--resaltado", default=None, help="color hex para resaltar 1 de cada 3 bloques")
@@ -113,7 +138,7 @@ def main():
     segs = json.load(open(a.segmentos)) if a.segmentos != "-" else []
     zonas = json.load(open(a.tapar)) if a.tapar else []
     ass = crear_ass(segs, W, H, os.path.splitext(a.salida)[0] + ".ass", a.estilo, a.fuente, a.color,
-                    a.resaltado, a.pos, a.tamano, zonas)
+                    a.resaltado, a.pos, a.tamano, zonas, claves=a.claves.split(","), caja=a.caja)
     fg, cur = filtro_tapar(zonas)
     fg = "[0:v]null[v0]" + fg + f";[{cur}]ass='{ff_ruta(ass)}':fontsdir='{ff_ruta(FONTS)}'[out]"
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", a.video, "-filter_complex", fg, "-map", "[out]",

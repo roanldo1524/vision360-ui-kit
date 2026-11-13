@@ -88,6 +88,8 @@ Si el pedido admite dos lecturas que cambian mucho el trabajo, pregunta una vez 
 y tu recomendación) y sigue.
 
 ## Reglas que hacen la diferencia
+- **El objetivo siempre es vender**: cada segundo empuja hacia el clic. Gancho que duele o intriga, beneficio visible, prueba, oferta y CTA claro. Si una toma, texto o efecto no ayuda a vender, se corta.
+- **Dopamina por defecto**: subtítulos karaoke con `--claves` (5-12 palabras de venta en verde), transiciones con sonido en ~la mitad de los cortes (`--transiciones auto`), un estímulo nuevo cada 1-2 s. Ver edicion.md §2-3.
 - **La ficha manda**: datos, precios, ofertas y promesas solo de la ficha o del usuario; lo no confirmado no sale en pantalla.
 - **Guion puntuado ≥16/20** antes de producir (metodo-guion.md §7). Es el filtro que baja la tasa de anuncios que fallan.
 - **Curiosidad progresiva**: un bucle abierto cada 3-5 s hasta el CTA; cada promesa se cumple.

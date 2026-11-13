@@ -183,7 +183,7 @@ def main():
         for x, y in reemplazos: t = t.replace(x, y)
         k = clave_cache(motor, a.voz or a.hablante, a.idioma, a.velocidad, t, a.referencia if motor == "xtts" and not a.hablante else None)
         huella = p + ".huella"
-        if os.path.exists(p) and os.path.getsize(p) > 0 and os.path.exists(huella) and open(huella).read() == k:
+        if os.path.exists(p) and os.path.getsize(p) > 0 and os.path.exists(huella) and os.path.basename(open(huella).read().strip()) == os.path.basename(k):
             continue  # ya existe y es de esta misma frase/voz
         if os.path.exists(p): os.remove(p)  # archivo de otra frase u otra voz: se rehace
         open(huella, "w").write(k)
