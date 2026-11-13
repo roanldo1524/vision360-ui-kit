@@ -387,9 +387,14 @@ def main():
         for e in plan:
             e["t"] = anclar(e)
         plan[:] = [e for e in plan if e.get("t") is not None]
+        ocupados = []
         for e in plan:
             t0 = float(e["t"]); t1 = t0 + float(e.get("dur", 1.5))
             if e.get("texto"):
+                pos_e = float(e.get("pos", 0.32))
+                while any(not (t1 <= a0 or t0 >= a1) and abs(pos_e - p0) < 0.075 for a0, a1, p0 in ocupados):
+                    pos_e += 0.085   # no encimar textos que salen al mismo tiempo
+                ocupados.append((t0, t1, pos_e)); e["pos"] = pos_e
                 est = {"caja": "NotaCaja", "precio": "Precio", "grande": "Nota"}.get(e.get("estilo", "grande"), "Nota")
                 eventos.append(f"Dialogue: 4,{ts(t0)},{ts(min(t1, D))},{est},,0,0,0,,"
                                f"{{\\pos({W//2},{int(H*float(e.get('pos', 0.32)))})}}{pop}{e['texto'].upper() if est != 'NotaCaja' else e['texto']}")

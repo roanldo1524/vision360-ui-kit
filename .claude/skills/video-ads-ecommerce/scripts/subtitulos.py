@@ -47,7 +47,7 @@ from comun import FONTS, codificador, ff_ruta
 def crear_ass(segs, W, H, ass_path, estilo="palabras", fuente="Montserrat", color="FFFFFF",
               resaltado=None, pos=None, tamano=None, zonas=(), extra_estilos="", extra_eventos=()):
     """Escribe el archivo .ass con los subtítulos (lo usa también editar_auto.py)."""
-    size = int(W * (tamano or {"palabras": 0.075, "frase": 0.05, "caja": 0.045}[estilo]))
+    size = int(W * (tamano or {"palabras": 0.075, "frase": 0.05, "caja": 0.054}[estilo]))
     pos = pos if pos is not None else {"palabras": 0.55, "frase": 0.74, "caja": 0.74}[estilo]
     border = 1 if estilo != "caja" else 3
     outline = max(2, size // 9) if estilo != "caja" else max(4, size // 4)

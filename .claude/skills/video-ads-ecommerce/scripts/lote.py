@@ -135,6 +135,7 @@ def main():
         if P.get("en_orden") and modo != "ugc": comun += ["--en-orden"]   # respeta el orden de "clips" (tabla del guion)
         if P.get("pos_subs") is not None: comun += ["--pos-subs", str(P["pos_subs"])]
         if P.get("subs_caja"): comun += ["--subs-caja"]
+        if P.get("gancho_dur"): comun += ["--gancho-dur", str(P["gancho_dur"])]
         if plan: comun += ["--plan", plan]
         if M.get("archivo"): comun += ["--musica", ab(M["archivo"])]
         elif M.get("biblioteca"):

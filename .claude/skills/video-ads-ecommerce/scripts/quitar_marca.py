@@ -93,7 +93,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("video"); ap.add_argument("salida")
     ap.add_argument("--zona", action="append", default=[], help="x,y,w,h[,t0,t1] en píxeles del video")
-    ap.add_argument("--metodo", default="delogo", choices=["delogo", "blur", "recorte"])
+    ap.add_argument("--metodo", default="delogo", choices=["delogo", "suave", "blur", "recorte"])
     ap.add_argument("--solo-detectar", action="store_true")
     a = ap.parse_args()
     if os.path.isdir(a.video):   # carpeta: procesa todos los videos (misma --zona o detección en cada uno)
@@ -113,6 +113,9 @@ def main():
                               start=p[4] if len(p) > 4 else 0, end=p[5] if len(p) > 5 else D))
     else:
         zonas = detectar(a.video)
+    for z in zonas:  # dentro del cuadro y sin tocar el borde (delogo lo exige)
+        z["x"] = max(1, z["x"]); z["y"] = max(1, z["y"])
+        z["w"] = max(4, min(z["w"], W - z["x"] - 2)); z["h"] = max(4, min(z["h"], H - z["y"] - 2))
     print("zonas:", json.dumps(zonas))
     if a.solo_detectar or not zonas:
         if not zonas: print("No detecté marcas. Si la ves, pásala con --zona x,y,w,h (mídela con hoja_contactos.py).")
@@ -132,6 +135,10 @@ def main():
             en = f"enable='between(t,{z['start']},{z['end']})'"
             if a.metodo == "delogo":
                 partes.append(f"delogo=x={z['x']}:y={z['y']}:w={z['w']}:h={z['h']}:{en}")
+            elif a.metodo == "suave":   # relleno + desenfoque leve: sin rayas ni rectángulo marcado
+                vf += (f"[{cur}]delogo=x={z['x']}:y={z['y']}:w={z['w']}:h={z['h']}:{en},split[m{i}][c{i}];"
+                       f"[c{i}]crop={z['w']}:{z['h']}:{z['x']}:{z['y']},gblur=sigma=14[b{i}];"
+                       f"[m{i}][b{i}]overlay={z['x']}:{z['y']}:{en}[o{i}];"); cur = f"o{i}"; partes.append(None)
             else:
                 lr = max(2, min(30, z["h"] // 2 - 1)); cr = max(1, min(15, z["h"] // 4 - 1))
                 partes.append(None)
@@ -141,7 +148,7 @@ def main():
             vf = ",".join(partes)
         else:
             vf = vf + f"[{cur}]null"
-    sub = ["-vf", vf] if a.metodo != "blur" else ["-filter_complex", vf.rstrip(";") + "[out]", "-map", "[out]", "-map", "0:a?"]
+    sub = ["-vf", vf] if a.metodo not in ("blur", "suave") else ["-filter_complex", vf.rstrip(";") + "[out]", "-map", "[out]", "-map", "0:a?"]
     sys.path.insert(0, __import__("os").path.dirname(__import__("os").path.abspath(__file__)))
     from comun import codificador, limpiar_metadatos
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", a.video, *sub, *codificador("final"),
