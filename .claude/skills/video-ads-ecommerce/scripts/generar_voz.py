@@ -128,18 +128,18 @@ for texto,path in items:
     if os.path.exists(path) and os.path.getsize(path)>0: continue
     # XTTS a veces "alucina" y alarga una frase corta: si dura mucho más de lo normal, se repite
     esperado=len(texto)/13.0/vel+0.8; mejor=None
-    for intento in range(3):
+    for intento in range(4):
         tmp=path+f".try{intento}.wav"
         if ref.startswith("@"):  # voz genérica del modelo (no es una persona real)
-        t.tts_to_file(text=texto,speaker=ref[1:],language=idioma,file_path=tmp,speed=vel)
-    else:
-        t.tts_to_file(text=texto,speaker_wav=ref,language=idioma,file_path=tmp,speed=vel)
+            t.tts_to_file(text=texto,speaker=ref[1:],language=idioma,file_path=tmp,speed=vel)
+        else:
+            t.tts_to_file(text=texto,speaker_wav=ref,language=idioma,file_path=tmp,speed=vel)
         d=dur(tmp)
         if mejor is None or abs(d-esperado)<abs(mejor[1]-esperado): mejor=(tmp,d)
-        if d<=esperado*1.8+1.0: break
+        if d<=esperado*1.35+0.7: break   # más largo que esto = palabras inventadas al final
         print(f"  frase larga de más ({d:.1f}s, esperado ~{esperado:.1f}s), repitiendo",flush=True)
     shutil.move(mejor[0],path)
-    for intento in range(3):
+    for intento in range(4):
         x=path+f".try{intento}.wav"
         if os.path.exists(x): os.remove(x)
     print("ok",os.path.basename(path),f"{mejor[1]:.1f}s",flush=True)

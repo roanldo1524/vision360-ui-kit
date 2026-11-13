@@ -358,11 +358,11 @@ def main():
         # Gancho: letra grande blanca sobre caja de color (se lee en 0.5 s, sin sonido)
         # CTA: "botón" de color; Oferta: franja oscura; Nota: textos del plan creativo.
         ext_estilos = (
-            f"Style: Gancho,{a.fuente},{int(W*0.074)},&H00FFFFFF,&H00FFFFFF,{col(a.color_gancho,'10')},&H00000000,-1,0,0,0,100,100,0,0,3,{int(W*0.022)},0,5,70,70,0,1\n"
-            f"Style: CTA,{a.fuente},{int(W*0.088)},&H00111111,&H00FFFFFF,{col(ac)},&H00000000,-1,0,0,0,100,100,0,0,3,{int(W*0.03)},0,5,60,60,0,1\n"
+            f"Style: Gancho,{a.fuente},{int(W*0.088)},&H00FFFFFF,&H00FFFFFF,{col(a.color_gancho,'10')},&H00000000,-1,0,0,0,100,100,0,0,3,{int(W*0.022)},0,5,70,70,0,1\n"
+            f"Style: CTA,{a.fuente},{int(W*0.1)},&H00111111,&H00FFFFFF,{col(ac)},&H00000000,-1,0,0,0,100,100,0,0,3,{int(W*0.03)},0,5,60,60,0,1\n"
             f"Style: Oferta,{a.fuente},{int(W*0.056)},&H00FFFFFF,&H00FFFFFF,&H40000000,&H00000000,-1,0,0,0,100,100,0,0,3,{int(W*0.016)},0,5,60,60,0,1\n"
-            f"Style: Nota,{a.fuente},{int(W*0.075)},&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,{int(W*0.008)},3,5,60,60,0,1\n"
-            f"Style: NotaCaja,{a.fuente},{int(W*0.072)},&H00111111,&H00FFFFFF,{col(a.resaltado)},&H00000000,-1,0,0,0,100,100,0,0,3,{int(W*0.016)},0,5,60,60,0,1\n"
+            f"Style: Nota,{a.fuente},{int(W*0.085)},&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,{int(W*0.008)},3,5,60,60,0,1\n"
+            f"Style: NotaCaja,{a.fuente},{int(W*0.082)},&H00111111,&H00FFFFFF,{col(a.resaltado)},&H00000000,-1,0,0,0,100,100,0,0,3,{int(W*0.016)},0,5,60,60,0,1\n"
             f"Style: Precio,Anton,{int(W*0.24)},{col(a.resaltado)},&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,{int(W*0.01)},4,5,60,60,0,1\n")
         pop = r"{\fscx60\fscy60\t(0,110,\fscx112\fscy112)\t(110,200,\fscx100\fscy100)}"
         sacudir = r"{\frz-3\t(0,80,\frz3)\t(80,160,\frz0)}"
