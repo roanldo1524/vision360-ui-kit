@@ -336,3 +336,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-13 9:58 a. m. (revisión automática): José Carvajal, galón, trabado por la semilla; se quitó y entró a Lucid Sales (7751146).
 - 2026-11-13 11:04 a. m. (revisión automática): 2 pedidos trabados por la semilla; se quitó y entraron a Lucid Sales: Jaime León Marín, 1 litro (7753750); Luz Miriam Uribe, 1 litro (7753747).
 - 2026-11-13 11:36 a. m. (revisión automática): 2 pedidos trabados por la semilla; se quitó y entraron a Lucid Sales: Martha Salinas, 2 litros (7754978); Ingrid Daniela Guzmán, 2 litros (7754980).
+- 2026-11-13 11:53 a. m. (revisión automática): 3 pedidos trabados por la semilla; se quitó y entraron a Lucid Sales: Segundo Dadey Camacho, 1 litro (7755560); Pablo Enrique Calderón, 1 litro (7755568); Luis José Porras, poma (7755574).
