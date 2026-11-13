@@ -66,11 +66,17 @@ Buenas prácticas:
 | Elemento | Nivel aproximado |
 |---|---|
 | Voz | protagonista, -14 LUFS en la mezcla final |
-| Música con voz encima | -18 a -24 dB bajo la voz (ducking) |
+| Música mientras habla | ~-12 dB bajo la voz (se oye y empuja, no tapa) |
+| Música en las pausas | ~-4 dB bajo la voz (sube sola) |
 | Música sin voz | al frente |
 | SFX | -6 a -10 dB bajo la voz |
 
-- Ducking automático (baja la música cuando hay voz):
+- **Lección (nov 2026)**: con -18/-24 dB la música "no se escucha" y el anuncio se siente muerto. `editar_auto.py`
+  ahora MIDE el volumen (LUFS) de la voz y de la canción y pone la música a -4 dB de la voz (dopamina; -6 en ugc/premium),
+  con sidechain rápido (ratio 3, ataque 15 ms) que la baja ~8 dB mientras se habla y la sube en las pausas.
+  Además le abre un hueco en 1.5-4 kHz (donde vive la voz) para que no tape las palabras, y le da cuerpo en graves.
+- Elección: entre las canciones del mood, el editor prefiere las de más "pegada" (golpes y ritmo marcado; se guarda en `indice.json`).
+- Ducking manual (ejemplo):
 ```bash
 ffmpeg -i voz.wav -i musica.mp3 -filter_complex "[1:a][0:a]sidechaincompress=threshold=0.03:ratio=8:attack=20:release=300[m];[m][0:a]amix=inputs=2:normalize=0[a]" -map "[a]" mezcla.wav
 ```

@@ -79,6 +79,35 @@ un fotograma a tamaño real para medir la zona en píxeles.
 Lección aprendida: el desenfoque en rectángulo se nota; combínalo con el estilo caja
 (caja semitransparente encima) para que parezca diseño intencional.
 
+### Tipografía animada (`--tipo` o `"tipo"` en el pedido)
+Cada concepto puede tener otra "cara" (ayuda a la diversidad de Meta). Fuentes libres (OFL) incluidas en `assets/fonts`.
+
+| tipo | Títulos | Subtítulos | Animación de títulos | Va bien con |
+|---|---|---|---|---|
+| impacto (dopamina) | Anton | Montserrat | golpe (entra grande y desenfocado, rebota) | dolor, urgencia, herramientas |
+| bloque (ugc) | Archivo Black | Archivo Black | rebote (cae y rebota) | testimonio, campo, directo |
+| moderno | Poppins ExtraBold | Poppins | sube (palabra por palabra) | listas, razones, tecnología |
+| titular | Bebas Neue | Montserrat | deslizar (entra de lado con barrido) | comparaciones, noticias |
+| marcador | Permanent Marker | Montserrat | máquina de escribir | tutoriales, pasos, hecho a mano |
+| elegante (premium/cine) | DM Serif Display | Montserrat | zoom lento | belleza, bienestar, lujo |
+
+En los subtítulos dopamina la palabra que se está diciendo da un pequeño "salto" (110%), además del karaoke.
+Tamaños: gancho 12.5% del ancho, CTA 14%, notas 10-11% (antes eran pequeños: se veían como etiqueta, no como titular).
+
+### Texto detrás de la persona o el producto
+`"detras": "¿POR QUÉ?"` en el gancho (o `--gancho-detras`): letra gigante entre el fondo y el sujeto (recorte
+cuadro a cuadro con rembg, sin créditos). Regla de legibilidad automática: la mitad de arriba de la letra queda
+libre y el sujeto solo tapa la parte de abajo; si no hay un lugar así, va delante. Solo dura la primera toma y luego
+entra el gancho escrito. Funciona mejor con tomas abiertas: personas de cuerpo entero, producto en la mano con
+espacio arriba. Usa 1-3 palabras.
+
+### Sincronía voz-imagen (lo que se dice, se ve)
+En el pedido cada frase lleva sus tomas: `{"voz": "Lo monta sobre la barra y gira la manivela.", "escenas": [{"en": "lo monta", "tomas": [...]}, {"en": "gira la manivela", "tomas": [...]}]}`.
+Whisper da el tiempo real de cada palabra, el corte cae ~0.06 s antes de que se diga (la imagen anticipa) y se
+acerca al beat de la música si está a ±0.12 s. Una toma nunca se estira más de lo que dura: entra la siguiente.
+Antes de producir arma la tabla frase → toma mirando la hoja de tomas (`inventario_tomas.py`): si una frase no tiene
+toma que la muestre, cambia la frase, no la toma.
+
 ## 4. Color y look
 
 - Corrige primero (exposición, balance de blancos), después estiliza.

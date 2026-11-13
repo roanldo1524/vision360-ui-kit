@@ -6,7 +6,9 @@ librosa
 soundfile
 faster-whisper
 demucs
+rembg
+onnxruntime
+# (rembg: texto detrás de la persona/producto y quitar fondo de fotos; baja su modelo ~170 MB la 1.ª vez)
 # Opcionales:
-# rembg onnxruntime      -> quitar fondo de fotos de producto
 # yt-dlp                 -> descargar videos de referencia para estudiar estilo
 # La voz IA local (XTTS) se instala aparte con: python scripts/setup_xtts.py

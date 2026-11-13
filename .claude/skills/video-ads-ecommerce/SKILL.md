@@ -89,13 +89,16 @@ y tu recomendación) y sigue.
 
 ## Reglas que hacen la diferencia
 - **El objetivo siempre es vender**: cada segundo empuja hacia el clic. Gancho que duele o intriga, beneficio visible, prueba, oferta y CTA claro. Si una toma, texto o efecto no ayuda a vender, se corta.
+- **Lo que se dice, se ve**: cada frase del cuerpo lleva sus `tomas` (o `escenas` con las palabras exactas); nunca b-roll al azar sobre la voz. Revisa la tabla frase → toma antes de producir.
+- **Tipografía animada y distinta por concepto** (`tipo`: impacto, bloque, moderno, titular, marcador, elegante) y texto detrás del sujeto en ganchos con toma abierta (`detras`).
+- **Cada copy, el mejor**: gancho con dolor o pregunta concreta que se VE en la toma, una idea por frase, palabras del cliente (usted, finca, pueblo), prueba visual, CTA con razón. Revisa con Whisper que la voz dijo exactamente el guion.
 - **Dopamina por defecto**: subtítulos karaoke con `--claves` (5-12 palabras de venta en verde), transiciones con sonido en ~la mitad de los cortes (`--transiciones auto`), un estímulo nuevo cada 1-2 s. Ver edicion.md §2-3.
 - **La ficha manda**: datos, precios, ofertas y promesas solo de la ficha o del usuario; lo no confirmado no sale en pantalla.
 - **Guion puntuado ≥16/20** antes de producir (metodo-guion.md §7). Es el filtro que baja la tasa de anuncios que fallan.
 - **Curiosidad progresiva**: un bucle abierto cada 3-5 s hasta el CTA; cada promesa se cumple.
 - **Emoción decide, lógica justifica**: punto A sentido → mecanismo → prueba → objeciones → oferta.
 - **Voz natural** (≤1.25x): si no cabe, se acorta el guion. Marcas en inglés: `--fonetica`.
-- **Edición**: gancho en el fotograma 0, cortes entre palabras, efectos con sentido (no en cada corte), música ~18 dB bajo la voz con su parte fuerte en el momento fuerte, -14 LUFS, subtítulos en zona segura y nunca sobre la cara.
+- **Edición**: gancho en el fotograma 0, cortes entre palabras, efectos con sentido (no en cada corte), música que SE OIGA (≈-12 dB bajo la voz al hablar, sube en pausas; el editor lo mide) con su parte fuerte en el momento fuerte, -14 LUFS, subtítulos en zona segura y nunca sobre la cara.
 - **Música y material con derechos**: nunca canciones comerciales en pauta (aunque se les quite la voz). Usa biblioteca con licencia o `generar_musica.py`.
 - **IA hiperrealista y honesta**: personas del común en lugares comunes (kit de realismo de `escenas_ia.py`), producto idéntico al real; una persona IA nunca da un testimonio como si fuera clienta real; se marca como IA.
 - **Cada video, un concepto distinto** (Meta Andromeda agrupa los parecidos): cambia al menos 3 de: ángulo/persona, formato, toma inicial, voz, música, look. Cambiar solo el gancho es una variante, no un concepto.

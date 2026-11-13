@@ -22,6 +22,10 @@ Pedido de ejemplo (pedido.json):
   "cta_voz": "Pídela hoy y pagas cuando te llegue.",
   "cta": "PÍDELA HOY", "oferta": "PAGO CONTRAENTREGA · ENVÍO GRATIS",
   "plan": [{"t": 6, "dur": 1.5, "texto": "Invisible bajo la ropa", "estilo": "caja", "sfx": "pop"}],
+  "ganchos": [{"voz": "...", "texto": "...", "tomas": ["clips/dolor1.mp4"], "detras": "¿BARRIGUITA?"}],  # detras = letra grande detrás de la persona
+  "cuerpo": [{"voz": "Esta faja moldea cintura y abdomen.", "tomas": ["clips/faja_puesta.mp4"]},   # se ve MIENTRAS se dice
+             {"voz": "Se ve invisible debajo de la ropa.", "tomas": ["clips/vestido.mp4", "clips/giro.mp4"]}],
+  "cta_tomas": ["clips/producto_caja.mp4"], "tipo": "impacto",   # tipografía: impacto|bloque|moderno|titular|marcador|elegante
   "claves": ["faja", "cintura", "invisible", "contraentrega"],   # palabras de venta en verde en los subtítulos
   "pos_subs": 0.66, "transiciones": "auto",  # altura de subtítulos (0-1) · auto | todas | no
   "preset": "dopamina", "colores": {"gancho": "E6007E", "cta": "FFD400", "resaltado": "FFD400"},
@@ -108,13 +112,28 @@ def main():
         if V.get("fonetica"): c += ["--fonetica", V["fonetica"]]
         return c
 
+    # "cuerpo" acepta frases sueltas o {"voz": frase, "tomas": [clips que se ven MIENTRAS se dice],
+    #  "escenas": [{"en": "palabras exactas", "tomas": [...]}]} → la imagen siempre coincide con lo que se dice.
+    cuerpo_txt = [c["voz"] if isinstance(c, dict) else c for c in P.get("cuerpo", [])]
+
+    def escenas_de(g):
+        esc = []
+        if g.get("tomas"): esc.append({"t": 0, "tomas": [ab(x) for x in g["tomas"]]})
+        for c in P.get("cuerpo", []):
+            if isinstance(c, dict):
+                if c.get("tomas"): esc.append({"en": c["voz"], "tomas": [ab(x) for x in c["tomas"]]})
+                for e in c.get("escenas", []): esc.append({**e, "tomas": [ab(x) for x in e["tomas"]]})
+        if P.get("cta_tomas") and P.get("cta_voz"): esc.append({"en": P["cta_voz"], "tomas": [ab(x) for x in P["cta_tomas"]]})
+        for e in P.get("escenas", []): esc.append({**e, "tomas": [ab(x) for x in e["tomas"]]})
+        return esc
+
     # 1) Todas las frases distintas del pedido se generan en UNA sola llamada (una carga del
     #    modelo / una ronda de API). Quedan en caché y cada variante solo las copia.
     if modo != "ugc":
         unicas = []
         for i in idx:
             g = ganchos[i]
-            for f in ([g["voz"]] if g.get("voz") else []) + P.get("cuerpo", []) + ([P["cta_voz"]] if P.get("cta_voz") else []):
+            for f in ([g["voz"]] if g.get("voz") else []) + cuerpo_txt + ([P["cta_voz"]] if P.get("cta_voz") else []):
                 if f not in unicas: unicas.append(f)
         if unicas:
             gj = os.path.join(trabajo, "todas_las_frases.json")
@@ -140,6 +159,8 @@ def main():
         if P.get("gancho_dur"): comun += ["--gancho-dur", str(P["gancho_dur"])]
         if P.get("claves"): comun += ["--claves", ",".join(P["claves"])]
         if P.get("transiciones"): comun += ["--transiciones", P["transiciones"]]
+        if P.get("tipo"): comun += ["--tipo", P["tipo"]]
+        if g.get("detras"): comun += ["--gancho-detras", g["detras"]]
         if plan: comun += ["--plan", plan]
         if M.get("archivo"): comun += ["--musica", ab(M["archivo"])]
         elif M.get("biblioteca"):
@@ -151,7 +172,7 @@ def main():
         if modo == "ugc":
             run([PY, os.path.join(AQUI, "editar_auto.py"), "ugc", "--video", crudo, *comun, "-o", tmp_out])
         else:
-            frases = ([g["voz"]] if g.get("voz") else []) + P.get("cuerpo", []) + ([P["cta_voz"]] if P.get("cta_voz") else [])
+            frases = ([g["voz"]] if g.get("voz") else []) + cuerpo_txt + ([P["cta_voz"]] if P.get("cta_voz") else [])
             voz_args = []
             if frases:
                 gj = os.path.join(trabajo, f"guion_h{i+1:02d}.json")
@@ -162,7 +183,11 @@ def main():
             else:
                 voz_args = ["--duracion", str(P.get("duracion", 20))]
             clips = [ab(c) for c in P.get("clips", [])]
-            run([PY, os.path.join(AQUI, "editar_auto.py"), "montaje", "--clips", *clips, *voz_args, *comun, "-o", tmp_out])
+            esc = escenas_de(g)
+            if esc:
+                ej = os.path.join(trabajo, f"escenas_h{i+1:02d}.json"); json.dump(esc, open(ej, "w"), ensure_ascii=False, indent=1)
+                comun += ["--escenas", ej]
+            run([PY, os.path.join(AQUI, "editar_auto.py"), "montaje", *(["--clips", *clips] if clips else []), *voz_args, *comun, "-o", tmp_out])
         D = dur(tmp_out); finales = []
         for fmt in P.get("formatos", ["9x16"]):
             f = os.path.join(out, f"{nombre}_{int(round(D))}s_{fmt}_{idioma}.mp4")

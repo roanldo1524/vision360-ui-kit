@@ -27,13 +27,57 @@ def bgr(hexrgb, alpha="00"):
     return f"&H{alpha}{b}{g}{r}".upper()
 
 def trocear(seg, n):
+    """Bloques de hasta n palabras. Si el segmento trae "words" (tiempos reales de cada palabra,
+    ver alinear_palabras en editar_auto.py) se usan; si no, se reparte por letras."""
+    if seg.get("words"):
+        out, g = [], []
+        for w in seg["words"]:
+            g.append(w)
+            if len(g) >= n or w["word"][-1:] in ".,?!;:":
+                out.append((g[0]["start"], g[-1]["end"], " ".join(x["word"] for x in g), list(g))); g = []
+        if g: out.append((g[0]["start"], g[-1]["end"], " ".join(x["word"] for x in g), list(g)))
+        for i in range(len(out) - 1):   # sin parpadeo entre bloques
+            a = out[i]; out[i] = (a[0], max(a[1], min(out[i + 1][0], a[1] + 0.35)), a[2], a[3])
+        return out
     w = seg["text"].split()
     trozos = [" ".join(w[i:i + n]) for i in range(0, len(w), n)] or [""]
     tot = sum(len(c) + 1 for c in trozos); t = seg["start"]; out = []
     for c in trozos:
         d = (seg["end"] - seg["start"]) * (len(c) + 1) / tot
-        out.append((t, t + d, c)); t += d
+        out.append((t, t + d, c, None)); t += d
     return out
+
+# Animaciones de entrada para títulos (gancho, notas, CTA). Todas en ms desde que aparece el texto.
+ANIMS = ("golpe", "sube", "maquina", "zoom", "rebote", "deslizar", "pop")
+
+def titulo_animado(texto, t0, t1, x, y, estilo, anim="golpe", capa=2, W=1080, extra=""):
+    """Línea(s) ASS de un título con animación de entrada y salida suave."""
+    d = int((t1 - t0) * 1000); sal = r"\fad(0,110)"
+    if anim == "golpe":      # entra grande y desenfocado, "golpea" y rebota un poco
+        tag = (rf"{{\pos({x},{y}){sal}\fscx150\fscy150\blur8\alpha&H60&\t(0,130,\fscx100\fscy100\blur0\alpha&H00&)"
+               rf"\t(130,190,\fscx106\fscy106)\t(190,260,\fscx100\fscy100){extra}}}")
+        return [f"Dialogue: {capa},{ts(t0)},{ts(t1)},{estilo},,0,0,0,,{tag}{texto}"]
+    if anim == "sube":       # palabra por palabra, subiendo
+        pal = texto.split(" ")
+        cuerpo = "".join(rf"{{\alpha&HFF&\fscy40\t({i*85},{i*85+150},\alpha&H00&\fscy100)}}{w}" + (" " if i < len(pal) - 1 else "")
+                         for i, w in enumerate(pal))
+        return [f"Dialogue: {capa},{ts(t0)},{ts(t1)},{estilo},,0,0,0,,{{\\move({x},{y+50},{x},{y},0,{min(400, 85*len(pal)+150)}){sal}{extra}}}{cuerpo}"
+                .replace("\\\\move", "\\move")]
+    if anim == "maquina":    # letra por letra (máquina de escribir)
+        paso = max(18, min(45, 700 // max(1, len(texto))))
+        cuerpo = "".join(rf"{{\alpha&HFF&\t({i*paso},{i*paso+1},\alpha&H00&)}}{c}" for i, c in enumerate(texto))
+        return [f"Dialogue: {capa},{ts(t0)},{ts(t1)},{estilo},,0,0,0,,{{\\pos({x},{y}){sal}{extra}}}{cuerpo}".replace("\\\\pos", "\\pos")]
+    if anim == "zoom":       # cine/premium: aparece suave y crece despacio
+        tag = rf"{{\pos({x},{y})\fad(220,180)\fscx96\fscy96\t(0,{d},\fscx106\fscy106){extra}}}"
+        return [f"Dialogue: {capa},{ts(t0)},{ts(t1)},{estilo},,0,0,0,,{tag}{texto}"]
+    if anim == "rebote":     # cae desde arriba y rebota
+        tag = (rf"{{\move({x},{y-140},{x},{y},0,170){sal}\fscy80\t(170,230,\fscy114\fscx94)\t(230,320,\fscy100\fscx100){extra}}}")
+        return [f"Dialogue: {capa},{ts(t0)},{ts(t1)},{estilo},,0,0,0,,{tag}{texto}"]
+    if anim == "deslizar":   # entra de lado con desenfoque de movimiento
+        tag = rf"{{\move({x-int(W*0.35)},{y},{x},{y},0,200){sal}\blur10\t(0,200,\blur0){extra}}}"
+        return [f"Dialogue: {capa},{ts(t0)},{ts(t1)},{estilo},,0,0,0,,{tag}{texto}"]
+    tag = rf"{{\pos({x},{y}){sal}\fscx60\fscy60\t(0,110,\fscx112\fscy112)\t(110,200,\fscx100\fscy100){extra}}}"
+    return [f"Dialogue: {capa},{ts(t0)},{ts(t1)},{estilo},,0,0,0,,{tag}{texto}"]
 
 def dims(video):
     o = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
@@ -46,7 +90,7 @@ from comun import FONTS, codificador, ff_ruta
 
 def crear_ass(segs, W, H, ass_path, estilo="palabras", fuente="Montserrat", color="FFFFFF",
               resaltado=None, pos=None, tamano=None, zonas=(), extra_estilos="", extra_eventos=(),
-              claves=(), caja=False, color_clave="00E676"):
+              claves=(), caja=False, color_clave="00E676", anim="pop", negrita=True):
     """Escribe el archivo .ass con los subtítulos (lo usa también editar_auto.py)."""
     size = int(W * (tamano or {"palabras": 0.075, "frase": 0.05, "caja": 0.054, "dopamina": 0.112}[estilo]))
     pos = pos if pos is not None else {"palabras": 0.55, "frase": 0.74, "caja": 0.74, "dopamina": 0.6}[estilo]
@@ -63,7 +107,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Sub,{fuente},{size},{bgr(color)},{bgr(color)},{oc},{back},-1,0,0,0,100,100,0,0,{border},{outline},{0 if estilo=='caja' else 2},5,{int(W*0.07)},{int(W*0.07)},0,1
+Style: Sub,{fuente},{size},{bgr(color)},{bgr(color)},{oc},{back},{-1 if negrita else 0},0,0,0,100,100,0,0,{border},{outline},{0 if estilo=='caja' else 2},5,{int(W*0.07)},{int(W*0.07)},0,1
 Style: Tapa,{fuente},{int(W*0.045)},&H00FFFFFF,&H00FFFFFF,&H50000000,&H50000000,-1,0,0,0,100,100,0,0,3,{max(4,int(W*0.012))},0,5,10,10,0,1
 {extra_estilos}
 [Events]
@@ -74,7 +118,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         res = resaltado or "FFD400"
         caja_txt = (f"3,{int(W*0.02)},0" if caja else f"1,{max(4, size // 7)},{max(3, size // 14)}")
         hdr = hdr.replace("Style: Tapa,", f"Style: Dop,{fuente},{size},{bgr(res)},{bgr(color)},&H00000000,"
-                                          f"{'&H70000000' if caja else '&H96000000'},-1,0,0,0,100,100,1,0,{caja_txt},5,"
+                                          f"{'&H70000000' if caja else '&H96000000'},{-1 if negrita else 0},0,0,0,100,100,1,0,{caja_txt},5,"
                                           f"{int(W*0.06)},{int(W*0.06)},0,1\nStyle: Tapa,")
     ev = []
     x, y = W // 2, int(H * pos)
@@ -82,21 +126,30 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     claves_l = [c.lower() for c in claves if c]
     for s in segs:
         if estilo == "dopamina":
-            for t0, t1, c in trocear(s, 3):
+            entrada = {"pop": pop,
+                       "sube": rf"{{\move({x},{y+28},{x},{y},0,110)\alpha&HFF&\t(0,90,\alpha&H00&)}}",
+                       "golpe": r"{\fscx125\fscy125\blur4\t(0,100,\fscx100\fscy100\blur0)}"}.get(anim, pop)
+            for t0, t1, c, ws in trocear(s, 3):
                 palabras = c.split(); total_cs = max(1, int((t1 - t0) * 100))
                 letras = sum(len(w) for w in palabras) or 1
-                partes = []
-                for w in palabras:
-                    k = max(6, int(total_cs * len(w) / letras))
+                partes, ac = [], 0
+                for j, w in enumerate(palabras):
+                    if ws:   # duración real de la palabra (hasta que empieza la siguiente)
+                        fin = ws[j + 1]["start"] if j + 1 < len(ws) else ws[j]["end"]
+                        k = max(5, int(round((fin - (ws[j]["start"] if j else t0)) * 100)))
+                    else:
+                        k = max(6, int(total_cs * len(w) / letras))
                     limpia = w.lower().strip(".,;:!?¿¡")
                     es_clave = any(ch.isdigit() for ch in w) or any(cl in limpia or limpia in cl for cl in claves_l if len(limpia) > 3)
-                    tag = (r"{\kf" + str(k) + r"\fscx112\fscy112\1c" + bgr(color_clave) + r"\2c" + bgr(color_clave) + "}"
-                           if es_clave else r"{\kf" + str(k) + r"\fscx100\fscy100\1c" + bgr(res) + r"\2c" + bgr(color) + "}")
-                    partes.append(tag + w.upper())
-                ev.append(f"Dialogue: 0,{ts(t0)},{ts(t1)},Dop,,0,0,0,,{{\\pos({x},{y})}}{pop}" + " ".join(partes))
+                    base = 112 if es_clave else 100; a0 = ac * 10   # ms en que se empieza a decir
+                    golpe = rf"\t({a0},{a0+70},\fscx{base+10}\fscy{base+10})\t({a0+70},{a0+180},\fscx{base}\fscy{base})"
+                    tag = (r"{\kf" + str(k) + rf"\fscx{base}\fscy{base}" + golpe + r"\1c" + bgr(color_clave) + r"\2c" + bgr(color_clave) + "}"
+                           if es_clave else r"{\kf" + str(k) + rf"\fscx{base}\fscy{base}" + golpe + r"\1c" + bgr(res) + r"\2c" + bgr(color) + "}")
+                    partes.append(tag + w.upper()); ac += k
+                ev.append(f"Dialogue: 0,{ts(t0)},{ts(t1)},Dop,,0,0,0,," + ("" if anim == "sube" else f"{{\\pos({x},{y})}}") + entrada + " ".join(partes))
             continue
         if estilo == "palabras":
-            for i, (t0, t1, c) in enumerate(trocear(s, 3)):
+            for i, (t0, t1, c, _) in enumerate(trocear(s, 3)):
                 col = r"{\c" + bgr(resaltado) + "}" if resaltado and i % 3 == 1 else ""
                 ev.append(f"Dialogue: 0,{ts(t0)},{ts(t1)},Sub,,0,0,0,,{{\\pos({x},{y})}}{pop}{col}{c.upper()}")
         else:
