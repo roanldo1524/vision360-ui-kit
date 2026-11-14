@@ -369,3 +369,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-14 10:19 a. m.: revisión automática. Error nuevo «Producto 1 no existe»: el producto venía como «Producto 1 litro». Se cambió a Herbicida Regenerativo Toro Verde LITRO ($99.000) y se subió: Germán Hurtado Delgado 3144488140 (7790038, oficina Interrapidísimo San Agustín, Huila).
 - 2026-11-14 11:20 a. m.: revisión automática. Subido (quitado el obsequio): Carlos Montes Ramírez 3212664749 (7792278, litro).
 - 2026-11-14 11:53 a. m.: revisión automática. Subido (quitado el obsequio): José Einer Rodas Ruiz 3169589491 (7793484, galón).
+- 2026-11-14 12:20 p. m.: revisión automática. PENDIENTE para una persona: Charline Duffis O'neill 3142271966 (litro). Se quitó el obsequio, pero Lucid Sales responde «Ciudad o departamento no encontrados»: es en la isla de Providencia (San Andrés). No se tocó más; revisar si hay envío a la isla y cómo se llama la ciudad en Dropi.
