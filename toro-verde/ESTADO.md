@@ -362,3 +362,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-14 5:55 a. m.: revisión automática. Subidos (quitado el obsequio): Orlando Millán 3152175636 (7780838, litro) y Héctor Manuel Calderón 3214313599 (7780841, litro).
 - 2026-11-14 6:49 a. m.: revisión automática. Subidos (quitado el obsequio): Alex Mosquera 3135108102 (7782111, litro) y Jorge Luis Rodríguez Ardila 3213350996 (7782112, litro).
 - 2026-11-14 7:20 a. m.: revisión automática. Subido (quitado el obsequio): Carlos Parra Holguín 3103148802 (7782921, 2 litros).
+- 2026-11-14 7:50 a. m.: revisión automática. Subidos (quitado el obsequio): Alexander Coronel 3233011030 (7784091, galón) y Nubia Vallejo 3115937807 (7784090, litro).
