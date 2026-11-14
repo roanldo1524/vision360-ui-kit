@@ -359,3 +359,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-13 9:49 p. m.: revisión automática. Subido (quitado el obsequio): Yeimy Yisella Tique Santos 3136355612 (7775633, galón).
 - 2026-11-14 1:20 a. m.: revisión automática. Subido (quitado el obsequio): Nelson Villa 3243508745 (7779301, litro).
 - 2026-11-14 4:20 a. m.: revisión automática. Subido (quitado el obsequio): Iliriano Quintero 3005686004 (7779926, 2 litros).
+- 2026-11-14 5:55 a. m.: revisión automática. Subidos (quitado el obsequio): Orlando Millán 3152175636 (7780838, litro) y Héctor Manuel Calderón 3214313599 (7780841, litro).
