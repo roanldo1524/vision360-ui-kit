@@ -380,3 +380,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-14 4:49 p. m.: revisión automática. 2 pedidos con el error del obsequio arreglados y subidos: Bolmar Quintero Ballena (7802824), Aicardo Herrera Palacios (7802823). Charline Duffis sigue pendiente (Providencia).
 - 2026-11-14 5:49 p. m.: revisión automática. 3 pedidos con el error del obsequio arreglados y subidos: Hermides García Quintero (7804634), Miyer Fabián Ijaji Hernández (7804636), José Octavio Hurtado (7804639). Charline Duffis sigue pendiente (Providencia).
 - 2026-11-14 6:49 p. m.: revisión automática. 1 pedido sin departamento arreglado y subido: Angela Ochoa (Cartagena → Bolívar, 7806626). Charline Duffis sigue pendiente (Providencia).
+- 2026-11-14 7:19 p. m.: revisión automática. 2 pedidos con el error del obsequio arreglados y subidos: Inmaculada Palomino Oliveros (7807484), Antonio Botello Torres (7807486). Charline Duffis sigue pendiente (Providencia).
