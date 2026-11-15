@@ -397,3 +397,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-15 11:49 a. m.: revisión automática. 3 pedidos con el error del obsequio arreglados: Maria Figueroa (pedido existente actualizado), Ramiro Portilla (7828920), Edwin Nacor Padilla Maussa (7828919). Charline Duffis sigue pendiente (Providencia).
 - 2026-11-15 12:19 p. m.: revisión automática. 2 pedidos con el error del obsequio arreglados y subidos: Bertha Cortés López (7830026), Wilber de Jesús Guzmán Saldaña (7830033). Charline Duffis sigue pendiente (Providencia).
 - 2026-11-15 12:49 p. m.: revisión automática. 1 pedido con el error del obsequio arreglado y subido: Naviz Gallo Bedoya (7831091; ojo: celular de Emiratos +971 545110880).
+- 2026-11-15 1:50 p. m.: revisión automática. 2 pedidos con el error del obsequio arreglados y subidos: Sebastian Gutierrez (7833130), José Gregorio Quintero (7833131). Charline Duffis sigue pendiente (Providencia).
