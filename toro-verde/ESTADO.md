@@ -385,3 +385,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-14 9:49 p. m.: revisión automática. 1 pedido con el error del obsequio arreglado y subido: Octavio Garzón (7812199). Charline Duffis sigue pendiente (Providencia).
 - 2026-11-14 10:19 p. m.: revisión automática. 1 pedido con el error del obsequio arreglado y subido: Sadhu Francisco Duque (7813035). Charline Duffis sigue pendiente (Providencia).
 - 2026-11-14 10:49 p. m.: revisión automática. 1 pedido con el error del obsequio arreglado y subido: Carlos Eduardo Cárdenas (poma, 7813634). Charline Duffis sigue pendiente (Providencia).
+- 2026-11-15 5:49 a. m.: revisión automática. 2 pedidos con el error del obsequio arreglados y subidos: Luis Lancheros (7816496), Jose Einer Yande Caldon (7816497). Charline Duffis sigue pendiente (Providencia).
