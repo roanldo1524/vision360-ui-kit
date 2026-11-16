@@ -421,3 +421,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-16 11:20 a. m.: revisión automática. Subido 1 pedido con error de Obsequio: 7864456.
 - 2026-11-16 11:49 a. m.: revisión automática. Subidos 6 pedidos con error de Obsequio: 7865585, 7865586, 7865587, 7865588, 7865590, 7865592.
 - 2026-11-16 12:19 p. m.: revisión automática. Subidos 3 pedidos con error de Obsequio: 7866752, 7866755 (decía «1 x 2 Litros», se pasó a 2 litros), 7866757.
+- 2026-11-16 12:50 p. m.: revisión automática. Subidos 4 pedidos con error de Obsequio: 7867975, 7867978, 7867980, 7867987.
