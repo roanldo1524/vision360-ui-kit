@@ -418,3 +418,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-16 9:49 a. m.: revisión automática. Subidos 3 pedidos con error de Obsequio: 7860846, 7860847, 7860849.
 - 2026-11-16 10:22 a. m.: revisión automática. Subido 1 pedido al que le faltaba el departamento (Neiva → Huila): pedido 7862142. Viene «SIN RECAUDO»: verificar que haya pagado antes de despachar.
 - 2026-11-16 10:49 a. m.: revisión automática. Subido 1 pedido con error de Obsequio: 7863249.
+- 2026-11-16 11:20 a. m.: revisión automática. Subido 1 pedido con error de Obsequio: 7864456.
