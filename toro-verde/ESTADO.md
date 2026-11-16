@@ -410,3 +410,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-15 9:19 p. m.: revisión automática. 1 pedido con el error del obsequio arreglado y subido: Pablo Chilatra Tique (7847941).
 - 2026-11-15 10:19 p. m.: revisión automática. Subido 1 pedido con error de Obsequio: Carmen Labio (3106683256), pedido 7849754.
 - 2026-11-16 5:19 a. m.: revisión automática. Subido 1 pedido con error de Obsequio: Maria Montoya (3018752401), pedido 7853055.
+- 2026-11-16 6:52 a. m.: revisión automática. Arreglados 2 pedidos con error de Obsequio: Henry Ramiro Martinez (3005939467), pedido 7854486; Ramiro Rodríguez Villalba (3105632941), actualizó su pedido existente (no duplicó).
