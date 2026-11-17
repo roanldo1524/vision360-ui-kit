@@ -453,3 +453,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-17 9:50 a. m.: resubido 1 pedido con «Obsequio» (Lucid Sales 7898460).
 - 2026-11-17 10:20 a. m.: resubido 1 pedido con «Obsequio» (Lucid Sales 7899508).
 - 2026-11-17 10:35 a. m.: escalada por costo por venta de 3 días (Ronald: escalar agresivo y rentable). Escalado 71,4k→100k, FK006 72k→100k, Claude copia 50k→70k, Frankistein 26k→40k, TV65V 13k→25k, Rescate Guisel 32k→45k, Lab Guisel 32k→45k, TV74V 32k→45k, Editados CLD 30k→40k. La regla automática de Meta había bajado en la noche Escalado (100k→71,4k) y Mónica (60k→30k). Revisión programada en 2 h.
+- 2026-11-17 10:45 a. m.: bajadas a la mitad las que no venden (TV71V, TV73V, Eliza Lab, Imágenes Meta: 25k→12,5k) y reactivada 11-08 Interacción (25k, ~$8.500 por venta en 3 días).
