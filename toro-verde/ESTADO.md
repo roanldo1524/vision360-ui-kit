@@ -434,3 +434,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-16 5:49 p. m.: revisión automática. Subido 1 pedido con error de Obsequio: 7878229.
 - 2026-11-16 6:19 p. m.: revisión automática. Subidos 3 pedidos con error de Obsequio: 7879229, 7879230, 7879231.
 - 2026-11-16 6:49 p. m.: revisión automática. Subidos 4 pedidos con error de Obsequio: 7880323, 7880324, 7880326, 7880329.
+- 2026-11-16 7:19 p. m.: revisión automática. Arreglados 4 pedidos con error de Obsequio: 7881328, 7881329, 7881330 subidos; un cuarto actualizó su pedido existente (sin duplicar).
