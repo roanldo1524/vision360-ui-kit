@@ -474,3 +474,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-17 3:49 p. m.: revisión automática. Subidos de nuevo 4 pedidos (Lucid 7909799, 7909800, 7909801, 7909802): 3 por «Obsequio» y 1 por cantidad mal escrita (cliente de la promo 10 %: corregir precio en Dropi).
 - 2026-11-17 4:19 p. m.: revisión automática. Subido de nuevo 1 pedido con «Obsequio» (Lucid 7910621).
 - 2026-11-17 4:49 p. m.: revisión automática. Subido de nuevo 1 pedido con «Obsequio» (Lucid 7911441). 1 pedido de la página sin teléfono queda para una persona.
+- 2026-11-17 5:19 p. m.: revisión automática. Subido de nuevo 1 pedido con «Obsequio» (Lucid 7912238, cliente de la promo 10 %).
