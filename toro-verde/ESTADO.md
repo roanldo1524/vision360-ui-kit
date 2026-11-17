@@ -471,3 +471,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-17 2:20 p. m.: resubidos 3 pedidos con «Obsequio» (Lucid Sales 7907167, 7907168, 7907173).
 - 2026-11-17 3:15 p. m.: surf scaling. Suben TV74V 45k→70k, TV68V 30k→45k, Lab Guisel 45k→60k, FK006 72k→95k, TV64V 10k→20k, TV71V 12,5k→20k (costo por compra de hoy entre $6k y $16k). Revisión 6 p. m. y bajada 9:30 p. m. programadas.
 - 2026-11-17 3:19 p. m.: revisión automática. Subido de nuevo 1 pedido con «Obsequio» (Lucid 7908927).
+- 2026-11-17 3:49 p. m.: revisión automática. Subidos de nuevo 4 pedidos (Lucid 7909799, 7909800, 7909801, 7909802): 3 por «Obsequio» y 1 por cantidad mal escrita (cliente de la promo 10 %: corregir precio en Dropi).
