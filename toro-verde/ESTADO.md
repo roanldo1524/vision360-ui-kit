@@ -462,3 +462,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-17 11:20 a. m.: etiqueta nueva en Lucid «💸 PROMO 10% _ CAMBIAR PRECIO EN DROPI» (id 218934). Cada revisión automática se la pone sola a los clientes de la promo que hacen pedido (promo_tag.sh, solo hasta el 18 nov). Para que quien confirma en Dropi filtre y corrija el precio.
 - 2026-11-17 11:20 a. m.: resubido 1 pedido de la promo con «Obsequio» (Lucid Sales 7901535), etiquetado PROMO 10% (debe quedar en $89.100 en Dropi).
 - 2026-11-17 11:50 a. m.: resubidos 2 pedidos con «Obsequio» (Lucid Sales 7902461 promo, 7902464). Confirmado: aunque Lucid mande $89.100, Dropi deja $99.000. Pedidos de la promo por corregir en Dropi: 97270685, 97275158, 97281450 (y el de Pitalito cuando aparezca).
+- 2026-11-17 12:20 p. m.: resubido 1 pedido de la promo (2 litros, Lucid Sales 7903363); en Dropi debe quedar en $152.100. Van 5 pedidos de la promo.
