@@ -439,3 +439,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-16 7:50 p. m.: subidas 30 % por costo por venta de 3 días (14-16 nov): Frankistein Lab 20k→26k, TV65V 10k→13k, Rescate Guisel 25k→32k, Lab Guisel 25k→32k, TV74V 25k→32k. No se bajó nada (Ronald: lo importante son las ventas).
 - 2026-11-16 7:50 p. m.: resubidos 3 pedidos con «Obsequio» (Lucid Sales 7882636, 7882637, 7882639).
 - 2026-11-16 8:20 p. m.: resubidos 3 pedidos con «Obsequio» (Lucid Sales 7883817, 7883823, 7883824).
+- 2026-11-16 8:50 p. m.: resubido 1 pedido con «Obsequio» (Lucid Sales 7885078).
