@@ -467,3 +467,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-17 12:50 p. m.: resubidos 3 pedidos con «Obsequio» (Lucid Sales 7904318 promo 2 L → $152.100 en Dropi, 7904319, 7904320). Van 6 pedidos de la promo.
 - 2026-11-17 1:20 p. m.: resubidos 3 pedidos (2 por «Obsequio», 1 por departamento vacío) (Lucid Sales 7905283, 7905286, 7905290).
 - 2026-11-17 1:50 p. m.: un pedido ya subido (Dropi 97297319) volvió a salir con error porque el cliente confirmó otra vez; no se resubió para no duplicar. Nuevo pedido de la promo etiquetado (van 7).
+- 2026-11-17 2:00 p. m.: promo 10 %: 26 de 373 respondieron, 7 compraron. En Dropi ya quedaron con precio de promo 3 (152.100, 152.100, 89.100); falta corregir 97270685 (89.100) y 2 que aún no aparecen. Día: 37 pedidos válidos en Dropi por ~$6,5 M (2 cancelados: 97275158 y 97227691), 44 oportunidades de WhatsApp en Lucid.
