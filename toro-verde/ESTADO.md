@@ -435,3 +435,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-16 6:19 p. m.: revisión automática. Subidos 3 pedidos con error de Obsequio: 7879229, 7879230, 7879231.
 - 2026-11-16 6:49 p. m.: revisión automática. Subidos 4 pedidos con error de Obsequio: 7880323, 7880324, 7880326, 7880329.
 - 2026-11-16 7:19 p. m.: revisión automática. Arreglados 4 pedidos con error de Obsequio: 7881328, 7881329, 7881330 subidos; un cuarto actualizó su pedido existente (sin duplicar).
+- 2026-11-16 7:40 p. m.: a pedido de Ronald se subieron presupuestos en Meta (CP1): Escalado post ID ganadores (copia) $41.792→$100.000; TV68V Mónica $30.000→$60.000; FK006 $34.500→$60.000; 09-12 Claude copia $27.500→$50.000. Ojo: la regla automática de Meta (cada 30 min) puede volver a bajarlos.
