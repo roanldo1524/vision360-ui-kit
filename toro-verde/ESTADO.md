@@ -441,3 +441,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-16 8:20 p. m.: resubidos 3 pedidos con «Obsequio» (Lucid Sales 7883817, 7883823, 7883824).
 - 2026-11-16 8:50 p. m.: resubido 1 pedido con «Obsequio» (Lucid Sales 7885078).
 - 2026-11-16 9:10 p. m.: revisión de 70 chats sin compra (14-16 nov). Nueva regla 75 del bot: responder lo preguntado de una, precio sin pedir municipio, municipio máx. 2 veces, datos de a uno, un intento suave con «le aviso», seguimientos con algo nuevo. Pendiente de Ronald: recortar el saludo automático de ~12 mensajes.
+- 2026-11-16 9:20 p. m.: resubidos 2 pedidos con «Obsequio» (Lucid Sales 7886204, 7886206).
