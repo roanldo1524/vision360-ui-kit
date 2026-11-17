@@ -469,3 +469,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-17 1:50 p. m.: un pedido ya subido (Dropi 97297319) volvió a salir con error porque el cliente confirmó otra vez; no se resubió para no duplicar. Nuevo pedido de la promo etiquetado (van 7).
 - 2026-11-17 2:00 p. m.: promo 10 %: 26 de 373 respondieron, 7 compraron. En Dropi ya quedaron con precio de promo 3 (152.100, 152.100, 89.100); falta corregir 97270685 (89.100) y 2 que aún no aparecen. Día: 37 pedidos válidos en Dropi por ~$6,5 M (2 cancelados: 97275158 y 97227691), 44 oportunidades de WhatsApp en Lucid.
 - 2026-11-17 2:20 p. m.: resubidos 3 pedidos con «Obsequio» (Lucid Sales 7907167, 7907168, 7907173).
+- 2026-11-17 3:15 p. m.: surf scaling. Suben TV74V 45k→70k, TV68V 30k→45k, Lab Guisel 45k→60k, FK006 72k→95k, TV64V 10k→20k, TV71V 12,5k→20k (costo por compra de hoy entre $6k y $16k). Revisión 6 p. m. y bajada 9:30 p. m. programadas.
