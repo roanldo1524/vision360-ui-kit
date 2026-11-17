@@ -444,3 +444,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-16 9:20 p. m.: resubidos 2 pedidos con «Obsequio» (Lucid Sales 7886204, 7886206).
 - 2026-11-16 10:50 p. m.: resubido 1 pedido con «Obsequio» (Lucid Sales 7888758).
 - 2026-11-17 6:20 a. m.: resubido 1 pedido con «Obsequio» (Lucid Sales 7892196).
+- 2026-11-17 6:50 a. m.: resubidos 2 pedidos con «Obsequio» (Lucid Sales 7892813, 7892817).
