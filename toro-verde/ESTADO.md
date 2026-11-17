@@ -476,3 +476,5 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-17 4:49 p. m.: revisión automática. Subido de nuevo 1 pedido con «Obsequio» (Lucid 7911441). 1 pedido de la página sin teléfono queda para una persona.
 - 2026-11-17 5:19 p. m.: revisión automática. Subido de nuevo 1 pedido con «Obsequio» (Lucid 7912238, cliente de la promo 10 %).
 - 2026-11-17 5:50 p. m.: revisión automática. Subidos de nuevo 2 pedidos con «Obsequio» (Lucid 7913116, 7913117).
+- 2026-11-17 6:19 p. m.: revisión automática. Subidos de nuevo 3 pedidos con «Obsequio» (Lucid 7913986, 7913987, 7913988).
+- 2026-11-17 6:49 p. m.: revisión automática. Subidos de nuevo 3 pedidos con «Obsequio» (Lucid 7914830, 7914831, 7914832).
