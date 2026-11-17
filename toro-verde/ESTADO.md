@@ -436,3 +436,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-16 6:49 p. m.: revisión automática. Subidos 4 pedidos con error de Obsequio: 7880323, 7880324, 7880326, 7880329.
 - 2026-11-16 7:19 p. m.: revisión automática. Arreglados 4 pedidos con error de Obsequio: 7881328, 7881329, 7881330 subidos; un cuarto actualizó su pedido existente (sin duplicar).
 - 2026-11-16 7:40 p. m.: a pedido de Ronald se subieron presupuestos en Meta (CP1): Escalado post ID ganadores (copia) $41.792→$100.000; TV68V Mónica $30.000→$60.000; FK006 $34.500→$60.000; 09-12 Claude copia $27.500→$50.000. Ojo: la regla automática de Meta (cada 30 min) puede volver a bajarlos.
+- 2026-11-16 7:50 p. m.: subidas 30 % por costo por venta de 3 días (14-16 nov): Frankistein Lab 20k→26k, TV65V 10k→13k, Rescate Guisel 25k→32k, Lab Guisel 25k→32k, TV74V 25k→32k. No se bajó nada (Ronald: lo importante son las ventas).
