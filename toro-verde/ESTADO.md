@@ -466,3 +466,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-17 12:40 p. m.: revisión de la escalada. ~$332.000 gastados, ~190 chats (~$1.750 por chat), 34 pedidos de WhatsApp (~$9.800 por pedido). Ninguna campaña pasa de $2.500 por chat: no se devolvió nada. La regla automática de Meta bajó Escalado 4 veces hoy (100k→70k→59,5k→41,6k→35,4k); a medianoche lo había subido a 120k.
 - 2026-11-17 12:50 p. m.: resubidos 3 pedidos con «Obsequio» (Lucid Sales 7904318 promo 2 L → $152.100 en Dropi, 7904319, 7904320). Van 6 pedidos de la promo.
 - 2026-11-17 1:20 p. m.: resubidos 3 pedidos (2 por «Obsequio», 1 por departamento vacío) (Lucid Sales 7905283, 7905286, 7905290).
+- 2026-11-17 1:50 p. m.: un pedido ya subido (Dropi 97297319) volvió a salir con error porque el cliente confirmó otra vez; no se resubió para no duplicar. Nuevo pedido de la promo etiquetado (van 7).
