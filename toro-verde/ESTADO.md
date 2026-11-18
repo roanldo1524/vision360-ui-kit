@@ -496,3 +496,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-18 7:50 a. m.: revisión automática. Subidos de nuevo 3 pedidos (Lucid 7928246, 7928302, 7928303); 2 sin departamento. Primera compra de la promo de hoy.
 - 2026-11-18 8:23 a. m.: revisión automática. Subidos de nuevo 2 pedidos con «Obsequio» (Lucid 7929290, 7929291); 1 es de la promo de hoy.
 - 2026-11-18 8:50 a. m.: revisión automática. Subidos de nuevo 2 pedidos con «Obsequio» (Lucid 7930268, 7930271).
+- 2026-11-18 9:30 a. m.: recordatorio de confirmación enviado a 18 pedidos «Pendiente por confirmar» (1 a 22 h). Cierre del 17 nov: 104 pedidos de WhatsApp (récord) frente a 84 el 16 nov.
