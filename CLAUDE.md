@@ -11,5 +11,6 @@ Reglas de marca que nunca se rompen:
 - Nunca usar "orgánico", "ecológico", "natural", "sin veneno", "no tóxico", ni mencionar ICA o precios en anuncios.
 - Todo mensaje de uso lleva la dosis mínima: 130 ml por bomba de 20 litros, y "agite el envase".
 - Hay dos aprobaciones humanas obligatorias en la Máquina Creativa: antes de grabar y antes de lanzar.
+- Los descuentos (remarketing, promos por WhatsApp) son SOLO para personas que nunca han comprado, para impulsar el cierre. Antes de enviar, sacar de la lista a todo el que tenga un pedido en el historial completo de Lucid (embudo 705299). El bot nunca ofrece descuento por iniciativa propia; a clientes que ya compraron, precio normal.
 
 Cada vez que se avance, actualiza `toro-verde/ESTADO.md`.
