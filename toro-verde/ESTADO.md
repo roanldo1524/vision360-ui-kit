@@ -511,3 +511,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-18 2:00 p. m.: alertas de inventario ajustadas por Ronald: un solo aviso cuando una presentación queda en 50 o menos y otro cuando llega a 0; no se repiten hasta que se reponga (más de 50). Reciben: Ronald, Karen y Leidy.
 - 2026-11-18 2:50 p. m. (revisión automática): subidos 4 pedidos que fallaban por el «Obsequio» (Lucid 7943043, 7943044, 7943046 y uno actualizado). 1 sin dirección queda para una persona. 8 compras del remarketing de hoy.
 - 2026-11-18 3:25 p. m. (revisión automática): subidos 3 pedidos con error (Lucid 7944062, 7944065, 7944111; uno con el departamento que faltaba: Jamundí → Valle del Cauca). El 7944065 llegó sin valor ni presentación: revisar.
+- 2026-11-18 3:50 p. m. (revisión automática): subidos 4 pedidos que fallaban por el «Obsequio» (Lucid 7945002, 7945003, 7945004, 7945007).
