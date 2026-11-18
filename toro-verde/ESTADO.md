@@ -515,3 +515,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-18 4:50 p. m. (revisión automática): subidos 3 pedidos con error (Lucid 7946906, 7946907, 7946940). La revisión ahora también arregla el error «Invalid JSON payload».
 - 2026-11-18 5:20 p. m. (revisión automática): subidos 3 pedidos con error (Lucid 7947738, 7947743 y Consacá → Nariño).
 - 2026-11-18 5:50 p. m.: Casino Toro Verde publicado (toroverde.co/pages/premios: ruleta, raspa y gana, elige tu regalo; 95 % gana 10 % + semilla, 5 % gana 5 %; códigos RULETA10/RULETA5 en el bot solo para quien nunca compró). Enviado a 254 tibios de 24 h que nunca compraron. Subido 1 pedido con error (Lucid 7948643).
+- 2026-11-18 6:20 p. m. (revisión automática): subidos 3 pedidos con error (Lucid 7949552, 7949555 y Sahagún → Córdoba, primera venta con RULETA5).
