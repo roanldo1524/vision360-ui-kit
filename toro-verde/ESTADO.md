@@ -498,3 +498,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-18 8:50 a. m.: revisión automática. Subidos de nuevo 2 pedidos con «Obsequio» (Lucid 7930268, 7930271).
 - 2026-11-18 9:30 a. m.: recordatorio de confirmación enviado a 18 pedidos «Pendiente por confirmar» (1 a 22 h). Cierre del 17 nov: 104 pedidos de WhatsApp (récord) frente a 84 el 16 nov.
 - 2026-11-18 9:40 a. m.: el bot ya no ofrece el 10 % por su cuenta; solo a quien recibió el mensaje hoy y nunca ha compró. Listas futuras excluyen a todo el que haya comprado alguna vez (historial desde dic 2025).
+- 2026-11-18 9:49 a. m.: revisión automática. Subidos de nuevo 3 pedidos con «Obsequio» (Lucid 7932434, 7932437, 7932439). 1 pedido sin ciudad ni dirección queda para una persona.
