@@ -506,3 +506,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-18 12:49 p. m.: revisión automática. Subidos de nuevo 3 pedidos con «Obsequio» (Lucid 7938917, 7938923, 7938943). El recordatorio de confirmar recuperó 8 de 18 pedidos.
 - 2026-11-18 1:00 p. m.: alertas de inventario activas (Dropi Herbicida Lote 22): revisión 2 veces al día (7:41 a. m. y 3:41 p. m.), roja < 30 unidades, naranja si alcanza < 7 días; WhatsApp al CEO. Stock hoy: litro 479, galón 279, POMA 0.
 - 2026-11-18 1:20 p. m.: revisión automática. Subido de nuevo 1 pedido con «Obsequio» (Lucid 7939949).
+- 2026-11-18 1:40 p. m.: alertas de inventario conectadas al sistema de avisos de administrador de Lucid (flujo «Mensaje administrador», plantilla aprobada). Nuevo tipo «stock» en Notificaciones_admin con el número del CEO. Prueba enviada.
