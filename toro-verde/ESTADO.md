@@ -492,3 +492,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-18 6:19 a. m.: revisión automática. Subido de nuevo 1 pedido con «Obsequio» (Lucid 7925938).
 - 2026-11-18 6:49 a. m.: revisión automática. Subidos de nuevo 4 pedidos (Lucid 7926578, 7926586, 7926587, 7926628); 1 sin departamento, «SIN RECAUDO».
 - 2026-11-18 7:20 a. m.: revisión automática. Subido a mano 1 pedido sin departamento (Lucid 7927313).
+- 2026-11-18 7:35 a. m.: promo 10 % + semilla (solo hoy), autorizada por Ronald, enviada a 422 clientes tibios de los anuncios con la ventana de 24 h abierta (0 fallos). Bot con precios de promo para hoy; los que compren llevan la etiqueta «💸 PROMO 10%» para corregir el precio en Dropi.
