@@ -520,3 +520,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-18 7:25 p. m.: casino enviado a 192 tibios más (total 446); recordatorio «vence a medianoche» programado 9:15 p. m. Subidos 2 pedidos con error (Lucid 7951764, 7951765).
 - 2026-11-18 8:20 p. m.: casino rediseñado como tragamonedas «Saca 3 toros» (3 tiros, medidor, casi-ganada, jackpot 95 %); tarea automática del casino 10:14, 16:14 y 21:14. Subidos 3 pedidos con error (Lucid 7953904, 7953908, 7953921).
 - 2026-11-18 9:00 p. m.: casino rediseñado con el brandbook (Verde Roble #043434, Verde Vital #C8F520, Barlow, logo real, íconos de toro/maíz/hoja/moneda; una sola celebración al ganar).
+- 2026-11-18 9:30 p. m.: casino con el toro del logo de Toro Verde y símbolos de café, cacao y aguacate.
