@@ -527,3 +527,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-18 10:45 p. m.: Casino con 5 juegos (tragamonedas del bono, ruleta, raspa, cofres, mayor o menor), música propia con botón para apagar, rifa de fumigadora de batería el 7 de enero de 2027 (página y bot). Carga en ~2 s.
 - 2026-11-18 9:50 p. m.: último aviso del casino enviado; subidos 2 pedidos con error (Lucid 7957947, 7957949).
 - 2026-11-18 10:20 p. m. (revisión automática): subido 1 pedido con error (Lucid 7958702).
+- 2026-11-18 11:00 p. m.: casino reducido a 3 juegos (tragamonedas con el bono, buscaminas de plagas, raspa y gana), música más movida (ritmo dembow) y franja fija de la rifa del 7 de enero.
