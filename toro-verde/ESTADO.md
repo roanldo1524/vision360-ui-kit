@@ -523,3 +523,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-18 9:30 p. m.: casino con el toro del logo de Toro Verde y símbolos de café, cacao y aguacate.
 - 2026-11-18 8:50 p. m. (revisión automática): subido 1 pedido con error (Lucid 7955442).
 - 2026-11-18 9:50 p. m.: casino con más dificultad: 5 tiros, el jugador frena cada rodillo con PARAR; primer tiro sin premio, 3 cafés = 5 %, 3 toros = 10 % + semilla en el último.
+- 2026-11-18 10:15 p. m.: Casino Toro Verde con 3 juegos (tragamonedas de 5 tiros que da el bono una sola vez, ruleta y raspa y gana por fichas sin valor), luces y rifa de una fumigadora de batería para quien compre con el bono (falta fecha y permiso de Coljuegos). Bot actualizado.
