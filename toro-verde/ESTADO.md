@@ -537,3 +537,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-19 12:45 UTC: recuperación de ventas: el mensaje principal pasa a ser la oferta directa (10% + semilla, solo a quienes nunca compraron, responder «QUIERO MI PREMIO»); el casino queda como extra. 132 tibios listos para el envío de las 10:14.
 - 2026-11-19 13:22–13:50 UTC: revisión automática: 8 pedidos resubidos (7 sin el «Obsequio»; 1 de Puente Nacional al que le faltaba el departamento: Santander). Lucid 7967383, 7967384, 7967389, 7967390, 7967392, 7967395, 7967398, 7967469.
 - 2026-11-19 14:20 UTC: revisión automática: 7 pedidos resubidos sin el «Obsequio» (Lucid 7969667, 7969670, 7969672, 7969673, 7969674, 7969676, 7969678).
+- 2026-11-19 14:50 UTC: revisión automática: 2 pedidos resubidos sin el «Obsequio» (Lucid 7970808, 7970809).
