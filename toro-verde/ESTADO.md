@@ -530,3 +530,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-18 11:00 p. m.: casino reducido a 3 juegos (tragamonedas con el bono, buscaminas de plagas, raspa y gana), música más movida (ritmo dembow) y franja fija de la rifa del 7 de enero.
 - 2026-11-18 11:20 p. m.: buscaminas de verdad (8x8, 10 plagas, números, destape en cadena, banderas, sonidos y explosión).
 - 2026-11-18 11:40 p. m.: buscaminas con frutos (café, cacao, aguacate) al destapar y bombas en vez de plagas.
+- 2026-11-19 04:50 UTC: revisión automática: resubido el pedido de Carlos (Candelaria) sin el «Obsequio» (Lucid 7960776).
