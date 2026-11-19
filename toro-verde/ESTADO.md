@@ -543,3 +543,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-19 16:19 UTC: revisión automática: 1 pedido resubido sin el «Obsequio» (Lucid 7974371).
 - 2026-11-19 16:49 UTC: revisión automática: 1 pedido resubido sin el «Obsequio» (Lucid 7975300). 11:48 Bogotá: 35 pedidos WhatsApp (ayer a la misma hora 50); oferta directa enviada a 20 tibios nuevos.
 - 2026-11-19 17:20 UTC: revisión automática: 4 pedidos resubidos sin el «Obsequio» (Lucid 7976385, 7976389, 7976390, 7976444). El de Lorica (José) lo marcó el filtro como cancelación por la frase «no quiero, ver la experiencia primero, mándeme un litro», pero confirmó con «Sí»: se subió a mano.
+- 2026-11-19 17:49 UTC: revisión automática: 3 pedidos resubidos sin el «Obsequio» (Lucid 7977507, 7977508, 7977509). Jorge (…4264, 1 litro) mandó la dirección en foto: sin municipio; se le pidió en texto y queda para resubir en la próxima revisión.
