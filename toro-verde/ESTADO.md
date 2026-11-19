@@ -522,3 +522,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-18 9:00 p. m.: casino rediseñado con el brandbook (Verde Roble #043434, Verde Vital #C8F520, Barlow, logo real, íconos de toro/maíz/hoja/moneda; una sola celebración al ganar).
 - 2026-11-18 9:30 p. m.: casino con el toro del logo de Toro Verde y símbolos de café, cacao y aguacate.
 - 2026-11-18 8:50 p. m. (revisión automática): subido 1 pedido con error (Lucid 7955442).
+- 2026-11-18 9:50 p. m.: casino con más dificultad: 5 tiros, el jugador frena cada rodillo con PARAR; primer tiro sin premio, 3 cafés = 5 %, 3 toros = 10 % + semilla en el último.
