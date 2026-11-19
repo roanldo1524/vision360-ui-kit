@@ -531,3 +531,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-18 11:20 p. m.: buscaminas de verdad (8x8, 10 plagas, números, destape en cadena, banderas, sonidos y explosión).
 - 2026-11-18 11:40 p. m.: buscaminas con frutos (café, cacao, aguacate) al destapar y bombas en vez de plagas.
 - 2026-11-19 04:50 UTC: revisión automática: resubido el pedido de Carlos (Candelaria) sin el «Obsequio» (Lucid 7960776).
+- 2026-11-19 10:19 UTC: revisión automática: resubido un pedido (cel. ...1872) sin el «Obsequio» (Lucid 7962606).
