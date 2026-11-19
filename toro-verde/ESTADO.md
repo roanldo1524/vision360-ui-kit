@@ -525,3 +525,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-18 9:50 p. m.: casino con más dificultad: 5 tiros, el jugador frena cada rodillo con PARAR; primer tiro sin premio, 3 cafés = 5 %, 3 toros = 10 % + semilla en el último.
 - 2026-11-18 10:15 p. m.: Casino Toro Verde con 3 juegos (tragamonedas de 5 tiros que da el bono una sola vez, ruleta y raspa y gana por fichas sin valor), luces y rifa de una fumigadora de batería para quien compre con el bono (falta fecha y permiso de Coljuegos). Bot actualizado.
 - 2026-11-18 10:45 p. m.: Casino con 5 juegos (tragamonedas del bono, ruleta, raspa, cofres, mayor o menor), música propia con botón para apagar, rifa de fumigadora de batería el 7 de enero de 2027 (página y bot). Carga en ~2 s.
+- 2026-11-18 9:50 p. m.: último aviso del casino enviado; subidos 2 pedidos con error (Lucid 7957947, 7957949).
