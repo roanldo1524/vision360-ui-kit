@@ -528,3 +528,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-18 9:50 p. m.: último aviso del casino enviado; subidos 2 pedidos con error (Lucid 7957947, 7957949).
 - 2026-11-18 10:20 p. m. (revisión automática): subido 1 pedido con error (Lucid 7958702).
 - 2026-11-18 11:00 p. m.: casino reducido a 3 juegos (tragamonedas con el bono, buscaminas de plagas, raspa y gana), música más movida (ritmo dembow) y franja fija de la rifa del 7 de enero.
+- 2026-11-18 11:20 p. m.: buscaminas de verdad (8x8, 10 plagas, números, destape en cadena, banderas, sonidos y explosión).
