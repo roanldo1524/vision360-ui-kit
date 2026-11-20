@@ -551,3 +551,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-19 19:50 (Bogotá): revisión automática resubió 1 pedido con error por «Obsequio» (Lucid 7991382). Sigue pendiente Jorge (…4264).
 - 2026-11-19 20:25 (Bogotá): pedido de Blanca (Belalcázar, Cauca) fallaba por ciudad; se dejó «Ciudad: Páez» y subió (Lucid 7992588). Creada la revisión de trafficker 3 veces al día (8:12, 13:12, 18:12) con reglas de escalar/bajar/pausar.
 - 2026-11-19 20:50 (Bogotá): revisión automática resubió 1 pedido con error por «Obsequio» (Lucid 7993683).
+- 2026-11-20 07:20 (Bogotá): pedido de Pedro (Pitalito) fallaba por departamento vacío; se puso Huila y subió (Lucid 8003263).
