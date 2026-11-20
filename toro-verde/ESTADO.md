@@ -555,3 +555,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-20 08:50 (Bogotá): revisión automática resubió 1 pedido con error por «Obsequio» (Lucid 8006539).
 - 2026-11-20 9:52 a. m. (revisión automática): Alfonso Reyes, 2 pomas $1.990.000 (8008740), trabado por la semilla; se quitó y entró a Lucid Sales. Es un pedido nuevo desde el mismo chat del pedido del 13-11 (no es repetido). Sigue pendiente Jorge (…4264): falta el municipio.
 - 2026-11-20 11:52 a. m. (revisión automática): Marilu López Vanegas, 1 poma $995.000, Rovira (Tolima) (8012786), trabado por la semilla; se quitó y entró a Lucid Sales. Sigue pendiente Jorge (…4264): falta el municipio.
+- 2026-11-20 12:52 p. m. (revisión automática): Pedro Vicente Rueda, 1 litro $99.000, Fundación (Magdalena) (8014736), trabado por la semilla; se quitó y entró a Lucid Sales. Sigue pendiente Jorge (…4264): falta el municipio.
