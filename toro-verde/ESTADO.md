@@ -548,3 +548,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-19 18:49 UTC: revisión automática: 6 pedidos resubidos sin el «Obsequio» (Lucid 7979655, 7979657, 7979658, 7979662, 7979663, 7979665). Regla 0 del bot reforzada: prohibido poner la semilla como producto o como línea «🎁 Obsequio» en el resumen (causa de casi todos los errores al subir). Respaldo botf/456432_antes_obsequio.json.
 - 2026-11-19 20:19 UTC: revisión automática: 1 pedido resubido (faltaban campos, Lucid 7982808). Jorge (…4264) sigue sin municipio.
 - 2026-11-19 17:50 (Bogotá): revisión automática resubió 3 pedidos con error por «Obsequio» como producto 2 (Lucid 7987172, 7987173, 7987175). Sigue pendiente Jorge (…4264): falta municipio.
+- 2026-11-19 19:50 (Bogotá): revisión automática resubió 1 pedido con error por «Obsequio» (Lucid 7991382). Sigue pendiente Jorge (…4264).
