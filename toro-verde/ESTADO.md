@@ -581,3 +581,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-21: chats sin respuesta por la caída de la IA (DeepSeek sin saldo): respondidos a mano 8 de venta (Inzá, Jorge, Dary, Río Blanco, Reinel galón Marinilla, Liliana, nuevo …2384, Javi reventa). 6 de posventa/quejas pasan a una persona (…9686, …0079, …2721, …4718, …7638, …0728).
 - 2026-11-21 8:20 a. m.: subido el pedido de Reinel Andrés Sánchez (galón, oficina Interrapidísimo Marinilla, Antioquia), id 8040882; faltaban departamento y dirección. Robinso Castilla sigue en espera (ya se subió una vez; ciudad «Subidas de Ocaña» por confirmar).
 - 2026-11-21 8:50 a. m.: subido el pedido de 321 510 5148 (se quitó el obsequio del resumen), id 8041937.
+- 2026-11-21 9:20 a. m.: subido el pedido de 302 329 6007 (se quitó el obsequio del resumen), id 8043033.
