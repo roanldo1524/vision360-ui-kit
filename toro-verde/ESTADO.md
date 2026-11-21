@@ -586,3 +586,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-21 10:50 a. m.: subido el pedido de 321 408 0385 (Río Blanco, Tolima; se quitó el obsequio), id 8046243.
 - 2026-11-21 11:50 a. m.: subido el pedido de 314 416 8562 (se quitó el obsequio), id 8048315.
 - 2026-11-21 12:50 p. m.: subido el pedido de 321 610 3962 (se quitó el obsequio), id 8050180.
+- 2026-11-21 2:40 p. m.: bot con regla nueva «02 - VENTA AGRESIVA» (campo 456432): dolor primero, costo de no hacer nada, «no paga nada por adelantado», respuestas cortas a 6 objeciones y cierre asumido. Sin descuentos por iniciativa propia, con la dosis obligatoria. Copia anterior en botf/456432_antes_agresivo_*.txt (scratchpad).
