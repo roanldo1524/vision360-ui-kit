@@ -585,3 +585,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-21 10:15 a. m.: casino enviado a 266 tibios. Se arregló un error que dejaba el envío en 0: Lucid da la hora del último mensaje en milisegundos y el chequeo «escribió hace menos de 6 h» la leía como fecha (también en casino_recordar.py). Ventas del casino con 10 %: 3 hoy desde la medianoche ($483.300), 23 en total ($4.115.700).
 - 2026-11-21 10:50 a. m.: subido el pedido de 321 408 0385 (Río Blanco, Tolima; se quitó el obsequio), id 8046243.
 - 2026-11-21 11:50 a. m.: subido el pedido de 314 416 8562 (se quitó el obsequio), id 8048315.
+- 2026-11-21 12:50 p. m.: subido el pedido de 321 610 3962 (se quitó el obsequio), id 8050180.
