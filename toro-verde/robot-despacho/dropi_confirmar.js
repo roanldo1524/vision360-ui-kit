@@ -20,6 +20,14 @@ for(const x of plan.confirmar){if(n>=MAX)break;
   // 2) Historial del cliente (cuida la efectividad)
   const h=await huella(tel);const gp=(h&&h.global_profile)||{};const lt=gp.lifetime_totals||{};const dev=lt.returned||0,ent=lt.delivered||0;
   if(/riesgosa|cr[ií]tica/i.test(gp.risk_label||'')||(dev>=2&&dev>=ent))motivos.push(`cliente devuelve (${ent} entregados, ${dev} devueltos): pedir abono o llamar`);
+  // 2b) Transportadora con la que el cliente SÍ recibe (historial por transportadora, todas las tiendas)
+  const TR=JSON.parse(fs.readFileSync('/tmp/dropi/transportadoras.json'));const ca=(h&&h.context_analysis)||{};const hc={};
+  for(const sec of [ca.my_shop||{},ca.other_shops||{}])for(const k of (sec.by_courier||[])){const z=hc[k.courier_id]||(hc[k.courier_id]={d:0,r:0});z.d+=k.delivered||0;z.r+=k.returned||0}
+  const cur=(o.distribution_company||{}).id;const act=hc[cur]||{d:0,r:0};
+  let mejor=null;for(const id in hc){const z=hc[id];if(+id===cur)continue;if(z.d>0&&z.r===0&&(!mejor||z.d>hc[mejor].d))mejor=id}
+  const oficina=/oficina|reclama|interrap/.test(dir);
+  if(act.r>0&&act.r>=act.d){ if(mejor&&!oficina)motivos.push(`con ${TR[cur]||cur} devuelve (${act.d} entregas, ${act.r} devoluciones) pero con ${TR[mejor]} recibe (${hc[mejor].d} entregas): cambiar a ${TR[mejor]}`); else motivos.push(`con ${TR[cur]||cur} devuelve (${act.d} entregas, ${act.r} devoluciones)`)}
+  else if(!oficina&&mejor&&act.d===0&&hc[mejor].d>=3)log.push(['SUGERENCIA',x.id,`nunca ha recibido con ${TR[cur]||cur}; con ${TR[mejor]} recibe siempre (${hc[mejor].d} entregas)`]);
   // 3) Otro pedido abierto del mismo teléfono en Dropi
   const q=`/orders/myorders/v2?exportAs=orderByRow&orderBy=id&orderDirection=desc&result_number=20&start=0&textToSearch=${tel}&status=null&supplier_id=false&user_id=1024715&from=${f(hace)}&until=${f(hoy)}&filter_date_by=FECHA%20DE%20CREADO`;
   const otros=((await call('GET',q)).j||{}).objects||[];
