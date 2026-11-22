@@ -29,6 +29,24 @@ NO = re.compile(r'\b(no tengo (ahora|plata|dinero)|ya no (lo )?(quiero|necesito)
 SI = re.compile(r'(gracias por confirmar tu pedido|procederemos a gestionar y subir tu pedido)', re.I)
 SI_CLIENTE = re.compile(r'^Usuario \([^)]*\):\s*(confirmar pedido|s[ií]\b|si,? es correcto|es correcto|correcto|confirmo|listo|ok\b|dale|de una|m[aá]nd(e|al)o)', re.I | re.M)
 
+
+# Ronald 21-11 (no negociable): transportadora que pide el cliente, pedidos de Shopify y carritos recuperados.
+TRANS_CLIENTE = re.compile(r'(?:por|con|en|transportadora|empresa|mensajer[ií]a)\s+(?:la\s+de\s+|de\s+)?(env[ií]a|interrap\w*|inter\b|servientrega|coordinadora|tcc|domina)', re.I)
+def trans_pedida(usuario):
+    m = list(TRANS_CLIENTE.finditer(usuario))
+    if not m: return ''
+    x = m[-1].group(1).lower()
+    return 'ENVIA' if x.startswith('env') else 'INTERRAPIDISIMO' if x.startswith('inter') else x.upper()
+def marcas(c):
+    try: tg = get(f'/contacts/{c}/tags'); tg = tg.get('data', tg) if isinstance(tg, dict) else tg
+    except Exception: tg = []
+    nombres = [str(x.get('name', '')) for x in tg if isinstance(x, dict)]
+    shop = any(n in ('Shopify', 'Subido Shopify', 'SHOPIFY_WEBHOOK') for n in nombres) or bool(campo(c, '448359'))
+    rec = campo(c, '731835')
+    carrito = any('carrito' in n.lower() for n in nombres) or bool(re.search(r's[ií]|true|1|lograd', rec or '', re.I))
+    return shop, carrito
+def confirmo_boton(t): return bool(re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) or SI.search(t))
+
 ops = []; o = 0
 while o < 30000:
     d = get(f'/pipelines/705299/opportunities?limit=100&offset={o}'); d = d.get('data', d); ops += d
@@ -77,7 +95,9 @@ for c, lst in por_contacto.items():
     valor_chat = re.sub(r'[^\d]', '', vt.group(1)) if vt else ''
     if prod_chat and p['Productos'] and prod_chat.upper().replace('Ó','O').split('PRESENTACION')[1:] != p['Productos'].upper().replace('Ó','O').split('PRESENTACION')[1:]:
         pass
-    filas.append({'contacto': c, 'nombre': (p['Nombre'] + ' ' + p['Apellido']).strip(), 'ciudad': f"{p['Ciudad']} ({p['Departamento']})",
+    es_shop, carrito = marcas(c)
+    if es_shop and not confirmo_boton(t) and not any('CONFIRMAR PEDIDO' in m for m in motivos): motivos.append('pedido de Shopify: el cliente no ha tocado «CONFIRMAR PEDIDO» en el chat')
+    filas.append({'contacto': c, 'shopify': es_shop, 'carrito': carrito, 'trans_cliente': trans_pedida(usuario), 'nombre': (p['Nombre'] + ' ' + p['Apellido']).strip(), 'ciudad': f"{p['Ciudad']} ({p['Departamento']})",
                   'producto': (prod_chat or p['Productos'])[:120], 'valor': (valor_chat or p['Valor total']), 'producto_lucid': p['Productos'][:120], 'valor_lucid': p['Valor total'], 'entrega': 'Oficina Interrapidísimo' if oficina else 'Domicilio',
                   'transportadora': 'INTERRAPIDISIMO' if oficina else 'la que más entregue en el municipio', 'id_lucidsales': re.findall(r'"id":"?(\d+)', msg)[:1],
                   'decision': 'POR CANCELAR' if motivos else ('REVISAR PAGO' if pago_previo else 'SALE'), 'motivos': motivos or (['pago anticipado (transferencia o Addi): confirmar que la plata llegó'] if pago_previo else [])})
@@ -98,7 +118,8 @@ if '--contactos' in sys.argv:
         confirmo = re.search(r'^Usuario \([^)]*\):\s*(confirmar pedido|s[ií]\b|si,? es correcto|es correcto|correcto|confirmo)', t, re.I | re.M) or SI.search(t)
         if not confirmo: motivos.append('pedido de la página: el cliente aún no confirma en el chat (no tocó «CONFIRMAR PEDIDO» ni dijo sí)')
         if re.search(r'reclam|recog|me (mandan|env[ií]an) (el )?c[oó]digo|en la oficina', usuario, re.I): motivos.append('en el chat habla de reclamar en oficina: revisar la dirección')
-        filas.append({'contacto': c, 'nombre': info.get('first_name') or '', 'ciudad': '', 'producto': '', 'valor': '', 'producto_lucid': '', 'valor_lucid': '',
+        es_shop, carrito = marcas(c)
+        filas.append({'contacto': c, 'shopify': es_shop, 'carrito': carrito, 'trans_cliente': trans_pedida(usuario), 'nombre': info.get('first_name') or '', 'ciudad': '', 'producto': '', 'valor': '', 'producto_lucid': '', 'valor_lucid': '',
                       'entrega': '', 'transportadora': '', 'id_lucidsales': [], 'origen': 'pagina', 'decision': 'POR CANCELAR' if motivos else 'SALE', 'motivos': motivos})
 json.dump(filas, open('robot/decision.json', 'w'), ensure_ascii=False, indent=1)
 sale = [f for f in filas if f['decision'] == 'SALE']; can = [f for f in filas if f['decision'] != 'SALE']

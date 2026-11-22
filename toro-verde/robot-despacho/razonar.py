@@ -4,13 +4,13 @@
 #  3) Precio: el que se negoció en el chat (si Dropi tiene otro, se edita al del chat).
 #  4) Chat: intención de compra confirmada, sin arrepentimiento, sin pago por adelantado sin validar.
 #  5) Producto, presentación y cantidad: los que pidió el cliente.
-#  6) Flete mayor a $27.000: no se confirma, revisión humana.
+#  6) Flete mayor a $30.000: no se confirma, revisión humana.
 import json, re
 TR = {int(k): v for k, v in json.load(open('/tmp/dropi/transportadoras.json')).items()}
 UI = {'INTERRAPIDISIMO': 'Interrapidisimo', 'ENVIA': 'Envia', 'COORDINADORA': 'Coordinadora', 'SERVIENTREGA': 'Servientrega', 'TCC': 'Tcc', 'DOMINA': 'Domina', 'VELOCES': 'Veloces'}
 PRECIOS = {99000, 169000, 269000, 89100, 152100, 242100, 995000, 895500}
 LITROS = {'LITRO': 1, 'GALON': 4, 'POMA': 20, '2 LITROS': 2}
-FLETE_MAX = 27000
+FLETE_MAX = 30000  # Ronald 21-11: más de $30.000 de envío → revisión humana
 det = json.load(open('/tmp/dropi/detalle.json'))
 luc = {f['contacto']: f for f in json.load(open('robot/decision.json'))}
 
@@ -73,7 +73,16 @@ for d in det:
     # La que más entregas tiene para este cliente, solo entre las que recibe más del 50 % (Ronald 21-11: «la que tiene más entregas»)
     buenas = [(z[0], tasa(z), i) for i, z in hc.items() if z[0] > 0 and tasa(z) > 0.5 and TR.get(i) in UI]
     mejor = max(buenas) if buenas else None
-    if oficina:
+    tc = (f or {}).get('trans_cliente') or ''
+    if tc:
+        # Ronald 21-11 (no negociable): si el cliente dijo con qué transportadora, va por esa.
+        idc = {'ENVIA': 2, 'INTERRAPIDISIMO': 3}.get(tc)
+        zc = hc.get(idc, [0, 0]) if idc else [0, 0]
+        if not idc: motivos.append(f'el cliente pidió la transportadora {tc}: revisarlo a mano')
+        elif oficina and tc != 'INTERRAPIDISIMO': motivos.append('el cliente pidió Envía pero la dirección es de oficina Interrapidísimo: preguntar')
+        elif sum(zc) and tasa(zc) <= 0.5: motivos.append(f'el cliente pidió {tc} pero con esa recibe solo {zc[0]} de {sum(zc)}')
+        elif idc != d['dc'] and not motivos: editar['transportadora'] = UI[TR[idc]]
+    elif oficina:
         if sum(act) and tasa(act) <= 0.5: motivos.append(f'es para oficina de Interrapidísimo y con Interrapidísimo recibe solo {act[0]} de {sum(act)}')
     # Ronald 21-11: si recibe muy bien con las dos (Envía e Interrapidísimo: 2+ entregas y 80 %+ con cada una), va por la más barata.
     elif all(hc.get(i, [0, 0])[0] >= 2 and tasa(hc[i]) >= 0.8 for i in (2, 3)):
@@ -85,7 +94,7 @@ for d in det:
         editar['transportadora'] = 'BARATA'
     elif sum(act) and tasa(act) <= 0.5: motivos.append(f'con {TR.get(d["dc"])} devuelve y no hay otra transportadora con buen historial')
     # 6) Flete
-    if d['flete'] > FLETE_MAX and 'transportadora' not in editar: motivos.append(f'flete ${d["flete"]:,.0f} mayor a $27.000'.replace(',', '.'))
+    if d['flete'] > FLETE_MAX and 'transportadora' not in editar: motivos.append(f'flete ${d["flete"]:,.0f} mayor a $30.000'.replace(',', '.'))
     if motivos: acc.append({'id': d['id'], 'accion': 'REVISAR', 'motivo': '; '.join(motivos), 'nombre': d['name']})
     elif editar: acc.append({'id': d['id'], 'accion': 'EDITAR_Y_CONFIRMAR', 'editar': editar, 'nombre': d['name'], 'dc': UI.get(TR.get(d['dc'], ''), '')})
     else: acc.append({'id': d['id'], 'accion': 'CONFIRMAR', 'nombre': d['name']})
