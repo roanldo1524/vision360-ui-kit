@@ -3,6 +3,11 @@
 cd "$(dirname "$0")/.." || exit 1
 (cd /tmp/dropi && node detalle.js) | tail -1 | tee /tmp/dropi/ultimo.txt
 # Si Dropi cerró la sesión, vuelve a entrar solo con DU/DP del entorno (Ronald 22-11) y lo intenta una vez más.
+# Si la sesión venció a mitad (los pedidos llegan sin cantidad), también se vuelve a entrar.
+python3 -I -c "
+import json,sys
+d=json.load(open('/tmp/dropi/detalle.json'))
+sys.exit(1 if d and all(any(i.get('q') is None for i in x['items']) for x in d) else 0)" || echo SESION_DROPI_CAIDA >> /tmp/dropi/ultimo.txt
 if grep -q SESION_DROPI_CAIDA /tmp/dropi/ultimo.txt; then
   (cd /tmp/dropi && node entrar.js </dev/null) | tail -1
   (cd /tmp/dropi && node detalle.js) | tail -1 | tee /tmp/dropi/ultimo.txt

@@ -54,7 +54,7 @@ for d in det:
     if abiertos: motivos.append('tiene otro pedido abierto en Dropi: ' + ', '.join(f"{o['id']} ({o['status']})" for o in abiertos))
     # 5) Producto y cantidad
     if f:
-        lc = litros_chat(f.get('producto', '')); ld = sum(i['q'] * next((v for k, v in LITROS.items() if k in (i['pres'] or '').upper()), 0) for i in d['items'])
+        lc = litros_chat(f.get('producto', '')); ld = sum((i['q'] or 0) * next((v for k, v in LITROS.items() if k in (i['pres'] or '').upper()), 0) for i in d['items'])
         if lc and ld and lc != ld: motivos.append(f'producto distinto: en el chat {lc} L, en Dropi {ld} L')
     if f and f.get('origen') == 'pagina' and round(d['total']) not in PRECIOS: motivos.append(f'pedido de la página con precio raro: {d["total"]:.0f}')
     # Lo que el agente ya frenó al leer el chat no se vuelve a proponer (hasta que una persona lo resuelva)
