@@ -2,7 +2,12 @@
 # Robot de despacho (v2): lee Dropi → razona con el chat de Lucid y las reglas de Ronald → edita (precio/transportadora) → confirma → etiqueta lo demás.
 cd "$(dirname "$0")/.." || exit 1
 (cd /tmp/dropi && node detalle.js) | tail -1 | tee /tmp/dropi/ultimo.txt
-grep -q SESION_DROPI_CAIDA /tmp/dropi/ultimo.txt && { echo "SESION_DROPI_CAIDA"; exit 2; }
+# Si Dropi cerró la sesión, vuelve a entrar solo con DU/DP del entorno (Ronald 22-11) y lo intenta una vez más.
+if grep -q SESION_DROPI_CAIDA /tmp/dropi/ultimo.txt; then
+  (cd /tmp/dropi && node entrar.js </dev/null) | tail -1
+  (cd /tmp/dropi && node detalle.js) | tail -1 | tee /tmp/dropi/ultimo.txt
+  grep -q SESION_DROPI_CAIDA /tmp/dropi/ultimo.txt && { echo "SESION_DROPI_CAIDA"; exit 2; }
+fi
 python3 -I -c "import json;open('robot/contactos_dropi.txt','w').write('\n'.join('57'+d['phone'] for d in json.load(open('/tmp/dropi/detalle.json'))))"
 timeout 1200 python3 -W ignore -I robot/decidir.py --contactos robot/contactos_dropi.txt | head -1
 python3 -I robot/razonar.py | head -1
