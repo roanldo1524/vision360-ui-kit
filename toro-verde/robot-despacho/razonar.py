@@ -1,3 +1,4 @@
+import os
 # Paso 2: decide pedido por pedido como lo haría una persona. Reglas NO NEGOCIABLES de Ronald (21-11):
 #  1) Solo se confirma si el cliente recibe MÁS del 50 % (historial Dropi, todas las tiendas). Sin historial = se confirma.
 #  2) Transportadora: la que mejor recibe ese cliente (oficina = siempre Interrapidísimo).
@@ -56,6 +57,9 @@ for d in det:
         lc = litros_chat(f.get('producto', '')); ld = sum(i['q'] * next((v for k, v in LITROS.items() if k in (i['pres'] or '').upper()), 0) for i in d['items'])
         if lc and ld and lc != ld: motivos.append(f'producto distinto: en el chat {lc} L, en Dropi {ld} L')
     if f and f.get('origen') == 'pagina' and round(d['total']) not in PRECIOS: motivos.append(f'pedido de la página con precio raro: {d["total"]:.0f}')
+    # Lo que el agente ya frenó al leer el chat no se vuelve a proponer (hasta que una persona lo resuelva)
+    _V = '/tmp/dropi/vetos.json'
+    if os.path.exists(_V) and str(d['id']) in json.load(open(_V)): motivos.append('revisión del agente: ' + json.load(open(_V))[str(d['id'])])
     # Regla de Ronald: el descuento (10 %) es solo para quien nunca ha comprado. Si ya recibió pedidos nuestros, precio normal.
     DESC = {89100, 152100, 242100, 895500}
     ms = ((d.get('huella') or {}).get('context_analysis') or {}).get('my_shop') or {}
