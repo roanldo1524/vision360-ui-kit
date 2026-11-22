@@ -23,4 +23,6 @@ plan={'confirmar':[{'id':x['id'],'n':x['nombre']} for x in a if x['accion']=='CO
 json.dump(plan,open('/tmp/dropi/plan.json','w'),ensure_ascii=False);json.dump(sorted(ya|{x['id'] for x in a if x['accion']=='REVISAR'}),open(E,'w'))
 print('PLAN confirmar',len(plan['confirmar']),'etiquetar_nuevos',len(plan['etiquetar']),'revisar_total',len(plan['revisar_total']))"
 python3 -I robot/aclarar.py
+# Dirección clara: quita el barrio repetido y le pone «BARRIO» antes de confirmar (no reemplaza el pedido)
+python3 -I robot/limpiar_dirs.py | while IFS=$'\t' read id dir; do (cd /tmp/dropi && node editar.js "$id" "$(python3 -c 'import json,sys;print(json.dumps({"dir":sys.argv[1]}))' "$dir")" 2>&1 | grep -c '^PUT 200' | sed "s/^/DIR_LIMPIA $id /"); done
 (cd /tmp/dropi && node confirmar.js) | awk -F' \\| ' '{print $1}' | sort | uniq -c
