@@ -35,8 +35,9 @@ while o < 30000:
 subidos = [r for r in ops if r['created_at'] >= DESDE and r['stage']['name'] == 'Pedidos Subidos']
 if '--contactos' in sys.argv:  # solo estos contactos (p. ej. los pendientes de confirmar en Dropi), con todos sus pedidos de 7 días
     quiero = set(open(sys.argv[sys.argv.index('--contactos') + 1]).read().split())
+    if os.path.exists('/tmp/dropi/extra_contactos.txt'): quiero |= set(open('/tmp/dropi/extra_contactos.txt').read().split())
     hace7 = (datetime.datetime.utcnow() - datetime.timedelta(days=7)).strftime('%Y-%m-%d %H:%M')
-    subidos = [r for r in ops if str(r['contact_id']) in quiero and r['created_at'] >= hace7 and r['stage']['name'] in ('Pedidos Subidos', 'Corregido - Por Subir')]
+    subidos = [r for r in ops if str(r['contact_id']) in quiero and r['created_at'] >= hace7]
 por_contacto = {}
 for r in sorted(subidos, key=lambda r: r['created_at']):
     por_contacto.setdefault(str(r['contact_id']), []).append(r)
