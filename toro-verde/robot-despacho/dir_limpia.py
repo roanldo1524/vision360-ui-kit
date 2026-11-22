@@ -3,7 +3,11 @@ import re
 ETIQ = r'\b(barrio|br|b/|bario|conjunto|conj|urbanizaci[oó]n|urb|vereda|vda|edificio|ed|torre|apto|apartamento|manzana|mz|sector|corregimiento|finca|casa)\b'
 def limpiar(dir_dropi, colonia=''):
     d = re.sub(r'\s+', ' ', (dir_dropi or '')).strip(' ,')
-    if re.search(r'oficina|reclama', d, re.I): return None
+    if re.search(r'oficina|reclama', d, re.I):
+        # Oficina: solo «RECLAMA EN OFICINA INTERRAPIDÍSIMO», sin «No aplica» ni repetidos
+        if re.search(r'reclama\w* en (la )?oficina\s+interrap', d, re.I) and re.search(r'no aplica|\bn/a\b|ninguno|,\s*$', d, re.I):
+            return 'RECLAMA EN OFICINA INTERRAPIDÍSIMO' if d.upper() != 'RECLAMA EN OFICINA INTERRAPIDÍSIMO' else None
+        return None
     # barrio repetido al final: «… SAN ROQUE SAN ROQUE» o «… X, X»
     m = re.search(r'^(.*?)[ ,]+((?:[A-Za-zÁÉÍÓÚÑáéíóúñ0-9]+ ?){1,5}?)[ ,]+\2$', d, re.I)
     base, barrio = (m.group(1), m.group(2)) if m else (d, '')
