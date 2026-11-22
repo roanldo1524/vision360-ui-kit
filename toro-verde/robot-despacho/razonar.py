@@ -5,13 +5,21 @@ import os
 #  3) Precio: el que se negoció en el chat (si Dropi tiene otro, se edita al del chat).
 #  4) Chat: intención de compra confirmada, sin arrepentimiento, sin pago por adelantado sin validar.
 #  5) Producto, presentación y cantidad: los que pidió el cliente.
-#  6) Flete mayor a $30.000: no se confirma, revisión humana.
+#  6) Flete mayor al tope (1 L $25.000, 2 L $29.000, galón $35.000, lo demás $30.000; Ronald 22-11): no se confirma, revisión humana.
 import json, re
 TR = {int(k): v for k, v in json.load(open('/tmp/dropi/transportadoras.json')).items()}
 UI = {'INTERRAPIDISIMO': 'Interrapidisimo', 'ENVIA': 'Envia', 'COORDINADORA': 'Coordinadora', 'SERVIENTREGA': 'Servientrega', 'TCC': 'Tcc', 'DOMINA': 'Domina', 'VELOCES': 'Veloces'}
 PRECIOS = {99000, 169000, 269000, 89100, 152100, 242100, 995000, 895500}
 LITROS = {'LITRO': 1, 'GALON': 4, 'POMA': 20, '2 LITROS': 2}
 FLETE_MAX = 30000  # Ronald 21-11: más de $30.000 de envío → revisión humana
+FLETE_MAX_GALON = 35000  # Ronald 22-11: si el pedido es de galón, acepta hasta $35.000
+# Ronald 22-11: tope de envío según lo que lleva el pedido: 1 litro $25.000 · 2 litros $29.000 · galón $35.000 · lo demás $30.000
+def tope_flete(d):
+    pres = [(i['pres'] or '').upper().replace('Ó', 'O') for i in d['items']]
+    if any('POMA' in x for x in pres): return FLETE_MAX
+    if any('GALON' in x for x in pres): return FLETE_MAX_GALON
+    lit = sum(i['q'] * next((v for k, v in LITROS.items() if k in (i['pres'] or '').upper()), 0) for i in d['items'])
+    return {1: 25000, 2: 29000}.get(lit, FLETE_MAX)
 det = json.load(open('/tmp/dropi/detalle.json'))
 luc = {f['contacto']: f for f in json.load(open('robot/decision.json'))}
 
@@ -103,7 +111,8 @@ for d in det:
         editar['transportadora'] = 'BARATA'
     elif sum(act) and tasa(act) <= 0.5: motivos.append(f'con {TR.get(d["dc"])} devuelve y no hay otra transportadora con buen historial')
     # 6) Flete
-    if d['flete'] > FLETE_MAX and 'transportadora' not in editar: motivos.append(f'flete ${d["flete"]:,.0f} mayor a $30.000'.replace(',', '.'))
+    tope = tope_flete(d)
+    if d['flete'] > tope and 'transportadora' not in editar: motivos.append(f'flete ${d["flete"]:,.0f} mayor a ${tope:,.0f}'.replace(',', '.'))
     if motivos: acc.append({'id': d['id'], 'accion': 'REVISAR', 'motivo': '; '.join(motivos), 'nombre': d['name']})
     elif editar: acc.append({'id': d['id'], 'accion': 'EDITAR_Y_CONFIRMAR', 'editar': editar, 'nombre': d['name'], 'dc': UI.get(TR.get(d['dc'], ''), '')})
     else: acc.append({'id': d['id'], 'accion': 'CONFIRMAR', 'nombre': d['name']})
