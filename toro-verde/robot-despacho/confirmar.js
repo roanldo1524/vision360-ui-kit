@@ -38,6 +38,7 @@ for(const x of plan.confirmar){if(n>=MAX)break;
   const r=await call('PUT','/orders/myorders/'+x.id,{status:'PENDIENTE'});
   const v=await call('GET','/orders/myorders/'+x.id);const st2=v.j&&v.j.objects&&v.j.objects.status;
   log.push([r.s===200&&r.j&&r.j.isSuccess?'OK':'FALLO',x.id,st2,r.j&&r.j.message]);n++;
+  if(r.s===200&&r.j&&r.j.isSuccess){const t=await call('POST','/tags/createorderstags',{order_id:x.id,tag_id:93483});log.push(['ETIQUETA_CONFIRMADO',x.id,t.s])}
   if(!(r.s===200&&r.j&&r.j.isSuccess)){if(++errs>=3){log.push(['FRENO','3 fallos seguidos']);break}}else errs=0;
   await p.waitForTimeout(1200)}
 if(MAX>=999){for(const t of plan.etiquetar){const r=await call('POST','/tags/createorderstags',{order_id:t.id,tag_id:TAG});log.push(['ETIQUETA',t.id,r.s,r.j&&(r.j.isSuccess??r.j.message)]);await p.waitForTimeout(800)}}

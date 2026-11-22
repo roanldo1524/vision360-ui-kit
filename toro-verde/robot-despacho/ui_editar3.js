@@ -10,7 +10,7 @@ if(PRECIO){const pv=p.locator('xpath=//*[normalize-space(text())="Precio de vent
 if(TRANS){await p.locator(`xpath=//*[normalize-space(text())="${TRANS}"]`).first().click();await p.waitForTimeout(3000)}
 await p.screenshot({path:'/tmp/dropi/e3.png'});
 const resumen=await p.evaluate(()=>(document.body.innerText.split('Resumen de la orden:')[1]||''));console.log('RESUMEN',resumen.replace(/\n+/g,' | ').slice(0,400));
-const fl=(resumen.match(/Precio de env[ií]o: \| \$ ([\d.]+)/)||[])[1];const tot=(resumen.match(/Total a recaudar: \| \$ ([\d.]+)/)||[])[1];const nfl=fl?+fl.replace(/\./g,''):0,ntot=tot?+tot.replace(/\./g,''):0;console.log('CHEQUEO flete',nfl,'total',ntot);
+const rz=resumen.replace(/\n+/g," | ").replace(/\s*\|\s*/g," | ");const fl=(rz.match(/Precio de env[ií]o:\D*([\d.]+)/)||[])[1];const tot=(rz.match(/Total a recaudar:\D*([\d.]+)/)||[])[1];const nfl=fl?+fl.replace(/\./g,''):0,ntot=tot?+tot.replace(/\./g,''):0;console.log('CHEQUEO flete',nfl,'total',ntot);
 let ok=nfl>0&&nfl<=27000;if(PRECIO&&ntot!==+PRECIO*1)ok=ok&&true;if(!ok){console.log('NO_GUARDO flete o total fuera de regla');}
 if(GUARDAR&&ok){await p.locator('button:has-text("Actualizar Orden")').last().click();await p.waitForTimeout(2500);await p.getByRole('button',{name:'Actualizar',exact:true}).last().click();await p.waitForTimeout(15000);await p.screenshot({path:'/tmp/dropi/e4.png'});console.log('TRAS GUARDAR',(await p.evaluate(()=>document.body.innerText)).replace(/\n+/g,' | ').slice(0,600))}
 apis.forEach(a=>console.log('API',a));await b.close()})();
