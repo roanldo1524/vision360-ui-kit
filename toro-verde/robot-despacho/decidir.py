@@ -68,8 +68,8 @@ for c, lst in por_contacto.items():
                   for l in re.split(r'\n(?=(?:Yo|Usuario) \()', tras) if l.startswith('Usuario'))
     if not (SI.search(t) or dijo_si or SI_CLIENTE.search(tras or '')): motivos.append('no veo la confirmación del cliente en el chat')
     if re.search(r'confirmacion_landing|CONFIRMAR PEDIDO', t) and not re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) and not SI.search(t): motivos.append('pedido de la página: el cliente no ha tocado «CONFIRMAR PEDIDO»')
-    pago_previo = re.search(r'addi|transferencia|consignaci|comprobante|sin recaudo|bancolombia', p['Método de pago'] + ' ' + usuario + ' ' + (tras or ''), re.I) and not re.search(r'contra ?entrega|con recaudo', p['Método de pago'], re.I)
-    if pago_previo and motivos == ['no veo la confirmación del cliente en el chat']: motivos = []  # quien paga por adelantado ya confirmó con el pago
+    # Ronald 21-11 (Evidalio): si el cliente pide Addi, cuotas o transferencia NUNCA se confirma solo, aunque Lucid diga «contra entrega».
+    pago_previo = re.search(r'addi|cuotas|transferencia|consignaci|comprobante|sin recaudo|bancolombia|nequi|daviplata|no (lo )?pago (en )?contra ?entrega', p['Método de pago'] + ' ' + usuario + ' ' + (tras or ''), re.I)
     # Último resumen que el cliente vio y confirmó en el chat (manda sobre el campo de Lucid, que a veces queda viejo)
     ult = t[t.rfind('Resumen de tu pedido'):] if 'Resumen de tu pedido' in t else ''
     prod_chat = ' '.join(f'({q} x Presentacion {pr.strip()})' for q, pr in re.findall(r'(\d+)\s*x[^\n]*?Presentaci[oó]n:?\s*([A-Za-zÁÉÍÓÚ0-9 ]+)', ult[:600]))
