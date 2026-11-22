@@ -4,7 +4,7 @@
 import json, os, time, datetime, urllib.request
 os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 K = open('lucidbot.key').read().strip(); API = 'https://panel.lucidbot.co/api'
-EQUIPO = ['573218940042', '573234209080']
+EQUIPO = ['573218940042', '573234209080', '573206357423']  # Ronald, Leidy, Karen
 FLUJO_PLANTILLA = '1753286864407'
 REG = '/tmp/dropi/avisos_equipo.json'; reg = json.load(open(REG)) if os.path.exists(REG) else {}
 def get(p): r = json.loads(urllib.request.urlopen(urllib.request.Request(API + p, headers={'X-ACCESS-TOKEN': K}), timeout=40).read()); return r.get('data', r) if isinstance(r, dict) else r
