@@ -76,11 +76,14 @@ for d in det:
         if sum(act) and tasa(act) <= 0.5: motivos.append(f'es para oficina de Interrapidísimo y con Interrapidísimo recibe solo {act[0]} de {sum(act)}')
     elif mejor and mejor[2] != d['dc'] and mejor[0] > act[0]:
         if not motivos: editar['transportadora'] = UI[TR[mejor[2]]]
+    elif not hc and not motivos:
+        # Sin historial de entregas y a domicilio: la más barata entre Envía e Interrapidísimo (Ronald 21-11)
+        editar['transportadora'] = 'BARATA'
     elif sum(act) and tasa(act) <= 0.5: motivos.append(f'con {TR.get(d["dc"])} devuelve y no hay otra transportadora con buen historial')
     # 6) Flete
     if d['flete'] > FLETE_MAX and 'transportadora' not in editar: motivos.append(f'flete ${d["flete"]:,.0f} mayor a $27.000'.replace(',', '.'))
     if motivos: acc.append({'id': d['id'], 'accion': 'REVISAR', 'motivo': '; '.join(motivos), 'nombre': d['name']})
-    elif editar: acc.append({'id': d['id'], 'accion': 'EDITAR_Y_CONFIRMAR', 'editar': editar, 'nombre': d['name']})
+    elif editar: acc.append({'id': d['id'], 'accion': 'EDITAR_Y_CONFIRMAR', 'editar': editar, 'nombre': d['name'], 'dc': UI.get(TR.get(d['dc'], ''), '')})
     else: acc.append({'id': d['id'], 'accion': 'CONFIRMAR', 'nombre': d['name']})
 json.dump(acc, open('/tmp/dropi/acciones.json', 'w'), ensure_ascii=False)
 from collections import Counter
