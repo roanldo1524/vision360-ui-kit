@@ -29,7 +29,7 @@ a=json.load(open('/tmp/dropi/acciones.json'));E='/tmp/dropi/etiquetados.json'
 ya=set(json.load(open(E))) if os.path.exists(E) else set()
 sc=set(int(i) for i in open('/tmp/dropi/sin_cambio.txt').read().split()) if os.path.exists('/tmp/dropi/sin_cambio.txt') else set()
 plan={'confirmar':[{'id':x['id'],'n':x['nombre']} for x in a if x['accion']=='CONFIRMAR' or (x['accion']=='EDITAR_Y_CONFIRMAR' and x['id'] in sc and not x['editar'].get('precio'))],'etiquetar':[{'id':x['id'],'motivo':x['motivo']} for x in a if x['accion']=='REVISAR' and x['id'] not in ya],'revisar_total':[x for x in a if x['accion']=='REVISAR']}
-json.dump(plan,open('/tmp/dropi/plan.json','w'),ensure_ascii=False);json.dump(sorted(ya|{x['id'] for x in a if x['accion']=='REVISAR'}),open(E,'w'))
+json.dump(plan,open('/tmp/dropi/plan.json','w'),ensure_ascii=False)
 print('PLAN confirmar',len(plan['confirmar']),'etiquetar_nuevos',len(plan['etiquetar']),'revisar_total',len(plan['revisar_total']))"
 python3 -I robot/aclarar.py
 python3 -I robot/recordar_confirmar.py
@@ -52,6 +52,10 @@ if [ -n "$ROBOT_PAUSA" ]; then
   bash robot/corregir_confirmados.sh; python3 -I robot/fichas.py; rm -f /tmp/dropi/vetados.txt; echo ESPERA_REVISION_DEL_AGENTE; exit 0
 fi
 (cd /tmp/dropi && node confirmar.js) | awk -F' \\| ' '{print $1}' | sort | uniq -c
+python3 -I -c "
+import json,os
+E='/tmp/dropi/etiquetados.json';ya=set(json.load(open(E))) if os.path.exists(E) else set()
+p=json.load(open('/tmp/dropi/plan.json'));json.dump(sorted(ya|{x['id'] for x in p.get('etiquetar',[])}),open(E,'w'))"
 python3 -I robot/avisar_equipo.py
 bash robot/corregir_confirmados.sh
 # Ronald 21-11: «cada vez que cambias de transportadora debes volver a darle confirmar».

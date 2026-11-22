@@ -56,6 +56,11 @@ for d in det:
         lc = litros_chat(f.get('producto', '')); ld = sum(i['q'] * next((v for k, v in LITROS.items() if k in (i['pres'] or '').upper()), 0) for i in d['items'])
         if lc and ld and lc != ld: motivos.append(f'producto distinto: en el chat {lc} L, en Dropi {ld} L')
     if f and f.get('origen') == 'pagina' and round(d['total']) not in PRECIOS: motivos.append(f'pedido de la página con precio raro: {d["total"]:.0f}')
+    # Regla de Ronald: el descuento (10 %) es solo para quien nunca ha comprado. Si ya recibió pedidos nuestros, precio normal.
+    DESC = {89100, 152100, 242100, 895500}
+    ms = ((d.get('huella') or {}).get('context_analysis') or {}).get('my_shop') or {}
+    ya_compro = sum(k.get('delivered', 0) for k in ms.get('by_courier') or []) or ms.get('period_delivered', 0)
+    if round(d['total']) in DESC and ya_compro: motivos.append(f'ya nos había comprado ({ya_compro} entregados) y lleva precio con descuento ${d["total"]:,.0f}: decidir el precio'.replace(',', '.'))
     # 3) Precio del chat
     if f and not motivos:
         try: vc = float(re.sub(r'[^\d.]', '', f['valor']) or 0)
