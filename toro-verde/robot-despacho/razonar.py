@@ -32,7 +32,8 @@ for d in det:
     tiene_via = bool(re.search(r'\b(calle|cl|cll|carrera|cra|cr|kr|kra|carera|avenida|av|diagonal|dg|diag|transversal|tv|trans|manzana|mz|mza|vereda|vda|finca|corregimiento|barrio|km|kil[oó]metro|sector|lote|casa)\b', dirx)) and bool(re.search(r'\d', dirx) or re.search(r'vereda|finca|corregimiento|sector', dirx))
     if re.search(r'servientrega|coordinadora|\benv[ií]a\b|\btcc\b|deprisa|\b472\b|domina|veloces', dirx): motivos.append(f'la dirección nombra otra transportadora (solo enviamos a oficinas de Interrapidísimo): «{(d["dir"] or "").strip()[:70]}»')
     if oficina and not es_oficina_std: motivos.append(f'dirección rara para oficina: «{d["dir"].strip()[:70]}»')
-    elif not oficina and not re.search(r'\d', dirx): motivos.append(f'dirección sin número, no es clara: «{(d["dir"] or "").strip()[:70]}»')
+    elif not oficina and not (re.search(r'#\s*\d+|\bn[oº°]\.?\s*\d+|\d+\s*[a-z]?\s*-\s*\d+|\bmz[a]?\.?\s*\w+\s*(cs|casa|lt|lote)\.?\s*\d+|\b(km|kil[oó]metro)\s*\d+', dirx) or re.search(r'vereda|finca|corregimiento|v[ií]a a |sector|parcela|hacienda', dirx)):
+        motivos.append(f'dirección sin número de puerta, no es clara: «{(d["dir"] or "").strip()[:70]}»')
     elif not oficina and not tiene_via: motivos.append(f'dirección incompleta o rara: «{(d["dir"] or "").strip()[:70]}»')
     nom = ((d.get('name') or '') + ' ' + (d.get('surname') or '')).lower()
     pal = re.findall(r'[a-záéíóúñ]+', nom)

@@ -22,4 +22,5 @@ ya=set(json.load(open(E))) if os.path.exists(E) else set()
 plan={'confirmar':[{'id':x['id'],'n':x['nombre']} for x in a if x['accion']=='CONFIRMAR'],'etiquetar':[{'id':x['id'],'motivo':x['motivo']} for x in a if x['accion']=='REVISAR' and x['id'] not in ya],'revisar_total':[x for x in a if x['accion']=='REVISAR']}
 json.dump(plan,open('/tmp/dropi/plan.json','w'),ensure_ascii=False);json.dump(sorted(ya|{x['id'] for x in a if x['accion']=='REVISAR'}),open(E,'w'))
 print('PLAN confirmar',len(plan['confirmar']),'etiquetar_nuevos',len(plan['etiquetar']),'revisar_total',len(plan['revisar_total']))"
+python3 -I robot/aclarar.py
 (cd /tmp/dropi && node confirmar.js) | awk -F' \\| ' '{print $1}' | sort | uniq -c
