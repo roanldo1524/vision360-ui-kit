@@ -39,6 +39,12 @@ for d in json.load(open('/tmp/dropi/detalle.json')):
 python3 -I robot/limpiar_dirs.py | while IFS=$'\t' read id dir; do (cd /tmp/dropi && node editar.js "$id" "$(python3 -c 'import json,sys;print(json.dumps({"dir":sys.argv[1]}))' "$dir")" </dev/null 2>&1 | grep -c '^PUT 200' | sed "s/^/DIR_LIMPIA $id /"); done
 rm -f /tmp/dropi/sin_cambio.txt
 EDITADOS=$(grep -c "" /tmp/dropi/editados_vuelta.txt 2>/dev/null || echo 0); rm -f /tmp/dropi/editados_vuelta.txt
+# Ronald 21-11: «cerebro izquierdo y derecho». Con ROBOT_PAUSA=1 el robot (reglas) se detiene antes de confirmar:
+# deja las fichas para que Claude lea cada chat como una persona, vete lo dudoso y luego corra robot/confirmar_aprobados.sh.
+if [ -n "$ROBOT_PAUSA" ]; then
+  if [ "${EDITADOS:-0}" -gt 0 ] && [ -z "$ROBOT_SEGUNDA" ]; then echo "SEGUNDA_VUELTA $EDITADOS editados"; sleep 10; ROBOT_SEGUNDA=1 bash "$0"; exit; fi
+  bash robot/corregir_confirmados.sh; python3 -I robot/fichas.py; rm -f /tmp/dropi/vetados.txt; echo ESPERA_REVISION_DEL_AGENTE; exit 0
+fi
 (cd /tmp/dropi && node confirmar.js) | awk -F' \\| ' '{print $1}' | sort | uniq -c
 bash robot/corregir_confirmados.sh
 # Ronald 21-11: «cada vez que cambias de transportadora debes volver a darle confirmar».
