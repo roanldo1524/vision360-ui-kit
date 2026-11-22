@@ -53,6 +53,8 @@ for c, lst in por_contacto.items():
     oficina = bool(re.search(r'oficina|interrapid', (p['Dirección'] + ' ' + p['Notas']), re.I))
     motivos = []
     if en_humano: motivos.append('una persona del equipo está atendiendo este chat (modo humano en Lucid): no lo toco')
+    oficina_chat = re.search(r'reclam|recog|me (mandan|env[ií]an) (el )?c[oó]digo|bajo (a|para)|voy a (la oficina|recogerlo)|en la oficina|interrapid', usuario, re.I)
+    if oficina_chat and not oficina: motivos.append('en el chat habla de reclamarlo/recogerlo pero la dirección es de casa: preguntar si es oficina de Interrapidísimo')
     if len(lst) > 1: motivos.append(f'repetido ({len(lst)} pedidos en Lucid)')
     if NO.search(usuario): motivos.append('el cliente dijo que no: «' + NO.search(usuario).group(0) + '»')
     if not p['Ciudad']: motivos.append('sin ciudad')
