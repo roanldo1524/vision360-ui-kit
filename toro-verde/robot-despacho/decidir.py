@@ -70,8 +70,15 @@ for c, lst in por_contacto.items():
     if re.search(r'confirmacion_landing|CONFIRMAR PEDIDO', t) and not re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) and not SI.search(t): motivos.append('pedido de la página: el cliente no ha tocado «CONFIRMAR PEDIDO»')
     pago_previo = re.search(r'addi|transferencia|consignaci|comprobante|sin recaudo|bancolombia', p['Método de pago'] + ' ' + usuario + ' ' + (tras or ''), re.I) and not re.search(r'contra ?entrega|con recaudo', p['Método de pago'], re.I)
     if pago_previo and motivos == ['no veo la confirmación del cliente en el chat']: motivos = []  # quien paga por adelantado ya confirmó con el pago
+    # Último resumen que el cliente vio y confirmó en el chat (manda sobre el campo de Lucid, que a veces queda viejo)
+    ult = t[t.rfind('Resumen de tu pedido'):] if 'Resumen de tu pedido' in t else ''
+    prod_chat = ' '.join(f'({q} x Presentacion {pr.strip()})' for q, pr in re.findall(r'(\d+)\s*x[^\n]*?Presentaci[oó]n:?\s*([A-Za-zÁÉÍÓÚ0-9 ]+)', ult[:600]))
+    vt = re.search(r'Total pedido:\*?[^\d]*([\d.,]+)', ult[:800])
+    valor_chat = re.sub(r'[^\d]', '', vt.group(1)) if vt else ''
+    if prod_chat and p['Productos'] and prod_chat.upper().replace('Ó','O').split('PRESENTACION')[1:] != p['Productos'].upper().replace('Ó','O').split('PRESENTACION')[1:]:
+        pass
     filas.append({'contacto': c, 'nombre': (p['Nombre'] + ' ' + p['Apellido']).strip(), 'ciudad': f"{p['Ciudad']} ({p['Departamento']})",
-                  'producto': p['Productos'][:70], 'valor': p['Valor total'], 'entrega': 'Oficina Interrapidísimo' if oficina else 'Domicilio',
+                  'producto': (prod_chat or p['Productos'])[:120], 'valor': (valor_chat or p['Valor total']), 'producto_lucid': p['Productos'][:120], 'valor_lucid': p['Valor total'], 'entrega': 'Oficina Interrapidísimo' if oficina else 'Domicilio',
                   'transportadora': 'INTERRAPIDISIMO' if oficina else 'la que más entregue en el municipio', 'id_lucidsales': re.findall(r'"id":"?(\d+)', msg)[:1],
                   'decision': 'POR CANCELAR' if motivos else ('REVISAR PAGO' if pago_previo else 'SALE'), 'motivos': motivos or (['pago anticipado (transferencia o Addi): confirmar que la plata llegó'] if pago_previo else [])})
 json.dump(filas, open('robot/decision.json', 'w'), ensure_ascii=False, indent=1)
