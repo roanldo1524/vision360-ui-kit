@@ -52,6 +52,7 @@ if [ -n "$ROBOT_PAUSA" ]; then
   bash robot/corregir_confirmados.sh; python3 -I robot/fichas.py; rm -f /tmp/dropi/vetados.txt; echo ESPERA_REVISION_DEL_AGENTE; exit 0
 fi
 (cd /tmp/dropi && node confirmar.js) | awk -F' \\| ' '{print $1}' | sort | uniq -c
+python3 -I robot/avisar_equipo.py
 bash robot/corregir_confirmados.sh
 # Ronald 21-11: «cada vez que cambias de transportadora debes volver a darle confirmar».
 # Dropi deja el pedido nuevo en PENDIENTE CONFIRMACION: se vuelve a razonar y se confirma en esta misma vuelta (una sola vez).
