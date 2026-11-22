@@ -75,6 +75,9 @@ for d in det:
     mejor = max(buenas) if buenas else None
     if oficina:
         if sum(act) and tasa(act) <= 0.5: motivos.append(f'es para oficina de Interrapidísimo y con Interrapidísimo recibe solo {act[0]} de {sum(act)}')
+    # Ronald 21-11: si recibe muy bien con las dos (Envía e Interrapidísimo: 2+ entregas y 80 %+ con cada una), va por la más barata.
+    elif all(hc.get(i, [0, 0])[0] >= 2 and tasa(hc[i]) >= 0.8 for i in (2, 3)):
+        if not motivos: editar['transportadora'] = 'BARATA'
     elif mejor and mejor[2] != d['dc'] and mejor[0] > act[0]:
         if not motivos: editar['transportadora'] = UI[TR[mejor[2]]]
     elif not hc and not motivos:
