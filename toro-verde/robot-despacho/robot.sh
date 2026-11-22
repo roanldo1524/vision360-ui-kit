@@ -11,7 +11,10 @@ python3 -I -c "
 import json;a=json.load(open('/tmp/dropi/acciones.json'))
 for x in a:
   if x['accion']=='EDITAR_Y_CONFIRMAR': print(x['id'],x['editar'].get('precio',''),x['editar'].get('transportadora',''))" | while read id precio trans; do
-  (cd /tmp/dropi && node ui_editar3.js "$id" "$precio" "$trans" guardar 2>&1 | grep -E "CHEQUEO|NO_GUARDO|API POST 200 https://api.dropi.co/api/orders/myorders " | cut -c1-160); done
+  r=$(cd /tmp/dropi && node ui_editar3.js "$id" "$precio" "$trans" guardar 2>&1 | grep -E "CHEQUEO|NO_GUARDO|API POST 200 https://api.dropi.co/api/orders/myorders " | cut -c1-160); echo "$r"
+  echo "$r" | grep -q NO_GUARDO && echo "$id" >> /tmp/dropi/no_editados.txt; done
+# Si no se pudo editar (la transportadora no llega allá o el flete pasa de $27.000), va a revisión humana.
+[ -s /tmp/dropi/no_editados.txt ] && (cd /tmp/dropi && sort -u no_editados.txt > ne.txt && node etiq_lote.js ne.txt 93484 && rm -f no_editados.txt)
 python3 -I -c "
 import json,os
 a=json.load(open('/tmp/dropi/acciones.json'));E='/tmp/dropi/etiquetados.json'

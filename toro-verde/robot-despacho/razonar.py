@@ -32,10 +32,13 @@ for d in det:
     tiene_via = bool(re.search(r'\b(calle|cl|cll|carrera|cra|cr|kr|kra|carera|avenida|av|diagonal|dg|diag|transversal|tv|trans|manzana|mz|mza|vereda|vda|finca|corregimiento|barrio|km|kil[oó]metro|sector|lote|casa)\b', dirx)) and bool(re.search(r'\d', dirx) or re.search(r'vereda|finca|corregimiento|sector', dirx))
     if re.search(r'servientrega|coordinadora|\benv[ií]a\b|\btcc\b|deprisa|\b472\b|domina|veloces', dirx): motivos.append(f'la dirección nombra otra transportadora (solo enviamos a oficinas de Interrapidísimo): «{(d["dir"] or "").strip()[:70]}»')
     if oficina and not es_oficina_std: motivos.append(f'dirección rara para oficina: «{d["dir"].strip()[:70]}»')
+    elif not oficina and not re.search(r'\d', dirx): motivos.append(f'dirección sin número, no es clara: «{(d["dir"] or "").strip()[:70]}»')
     elif not oficina and not tiene_via: motivos.append(f'dirección incompleta o rara: «{(d["dir"] or "").strip()[:70]}»')
     nom = ((d.get('name') or '') + ' ' + (d.get('surname') or '')).lower()
     pal = re.findall(r'[a-záéíóúñ]+', nom)
     if len(pal) != len(set(pal)) or re.search(r'([a-záéíóúñ]{4,})\1', nom) or len(nom.strip()) < 4: motivos.append(f'nombre raro: «{(d.get("name") or "")} {(d.get("surname") or "")}»')
+    otras = [t for t in (d.get('tags') or []) if t and t not in ('CONFIRMADO AGENTE', 'REVISAR HUMANO')]
+    if otras: motivos.append('una persona ya le puso etiquetas en Dropi (' + ', '.join(otras) + '): no lo toco')
     # 4) Chat
     if not f: motivos.append('no encontré el chat de este teléfono en Lucid')
     elif f['decision'] != 'SALE': motivos += f['motivos']
@@ -65,13 +68,13 @@ for d in det:
             z = hc.setdefault(k['courier_id'], [0, 0]); z[0] += k.get('delivered', 0); z[1] += k.get('returned', 0)
     tasa = lambda z: z[0] / (z[0] + z[1]) if sum(z) else None
     act = hc.get(d['dc'], [0, 0])
-    cand = sorted([(tasa(z), z[0], i) for i, z in hc.items() if i != d['dc'] and z[0] > 0 and tasa(z) > 0.5 and TR.get(i) in UI], reverse=True)
+    # La que más entregas tiene para este cliente, solo entre las que recibe más del 50 % (Ronald 21-11: «la que tiene más entregas»)
+    buenas = [(z[0], tasa(z), i) for i, z in hc.items() if z[0] > 0 and tasa(z) > 0.5 and TR.get(i) in UI]
+    mejor = max(buenas) if buenas else None
     if oficina:
         if sum(act) and tasa(act) <= 0.5: motivos.append(f'es para oficina de Interrapidísimo y con Interrapidísimo recibe solo {act[0]} de {sum(act)}')
-    elif cand:
-        mejor = cand[0]
-        if (sum(act) and tasa(act) <= 0.5) or (not sum(act) and mejor[1] >= 2) or (sum(act) and mejor[0] - tasa(act) >= 0.25 and mejor[1] >= 2):
-            if not motivos: editar['transportadora'] = UI[TR[mejor[2]]]
+    elif mejor and mejor[2] != d['dc'] and mejor[0] > act[0]:
+        if not motivos: editar['transportadora'] = UI[TR[mejor[2]]]
     elif sum(act) and tasa(act) <= 0.5: motivos.append(f'con {TR.get(d["dc"])} devuelve y no hay otra transportadora con buen historial')
     # 6) Flete
     if d['flete'] > FLETE_MAX and 'transportadora' not in editar: motivos.append(f'flete ${d["flete"]:,.0f} mayor a $27.000'.replace(',', '.'))

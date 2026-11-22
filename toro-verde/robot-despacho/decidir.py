@@ -45,11 +45,14 @@ for r in sorted(subidos, key=lambda r: r['created_at']):
 filas = []
 for c, lst in por_contacto.items():
     res = campo(c, '880500'); p = parse(res); msg = campo(c, '386920')
+    try: info = get(f'/contacts/{c}'); info = info.get('data', info); en_humano = bool(info.get('live_chat'))
+    except Exception: en_humano = False
     try: t = get(f'/contacts/{c}/messages?limit=25'); t = t.get('data', t); t = t if isinstance(t, str) else json.dumps(t, ensure_ascii=False)
     except Exception: t = ''
     usuario = ' '.join(l for l in re.split(r'\n(?=(?:Yo|Usuario) \()', t) if l.startswith('Usuario'))
     oficina = bool(re.search(r'oficina|interrapid', (p['Dirección'] + ' ' + p['Notas']), re.I))
     motivos = []
+    if en_humano: motivos.append('una persona del equipo está atendiendo este chat (modo humano en Lucid): no lo toco')
     if len(lst) > 1: motivos.append(f'repetido ({len(lst)} pedidos en Lucid)')
     if NO.search(usuario): motivos.append('el cliente dijo que no: «' + NO.search(usuario).group(0) + '»')
     if not p['Ciudad']: motivos.append('sin ciudad')
