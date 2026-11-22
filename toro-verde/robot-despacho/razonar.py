@@ -55,6 +55,7 @@ for d in det:
     if f:
         lc = litros_chat(f.get('producto', '')); ld = sum(i['q'] * next((v for k, v in LITROS.items() if k in (i['pres'] or '').upper()), 0) for i in d['items'])
         if lc and ld and lc != ld: motivos.append(f'producto distinto: en el chat {lc} L, en Dropi {ld} L')
+    if f and f.get('origen') == 'pagina' and round(d['total']) not in PRECIOS: motivos.append(f'pedido de la página con precio raro: {d["total"]:.0f}')
     # 3) Precio del chat
     if f and not motivos:
         try: vc = float(re.sub(r'[^\d.]', '', f['valor']) or 0)

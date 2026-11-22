@@ -81,6 +81,25 @@ for c, lst in por_contacto.items():
                   'producto': (prod_chat or p['Productos'])[:120], 'valor': (valor_chat or p['Valor total']), 'producto_lucid': p['Productos'][:120], 'valor_lucid': p['Valor total'], 'entrega': 'Oficina Interrapidísimo' if oficina else 'Domicilio',
                   'transportadora': 'INTERRAPIDISIMO' if oficina else 'la que más entregue en el municipio', 'id_lucidsales': re.findall(r'"id":"?(\d+)', msg)[:1],
                   'decision': 'POR CANCELAR' if motivos else ('REVISAR PAGO' if pago_previo else 'SALE'), 'motivos': motivos or (['pago anticipado (transferencia o Addi): confirmar que la plata llegó'] if pago_previo else [])})
+# Ronald 21-11: «cada cliente debes buscarlo en el chat y evaluar la intención de compra».
+# Pedidos de la página (landing) no pasan por el embudo 705299: se lee igual su chat de Lucid (contacto = 57 + teléfono).
+if '--contactos' in sys.argv:
+    for c in sorted(quiero - set(por_contacto)):
+        try: info = get(f'/contacts/{c}'); info = info.get('data', info)
+        except Exception: continue
+        try: t = get(f'/contacts/{c}/messages?limit=40'); t = t.get('data', t); t = t if isinstance(t, str) else json.dumps(t, ensure_ascii=False)
+        except Exception: t = ''
+        usuario = ' '.join(l for l in re.split(r'\n(?=(?:Yo|Usuario) \()', t) if l.startswith('Usuario'))
+        tras = t[t.rfind('Resumen de tu pedido'):] if 'Resumen de tu pedido' in t else ''
+        motivos = []
+        if info.get('live_chat'): motivos.append('una persona del equipo está atendiendo este chat (modo humano en Lucid): no lo toco')
+        if NO.search(usuario): motivos.append('el cliente dijo que no: «' + NO.search(usuario).group(0) + '»')
+        if re.search(r'addi|cuotas|transferencia|consignaci|comprobante|nequi|daviplata|no (lo )?pago (en )?contra ?entrega', usuario + ' ' + tras, re.I): motivos.append('pide pagar por Addi, cuotas o transferencia: se confirma a mano')
+        confirmo = re.search(r'^Usuario \([^)]*\):\s*(confirmar pedido|s[ií]\b|si,? es correcto|es correcto|correcto|confirmo)', t, re.I | re.M) or SI.search(t)
+        if not confirmo: motivos.append('pedido de la página: el cliente aún no confirma en el chat (no tocó «CONFIRMAR PEDIDO» ni dijo sí)')
+        if re.search(r'reclam|recog|me (mandan|env[ií]an) (el )?c[oó]digo|en la oficina', usuario, re.I): motivos.append('en el chat habla de reclamar en oficina: revisar la dirección')
+        filas.append({'contacto': c, 'nombre': info.get('first_name') or '', 'ciudad': '', 'producto': '', 'valor': '', 'producto_lucid': '', 'valor_lucid': '',
+                      'entrega': '', 'transportadora': '', 'id_lucidsales': [], 'origen': 'pagina', 'decision': 'POR CANCELAR' if motivos else 'SALE', 'motivos': motivos})
 json.dump(filas, open('robot/decision.json', 'w'), ensure_ascii=False, indent=1)
 sale = [f for f in filas if f['decision'] == 'SALE']; can = [f for f in filas if f['decision'] != 'SALE']
 print('PEDIDOS', len(filas), 'SALEN', len(sale), 'OTROS', len(can))
