@@ -27,6 +27,7 @@ plan={'confirmar':[{'id':x['id'],'n':x['nombre']} for x in a if x['accion']=='CO
 json.dump(plan,open('/tmp/dropi/plan.json','w'),ensure_ascii=False);json.dump(sorted(ya|{x['id'] for x in a if x['accion']=='REVISAR'}),open(E,'w'))
 print('PLAN confirmar',len(plan['confirmar']),'etiquetar_nuevos',len(plan['etiquetar']),'revisar_total',len(plan['revisar_total']))"
 python3 -I robot/aclarar.py
+python3 -I robot/recordar_confirmar.py
 # Ronald 21-11: pedidos de carritos recuperados de Shopify llevan la etiqueta CARRITORECUPERADOLUC (49501) en Dropi.
 python3 -I -c "
 import json
