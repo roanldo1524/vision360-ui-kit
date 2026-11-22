@@ -25,7 +25,9 @@ def parse(res):
     return out
 
 NO = re.compile(r'\b(no tengo (ahora|plata|dinero)|ya no (lo )?(quiero|necesito)|cancel(a|e|ar|en) (el|mi) pedido|no lo (quiero|voy a recibir)|anul(a|e|ar)|no me lo (manden|envien|envíen)|mejor no|despu[eé]s le (escribo|aviso)|no estoy interesad)', re.I)
-SI = re.compile(r'(gracias por confirmar tu pedido|pedido se ha subido|procederemos a gestionar)', re.I)
+# Solo cuenta lo que confirma el CLIENTE (nunca el aviso de Lucid «Tu pedido se ha subido», que en landing sale antes de que confirme)
+SI = re.compile(r'(gracias por confirmar tu pedido|procederemos a gestionar y subir tu pedido)', re.I)
+SI_CLIENTE = re.compile(r'^Usuario \([^)]*\):\s*(confirmar pedido|s[ií]\b|si,? es correcto|es correcto|correcto|confirmo|listo|ok\b|dale|de una|m[aá]nd(e|al)o)', re.I | re.M)
 
 ops = []; o = 0
 while o < 30000:
@@ -64,7 +66,8 @@ for c, lst in por_contacto.items():
     tras = t[t.rfind('Resumen de tu pedido'):] if 'Resumen de tu pedido' in t else ''
     dijo_si = any((len(l.split('):',1)[-1].strip()) < 80 and re.search(r'\b(s[ií]+|ok|listo|dale|de una|confirm\w*|correct[oa]|as[ií] est[aá]|m[aá]nd\w*|env[ií]\w*|perfecto|claro|bueno|est[aá] bien)\b', l.split('):',1)[-1], re.I))
                   for l in re.split(r'\n(?=(?:Yo|Usuario) \()', tras) if l.startswith('Usuario'))
-    if not (SI.search(t + msg) or dijo_si): motivos.append('no veo la confirmación del cliente en el chat')
+    if not (SI.search(t) or dijo_si or SI_CLIENTE.search(tras or '')): motivos.append('no veo la confirmación del cliente en el chat')
+    if re.search(r'confirmacion_landing|CONFIRMAR PEDIDO', t) and not re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) and not SI.search(t): motivos.append('pedido de la página: el cliente no ha tocado «CONFIRMAR PEDIDO»')
     pago_previo = re.search(r'addi|transferencia|consignaci|comprobante|sin recaudo|bancolombia', p['Método de pago'] + ' ' + usuario + ' ' + (tras or ''), re.I) and not re.search(r'contra ?entrega|con recaudo', p['Método de pago'], re.I)
     if pago_previo and motivos == ['no veo la confirmación del cliente en el chat']: motivos = []  # quien paga por adelantado ya confirmó con el pago
     filas.append({'contacto': c, 'nombre': (p['Nombre'] + ' ' + p['Apellido']).strip(), 'ciudad': f"{p['Ciudad']} ({p['Departamento']})",
