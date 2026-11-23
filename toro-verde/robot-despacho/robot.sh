@@ -47,7 +47,7 @@ M='/tmp/dropi/motivos.json';m=json.load(open(M)) if os.path.exists(M) else {}
 for x in json.load(open('/tmp/dropi/plan.json')).get('revisar_total',[]): m[str(x['id'])]=x['motivo']
 json.dump(m,open(M,'w'),ensure_ascii=False)"
 python3 -I robot/aclarar.py
-python3 -I robot/pedir_anticipo.py  # Ronald 23-11: audio de anticipo a los que solo frenan por devoluciones
+( python3 -I robot/pedir_anticipo.py > /tmp/dropi/anticipo.log 2>&1 & )  # foto + audio de anticipo APARTE: no frena la confirmación (Ronald 23-11)
 # Ronald 23-11: novedades de Dropi → fichas para que Claude las solucione (solucionar_nov.js). Si el cliente no ha respondido, se le pregunta una vez.
 # Ronald 23-11 (tarde): «novedades y todo eso lo resuelve el bot, no es tu función en este chat». Apagado.
 # (cd /tmp/dropi && timeout 300 node novedades.js </dev/null | tail -1) && python3 -I robot/novedades.py --escribir
