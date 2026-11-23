@@ -88,6 +88,19 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   7. Promete «una asesora te contacta en minutos» y nadie aparece.
 - ESPERANDO el sí de Ronald para pegar los arreglos en Lucid y para escribirle a las ventas recuperables.
 
+## Casino La Bodeguita — armado (2026-11-23 noche)
+- `bodeguita/casino/pagina-premios-bodeguita.html`: misma máquina de Toro Verde (foto sin marca, sonidos ya en Shopify).
+  El premio sale del producto del enlace (`?p=afilador|detector|iman|pelador|ventilador|tensor|canas|mandala|brocas|bici|yunabi`),
+  10 % sobre el precio del catálogo, redondeado hacia arriba para no pasar nunca del 10 %. Código BODEGUITA10. Sin regalo.
+  WhatsApp 573233080393. Probado con Playwright (mandala, imán, producto desconocido → afilador): sin errores.
+- `bodeguita/casino/casino-wa-bodeguita.jpg`: imagen de WhatsApp («Gana hasta 10 % de descuento en tu pedido»).
+- `bodeguita/casino/casino_envio.py`: 6–23 h callado, nunca compró (todo 705299), 3 días sin repetir, revisa justo antes
+  de enviar, comprueba que la cuenta sea La Bodeguita. Modos: contar (por defecto), `--prueba <número>`, `--enviar`.
+  Conteo de prueba 23-nov: 349 para enviar (afilador 151, canas 46, pelador 41, detector 37, tensor 34, mandala 28, imán 12).
+- FALTA (con el sí de Ronald): subir imagen a Shopify Archivos; crear la página /pages/premios-bodeguita con la plantilla
+  page.casino-bodeguita; publicar el tema; que el bot reconozca «gané en el casino … BODEGUITA10» y aplique el 10 %;
+  número de WhatsApp de Ronald para la prueba; programar 10 a. m. / 4 p. m.
+
 ## Lo que sigue (cuando llegue lo anterior)
 2. Buscar en Lucid el embudo de pedidos y el campo del anuncio de La Bodeguita.
 3. Página `/pages/premios` en la tienda de La Bodeguita + subir foto y sonidos.
