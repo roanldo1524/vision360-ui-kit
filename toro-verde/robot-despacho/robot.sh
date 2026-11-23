@@ -36,6 +36,12 @@ sc=set(int(i) for i in open('/tmp/dropi/sin_cambio.txt').read().split()) if os.p
 plan={'confirmar':[{'id':x['id'],'n':x['nombre']} for x in a if x['accion']=='CONFIRMAR' or (x['accion']=='EDITAR_Y_CONFIRMAR' and x['id'] in sc and not x['editar'].get('precio'))],'etiquetar':[{'id':x['id'],'motivo':x['motivo']} for x in a if x['accion']=='REVISAR' and x['id'] not in ya],'revisar_total':[x for x in a if x['accion']=='REVISAR']}
 json.dump(plan,open('/tmp/dropi/plan.json','w'),ensure_ascii=False)
 print('PLAN confirmar',len(plan['confirmar']),'etiquetar_nuevos',len(plan['etiquetar']),'revisar_total',len(plan['revisar_total']))"
+# Motivos de revisión guardados entre vueltas (para el panel y los avisos)
+python3 -I -c "
+import json,os
+M='/tmp/dropi/motivos.json';m=json.load(open(M)) if os.path.exists(M) else {}
+for x in json.load(open('/tmp/dropi/plan.json')).get('revisar_total',[]): m[str(x['id'])]=x['motivo']
+json.dump(m,open(M,'w'),ensure_ascii=False)"
 python3 -I robot/aclarar.py
 python3 -I robot/pedir_anticipo.py  # Ronald 23-11: audio de anticipo a los que solo frenan por devoluciones
 python3 -I robot/recordar_confirmar.py

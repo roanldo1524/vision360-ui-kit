@@ -5,6 +5,7 @@ mot={}
 try:
   p=json.load(open('/tmp/dropi/plan.json')); mot={x['id']:x['motivo'] for x in p['revisar_total']+p.get('etiquetar',[])}
 except Exception: pass
+if os.path.exists('/tmp/dropi/motivos.json'): mot.update({int(k):v for k,v in json.load(open('/tmp/dropi/motivos.json')).items()})
 if os.path.exists('/tmp/dropi/vetos.json'): mot.update({int(k):'revisión del agente: '+v for k,v in json.load(open('/tmp/dropi/vetos.json')).items()})
 tag=lambda x,n: any(t.get('tag_name')==n for t in x['tags'])
 ca=[x for x in h if tag(x,'CONFIRMADO AGENTE') and x['status']=='PENDIENTE']
