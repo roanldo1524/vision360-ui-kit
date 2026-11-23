@@ -27,7 +27,26 @@ for i, m in hist.items():
 print('MOTIVO: total → persona aprobó / cancelado / esperando')
 for m, c in sorted(t.items(), key=lambda x: -x[1]['persona aprobó']):
     print(f"{m}: {sum(c.values())} → {c['persona aprobó']} / {c['cancelado']} / {c['esperando']}")
-hoy = (datetime.datetime.utcnow() - datetime.timedelta(hours=5)).strftime('%Y-%m-%d')
+hoy = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=5)).strftime('%Y-%m-%d')
 d = [o for o in H.values() if o['created'].startswith(hoy) and 'CANCEL' not in o['status'] and o['status'] != 'PENDIENTE CONFIRMACION']
 rob = sum(1 for o in d if 'CONFIRMADO AGENTE' in tg(o))
 print(f'HOY {hoy}: salieron {len(d)}, confirmados por el robot {rob} ({100*rob//max(1,len(d))} %)')
+
+# Tasa de ENTREGA (Ronald 23-11: «garantizar la tasa de entrega, ya que es contra entrega»).
+# Por semana de creación: confirmados por el robot (CONFIRMADO AGENTE) frente a aprobados por una persona.
+# Solo cuenta pedidos ya resueltos (entregado o devuelto); el resto va «en camino». hoy.json trae 10 días.
+FIN_OK = {'ENTREGADO'}
+FIN_MAL = {'DEVOLUCION', 'RECHAZADO', 'DEVOLUCION EN BODEGA', 'DEVUELTO'}
+sem = collections.defaultdict(lambda: collections.defaultdict(collections.Counter))
+for o in H.values():
+    s = o['status']
+    if 'CANCEL' in s or s in ('PENDIENTE CONFIRMACION', 'PENDIENTE', 'TELEMERCADEO'): continue
+    quien = 'robot' if 'CONFIRMADO AGENTE' in tg(o) else 'persona'
+    w = datetime.date.fromisoformat(o['created'][:10]).isocalendar()
+    k = 'entregado' if s in FIN_OK else 'devuelto' if s in FIN_MAL else 'en camino'
+    sem[f'{w[0]}-S{w[1]:02d}'][quien][k] += 1
+print('ENTREGA por semana (entregado / devuelto / en camino → % entregado de los resueltos):')
+for w in sorted(sem):
+    for quien in ('robot', 'persona'):
+        c = sem[w][quien]; r = c['entregado'] + c['devuelto']
+        print(f"{w} {quien}: {c['entregado']} / {c['devuelto']} / {c['en camino']} → {100*c['entregado']//r if r else '-'} %")
