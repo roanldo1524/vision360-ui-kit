@@ -17,8 +17,8 @@ PRUEBA = sys.argv[sys.argv.index('--prueba') + 1] if '--prueba' in sys.argv else
 MAX = int(sys.argv[sys.argv.index('--max') + 1]) if '--max' in sys.argv else 400
 REG = 'enviados.json'  # {contacto: fecha ISO del último envío}  (no se sube al repo)
 reg = json.load(open(REG)) if os.path.exists(REG) else {}
-PAGINA = 'https://toroverde.co/pages/premios-bodeguita'
-IMAGEN = 'https://cdn.shopify.com/s/files/1/0687/6096/1211/files/casino-wa-bodeguita.jpg'  # subir antes a Shopify
+PAGINA = 'https://casino-labodeguita.vercel.app/'
+IMAGEN = 'https://raw.githubusercontent.com/roanldo1524/vision360-ui-kit/88206144584444f3bef84988300b8813a6eb6956/bodeguita/casino/web/casino-wa.jpg'
 
 # Producto del catálogo del bot -> clave del casino (ver CAT en pagina-premios-bodeguita.html)
 SLUG = {'AFILADOR DE CADENA': 'afilador', 'DETECTOR DE METALES': 'detector', 'IMAN': 'iman',
