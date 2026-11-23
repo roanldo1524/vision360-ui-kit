@@ -11,7 +11,7 @@
 
 **Ejemplos que pide Meta:**
 - {{1}} = Breiner
-- {{2}} = 2 litro por $169.000, para reclamar en la oficina de Interrapidísimo de Guamal
+- {{2}} = 2 litros por $169.000, para reclamar en la oficina de Interrapidísimo de Guamal
 
 **Botones (respuesta rápida):**
 1. `CONFIRMAR PEDIDO`

@@ -27,7 +27,8 @@ for a in json.load(open('/tmp/dropi/acciones.json')):
         li = float(info.get('last_interaction') or 0) / 1000
     except Exception: continue
     nom = (d.get('name') or '').split(' ')[0].capitalize()
-    prod = ', '.join(f"{i['q']} {i['pres'].lower()}" for i in d.get('items', []))
+    PL = {'litro': 'litros', 'galon': 'galones', 'poma': 'pomas'}
+    prod = ', '.join(f"{i['q']} {PL.get((i['pres'] or '').lower(), (i['pres'] or '').lower()) if (i['q'] or 1) > 1 else (i['pres'] or '').lower().replace('galon', 'galón')}" for i in d.get('items', []))
     try:
         if time.time() - li < 23 * 3600:
             t = (f"¡Hola {nom}! 🌱 Tu pedido de Toro Verde está listo para salir: *{prod}* por *${d.get('total',0):,.0f}*".replace(',', '.') +
