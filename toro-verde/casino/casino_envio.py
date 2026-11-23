@@ -76,8 +76,8 @@ if not ENVIAR:
 # Mensaje del primer día (precios tachados + «dime tu municipio») unido al casino. Corto: Ronald pidió textos breves.
 IMAGEN = 'https://cdn.shopify.com/s/files/1/0687/6096/1211/files/casino-wa-777.jpg?v=1795398353'
 MENSAJES = [
-    "{s} 🎰 *Hoy juegas GRATIS en el Casino Toro Verde*\n\nTienes 3 tiros para ganar *hasta $26.900 de descuento* + semilla de maíz criollo de regalo 💰🌽\n\n👉 *Toca aquí y juega:* {u}\n\n⏰ Tus tiros vencen hoy a medianoche",
-    "{s} 💰 *Te regalamos 3 tiros gratis* en la máquina del Casino Toro Verde\n\nPuedes ganar *hasta $26.900 de descuento* en tu herbicida + semilla de regalo 🎰\n\n👉 *Juega aquí:* {u}\n\n⏰ Solo por hoy · Pagas al recibir",
+    "{s} 🎰 *Ganaste 3 tiros GRATIS en el Casino Toro Verde*\n\nCon el 7-7-7 te llevas *hasta $26.900 de descuento* + semilla de maíz criollo de regalo 💰🌽\n\n👉 *Juega ya, toma 10 segundos:* {u}\n\n⏰ Tus tiros se borran hoy a la medianoche · Pagas al recibir",
+    "{s} 💰 *Tienes un premio esperándote*: 3 tiros gratis para ganar *hasta $26.900 de descuento* en tu Toro Verde + semilla de regalo 🎰\n\n👉 *Toca y juega ahora:* {u}\n\n⏰ Solo hoy hasta la medianoche · Pagas cuando te llegue 📦",
 ]
 JUEGO = ['', '']
 ok = fail = 0
