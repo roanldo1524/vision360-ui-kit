@@ -45,6 +45,14 @@ solo cambian marca, bot de Lucid y tienda de Shopify.
   Choca con la regla escrita en CLAUDE.md y en la tarea («descuento solo para quien nunca ha compró»).
   Para La Bodeguita NO se aplica hasta que Ronald lo confirme directamente.
 
+## Novedades 2026-11-23 (noche)
+- Nueva sesión en el espacio «La Bodeguita». Ronald guardó la clave de Lucid de Master Importer como
+  secreto de red (panel.lucidbot.co, X-ACCESS-TOKEN). Comprobado: `/api/accounts/me` responde
+  **«La bodeguita»** (no Toro Verde). Ya se puede usar Lucid desde este espacio.
+- Falta de Ronald: lista de productos con precio y premio de cada uno (máx. 10 %), el regalo, palabras
+  prohibidas, a quién va el casino (¿solo quien nunca compró o también recompra?) y si se publica la
+  plantilla page.casino-bodeguita del tema de Toro Verde.
+
 ## Lo que sigue (cuando llegue lo anterior)
 2. Buscar en Lucid el embudo de pedidos y el campo del anuncio de La Bodeguita.
 3. Página `/pages/premios` en la tienda de La Bodeguita + subir foto y sonidos.
