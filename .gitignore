@@ -1,2 +1,4 @@
 *.key
 __pycache__/
+lucidbot.key
+**/lucidbot.key
