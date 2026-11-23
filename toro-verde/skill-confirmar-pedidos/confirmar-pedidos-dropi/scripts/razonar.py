@@ -1,0 +1,124 @@
+import os
+# Paso 2: decide pedido por pedido como lo haría una persona. Reglas NO NEGOCIABLES de el dueño (21-11):
+#  1) Solo se confirma si el cliente recibe MÁS del 50 % (historial Dropi, todas las tiendas). Sin historial = se confirma.
+#  2) Transportadora: la que mejor recibe ese cliente (oficina = siempre Interrapidísimo).
+#  3) Precio: el que se negoció en el chat (si Dropi tiene otro, se edita al del chat).
+#  4) Chat: intención de compra confirmada, sin arrepentimiento, sin pago por adelantado sin validar.
+#  5) Producto, presentación y cantidad: los que pidió el cliente.
+#  6) Flete mayor al tope de envío del dueño (config.json): no se confirma, revisión humana.
+import json, re
+TR = {int(k): v for k, v in json.load(open('/tmp/dropi/transportadoras.json')).items()}
+UI = {'INTERRAPIDISIMO': 'Interrapidisimo', 'ENVIA': 'Envia', 'COORDINADORA': 'Coordinadora', 'SERVIENTREGA': 'Servientrega', 'TCC': 'Tcc', 'DOMINA': 'Domina', 'VELOCES': 'Veloces'}
+PRECIOS = __PRECIOS_VALIDOS__
+UNIDADES = __PRESENTACIONES__
+MIN_ENTREGA = __MIN_ENTREGA__  # solo confirma si el cliente recibe MÁS que esta proporción (0.5 = 50 %)
+FLETE_MAX = __TOPE_ENVIO_GENERAL__  # envío máximo para confirmar solo
+TOPES = __TOPES_ENVIO__  # tope por presentación o por unidades
+# Tope de envío según lo que lleva el pedido (config.json: topes_envio y tope_envio_general)
+def tope_flete(d):
+    # Tope de envío del dueño: primero por presentación (p. ej. CAJA), si no por unidades totales (p. ej. 1 o 2 unidades), si no el general.
+    pres = [(i['pres'] or '').upper().replace('Ó', 'O') for i in d['items']]
+    for k, v in (TOPES.get('presentaciones') or {}).items():
+        if any(k.upper() in x for x in pres): return v
+    u = sum((i['q'] or 0) * next((v for k, v in sorted(UNIDADES.items(), key=lambda kv: -len(kv[0])) if k in (i['pres'] or '').upper()), 0) for i in d['items'])
+    return (TOPES.get('unidades') or {}).get(str(u), FLETE_MAX)
+det = json.load(open('/tmp/dropi/detalle.json'))
+luc = {f['contacto']: f for f in json.load(open('robot/decision.json'))}
+
+def unidades_chat(txt):
+    tot = 0
+    for q, pres in re.findall(r'\((\d+)\s*x[^)]*?(?:Presentacion|Presentación)\s*:?\s*([A-ZÁÉÍÓÚ0-9 ]+)', txt or '', re.I):
+        p = pres.strip().upper().replace('Ó', 'O')
+        tot += int(q) * next((v for k, v in UNIDADES.items() if k in p), 0)
+    return tot
+
+acc = []
+for d in det:
+    motivos, editar = [], {}
+    f = luc.get('57' + d['phone'])
+    oficina = bool(re.search(r'oficina|reclama|interrap', (d['dir'] or '').lower()))
+    # 7) Dirección y nombre: si algo se ve raro, no se confirma (el dueño 21-11)
+    dirx = re.sub(r'\s+', ' ', (d['dir'] or '')).strip(' ,').lower()
+    es_oficina_std = bool(re.search(r'(reclama|recoge|retira)\w* en (la )?oficina|^oficina (de )?interrap|oficina interrap', dirx))
+    tiene_via = bool(re.search(r'\b(calle|cl|cll|carrera|cra|cr|kr|kra|carera|avenida|av|diagonal|dg|diag|transversal|tv|trans|manzana|mz|mza|vereda|vda|finca|corregimiento|barrio|km|kil[oó]metro|sector|lote|casa)\b', dirx)) and bool(re.search(r'\d', dirx) or re.search(r'vereda|finca|corregimiento|sector', dirx))
+    if re.search(r'servientrega|coordinadora|\benv[ií]a\b|\btcc\b|deprisa|\b472\b|domina|veloces', dirx): motivos.append(f'la dirección nombra otra transportadora (solo enviamos a oficinas de Interrapidísimo): «{(d["dir"] or "").strip()[:70]}»')
+    if oficina and not es_oficina_std: motivos.append(f'dirección rara para oficina: «{d["dir"].strip()[:70]}»')
+    elif not oficina and not (re.search(r'#\s*\d+|\bn[oº°]\.?\s*\d+|\d+\s*[a-z]?\s*-\s*\d+|\bmz[a]?\.?\s*\w+\s*(cs|casa|lt|lote)\.?\s*\d+|\b(km|kil[oó]metro)\s*\d+', dirx) or re.search(r'vereda|finca|corregimiento|v[ií]a a |sector|parcela|hacienda', dirx)):
+        motivos.append(f'dirección sin número de puerta, no es clara: «{(d["dir"] or "").strip()[:70]}»')
+    elif not oficina and not tiene_via: motivos.append(f'dirección incompleta o rara: «{(d["dir"] or "").strip()[:70]}»')
+    nom = ((d.get('name') or '') + ' ' + (d.get('surname') or '')).lower()
+    pal = re.findall(r'[a-záéíóúñ]+', nom)
+    if len(pal) != len(set(pal)) or re.search(r'([a-záéíóúñ]{4,})\1', nom) or len(nom.strip()) < 4: motivos.append(f'nombre raro: «{(d.get("name") or "")} {(d.get("surname") or "")}»')
+    otras = [t for t in (d.get('tags') or []) if t and t not in ('CONFIRMADO AGENTE', 'REVISAR HUMANO')]
+    if otras: motivos.append('una persona ya le puso etiquetas en Dropi (' + ', '.join(otras) + '): no lo toco')
+    # 4) Chat
+    if not f: motivos.append('no encontré el chat de este teléfono en Lucid')
+    elif f['decision'] != 'SALE': motivos += f['motivos']
+    # 1) Historial de entregas
+    gp = ((d.get('huella') or {}).get('global_profile') or {}); lt = gp.get('lifetime_totals') or {}
+    ent, dev = lt.get('delivered', 0), lt.get('returned', 0)
+    if ent + dev > 0 and ent / (ent + dev) <= MIN_ENTREGA: motivos.append(f'recibe solo el {round(100*ent/(ent+dev))} % ({ent} entregados, {dev} devueltos)')
+    if re.search(r'riesgosa|cr[ií]tica', gp.get('risk_label') or '', re.I): motivos.append(f'Dropi lo marca {gp.get("risk_label")}')
+    # Repetido en Dropi
+    abiertos = [o for o in d.get('otros', []) if not re.search(r'CANCELADO|ENTREGADO|DEVOLUCION|DEVUELTO|ANULAD|RECHAZ|INDEMNIZ|REEMPLAZADA', o['status'] or '')]
+    if abiertos: motivos.append('tiene otro pedido abierto en Dropi: ' + ', '.join(f"{o['id']} ({o['status']})" for o in abiertos))
+    # 5) Producto y cantidad
+    if f:
+        lc = unidades_chat(f.get('producto', '')); ld = sum((i['q'] or 0) * next((v for k, v in UNIDADES.items() if k in (i['pres'] or '').upper()), 0) for i in d['items'])
+        if lc and ld and lc != ld: motivos.append(f'producto distinto: en el chat {lc} L, en Dropi {ld} L')
+    if f and f.get('origen') == 'pagina' and round(d['total']) not in PRECIOS: motivos.append(f'pedido de la página con precio raro: {d["total"]:.0f}')
+    # Lo que el agente ya frenó al leer el chat no se vuelve a proponer (hasta que una persona lo resuelva)
+    _V = '/tmp/dropi/vetos.json'
+    if os.path.exists(_V) and str(d['id']) in json.load(open(_V)): motivos.append('revisión del agente: ' + json.load(open(_V))[str(d['id'])])
+    # Regla de el dueño: el descuento (10 %) es solo para quien nunca ha comprado. Si ya recibió pedidos nuestros, precio normal.
+    DESC = {89100, 152100, 242100, 895500}
+    ms = ((d.get('huella') or {}).get('context_analysis') or {}).get('my_shop') or {}
+    ya_compro = sum(k.get('delivered', 0) for k in ms.get('by_courier') or []) or ms.get('period_delivered', 0)
+    if round(d['total']) in DESC and ya_compro: motivos.append(f'ya nos había comprado ({ya_compro} entregados) y lleva precio con descuento ${d["total"]:,.0f}: decidir el precio'.replace(',', '.'))
+    # 3) Precio del chat
+    if f and not motivos:
+        try: vc = float(re.sub(r'[^\d.]', '', f['valor']) or 0)
+        except Exception: vc = 0
+        if vc and abs(vc - d['total']) > 1:
+            if vc in PRECIOS and len(d['items']) == 1: editar['precio'] = int(round(vc / max(1, d['items'][0]['q'])))
+            else: motivos.append(f'precio distinto: Dropi {d["total"]:.0f}, chat {vc:.0f}')
+    # 2) Transportadora con la que mejor recibe
+    ca = (d.get('huella') or {}).get('context_analysis') or {}; hc = {}
+    for sec in (ca.get('my_shop') or {}, ca.get('other_shops') or {}):
+        for k in sec.get('by_courier') or []:
+            z = hc.setdefault(k['courier_id'], [0, 0]); z[0] += k.get('delivered', 0); z[1] += k.get('returned', 0)
+    tasa = lambda z: z[0] / (z[0] + z[1]) if sum(z) else None
+    act = hc.get(d['dc'], [0, 0])
+    # La que más entregas tiene para este cliente, solo entre las que recibe más del 50 % (el dueño 21-11: «la que tiene más entregas»)
+    buenas = [(z[0], tasa(z), i) for i, z in hc.items() if z[0] > 0 and tasa(z) > MIN_ENTREGA and TR.get(i) in UI]
+    mejor = max(buenas) if buenas else None
+    tc = (f or {}).get('trans_cliente') or ''
+    if tc:
+        # el dueño 21-11 (no negociable): si el cliente dijo con qué transportadora, va por esa.
+        idc = {'ENVIA': 2, 'INTERRAPIDISIMO': 3}.get(tc)
+        zc = hc.get(idc, [0, 0]) if idc else [0, 0]
+        if not idc: motivos.append(f'el cliente pidió la transportadora {tc}: revisarlo a mano')
+        elif oficina and tc != 'INTERRAPIDISIMO': motivos.append('el cliente pidió Envía pero la dirección es de oficina Interrapidísimo: preguntar')
+        elif sum(zc) and tasa(zc) <= MIN_ENTREGA: motivos.append(f'el cliente pidió {tc} pero con esa recibe solo {zc[0]} de {sum(zc)}')
+        elif idc != d['dc'] and not motivos: editar['transportadora'] = UI[TR[idc]]
+    elif oficina:
+        if sum(act) and tasa(act) <= MIN_ENTREGA: motivos.append(f'es para oficina de Interrapidísimo y con Interrapidísimo recibe solo {act[0]} de {sum(act)}')
+    # el dueño 21-11: si recibe muy bien con las dos (Envía e Interrapidísimo: 2+ entregas y 80 %+ con cada una), va por la más barata.
+    elif all(hc.get(i, [0, 0])[0] >= 2 and tasa(hc[i]) >= 0.8 for i in (2, 3)):
+        if not motivos: editar['transportadora'] = 'BARATA'
+    elif mejor and mejor[2] != d['dc'] and mejor[0] > act[0]:
+        if not motivos: editar['transportadora'] = UI[TR[mejor[2]]]
+    elif not hc and not motivos:
+        # Sin historial de entregas y a domicilio: la más barata entre Envía e Interrapidísimo (el dueño 21-11)
+        editar['transportadora'] = 'BARATA'
+    elif sum(act) and tasa(act) <= MIN_ENTREGA: motivos.append(f'con {TR.get(d["dc"])} devuelve y no hay otra transportadora con buen historial')
+    # 6) Flete
+    tope = tope_flete(d)
+    if d['flete'] > tope and 'transportadora' not in editar: motivos.append(f'flete ${d["flete"]:,.0f} mayor a ${tope:,.0f}'.replace(',', '.'))
+    if motivos: acc.append({'id': d['id'], 'accion': 'REVISAR', 'motivo': '; '.join(motivos), 'nombre': d['name']})
+    elif editar: acc.append({'id': d['id'], 'accion': 'EDITAR_Y_CONFIRMAR', 'editar': editar, 'nombre': d['name'], 'dc': UI.get(TR.get(d['dc'], ''), '')})
+    else: acc.append({'id': d['id'], 'accion': 'CONFIRMAR', 'nombre': d['name']})
+json.dump(acc, open('/tmp/dropi/acciones.json', 'w'), ensure_ascii=False)
+from collections import Counter
+print('ACCIONES', dict(Counter(a['accion'] for a in acc)))
+for a in acc: print(' -', a['accion'], a['id'], a['nombre'], a.get('editar') or a.get('motivo') or '')

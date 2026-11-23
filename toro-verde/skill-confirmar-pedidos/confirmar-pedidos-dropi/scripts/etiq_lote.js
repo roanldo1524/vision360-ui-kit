@@ -1,0 +1,6 @@
+// Pone una etiqueta a una lista de pedidos. Uso: node etiq_lote.js <archivo_ids> <tag_id>
+const {chromium}=require('playwright');const fs=require('fs');(async()=>{const b=await chromium.launch();const c=await b.newContext({storageState:'/tmp/dropi/estado.json',locale:'es-CO',userAgent:'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36'});const p=await c.newPage();let auth=null;p.on('request',r=>{const h=r.headers();if(!auth&&h['x-authorization'])auth=h['x-authorization']});
+await p.goto('https://app.dropi.co/dashboard/orders',{waitUntil:'networkidle',timeout:60000});
+const ids=fs.readFileSync(process.argv[2],'utf8').split('\n').filter(Boolean);const tag=+process.argv[3];const res={};
+for(const id of ids){const s=await p.evaluate(async([id,tag,a])=>{const x=await fetch('https://api.dropi.co/api/tags/createorderstags',{method:'POST',headers:{'x-authorization':a,'content-type':'application/json'},body:JSON.stringify({order_id:+id,tag_id:tag})});const j=await x.json().catch(()=>({}));return x.status+':'+(j.isSuccess===true?'ok':(j.message||'?'))},[id,tag,auth]);res[s]=(res[s]||0)+1;await p.waitForTimeout(300)}
+console.log(JSON.stringify(res));await b.close()})();

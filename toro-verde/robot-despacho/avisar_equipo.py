@@ -31,13 +31,13 @@ for c in EQUIPO:
     try:
         info = get(f'/contacts/{c}'); li = float(info.get('last_interaction') or 0) / 1000
         if time.time() - li < 23 * 3600:
-            txt = '\n\n'.join(r['pendiente'])[:3400] + '\n\n👉 Responde con un punto (.) o «revisado» para que te sigan llegando los avisos.'
+            txt = '\n\n'.join(r['pendiente'])[:3400] + '\n\n👉 Responde *REVISADO* para que te sigan llegando los avisos.'
             res = post(f'/contacts/{c}/send_content', {'messages': [{'message': {'text': txt}}]})
             if 'true' in res: r['pendiente'] = []; n += 1
         elif novedad and time.time() - r['plantilla'] > 3600:
             # Ronald 22-11: la plantilla lleva el resumen (variables Tipo/Título/Resumen notificación; WhatsApp no deja saltos de línea en variables)
             res1 = ' · '.join(l.strip() for l in t.split('\n')[1:] if l.strip())
-            res1 = (res1[:850] + ' · Responde con un punto (.) para recibir el detalle.').replace('  ', ' ')
+            res1 = (res1[:850] + ' · Responde REVISADO para recibir el detalle.').replace('  ', ' ')
             for f, v in (('169820', 'Robot de despacho'), ('276603', 'Robot de despacho ' + hora), ('470472', res1)): campo(c, f, v)
             if 'true' in post(f'/contacts/{c}/send/{FLUJO_PLANTILLA}'): r['plantilla'] = time.time()
     except Exception as e: print('AVISO error', c, str(e)[:80])
