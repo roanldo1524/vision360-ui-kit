@@ -1,3 +1,5 @@
+> **No usar por ahora (Ronald 23-11):** Lucid Sales ya le vuelve a mandar al cliente su plantilla de confirmación («Pendientes por confirmar»). Esta plantilla duplicaría el mensaje. El robot solo espera el «CONFIRMAR PEDIDO» del cliente y confirma en la siguiente vuelta.
+
 # Plantilla «confirmar_pedido_robot» (para clientes que no confirmaron y llevan más de 24 h sin escribir)
 
 **Dónde:** Lucid → Plantillas de WhatsApp → Crear (o business.facebook.com → WhatsApp Manager → Plantillas de mensajes → Crear).
