@@ -9,12 +9,13 @@ def node(*a, t=240):
     try: out = subprocess.run(['node', *a], cwd='/tmp/dropi', capture_output=True, text=True, timeout=t).stdout.strip().splitlines()
     except Exception as e: return 'ERROR ' + str(e)[:80]
     return out[-1] if out else 'ERROR sin salida'
+# Mensajes con la redacción de Karen (así logra que la IA de Dropi pase el caso a un asesor humano).
 def humano(q):
-    return (f"ASESOR HUMANO por favor: el estado NO ha cambiado. La guía {q['guia']} sigue en «{q['estado'][:30]}» desde el {q['desde']} ({q['horas']} h). "
-            f"Pedimos gestionar con {q['dc']} la entrega y darnos fecha. Gracias.")[:400]
+    return (f"Solicitamos por favor su intervención, con el fin de agilizar los procesos internos pendientes y permitir que la guía {q['guia']} continúe su movimiento hasta llegar a destino. "
+            f"Lleva {q['horas']} horas en «{q['estado'][:30]}» desde el {q['desde']} sin ningún cambio. Agradecemos su pronta gestión y apoyo para evitar mayores retrasos.")
 def seguir(q):
-    return (f"SEGUIMIENTO ({q['vez']}ª solicitud): la guía {q['guia']} sigue sin movimiento, {q['horas']} h en «{q['estado'][:30]}» desde el {q['desde']}. "
-            f"El paquete está en manos de {q['dc']}, no del cliente. Por favor escalar y dar fecha de entrega.")[:400]
+    return (f"Buen día. Seguimos sin movimiento en la guía {q['guia']}: {q['horas']} horas en «{q['estado'][:30]}» desde el {q['desde']}. "
+            f"Solicitamos por favor su intervención con {q['dc']} para agilizar la entrega al destinatario. Agradecemos su pronta gestión y apoyo para evitar mayores retrasos.")
 def una(q):
     i = str(q['id'])
     if q['vez'] == 1:

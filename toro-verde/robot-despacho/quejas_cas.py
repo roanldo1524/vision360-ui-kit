@@ -14,9 +14,9 @@ for x in json.load(open(Q)) if os.path.exists(Q) else []:
     if prev and time.time() - prev['ultima'] < 48 * 3600: continue
     vez = (prev or {}).get('veces', 0) + 1
     d = (x.get('desde') or '')[5:10]; d = d[3:5] + '/' + d[0:2] if len(d) == 5 else d
-    um = (x.get('ult_mov') or '').strip()[:45]
-    texto = (f"Guía {x.get('guia')} ({x.get('dc')}): lleva {x['horas']} h en «{st[:30]}» desde el {d} sin movimiento." + (f" Último: {um}." if um and um.upper() != st else '') +
-             " No es por el cliente. Favor gestionar la entrega.")[:200]
+    # Redacción de Karen (así escribe ella al CAS): formal, corta, pide intervención y agradece.
+    texto = f"Guía {x.get('guia')} lleva {x['horas']} h sin movimiento en «{st[:28]}» desde el {d}. Solicitamos su intervención para que continúe hasta destino. Agradecemos su pronta gestión."
+    if len(texto) > 200: texto = f"Guía {x.get('guia')}: {x['horas']} h sin movimiento desde el {d}. Solicitamos su intervención para que continúe hasta destino. Agradecemos su pronta gestión."
     cola.append({'id': x['id'], 'guia': x.get('guia'), 'dc': x.get('dc'), 'dias': x['dias'], 'horas': x['horas'], 'estado': st, 'desde': d, 'ciudad': x.get('city'), 'vez': vez, 'texto': texto})
 json.dump(cola, open('/tmp/dropi/quejas_cas.json', 'w'), ensure_ascii=False, indent=1)
 print('QUEJAS_CAS', len(cola))
