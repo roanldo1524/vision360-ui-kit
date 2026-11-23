@@ -53,6 +53,27 @@ solo cambian marca, bot de Lucid y tienda de Shopify.
   prohibidas, a quién va el casino (¿solo quien nunca compró o también recompra?) y si se publica la
   plantilla page.casino-bodeguita del tema de Toro Verde.
 
+## Datos de Lucid de La Bodeguita (encontrados 2026-11-23)
+- Embudo de pedidos: **705299 «Pedidos - Chat»** (3.130 pedidos del 29-sep al 23-nov; ~50 por día).
+  Otros: 259585 Pedidos - Landing (vacío), 967216 Estados de pedido, 573645 Carritos Landing.
+- Campos: 728462 «Anuncio Facebook» (ad id), 116501 «Producto Interesado _ Ad ID» (nombre del producto de
+  interés), 892889 mapa anuncio→producto, 312704 catálogo del bot, 330538 preguntas frecuentes,
+  677316 / 456432 reglas adicionales, 764680 políticas.
+- `find_by_custom_field` devuelve máximo 100 contactos por anuncio (sin páginas): los conteos son aproximados.
+- Lucid frena con error 429 si se hacen muchas consultas seguidas: ir despacio (≈4 por segundo).
+- Errores ya vistos en el catálogo del bot: IMÁN «2 unidades 94.500» choca con su regla «2 unidades 189.000»;
+  «GOMAS ADIOS VARICES» y «Duo pelador» repetidos; «Chaleco con luces» sin ficha; muchos productos sin
+  preguntas frecuentes; cuando el cliente manda video, el bot reinicia todo el flujo (ej. IMÁN).
+
+## Conversión aproximada por producto (contactos de anuncios vs. pedidos en 705299)
+Afilador de cadena 45 % (1.166 contactos) · Detector de metales 50 % (795) · Imán 40 % (562) ·
+Dúo pelador 40 % (338) · Ventilador solar 58 % (278) · Tensor de cadena 53 % (261) · Cubre canas 34 % (138) ·
+Luces mandala 19 % (120) · Yunabi 19 % (101) · Afilador de brocas 67 % (66) · Luz bici 68 % (57) ·
+Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
+
+## En curso: objeciones por producto
+- Leídos 388 chats de quienes escribieron desde el 2-nov y no compraron. Resultado → `bodeguita/objeciones.md`.
+
 ## Lo que sigue (cuando llegue lo anterior)
 2. Buscar en Lucid el embudo de pedidos y el campo del anuncio de La Bodeguita.
 3. Página `/pages/premios` en la tienda de La Bodeguita + subir foto y sonidos.
