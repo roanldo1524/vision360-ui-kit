@@ -48,6 +48,8 @@ for x in json.load(open('/tmp/dropi/plan.json')).get('revisar_total',[]): m[str(
 json.dump(m,open(M,'w'),ensure_ascii=False)"
 python3 -I robot/aclarar.py
 python3 -I robot/pedir_anticipo.py  # Ronald 23-11: audio de anticipo a los que solo frenan por devoluciones
+# Ronald 23-11: novedades de Dropi → fichas para que Claude las solucione (solucionar_nov.js). Si el cliente no ha respondido, se le pregunta una vez.
+(cd /tmp/dropi && timeout 300 node novedades.js </dev/null | tail -1) && python3 -I robot/novedades.py --escribir
 python3 -I robot/recordar_confirmar.py
 # Ronald 21-11: pedidos de carritos recuperados de Shopify llevan la etiqueta CARRITORECUPERADOLUC (49501) en Dropi.
 python3 -I -c "
