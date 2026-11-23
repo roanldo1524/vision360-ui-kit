@@ -14,9 +14,9 @@ Habla con el dueño en español sencillo, sin jerga: casi siempre es un comercia
 Si no existe `config.json` junto a este archivo (o el dueño pide cambiar reglas), hazle la entrevista. Cada tienda vende productos distintos, así que nada de lo de abajo se adivina. Pregunta en bloques cortos y con ejemplos:
 
 1. **Tienda**: ¿cómo se llama? (sale en los mensajes a los clientes).
-2. **Productos**: ¿qué presentaciones vendes y cuántas «unidades» es cada una? Ej.: «LITRO = 1, 2 LITROS = 2, GALON = 4». Usa el nombre tal como aparece en la variación de Dropi.
-3. **Precios válidos**: todos los totales que pueden ser correctos, incluidos los de promoción (ej. 99.000, 169.000, 89.100). Un pedido de la página con otro total va a revisión.
-4. **Tope de envío**: ¿cuánto es lo máximo que aceptas pagar de envío para confirmar solo? General y, si quiere, por presentación o por unidades (ej.: 1 unidad $25.000, 2 unidades $29.000, galón $35.000). Avísale si su tope queda justo por debajo de una tarifa común de la transportadora (pasa mucho: Interrapidísimo cobra montos fijos por zona).
+2. **Productos**: ¿qué presentaciones vendes y cuántas «unidades» es cada una? Ej.: «UNIDAD = 1, KIT X2 = 2, CAJA X6 = 6». Usa el nombre tal como aparece en la variación de Dropi.
+3. **Precios válidos**: todos los totales que pueden ser correctos, incluidos los de promoción (ej. 59.900, 99.900, 53.900). Un pedido de la página con otro total va a revisión.
+4. **Tope de envío**: ¿cuánto es lo máximo que aceptas pagar de envío para confirmar solo? General y, si quiere, por presentación o por unidades (ej.: 1 unidad $25.000, 2 unidades $29.000, caja $35.000). Avísale si su tope queda justo por debajo de una tarifa común de la transportadora (pasa mucho: Interrapidísimo cobra montos fijos por zona).
 5. **Clientes que devuelven**: ¿desde qué porcentaje de entregas se confía? Por defecto solo se confirma si recibe **más del 50 %** (historial de Dropi, todas las tiendas).
 6. **Equipo que recibe el resumen** por WhatsApp: celulares.
 7. **Credenciales** (no las pidas en el chat): un usuario de Dropi solo para el robot, guardado en las variables de entorno `DU` (correo) y `DP` (clave), y el token de Lucid Bot (variable `LUCID_TOKEN` o archivo `/tmp/robot/lucidbot.key`). Nunca imprimas sus valores.

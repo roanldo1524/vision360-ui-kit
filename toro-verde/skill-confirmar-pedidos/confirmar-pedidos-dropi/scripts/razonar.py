@@ -5,31 +5,31 @@ import os
 #  3) Precio: el que se negoció en el chat (si Dropi tiene otro, se edita al del chat).
 #  4) Chat: intención de compra confirmada, sin arrepentimiento, sin pago por adelantado sin validar.
 #  5) Producto, presentación y cantidad: los que pidió el cliente.
-#  6) Flete mayor al tope (1 L $25.000, 2 L $29.000, galón $35.000, lo demás $30.000; el dueño 22-11): no se confirma, revisión humana.
+#  6) Flete mayor al tope de envío del dueño (config.json): no se confirma, revisión humana.
 import json, re
 TR = {int(k): v for k, v in json.load(open('/tmp/dropi/transportadoras.json')).items()}
 UI = {'INTERRAPIDISIMO': 'Interrapidisimo', 'ENVIA': 'Envia', 'COORDINADORA': 'Coordinadora', 'SERVIENTREGA': 'Servientrega', 'TCC': 'Tcc', 'DOMINA': 'Domina', 'VELOCES': 'Veloces'}
 PRECIOS = __PRECIOS_VALIDOS__
-LITROS = __PRESENTACIONES__
+UNIDADES = __PRESENTACIONES__
 MIN_ENTREGA = __MIN_ENTREGA__  # solo confirma si el cliente recibe MÁS que esta proporción (0.5 = 50 %)
 FLETE_MAX = __TOPE_ENVIO_GENERAL__  # envío máximo para confirmar solo
 TOPES = __TOPES_ENVIO__  # tope por presentación o por unidades
-# el dueño 22-11: tope de envío según lo que lleva el pedido: 1 litro $25.000 · 2 litros $29.000 · galón $35.000 · lo demás $30.000
+# Tope de envío según lo que lleva el pedido (config.json: topes_envio y tope_envio_general)
 def tope_flete(d):
-    # Tope de envío del dueño: primero por presentación (p. ej. GALON), si no por unidades totales (p. ej. 1 litro, 2 litros), si no el general.
+    # Tope de envío del dueño: primero por presentación (p. ej. CAJA), si no por unidades totales (p. ej. 1 o 2 unidades), si no el general.
     pres = [(i['pres'] or '').upper().replace('Ó', 'O') for i in d['items']]
     for k, v in (TOPES.get('presentaciones') or {}).items():
         if any(k.upper() in x for x in pres): return v
-    u = sum((i['q'] or 0) * next((v for k, v in sorted(LITROS.items(), key=lambda kv: -len(kv[0])) if k in (i['pres'] or '').upper()), 0) for i in d['items'])
+    u = sum((i['q'] or 0) * next((v for k, v in sorted(UNIDADES.items(), key=lambda kv: -len(kv[0])) if k in (i['pres'] or '').upper()), 0) for i in d['items'])
     return (TOPES.get('unidades') or {}).get(str(u), FLETE_MAX)
 det = json.load(open('/tmp/dropi/detalle.json'))
 luc = {f['contacto']: f for f in json.load(open('robot/decision.json'))}
 
-def litros_chat(txt):
+def unidades_chat(txt):
     tot = 0
     for q, pres in re.findall(r'\((\d+)\s*x[^)]*?(?:Presentacion|Presentación)\s*:?\s*([A-ZÁÉÍÓÚ0-9 ]+)', txt or '', re.I):
         p = pres.strip().upper().replace('Ó', 'O')
-        tot += int(q) * next((v for k, v in LITROS.items() if k in p), 0)
+        tot += int(q) * next((v for k, v in UNIDADES.items() if k in p), 0)
     return tot
 
 acc = []
@@ -64,7 +64,7 @@ for d in det:
     if abiertos: motivos.append('tiene otro pedido abierto en Dropi: ' + ', '.join(f"{o['id']} ({o['status']})" for o in abiertos))
     # 5) Producto y cantidad
     if f:
-        lc = litros_chat(f.get('producto', '')); ld = sum((i['q'] or 0) * next((v for k, v in LITROS.items() if k in (i['pres'] or '').upper()), 0) for i in d['items'])
+        lc = unidades_chat(f.get('producto', '')); ld = sum((i['q'] or 0) * next((v for k, v in UNIDADES.items() if k in (i['pres'] or '').upper()), 0) for i in d['items'])
         if lc and ld and lc != ld: motivos.append(f'producto distinto: en el chat {lc} L, en Dropi {ld} L')
     if f and f.get('origen') == 'pagina' and round(d['total']) not in PRECIOS: motivos.append(f'pedido de la página con precio raro: {d["total"]:.0f}')
     # Lo que el agente ya frenó al leer el chat no se vuelve a proponer (hasta que una persona lo resuelva)

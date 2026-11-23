@@ -16,7 +16,7 @@ Todas se ajustan en `config.json`; las que no tienen número son fijas porque cu
 
 ## Errores reales que la lectura humana atrapó (para tenerlos presentes)
 - «CONFIRMAR PEDIDO» de un pedido de hace un mes tomado como confirmación del de hoy.
-- Pedido de la página donde el cliente solo preguntaba cómo aplicar el producto y escribió «correcto, tengo bomba…».
+- Pedido de la página donde el cliente solo preguntaba cómo usar el producto y escribió «correcto…» respondiendo a otra cosa.
 - Zona con anticipo de envío que el cliente dijo pagar «mañana».
 - Cliente que ya había comprado y recibió un descuento pensado solo para clientes nuevos.
 - Dirección que mezclaba casa con número y «reclama en oficina».
