@@ -30,3 +30,18 @@ solo cambian marca, bot de Lucid y tienda de Shopify.
 - Nunca enviar a quien escribió hace menos de 6 h.
 - Nada de rifas (Coljuegos).
 - Las claves nunca se imprimen ni se suben al repo.
+
+## Aprendido de Toro Verde (lo pasó el chat de Toro Verde, 2026-11-23)
+- Lucid: imagen + texto como DOS mensajes en un solo `POST /contacts/{id}/send_content`
+  (el pie de foto no está comprobado). `last_interaction` viene en milisegundos en `/contacts/{id}`
+  y en fecha ISO en `find_by_custom_field`. Pedidos: `/pipelines/<id>/opportunities?limit=100&offset=N`.
+- Enviar solo a quien escribió hace entre 6 y 23 h. No repetir el casino en 3 días. Si ese día va otra
+  promo, no mandar las dos.
+- Diseño: máquina tragamonedas hiperrealista (gpt-image), con el logo de la marca o símbolos clásicos
+  y 7-7-7. Nada de animales «diabólicos». En grande: «Gana hasta $X de descuento» / «juega gratis hoy».
+  En el premio: «¡Ganaste hasta $X!», el ahorro por producto y un botón de WhatsApp por producto.
+  Sonidos reales, 3 tiros (casi, casi, gana), textos cortos.
+- Medir cada día: envíos, pedidos del embudo creados después del envío y plata; dar a Ronald los números de ayer y de hoy.
+  Referencia Toro Verde 18–23 nov: 2.523 recibieron, 67 ventas, $11,5 M; el 22 compró el 1,2 %.
+- Mejorar con datos, un cambio a la vez: si no juegan → cambiar mensaje/imagen; si juegan y no piden → cambiar premio.
+- Las tareas automáticas (10 a. m., 4 p. m. y 9 p. m. de Bogotá) se programan SOLO con la aprobación de Ronald.
