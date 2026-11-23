@@ -33,12 +33,13 @@ rob = sum(1 for o in d if 'CONFIRMADO AGENTE' in tg(o))
 print(f'HOY {hoy}: salieron {len(d)}, confirmados por el robot {rob} ({100*rob//max(1,len(d))} %)')
 
 # Tasa de ENTREGA (Ronald 23-11: «garantizar la tasa de entrega, ya que es contra entrega»).
+H30 = {str(o['id']): o for o in json.load(open('hoy30.json'))} if os.path.exists('hoy30.json') else H  # DIAS=30 SALIDA=/tmp/dropi/hoy30.json node hoy.js
 # Por semana de creación: confirmados por el robot (CONFIRMADO AGENTE) frente a aprobados por una persona.
 # Solo cuenta pedidos ya resueltos (entregado o devuelto); el resto va «en camino». hoy.json trae 10 días.
 FIN_OK = {'ENTREGADO'}
 FIN_MAL = {'DEVOLUCION', 'RECHAZADO', 'DEVOLUCION EN BODEGA', 'DEVUELTO'}
 sem = collections.defaultdict(lambda: collections.defaultdict(collections.Counter))
-for o in H.values():
+for o in H30.values():
     s = o['status']
     if 'CANCEL' in s or s in ('PENDIENTE CONFIRMACION', 'PENDIENTE', 'TELEMERCADEO'): continue
     quien = 'robot' if 'CONFIRMADO AGENTE' in tg(o) else 'persona'
