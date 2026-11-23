@@ -1,0 +1,12 @@
+{
+ "tienda": "Mi Tienda",
+ "dropi_user_id": 0,
+ "etiquetas": {"confirmado": 0, "revisar": 0, "carrito_recuperado": 0},
+ "lucid": {"embudo_pedidos": 0, "campo_resumen_pedido": 0, "campo_mensaje_lucidsales": 0, "campo_shopify_order": 0, "campo_carrito_recuperado": 0},
+ "avisos": {"equipo": ["3001234567"], "flujo_plantilla": 0, "campo_tipo": 0, "campo_titulo": 0, "campo_resumen": 0},
+ "presentaciones": {"UNIDAD": 1, "KIT X2": 2},
+ "precios_validos": [99000, 169000],
+ "tope_envio_general": 30000,
+ "topes_envio": {"presentaciones": {}, "unidades": {"1": 25000, "2": 29000}},
+ "min_entrega": 0.5
+}

@@ -1,0 +1,6 @@
+// Prueba editar campos de un pedido PENDIENTE CONFIRMACION. Uso: node editar.js <id> '<json>'
+const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const c=await b.newContext({storageState:'/tmp/dropi/estado.json',locale:'es-CO',userAgent:'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36'});const p=await c.newPage();let auth=null;p.on('request',r=>{const h=r.headers();if(!auth&&h['x-authorization'])auth=h['x-authorization']});
+await p.goto('https://app.dropi.co/dashboard/orders',{waitUntil:'networkidle',timeout:60000});
+const call=(m,u,body)=>p.evaluate(async([m,u,body,a])=>{const r=await fetch('https://api.dropi.co/api'+u,{method:m,headers:{'x-authorization':a,'accept':'application/json','content-type':'application/json'},body:body?JSON.stringify(body):undefined});let j=null;try{j=await r.json()}catch(e){};return {s:r.status,j}},[m,u,body,auth]);
+const [id,js]=process.argv.slice(2);const r=await call('PUT','/orders/myorders/'+id,JSON.parse(js));console.log('PUT',r.s,JSON.stringify(r.j).slice(0,300));
+const g=await call('GET','/orders/myorders/'+id);const o=g.j.objects;console.log('AHORA',o.status,(o.distribution_company||{}).name,o.distribution_company_id,o.total_order,o.shipping_amount||'');await b.close()})();
