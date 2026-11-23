@@ -2,7 +2,7 @@
 # (audio + datos para consignar el anticipo). Una vez por cliente, 7 a. m.–9 p. m., solo con la ventana de 24 h abierta y sin modo humano.
 # Después vigila el chat: si el cliente manda una imagen (comprobante), avisa al equipo para que valide la plata y confirme descontando el abono.
 # El pedido sigue en REVISAR HUMANO: el robot nunca confirma un pago anticipado solo. Uso: python3 -I robot/pedir_anticipo.py
-import json, os, re, time, datetime, urllib.request
+import json, os, re, time, datetime, urllib.request, base64, uuid, subprocess
 os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 K = open('lucidbot.key').read().strip(); API = 'https://panel.lucidbot.co/api'
 FLUJO = '1795460736971'  # AUDIO PEDIDO  CON DEVOLUCION
@@ -12,7 +12,21 @@ DEVUELVE = re.compile(r'recibe solo|devuelve|riesgosa|cr[ií]tica', re.I)
 def get(p):
     d = json.loads(urllib.request.urlopen(urllib.request.Request(API + p, headers={'X-ACCESS-TOKEN': K}), timeout=40).read())
     return d.get('data', d) if isinstance(d, dict) else d
+def post_json(p, b): return urllib.request.urlopen(urllib.request.Request(API + p, data=json.dumps(b).encode(), headers={'X-ACCESS-TOKEN': K, 'Content-Type': 'application/json'}, method='POST'), timeout=40).read().decode()
 def post(p): return urllib.request.urlopen(urllib.request.Request(API + p, data=b'{}', headers={'X-ACCESS-TOKEN': K, 'Content-Type': 'application/json'}, method='POST'), timeout=40).read().decode()
+def foto_historial(tel):
+    # Ronald 23-11: antes del audio se le manda al cliente la captura REAL de su «Historial del comprador» de Dropi (solo la tarjeta de él).
+    # Se sube con nombre aleatorio a un alojamiento temporal (se borra solo a los 3 días) y la copia local se borra al enviar. Sin IA.
+    png = f'/tmp/dropi/h_{uuid.uuid4().hex}.png'
+    try:
+        out = subprocess.run(['node', 'foto_huella.js', tel, png], cwd='/tmp/dropi', capture_output=True, text=True, timeout=150).stdout
+        if 'FOTO_OK' not in out or not os.path.exists(png): return None
+        b64 = 'data:image/png;base64,' + base64.b64encode(open(png, 'rb').read()).decode()
+        r = json.loads(urllib.request.urlopen(urllib.request.Request('https://kieai.redpandaai.co/api/file-base64-upload', data=json.dumps({'base64Data': b64, 'uploadPath': 'tv-h', 'fileName': uuid.uuid4().hex + '.png'}).encode(), headers={'Content-Type': 'application/json', 'Authorization': 'Bearer x'}, method='POST'), timeout=60).read())
+        return (r.get('data') or {}).get('downloadUrl')
+    except Exception: return None
+    finally:
+        if os.path.exists(png): os.remove(png)
 def imagenes(c):
     try: t = get(f'/contacts/{c}/messages?limit=20'); t = t if isinstance(t, str) else json.dumps(t, ensure_ascii=False)
     except Exception: return None, []
@@ -34,8 +48,12 @@ if 7 <= h < 21:
             if info.get('live_chat') or (time.time() - float(info.get('last_interaction') or 0) / 1000) > 23 * 3600: continue
         except Exception: continue
         n_img, _ = imagenes(c)
+        url = foto_historial(d.get('phone', ''))
+        if url:
+            try: post_json(f'/contacts/{c}/send_content', {'messages': [{'message': {'attachment': {'type': 'image', 'payload': {'url': url}}}}]})
+            except Exception: pass
         if 'true' in post(f'/contacts/{c}/send/{FLUJO}'):
-            reg[c] = {'pedido': a['id'], 'nombre': (d.get('name') or '').title(), 'total': d.get('total'), 'enviado': time.time(), 'imagenes': n_img or 0}
+            reg[c] = {'foto': bool(url), 'pedido': a['id'], 'nombre': (d.get('name') or '').title(), 'total': d.get('total'), 'enviado': time.time(), 'imagenes': n_img or 0}
             enviados += 1
 
 # Comprobantes: imagen nueva del cliente después del audio → aviso al equipo (se entrega con avisar_equipo.py)
