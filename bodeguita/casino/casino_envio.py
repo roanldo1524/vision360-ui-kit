@@ -125,6 +125,7 @@ for p in cat:
         PROD[nom] = op
 VACIAS = {'DE', 'DEL', 'LA', 'EL', 'LOS', 'LAS', 'CON', 'PARA', 'Y', 'EN', 'X2', 'OBSEQUIO', 'SH', 'PARA', 'EL', 'UN', 'UNA'}
 CLAVES = {n: [w for w in norm(n).split() if len(w) >= 3 and w not in VACIAS] for n in PROD}
+GENERICAS = {'ANTI', 'KIT', 'PACK', 'COMBO', 'PORTATIL', 'PROFESIONAL', 'HERRAMIENTA', 'DISPOSITIVO', 'TRASERA', 'AJUSTABLE', 'ANGULO', 'INTEGRAL'}
 cuenta = {}
 for ws in CLAVES.values():
     for w in set(ws):
@@ -135,8 +136,8 @@ def productos_en(texto):
     t = ' ' + norm(texto) + ' '
     hits = []
     for n, ws in CLAVES.items():
-        m = [w for w in ws if f' {w}' in t]
-        if len(m) >= min(2, len(ws)) or any(cuenta[w] == 1 for w in m):
+        m = [w for w in ws if re.search(r' ' + w + r'(?:S|ES)? ', t)]  # palabra completa (o su plural)
+        if len(m) >= min(2, len(ws)) or any(cuenta[w] == 1 and len(w) >= 5 and w not in GENERICAS for w in m):
             hits.append(n)
     return hits
 
@@ -186,7 +187,7 @@ lista = [(c, n, p) for c, (n, p) in tibios.items()
 print('PRODUCTOS_EN_CATALOGO', len(PROD), 'ANUNCIOS', len(ads), 'TIBIOS_6_A_23H', len(tibios),
       'YA_COMPRARON', sum(1 for c in tibios if c in compraron), 'PARA_ENVIAR', len(lista))
 if '--mostrar' in sys.argv:  # muestra qué producto y premio le tocaría a los primeros, sin enviar
-    for c, n, p in lista[:int(sys.argv[sys.argv.index('--mostrar') + 1])]:
+    for c, n, p in random.sample(lista, min(len(lista), int(sys.argv[sys.argv.index('--mostrar') + 1]))):
         u = ultimo_producto(c, p)
         print(' …' + c[-4:], '| anuncio:', p, '| último preguntado:', u, '|', PROD[u])
         time.sleep(0.3)
