@@ -29,6 +29,15 @@ solo cambian marca, bot de Lucid y tienda de Shopify.
 
 - Ronald confirma: la tienda de Shopify de La Bodeguita es la de **«alcomprar»**. Él la va a conectar.
 
+- WhatsApp del bot de La Bodeguita: **+57 323 308 0393** (en la página: W=573233080393).
+- CAMBIO DE RONALD: el casino de La Bodeguita se aloja en la tienda de **Toro Verde** (toroverde.co),
+  en una página aparte, SIN menú ni pie: la gente no puede navegar la tienda, solo ve el casino.
+  - En el tema vivo «TORO VERDE PLANTILLA ULTIMA» se prepararon: `layout/casino.liquid` (limpio, sin marca
+    Toro Verde, noindex) y `templates/page.casino-bodeguita.json` (usa ese layout).
+  - No toca la página principal ni el casino de Toro Verde (/pages/premios sigue igual).
+  - Falta: guardar (commit), crear la página `/pages/premios-bodeguita` con los productos y premios de
+    La Bodeguita, y publicar el tema SOLO con el sí de Ronald.
+
 ## Lo que sigue (cuando llegue lo anterior)
 2. Buscar en Lucid el embudo de pedidos y el campo del anuncio de La Bodeguita.
 3. Página `/pages/premios` en la tienda de La Bodeguita + subir foto y sonidos.
