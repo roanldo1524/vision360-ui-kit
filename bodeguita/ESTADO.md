@@ -29,6 +29,7 @@ solo cambian marca, bot de Lucid y tienda de Shopify.
 
 - Ronald confirma: la tienda de Shopify de La Bodeguita es la de **«alcomprar»**. Él la va a conectar.
 
+- La cuenta de Lucid Sales de La Bodeguita se llama **«Master Importer»**.
 - WhatsApp del bot de La Bodeguita: **+57 323 308 0393** (en la página: W=573233080393).
 - CAMBIO DE RONALD: el casino de La Bodeguita se aloja en la tienda de **Toro Verde** (toroverde.co),
   en una página aparte, SIN menú ni pie: la gente no puede navegar la tienda, solo ve el casino.
