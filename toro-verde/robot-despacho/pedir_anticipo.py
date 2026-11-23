@@ -27,7 +27,7 @@ if 7 <= h < 21:
         if a['accion'] != 'REVISAR': continue
         partes = [p.strip() for p in a['motivo'].split(';') if p.strip()]
         if not partes or not all(DEVUELVE.search(p) for p in partes): continue  # solo si el ÚNICO problema es que devuelve
-        d = det.get(a['id'], {}); c = '57' + d.get('phone', '')
+        d = det.get(a['id'], {}); c = d.get('chat') or '57' + d.get('phone', '')
         if c in reg: continue
         try:
             info = get(f'/contacts/{c}')

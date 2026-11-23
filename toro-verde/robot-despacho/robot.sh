@@ -13,7 +13,9 @@ if grep -q SESION_DROPI_CAIDA /tmp/dropi/ultimo.txt; then
   (cd /tmp/dropi && node detalle.js) | tail -1 | tee /tmp/dropi/ultimo.txt
   grep -q SESION_DROPI_CAIDA /tmp/dropi/ultimo.txt && { echo "SESION_DROPI_CAIDA"; exit 2; }
 fi
-python3 -I -c "import json;open('robot/contactos_dropi.txt','w').write('\n'.join('57'+d['phone'] for d in json.load(open('/tmp/dropi/detalle.json'))))"
+# Ronald 23-11: pedidos con otro teléfono → busca el WhatsApp que compró (número de pedido de Lucid Sales; si no, nombre) y lo pone en Dropi con el original en notas
+timeout 900 python3 -W ignore -I robot/telefonos.py | grep -E "^TEL_|^TELEFONOS"
+python3 -I -c "import json;open('robot/contactos_dropi.txt','w').write('\n'.join(d.get('chat') or '57'+d['phone'] for d in json.load(open('/tmp/dropi/detalle.json'))))"
 timeout 1200 python3 -W ignore -I robot/decidir.py --contactos robot/contactos_dropi.txt | head -1
 python3 -I robot/razonar.py | head -1
 # Ediciones (precio del chat / transportadora con la que recibe): Dropi crea un ID nuevo; se confirma en la siguiente vuelta tras volver a razonar.
@@ -50,7 +52,7 @@ python3 -I -c "
 import json
 dec={f['contacto']:f for f in json.load(open('robot/decision.json'))}
 for d in json.load(open('/tmp/dropi/detalle.json')):
-  f=dec.get('57'+d['phone'])
+  f=dec.get(d.get('chat') or '57'+d['phone'])
   if f and f.get('carrito') and 'CARRITORECUPERADOLUC' not in (d.get('tags') or []): print(d['id'])" > /tmp/dropi/carritos.txt
 [ -s /tmp/dropi/carritos.txt ] && (cd /tmp/dropi && echo "CARRITOS $(wc -l < carritos.txt)" && node etiq_lote.js carritos.txt 49501 </dev/null | tail -1)
 # Dirección clara: quita el barrio repetido y le pone «BARRIO» antes de confirmar (no reemplaza el pedido)

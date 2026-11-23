@@ -33,7 +33,7 @@ def litros_chat(txt):
 acc = []
 for d in det:
     motivos, editar = [], {}
-    f = luc.get('57' + d['phone'])
+    f = luc.get(d.get('chat') or '57' + d['phone'])
     oficina = bool(re.search(r'oficina|reclama|interrap', (d['dir'] or '').lower()))
     # 7) Dirección y nombre: si algo se ve raro, no se confirma (Ronald 21-11)
     dirx = re.sub(r'\s+', ' ', (d['dir'] or '')).strip(' ,').lower()
