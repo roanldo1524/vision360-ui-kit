@@ -93,6 +93,8 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   El premio sale del producto del enlace (`?p=afilador|detector|iman|pelador|ventilador|tensor|canas|mandala|brocas|bici|yunabi`),
   10 % sobre el precio del catálogo, redondeado hacia arriba para no pasar nunca del 10 %. Código BODEGUITA10. Sin regalo.
   WhatsApp 573233080393. Probado con Playwright (mandala, imán, producto desconocido → afilador): sin errores.
+- Ronald pidió que la máquina se vea real como la imagen: rodillos tipo tambor con borde dorado, 7 rojos con filo
+  dorado y línea verde de neón sobre la foto real de la máquina (vistas: `casino/vista-antes.png`, `casino/vista-gana.png`).
 - `bodeguita/casino/casino-wa-bodeguita.jpg`: imagen de WhatsApp («Gana hasta 10 % de descuento en tu pedido»).
 - `bodeguita/casino/casino_envio.py`: 6–23 h callado, nunca compró (todo 705299), 3 días sin repetir, revisa justo antes
   de enviar, comprueba que la cuenta sea La Bodeguita. Modos: contar (por defecto), `--prueba <número>`, `--enviar`.

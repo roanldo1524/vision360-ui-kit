@@ -14,14 +14,14 @@
 #tvx .led b{font:900 22px/1 Orbitron,monospace;color:#ff3b1f;text-shadow:0 0 10px #ff3b1f;letter-spacing:.04em;font-variant-numeric:tabular-nums}
 #tvx .led.gana b{color:var(--o);text-shadow:0 0 14px var(--o)}
 #tvx .vent{position:absolute;left:16.3%;width:66%;top:36.4%;height:36.8%;display:grid;grid-template-columns:repeat(3,1fr);gap:2.5%;padding:2%}
-#tvx .rod{position:relative;overflow:hidden;border-radius:6px;background:linear-gradient(90deg,#b9b29a,#f6f1df 30%,#fffdf3 50%,#f6f1df 70%,#b9b29a)}
-#tvx .rod:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.65),transparent 28%,transparent 72%,rgba(0,0,0,.65));pointer-events:none}
+#tvx .rod{position:relative;overflow:hidden;border-radius:8px;background:linear-gradient(180deg,#3d382c,#cfc8b0 14%,#f7f2e2 32%,#fffef8 50%,#f7f2e2 68%,#cfc8b0 86%,#3d382c);box-shadow:inset 0 0 0 3px #d9b24a,inset 0 0 0 5px #5a4100,0 0 0 2px #1a1200,0 4px 12px rgba(0,0,0,.6)}
+#tvx .rod:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.7),transparent 30%,rgba(255,255,255,.18) 48%,transparent 56%,transparent 70%,rgba(0,0,0,.7)),linear-gradient(90deg,rgba(0,0,0,.35),transparent 18%,transparent 82%,rgba(0,0,0,.35));pointer-events:none}
 #tvx .tira{will-change:transform}
 #tvx .s{display:flex;align-items:center;justify-content:center;font-size:44px;line-height:1}
-#tvx .s .siete{font:900 54px/1 "Barlow Condensed";color:#d0140f;-webkit-text-stroke:2px #6d0000;text-shadow:0 2px 0 #ffcf3a}
+#tvx .s .siete{font:900 66px/1 "Barlow Condensed";padding:0 6px;transform:skewX(-8deg);display:inline-block;background:linear-gradient(180deg,#ff7a5c,#e01a10 45%,#8a0000);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:2.5px #f2c14e;filter:drop-shadow(0 3px 0 #5a3a00) drop-shadow(0 0 6px rgba(255,190,60,.5))}
 #tvx .s .bar{font:900 18px/1 "Barlow Condensed";color:#fff;background:#111;padding:6px 8px;border-radius:4px;border:2px solid #d9b13b;letter-spacing:.05em}
 #tvx .tira.blur{filter:blur(2.5px)}
-#tvx .linea{position:absolute;left:12%;right:15%;top:54.8%;height:3px;background:#ff2a2a;box-shadow:0 0 10px #ff2a2a;opacity:.85;pointer-events:none}
+#tvx .linea{position:absolute;left:12%;right:15%;top:54.8%;height:3px;background:#9dff3a;box-shadow:0 0 8px #9dff3a,0 0 18px #4cff00;opacity:.9;pointer-events:none}
 #tvx .rod.win{box-shadow:0 0 0 3px var(--v),0 0 24px var(--v);animation:tvxw .5s ease-in-out infinite alternate}@keyframes tvxw{to{box-shadow:0 0 0 3px var(--o),0 0 34px var(--o)}}
 #tvx .palanca{position:absolute;right:0;top:14.6%;width:14%;height:54.8%;cursor:pointer;-webkit-tap-highlight-color:transparent}
 #tvx .mano{position:absolute;right:2%;top:29.3%;font-size:28px;animation:tvxm 1.2s ease-in-out infinite;pointer-events:none}@keyframes tvxm{50%{transform:translateY(14px)}}
@@ -58,7 +58,7 @@
 <button class="sonido" id="son">🔊 Sonido</button>
 <div class="cab"><span class="pill">🎰 JUEGA GRATIS HOY</span>
 <h1 id="hola">Gana hasta <span class="m" id="tope">$0</span> de descuento</h1></div>
-<div class="como"><div><b>1</b>Jala la palanca o toca GIRAR</div><div><b>2</b>Los rodillos paran solos</div><div><b>3</b>7-7-7 en la línea roja = ¡premio mayor!</div></div>
+<div class="como"><div><b>1</b>Jala la palanca o toca GIRAR</div><div><b>2</b>Los rodillos paran solos</div><div><b>3</b>7-7-7 en la línea verde = ¡premio mayor!</div></div>
 <div class="maq" id="maq">
 <div class="led" id="led"><small>PREMIO</small><b id="premioLed">$0</b></div>
 <div class="vent"><div class="rod"><div class="tira" id="r0"></div></div><div class="rod"><div class="tira" id="r1"></div></div><div class="rod"><div class="tira" id="r2"></div></div></div>
