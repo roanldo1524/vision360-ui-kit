@@ -42,6 +42,7 @@
 #tvx #premio{display:none;margin-top:14px;background:linear-gradient(180deg,#fffbe8,#fff2c2);color:#2a1a00;border-radius:18px;padding:18px 16px 16px;box-shadow:0 0 0 3px var(--o),0 0 40px rgba(255,200,40,.4);animation:tvxp .5s var(--eo)}
 #tvx #premio h2{font-family:"Barlow Condensed";font-weight:900;text-transform:uppercase;font-size:32px;line-height:.95;color:#043434;text-align:center}
 #tvx #premio h2 span{color:#c47b00}
+#tvx #premio .g{text-align:center;font-weight:800;color:#2f6b00;margin-top:6px;font-size:16px}
 #tvx #premio .p{font-size:14.5px;margin-top:8px;color:#5c4a20;line-height:1.35;text-align:center}
 #tvx .prod{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 10px;width:100%;margin-top:10px;border-radius:14px;padding:12px 14px;background:#043434;color:#fff;text-decoration:none;transition:transform .14s}
 #tvx .prod:active{transform:scale(.97)}
@@ -70,7 +71,7 @@
 <div class="tiros" id="tiros">Tiros gratis: <i></i><i></i><i></i></div>
 <p class="msg" id="msg">Tienes 3 tiros gratis. ¡Jala la palanca!</p>
 <button class="btn late" id="tirar">🎰 Girar gratis</button>
-<section id="premio" aria-live="polite"><h2>¡Jackpot! Ganaste <span>hasta $26.900</span></h2><p class="p">Tu premio: <b>10% de descuento + semilla de maíz criollo de regalo</b>. Elige cuánto quieres y te tomamos el pedido por WhatsApp. Código <b>RULETA10</b>.</p><div id="prods"></div><p class="aviso">Premio apartado a tu nombre hasta la medianoche. Pagas al recibir en tu casa o en la oficina de Interrapidísimo. Un premio por persona, válido en tu primer pedido.</p></section>
+<section id="premio" aria-live="polite"><h2>¡Jackpot! Ganaste <span>hasta $26.900</span></h2><p class="g">+ semilla de maíz criollo de regalo 🌽</p><p class="p">Tu premio es <b>10% de descuento</b>: con el <b>galón ahorras $26.900</b>, con 2 litros $16.900 y con 1 litro $9.900. Toca el que quieres y te tomamos el pedido por WhatsApp 👇</p><div id="prods"></div><p class="aviso">Código RULETA10. Premio apartado a tu nombre hasta la medianoche. Pagas al recibir en tu casa o en la oficina de Interrapidísimo. Un premio por persona, válido en tu primer pedido.</p></section>
 <p class="uso">Uso: agite el envase y aplique mínimo 130 ml por bomba de 20 litros.</p>
 </div>
 <script>
@@ -113,8 +114,8 @@ function monedas(n){var maq=$("maq"),r=maq.getBoundingClientRect(),band=$("bande
 setTimeout(function(){c.remove();if(band.children.length<45){var p=document.createElement("i");p.className="moneda";p.style.left=(Math.random()*85)+"%";p.style.bottom=(Math.random()*40)+"%";band.appendChild(p)}},900)},k*70)})(k)}
 function papel(n){var cs=["#c8f520","#ffd54a","#fff","#ff3b1f"];for(var k=0;k<n;k++){var d=document.createElement("i");d.className="pz";d.style.left=Math.random()*100+"%";d.style.background=cs[k%4];d.style.setProperty("--dx",(Math.random()*140-70)+"px");d.style.setProperty("--r",(Math.random()*720-360)+"deg");d.style.animationDelay=Math.random()*.8+"s";root.appendChild(d);setTimeout(function(x){x.remove()}.bind(null,d),3600)}}
 function jackpot(){document.querySelectorAll("#tvx .rod").forEach(function(x){x.classList.add("win")});play("jack",1,9000);vib([100,50,100,50,400]);var f=$("flash");f.classList.remove("on");void f.offsetWidth;f.classList.add("on");papel(90);setTimeout(function(){papel(60)},1200);contar();monedas(45);b.style.display="none";setTimeout(premio,2900)}
-function premio(){var P=[["1 litro",99000,89100,""],["2 litros",169000,152100,""],["Galón (4 litros)",269000,242100,"El que más rinde"]],mm=function(x){return"$"+x.toLocaleString("es-CO")};
-$("prods").innerHTML=P.map(function(x,k){var t="Hola, gané en el casino Toro Verde: 10% de descuento + semilla de maíz criollo de regalo. Código RULETA10. Quiero "+x[0]+" a "+mm(x[2])+".";return'<a class="prod'+(k==2?" top1":"")+'" href="https://wa.me/'+W+'?text='+encodeURIComponent(t)+'"><span class="n">'+x[0]+'</span><span class="a">Ahorras '+mm(x[1]-x[2])+'</span><span class="d"><span>'+(x[3]||"Pagas al recibir")+'</span><span><s>'+mm(x[1])+'</s> '+mm(x[2])+'</span></span></a>'}).join("");
+function premio(){var P=[["Galón (4 litros)",269000,242100,"El que más rinde"],["2 litros",169000,152100,""],["1 litro",99000,89100,""]],mm=function(x){return"$"+x.toLocaleString("es-CO")};
+$("prods").innerHTML=P.map(function(x,k){var t="Hola, gané en el casino Toro Verde: 10% de descuento + semilla de maíz criollo de regalo. Código RULETA10. Quiero "+x[0]+" a "+mm(x[2])+".";return'<a class="prod'+(k==0?" top1":"")+'" href="https://wa.me/'+W+'?text='+encodeURIComponent(t)+'"><span class="n">'+x[0]+'</span><span class="a">Ahorras '+mm(x[1]-x[2])+'</span><span class="d"><span>'+(x[3]||"Pagas al recibir")+'</span><span><s>'+mm(x[1])+'</s> '+mm(x[2])+'</span></span></a>'}).join("");
 $("premio").style.display="block";setTimeout(function(){$("premio").scrollIntoView({behavior:"smooth",block:"center"})},150)}
 b.onclick=girar;$("palanca").onclick=girar;
 window.addEventListener("load",function(){for(var i=0;i<3;i++)pone(i,["cereza","toro","bar"][i]);if(st.u>=N){for(var i=0;i<3;i++)pone(i,"siete");document.querySelectorAll("#tvx .rod").forEach(function(x){x.classList.add("win")});$("premioLed").textContent="$26.900";$("led").classList.add("gana");$("msg").textContent="¡Ya ganaste! Reclama tu premio 👇";b.style.display="none";$("mano").style.display="none";pinta();premio()}else{pinta();if(st.u>0)$("msg").textContent=MSJ[st.u-1]}});
