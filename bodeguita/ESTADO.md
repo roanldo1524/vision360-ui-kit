@@ -109,6 +109,16 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   mandarles mensaje libre. Tienen que escribir «hola» al bot +57 323 308 0393 y ahí se manda la prueba.
 - La prueba completa también necesita la imagen en Shopify y la página publicada (falta el sí de Ronald).
 
+## CAMBIO DE RONALD (2026-11-23 noche): el casino NO puede mostrar nada de Toro Verde
+- La prueba a Ronald (solo texto, enlace toroverde.co/pages/premios-bodeguita) lo llevó al inicio de Toro Verde
+  porque la página no existía. Ronald: nada de Toro Verde, ni banner; pantalla completa; el mensaje va con foto.
+- Nueva versión: `bodeguita/casino/web/` (index.html a pantalla completa + casino-wa.jpg liviana). Se publicará en
+  Vercel como proyecto propio «casino-labodeguita» (casino-labodeguita.vercel.app), no en Shopify.
+  Fotos de la máquina y sonidos siguen en cdn.shopify.com (dirección genérica, no muestra marca).
+- Vercel pidió permiso para el equipo «matrix-ops»: se le pasó el enlace a Ronald. Después: publicar, cambiar
+  PAGINA e IMAGEN en casino_envio.py a la dirección nueva y mandar la prueba completa a Ronald.
+- Ya no hace falta publicar el tema de Toro Verde para La Bodeguita.
+
 ## Lo que sigue (cuando llegue lo anterior)
 2. Buscar en Lucid el embudo de pedidos y el campo del anuncio de La Bodeguita.
 3. Página `/pages/premios` en la tienda de La Bodeguita + subir foto y sonidos.
