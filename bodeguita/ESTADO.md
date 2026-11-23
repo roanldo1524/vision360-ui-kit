@@ -38,6 +38,12 @@ solo cambian marca, bot de Lucid y tienda de Shopify.
   - Falta: guardar (commit), crear la página `/pages/premios-bodeguita` con los productos y premios de
     La Bodeguita, y publicar el tema SOLO con el sí de Ronald.
 
+- PENDIENTE DE CONFIRMAR CON RONALD (2026-11-23): el chat de Toro Verde dice que Ronald cambió la regla:
+  el casino SÍ iría a clientes que ya compraron y recibieron (recompra), y se excluye solo a quien tenga un
+  pedido en los últimos 15 días (posventa o pedido reciente). Eso ya está así en Toro Verde (commit d5fb3c1).
+  Choca con la regla escrita en CLAUDE.md y en la tarea («descuento solo para quien nunca ha compró»).
+  Para La Bodeguita NO se aplica hasta que Ronald lo confirme directamente.
+
 ## Lo que sigue (cuando llegue lo anterior)
 2. Buscar en Lucid el embudo de pedidos y el campo del anuncio de La Bodeguita.
 3. Página `/pages/premios` en la tienda de La Bodeguita + subir foto y sonidos.
