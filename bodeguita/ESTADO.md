@@ -71,6 +71,10 @@ Dúo pelador 40 % (338) · Ventilador solar 58 % (278) · Tensor de cadena 53 % 
 Luces mandala 19 % (120) · Yunabi 19 % (101) · Afilador de brocas 67 % (66) · Luz bici 68 % (57) ·
 Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
 
+- Ronald (2026-11-23): **los precios válidos son los del catálogo del bot** (campo 312704). No pedirlos de nuevo.
+  Ojo Imán: en pedidos reales se cobró 1 und a 109.000 (13 pedidos) y 2 und a 199.000, aunque el catálogo dice
+  1 und 99.000. Revisar si fue un cambio de precio.
+
 ## En curso: objeciones por producto
 - Leídos 388 chats de quienes escribieron desde el 2-nov y no compraron. Resultado → `bodeguita/objeciones.md`.
 
