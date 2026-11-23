@@ -1,6 +1,8 @@
 #!/bin/bash
 # Robot de despacho (v2): lee Dropi → razona con el chat de Lucid y las reglas de Ronald → edita (precio/transportadora) → confirma → etiqueta lo demás.
 cd "$(dirname "$0")/.." || exit 1
+# Una sola vuelta a la vez (Ronald 23-11: robot cada 15 min): si otra sigue corriendo, esta no arranca.
+exec 9>/tmp/dropi/robot.lock; flock -n 9 || { echo ROBOT_OCUPADO; exit 0; }
 (cd /tmp/dropi && node detalle.js) | tail -1 | tee /tmp/dropi/ultimo.txt
 # Si Dropi cerró la sesión, vuelve a entrar solo con DU/DP del entorno (Ronald 22-11) y lo intenta una vez más.
 # Si la sesión venció a mitad (los pedidos llegan sin cantidad), también se vuelve a entrar.
