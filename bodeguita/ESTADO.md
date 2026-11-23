@@ -119,6 +119,14 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   PAGINA e IMAGEN en casino_envio.py a la dirección nueva y mandar la prueba completa a Ronald.
 - Ya no hace falta publicar el tema de Toro Verde para La Bodeguita.
 
+## PUBLICADO (2026-11-23 noche)
+- Casino en **https://casino-labodeguita.vercel.app/** (Vercel, equipo matrix-ops, proyecto casino-labodeguita).
+  Pantalla completa, sin nada de Toro Verde. Protección de Vercel solo en vistas previas (la principal es pública).
+  Se publicó pasando el archivo directo (GitHub frenaba a Vercel). Para cambios: volver a publicar web/index.html.
+- Foto del mensaje: raw.githubusercontent.com/…/88206144…/bodeguita/casino/web/casino-wa.jpg (repo público).
+- casino_envio.py ya usa esas direcciones. Prueba completa (foto + texto + enlace) enviada a Ronald: OK.
+- Falta: visto bueno de Ronald; que el bot de Lucid reconozca BODEGUITA10 (su sí); programar envíos (su sí).
+
 ## Lo que sigue (cuando llegue lo anterior)
 2. Buscar en Lucid el embudo de pedidos y el campo del anuncio de La Bodeguita.
 3. Página `/pages/premios` en la tienda de La Bodeguita + subir foto y sonidos.
