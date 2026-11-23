@@ -656,3 +656,8 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 23-11 5:19 a. m.: confirmados 7 (1 L c/u): Viviana García (97957674, Cartago), James Hoyos (97955552, Cali), Dinel Rivera (97953438, of. Supía), Fanor Muñoz (97951198, of. Puerto Guzmán), José Alcina Navarro (97949289, of. Caicedonia), Carlos Sanabria (97968635, Zipaquirá, piso 2 agregado), Javier Ariza (97941690, of. Fuente de Oro). 3 nuevos a REVISAR HUMANO.
 - 23-11 6:19 a. m.: confirmados José Manuel Eusse (97970919, 1 L, of. San José de la Montaña; resubido en Lucid sin obsequio, 8108544) y Luis Eduardo Moreno (97917066, 2 L Shopify, of. Riofrío; dirección limpiada).
 - 23-11 6:49 a. m.: confirmados Luis Orlando Guerrero (97971778, 1 L, of. Chocontá) y Ángel María Liz (97971405, 2 L, of. Belalcázar Cauca).
+
+## 2026-11-23 10:52 a. m. — Casino medido en Clarity
+- La página /pages/premios ahora manda a Clarity (proyecto uavk9ly045) 9 marcas: casino_abre, casino_tiro_1/2/3, casino_jackpot, casino_premio_visto, casino_reclama_galon/2litros/1litro y casino_sin_sonido. También etiqueta casino=v3 y origen (whatsapp/directo).
+- Publicada y revisada en vivo: juega los 3 tiros, sale el premio, sin errores.
+- Robot 7:20 a. m.: 0 pedidos para confirmar (79 en REVISAR HUMANO, 26 esperando respuesta).
