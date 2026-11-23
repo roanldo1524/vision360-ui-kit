@@ -15,6 +15,18 @@ solo cambian marca, bot de Lucid y tienda de Shopify.
   5. Palabras prohibidas de la marca.
   6. Conectar la tienda de Shopify de La Bodeguita en los conectores de claude.ai.
 
+## Novedades 2026-11-23 (tarde)
+- Ronald entregó las claves de Lucid de La Bodeguita. Están guardadas en archivos privados que NO se suben.
+  OJO: las pegó en el chat, así que conviene cambiarlas en Lucid cuando todo esté montado.
+- PROBLEMA: el espacio de trabajo actual («EDITOR DE VIDEO DE DOPSHIPING») inyecta la clave de Lucid de
+  Toro Verde y la pone encima de la nuestra (la prueba devolvió la cuenta «Toro Verde»). No usar Lucid desde ahí.
+- Creado el espacio de trabajo **«La Bodeguita»** (env_01SufUksUbhMyKsHmPfdYyy1). Esta sesión no se puede
+  mover a ese espacio, así que hay que abrir una sesión nueva en él y guardar ahí la clave de Lucid de
+  La Bodeguita como secreto de red (panel.lucidbot.co, cabecera X-ACCESS-TOKEN).
+- CAMBIO DE RONALD: cada producto ya tiene su premio listo, así que el descuento es VARIABLE según el
+  producto por el que el cliente escribió. El casino debe mostrar el premio de ESE producto (tope del 10 %).
+  Falta: la lista de productos con su premio y saber en qué campo de Lucid queda el producto de interés.
+
 ## Lo que sigue (cuando llegue lo anterior)
 2. Buscar en Lucid el embudo de pedidos y el campo del anuncio de La Bodeguita.
 3. Página `/pages/premios` en la tienda de La Bodeguita + subir foto y sonidos.
