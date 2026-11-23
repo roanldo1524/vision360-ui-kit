@@ -76,7 +76,17 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   1 und 99.000. Revisar si fue un cambio de precio.
 
 ## En curso: objeciones por producto
-- Leídos 388 chats de quienes escribieron desde el 2-nov y no compraron. Resultado → `bodeguita/objeciones.md`.
+- Leídos 388 chats de quienes escribieron desde el 2-nov y no compraron. Resultado → `bodeguita/objeciones.md`
+  (motivos por producto, frases de clientes, errores del bot, preguntas y reglas listas para pegar, ventas recuperables).
+- Fallas que se repiten en casi todos los productos:
+  1. El bot NO da el precio en texto cuando lo preguntan («a cómo», «cuánto vale»): Imán, Mandala, Yunabi, Afilador, Pelador.
+  2. Reinicia el guion completo si el cliente manda video, enlace o vuelve a escribir.
+  3. Precios que cambian según el chat (Afilador 129.000 vs 129.900; Mandala 109.000/109.900/129.900; Imán 99.000/99.900).
+  4. Inventa o se contradice (Mandala: «sí/no se pegan a la pared»; «revisas antes de pagar», lo contrario de la política).
+  5. Ofrece descuentos de $5.000 por su cuenta, y las reglas 24 y 96 de descuentos se contradicen.
+  6. No cierra: pregunta «¿cuántas unidades?», «¿qué color?», pide datos uno por uno o datos que ya tiene.
+  7. Promete «una asesora te contacta en minutos» y nadie aparece.
+- ESPERANDO el sí de Ronald para pegar los arreglos en Lucid y para escribirle a las ventas recuperables.
 
 ## Lo que sigue (cuando llegue lo anterior)
 2. Buscar en Lucid el embudo de pedidos y el campo del anuncio de La Bodeguita.
