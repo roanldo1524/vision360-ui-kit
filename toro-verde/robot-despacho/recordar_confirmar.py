@@ -1,9 +1,12 @@
 # Ronald 21-11: «entre más pedidos puedas confirmar, mejor». Pedidos frenados SOLO porque el cliente no ha confirmado
 # (página/Shopify sin «CONFIRMAR PEDIDO» o sin «sí» después del resumen): se le recuerda UNA vez para que confirme.
-# Solo con la ventana de 24 h abierta (texto). Con la ventana cerrada no hay cómo escribirle gratis: queda para Karen.
-import json, os, re, time, datetime, urllib.request
+# Ventana de 24 h abierta: texto. Ventana cerrada: plantilla «confirmar_pedido_robot» (si FLUJO_CONFIRMAR tiene el flujo).
+import json, os, re, time, datetime, urllib.request, urllib.parse
 os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 K = open('lucidbot.key').read().strip(); API = 'https://panel.lucidbot.co/api'
+# Ronald 23-11: con la ventana cerrada se usa la plantilla aprobada «confirmar_pedido_robot» (flujo de Lucid). Vacío = apagado.
+FLUJO_CONFIRMAR = ''  # pon aquí el número del flujo «Robot - Confirmar pedido» cuando Meta apruebe la plantilla
+CAMPO_RESUMEN = '198260'  # Resumen_confirmacion_pedido: {{2}} de la plantilla
 REG = '/tmp/dropi/recordados_conf.json'; reg = json.load(open(REG)) if os.path.exists(REG) else {}
 hora = (datetime.datetime.utcnow() - datetime.timedelta(hours=5)).hour
 if not 8 <= hora < 20: print('RECORDAR_CONFIRMAR fuera de horario'); raise SystemExit
@@ -30,8 +33,14 @@ for a in json.load(open('/tmp/dropi/acciones.json')):
             t = (f"¡Hola {nom}! 🌱 Tu pedido de Toro Verde está listo para salir: *{prod}* por *${d.get('total',0):,.0f}*".replace(',', '.') +
                  f", a {(d.get('dir') or '').strip()}, {(d.get('city') or '').title()}. Pagas al recibir 🚚\n\n¿Me confirmas que te lo despachamos? Responde *SÍ* y sale de una 🙌")
             r = post(f'/contacts/{c}/send_content', {'messages': [{'message': {'text': t}}]}); via = 'texto'
+        elif FLUJO_CONFIRMAR:
+            dirx = (d.get('dir') or '').strip()
+            donde = f"para reclamar en la oficina de Interrapidísimo de {(d.get('city') or '').title()}" if re.search(r'reclama', dirx, re.I) else f"a {dirx}, {(d.get('city') or '').title()}"
+            res = re.sub(r'\s+', ' ', f"{prod} por ${d.get('total',0):,.0f}".replace(',', '.') + f", {donde}").strip()[:300]
+            urllib.request.urlopen(urllib.request.Request(f'{API}/contacts/{c}/custom_fields/{CAMPO_RESUMEN}', data=urllib.parse.urlencode({'value': res}).encode(), headers={'X-ACCESS-TOKEN': K, 'Content-Type': 'application/x-www-form-urlencoded'}, method='POST'), timeout=40).read()
+            r = post(f'/contacts/{c}/send/{FLUJO_CONFIRMAR}'); via = 'plantilla'
         else:
-            continue  # ventana cerrada: el flujo «Confirmacion landing» no se deja reenviar por la API (probado 21-11, no sale nada)
+            continue  # ventana cerrada y todavía no hay plantilla aprobada
     except Exception as e:
         continue
     if 'true' in r or 'success' in r:
