@@ -49,7 +49,8 @@ json.dump(m,open(M,'w'),ensure_ascii=False)"
 python3 -I robot/aclarar.py
 python3 -I robot/pedir_anticipo.py  # Ronald 23-11: audio de anticipo a los que solo frenan por devoluciones
 # Ronald 23-11: novedades de Dropi → fichas para que Claude las solucione (solucionar_nov.js). Si el cliente no ha respondido, se le pregunta una vez.
-(cd /tmp/dropi && timeout 300 node novedades.js </dev/null | tail -1) && python3 -I robot/novedades.py --escribir
+# Ronald 23-11 (tarde): «novedades y todo eso lo resuelve el bot, no es tu función en este chat». Apagado.
+# (cd /tmp/dropi && timeout 300 node novedades.js </dev/null | tail -1) && python3 -I robot/novedades.py --escribir
 python3 -I robot/recordar_confirmar.py
 # Ronald 21-11: pedidos de carritos recuperados de Shopify llevan la etiqueta CARRITORECUPERADOLUC (49501) en Dropi.
 python3 -I -c "
