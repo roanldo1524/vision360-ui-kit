@@ -1,31 +1,50 @@
-# Último empujón: a quien recibió el casino hoy y no ha comprado: «tu premio vence a medianoche».
-import json,os,time,urllib.request,datetime,re
+# Empujón de las 8 p. m. (Ronald 23-11: «metele urgencia a las 8 de la noche si se les envió el casino y no han comprado»).
+# A quien recibió el casino HOY y no ha hecho pedido después de recibirlo. Imagen + texto con su nombre y su enlace.
+import json,os,time,urllib.request,urllib.parse,datetime,re,random
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 K=open('lucidbot.key').read().strip()
-def get(p): return json.loads(urllib.request.urlopen(urllib.request.Request('https://panel.lucidbot.co/api'+p,headers={'X-ACCESS-TOKEN':K}),timeout=40).read())
+API='https://panel.lucidbot.co/api'
+def get(p): return json.loads(urllib.request.urlopen(urllib.request.Request(API+p,headers={'X-ACCESS-TOKEN':K}),timeout=40).read())
+def post(p,b): return urllib.request.urlopen(urllib.request.Request(API+p,data=json.dumps(b).encode(),headers={'X-ACCESS-TOKEN':K,'Content-Type':'application/json'},method='POST'),timeout=40).read().decode()
 reg=json.load(open('casino/enviados.json'))
-hoy=datetime.datetime.now(datetime.timezone.utc)-datetime.timedelta(hours=10)
-lista=[c for c,f in reg.items() if f>=hoy.isoformat()]
-comp=set();o=0
+bog=datetime.timezone(datetime.timedelta(hours=-5))
+ahora=datetime.datetime.now(bog)
+medianoche=ahora.replace(hour=0,minute=0,second=0,microsecond=0).astimezone(datetime.timezone.utc).isoformat()
+lista=[c for c,f in reg.items() if f>=medianoche]
+# Pedidos hechos DESPUÉS de recibir el casino: ese ya compró, no se le escribe.
+ped={}
+o=0
 while o<20000:
   d=get(f'/pipelines/705299/opportunities?limit=100&offset={o}');d=d.get('data',d)
-  comp|={str(r['contact_id']) for r in d}
+  for r in d:
+    c=str(r['contact_id']);f=r.get('created_at') or ''
+    if f>ped.get(c,''): ped[c]=f
   if len(d)<100:break
   o+=100
 hechos=set(open('casino/recordados.txt').read().split()) if os.path.exists('casino/recordados.txt') else set()
-lista=[c for c in lista if c not in comp and c not in hechos]
-txt="⏰ ¡Últimas horas! Tu premio del casino Toro Verde vence hoy a la medianoche.\n\nSi ya jugaste, solo responde *QUIERO MI PREMIO* y te tomo el pedido ya mismo 🚚 (pagas al recibir).\n\nSi no has jugado, aún tienes 3 tiros gratis para ganar hasta $26.900 de descuento 🎰👇\nhttps://toroverde.co/pages/premios"
-ok=0
+lista=[c for c in lista if ped.get(c,'')[:19]<=reg[c][:19] and c not in hechos]
+horas=max(1,24-ahora.hour)
+IMAGEN='https://cdn.shopify.com/s/files/1/0687/6096/1211/files/casino-wa-777.jpg?v=1795398353'
+MSJ=[
+"🚨 {n}, *tu premio se pierde a la medianoche*\n\nTe quedan *{h} horas* para reclamar *hasta $26.900 de descuento* + semilla de maíz criollo de regalo 🌽\n\nYa ganaste. Solo responde *QUIERO MI PREMIO* y te dejo el pedido listo ahora mismo 🚚 Pagas al recibir.\n\n¿No has jugado? Tus 3 tiros siguen ahí 👇\n{u}",
+"⏰ {n}, *últimas {h} horas* de tu premio del Casino Toro Verde\n\nA la medianoche se borra tu descuento de *hasta $26.900* y la semilla de regalo 🌽\n\nResponde *QUIERO MI PREMIO* y te tomo el pedido ya, pagas cuando te llegue 📦\n\nO juega tus 3 tiros aquí 👇\n{u}",
+]
+ok=0;env=0
 for c in lista:
-  # Si escribió en las últimas 3 h está hablando con el bot (comprando): no se le interrumpe.
   try:
     info=get(f'/contacts/{c}');info=info.get('data',info)
-    li=float(info.get('last_interaction') or 0)/1000  # milisegundos, no fecha ISO
-    if time.time()-li<3*3600: continue
+    li=float(info.get('last_interaction') or 0)/1000  # milisegundos
+    if time.time()-li<3*3600: continue  # está hablando con el bot: no se interrumpe
+    if time.time()-li>23*3600: continue  # ventana de WhatsApp cerrada
+    nom=re.sub(r'[^A-Za-zÁÉÍÓÚáéíóúÑñ ]','',info.get('first_name') or '').strip().split(' ')[0].capitalize()
   except Exception: continue
+  u='https://toroverde.co/pages/premios?n='+urllib.parse.quote(nom)+'&utm_source=whatsapp&utm_campaign=casino_8pm'
+  t=random.choice(MSJ).format(n=nom or '¡Hola!',h=horas,u=u)
+  if not nom: t=t.replace('¡Hola!, ','').replace('¡Hola!','')
+  env+=1
   try:
-    r=urllib.request.urlopen(urllib.request.Request(f'https://panel.lucidbot.co/api/contacts/{c}/send_content',data=json.dumps({'messages':[{'message':{'text':txt}}]}).encode(),headers={'X-ACCESS-TOKEN':K,'Content-Type':'application/json'},method='POST'),timeout=40).read().decode()
+    r=post(f'/contacts/{c}/send_content',{'messages':[{'message':{'attachment':{'type':'image','payload':{'url':IMAGEN}}}},{'message':{'text':t}}]})
     if 'true' in r: ok+=1; open('casino/recordados.txt','a').write(c+'\n')
   except Exception: pass
   time.sleep(0.5)
-print('RECORDADOS',ok,'DE',len(lista))
+print('RECORDADOS',ok,'DE',env,'CANDIDATOS',len(lista))
