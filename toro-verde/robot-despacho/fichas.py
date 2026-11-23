@@ -15,7 +15,7 @@ acc = {a['id']: a for a in json.load(open('/tmp/dropi/acciones.json'))}
 dec = {f['contacto']: f for f in json.load(open('robot/decision.json'))}
 out = []
 for x in plan['confirmar']:
-    d = det.get(x['id'], {}); c = '57' + d.get('phone', ''); f = dec.get(c, {})
+    d = det.get(x['id'], {}); c = d.get('chat') or '57' + d.get('phone', ''); f = dec.get(c, {})
     lt = (((d.get('huella') or {}).get('global_profile') or {}).get('lifetime_totals') or {})
     items = '; '.join(f"{i['q']} x {i['pres']} ${i['precio']:,.0f}" for i in d.get('items', []))
     out.append(f"## {x['id']} · {d.get('name','')} {d.get('surname','')} · {d.get('phone','')}\n"
