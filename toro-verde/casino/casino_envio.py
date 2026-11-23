@@ -26,7 +26,10 @@ while o < 20000:
     d = get(f'/pipelines/705299/opportunities?limit=100&offset={o}')
     d = d.get('data', d)
     for r in d:
-        compraron.add(str(r.get('contact_id')))
+        # Ronald 23-11: el casino también es para clientes que ya compraron (recompra).
+        # Solo se excluye a quien hizo un pedido en los últimos 15 días: puede estar en camino (posventa) o cancelaría para pedirlo con descuento.
+        if (r.get('created_at') or '') >= (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=15)).isoformat():
+            compraron.add(str(r.get('contact_id')))
     if len(d) < 100:
         break
     o += 100
@@ -66,7 +69,7 @@ if os.path.exists('empujon_hecho.txt') and (time.time() - os.path.getmtime('empu
     hoy_promo |= set(open('empujon_hecho.txt').read().split())
 hace3 = (ahora - datetime.timedelta(days=3)).isoformat()
 lista = [(c, n) for c, n in tibios.items() if c not in compraron and c not in garantia and c not in hoy_promo and reg.get(c, '') < hace3]
-print('TIBIOS_24H', len(tibios), 'YA_COMPRARON', sum(1 for c in tibios if c in compraron), 'PARA_ENVIAR', len(lista))
+print('TIBIOS_24H', len(tibios), 'PEDIDO_ULTIMOS_15_DIAS', sum(1 for c in tibios if c in compraron), 'PARA_ENVIAR', len(lista))
 if not ENVIAR:
     sys.exit(0)
 
