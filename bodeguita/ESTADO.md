@@ -127,6 +127,22 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
 - casino_envio.py ya usa esas direcciones. Prueba completa (foto + texto + enlace) enviada a Ronald: OK.
 - Falta: visto bueno de Ronald; que el bot de Lucid reconozca BODEGUITA10 (su sí); programar envíos (su sí).
 
+## Casino automático por producto (2026-11-23 noche)
+- Ronald: el premio va sobre el ÚLTIMO producto por el que el cliente entró o preguntó, y los productos nuevos del
+  catálogo deben entrar solos. Hecho:
+  - casino_envio.py lee el catálogo del bot (312704) en cada envío: producto, cantidades y precios (34 productos hoy).
+    Filtra precios mal cargados (ej. imán «2 unidades 94.500») y repetidos (mandala 1 und = 3 und → 3 unidades).
+  - Lucid NO actualiza el campo 116501 (se queda con el producto del primer anuncio). Por eso el script lee los
+    últimos 40 mensajes del chat y toma el último producto mencionado (palabra completa; desempata productos
+    parecidos como «detector» vs «detector disco»). Si no encuentra ninguno, usa el del anuncio.
+    Prueba con 8 clientes que cambiaron de producto: acierta en todos (los 2 «raros» de verdad preguntaron otro al final).
+  - La página recibe el producto y sus precios en el enlace (`t=` nombre, `o=` «2 unidades~219900|1 unidad~129900»).
+    Republicada en Vercel (pasando el archivo directo: GitHub sigue frenando a Vercel).
+- Prueba de foto con texto en un solo mensaje (pie de foto «caption») enviada a Ronald: Lucid respondió success;
+  falta que Ronald confirme si se ve el texto debajo de la foto.
+- HALLAZGO: el bot de posventa responde «mi función es el seguimiento de tu pedido y no gestiono ventas» cuando un
+  cliente que ya compró pregunta por otro producto (ej. …9410 pidió info del detector). Venta perdida: arreglar.
+
 ## Lo que sigue (cuando llegue lo anterior)
 2. Buscar en Lucid el embudo de pedidos y el campo del anuncio de La Bodeguita.
 3. Página `/pages/premios` en la tienda de La Bodeguita + subir foto y sonidos.

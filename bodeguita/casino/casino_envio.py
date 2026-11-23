@@ -138,8 +138,11 @@ def productos_en(texto):
     for n, ws in CLAVES.items():
         m = [w for w in ws if re.search(r' ' + w + r'(?:S|ES)? ', t)]  # palabra completa (o su plural)
         if len(m) >= min(2, len(ws)) or any(cuenta[w] == 1 and len(w) >= 5 and w not in GENERICAS for w in m):
-            hits.append(n)
-    return hits
+            hits.append((len(m) / len(ws), n))
+    if not hits:
+        return []
+    mejor = max(h[0] for h in hits)  # «detector de metales» → el detector normal, no el «disco»
+    return [n for f, n in hits if f == mejor]
 
 
 def ultimo_producto(c, por_defecto):
