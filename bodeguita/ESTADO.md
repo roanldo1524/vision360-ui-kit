@@ -27,6 +27,8 @@ solo cambian marca, bot de Lucid y tienda de Shopify.
   producto por el que el cliente escribió. El casino debe mostrar el premio de ESE producto (tope del 10 %).
   Falta: la lista de productos con su premio y saber en qué campo de Lucid queda el producto de interés.
 
+- Ronald confirma: la tienda de Shopify de La Bodeguita es la de **«alcomprar»**. Él la va a conectar.
+
 ## Lo que sigue (cuando llegue lo anterior)
 2. Buscar en Lucid el embudo de pedidos y el campo del anuncio de La Bodeguita.
 3. Página `/pages/premios` en la tienda de La Bodeguita + subir foto y sonidos.
