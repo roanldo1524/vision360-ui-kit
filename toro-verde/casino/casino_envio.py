@@ -19,6 +19,17 @@ def post(path, body):
     req = urllib.request.Request(API + path, data=json.dumps(body).encode(), headers={'X-ACCESS-TOKEN': K, 'Content-Type': 'application/json'}, method='POST')
     return urllib.request.urlopen(req, timeout=40).read().decode()
 
+NO_RE = re.compile(r'\b(no (me )?(interesa|mand|escrib|molest)|no m[aá]s|ya no|stop|salir|spam|bloque|deja de|dejen de|no gracias)', re.I)
+def pidio_no(c):
+    # Lucid devuelve el chat como texto: «Yo (fecha): …» / «Usuario (fecha): …». Se mira el último mensaje del cliente.
+    try:
+        t = get(f'/contacts/{c}/messages?limit=15'); t = t.get('data', t)
+        t = t if isinstance(t, str) else json.dumps(t, ensure_ascii=False)
+        us = [l for l in re.split(r'\n(?=(?:Yo|Usuario) \()', t) if l.startswith('Usuario')]
+        return bool(us) and bool(NO_RE.search(us[-1]) or re.fullmatch(r'Usuario \([^)]*\):\s*no\.?\s*', us[-1].strip(), re.I))
+    except Exception:
+        return False
+
 # 1) Todo el que tiene un pedido en el historial completo del embudo 705299 = ya compró (se excluye)
 compraron = set()
 o = 0
@@ -67,8 +78,10 @@ if '--incluir-promo' in sys.argv: hoy_promo = set()
 # Quien recibió el empujón sin descuento (empujon.py) hace poco no recibe el casino el mismo día: dos mensajes seguidos cansan.
 if os.path.exists('empujon_hecho.txt') and (time.time() - os.path.getmtime('empujon_hecho.txt')) < 20 * 3600:
     hoy_promo |= set(open('empujon_hecho.txt').read().split())
-hace3 = (ahora - datetime.timedelta(days=3)).isoformat()
-lista = [(c, n) for c, n in tibios.items() if c not in compraron and c not in garantia and c not in hoy_promo and reg.get(c, '') < hace3]
+# Ronald 23-11: que no nos reporten por spam. Máximo 1 casino por persona cada 7 días y nunca a quien dijo que no.
+hace3 = (ahora - datetime.timedelta(days=7)).isoformat()
+negados = set(json.load(open('casino/negados.json'))) if os.path.exists('casino/negados.json') else set()
+lista = [(c, n) for c, n in tibios.items() if c not in compraron and c not in negados and c not in garantia and c not in hoy_promo and reg.get(c, '') < hace3]
 print('TIBIOS_24H', len(tibios), 'PEDIDO_ULTIMOS_15_DIAS', sum(1 for c in tibios if c in compraron), 'PARA_ENVIAR', len(lista))
 if not ENVIAR:
     sys.exit(0)
@@ -76,8 +89,8 @@ if not ENVIAR:
 # Mensaje del primer día (precios tachados + «dime tu municipio») unido al casino. Corto: Ronald pidió textos breves.
 IMAGEN = 'https://cdn.shopify.com/s/files/1/0687/6096/1211/files/casino-wa-777.jpg?v=1795398353'
 MENSAJES = [
-    "{s} 🎰 *Ganaste 3 tiros GRATIS en el Casino Toro Verde*\n\nCon el 7-7-7 te llevas *hasta $26.900 de descuento* + semilla de maíz criollo de regalo 💰🌽\n\n👉 *Juega ya, toma 10 segundos:* {u}\n\n⏰ Tus tiros se borran hoy a la medianoche · Pagas al recibir",
-    "{s} 💰 *Tienes un premio esperándote*: 3 tiros gratis para ganar *hasta $26.900 de descuento* en tu Toro Verde + semilla de regalo 🎰\n\n👉 *Toca y juega ahora:* {u}\n\n⏰ Solo hoy hasta la medianoche · Pagas cuando te llegue 📦",
+    "{s} 🎰 *Ganaste 3 tiros GRATIS en el Casino Toro Verde*\n\nCon el 7-7-7 te llevas *hasta $26.900 de descuento* + semilla de maíz criollo de regalo 💰🌽\n\n👉 *Juega ya, toma 10 segundos:* {u}\n\n⏰ Tus tiros se borran hoy a la medianoche · Pagas al recibir\n\n_Si no quieres recibir premios, responde NO_",
+    "{s} 💰 *Tienes un premio esperándote*: 3 tiros gratis para ganar *hasta $26.900 de descuento* en tu Toro Verde + semilla de regalo 🎰\n\n👉 *Toca y juega ahora:* {u}\n\n⏰ Solo hoy hasta la medianoche · Pagas cuando te llegue 📦\n\n_Si no quieres recibir premios, responde NO_",
 ]
 JUEGO = ['', '']
 ok = fail = 0
@@ -92,6 +105,9 @@ for i, (c, nom) in enumerate(lista[:MAX]):
         # /contacts/{id} da la hora en milisegundos (p. ej. "1795224511995"), no en fecha ISO.
         li = float(info.get('last_interaction') or 0) / 1000
         if time.time() - li < 6 * 3600:
+            continue
+        if pidio_no(c):
+            negados.add(c); json.dump(sorted(negados), open('casino/negados.json', 'w'))
             continue
     except Exception:
         continue

@@ -22,12 +22,13 @@ while o<20000:
   if len(d)<100:break
   o+=100
 hechos=set(open('casino/recordados.txt').read().split()) if os.path.exists('casino/recordados.txt') else set()
-lista=[c for c in lista if ped.get(c,'')[:19]<=reg[c][:19] and c not in hechos]
+negados=set(json.load(open('casino/negados.json'))) if os.path.exists('casino/negados.json') else set()
+lista=[c for c in lista if ped.get(c,'')[:19]<=reg[c][:19] and c not in hechos and c not in negados]
 horas=max(1,24-ahora.hour)
 IMAGEN='https://cdn.shopify.com/s/files/1/0687/6096/1211/files/casino-wa-777.jpg?v=1795398353'
 MSJ=[
-"🚨 {n}, *tu premio se pierde a la medianoche*\n\nTe quedan *{h} horas* para reclamar *hasta $26.900 de descuento* + semilla de maíz criollo de regalo 🌽\n\nYa ganaste. Solo responde *QUIERO MI PREMIO* y te dejo el pedido listo ahora mismo 🚚 Pagas al recibir.\n\n¿No has jugado? Tus 3 tiros siguen ahí 👇\n{u}",
-"⏰ {n}, *últimas {h} horas* de tu premio del Casino Toro Verde\n\nA la medianoche se borra tu descuento de *hasta $26.900* y la semilla de regalo 🌽\n\nResponde *QUIERO MI PREMIO* y te tomo el pedido ya, pagas cuando te llegue 📦\n\nO juega tus 3 tiros aquí 👇\n{u}",
+"🚨 {n}, *tu premio se pierde a la medianoche*\n\nTe quedan *{h} horas* para reclamar *hasta $26.900 de descuento* + semilla de maíz criollo de regalo 🌽\n\nYa ganaste. Solo responde *QUIERO MI PREMIO* y te dejo el pedido listo ahora mismo 🚚 Pagas al recibir.\n\n¿No has jugado? Tus 3 tiros siguen ahí 👇\n{u}\n\n_Si no quieres recibir premios, responde NO_",
+"⏰ {n}, *últimas {h} horas* de tu premio del Casino Toro Verde\n\nA la medianoche se borra tu descuento de *hasta $26.900* y la semilla de regalo 🌽\n\nResponde *QUIERO MI PREMIO* y te tomo el pedido ya, pagas cuando te llegue 📦\n\nO juega tus 3 tiros aquí 👇\n{u}\n\n_Si no quieres recibir premios, responde NO_",
 ]
 ok=0;env=0
 for c in lista:
