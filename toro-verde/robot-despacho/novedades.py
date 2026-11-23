@@ -4,6 +4,10 @@
 #   - el cliente dio/confirmó dirección, referencia u hora → node solucionar_nov.js <id> '{"solucion","nombre","direccion","celular"}' (vuelve a ofrecer)
 #   - no ha respondido → se le escribe (aquí, si la ventana de 24 h está abierta) y se espera
 #   - no lo quiere / problema raro / la transportadora solo ofrece devolución (Coordinadora) → aviso al equipo. Nunca se elige devolución solo.
+# Reglas (Envía/Servientrega y guías de Dropi): NO solucionar «volver a ofrecer» sin validar los datos con el cliente (la transportadora lo toma
+# como solución no efectiva); actuar en las primeras horas (la ventana suele ser 24–72 h); la solución debe decir qué confirmó el cliente,
+# dirección completa, punto de referencia, horario y teléfono que contesta; después de solucionar, seguir el pedido: si sale otra novedad, aviso al equipo.
+# Daño del paquete o rechazo → aviso al equipo (reclamo), nunca se soluciona solo.
 # Uso: python3 -I robot/novedades.py [--escribir]
 import json, os, re, sys, time, urllib.request
 os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
