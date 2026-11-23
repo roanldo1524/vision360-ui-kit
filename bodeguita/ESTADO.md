@@ -103,6 +103,12 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   page.casino-bodeguita; publicar el tema; que el bot reconozca «gané en el casino … BODEGUITA10» y aplique el 10 %;
   número de WhatsApp de Ronald para la prueba; programar 10 a. m. / 4 p. m.
 
+## Prueba del mensaje (2026-11-23)
+- Números para la prueba: Ronald 573218940042; Sandra (administra el bot) 573146851127.
+- Ninguno ha escrito al bot en las últimas 24 h (Ronald hace 137 h, Sandra hace 53 días): WhatsApp no deja
+  mandarles mensaje libre. Tienen que escribir «hola» al bot +57 323 308 0393 y ahí se manda la prueba.
+- La prueba completa también necesita la imagen en Shopify y la página publicada (falta el sí de Ronald).
+
 ## Lo que sigue (cuando llegue lo anterior)
 2. Buscar en Lucid el embudo de pedidos y el campo del anuncio de La Bodeguita.
 3. Página `/pages/premios` en la tienda de La Bodeguita + subir foto y sonidos.
