@@ -49,6 +49,8 @@ for d in json.load(open('/tmp/dropi/detalle.json')):
 [ -s /tmp/dropi/carritos.txt ] && (cd /tmp/dropi && echo "CARRITOS $(wc -l < carritos.txt)" && node etiq_lote.js carritos.txt 49501 </dev/null | tail -1)
 # Dirección clara: quita el barrio repetido y le pone «BARRIO» antes de confirmar (no reemplaza el pedido)
 python3 -I robot/limpiar_dirs.py | while IFS=$'\t' read id dir; do (cd /tmp/dropi && node editar.js "$id" "$(python3 -c 'import json,sys;print(json.dumps({"dir":sys.argv[1]}))' "$dir")" </dev/null 2>&1 | grep -c '^PUT 200' | sed "s/^/DIR_LIMPIA $id /"); done
+# Ronald 23-11: pedidos de oficina llevan la dirección de la oficina de Interrapidísimo del municipio + «RECLAMA EN OFICINA INTERRAPIDÍSIMO»
+python3 -I robot/oficinas.py > /tmp/dropi/ofi.tsv; [ -s /tmp/dropi/ofi.tsv ] && (cd /tmp/dropi && node dir_lote.js ofi.tsv </dev/null 2>&1 | grep -c OK | sed 's/^/OFICINAS_DIR /')
 rm -f /tmp/dropi/sin_cambio.txt
 EDITADOS=$(grep -c "" /tmp/dropi/editados_vuelta.txt 2>/dev/null || echo 0); rm -f /tmp/dropi/editados_vuelta.txt
 # Ronald 21-11: «cerebro izquierdo y derecho». Con ROBOT_PAUSA=1 el robot (reglas) se detiene antes de confirmar:

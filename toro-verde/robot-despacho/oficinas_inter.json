@@ -1,0 +1,8294 @@
+[
+{
+"dep": "AMAZONAS",
+"ciudad": "LETICIA\\AMAZ\\COL",
+"dir": "CALLE 7 # 9 - 65",
+"tel": "018000942777"
+},
+{
+"dep": "AMAZONAS",
+"ciudad": "PUERTO NARINO\\AMAZ\\COL",
+"dir": "COMUNIDAD INDIGENA TICOYA",
+"tel": "3214882632"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ABEJORRAL\\ANT\\COL",
+"dir": "CL 51 49 48",
+"tel": "3123638250"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ABRIAQUI\\ANT\\COL",
+"dir": "CL 9 12 57",
+"tel": "3136406910"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ALEJANDRIA\\ANT\\COL",
+"dir": "CL 20 19 78",
+"tel": "3113868118"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ALTAMIRA BETULIA\\BET\\ANT",
+"dir": "CL ABAJO",
+"tel": "3046059575"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "AMAGA\\ANT\\COL",
+"dir": "CL 49 51 19",
+"tel": "3127096237"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "AMALFI\\ANT\\COL",
+"dir": "KR ARANZAZU 20 79",
+"tel": "3218003056"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ANDES\\ANT\\COL",
+"dir": "KR 51 50 87",
+"tel": "3128126908"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ANGELOPOLIS\\ANT\\COL",
+"dir": "KR 11 N 10 23",
+"tel": "3137472910"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ANGOSTURA\\ANT\\COL",
+"dir": "KR 10 9 91",
+"tel": "8645264"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ANORI\\ANT\\COL",
+"dir": "CL 29 29 30",
+"tel": "3506899206"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ANZA\\ANT\\COL",
+"dir": "CL 9 11 22",
+"tel": "3215397446"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "APARTADO\\ANT\\COL",
+"dir": "CL 99 NO 100 33",
+"tel": "3218790127"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ARBOLETES\\ANT\\COL",
+"dir": "KR 31 DG IGLESIA",
+"tel": "3106681214"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ARGELIA ANTIOQUIA\\ANT\\COL",
+"dir": "CL 31 30 16",
+"tel": "3146309776"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ARMENIA_ANTIOQUIA\\ANT\\COL",
+"dir": "CL 10 6 15",
+"tel": "3136996717"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "BARBOSA ANTIOQUIA\\ANT\\COL",
+"dir": "KR 15 10 40",
+"tel": "3192736171"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "BELLO\\ANT\\COL",
+"dir": "AV 10 52 80 R O",
+"tel": "3125042713"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "BELMIRA\\ANT\\COL",
+"dir": "KR 21 18 26",
+"tel": "3136842645"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "BETANIA\\ANT\\COL",
+"dir": "CL 20 19 02",
+"tel": "3105233850"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "BETULIA ANTIOQUIA\\ANT\\COL",
+"dir": "KR 20 19 59",
+"tel": "3116339167 3508319283"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "BOLOMBOLO\\VEN\\ANT",
+"dir": "TV 6 7 20",
+"tel": "3113601211"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "BRICEÑO ANTIOQUIA\\ANT\\COL",
+"dir": "KR 9 9 36",
+"tel": "3128240296"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "BURITICA\\ANT\\COL",
+"dir": "KR 4 7 10 PS 1",
+"tel": "3176731926"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CACERES\\ANT\\COL",
+"dir": "CL BOLIVAR 50 89",
+"tel": "3217594433"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CAICEDO\\ANT\\COL",
+"dir": "KR 4 4 08",
+"tel": "3137391289"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CALDAS ANTIOQUIA\\ANT\\COL",
+"dir": "CL 129 SUR 51 56",
+"tel": "3112168358"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CAMPAMENTO\\ANT\\COL",
+"dir": "CL 11 11 49",
+"tel": "3128333071"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CANASGORDAS\\ANT\\COL",
+"dir": "KR 31 31 82",
+"tel": "3217617534"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CARACOLI\\ANT\\COL",
+"dir": "KR 22 20 04",
+"tel": "3505064171"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CARAMANTA\\ANT\\COL",
+"dir": "KR 20 19 30",
+"tel": "3104374742"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CAREPA\\ANT\\COL",
+"dir": "CL 81 74 50",
+"tel": "3046079362"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CAROLINA\\ANT\\COL",
+"dir": "KR 62 CL 52 26",
+"tel": "3109728868"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CAUCASIA\\ANT\\COL",
+"dir": "KR 20 4 76 LC 105 116 117",
+"tel": "3002247495"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CAUCHERAS (MUTATA ANT)\\MUT\\ANT",
+"dir": "VIA PPAL DG AL COLEGIO INMACULADA",
+"tel": "3015752331"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CHIGORODO\\ANT\\COL",
+"dir": "KR 102 93 21",
+"tel": "3006197980"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CISNEROS\\ANT\\COL",
+"dir": "CL NARIÑO 21 20 59",
+"tel": "3113572148"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CIUDAD BOLIVAR\\ANT\\COL",
+"dir": "CL 50 52 16",
+"tel": "3243807771"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "COCORNA\\ANT\\COL",
+"dir": "CL 21 23 35",
+"tel": "3505305952"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CONCEPCION ANTIOQUIA\\ANT\\COL",
+"dir": "CL 26 18 21 PISO 2",
+"tel": "3156762668 3116017263"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CONCORDIA ANTIOQUIA\\ANT\\COL",
+"dir": "KR 21 21 04",
+"tel": "3123494473"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "COPACABANA\\ANT\\COL",
+"dir": "CL 50 50 A 24",
+"tel": "3217142220"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "CURRULAO\\TUR\\ANT",
+"dir": "KR 54 56 06",
+"tel": "3148869091"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "DABEIBA\\ANT\\COL",
+"dir": "CL 7 10 24",
+"tel": "3218993800"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "DON MATIAS\\ANT\\COL",
+"dir": "CL 29 30 35 LC 2",
+"tel": "3117925366"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "DORADAL\\ANT\\COL",
+"dir": "CL 23 25 30",
+"tel": "3128802826"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "EBEJICO\\ANT\\COL",
+"dir": "CL 20 21 22",
+"tel": "3173486617"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "EL BAGRE\\ANT\\COL",
+"dir": "AV JUVENTUD 48 33",
+"tel": "3004155865"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "EL CARMEN DE VIBORAL\\ANT\\COL",
+"dir": "KR 30 26 25",
+"tel": "3154191983"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "EL DOCE (ANTIOQUIA)\\TAR\\ANT",
+"dir": "CORREG. KM EL DOCE VIA COSTA ATLANTICA",
+"tel": "3135066409"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "EL JARDIN (TAMANA)\\CAC\\ANT",
+"dir": "ASENTAMIENTO LA NUEVA JERUSALÉN",
+"tel": "3202575224"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "EL REPOSO (APARTADO)\\APA\\ANT",
+"dir": "KR 100 27 02",
+"tel": "3117011221"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "EL SANTUARIO\\ANT\\COL",
+"dir": "CL 53 A 49 15",
+"tel": "3206655118"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "EL TOTUMO (NECOCLI)\\NEC\\ANT",
+"dir": "VÍA PRINCIPAL EL TOTUMO SEGUNDO RESALTO",
+"tel": "3103694657"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "EL TRES (TURBO)\\TUR\\ANT",
+"dir": "CL PRINCIPAL",
+"tel": "3146716549"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ENTRERRIOS\\ANT\\COL",
+"dir": "KR 14 9 90",
+"tel": "3192264431"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ENVIGADO\\ANT\\COL",
+"dir": "CL 38 SUR 36 24",
+"tel": "3239663217"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "FREDONIA\\ANT\\COL",
+"dir": "KR 52 48 50 CL CUBA",
+"tel": "3106378351"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "FRONTINO\\ANT\\COL",
+"dir": "KR 30 30 42",
+"tel": "3104744287"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "GIRALDO\\ANT\\COL",
+"dir": "CL 10 9 25",
+"tel": "3105403824"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "GIRARDOTA\\ANT\\COL",
+"dir": "CL 7 21 20",
+"tel": "3023381425"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "GOMEZ PLATA\\ANT\\COL",
+"dir": "KR 51 51 50",
+"tel": "3226655959"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "GRANADA ANTIOQUIA\\ANT\\COL",
+"dir": "CL 21 21 25",
+"tel": "3206624495"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "GUADALUPE ANTIOQUIA\\ANT\\COL",
+"dir": "CL 51 49 18",
+"tel": "3147635569"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "GUARNE\\ANT\\COL",
+"dir": "KR 51 46 47",
+"tel": "3222172972"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "GUATAPE\\ANT\\COL",
+"dir": "CL 30 28 38",
+"tel": "3236726502"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "HELICONIA\\ANT\\COL",
+"dir": "KR 21 20 03",
+"tel": "3217480233"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "HISPANIA\\ANT\\COL",
+"dir": "CL 49 CON KR 51",
+"tel": "3113694049"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ITAGUI\\ANT\\COL",
+"dir": "KR 42 46 210",
+"tel": "7456000"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ITUANGO\\ANT\\COL",
+"dir": "KR 20 19 20",
+"tel": "3147564370"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "JARDIN\\ANT\\COL",
+"dir": "KR 5 9 11",
+"tel": "3218124210"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "JERICO ANTIOQUIA\\ANT\\COL",
+"dir": "CL 05 04 23",
+"tel": "3016396922"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "LA CEJA\\ANT\\COL",
+"dir": "CL 21 21 32",
+"tel": "3226968789"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "LA CRUZADA (REMEDIOS)\\REM\\ANT",
+"dir": "CRA 10 2 12",
+"tel": "3147871843"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "LA ESTRELLA\\ANT\\COL",
+"dir": "KR 60 79 SUR 20",
+"tel": "3156474450"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "LA PINTADA\\ANT\\COL",
+"dir": "AV 30 30 33 LC 104 105",
+"tel": "3042124086"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "LA UNION ANTIOQUIA\\ANT\\COL",
+"dir": "CL 12 11 39",
+"tel": "3135809799 3147867070"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "LIBORINA\\ANT\\COL",
+"dir": "CL 11 11 48",
+"tel": "3116067625"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "LLANO GRANDE (RIONEGRO)\\RIO\\ANT",
+"dir": "KM 3 VIA C.CIAL LINARES LC 6",
+"tel": "3015684119"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "LLANOS DE CUIVA( YARUMAL ANTI)\\YAR\\ANT",
+"dir": "CL 10 10 23",
+"tel": "3137837841"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "MACEO\\ANT\\COL",
+"dir": "CL 29 30 33",
+"tel": "3148889188"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "MARINILLA\\ANT\\COL",
+"dir": "CL 32 32 24",
+"tel": "3015772869"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "MEDELLIN\\ANT\\COL",
+"dir": "OF. PRINC CL 30 A 65 B 59",
+"tel": "3232554455"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "MONTEBELLO\\ANT\\COL",
+"dir": "KR 19 19 46",
+"tel": "3136146438"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "MURINDO\\ANT\\COL",
+"dir": "BR DIVINO NIÑO",
+"tel": "3207391450"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "MUTATA\\ANT\\COL",
+"dir": "CL 10 KR 10 DETRAS DEL HOSPITAL",
+"tel": "3117025973"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "NARIÑO ANTIOQUIA\\ANT\\COL",
+"dir": "KR 10 N 11 84",
+"tel": "3147937053"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "NECHI\\ANT\\COL",
+"dir": "CL 30 29 14",
+"tel": "3150490431"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "NECOCLI\\ANT\\COL",
+"dir": "KR 49 53 06",
+"tel": "3105230543"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "NUEVA COLONIA (TURBO)\\TUR\\ANT",
+"dir": "KR 31 CL 32",
+"tel": "3127050147"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "OLAYA\\ANT\\COL",
+"dir": "CL 11 11 48",
+"tel": "3116067625"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "PENOL\\ANT\\COL",
+"dir": "TV 4 18 54 LC 104",
+"tel": "3152196020"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "PEQUE\\ANT\\COL",
+"dir": "KR BOLIVAR 10 02 PS 1 PARQUE PRINCIPAL",
+"tel": "3112851988"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "PUEBLORRICO\\ANT\\COL",
+"dir": "KR 29 33 06",
+"tel": "3207381981"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "PUERTO BERRIO\\ANT\\COL",
+"dir": "CL 50 10 39",
+"tel": "3003958876"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "PUERTO NARE\\ANT\\COL",
+"dir": "KR 2 48 31",
+"tel": "3235920609"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "PUERTO TRIUNFO\\ANT\\COL",
+"dir": "KR 10 11 37",
+"tel": "3134007809"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "PUERTO VALDIVIA\\VAL\\ANT",
+"dir": "VIA TRONCAL SECTOR EL ALTO AL FRENTE DE PROVEEDORA EL RETORNO",
+"tel": "3116263312"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "REMEDIOS\\ANT\\COL",
+"dir": "KR 11 5 65",
+"tel": "3186333291"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "RETIRO\\ANT\\COL",
+"dir": "KR 19 19 27",
+"tel": "3247620609"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "RIONEGRO ANTIOQUIA\\ANT\\COL",
+"dir": "CL 52 45 33",
+"tel": "3232554455"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SABANALARGA ANTIOQUIA\\ANT\\COL",
+"dir": "CL 18 18 24",
+"tel": "3136279098"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SABANETA\\ANT\\COL",
+"dir": "CL 67 SUR 43 A 69",
+"tel": "3217107246"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SALGAR\\ANT\\COL",
+"dir": "CL 31 31 20",
+"tel": "3218100957"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SAN ANDRES DE CUERQUIA\\ANT\\COL",
+"dir": "CL 32 27 57 77",
+"tel": "3122152895"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SAN CARLOS ANTIOQUIA\\ANT\\COL",
+"dir": "KR 19 19 19",
+"tel": "3127626117"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SAN FRANCISCO ANTIOQUIA\\ANT\\COL",
+"dir": "CL 11 11 25 27 A 101 CL LA FEDERACION",
+"tel": "3105175590"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SAN JERONIMO\\ANT\\COL",
+"dir": "KR 11 18 83 LC 101",
+"tel": "3225150829"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SAN JOSE DE LA MONTANA\\ANT\\COL",
+"dir": "CL 20 21 08",
+"tel": "3504499083"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SAN JOSE DEL NUS(MACEO ANTIOQU\\MAC\\ANT",
+"dir": "CORR SAN JOSE DEL NUS SEC MACEO",
+"tel": "3107530954"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SAN JUAN DE URABA\\ANT\\COL",
+"dir": "KR 20 22 68",
+"tel": "3127749909"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SAN LUIS ANTIOQUIA\\ANT\\COL",
+"dir": "KR 19 19 05",
+"tel": "3148021612"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SAN PEDRO ANTIOQUIA\\ANT\\COL",
+"dir": "CL 50 49 B 26",
+"tel": "3116207734"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SAN PEDRO DE URABA\\ANT\\COL",
+"dir": "CL 50 50 67",
+"tel": "3116868350"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SAN RAFAEL\\ANT\\COL",
+"dir": "KR 20 18 43",
+"tel": "3147053556"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SAN ROQUE\\ANT\\COL",
+"dir": "KR 20 22 47",
+"tel": "3128514649"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SAN VICENTE\\ANT\\COL",
+"dir": "KR 30 30 13",
+"tel": "3122042890"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SANTA BARBARA ANTIOQUIA\\ANT\\COL",
+"dir": "KR SANTANDER 51 28",
+"tel": "3137220160"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SANTA ISABEL (REMEDIOS)\\REM\\ANT",
+"dir": "CL 10 9 95",
+"tel": "3135002572"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SANTA ROSA DE OSOS\\ANT\\COL",
+"dir": "CL 30 30 25",
+"tel": "3027495455"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SANTAFE DE ANTIOQUIA\\ANT\\COL",
+"dir": "KR 12 11 48",
+"tel": "3015670018"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SANTO DOMINGO\\ANT\\COL",
+"dir": "CL 13 15 14 LC 108",
+"tel": "3117163529"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SEGOVIA\\ANT\\COL",
+"dir": "KR 45 46 41",
+"tel": "3148672480"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SONSON\\ANT\\COL",
+"dir": "KR 6 7 75",
+"tel": "3508471505"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "SOPETRAN\\ANT\\COL",
+"dir": "KR 10 11 12",
+"tel": "3104508455"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "TAMESIS\\ANT\\COL",
+"dir": "KR 10 11 23",
+"tel": "3166348467"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "TARAZA\\ANT\\COL",
+"dir": "KR 28 32 117",
+"tel": "321 7594433"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "TARSO\\ANT\\COL",
+"dir": "KR 20 17 58",
+"tel": "3135033919"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "TITIRIBI\\ANT\\COL",
+"dir": "CL 21 20 30",
+"tel": "3195260134"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "TOLEDO ANTIOQUIA\\ANT\\COL",
+"dir": "KR 11 9 16",
+"tel": "3217709346"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "TURBO\\ANT\\COL",
+"dir": "KR 18 CON CL 104",
+"tel": "3122945989"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "URAMITA\\ANT\\COL",
+"dir": "CL 20 20 34",
+"tel": "3136950295"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "URRAO\\ANT\\COL",
+"dir": "CL 29 31 15",
+"tel": "3023451582"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "VALDIVIA\\ANT\\COL",
+"dir": "KR 10 9 30 L 1",
+"tel": "3127679443"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "VALPARAISO ANTIOQUIA\\ANT\\COL",
+"dir": "CL 14 8 B 02",
+"tel": "3246822213"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "VEGACHI\\ANT\\COL",
+"dir": "KR 50 53 98",
+"tel": "3122520820"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "VENECIA ANTIOQUIA\\ANT\\COL",
+"dir": "KR 52 51 A 54 LC 103",
+"tel": "3226483925"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "VIGIA DEL FUERTE\\ANT\\COL",
+"dir": "KR 3 18 04",
+"tel": "3218849205"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "YALI\\ANT\\COL",
+"dir": "KR 19 20 27",
+"tel": "3117170784"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "YARUMAL\\ANT\\COL",
+"dir": "KR 21 21 32 DG PLAZA YARUMA",
+"tel": "3223514039"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "YOLOMBO\\ANT\\COL",
+"dir": "DG 19 18A 06",
+"tel": "3117868218"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "YONDO\\ANT\\COL",
+"dir": "KR 50 54 21",
+"tel": "3507711401"
+},
+{
+"dep": "ANTIOQUIA",
+"ciudad": "ZARAGOZA\\ANT\\COL",
+"dir": "CRA 19 41 32",
+"tel": "3145209663"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "ARAUCA ARAUCA\\ARAU\\COL",
+"dir": "OF. PRINC CL 23 # 16 - 91",
+"tel": "3232554455"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "ARAUQUITA\\ARAU\\COL",
+"dir": "KR 6 3 33",
+"tel": "3212569763"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "CARANAL (FORTUL)\\FOR\\ARAU",
+"dir": "CACERIO NUEVO CARANAL",
+"tel": "3107853056"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "COROCITO (TAME ARAUCA)\\TAM\\ARAU",
+"dir": "VDA COROCITO",
+"tel": "3115556890"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "CRAVO NORTE\\ARAU\\COL",
+"dir": "KR 5 4 29",
+"tel": "3214021528"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "EL TRONCAL(ARAUQUITA)\\ARA\\ARAU",
+"dir": "CL 9 3 16",
+"tel": "3102599450"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "FORTUL\\ARAU\\COL",
+"dir": "CL 7 17 56",
+"tel": "88899077"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "LA ESMERALDA\\ARA\\ARAU",
+"dir": "CL 2 5 A 33",
+"tel": "3213829705"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "PANAMA (ARAUQUITA ARAUCA)\\ARA\\ARAU",
+"dir": "BR CENTRO PANAMA CORREGIMIENTO PANAMA",
+"tel": "3209101730"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "PESQUERA (ARAUQUITA)\\ARA\\ARAU",
+"dir": "CL 5 CORR LA PESQUERA",
+"tel": "3042778838"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "PUERTO JORDAN (ARAUCA)\\AUC\\ARAU",
+"dir": "TAME 749 CS PUERTO JORDAN",
+"tel": "3208369693"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "PUERTO NARINO (SARAVENA)\\SAR\\ARAU",
+"dir": "CL PRINCIPAL 1 83",
+"tel": "3162733574"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "PUERTO RONDON\\ARAU\\COL",
+"dir": "KR 4 2 92",
+"tel": "3114592863"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "SARAVENA\\ARAU\\COL",
+"dir": "DG 30 10 85",
+"tel": "3225103509"
+},
+{
+"dep": "ARAUCA",
+"ciudad": "TAME\\ARAU\\COL",
+"dir": "KR 13 15 28",
+"tel": "3115169114"
+},
+{
+"dep": "ARCHIPIELAGO DE SAN ANDRES , PROVIDENCIA Y SANTA CATALINA",
+"ciudad": "PROVIDENCIA ARCHIPIELAGO Y SANTA CATALINA\\ARCH\\COL",
+"dir": "SANTA ISABEL",
+"tel": "3161834900"
+},
+{
+"dep": "ARCHIPIELAGO DE SAN ANDRES , PROVIDENCIA Y SANTA CATALINA",
+"ciudad": "SAN ANDRES ISLAS\\ARCH\\COL",
+"dir": "AV AM VELEZ447L1",
+"tel": "315 3254540"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "BARANOA\\ATLA\\COL",
+"dir": "KR 18 16 62 LC 1",
+"tel": "3007721561"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "BARRANQUILLA\\ATLA\\COL",
+"dir": "OF. PRINC CLL 30 13 93",
+"tel": "3232554455"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "CAMPECHE (BARANOA)\\BAR\\ATLA",
+"dir": "CL 6 12 31 APTO 1",
+"tel": "3013837667"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "CAMPO DE LA CRUZ\\ATLA\\COL",
+"dir": "CL 9 3 190",
+"tel": "3008582250"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "CANDELARIA ATLANTICO\\ATLA\\COL",
+"dir": "KR 21 B 4 44",
+"tel": "3001128930"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "GALAPA\\ATLA\\COL",
+"dir": "CL 11 15 27",
+"tel": "3205307946"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "JUAN DE ACOSTA\\ATLA\\COL",
+"dir": "CL 7 4 30",
+"tel": "3003900764"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "JUAN MINA\\BQA\\ATLA",
+"dir": "CL 7 9 58",
+"tel": "3126486238"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "LURUACO\\ATLA\\COL",
+"dir": "KR 20 18 169",
+"tel": "3146948742"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "MALAMBO\\ATLA\\COL",
+"dir": "CL 10 16 45",
+"tel": "3104333165"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "MANATI\\ATLA\\COL",
+"dir": "CL 8 4 78",
+"tel": "3024470926"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "PALMAR DE VARELA\\ATLA\\COL",
+"dir": "CL 5 5 61",
+"tel": "3016734815"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "PIOJO\\ATLA\\COL",
+"dir": "CL 9 B 8 02",
+"tel": "3003337793"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "POLONUEVO\\ATLA\\COL",
+"dir": "KR 5 2A 49",
+"tel": "3242046056"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "PONEDERA\\ATLA\\COL",
+"dir": "CL 17 15 19",
+"tel": "3126490578"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "PUERTO COLOMBIA ATLANTICO\\ATLA\\COL",
+"dir": "CL 2 A 6 41 PLAZO MONO´S LC 74",
+"tel": "3015015933"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "PUERTO GIRALDO\\PON\\ATLA",
+"dir": "CL 4 11 65 LC 1",
+"tel": "3147252701"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "REPELON\\ATLA\\COL",
+"dir": "CL 7 A 7 20",
+"tel": "3114278406"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "SABANAGRANDE\\ATLA\\COL",
+"dir": "CL 7 10 83",
+"tel": "3016734815"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "SABANALARGA ATLANTICO\\ATLA\\COL",
+"dir": "CL 18 18 58",
+"tel": "3106659324"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "SANTA LUCIA\\ATLA\\COL",
+"dir": "CL 7 6 167",
+"tel": "3122346354"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "SANTO TOMAS\\ATLA\\COL",
+"dir": "CL 6 10 183",
+"tel": "3016734815"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "SOLEDAD\\ATLA\\COL",
+"dir": "KR 18 59 40",
+"tel": "3006316298"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "SUAN\\ATLA\\COL",
+"dir": "CL 5 14 36",
+"tel": "3016075413"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "TUBARA\\ATLA\\COL",
+"dir": "CL 3 1 34",
+"tel": "3232507457"
+},
+{
+"dep": "ATLANTICO",
+"ciudad": "USIACURI\\ATLA\\COL",
+"dir": "CL 13 15 27 LC 1",
+"tel": "3003337793"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "ACHI\\BOLI\\COL",
+"dir": "KR 7 CL 11 20",
+"tel": "3164596821"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "ALTOS DEL ROSARIO\\BOLI\\COL",
+"dir": "CL 17 5 41",
+"tel": "3145604738"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "ARENAL\\BOLI\\COL",
+"dir": "CL PPAL KR 3",
+"tel": "3164702335"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "ARJONA\\BOLI\\COL",
+"dir": "CL DEL MERCADO 38 03",
+"tel": "3017363404"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "ARROYOHONDO\\BOLI\\COL",
+"dir": "CL 2 1E 35",
+"tel": "3006127351"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "BARRANCO DE LOBA\\BOLI\\COL",
+"dir": "CL 14 6 78",
+"tel": "3145841987"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "BARU\\CAR\\BOLI",
+"dir": "CL 22 15 36 CL DE LA LOMA",
+"tel": "3152127908"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "BAYUNCA\\CAR\\BOLI",
+"dir": "CL 6 9 05",
+"tel": "3167006161"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "CALAMAR BOLIVAR\\BOLI\\COL",
+"dir": "CL 19 3 191",
+"tel": "3246623506"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "CANTAGALLO\\BOLI\\COL",
+"dir": "CL 5 5 31",
+"tel": "3102971476"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "CARTAGENA\\BOLI\\COL",
+"dir": "DG 21 48 81",
+"tel": "3232554455"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "CASCAJAL (MAGANGUE)\\MAG\\BOLI",
+"dir": "KR 3 10 92",
+"tel": "3004600179"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "CICUCO\\BOLI\\COL",
+"dir": "KR 11 A 17 21",
+"tel": "3107455787"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "CLEMENCIA\\BOLI\\COL",
+"dir": "KR 11 10 10",
+"tel": "3023744837"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "CORDOBA BOLIVAR\\BOLI\\COL",
+"dir": "CL 09 No 06 38",
+"tel": "3024324449"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "EL CARMEN DE BOLIVAR\\BOLI\\COL",
+"dir": "KR 48 29 24",
+"tel": "3002158609"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "EL GUAMO\\BOLI\\COL",
+"dir": "CL 12 60",
+"tel": "3003193891"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "EL PENON BOLIVAR\\BOLI\\COL",
+"dir": "CL 6 11 04",
+"tel": "3135858852"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "HATILLO DE LOBA\\BOLI\\COL",
+"dir": "CLL 4 CR 4 159",
+"tel": "3116066753"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "JUAN ARIAS (MAGANGUE/BOLIVAR)\\MAG\\BOLI",
+"dir": "DG 21 25 120",
+"tel": "3002185593"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "LA RINCONADA (MOMPOS )\\MOM\\BOLI",
+"dir": "CL 2 11 78",
+"tel": "3012458347"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "LOMA DE ARENA (SANTA CATALINA)\\SAN\\BOLI",
+"dir": "BRR LA CEIBA LOMA DE ARENA BOLIVAR",
+"tel": "3046057610"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "MAGANGUE\\BOLI\\COL",
+"dir": "CL 17 3 64 AV LEQUERICA VELEZ",
+"tel": "3114271674"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "MAHATES\\BOLI\\COL",
+"dir": "KR 32 NO 16 11",
+"tel": "3126049610"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "MARGARITA\\BOLI\\COL",
+"dir": "CL 4 3 360",
+"tel": "3175687917"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "MARIA LA BAJA\\BOLI\\COL",
+"dir": "KR 15 4 34",
+"tel": "3114144766"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "MOMPOS\\BOLI\\COL",
+"dir": "CL 14 2 112",
+"tel": "3218061542"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "MONTECRISTO\\BOLI\\COL",
+"dir": "CL 29 85",
+"tel": "3153722237"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "MORALES BOLIVAR\\BOLI\\COL",
+"dir": "KR 15 15 75",
+"tel": "3126150617"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "NOROSI BOLIVAR\\BOLI\\COL",
+"dir": "PLAZA PRINCIPAL",
+"tel": "3143857721"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "PASACABALLOS (CARTAGENA)\\CAR\\BOLI",
+"dir": "KR 9 20 24 LC 1",
+"tel": "3044844708"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "PINILLOS\\BOLI\\COL",
+"dir": "KR 4 8 189",
+"tel": "3163338935"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "REGIDOR\\BOLI\\COL",
+"dir": "KR 6 5 136",
+"tel": "3137796453"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "RIO VIEJO\\BOLI\\COL",
+"dir": "CL 5 14 20",
+"tel": "3103435743"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SAN CAYETANO(SAN JUAN NEPOMUCE\\SAN\\BOLI",
+"dir": "KR 15 17 34",
+"tel": "3128871044"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SAN CRISTOBAL\\BOLI\\COL",
+"dir": "KR 4 19 11",
+"tel": "3137849561"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SAN ESTANISLAO\\BOLI\\COL",
+"dir": "TV 15 14 61",
+"tel": "3206691483"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SAN FERNANDO\\BOLI\\COL",
+"dir": "CL 5 KR 5 375",
+"tel": "3107041297"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SAN JACINTO DEL CAUCA\\BOLI\\COL",
+"dir": "CL 3 KR 3 1",
+"tel": "3205475977"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SAN JACINTO\\BOLI\\COL",
+"dir": "CL 22 35 39",
+"tel": "3014030152"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SAN JUAN NEPOMUCENO\\BOLI\\COL",
+"dir": "CL 11 13 63",
+"tel": "3135397690"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SAN MARTIN DE LOBA\\BOLI\\COL",
+"dir": "KR 19 7 63",
+"tel": "3135717032"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SAN PABLO BOLIVAR\\BOLI\\COL",
+"dir": "KR 7 17 05",
+"tel": "3202555677"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SANTA ANA (CARTAGENA)\\CAR\\BOLI",
+"dir": "CL 12 KR 10A 99 CS O APTO 1",
+"tel": "3114176255"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SANTA CATALINA\\BOLI\\COL",
+"dir": "KR 16 16 17",
+"tel": "3126413908"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SANTA FE (MAGANGUE)\\MAG\\BOLI",
+"dir": "KR 1 KM 1 425",
+"tel": "3234733751"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SANTA ROSA DE LIMA\\BOLI\\COL",
+"dir": "KR 29 16 68 CL SAN ANTONIO",
+"tel": "3155508737"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SANTA ROSA DEL SUR\\BOLI\\COL",
+"dir": "CL 11 13 52",
+"tel": "3134084976"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SIMITI\\BOLI\\COL",
+"dir": "KR 6 12 33",
+"tel": "3143244751"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "SOPLAVIENTO\\BOLI\\COL",
+"dir": "CL 6 12 109",
+"tel": "3014755242"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "TALAIGUA NUEVO\\BOLI\\COL",
+"dir": "CL 14 8 105",
+"tel": "3503833944"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "TIQUISIO\\BOLI\\COL",
+"dir": "KR 6 A 6 32",
+"tel": "3217593309"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "TURBACO\\BOLI\\COL",
+"dir": "CL 19 13A - 143 P1 APTO 1",
+"tel": "3005120014"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "TURBANA\\BOLI\\COL",
+"dir": "KR 13 15 21",
+"tel": "3155351494"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "VILLANUEVA BOLIVAR\\BOLI\\COL",
+"dir": "CL 17 17 04",
+"tel": "3244769273"
+},
+{
+"dep": "BOLIVAR",
+"ciudad": "ZAMBRANO\\BOLI\\COL",
+"dir": "KR 19 4 95",
+"tel": "3003987866"
+},
+{
+"dep": "BOYACA",
+"ciudad": "ALMEIDA\\BOYA\\COL",
+"dir": "CL 4 3 36",
+"tel": "'7500897 – 3133715871"
+},
+{
+"dep": "BOYACA",
+"ciudad": "AQUITANIA\\BOYA\\COL",
+"dir": "KR 7 7 29",
+"tel": "3105762035"
+},
+{
+"dep": "BOYACA",
+"ciudad": "ARCABUCO\\BOYA\\COL",
+"dir": "CL 3 6 39 ABAJO DEL PARQUE PRINCIPAL",
+"tel": "3125684552"
+},
+{
+"dep": "BOYACA",
+"ciudad": "BELEN BOYACA\\BOYA\\COL",
+"dir": "KR 7 7 78",
+"tel": "3118531406"
+},
+{
+"dep": "BOYACA",
+"ciudad": "BERBEO\\BOYA\\COL",
+"dir": "KR 3 4 24",
+"tel": "3138033322"
+},
+{
+"dep": "BOYACA",
+"ciudad": "BETEITIVA\\BOYA\\COL",
+"dir": "KR 4 3 41",
+"tel": "3045758526"
+},
+{
+"dep": "BOYACA",
+"ciudad": "BOAVITA\\BOYA\\COL",
+"dir": "CL 6 6 82",
+"tel": "3123605785"
+},
+{
+"dep": "BOYACA",
+"ciudad": "BOSIGAS(SOTAQUIRA/BOYA)\\SOT\\BOYA",
+"dir": "KM 27 VIA TUNJA PAIPA",
+"tel": "3232045506"
+},
+{
+"dep": "BOYACA",
+"ciudad": "BOYACA\\BOYA\\COL",
+"dir": "KR 3 5 63",
+"tel": "3114778769"
+},
+{
+"dep": "BOYACA",
+"ciudad": "BRICEÑO BOYACA\\BOYA\\COL",
+"dir": "KR 3 4 68",
+"tel": "3138510551"
+},
+{
+"dep": "BOYACA",
+"ciudad": "BUENAVISTA BOYACA\\BOYA\\COL",
+"dir": "CL 2 2 34",
+"tel": "3134344656"
+},
+{
+"dep": "BOYACA",
+"ciudad": "BUSBANZA\\BOYA\\COL",
+"dir": "CL 2 2 15",
+"tel": "3112231876"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CALDAS BOYACA\\BOYA\\COL",
+"dir": "CL 1 2 85",
+"tel": "3124829505"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CAMPOHERMOSO\\BOYA\\COL",
+"dir": "CL 2 5 08",
+"tel": "3118756716"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CERINZA\\BOYA\\COL",
+"dir": "KR 6 7 12",
+"tel": "3203219097"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CHINAVITA\\BOYA\\COL",
+"dir": "CL 4 3 32",
+"tel": "3214829391"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CHIQUINQUIRA\\BOYA\\COL",
+"dir": "KR 9 3B – 06",
+"tel": "7266249"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CHIQUIZA\\BOYA\\COL",
+"dir": "KR 3 4 36",
+"tel": "3103370461"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CHISCAS\\BOYA\\COL",
+"dir": "CL 5 5 55",
+"tel": "3203686512"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CHITA\\BOYA\\COL",
+"dir": "KR 4 4 50",
+"tel": "3204007419"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CHITARAQUE\\BOYA\\COL",
+"dir": "CL 3 4 09",
+"tel": "'3134183495 – 3108081837"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CHIVATA\\BOYA\\COL",
+"dir": "KR 04 04 45 LT 11",
+"tel": "3112584534"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CHIVOR\\BOYA\\COL",
+"dir": "KR 4 5 30",
+"tel": "3118388415"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CIENEGA\\BOYA\\COL",
+"dir": "CL 3 4 54",
+"tel": "3124044896"
+},
+{
+"dep": "BOYACA",
+"ciudad": "COMBITA\\BOYA\\COL",
+"dir": "KR 5 3 18",
+"tel": "3143757585"
+},
+{
+"dep": "BOYACA",
+"ciudad": "COPER\\BOYA\\COL",
+"dir": "KR 2 3 72",
+"tel": "3214421722"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CORRALES\\BOYA\\COL",
+"dir": "CL 7 2 12",
+"tel": "3134989396"
+},
+{
+"dep": "BOYACA",
+"ciudad": "COVARACHIA\\BOYA\\COL",
+"dir": "KR PRIMERA 3 39",
+"tel": "3222033834"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CUBARA\\BOYA\\COL",
+"dir": "CL 2 5 09",
+"tel": "3214420927"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CUCAITA\\BOYA\\COL",
+"dir": "CL 9 7 08",
+"tel": "3105539987"
+},
+{
+"dep": "BOYACA",
+"ciudad": "CUITIVA\\BOYA\\COL",
+"dir": "CL 3 3 19",
+"tel": "3103410434"
+},
+{
+"dep": "BOYACA",
+"ciudad": "DUITAMA\\BOYA\\COL",
+"dir": "KR 42 NO 19 18",
+"tel": "761 48 48 – 7602170"
+},
+{
+"dep": "BOYACA",
+"ciudad": "EL BARNE(COMBITA/BOYA)\\COM\\BOYA",
+"dir": "KM 17 VIA TUNJA PAIPA",
+"tel": "3182275369"
+},
+{
+"dep": "BOYACA",
+"ciudad": "EL COCUY\\BOYA\\COL",
+"dir": "CL 7 4 36",
+"tel": "3133751235"
+},
+{
+"dep": "BOYACA",
+"ciudad": "EL ESPINO\\BOYA\\COL",
+"dir": "KR 5 4 36",
+"tel": "3203665818"
+},
+{
+"dep": "BOYACA",
+"ciudad": "FIRAVITOBA\\BOYA\\COL",
+"dir": "KR 4 8 88",
+"tel": "3123144721"
+},
+{
+"dep": "BOYACA",
+"ciudad": "FLORESTA\\BOYA\\COL",
+"dir": "KR 4 4 27",
+"tel": "3103251028"
+},
+{
+"dep": "BOYACA",
+"ciudad": "GACHANTIVA\\BOYA\\COL",
+"dir": "KR 5 5 08",
+"tel": "3224790202"
+},
+{
+"dep": "BOYACA",
+"ciudad": "GAMEZA\\BOYA\\COL",
+"dir": "KR 19 41 32",
+"tel": "3133485359"
+},
+{
+"dep": "BOYACA",
+"ciudad": "GARAGOA\\BOYA\\COL",
+"dir": "KR 12 10 23",
+"tel": "3193692960"
+},
+{
+"dep": "BOYACA",
+"ciudad": "GUACAMAYAS\\BOYA\\COL",
+"dir": "CL 1 5 13",
+"tel": "3213307081"
+},
+{
+"dep": "BOYACA",
+"ciudad": "GUATEQUE\\BOYA\\COL",
+"dir": "KR 4 11 00",
+"tel": "3203155738"
+},
+{
+"dep": "BOYACA",
+"ciudad": "GUAYATA\\BOYA\\COL",
+"dir": "KR 5 4 07",
+"tel": "3108151511"
+},
+{
+"dep": "BOYACA",
+"ciudad": "GUICAN\\BOYA\\COL",
+"dir": "KR 4 4 69",
+"tel": "3196890205"
+},
+{
+"dep": "BOYACA",
+"ciudad": "IZA\\BOYA\\COL",
+"dir": "KR 4 5 09",
+"tel": "3227315602"
+},
+{
+"dep": "BOYACA",
+"ciudad": "JENESANO\\BOYA\\COL",
+"dir": "KR 2 8 14",
+"tel": "3164581394"
+},
+{
+"dep": "BOYACA",
+"ciudad": "JERICO BOYACA\\BOYA\\COL",
+"dir": "KR 4 3 22",
+"tel": "3208358336"
+},
+{
+"dep": "BOYACA",
+"ciudad": "LA CAPILLA\\BOYA\\COL",
+"dir": "KR 4 3 69",
+"tel": "7539055"
+},
+{
+"dep": "BOYACA",
+"ciudad": "LA UVITA\\BOYA\\COL",
+"dir": "KR 6 5 34",
+"tel": "3142974356"
+},
+{
+"dep": "BOYACA",
+"ciudad": "LA VICTORIA BOYACA\\BOYA\\COL",
+"dir": "CL 2 3A 07",
+"tel": "3103273022"
+},
+{
+"dep": "BOYACA",
+"ciudad": "LABRANZAGRANDE\\BOYA\\COL",
+"dir": "KR 7 7 44",
+"tel": "3204768731"
+},
+{
+"dep": "BOYACA",
+"ciudad": "MACANAL\\BOYA\\COL",
+"dir": "KR 6 2 80",
+"tel": "3204959105"
+},
+{
+"dep": "BOYACA",
+"ciudad": "MARIPI\\BOYA\\COL",
+"dir": "CL 3 4 32",
+"tel": "3115261664"
+},
+{
+"dep": "BOYACA",
+"ciudad": "MIRAFLORES BOYACA\\BOYA\\COL",
+"dir": "CL 6 7 29",
+"tel": "3137894615"
+},
+{
+"dep": "BOYACA",
+"ciudad": "MONGUA\\BOYA\\COL",
+"dir": "CL 5 5 10",
+"tel": "3123452298"
+},
+{
+"dep": "BOYACA",
+"ciudad": "MONGUI\\BOYA\\COL",
+"dir": "KR 4 5 75",
+"tel": "3144010284"
+},
+{
+"dep": "BOYACA",
+"ciudad": "MONIQUIRA\\BOYA\\COL",
+"dir": "CL 18 5 12 LC 107",
+"tel": "3208477790"
+},
+{
+"dep": "BOYACA",
+"ciudad": "MOTAVITA\\BOYA\\COL",
+"dir": "KR 3 3 61 CS 6",
+"tel": "3232454559"
+},
+{
+"dep": "BOYACA",
+"ciudad": "MUZO\\BOYA\\COL",
+"dir": "CL 3 5A 15",
+"tel": "3183607522"
+},
+{
+"dep": "BOYACA",
+"ciudad": "NARIÑO (CALDAS BOYACÁ)\\CAL\\BOYA",
+"dir": "KR 2 1 98",
+"tel": "3208190414"
+},
+{
+"dep": "BOYACA",
+"ciudad": "NOBSA\\BOYA\\COL",
+"dir": "KR 10 5 57",
+"tel": "3125319614"
+},
+{
+"dep": "BOYACA",
+"ciudad": "NUEVO COLON\\BOYA\\COL",
+"dir": "KR 4 3 52",
+"tel": "3217802805"
+},
+{
+"dep": "BOYACA",
+"ciudad": "OICATA\\BOYA\\COL",
+"dir": "CL 5 3 38",
+"tel": "3173807098"
+},
+{
+"dep": "BOYACA",
+"ciudad": "OTANCHE\\BOYA\\COL",
+"dir": "AV LA PAZ 7 35 LC 2",
+"tel": "3144791062"
+},
+{
+"dep": "BOYACA",
+"ciudad": "PACHAVITA\\BOYA\\COL",
+"dir": "KR 3 3 21",
+"tel": "3124116035"
+},
+{
+"dep": "BOYACA",
+"ciudad": "PAEZ BOYACA\\BOYA\\COL",
+"dir": "CL 5 2 09",
+"tel": "3107861327"
+},
+{
+"dep": "BOYACA",
+"ciudad": "PAIPA\\BOYA\\COL",
+"dir": "KR 22 25 59",
+"tel": "3107513533"
+},
+{
+"dep": "BOYACA",
+"ciudad": "PAJARITO\\BOYA\\COL",
+"dir": "KR 2 4 71",
+"tel": "3212325165"
+},
+{
+"dep": "BOYACA",
+"ciudad": "PANQUEBA\\BOYA\\COL",
+"dir": "KR 4 4 02",
+"tel": "3138452689"
+},
+{
+"dep": "BOYACA",
+"ciudad": "PAUNA\\BOYA\\COL",
+"dir": "KR 3 6 24",
+"tel": "3123130489"
+},
+{
+"dep": "BOYACA",
+"ciudad": "PAYA\\BOYA\\COL",
+"dir": "KR 3 3 02",
+"tel": "3204214189"
+},
+{
+"dep": "BOYACA",
+"ciudad": "PAZ DE RIO\\BOYA\\COL",
+"dir": "CL 10 5 20",
+"tel": "3204346248"
+},
+{
+"dep": "BOYACA",
+"ciudad": "PESCA\\BOYA\\COL",
+"dir": "KR 6 4 33",
+"tel": "3105600050"
+},
+{
+"dep": "BOYACA",
+"ciudad": "PISBA\\BOYA\\COL",
+"dir": "KR 2 2 25",
+"tel": "3212675601"
+},
+{
+"dep": "BOYACA",
+"ciudad": "PUENTE BOYACA(VENTAQUEMADA)\\VEN\\BOYA",
+"dir": "centro poblado puente boyaca",
+"tel": "3118933169"
+},
+{
+"dep": "BOYACA",
+"ciudad": "PUERTO BOYACA\\BOYA\\COL",
+"dir": "KR 3 A 14 80",
+"tel": "3124449267"
+},
+{
+"dep": "BOYACA",
+"ciudad": "PUNTA LARGA (NOBSA)\\NOB\\BOYA",
+"dir": "Km 7 Vda Punta Larga",
+"tel": "3217738366"
+},
+{
+"dep": "BOYACA",
+"ciudad": "QUIPAMA\\BOYA\\COL",
+"dir": "CL 10 8 13",
+"tel": "3204573117"
+},
+{
+"dep": "BOYACA",
+"ciudad": "RAMIRIQUI\\BOYA\\COL",
+"dir": "KR 6 7 03",
+"tel": "3105859502"
+},
+{
+"dep": "BOYACA",
+"ciudad": "RANCHOGRANDE (RONDON)\\RON\\BOYA",
+"dir": "CENTRO POBLADO RANCHO GRANDE",
+"tel": "3213286293"
+},
+{
+"dep": "BOYACA",
+"ciudad": "RAQUIRA\\BOYA\\COL",
+"dir": "KR 3 6A 04",
+"tel": "3212823226"
+},
+{
+"dep": "BOYACA",
+"ciudad": "RONDON\\BOYA\\COL",
+"dir": "KR 3 5 37",
+"tel": "3112696901"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SABOYA\\BOYA\\COL",
+"dir": "CL 7 9 50",
+"tel": "3134179678"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SACHICA\\BOYA\\COL",
+"dir": "CL 3 1 21",
+"tel": "3115874989"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SAMACA\\BOYA\\COL",
+"dir": "KR 5 7 09",
+"tel": "3144424917"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SAN EDUARDO\\BOYA\\COL",
+"dir": "KR 3 5 30",
+"tel": "3213192162"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SAN JOSE DE PARE\\BOYA\\COL",
+"dir": "CL 2 2 06",
+"tel": "3115325525"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SAN LUIS DE GACENO\\BOYA\\COL",
+"dir": "KR 4 6 35",
+"tel": "3202235199"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SAN MATEO\\BOYA\\COL",
+"dir": "KR 3 2 42",
+"tel": "3104791109"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SAN MIGUEL DE SEMA\\BOYA\\COL",
+"dir": "CL 6 5 64",
+"tel": "3125824034"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SAN PABLO DE BORBUR\\BOYA\\COL",
+"dir": "KR 4 2 03",
+"tel": "3132888407"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SANTA BARBARA(SAN PABLO DE BOR\\SAN\\BOYA",
+"dir": "KR 1 3 93",
+"tel": "3114618223"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SANTA MARIA BOYACA\\BOYA\\COL",
+"dir": "CL 4 3 15",
+"tel": "3107908880"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SANTA ROSA DE VITERBO\\BOYA\\COL",
+"dir": "KR 5 7 10",
+"tel": "3112231453"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SANTA SOFIA\\BOYA\\COL",
+"dir": "KR 4 4 27",
+"tel": "3118951267"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SANTA TERESA ( TIBASOSA)\\TIB\\BOYA",
+"dir": "SANTA TERESA TIBASOSA FRENTE AL COLEGIO",
+"tel": "3132208141"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SANTANA\\BOYA\\COL",
+"dir": "KR 5 1A 53",
+"tel": "3213241606"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SATIVANORTE\\BOYA\\COL",
+"dir": "CL 6 N 3 15",
+"tel": "3115389328"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SATIVASUR\\BOYA\\COL",
+"dir": "KR 2 1 27",
+"tel": "3114789672"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SIACHOQUE\\BOYA\\COL",
+"dir": "KR 6 2 22",
+"tel": "3202814831"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SOATA\\BOYA\\COL",
+"dir": "CL 8 4 53",
+"tel": "3107877471"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SOCHA\\BOYA\\COL",
+"dir": "CL 3 10 20",
+"tel": "3115899589"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SOCOTA\\BOYA\\COL",
+"dir": "KR 02 04 65",
+"tel": "'3204683755 – 3204997160"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SOGAMOSO\\BOYA\\COL",
+"dir": "CL 11 NO 15 42",
+"tel": "7700312-3114972549"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SOMONDOCO\\BOYA\\COL",
+"dir": "KR 3 5 06",
+"tel": "3204967225"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SORA\\BOYA\\COL",
+"dir": "KR 2 3 12",
+"tel": "3114859377"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SORACA\\BOYA\\COL",
+"dir": "CL 4 4 55",
+"tel": "3125458224"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SOTAQUIRA\\BOYA\\COL",
+"dir": "KR 8 6 61",
+"tel": "3143348276"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SUSACON\\BOYA\\COL",
+"dir": "KR 3 5 15",
+"tel": "3145199542"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SUTAMARCHAN\\BOYA\\COL",
+"dir": "KR 3 3 83",
+"tel": "3103443264"
+},
+{
+"dep": "BOYACA",
+"ciudad": "SUTATENZA\\BOYA\\COL",
+"dir": "KR 5 2 42",
+"tel": "3176702959"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TARQUI (SOGAMOSO)\\SOG\\BOYA",
+"dir": "KR 11 30 43 SUR",
+"tel": "3208763523"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TASCO\\BOYA\\COL",
+"dir": "CL 6 5 34",
+"tel": "3125125990"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TENZA\\BOYA\\COL",
+"dir": "CL 4 NO 9 13",
+"tel": "3219437793"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TIBANA\\BOYA\\COL",
+"dir": "KR 5 5 07",
+"tel": "3144360907"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TIBASOSA\\BOYA\\COL",
+"dir": "CL 3 8 18",
+"tel": "3004222849"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TIERRA NEGRA (VENTAQUEMADA)\\VEN\\BOYA",
+"dir": "KM 1O4 VIA BOGOTA TUNJA SECTOR TIERRA NEGRA",
+"tel": "3232150463"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TINJACA\\BOYA\\COL",
+"dir": "KR 2 4 23",
+"tel": "3132833445"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TIPACOQUE\\BOYA\\COL",
+"dir": "KR 2 5 14",
+"tel": "3112232562"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TOCA\\BOYA\\COL",
+"dir": "CL 4 8 55",
+"tel": "3118712588"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TOGUI\\BOYA\\COL",
+"dir": "KR 05 03 61",
+"tel": "3112023566"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TOPAGA\\BOYA\\COL",
+"dir": "CL 4 5 04",
+"tel": "3124914014"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TOTA\\BOYA\\COL",
+"dir": "CL 3 3 60",
+"tel": "3229844595"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TUNJA\\BOYA\\COL",
+"dir": "OF. PRINC Km1 salida Tunja-Paipa Ctro Logistico San Carlos",
+"tel": "7430606"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TUNUNGUA\\BOYA\\COL",
+"dir": "CL 1 3 03",
+"tel": "3144538899"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TURMEQUE\\BOYA\\COL",
+"dir": "KR 5 3 10",
+"tel": "3124380037"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TUTA\\BOYA\\COL",
+"dir": "KR 7 6 05",
+"tel": "3112237656"
+},
+{
+"dep": "BOYACA",
+"ciudad": "TUTAZA\\BOYA\\COL",
+"dir": "KR 3 3 71",
+"tel": "3115298062"
+},
+{
+"dep": "BOYACA",
+"ciudad": "UMBITA\\BOYA\\COL",
+"dir": "KR 6 6 29",
+"tel": "3115037613"
+},
+{
+"dep": "BOYACA",
+"ciudad": "VENTAQUEMADA\\BOYA\\COL",
+"dir": "KR 4 4 35",
+"tel": "3134790038"
+},
+{
+"dep": "BOYACA",
+"ciudad": "VILLA DE LEYVA\\BOYA\\COL",
+"dir": "CL 10 8 46",
+"tel": "7320738"
+},
+{
+"dep": "BOYACA",
+"ciudad": "VIRACACHA\\BOYA\\COL",
+"dir": "KR 3 4 65",
+"tel": "3102828935"
+},
+{
+"dep": "BOYACA",
+"ciudad": "ZETAQUIRA\\BOYA\\COL",
+"dir": "KR 2 3 80",
+"tel": "3144816516"
+},
+{
+"dep": "CALDAS",
+"ciudad": "AGUADAS\\CALD\\COL",
+"dir": "KR 6 NO 5 21",
+"tel": "3205136805"
+},
+{
+"dep": "CALDAS",
+"ciudad": "ALTO BONITO (MANIZALES)\\MZL\\CALD",
+"dir": "VDA ALTO BONITO VIA A NEIRA",
+"tel": "3113904628"
+},
+{
+"dep": "CALDAS",
+"ciudad": "ANSERMA\\CALD\\COL",
+"dir": "KR 4 13 26",
+"tel": "3006545075"
+},
+{
+"dep": "CALDAS",
+"ciudad": "ARANZAZU\\CALD\\COL",
+"dir": "KR 6 06 33",
+"tel": "3134745819"
+},
+{
+"dep": "CALDAS",
+"ciudad": "ARAUCA PALESTINA\\PAL\\CALD",
+"dir": "KR 4 6 A 45",
+"tel": "3105064671"
+},
+{
+"dep": "CALDAS",
+"ciudad": "BELALCAZAR\\CALD\\COL",
+"dir": "KR 3 7 62",
+"tel": "3128227935"
+},
+{
+"dep": "CALDAS",
+"ciudad": "BOLIVIA\\PEN\\CALD",
+"dir": "CL PRINCIPAL BOLIVIA",
+"tel": "3108284150"
+},
+{
+"dep": "CALDAS",
+"ciudad": "CANAVERAL(VICTORIA CALDAS)\\VIC\\CALD",
+"dir": "VDA CAÑAVERAL",
+"tel": "3107798613"
+},
+{
+"dep": "CALDAS",
+"ciudad": "CHINCHINA\\CALD\\COL",
+"dir": "KR 08 12 34",
+"tel": "3203003876"
+},
+{
+"dep": "CALDAS",
+"ciudad": "EL LLANERITO(NEIRA)\\NEI\\CALD",
+"dir": "LA BOTIJA KM 36 VIA MANIZALEZ",
+"tel": "3218235703"
+},
+{
+"dep": "CALDAS",
+"ciudad": "FILADELFIA\\CALD\\COL",
+"dir": "KR 6 5 59",
+"tel": "3105301378"
+},
+{
+"dep": "CALDAS",
+"ciudad": "FLORENCIA CALDAS\\CALD\\COL",
+"dir": "CL 2 5 19",
+"tel": "3146770480"
+},
+{
+"dep": "CALDAS",
+"ciudad": "GUARINOCITO (LA DORADA)\\DOR\\CALD",
+"dir": "KR 6 5 27",
+"tel": "3122478883"
+},
+{
+"dep": "CALDAS",
+"ciudad": "IRRA (QUINCHIA)\\MZL\\CALD",
+"dir": "CL 2 4 107",
+"tel": "3114725034"
+},
+{
+"dep": "CALDAS",
+"ciudad": "LA DORADA\\CALD\\COL",
+"dir": "CL 16 1 25 LC 101",
+"tel": "8570217"
+},
+{
+"dep": "CALDAS",
+"ciudad": "LA FELISA (LA MERCED)\\MER\\CALD",
+"dir": "LA MERCED CORREGIMIENTO LA FELISA",
+"tel": "3137650366"
+},
+{
+"dep": "CALDAS",
+"ciudad": "LA MERCED\\CALD\\COL",
+"dir": "CL 15 5 21",
+"tel": "3137683023"
+},
+{
+"dep": "CALDAS",
+"ciudad": "LOS PLANES (MANZANARES CALDAS)\\MAN\\CALD",
+"dir": "VDA PLANES",
+"tel": "3133964562"
+},
+{
+"dep": "CALDAS",
+"ciudad": "MANIZALES\\CALD\\COL",
+"dir": "OF. PRINC CALLE 17 # 25-35",
+"tel": "3232554455"
+},
+{
+"dep": "CALDAS",
+"ciudad": "MANZANARES\\CALD\\COL",
+"dir": "KR 5 4 1 9",
+"tel": "3114861484"
+},
+{
+"dep": "CALDAS",
+"ciudad": "MARMATO\\CALD\\COL",
+"dir": "C.CIAL JORGE JORGE AGUDELO LC 10",
+"tel": "3113301033"
+},
+{
+"dep": "CALDAS",
+"ciudad": "MARQUETALIA\\CALD\\COL",
+"dir": "CL 3 1 A 64",
+"tel": "3137201529"
+},
+{
+"dep": "CALDAS",
+"ciudad": "MARULANDA\\CALD\\COL",
+"dir": "KR 6 7 14",
+"tel": "3125417316"
+},
+{
+"dep": "CALDAS",
+"ciudad": "NEIRA\\CALD\\COL",
+"dir": "CL 8 9 47",
+"tel": "3216372518"
+},
+{
+"dep": "CALDAS",
+"ciudad": "NORCASIA\\CALD\\COL",
+"dir": "CL 11 5 26",
+"tel": "3234439013"
+},
+{
+"dep": "CALDAS",
+"ciudad": "PACORA\\CALD\\COL",
+"dir": "KR 3 6 62",
+"tel": "3217772163"
+},
+{
+"dep": "CALDAS",
+"ciudad": "PADUA (HERVEO)\\MZL\\CALD",
+"dir": "CL PRINCIPAL CORREGIMIENTO PADUA",
+"tel": "3138176381"
+},
+{
+"dep": "CALDAS",
+"ciudad": "PALESTINA CALDAS\\CALD\\COL",
+"dir": "CL 9 9 28",
+"tel": "3145158250"
+},
+{
+"dep": "CALDAS",
+"ciudad": "PENSILVANIA\\CALD\\COL",
+"dir": "CL 4 6 75",
+"tel": "3138452745"
+},
+{
+"dep": "CALDAS",
+"ciudad": "QUIEBRA DE VELEZ(MANIZALES)\\MZL\\CALD",
+"dir": "VDA QUIEBRA DE VELEZ",
+"tel": "3105961825"
+},
+{
+"dep": "CALDAS",
+"ciudad": "RIOSUCIO CALDAS\\CALD\\COL",
+"dir": "KR 6 6 12",
+"tel": "3041007423"
+},
+{
+"dep": "CALDAS",
+"ciudad": "RISARALDA\\CALD\\COL",
+"dir": "KR 2 5 25",
+"tel": "3105487115"
+},
+{
+"dep": "CALDAS",
+"ciudad": "SALAMINA CALDAS\\CALD\\COL",
+"dir": "KR 6 5 11",
+"tel": "3113200449"
+},
+{
+"dep": "CALDAS",
+"ciudad": "SAMANA\\CALD\\COL",
+"dir": "KR 9 8 17",
+"tel": "3017912352"
+},
+{
+"dep": "CALDAS",
+"ciudad": "SAN DIEGO (SAMANA CALDAS)\\SAM\\CALD",
+"dir": "KR 7 64 2",
+"tel": "3207290914"
+},
+{
+"dep": "CALDAS",
+"ciudad": "SAN FELIX\\SAL\\CALD",
+"dir": "KR 5 12 31",
+"tel": "3122087358"
+},
+{
+"dep": "CALDAS",
+"ciudad": "SAN JOSE\\CALD\\COL",
+"dir": "KR 2 2 33",
+"tel": "3145383534"
+},
+{
+"dep": "CALDAS",
+"ciudad": "SAN PEREGRINO (MANIZALES)\\MZL\\CALD",
+"dir": "VDA SAN PEREGRINO SEC EL BOSQUE CS 2",
+"tel": "3127971218"
+},
+{
+"dep": "CALDAS",
+"ciudad": "SANTAGUEDA (PALESTINA)\\PAL\\CALD",
+"dir": "ESTACIÓN DE SERVICIO LA ROCHELA",
+"tel": "3122880937"
+},
+{
+"dep": "CALDAS",
+"ciudad": "SUPIA\\CALD\\COL",
+"dir": "CL 32 07 65 LC 101",
+"tel": "3117029901"
+},
+{
+"dep": "CALDAS",
+"ciudad": "VICTORIA\\CALD\\COL",
+"dir": "KR 6 8 45",
+"tel": "8552417 - 3137459688"
+},
+{
+"dep": "CALDAS",
+"ciudad": "VILLAMARIA\\CALD\\COL",
+"dir": "KR 5 7 12",
+"tel": "3105417809"
+},
+{
+"dep": "CALDAS",
+"ciudad": "VITERBO\\CALD\\COL",
+"dir": "KR 8 9 64",
+"tel": "3108451299"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "ALBANIA CAQUETA\\CAQU\\COL",
+"dir": "CL 6 6 36",
+"tel": "3134100914"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "BELEN DE LOS ANDAQUIES\\CAQU\\COL",
+"dir": "KR 4 3 15",
+"tel": "3124345452"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "CARTAGENA DEL CHAIRA\\CAQU\\COL",
+"dir": "KR 7 3 31",
+"tel": "3173787625"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "CURILLO\\CAQU\\COL",
+"dir": "CL 13 25 57",
+"tel": "3124790313"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "EL DONCELLO\\CAQU\\COL",
+"dir": "KR 4 3 39",
+"tel": "3222410182"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "EL PARAISO (CURILLO) \\CUR\\CAQU",
+"dir": "CORREG EL PARAISO CURILLO",
+"tel": "3152608706"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "EL PAUJIL\\CAQU\\COL",
+"dir": "CL 4 4 40",
+"tel": "3204505138"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "FLORENCIA CAQUETA\\CAQU\\COL",
+"dir": "OF. PRINC Cra 9 # 16-40",
+"tel": "018000942777"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "LA MONTANITA\\CAQU\\COL",
+"dir": "KR 6 5 29",
+"tel": "3103326019"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "MILAN\\CAQU\\COL",
+"dir": "CL 1 KR 1 CS 1",
+"tel": "3133673248"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "MORELIA\\CAQU\\COL",
+"dir": "CL 4 4 19",
+"tel": "3105586577"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "PUERTO RICO CAQUETA\\CAQU\\COL",
+"dir": "CL 5 9 69 FRENTE HOTEL CS QUINTA",
+"tel": "3114740066"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "SAN JOSE DEL FRAGUA\\CAQU\\COL",
+"dir": "KR 5 4 28",
+"tel": "3215577875"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "SAN VICENTE DEL CAGUAN\\CAQU\\COL",
+"dir": "CL 4 6A 39",
+"tel": "3112578409"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "SOLANO\\CAQU\\COL",
+"dir": "KR 2 4 08 TERMINAL FLUVIAL EXPRESO SOLANO",
+"tel": "3124989947"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "SOLITA\\CAQU\\COL",
+"dir": "KR 4 CL 6",
+"tel": "3203772803"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "VALPARAISO CAQUETA\\CAQU\\COL",
+"dir": "CL 11 3 32",
+"tel": "3112644157"
+},
+{
+"dep": "CAQUETA",
+"ciudad": "VERSALLES (EL PAUJIL)\\PAU\\CAQU",
+"dir": "RUTA PPAL EL PAUJIL",
+"tel": "3125389662"
+},
+{
+"dep": "CASANARE",
+"ciudad": "AGUAZUL\\CASA\\COL",
+"dir": "KR 19 11 28",
+"tel": "3132922306"
+},
+{
+"dep": "CASANARE",
+"ciudad": "CHAMEZA\\CASA\\COL",
+"dir": "CS CURAL ESQ",
+"tel": "3118039900"
+},
+{
+"dep": "CASANARE",
+"ciudad": "EL ALGARROBO (OROCUE)\\ORO\\CASA",
+"dir": "VDA EL ALGARROBO",
+"tel": "3144487100"
+},
+{
+"dep": "CASANARE",
+"ciudad": "EL MORRO (YOPAL)\\YPL\\CASA",
+"dir": "CORR EL MORRO",
+"tel": "3182149600"
+},
+{
+"dep": "CASANARE",
+"ciudad": "HATO COROZAL\\CASA\\COL",
+"dir": "CL 12 11 65",
+"tel": "3143019543"
+},
+{
+"dep": "CASANARE",
+"ciudad": "LA CHAPARRERA\\YPL\\CASA",
+"dir": "MARGINAL DE LA SELVA 4 16",
+"tel": "3112855059"
+},
+{
+"dep": "CASANARE",
+"ciudad": "LA SALINA\\CASA\\COL",
+"dir": "CL 3 4 02",
+"tel": "3115697679"
+},
+{
+"dep": "CASANARE",
+"ciudad": "LA YOPALOSA(/NUNCHÍA CASA)\\NUN\\CASA",
+"dir": "KR 7 N 4 -62",
+"tel": "3124812223"
+},
+{
+"dep": "CASANARE",
+"ciudad": "MANI\\CASA\\COL",
+"dir": "KR 4 17 07",
+"tel": "3132529165"
+},
+{
+"dep": "CASANARE",
+"ciudad": "MONTERREY\\CASA\\COL",
+"dir": "KR 6 16 50",
+"tel": "3143313055"
+},
+{
+"dep": "CASANARE",
+"ciudad": "NUNCHIA\\CASA\\COL",
+"dir": "KR 5 8 40",
+"tel": "3133771723"
+},
+{
+"dep": "CASANARE",
+"ciudad": "OROCUE\\CASA\\COL",
+"dir": "DG 5 8 100",
+"tel": "3156506678"
+},
+{
+"dep": "CASANARE",
+"ciudad": "PAZ DE ARIPORO\\CASA\\COL",
+"dir": "CL 8 9 15",
+"tel": "3507026619"
+},
+{
+"dep": "CASANARE",
+"ciudad": "PORE\\CASA\\COL",
+"dir": "CL 4 19 16",
+"tel": "3102526318"
+},
+{
+"dep": "CASANARE",
+"ciudad": "RECETOR\\CASA\\COL",
+"dir": "CL 2 2 21",
+"tel": "3102676143"
+},
+{
+"dep": "CASANARE",
+"ciudad": "SABANALARGA CASANARE\\CASA\\COL",
+"dir": "CL 5 5 35",
+"tel": "3112274064"
+},
+{
+"dep": "CASANARE",
+"ciudad": "SACAMA\\CASA\\COL",
+"dir": "DG 4 104 114",
+"tel": "3115757886"
+},
+{
+"dep": "CASANARE",
+"ciudad": "SAN LUIS DE PALENQUE\\CASA\\COL",
+"dir": "CL 2 11 06",
+"tel": "3138925125"
+},
+{
+"dep": "CASANARE",
+"ciudad": "TAMARA\\CASA\\COL",
+"dir": "CL 6 3 07",
+"tel": "3204535403"
+},
+{
+"dep": "CASANARE",
+"ciudad": "TAURAMENA\\CASA\\COL",
+"dir": "CL 5 12 35",
+"tel": "3115890806"
+},
+{
+"dep": "CASANARE",
+"ciudad": "TRINIDAD\\CASA\\COL",
+"dir": "CL 4 4 51",
+"tel": "3204467779"
+},
+{
+"dep": "CASANARE",
+"ciudad": "VILLANUEVA CASANARE\\CASA\\COL",
+"dir": "KR 10 12 04 ESQ",
+"tel": "3203667898"
+},
+{
+"dep": "CASANARE",
+"ciudad": "YOPAL\\CASA\\COL",
+"dir": "OF. PRINC TV 1 3 ESTE KM 1 VIA YOPAL - AGUAZUL",
+"tel": "018000942777"
+},
+{
+"dep": "CAUCA",
+"ciudad": "ALMAGUER\\CAUC\\COL",
+"dir": "CL 4 8 72",
+"tel": "3207699086"
+},
+{
+"dep": "CAUCA",
+"ciudad": "ARGELIA CAUCA\\CAUC\\COL",
+"dir": "KR 3 CL 4 2 20",
+"tel": "3156790901"
+},
+{
+"dep": "CAUCA",
+"ciudad": "BALBOA CAUCA\\CAUC\\COL",
+"dir": "CL 5 3 25",
+"tel": "3126065962"
+},
+{
+"dep": "CAUCA",
+"ciudad": "BOLIVAR CAUCA\\CAUC\\COL",
+"dir": "KR 3 5 56",
+"tel": "3148149475"
+},
+{
+"dep": "CAUCA",
+"ciudad": "BUENOS AIRES\\CAUC\\COL",
+"dir": "CL 6 12 14",
+"tel": "3148754450"
+},
+{
+"dep": "CAUCA",
+"ciudad": "CAJETE (POPAYAN/CAUCA) \\PPY\\CAUC",
+"dir": "VDA CAJETE CERCA DE LA IGLESIA CATOLICA",
+"tel": "3011809229"
+},
+{
+"dep": "CAUCA",
+"ciudad": "CAJIBIO\\CAUC\\COL",
+"dir": "KR 2 05 26",
+"tel": "3176996395"
+},
+{
+"dep": "CAUCA",
+"ciudad": "CALDONO\\CAUC\\COL",
+"dir": "CL 4 3 39",
+"tel": "3014676023"
+},
+{
+"dep": "CAUCA",
+"ciudad": "CALOTO\\CAUC\\COL",
+"dir": "KR 5 11 16 PQ PRINCIPAL",
+"tel": "3166568350"
+},
+{
+"dep": "CAUCA",
+"ciudad": "COCONUCO_PURACE\\CAUC\\COL",
+"dir": "KR 3 LC 1",
+"tel": "3148352409"
+},
+{
+"dep": "CAUCA",
+"ciudad": "CORINTO\\CAUC\\COL",
+"dir": "CL 7 9 29",
+"tel": "8270125"
+},
+{
+"dep": "CAUCA",
+"ciudad": "EL BORDO PATIA\\CAUC\\COL",
+"dir": "KR 6 4 74",
+"tel": "3146784446"
+},
+{
+"dep": "CAUCA",
+"ciudad": "EL ESTRECHO(EL BORDO PATIA CAU\\BOR\\CAUC",
+"dir": "CORREGIMIENTO EL ESTRECHO PATIA CAUCA",
+"tel": "3146784446"
+},
+{
+"dep": "CAUCA",
+"ciudad": "EL TAMBO CAUCA\\CAUC\\COL",
+"dir": "CL 2 3 35",
+"tel": "3148217091"
+},
+{
+"dep": "CAUCA",
+"ciudad": "FLORENCIA CAUCA\\CAUC\\COL",
+"dir": "CL 4 3 30",
+"tel": "3112767389"
+},
+{
+"dep": "CAUCA",
+"ciudad": "GUACHENE\\CAUC\\COL",
+"dir": "KR 5 4 45",
+"tel": "3165488378"
+},
+{
+"dep": "CAUCA",
+"ciudad": "GUAPI\\CAUC\\COL",
+"dir": "KR 2 1 49",
+"tel": "3137210305"
+},
+{
+"dep": "CAUCA",
+"ciudad": "INZA\\CAUC\\COL",
+"dir": "CL 5 4 56",
+"tel": "3224032368"
+},
+{
+"dep": "CAUCA",
+"ciudad": "JAMBALO\\CAUC\\COL",
+"dir": "KR 5 COD 6",
+"tel": "3154771901"
+},
+{
+"dep": "CAUCA",
+"ciudad": "LA SIERRA CAUCA\\CAUC\\COL",
+"dir": "CL PPAL",
+"tel": "3148443291 3146691702"
+},
+{
+"dep": "CAUCA",
+"ciudad": "LA VEGA CAUCA\\CAUC\\COL",
+"dir": "KR 3 9 42",
+"tel": "3224139667"
+},
+{
+"dep": "CAUCA",
+"ciudad": "LAS GUACAS (POPAYAN)\\PPY\\CAUC",
+"dir": "CL 73DN 3E 10",
+"tel": "3127473148"
+},
+{
+"dep": "CAUCA",
+"ciudad": "LOPEZ\\CAUC\\COL",
+"dir": "BR EL SENDERO",
+"tel": "3117222023"
+},
+{
+"dep": "CAUCA",
+"ciudad": "MERCADERES\\CAUC\\COL",
+"dir": "KR 3 6 23",
+"tel": "3122506057"
+},
+{
+"dep": "CAUCA",
+"ciudad": "MIRANDA\\CAUC\\COL",
+"dir": "KR 7 5 29",
+"tel": "3104410713"
+},
+{
+"dep": "CAUCA",
+"ciudad": "MONDOMO( SANTANDER DE QUILICHA\\SAN\\CAUC",
+"dir": "KR 2 DA 6 73 B PANAMERICANO NORTE",
+"tel": "3234271257"
+},
+{
+"dep": "CAUCA",
+"ciudad": "MORALES CAUCA\\CAUC\\COL",
+"dir": "KR 2 1 S 27",
+"tel": "3216150281"
+},
+{
+"dep": "CAUCA",
+"ciudad": "PADILLA\\CAUC\\COL",
+"dir": "KR 2 9 A 04",
+"tel": "3184485358"
+},
+{
+"dep": "CAUCA",
+"ciudad": "PAEZ BELALCAZAR CAUCA\\CAUC\\COL",
+"dir": "KR 3 10 12",
+"tel": "3103060743"
+},
+{
+"dep": "CAUCA",
+"ciudad": "PESCADOR(CALDONO CAUCA)\\CAL\\CAUC",
+"dir": "KR 1 4 44 VIA PRINCIPAL PANAMERICANA",
+"tel": "3183525497"
+},
+{
+"dep": "CAUCA",
+"ciudad": "PIAGUA (EL TAMBO)\\TAM\\CAUC",
+"dir": "CL PPAL",
+"tel": "3185186982"
+},
+{
+"dep": "CAUCA",
+"ciudad": "PIAMONTE\\CAUC\\COL",
+"dir": "FUNDADORES ESQ HOTEL ZAFIRO",
+"tel": "3158257040"
+},
+{
+"dep": "CAUCA",
+"ciudad": "PIEDRASENTADA ( PATIA )\\BOR\\CAUC",
+"dir": "KR 2 1 5",
+"tel": "3184914030"
+},
+{
+"dep": "CAUCA",
+"ciudad": "PIENDAMO\\CAUC\\COL",
+"dir": "CL 7 9 27",
+"tel": "3046156001"
+},
+{
+"dep": "CAUCA",
+"ciudad": "POPAYAN\\CAUC\\COL",
+"dir": "OF. PRINC CALLE 5 50 10",
+"tel": "3232554455"
+},
+{
+"dep": "CAUCA",
+"ciudad": "PUERTO TEJADA\\CAUC\\COL",
+"dir": "CL 16 16 78",
+"tel": "3128344801"
+},
+{
+"dep": "CAUCA",
+"ciudad": "ROSAS\\CAUC\\COL",
+"dir": "KR 3 6 29",
+"tel": "3103848582"
+},
+{
+"dep": "CAUCA",
+"ciudad": "SAN JUAN DE VILLALOBOS\\SAN\\CAUC",
+"dir": "VIA NACIONAL SAN JUAN DE VILLALOBOS",
+"tel": "3124312638"
+},
+{
+"dep": "CAUCA",
+"ciudad": "SAN MIGUEL (LA VEGA )\\VEG\\CAUC",
+"dir": "VDA GUAYABO NEGRO",
+"tel": "3172714409"
+},
+{
+"dep": "CAUCA",
+"ciudad": "SAN SEBASTIAN\\CAUC\\COL",
+"dir": "CL 3 3 67",
+"tel": "3147550666"
+},
+{
+"dep": "CAUCA",
+"ciudad": "SANTA ROSA\\CAUC\\COL",
+"dir": "CL 4 4 63",
+"tel": "3216712920"
+},
+{
+"dep": "CAUCA",
+"ciudad": "SANTANDER DE QUILICHAO\\CAUC\\COL",
+"dir": "CL 8 11 51",
+"tel": "3137490786"
+},
+{
+"dep": "CAUCA",
+"ciudad": "SILVIA\\CAUC\\COL",
+"dir": "KR 3 10 20",
+"tel": "3185232223"
+},
+{
+"dep": "CAUCA",
+"ciudad": "SOTARA\\CAUC\\COL",
+"dir": "CL PPAL",
+"tel": "3164701176"
+},
+{
+"dep": "CAUCA",
+"ciudad": "SUAREZ CAUCA\\CAUC\\COL",
+"dir": "KR 3 6 62",
+"tel": "3225892155"
+},
+{
+"dep": "CAUCA",
+"ciudad": "SUCRE CAUCA\\CAUC\\COL",
+"dir": "CL 2 3 53",
+"tel": "3117651996"
+},
+{
+"dep": "CAUCA",
+"ciudad": "TIMBIO\\CAUC\\COL",
+"dir": "KR 20 19 20",
+"tel": "3217289593"
+},
+{
+"dep": "CAUCA",
+"ciudad": "TIMBIQUI\\CAUC\\COL",
+"dir": "CL 3 5 41",
+"tel": "3113366769"
+},
+{
+"dep": "CAUCA",
+"ciudad": "TORIBIO\\CAUC\\COL",
+"dir": "DG A LA ALCALDIA",
+"tel": "3148219591"
+},
+{
+"dep": "CAUCA",
+"ciudad": "TOTORO\\CAUC\\COL",
+"dir": "CL 3 5 65",
+"tel": "3226648101"
+},
+{
+"dep": "CAUCA",
+"ciudad": "TUNIA (PIENDAMO) \\PIE\\CAUC",
+"dir": "VDA VIVAS BALCAZAR ENTRADA A LA CANCHA",
+"tel": "3005201606"
+},
+{
+"dep": "CAUCA",
+"ciudad": "VILLA RICA\\CAUC\\COL",
+"dir": "KR 16 2 27",
+"tel": "3136567678"
+},
+{
+"dep": "CESAR",
+"ciudad": "AGUACHICA\\CESA\\COL",
+"dir": "CL 8 14 17",
+"tel": "5658661"
+},
+{
+"dep": "CESAR",
+"ciudad": "AGUAS BLANCAS( VALLEDUPAR)\\VDP\\CESA",
+"dir": "CL 8 KR 8 29",
+"tel": "3243265273"
+},
+{
+"dep": "CESAR",
+"ciudad": "AGUSTIN CODAZZI\\CESA\\COL",
+"dir": "KR 16 11 47",
+"tel": "3206872619"
+},
+{
+"dep": "CESAR",
+"ciudad": "ARJONA (ASTREA )\\AST\\CESA",
+"dir": "CL 4 4 13",
+"tel": "3205439181"
+},
+{
+"dep": "CESAR",
+"ciudad": "ASTREA\\CESA\\COL",
+"dir": "CL 7 5 02",
+"tel": "3205219892"
+},
+{
+"dep": "CESAR",
+"ciudad": "BECERRIL\\CESA\\COL",
+"dir": "CL 10 5 75",
+"tel": "3126392134"
+},
+{
+"dep": "CESAR",
+"ciudad": "BOSCONIA\\CESA\\COL",
+"dir": "CL 18 22 35",
+"tel": "3232554455"
+},
+{
+"dep": "CESAR",
+"ciudad": "CASACARA (AGUSTIN CODAZZI)\\COD\\CESA",
+"dir": "KR 2 8 76",
+"tel": "3145367821"
+},
+{
+"dep": "CESAR",
+"ciudad": "CHIMICHAGUA\\CESA\\COL",
+"dir": "CL 6 3 16",
+"tel": "3175650376"
+},
+{
+"dep": "CESAR",
+"ciudad": "CHIRIGUANA\\CESA\\COL",
+"dir": "CL 8 4 20",
+"tel": "3163312017"
+},
+{
+"dep": "CESAR",
+"ciudad": "CUATRO VIENTOS (EL PASO CESAR)\\PAS\\CESA",
+"dir": "CL 6 5 100",
+"tel": "3234668703"
+},
+{
+"dep": "CESAR",
+"ciudad": "CURUMANI\\CESA\\COL",
+"dir": "KR 16 9 16",
+"tel": "3225945699"
+},
+{
+"dep": "CESAR",
+"ciudad": "EL COPEY\\CESA\\COL",
+"dir": "CL 16 11 125",
+"tel": "3216898508"
+},
+{
+"dep": "CESAR",
+"ciudad": "EL PASO\\CESA\\COL",
+"dir": "KR 4 2 07",
+"tel": "3216777323"
+},
+{
+"dep": "CESAR",
+"ciudad": "GAMARRA\\CESA\\COL",
+"dir": "KR 9 6 25",
+"tel": "3147724844"
+},
+{
+"dep": "CESAR",
+"ciudad": "GONZALEZ\\CESA\\COL",
+"dir": "CL 2 2 95",
+"tel": "3126235167"
+},
+{
+"dep": "CESAR",
+"ciudad": "LA GLORIA\\CESA\\COL",
+"dir": "CL 2 5 11",
+"tel": "3004798197"
+},
+{
+"dep": "CESAR",
+"ciudad": "LA JAGUA DE IBIRICO\\CESA\\COL",
+"dir": "CL 8 04 34",
+"tel": "3137494979"
+},
+{
+"dep": "CESAR",
+"ciudad": "LA LOMA\\PAS\\CESA",
+"dir": "CL 10 13A 110 LC 1",
+"tel": "3154966783"
+},
+{
+"dep": "CESAR",
+"ciudad": "LA MATA (LA GLORIA CESAR)\\GLO\\CESA",
+"dir": "CL 2 3 19 LC 3",
+"tel": "3202187315"
+},
+{
+"dep": "CESAR",
+"ciudad": "LA PAZ CESAR\\CESA\\COL",
+"dir": "CL 6 6 51",
+"tel": "3152154467"
+},
+{
+"dep": "CESAR",
+"ciudad": "MANAURE CESAR\\CESA\\COL",
+"dir": "CL 3 7 145",
+"tel": "3116690409"
+},
+{
+"dep": "CESAR",
+"ciudad": "MANDINGUILLA (CHIMICHAGUA)\\CHI\\CESA",
+"dir": "KR 6 1 SUR 15",
+"tel": "3205258574"
+},
+{
+"dep": "CESAR",
+"ciudad": "MARIANGOLA(VALLEDUPAR CESAR)\\VDP\\CESA",
+"dir": "CL 5 4 65",
+"tel": "3004782647"
+},
+{
+"dep": "CESAR",
+"ciudad": "PAILITAS\\CESA\\COL",
+"dir": "KR 7 5 84",
+"tel": "3216700999"
+},
+{
+"dep": "CESAR",
+"ciudad": "PELAYA\\CESA\\COL",
+"dir": "CL 10 9 02",
+"tel": "3103864718"
+},
+{
+"dep": "CESAR",
+"ciudad": "PUEBLO BELLO\\CESA\\COL",
+"dir": "CL 10 4 176",
+"tel": "3157384697"
+},
+{
+"dep": "CESAR",
+"ciudad": "RINCON HONDO (CHIRIGUANA) \\CHI\\CESA",
+"dir": "KR 6 12 46",
+"tel": "3013173564"
+},
+{
+"dep": "CESAR",
+"ciudad": "RIO DE ORO\\CESA\\COL",
+"dir": "KDX 67 520 LC 1",
+"tel": "3166154416"
+},
+{
+"dep": "CESAR",
+"ciudad": "SAN ALBERTO\\CESA\\COL",
+"dir": "KR 3 5 35",
+"tel": "3154353905"
+},
+{
+"dep": "CESAR",
+"ciudad": "SAN DIEGO\\CESA\\COL",
+"dir": "DG 3 8 13",
+"tel": "3136176778"
+},
+{
+"dep": "CESAR",
+"ciudad": "SAN MARTIN CESAR\\CESA\\COL",
+"dir": "CL 15 7 41",
+"tel": "3177932774"
+},
+{
+"dep": "CESAR",
+"ciudad": "SAN ROQUE (CURUMANI)\\CUR\\CESA",
+"dir": "CL 5 5 08",
+"tel": "3208894993"
+},
+{
+"dep": "CESAR",
+"ciudad": "TAMALAMEQUE\\CESA\\COL",
+"dir": "CL 4 4 14",
+"tel": "3187849861"
+},
+{
+"dep": "CESAR",
+"ciudad": "VALLEDUPAR\\CESA\\COL",
+"dir": "OF. PRINC CR 7 # 23 -21",
+"tel": "3232554455"
+},
+{
+"dep": "CHOCO",
+"ciudad": "ACANDI\\CHOC\\COL",
+"dir": "CL JULIAN VALENCIA",
+"tel": "3126698021"
+},
+{
+"dep": "CHOCO",
+"ciudad": "ALTO BAUDO\\CHOC\\COL",
+"dir": "KR 1 CL SAN JUAN",
+"tel": "3216075129"
+},
+{
+"dep": "CHOCO",
+"ciudad": "ATRATO\\CHOC\\COL",
+"dir": "BR YUTO NUEVO AL FRENTE DEL ESTADERO DANIEL",
+"tel": "3148008287"
+},
+{
+"dep": "CHOCO",
+"ciudad": "BAGADO\\CHOC\\COL",
+"dir": "FRENTE AL JUZGADO",
+"tel": "3122401674"
+},
+{
+"dep": "CHOCO",
+"ciudad": "BAHIA SOLANO\\CHOC\\COL",
+"dir": "CL 3 2 40",
+"tel": "3177565992"
+},
+{
+"dep": "CHOCO",
+"ciudad": "BAJO BAUDO\\CHOC\\COL",
+"dir": "BAJO BAUDO BR LA FLORESTA",
+"tel": "3213786284"
+},
+{
+"dep": "CHOCO",
+"ciudad": "BELEN DE BAJIRA\\RIO\\CHOC",
+"dir": "CORR BAJIRA",
+"tel": "3116583730"
+},
+{
+"dep": "CHOCO",
+"ciudad": "BOJAYA\\CHOC\\COL",
+"dir": "VDA VELLA VISTA",
+"tel": "3146247457"
+},
+{
+"dep": "CHOCO",
+"ciudad": "CERTEGUI\\CHOC\\COL",
+"dir": "CENTRO AL LADO DE LA ESTACION DE POLICIA",
+"tel": "3127371366"
+},
+{
+"dep": "CHOCO",
+"ciudad": "CONDOTO\\CHOC\\COL",
+"dir": "AV PPAL",
+"tel": "3146319368"
+},
+{
+"dep": "CHOCO",
+"ciudad": "EL CANTON DEL SAN PABLO\\CHOC\\COL",
+"dir": "CL 6 5 45",
+"tel": "3205389018"
+},
+{
+"dep": "CHOCO",
+"ciudad": "EL CARMEN DE ATRATO\\CHOC\\COL",
+"dir": "PARQUE PPAL",
+"tel": "3147421063"
+},
+{
+"dep": "CHOCO",
+"ciudad": "ISTMINA\\CHOC\\COL",
+"dir": "CL 24",
+"tel": "3127098011"
+},
+{
+"dep": "CHOCO",
+"ciudad": "JURADO\\CHOC\\COL",
+"dir": "BR PUEBLO NUEVO",
+"tel": "3146491433"
+},
+{
+"dep": "CHOCO",
+"ciudad": "LLORO\\CHOC\\COL",
+"dir": "KR 3 3 25",
+"tel": "3147806531"
+},
+{
+"dep": "CHOCO",
+"ciudad": "MEDIO ATRATO\\CHOC\\COL",
+"dir": "KR 36 2 25",
+"tel": "3137005362"
+},
+{
+"dep": "CHOCO",
+"ciudad": "MEDIO BAUDO\\CHOC\\COL",
+"dir": "KR 2 3 25",
+"tel": "3148276091"
+},
+{
+"dep": "CHOCO",
+"ciudad": "MEDIO SAN JUAN\\CHOC\\COL",
+"dir": "BR SAN JOSE CENTRO ANDAGOYA",
+"tel": "3206994577"
+},
+{
+"dep": "CHOCO",
+"ciudad": "NOVITA\\CHOC\\COL",
+"dir": "BR JESUS POBRE FRENTE A LA ANTENA",
+"tel": "3104116794"
+},
+{
+"dep": "CHOCO",
+"ciudad": "NUQUI\\CHOC\\COL",
+"dir": "LA UNION",
+"tel": "3167348981"
+},
+{
+"dep": "CHOCO",
+"ciudad": "QUIBDO\\CHOC\\COL",
+"dir": "OF. PRINC CALLE 23 # 3 - 24",
+"tel": "3232554455"
+},
+{
+"dep": "CHOCO",
+"ciudad": "RIO IRO\\CHOC\\COL",
+"dir": "DG A LA ALCALDIA",
+"tel": "3105128197"
+},
+{
+"dep": "CHOCO",
+"ciudad": "RIO QUITO\\CHOC\\COL",
+"dir": "KR 2",
+"tel": "3138800041"
+},
+{
+"dep": "CHOCO",
+"ciudad": "RIOSUCIO CHOCO\\CHOC\\COL",
+"dir": "BRR BENJAMIN SECT0R 1 DE MAYO CLL PRINCIPAL",
+"tel": "3113325950"
+},
+{
+"dep": "CHOCO",
+"ciudad": "SAN JOSE DEL PALMAR\\CHOC\\COL",
+"dir": "KR 3 4 13 AV QUIBDO",
+"tel": "3126617678"
+},
+{
+"dep": "CHOCO",
+"ciudad": "SIPI\\CHOC\\COL",
+"dir": "CL CENTRO",
+"tel": "3127195995"
+},
+{
+"dep": "CHOCO",
+"ciudad": "TADO\\CHOC\\COL",
+"dir": "CL 6 10 61",
+"tel": "3122401674"
+},
+{
+"dep": "CHOCO",
+"ciudad": "UNGUIA\\CHOC\\COL",
+"dir": "BR PARROQUIAL FRENTE AL PARQUE",
+"tel": "6815026 - 3136743571"
+},
+{
+"dep": "CHOCO",
+"ciudad": "UNION PANAMERICANA\\CHOC\\COL",
+"dir": "CL DEL COMERCIO",
+"tel": "3133776330"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "AYAPEL\\CORD\\COL",
+"dir": "CL 9 3 32 OFICINA PRINCIPAL",
+"tel": "3172913809"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "BUENAVISTA CORDOBA\\CORD\\COL",
+"dir": "KR 12 TELECOM",
+"tel": "7712078 - 3147644749"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "CANALETE\\CORD\\COL",
+"dir": "KR 4 3 54",
+"tel": "3157717064 -3217796249"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "CARRILLO (SAN PELAYO)\\SAN\\CORD",
+"dir": "KR 2 CL 6 50",
+"tel": "3014451487"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "CERETE\\CORD\\COL",
+"dir": "CL 13 A 9 45",
+"tel": "3007045476"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "CHIMA CORDOBA\\CORD\\COL",
+"dir": "CL 4 15 A 04",
+"tel": "'7679829 – 3107336333"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "CHINU\\CORD\\COL",
+"dir": "KR 6 15 18",
+"tel": "314 6454697"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "CIENAGA DE ORO\\CORD\\COL",
+"dir": "CL 8 KR 23 8 07",
+"tel": "3116549401"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "COTORRA\\CORD\\COL",
+"dir": "CL 15 B 4 A 49",
+"tel": "3104998641"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "EL PORVENIR (SAN ANTERO CORD)\\SAN\\CORD",
+"dir": "KR 12 2 A 15",
+"tel": "3005963699"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "KM 15 EL CERRITO(MONTERIA)\\MTR\\CORD",
+"dir": "KR 6 CL 4 10 APTO 01",
+"tel": "3007435999"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "LA APARTADA\\CORD\\COL",
+"dir": "CL 20 9 104",
+"tel": "3116944721"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "LA YE (TRES ESQUINAS)\\SAH\\CORD",
+"dir": "CL 3 8E 6",
+"tel": "3007144316"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "LORICA\\CORD\\COL",
+"dir": "KR 9 21 45",
+"tel": "3108269993"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "LOS CORDOBAS\\CORD\\COL",
+"dir": "KR 3",
+"tel": "3135389034"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "LOS GARZONES (MONTERIA)\\MTR\\CORD",
+"dir": "CL 126 15 154 CGTO GARZONES",
+"tel": "3012426154"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "LOS MONOS (LORICA)\\LOR\\CORD",
+"dir": "CL 8 KR 4 22",
+"tel": "3024294049"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "MOMIL\\CORD\\COL",
+"dir": "CL 7 13 03",
+"tel": "3206044758"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "MONITOS\\CORD\\COL",
+"dir": "KR 5 22B 17",
+"tel": "3103705090"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "MONTELIBANO\\CORD\\COL",
+"dir": "CL 16 4 38",
+"tel": "3104119041"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "MONTERIA\\CORD\\COL",
+"dir": "OF.PRINC BDG SAN JERONIMO 39A KM3 VIA PLANETA RICA",
+"tel": "3232554455"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "PASO NUEVO(SAN BERNARDO DEL VI\\SAN\\CORD",
+"dir": "KR 2 A 19 18",
+"tel": "3116533747"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "PLANETA RICA\\CORD\\COL",
+"dir": "CL 15 7 99",
+"tel": "3126340576"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "PUEBLO NUEVO\\CORD\\COL",
+"dir": "TRANSV 10 8 B 14",
+"tel": "3008090831"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "PUERTO ESCONDIDO\\CORD\\COL",
+"dir": "KR 3 A 14 21 LC 01",
+"tel": "3135503219"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "PUERTO LIBERTADOR\\CORD\\COL",
+"dir": "KR 9 8 35",
+"tel": "3103704619"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "PURISIMA\\CORD\\COL",
+"dir": "KR 6 7 43",
+"tel": "3004899249"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "RETIRO DE LOS INDIOS(CERETE)\\CER\\CORD",
+"dir": "KR 9 5 67",
+"tel": "3009875080"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "SAHAGUN\\CORD\\COL",
+"dir": "CL 18 1J 09 APTO 1",
+"tel": "3007712373"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "SAN ANDRES DE SOTAVENTO\\CORD\\COL",
+"dir": "CL 6B DG 7B 6 APTO 2",
+"tel": "3007712373"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "SAN ANTERO\\CORD\\COL",
+"dir": "KR 12 12 121 CS BAJANDO LA REGISTRADURIA MUNICIPAL",
+"tel": "3104368024"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "SAN BERNARDO DEL VIENTO\\CORD\\COL",
+"dir": "KR 7 7 37",
+"tel": "3114116503 3145318305"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "SAN CARLOS CORDOBA\\CORD\\COL",
+"dir": "KR 3 13 21",
+"tel": "3006921036"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "SAN JOSE DE URE\\CORD\\COL",
+"dir": "KR 2 5B 15",
+"tel": "3005951798"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "SAN PELAYO\\CORD\\COL",
+"dir": "CL 6 7 43",
+"tel": "3116760641 3003708127"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "SANTA LUCIA (MONTERIA)\\MTR\\CORD",
+"dir": "KR 4 CL 4",
+"tel": "3233064653"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "TIERRALTA\\CORD\\COL",
+"dir": "CL 11 17 A 35",
+"tel": "3137263089"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "TUCHIN\\CORD\\COL",
+"dir": "CL 12 16 E 10",
+"tel": "3152277656"
+},
+{
+"dep": "CORDOBA",
+"ciudad": "VALENCIA\\CORD\\COL",
+"dir": "CL 13 19 51",
+"tel": "3206406430"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "AGUA DE DIOS\\CUND\\COL",
+"dir": "KR 09 14 32",
+"tel": "3202359023"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "ALBAN CUNDINAMARCA\\CUND\\COL",
+"dir": "KR 2 2 53",
+"tel": "3108780906"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "ANAPOIMA\\CUND\\COL",
+"dir": "CL 4 1 71",
+"tel": "3214763001"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "ANOLAIMA\\CUND\\COL",
+"dir": "CL 4 4 07",
+"tel": "3138195538"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "APULO\\CUND\\COL",
+"dir": "CL 9 4 45",
+"tel": "3203960975"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "ARBELAEZ\\CUND\\COL",
+"dir": "CRA 7 # 6 - 35",
+"tel": "3015459332"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "BELTRAN\\CUND\\COL",
+"dir": "CL 3 3 05",
+"tel": "3123467678"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "BITUIMA\\CUND\\COL",
+"dir": "KR 3 3 28",
+"tel": "3112558161"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "BOGOTA\\CUND\\COL",
+"dir": "OF. PRINC CALLE 18 # 65 A 03",
+"tel": "3232554455"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "BOJACA\\CUND\\COL",
+"dir": "KR 6 5 40",
+"tel": "3228238821"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "BRICEÑO SOPO\\SOP\\CUND",
+"dir": "DG 6 5 53 LC B5",
+"tel": "3192403339"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CABRERA CUNDINAMARCA\\CUND\\COL",
+"dir": "KR 3 6 07",
+"tel": "3115633289"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CABUYARITO (PARATEBUENO)\\PAR\\CUND",
+"dir": "VDA CABUYARITO KM 86",
+"tel": "3133924382"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CACHIPAY\\CUND\\COL",
+"dir": "KR 5 2 10",
+"tel": "3114414354"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CACICAZGO (SUESCA)\\SUE\\CUND",
+"dir": "VEREDA CACICAZGO SECTOR PARADERO",
+"tel": "3197212191"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CAJICA\\CUND\\COL",
+"dir": "CL 2 3 53",
+"tel": "3164034354"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CAMBAO\\SAN\\CUND",
+"dir": "CL 3 4 31",
+"tel": "3228442556"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CAPARRAPI\\CUND\\COL",
+"dir": "KR 4 8 57",
+"tel": "3125264421"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CAPELLANIA\\FUQ\\CUND",
+"dir": "KR 2 2 32 INT 101",
+"tel": "3105591187"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CAQUEZA\\CUND\\COL",
+"dir": "CL 4 4 36",
+"tel": "3138098779"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CARMEN DE CARUPA\\CUND\\COL",
+"dir": "CL 3 2 88",
+"tel": "3123301432"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CARTAGENITA CUND\\ZIP\\CUND",
+"dir": "PRUEBAS PRE ENVIO",
+"tel": "PRUEBAS PRE ENVIO"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CARTAGENITA(FACATATIVA)\\FAC\\CUND",
+"dir": "CL 2 1A 41",
+"tel": "3106850275"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CHAGUANI\\CUND\\COL",
+"dir": "KR 5 1 14",
+"tel": "3132629658"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CHIA\\CUND\\COL",
+"dir": "KR 9 21 121",
+"tel": "3203452940"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CHIMBE (ALBAN)\\ALC\\CUND",
+"dir": "VDA CHIMBE CENTRO",
+"tel": "3182761988"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CHINAUTA \\FUS\\CUND",
+"dir": "KL 67 AV PANAMERICANA",
+"tel": "3208740496"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CHIPAQUE\\CUND\\COL",
+"dir": "KR 4 5 35",
+"tel": "3227339134"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CHOACHI\\CUND\\COL",
+"dir": "CL 4 1 40",
+"tel": "3213690981"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CHOCONTA\\CUND\\COL",
+"dir": "KR 4 6 20",
+"tel": "3106085624"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "COGUA\\CUND\\COL",
+"dir": "CL 3 4 87",
+"tel": "3143174505"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "COTA\\CUND\\COL",
+"dir": "CL 13 3A 32",
+"tel": "3192925749"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "CUCUNUBA\\CUND\\COL",
+"dir": "CL 6 4 10",
+"tel": "3232214069"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "DOS Y MEDIO (PTO BOYACA)\\BOG\\CUND",
+"dir": "KM DOS Y MEDIO",
+"tel": "3196188351"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "EL COLEGIO\\CUND\\COL",
+"dir": "CL 9 8 23",
+"tel": "3157553536"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "EL HATO (FUNZA)\\FUN\\CUND",
+"dir": "KR 2 22 16 LC 1",
+"tel": "3143839287"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "EL PENON CUNDINAMARCA\\CUND\\COL",
+"dir": "KR 3 4 45",
+"tel": "3133005725"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "EL PIÑAL (VIOTA CUND)\\VIO\\CUND",
+"dir": "CL 3 3 24",
+"tel": "3107627194"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "EL ROSAL\\CUND\\COL",
+"dir": "KR 6 9 01",
+"tel": "3212773797"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "EL TRIGO(GUAYABAL DE SIQUIMA)\\GUA\\CUND",
+"dir": "VDA EL TRIGO CS1 CENTRO POBLADO EL TRIGO",
+"tel": "3176501538"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "EL TRIUNFO\\COL\\CUND",
+"dir": "KR 3 2 40",
+"tel": "3232038253"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "FACATATIVA\\CUND\\COL",
+"dir": "KR 2 07 35 BR CENTRO",
+"tel": "3203450214"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "FOMEQUE\\CUND\\COL",
+"dir": "KR 3 4 33",
+"tel": "3118117837"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "FOSCA\\CUND\\COL",
+"dir": "CL 3 3 02",
+"tel": "3134433434"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "FUNZA\\CUND\\COL",
+"dir": "KR 16 14 16",
+"tel": "3232501304"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "FUQUENE\\CUND\\COL",
+"dir": "KR 2 6 19",
+"tel": "3134111990"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "FUSAGASUGA\\CUND\\COL",
+"dir": "KR 4 7 56",
+"tel": "3142184165"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "GACHALA\\CUND\\COL",
+"dir": "KR 4 6 39",
+"tel": "3132705480"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "GACHANCIPA\\CUND\\COL",
+"dir": "KR 3 3 53",
+"tel": "3112046837"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "GACHETA\\CUND\\COL",
+"dir": "KR 3 5 52",
+"tel": "3123580858"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "GAMA\\CUND\\COL",
+"dir": "KR 3 4 46",
+"tel": "3144671533"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "GIRARDOT\\CUND\\COL",
+"dir": "KR 9 19 44",
+"tel": "018000942777"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "GRANADA CUNDINAMARCA\\CUND\\COL",
+"dir": "KR 14 9 14",
+"tel": "3208080646"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "GUACHETA\\CUND\\COL",
+"dir": "CL 4 3 91",
+"tel": "3203409145"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "GUADUAS\\CUND\\COL",
+"dir": "CL 2 3 01",
+"tel": "3143765117"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "GUASCA\\CUND\\COL",
+"dir": "CL 5 2 49",
+"tel": "3045803310"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "GUATAQUI\\CUND\\COL",
+"dir": "CL 6 2 53",
+"tel": "3132905269"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "GUATAVITA\\CUND\\COL",
+"dir": "KR 1 1 36",
+"tel": "3143664429"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "GUAYABAL DE SIQUIMA\\CUND\\COL",
+"dir": "KR 2 2 46",
+"tel": "3025152393"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "GUAYABETAL\\CUND\\COL",
+"dir": "AV 4 2 41",
+"tel": "3212451518"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "GUTIERREZ\\CUND\\COL",
+"dir": "KR 5 5 42",
+"tel": "3124358325"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "JERUSALEN\\CUND\\COL",
+"dir": "CL 3 6 104",
+"tel": "3144270840"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "JUNIN CUNDINAMARCA\\CUND\\COL",
+"dir": "KR 4 4 32",
+"tel": "3124487060"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "LA CALERA\\CUND\\COL",
+"dir": "CL 08 02A 48",
+"tel": "3115099928"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "LA FLORIDA(ANOLAIMA CUND\\ANL\\CUND",
+"dir": "DG 3C 02 13 LC 03",
+"tel": "3105692006"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "LA FUENTE (TOCANCIPA)\\TOC\\CUND",
+"dir": "TOCANCIPA VDA LA FUENTE",
+"tel": "3125879638"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "LA MAGDALENA (QUEBRADANEGRA/CU\\QUE\\CUND",
+"dir": "CL 4 5 31",
+"tel": "3204351002"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "LA MAGOLA (SUPATA)\\SUP\\CUND",
+"dir": "VDA LA MAGOLA CA 76",
+"tel": "3145692008"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "LA MESA\\CUND\\COL",
+"dir": "CL 8 18 26",
+"tel": "3208583798"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "LA PALMA CUNDINAMARCA\\CUND\\COL",
+"dir": "KR 4A 4 65",
+"tel": "3153931055"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "LA PENA\\CUND\\COL",
+"dir": "KR 2 8 58",
+"tel": "3138061244"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "LA PRADERA (Subachoque)\\SUB\\CUND",
+"dir": "CL 5 3 19",
+"tel": "3118342181"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "LA VEGA CUNDINAMARCA\\CUND\\COL",
+"dir": "KR 5 11 01",
+"tel": "3112900434"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "LA VICTORIA EL COLEGIO\\COL\\CUND",
+"dir": "KR 2 4 24",
+"tel": "3115281235"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "LAGUNA AZUL (UBALA/CUND)\\UBA\\CUND",
+"dir": "CL 2 2 24",
+"tel": "3203854079"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "LENGUAZAQUE\\CUND\\COL",
+"dir": "CL 4 4 38",
+"tel": "3115989733"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "MACHETA\\CUND\\COL",
+"dir": "CL 5 7 15",
+"tel": "3016816746"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "MADRID\\CUND\\COL",
+"dir": "CL 7 8 16 C.CIAL LOS PINOS LC 44",
+"tel": "3112287982"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "MANTA\\CUND\\COL",
+"dir": "CL 3 6 40",
+"tel": "3195013868"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "MAYA\\PAR\\CUND",
+"dir": "KR 3 3 69 ESQ PARQUE CENTRAL",
+"tel": "3204911855"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "MEDINA\\CUND\\COL",
+"dir": "KR 7 12 65",
+"tel": "3103494082"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "MOSQUERA CUNDINAMARCA\\CUND\\COL",
+"dir": "KR 3 13 12 LC 23",
+"tel": "3003311073"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "NARIÑO CUNDINAMARCA\\CUND\\COL",
+"dir": "CL 7 3 46",
+"tel": "3202258233"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "NEMOCON\\CUND\\COL",
+"dir": "CL 2 3 69",
+"tel": "3212553799"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "NILO\\CUND\\COL",
+"dir": "KR 3 3 47",
+"tel": "3203199421"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "NIMAIMA\\CUND\\COL",
+"dir": "KR 3 1 25",
+"tel": "3134177573"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "NOCAIMA\\CUND\\COL",
+"dir": "KR 6 9 32",
+"tel": "3114447491"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "PACHO\\CUND\\COL",
+"dir": "KR 14 6 54",
+"tel": "3003711047"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "PAIME\\CUND\\COL",
+"dir": "KR 3 2 35 CEN",
+"tel": "3203529250"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "PANDI\\CUND\\COL",
+"dir": "AV 3 2 46",
+"tel": "3107866590"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "PANTANILLO\\ALC\\CUND",
+"dir": "VDA PANTANILLO",
+"tel": "3195176341"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "PARATEBUENO\\CUND\\COL",
+"dir": "CL 3 7 52",
+"tel": "3123438512"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "PARCELAS (COTA CUND)\\COT\\CUND",
+"dir": "PARCELAS 45 LOTE 8 GLOBO 1",
+"tel": "3173423473"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "PASCA\\CUND\\COL",
+"dir": "CL 7 6 13",
+"tel": "3212911669"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "PATIO BONITO(NEMOCON)\\NEM\\CUND",
+"dir": "VDA PATIO BONITO SEC LA CAPILLA",
+"tel": "3214773610"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "PORVENIR RIO (MOSQUERA)\\MOS\\CUND",
+"dir": "CL 14 4 16",
+"tel": "3133057667"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "PRADILLA (EL COLEGIO)\\COL\\CUND",
+"dir": "PRADILLA KM 26 VIA EL CHARQUITO",
+"tel": "3046006001"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "PUENTE PIEDRA\\MAD\\CUND",
+"dir": "KR 5 4 03",
+"tel": "3115000117"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "PUERTO SALGAR\\CUND\\COL",
+"dir": "CL 12 N 11 36",
+"tel": "3136719759"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "PULI\\CUND\\COL",
+"dir": "CL 4 4 5",
+"tel": "3102879853"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "QUEBRADANEGRA\\CUND\\COL",
+"dir": "CL 5 4 06",
+"tel": "3105546437"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "QUETAME\\CUND\\COL",
+"dir": "CL 03 02 02",
+"tel": "3202451097"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "QUIPILE\\CUND\\COL",
+"dir": "CL 4 1 14",
+"tel": "3212010920"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "REVENTONES (ANOLAIMA)\\ANL\\CUND",
+"dir": "KR 1 2 12 VRA REVENTONE",
+"tel": "3143248816"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "RICAURTE CUNDINAMARCA\\CUND\\COL",
+"dir": "KR 16 8 67 LC 2",
+"tel": "3138726656"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SAN ANTONIO DEL TEQUENDAMA\\CUND\\COL",
+"dir": "KR 04 A 02 38 LC 06",
+"tel": "3052110215"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SAN BERNARDO CUNDINAMARCA\\CUND\\COL",
+"dir": "CL 6 3 47",
+"tel": "3112267804"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SAN CAYETANO CUNDINAMARCA\\CUND\\COL",
+"dir": "KR 4 2 62",
+"tel": "3138126796"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SAN FRANCISCO CUNDINAMARCA\\CUND\\COL",
+"dir": "KR 8 4 11",
+"tel": "3057541774"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SAN JUAN DE RIO SECO\\CUND\\COL",
+"dir": "CL 8 4 31",
+"tel": "3102895968"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SAN RAIMUNDO (GRANADA/CUND\\GRA\\CUND",
+"dir": "VDA SAN RAIMUNDO",
+"tel": "3214062508"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SAN ROQUE(GAMA)\\GAM\\CUND",
+"dir": "SAN ROQUE DE GAMA CS 1",
+"tel": "3144671533"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SANTANDERCITO\\SAN\\CUND",
+"dir": "KR 3 A 3 15",
+"tel": "3219734321"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SASAIMA\\CUND\\COL",
+"dir": "KR 3 3 82",
+"tel": "3208695883"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SESQUILE\\CUND\\COL",
+"dir": "CL 6 6 21",
+"tel": "3138056028"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SIBATE\\CUND\\COL",
+"dir": "KR 7 8 34",
+"tel": "3015484491"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SILVANIA\\CUND\\COL",
+"dir": "KR 4 10 22",
+"tel": "3204424741"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SIMIJACA\\CUND\\COL",
+"dir": "CL 9 7A 11",
+"tel": "3014462384 / 3108554442"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SOACHA\\CUND\\COL",
+"dir": "KR 7 39A 43",
+"tel": "3232554455"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SOPO\\CUND\\COL",
+"dir": "KR 2 3 24",
+"tel": "3115756704"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "STE-A / B\\CUND\\COL",
+"dir": "CRA 23 # 166 12",
+"tel": "7456000"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "STE-D / B\\CUND\\COL",
+"dir": "CRA 30 # 7 - 45",
+"tel": "3232554455"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SUBACHOQUE\\CUND\\COL",
+"dir": "CL 4 3 44",
+"tel": "3107590766"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SUBIA\\SIL\\CUND",
+"dir": "CL 10 11 21",
+"tel": "3138351070"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SUESCA\\CUND\\COL",
+"dir": "CL 8 4 113",
+"tel": "3138330614"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SUEVA (JUNIN)\\JUN\\CUND",
+"dir": "KR 4 1 15",
+"tel": "3138568503"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SUPATA\\CUND\\COL",
+"dir": "CLL 4 # 5 - 54",
+"tel": "3108762017"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SUSA\\CUND\\COL",
+"dir": "KR 5 9 60",
+"tel": "3125046187"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "SUTATAUSA\\CUND\\COL",
+"dir": "KR 4 3 53",
+"tel": "3212400071"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "TABIO\\CUND\\COL",
+"dir": "KR 3 5 93",
+"tel": "3227045850"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "TAUSA\\CUND\\COL",
+"dir": "CL 4 4 51",
+"tel": "3212097409"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "TENA\\CUND\\COL",
+"dir": "URB LA CONCORDIA LC 4",
+"tel": "3115186623"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "TENJO\\CUND\\COL",
+"dir": "KR 3 4 51",
+"tel": "3222501294"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "TIBACUY\\CUND\\COL",
+"dir": "CL 4 2 71",
+"tel": "3103364525"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "TIBIRITA\\CUND\\COL",
+"dir": "KR 4 5 41 TIBIRITA",
+"tel": "3123506568"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "TIQUIZA (CHIA)\\CHI\\CUND",
+"dir": "VDA TIQUIZA",
+"tel": "3227523386"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "TOBIA\\NIM\\CUND",
+"dir": "CL 3 1 23",
+"tel": "3227113956"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "TOCAIMA\\CUND\\COL",
+"dir": "CL 4 10 102",
+"tel": "3134425088"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "TOCANCIPA\\CUND\\COL",
+"dir": "KR 7 8 29",
+"tel": "3105725742"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "TOPAIPI\\CUND\\COL",
+"dir": "CL 4 8 18",
+"tel": "3133005725"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "UBALA\\CUND\\COL",
+"dir": "KR 6 10 41",
+"tel": "3123580858"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "UBAQUE\\CUND\\COL",
+"dir": "CL 4 01 02 A 30",
+"tel": "3142559421"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "UBATE\\CUND\\COL",
+"dir": "CL 10 6 21",
+"tel": "3104026732"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "UNE\\CUND\\COL",
+"dir": "KR 4 1 90",
+"tel": "3105648759"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "UTICA\\CUND\\COL",
+"dir": "CL 7 4 17",
+"tel": "3125342484"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "VENECIA CUNDINAMARCA\\CUND\\COL",
+"dir": "KR 3 4 21 LC 2",
+"tel": "3144611291"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "VERGANZO (TOCANCIPA)\\TOC\\CUND",
+"dir": "TOCANCIPA VDA VERGANZO SECTOR GUATIVA",
+"tel": "3164793678"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "VERGARA\\CUND\\COL",
+"dir": "CL 2 4 44 LC 2",
+"tel": "3118146859"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "VIANI\\CUND\\COL",
+"dir": "CL 4 5 28",
+"tel": "3143824869"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "VILLA MYRIAM (FACATATIVA)\\FAC\\CUND",
+"dir": "KR 1 SUR 14 ESTE 10",
+"tel": "3143499420"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "VILLAGOMEZ\\CUND\\COL",
+"dir": "KR 4 3 27",
+"tel": "3142808818"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "VILLAPINZON\\CUND\\COL",
+"dir": "KR 4 3 34",
+"tel": "3134891271"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "VILLETA\\CUND\\COL",
+"dir": "CL 5 09 57",
+"tel": "3160426828"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "VIOTA\\CUND\\COL",
+"dir": "CL 20 10 21",
+"tel": "3013038963"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "YACOPI\\CUND\\COL",
+"dir": "KR 4 9 33",
+"tel": "3132024613"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "ZIPACON\\CUND\\COL",
+"dir": "KR 4 6 51",
+"tel": "3124494333"
+},
+{
+"dep": "CUNDINAMARCA",
+"ciudad": "ZIPAQUIRA\\CUND\\COL",
+"dir": "CL 8 NO 12 75",
+"tel": "3203452940"
+},
+{
+"dep": "GUAINIA",
+"ciudad": "BARRANCO MINAS\\GUAI\\COL",
+"dir": "CL PRINCIPAL CENTRO",
+"tel": "3133925290"
+},
+{
+"dep": "GUAINIA",
+"ciudad": "INIRIDA\\GUAI\\COL",
+"dir": "CL 20 9 43",
+"tel": "3133940389"
+},
+{
+"dep": "GUAVIARE",
+"ciudad": "CALAMAR GUAVIARE\\GUAV\\COL",
+"dir": "CL 7 5 55",
+"tel": "3192335448"
+},
+{
+"dep": "GUAVIARE",
+"ciudad": "EL RETORNO\\GUAV\\COL",
+"dir": "CL 13 8 20",
+"tel": "3173074137"
+},
+{
+"dep": "GUAVIARE",
+"ciudad": "LA LIBERTAD\\RET\\GUAV",
+"dir": "KR 6 MZ 4 VIA PPAL",
+"tel": "3185737012"
+},
+{
+"dep": "GUAVIARE",
+"ciudad": "MIRAFLORES GUAVIARE\\GUAV\\COL",
+"dir": "KR 4 A 3 45",
+"tel": "3134180798"
+},
+{
+"dep": "GUAVIARE",
+"ciudad": "SAN JOSE DEL GUAVIARE\\GUAV\\COL",
+"dir": "OF PPAL KR 22 8 23 R.O",
+"tel": "5840593"
+},
+{
+"dep": "HUILA",
+"ciudad": "ACEVEDO\\HUIL\\COL",
+"dir": "KR 6 5 07",
+"tel": "3118538053"
+},
+{
+"dep": "HUILA",
+"ciudad": "AGRADO\\HUIL\\COL",
+"dir": "KR 4 CON CL 5 ESQ",
+"tel": "3124582890"
+},
+{
+"dep": "HUILA",
+"ciudad": "AIPE\\HUIL\\COL",
+"dir": "CL 4 6 05",
+"tel": "3112408953"
+},
+{
+"dep": "HUILA",
+"ciudad": "ALGECIRAS\\HUIL\\COL",
+"dir": "KR 6 3A 34",
+"tel": "3214598458"
+},
+{
+"dep": "HUILA",
+"ciudad": "ALTAMIRA HUILA\\HUIL\\COL",
+"dir": "KR 4 6 69",
+"tel": "3118580054"
+},
+{
+"dep": "HUILA",
+"ciudad": "BARAYA\\HUIL\\COL",
+"dir": "KR 5 2C 18",
+"tel": "3133371342"
+},
+{
+"dep": "HUILA",
+"ciudad": "BETANIA (PALERMO) \\PAL\\HUIL",
+"dir": "CL 5 1 57",
+"tel": "3186695446"
+},
+{
+"dep": "HUILA",
+"ciudad": "BRUSELAS (PITALITO)\\PIT\\HUIL",
+"dir": "CL 7 KR 5 LC 5",
+"tel": "3138790376"
+},
+{
+"dep": "HUILA",
+"ciudad": "CAGUAN (NEIVA)\\NVA\\HUIL",
+"dir": "CL 4 5 40",
+"tel": "3224315087"
+},
+{
+"dep": "HUILA",
+"ciudad": "CAMPOALEGRE\\HUIL\\COL",
+"dir": "CL 18 10 24",
+"tel": "3203549301"
+},
+{
+"dep": "HUILA",
+"ciudad": "COLOMBIA\\HUIL\\COL",
+"dir": "CL 6 4 53",
+"tel": "3125234510"
+},
+{
+"dep": "HUILA",
+"ciudad": "EL JUNCAL (PALERMO)\\PAL\\HUIL",
+"dir": "CL 3 2 50",
+"tel": "3052528357"
+},
+{
+"dep": "HUILA",
+"ciudad": "EL LIBANO (ACEVEDO HUILA)\\ACE\\HUIL",
+"dir": "VTE CRUCE ACEVEDO",
+"tel": "3172171735"
+},
+{
+"dep": "HUILA",
+"ciudad": "EL PITAL\\HUIL\\COL",
+"dir": "CL 8 8 33",
+"tel": "3134981951"
+},
+{
+"dep": "HUILA",
+"ciudad": "ELIAS\\HUIL\\COL",
+"dir": "KR 3A 8 80",
+"tel": "3203513319"
+},
+{
+"dep": "HUILA",
+"ciudad": "FORTALECILLAS\\NVA\\HUIL",
+"dir": "KR 3 2A 16",
+"tel": "3177552956"
+},
+{
+"dep": "HUILA",
+"ciudad": "GALLEGO (LA PLATA)\\PLA\\HUIL",
+"dir": "CENTRO POBLADO GALLEGO",
+"tel": "3136553480"
+},
+{
+"dep": "HUILA",
+"ciudad": "GARZON\\HUIL\\COL",
+"dir": "KR 12 5 46",
+"tel": "3176478954"
+},
+{
+"dep": "HUILA",
+"ciudad": "GIGANTE\\HUIL\\COL",
+"dir": "KR 4 5 39",
+"tel": "3132098284"
+},
+{
+"dep": "HUILA",
+"ciudad": "GUACACAYO (PITALITO)\\PIT\\HUIL",
+"dir": "SECTOR 4 VIA PRINCIPAL",
+"tel": "3155370878"
+},
+{
+"dep": "HUILA",
+"ciudad": "GUADALUPE HUILA\\HUIL\\COL",
+"dir": "KR 4 3 80",
+"tel": "3206991570"
+},
+{
+"dep": "HUILA",
+"ciudad": "GUAYABAL(SUAZA)\\SUA\\HUIL",
+"dir": "AV NACIONAL",
+"tel": "3134406290"
+},
+{
+"dep": "HUILA",
+"ciudad": "HOBO\\HUIL\\COL",
+"dir": "KR 10 4 36",
+"tel": "3183024540"
+},
+{
+"dep": "HUILA",
+"ciudad": "IQUIRA\\HUIL\\COL",
+"dir": "CL 4 06 11",
+"tel": "316422815"
+},
+{
+"dep": "HUILA",
+"ciudad": "ISNOS\\HUIL\\COL",
+"dir": "KR 3 2 12",
+"tel": "3132488649 3123548019"
+},
+{
+"dep": "HUILA",
+"ciudad": "LA ARGENTINA\\HUIL\\COL",
+"dir": "CL 7 2 16 LC 3",
+"tel": "3136553480"
+},
+{
+"dep": "HUILA",
+"ciudad": "LA JAGUA (GARZON)\\ARG\\HUIL",
+"dir": "KR 3 5 36",
+"tel": "3224080055"
+},
+{
+"dep": "HUILA",
+"ciudad": "LA PLATA\\HUIL\\COL",
+"dir": "CL 4 3 17 LC 2",
+"tel": "3102392654"
+},
+{
+"dep": "HUILA",
+"ciudad": "NATAGA\\HUIL\\COL",
+"dir": "CL 4 7 34",
+"tel": "3204179899"
+},
+{
+"dep": "HUILA",
+"ciudad": "NEIVA\\HUIL\\COL",
+"dir": "OF. PRINC Cra 5#26-291 Sur Zon Industrial",
+"tel": "018000942777 3107547469"
+},
+{
+"dep": "HUILA",
+"ciudad": "OPORAPA\\HUIL\\COL",
+"dir": "CL 2 4 12",
+"tel": "3125202223-3202614634"
+},
+{
+"dep": "HUILA",
+"ciudad": "PAICOL\\HUIL\\COL",
+"dir": "CL 5 7 05",
+"tel": "3118657188"
+},
+{
+"dep": "HUILA",
+"ciudad": "PALERMO\\HUIL\\COL",
+"dir": "KR 08 07 48 LC 02",
+"tel": "3215151466"
+},
+{
+"dep": "HUILA",
+"ciudad": "PALESTINA HUILA\\HUIL\\COL",
+"dir": "KR 3 1 25",
+"tel": "3215932988"
+},
+{
+"dep": "HUILA",
+"ciudad": "PANTANOS (TIMANA/HUILA)\\TIM\\HUIL",
+"dir": "CORREGIMIENTO PANTANOS",
+"tel": "3116607605"
+},
+{
+"dep": "HUILA",
+"ciudad": "PITALITO\\HUIL\\COL",
+"dir": "KR 1 10 07",
+"tel": "3133394329"
+},
+{
+"dep": "HUILA",
+"ciudad": "RIO FRIO (NEIVA/HUIL)\\NVA\\HUIL",
+"dir": "KR 1A 3A 21",
+"tel": "3209434902"
+},
+{
+"dep": "HUILA",
+"ciudad": "RIVERA\\HUIL\\COL",
+"dir": "CL 4 7 29",
+"tel": "3175393428"
+},
+{
+"dep": "HUILA",
+"ciudad": "RIVERITA (RIVERA)\\RIV\\HUIL",
+"dir": "KR 4 7 73",
+"tel": "3118816181"
+},
+{
+"dep": "HUILA",
+"ciudad": "SALADOBLANCO\\HUIL\\COL",
+"dir": "CL 2 6 13",
+"tel": "3134921160"
+},
+{
+"dep": "HUILA",
+"ciudad": "SAN AGUSTIN\\HUIL\\COL",
+"dir": "CL 3 10 25",
+"tel": "3212006708"
+},
+{
+"dep": "HUILA",
+"ciudad": "SANTA MARIA HUILA\\HUIL\\COL",
+"dir": "KR 5 09 24",
+"tel": "3114103411"
+},
+{
+"dep": "HUILA",
+"ciudad": "TARQUI\\HUIL\\COL",
+"dir": "CL 3 9 41",
+"tel": "3202841129"
+},
+{
+"dep": "HUILA",
+"ciudad": "TELLO\\HUIL\\COL",
+"dir": "KR 4 3 33",
+"tel": "3024420737"
+},
+{
+"dep": "HUILA",
+"ciudad": "TERUEL\\HUIL\\COL",
+"dir": "KR 3 6 80",
+"tel": "3114869493"
+},
+{
+"dep": "HUILA",
+"ciudad": "TESALIA\\HUIL\\COL",
+"dir": "CL 6 6 56",
+"tel": "3187971802"
+},
+{
+"dep": "HUILA",
+"ciudad": "TIMANA\\HUIL\\COL",
+"dir": "CL 10 3 72",
+"tel": "3143561678"
+},
+{
+"dep": "HUILA",
+"ciudad": "ULLOA (NEIVA)\\NVA\\HUIL",
+"dir": "CL 8 2 47",
+"tel": "3114422505"
+},
+{
+"dep": "HUILA",
+"ciudad": "VILLAVIEJA\\HUIL\\COL",
+"dir": "CL 4 5 05",
+"tel": "3134327952"
+},
+{
+"dep": "HUILA",
+"ciudad": "YAGUARA\\HUIL\\COL",
+"dir": "CL 3 5 50",
+"tel": "3123119982"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "ALBANIA GUAJIRA\\GUAJ\\COL",
+"dir": "CL 4 5 100",
+"tel": "3012430048"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "BARRANCAS\\GUAJ\\COL",
+"dir": "CL 9 9 02",
+"tel": "3166950236"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "CUESTECITAS (ALBANIA GUAJIRA)\\ALG\\GUAJ",
+"dir": "CL 4 8 74",
+"tel": "3104131155"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "DIBULLA\\GUAJ\\COL",
+"dir": "CL 6 5 45",
+"tel": "3212010556"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "DISTRACCION\\GUAJ\\COL",
+"dir": "KR 2 1 47",
+"tel": "3014096304"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "EL MOLINO\\GUAJ\\COL",
+"dir": "CL 10 A 4 16",
+"tel": "3165165656"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "FONSECA\\GUAJ\\COL",
+"dir": "KR 19N 12 50",
+"tel": "3156860159"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "HATONUEVO\\GUAJ\\COL",
+"dir": "CL 15 16 170",
+"tel": "3166957575"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "LA JAGUA DEL PILAR\\GUAJ\\COL",
+"dir": "CL 9 5 27",
+"tel": "3204442581"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "MAICAO\\GUAJ\\COL",
+"dir": "CL 10 11 15",
+"tel": "3012690710"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "MANAURE GUAJIRA\\GUAJ\\COL",
+"dir": "CL 10 5 95",
+"tel": "3205842536"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "MINGUEO (DIBULLA GUAJ)\\DIB\\GUAJ",
+"dir": "CL 3 3 77",
+"tel": "3206864656"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "PAPAYAL(BARRANCAS)\\BAR\\GUAJ",
+"dir": "CL 7 7 44",
+"tel": "3042925490"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "RIOHACHA\\GUAJ\\COL",
+"dir": "KR 7 24 167",
+"tel": "3232554455 3228930629"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "SAN JUAN DEL CESAR\\GUAJ\\COL",
+"dir": "CL 3 SUR 8 07",
+"tel": "3107393489"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "URIBIA\\GUAJ\\COL",
+"dir": "KR 9 10B 24",
+"tel": "3186763980"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "URUMITA\\GUAJ\\COL",
+"dir": "KR 9 9 53",
+"tel": "3016016283"
+},
+{
+"dep": "LA GUAJIRA",
+"ciudad": "VILLANUEVA GUAJIRA\\GUAJ\\COL",
+"dir": "CL 5B 16 94",
+"tel": "3007137216"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "ALGARROBO\\MAGD\\COL",
+"dir": "CL 7 8 28",
+"tel": "3004713043"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "ARACATACA\\MAGD\\COL",
+"dir": "KR 6 E 5 17",
+"tel": "3168256791"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "ARIGUANI\\MAGD\\COL",
+"dir": "DG 7 6 67",
+"tel": "3105137020"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "CALABAZO (SANTA MARTA)\\SAN\\MAGD",
+"dir": "KR CALABAZO KM 21 36 DPL E N 7195",
+"tel": "3013923409"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "CERRO SAN ANTONIO\\MAGD\\COL",
+"dir": "KR 2 2 48",
+"tel": "3015635110"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "CHIBOLO\\MAGD\\COL",
+"dir": "CL 5 9 115 LC 1",
+"tel": "3116823950"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "CIENAGA\\MAGD\\COL",
+"dir": "KR 21 17 22",
+"tel": "3042961199"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "CONCORDIA MAGDALENA\\MAGD\\COL",
+"dir": "CL 7 7 65",
+"tel": "3126012486"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "EL BANCO\\MAGD\\COL",
+"dir": "KR 4 8 76",
+"tel": "3107277785"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "EL PINON\\MAGD\\COL",
+"dir": "CL 12 2 89",
+"tel": "3006054458"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "EL RETEN\\MAGD\\COL",
+"dir": "CL 7 2 16",
+"tel": "3136152327"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "FUNDACION\\MAGD\\COL",
+"dir": "CL 6 7A 69",
+"tel": "3116741775"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "GUAMAL MAGDALENA\\MAGD\\COL",
+"dir": "CL 6 6 87",
+"tel": "3155038494"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "LA GRAN VÍA - ZONA BANANERA\\SEV\\MAGD",
+"dir": "CL 6 TV 9 6 10",
+"tel": "3232902397"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "LOMA DEL BALSAMO ( ALGARROBO)\\ALG\\MAGD",
+"dir": "CL 4 4 37",
+"tel": "3116785791"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "LOS ANDES (NUEVA GRANADA)\\NUE\\MAGD",
+"dir": "KR 5 6 43",
+"tel": "3025483082"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "NUEVA GRANADA\\MAGD\\COL",
+"dir": "CS 6",
+"tel": "3126038785"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "PEDRAZA\\MAGD\\COL",
+"dir": "CL 4 03 03 LC 1",
+"tel": "3005363870"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "PIJINO DEL CARMEN\\MAGD\\COL",
+"dir": "KR 13 12 05",
+"tel": "3046676382"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "PIVIJAY\\MAGD\\COL",
+"dir": "KR 11 12 32 LC 2",
+"tel": "3013127115"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "PLATO\\MAGD\\COL",
+"dir": "KR 6 11 27",
+"tel": "3128144780"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "PUEBLOVIEJO\\MAGD\\COL",
+"dir": "CL 8 6 20",
+"tel": "3243817464"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "REMOLINO MAGDALENA\\MAGD\\COL",
+"dir": "CL10 5 04",
+"tel": "3005363870"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "SABANAS DE SAN ANGEL\\MAGD\\COL",
+"dir": "KR 5 5 56",
+"tel": "3137217755"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "SALAMINA MAGDALENA\\MAGD\\COL",
+"dir": "CL 9 4 31",
+"tel": "3135133645"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "SAN SEBASTIAN DE BUENAVISTA\\MAGD\\COL",
+"dir": "CL 6 5 45",
+"tel": "3138057387"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "SAN ZENON\\MAGD\\COL",
+"dir": "KR 3 8 100",
+"tel": "3016895450"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "SANTA ANA\\MAGD\\COL",
+"dir": "CL 4 6 44",
+"tel": "3233631604"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "SANTA BARBARA DE PINTO\\MAGD\\COL",
+"dir": "KR 4 5 08",
+"tel": "3116617755"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "SANTA MARTA\\MAGD\\COL",
+"dir": "CL 22 6 82 LC 3 C.CIAL LA 22",
+"tel": "3232554455 3138107447"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "SEVILLA ZONA BANANERA\\SEV\\MAGD",
+"dir": "CL PRINCIPAL 1 118",
+"tel": "3228487646"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "SITIONUEVO\\MAGD\\COL",
+"dir": "CL 3 14 16",
+"tel": "3145627224"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "TENERIFE\\MAGD\\COL",
+"dir": "KR 8 5 67",
+"tel": "3005161879"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "ZAPAYAN\\MAGD\\COL",
+"dir": "CL 16B 1 14",
+"tel": "3046482138"
+},
+{
+"dep": "MAGDALENA",
+"ciudad": "ZAWADY(ZONA BANANERA)\\SEV\\MAGD",
+"dir": "CL 3 3 05",
+"tel": "3012914414"
+},
+{
+"dep": "META",
+"ciudad": "ACACIAS\\META\\COL",
+"dir": "KR 21 14 73",
+"tel": "3144143143"
+},
+{
+"dep": "META",
+"ciudad": "AGUAS CLARAS (LEJANIAS)\\LEJ\\META",
+"dir": "VRA AGUAS CLARAS",
+"tel": "3147875851"
+},
+{
+"dep": "META",
+"ciudad": "BARRANCA DE UPIA\\META\\COL",
+"dir": "CL 10 02 58",
+"tel": "3205699357"
+},
+{
+"dep": "META",
+"ciudad": "CABUYARO\\META\\COL",
+"dir": "KR 8 7 64",
+"tel": "3045369718"
+},
+{
+"dep": "META",
+"ciudad": "CACAYAL (LEJANIAS META)\\LEJ\\META",
+"dir": "CL 5 4 95",
+"tel": "3214136363"
+},
+{
+"dep": "META",
+"ciudad": "CASTILLA LA NUEVA\\META\\COL",
+"dir": "CL 6 8 3",
+"tel": "6751222"
+},
+{
+"dep": "META",
+"ciudad": "CHICHIMENE (META)\\ACC\\META",
+"dir": "KM 4 VDA CHICHIMENE",
+"tel": "3213940837"
+},
+{
+"dep": "META",
+"ciudad": "CUBARRAL\\META\\COL",
+"dir": "CL 6 9 24",
+"tel": "3138853188"
+},
+{
+"dep": "META",
+"ciudad": "CUMARAL\\META\\COL",
+"dir": "CL 11 20 23",
+"tel": "3175797823"
+},
+{
+"dep": "META",
+"ciudad": "EL CALVARIO\\META\\COL",
+"dir": "KR 15 4 22",
+"tel": "3143953473"
+},
+{
+"dep": "META",
+"ciudad": "EL CASTILLO\\META\\COL",
+"dir": "TV 9 10 54",
+"tel": "3144935285"
+},
+{
+"dep": "META",
+"ciudad": "EL DORADO\\META\\COL",
+"dir": "CL 5 5 45",
+"tel": "3124228083"
+},
+{
+"dep": "META",
+"ciudad": "EL PORORIO (PUERTO CONCORDIA)\\CON\\META",
+"dir": "CL PRINCIPAL CRUCE PORORIO",
+"tel": "3103034864"
+},
+{
+"dep": "META",
+"ciudad": "EL TORO (META)\\VVC\\META",
+"dir": "PARCELA 19 BR EL RODEO",
+"tel": "3214704095"
+},
+{
+"dep": "META",
+"ciudad": "FUENTE DE ORO\\META\\COL",
+"dir": "CL 10 13 81",
+"tel": "3103020375"
+},
+{
+"dep": "META",
+"ciudad": "GRANADA META\\META\\COL",
+"dir": "CL 13 13 23 OF. PRINCIPAL",
+"tel": "3144147971"
+},
+{
+"dep": "META",
+"ciudad": "GUAMAL META\\META\\COL",
+"dir": "CL 13 8 47",
+"tel": "3215450397"
+},
+{
+"dep": "META",
+"ciudad": "HUMADEA (GUAMAL META)\\GUA\\META",
+"dir": "KM 7 AV PRINCIPAL",
+"tel": "3114846581"
+},
+{
+"dep": "META",
+"ciudad": "JARDIN DE LAS PENAS (META)\\MES\\META",
+"dir": "CENTRO POBLADO JARDIN DE PEÑA",
+"tel": "3134814992"
+},
+{
+"dep": "META",
+"ciudad": "LA CUNCIA (VILLAVICENCIO)\\VVC\\META",
+"dir": "CL 5 14 45 VDA LA CUNCIA",
+"tel": "3176917714"
+},
+{
+"dep": "META",
+"ciudad": "LA JULIA\\META\\COL",
+"dir": "KR 9 5 60",
+"tel": "3143013191"
+},
+{
+"dep": "META",
+"ciudad": "LA MACARENA\\META\\COL",
+"dir": "KR 8 7 20",
+"tel": "3115412317"
+},
+{
+"dep": "META",
+"ciudad": "LA NOHORA(VILLAVICENCIO)\\VVC\\META",
+"dir": "CL 74 48 24",
+"tel": "3143705135"
+},
+{
+"dep": "META",
+"ciudad": "LEJANIAS\\META\\COL",
+"dir": "CL 7 CON KR 12 ESQ",
+"tel": "3102652794"
+},
+{
+"dep": "META",
+"ciudad": "MAPIRIPAN\\META\\COL",
+"dir": "CL 4 18 71",
+"tel": "3102685369"
+},
+{
+"dep": "META",
+"ciudad": "MEDELLIN DE ARIARI META\\CAS\\META",
+"dir": "CL 3 4 11",
+"tel": "3144808637"
+},
+{
+"dep": "META",
+"ciudad": "MESETAS\\META\\COL",
+"dir": "CL 7 7 27",
+"tel": "3138477842"
+},
+{
+"dep": "META",
+"ciudad": "PACHAQUIARO\\LOP\\META",
+"dir": "CLL 7 3 21 LOCAL 2 CENTRO",
+"tel": "3222908899"
+},
+{
+"dep": "META",
+"ciudad": "POMPEYA (VILLAVICENCIO)\\VVC\\META",
+"dir": "CL 6 10 03",
+"tel": "3204939082"
+},
+{
+"dep": "META",
+"ciudad": "PUEBLO NUEVO (PTO GAITAN)\\GAI\\META",
+"dir": "AV PRICIPAL PUEBLO NUEVO",
+"tel": "3208851372"
+},
+{
+"dep": "META",
+"ciudad": "PUERTO CONCORDIA\\META\\COL",
+"dir": "KR 2",
+"tel": "3203204339"
+},
+{
+"dep": "META",
+"ciudad": "PUERTO GAITAN\\META\\COL",
+"dir": "AGE OF PPAL KR 10 8 38 R O",
+"tel": "3112574784"
+},
+{
+"dep": "META",
+"ciudad": "PUERTO LLERAS\\META\\COL",
+"dir": "CL 7 5 18 LC 102",
+"tel": "3186194847"
+},
+{
+"dep": "META",
+"ciudad": "PUERTO LOPEZ\\META\\COL",
+"dir": "CL 5 6 57",
+"tel": "3104883002"
+},
+{
+"dep": "META",
+"ciudad": "PUERTO RICO META\\META\\COL",
+"dir": "CL 3 12 18",
+"tel": "3208377487"
+},
+{
+"dep": "META",
+"ciudad": "PUNTA BRAVA (GRANADA)\\GRA\\META",
+"dir": "AV PRINCIPAL PUNTA BRAVA",
+"tel": "3142866324"
+},
+{
+"dep": "META",
+"ciudad": "RESTREPO META\\META\\COL",
+"dir": "KR 5 10 24",
+"tel": "3134367753"
+},
+{
+"dep": "META",
+"ciudad": "SAN CARLOS DE GUAROA\\META\\COL",
+"dir": "CL 4 11 35",
+"tel": "3108519231"
+},
+{
+"dep": "META",
+"ciudad": "SAN JUAN DE ARAMA\\META\\COL",
+"dir": "KR 10 13 51 53",
+"tel": "3142129983"
+},
+{
+"dep": "META",
+"ciudad": "SAN JUANITO\\META\\COL",
+"dir": "KR 2 5 52",
+"tel": "3212083005"
+},
+{
+"dep": "META",
+"ciudad": "SAN LORENZO (CASTILLA LA NUEVA\\CAS\\META",
+"dir": "MZ A CS 10 URB LAS ACACIAS",
+"tel": "3142473153"
+},
+{
+"dep": "META",
+"ciudad": "SAN MARTIN META\\META\\COL",
+"dir": "KR 5 6 63",
+"tel": "3124280043"
+},
+{
+"dep": "META",
+"ciudad": "URIBE\\META\\COL",
+"dir": "KR 9 5 24",
+"tel": "3125949555- 3203422391"
+},
+{
+"dep": "META",
+"ciudad": "VILLAVICENCIO\\META\\COL",
+"dir": "OF. PRINC CLL 15 CRA 15 A -04",
+"tel": "018000942777"
+},
+{
+"dep": "META",
+"ciudad": "VISTAHERMOSA\\META\\COL",
+"dir": "KR 12 10 43",
+"tel": "3186816167"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "ALBAN NARIÑO\\NARI\\COL",
+"dir": "KR 3 4 04",
+"tel": "3117933394"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "ALDANA\\NARI\\COL",
+"dir": "KR 5 7 52",
+"tel": "3216167647"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "ANCUYA\\NARI\\COL",
+"dir": "CL 3 2 36",
+"tel": "3116110392"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "ARBOLEDA BERRUECOS\\NARI\\COL",
+"dir": "KR 3 3 10",
+"tel": "3206280465"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "BARBACOAS\\NARI\\COL",
+"dir": "AV PRINCIPAL",
+"tel": "3155786744"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "BELEN NARIÑO\\NARI\\COL",
+"dir": "KR 1 3 31",
+"tel": "3127181705"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "BOCAS DE SATINGA(OLAYA HERRERA)\\NARI\\COL",
+"dir": "CL EL PROGESO",
+"tel": "3184759816"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "BUESACO\\NARI\\COL",
+"dir": "KR 3 2 85",
+"tel": "3168310388"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "CATAMBUCO (PASTO )\\PTO\\NARI",
+"dir": "KR 5 CS 308 SECTOR SAN MARTIN",
+"tel": "3233469096"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "CHACHAGUI\\NARI\\COL",
+"dir": "KR 3 6 53",
+"tel": "3128463942"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "COLON NARIÑO\\NARI\\COL",
+"dir": "KR 2 3 39",
+"tel": "3206733550"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "CONSACA\\NARI\\COL",
+"dir": "MZ 13 CS 4 B",
+"tel": "3136721786"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "CONTADERO\\NARI\\COL",
+"dir": "KR 3 3 49",
+"tel": "3116482615"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "CORDOBA NARIÑO\\NARI\\COL",
+"dir": "CL 4 05",
+"tel": "3215089380"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "CUASPUD\\NARI\\COL",
+"dir": "KR 2 5 40",
+"tel": "3183271819"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "CUMBAL\\NARI\\COL",
+"dir": "KR 8 16 78",
+"tel": "3146539810"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "CUMBITARA\\NARI\\COL",
+"dir": "KR 5 3 57",
+"tel": "3136225292"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "EL CHARCO\\NARI\\COL",
+"dir": "KR 2 7A 52",
+"tel": "3187948048"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "EL PEDREGAL ( IMUES)\\IMU\\NARI",
+"dir": "URB DE LOS RIOS MZ J CS 5",
+"tel": "3126601804"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "EL PENOL\\NARI\\COL",
+"dir": "KR 1 CA 9 EL PEÑOL CENTRO",
+"tel": "3104651536"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "EL ROSARIO\\NARI\\COL",
+"dir": "AV LOS ESTUDIANTES",
+"tel": "3136645190"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "EL TABLON DE GOMEZ\\NARI\\COL",
+"dir": "VDA LLANO LARGO",
+"tel": "3143838947"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "EL TABLON TAMINANGO NARIÑO)\\TAM\\NARI",
+"dir": "KR 1 4 11",
+"tel": "3185073525"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "EL TAMBO NARIÑO\\NARI\\COL",
+"dir": "KR 11 N 3 47",
+"tel": "3127856502"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "FRANCISCO PIZARRO\\NARI\\COL",
+"dir": "CL DEL COMERCIO CS 1467 MIRAFLORES",
+"tel": "3187875083"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "FUNES\\NARI\\COL",
+"dir": "KR 2 4 63",
+"tel": "3158707859"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "GUACHUCAL\\NARI\\COL",
+"dir": "KR 3 6 10",
+"tel": "3175789900"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "GUAITARILLA\\NARI\\COL",
+"dir": "CL LAUREANO GOMEZ",
+"tel": "3163925957"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "GUALMATAN\\NARI\\COL",
+"dir": "CR 3 # 4-21",
+"tel": "3186133515"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "ILES\\NARI\\COL",
+"dir": "BR CL REAL QUINTA",
+"tel": "3105405510"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "IMUES\\NARI\\COL",
+"dir": "CL 3 B MARILUZ",
+"tel": "3126601804"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "IPIALES\\NARI\\COL",
+"dir": "CL 12 A 10 111",
+"tel": "3165203784"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "LA CRUZ\\NARI\\COL",
+"dir": "CL 5 9 30",
+"tel": "3206921154"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "LA FLORIDA\\NARI\\COL",
+"dir": "CL 3 6 64 SECTOR DIVINO NIÑO",
+"tel": "3137978799"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "LA LLANADA\\NARI\\COL",
+"dir": "KR 5 7 52",
+"tel": "3155863759"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "LA TOLA\\NARI\\COL",
+"dir": "FRENTE AL MUELLE PRINCIPAL",
+"tel": "3127904112"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "LA UNION NARIÑO\\NARI\\COL",
+"dir": "KR 2 20 07",
+"tel": "3186425333"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "LEIVA\\NARI\\COL",
+"dir": "KR 5 3 30",
+"tel": "3235675948"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "LINARES\\NARI\\COL",
+"dir": "KR 4 3 21",
+"tel": "3104163099"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "LLORENTE\\COR\\NARI",
+"dir": "CL PPAL LAS PALMAS",
+"tel": "3103798808"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "LOS ANDES\\NARI\\COL",
+"dir": "CL 5 4 38",
+"tel": "3148885414"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "LOS CHILCOS (IPIALES)\\IPI\\NARI",
+"dir": "CORR LOS CHILCOS KR 1 05E 06",
+"tel": "3183799836"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "MAGUI\\NARI\\COL",
+"dir": "CL 3 CS 76",
+"tel": "3104465664"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "MALLAMA\\NARI\\COL",
+"dir": "CL 2 4 45",
+"tel": "3104402897"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "MOSQUERA NARIÑO\\NARI\\COL",
+"dir": "CL 2 10 16",
+"tel": "3102998964"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "NARIÑO\\NARI\\COL",
+"dir": "CL 3 3 13",
+"tel": "3116110392"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "OSPINA\\NARI\\COL",
+"dir": "KR 3 3 36",
+"tel": "3217048346"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "PASTO\\NARI\\COL",
+"dir": "OF. PRINC CALLE 17 # 15-60",
+"tel": "3232554455"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "POLICARPA\\NARI\\COL",
+"dir": "KR 3 2 35",
+"tel": "3216417061"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "POTOSI\\NARI\\COL",
+"dir": "KR 4 4 54",
+"tel": "3183157833"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "PROVIDENCIA NARIÑO\\NARI\\COL",
+"dir": "KR 3 5 84",
+"tel": "3127262951"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "PUERRES\\NARI\\COL",
+"dir": "KR 4 4 05",
+"tel": "3148960737"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "PUPIALES\\NARI\\COL",
+"dir": "KR 4 4 83",
+"tel": "3163853166"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "REMOLINO TAMINANGO\\TAM\\NARI",
+"dir": "CL 7 4 09",
+"tel": "3118638961"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "RICAURTE NARIÑO\\NARI\\COL",
+"dir": "BR EL COMERCIO",
+"tel": "3103519993"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "ROBERTO PAYAN\\NARI\\COL",
+"dir": "BR PORVENIR",
+"tel": "3122795495"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "SAMANIEGO\\NARI\\COL",
+"dir": "CL 5 4 16",
+"tel": "3127291945"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "SAN BERNARDO NARIÑO\\NARI\\COL",
+"dir": "BR VILLA HERMOSA",
+"tel": "3207918480"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "SAN LORENZO\\NARI\\COL",
+"dir": "DG 1 4 40",
+"tel": "3105917604"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "SAN PABLO NARIÑO\\NARI\\COL",
+"dir": "CL 5 3 41",
+"tel": "3117827264"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "SAN PEDRO DE CARTAGO\\NARI\\COL",
+"dir": "KR 1 2 114",
+"tel": "3136989329"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "SANDONA\\NARI\\COL",
+"dir": "CL 5 04 48",
+"tel": "3155341526"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "SANTA ANA (IMUES)\\IMU\\NARI",
+"dir": "SANTA ANITA",
+"tel": "3186493123"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "SANTA BARBARA NARIÑO\\NARI\\COL",
+"dir": "SAN ANDRECITO CL DEL COMERCIO",
+"tel": "3218165562"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "SANTACRUZ\\NARI\\COL",
+"dir": "BRR LA SOLEDAD KR 1",
+"tel": "3117999352"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "SAPUYES\\NARI\\COL",
+"dir": "VDA SAN JORGE",
+"tel": "3184250565"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "TAMINANGO\\NARI\\COL",
+"dir": "KR 3 4 32",
+"tel": "3137298896"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "TANGUA\\NARI\\COL",
+"dir": "TANGUA BRLOS ANDES KR 4 4 68",
+"tel": "3026814251"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "TUMACO\\NARI\\COL",
+"dir": "AV ESTUDIANTES DESP DE PERU SALUDABLE A LA IZQ",
+"tel": "3178946267"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "TUQUERRES\\NARI\\COL",
+"dir": "KR 13B 23 03",
+"tel": "3248547980"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "VILLAMORENO (BUESACO)\\BUE\\NARI",
+"dir": "CORR VILLAMORENO CS 57",
+"tel": "3167066600"
+},
+{
+"dep": "NARIÑO",
+"ciudad": "YACUANQUER\\NARI\\COL",
+"dir": "KR 3 7 29",
+"tel": "3504535029"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "ABREGO\\NORT\\COL",
+"dir": "KR 6 12 83",
+"tel": "3118408784"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "AGUA CLARA(PTO SANTANDER)\\SAN\\NORT",
+"dir": "KDX 25 3 APTO 1",
+"tel": "3124932291"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "ARBOLEDAS\\NORT\\COL",
+"dir": "CL 3 6 29",
+"tel": "3133424650"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "ASTILLERO (EL ZULIA)\\ZUL\\NORT",
+"dir": "KDX 24 2 APTO 101",
+"tel": "3123533884"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "BOCHALEMA\\NORT\\COL",
+"dir": "CL 5 4 21",
+"tel": "3203977335"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "BUCARASICA\\NORT\\COL",
+"dir": "CL 2 2 20",
+"tel": "3106988661"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "CACHIRA\\NORT\\COL",
+"dir": "CL 6 6 02",
+"tel": "3103170311"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "CACOTA\\NORT\\COL",
+"dir": "CL 3 3 19",
+"tel": "3224468625"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "CAMPO DOS (TIBU) \\TIB\\NORT",
+"dir": "CL 16N 11 10",
+"tel": "3107723739"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "CHINACOTA\\NORT\\COL",
+"dir": "KR 4 5 25",
+"tel": "5865458"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "CHITAGA\\NORT\\COL",
+"dir": "CL 4 6 35",
+"tel": "3105686236"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "CONVENCION\\NORT\\COL",
+"dir": "CL 4 8 29",
+"tel": "3168870615"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "CORNEJO (SAN CAYETANO)\\SAN\\NORT",
+"dir": "CL 8 BR LA HAMACA CORR CORNEJO 37",
+"tel": "3006737211"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "COROZAL (LOS PATIOS)\\PAT\\NORT",
+"dir": "KDX 7 1 LC 3",
+"tel": "3178348404"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "CUCUTA\\NORT\\COL",
+"dir": "CLL 21 NORTE 10 - 25",
+"tel": "3232554455"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "CUCUTILLA\\NORT\\COL",
+"dir": "KDX 52 5",
+"tel": "3102350182"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "DURANIA\\NORT\\COL",
+"dir": "CL 10 1 37",
+"tel": "3118082904"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "EL CARMEN DE NAZARETH (SALAZAR\\SAL\\NORT",
+"dir": "KM 23",
+"tel": "3138306510"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "EL CARMEN\\NORT\\COL",
+"dir": "KR 4 10 55",
+"tel": "3108586047"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "EL DIAMANTE (PAMPLONITA)\\PAM\\NORT",
+"dir": "CL 2 2 90",
+"tel": "3132719879"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "EL TARRA\\NORT\\COL",
+"dir": "KDX L1 0 80",
+"tel": "3144197949"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "EL ZULIA\\NORT\\COL",
+"dir": "CL 7 01 20",
+"tel": "3124180372"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "GRAMALOTE\\NORT\\COL",
+"dir": "MZ 3 CA 19 BRR CENTRO",
+"tel": "3222316144"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "HACARI\\NORT\\COL",
+"dir": "KDX A2 260",
+"tel": "3142923883"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "HERRAN\\NORT\\COL",
+"dir": "KR 4 6 73",
+"tel": "3118920519"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "LA DONJUANA\\BOC\\NORT",
+"dir": "KR 99 1 LC 1",
+"tel": "3204487098"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "LA ERMITA (OCANA)\\OCA\\NORT",
+"dir": "KDX 188 590 APTO 1",
+"tel": "3155864990"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "LA ESPERANZA\\NORT\\COL",
+"dir": "KR 6 2 10",
+"tel": "3186962689"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "LA GABARRA\\TIB\\NORT",
+"dir": "CL 17 11 10",
+"tel": "3133583128"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "LA LAGUNA (SILOS)\\SIL\\NORT",
+"dir": "KDX 10 2 A",
+"tel": "3203411830"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "LA PLAYA\\NORT\\COL",
+"dir": "CL 1 2 09",
+"tel": "3144801582"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "LA SAN JUANA (SARDINATA)\\SAR\\NORT",
+"dir": "LA SAN JUANA KDX 118",
+"tel": "3135667362"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "LABATECA\\NORT\\COL",
+"dir": "KR 2 4 03",
+"tel": "3135312091"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "LLANO GRANDE(CHITAGA NORT)\\CHI\\NORT",
+"dir": "KDX 1B 1 AP 101",
+"tel": "3118921495"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "LOS PATIOS\\NORT\\COL",
+"dir": "AV 10 20 15",
+"tel": "3022383153"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "LOURDES\\NORT\\COL",
+"dir": "CL 4 KR 5 6",
+"tel": "3213711409"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "MUTISCUA\\NORT\\COL",
+"dir": "CL 7 NO 2 13",
+"tel": "3112104318"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "OCANA\\NORT\\COL",
+"dir": "CL 2 21 B 207 LC 1",
+"tel": "3183704649"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "PAMPLONA\\NORT\\COL",
+"dir": "CL 7 6 57",
+"tel": "3138135365"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "PAMPLONITA\\NORT\\COL",
+"dir": "KR 1 3 72",
+"tel": "3107646028"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "PUERTO LLERAS (PTO SANTANDER)\\SAN\\NORT",
+"dir": "KDX 18 1",
+"tel": "3508086267"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "PUERTO SANTANDER NORTE DE SANTANDER\\NORT\\COL",
+"dir": "CL 4 2 34",
+"tel": "3188301553"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "RAGONVALIA\\NORT\\COL",
+"dir": "AV 4 5 23",
+"tel": "3133926773"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "SALAZAR\\NORT\\COL",
+"dir": "CL 4 6 72 PUENTE FORTUL",
+"tel": "3115090786"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "SAN CALIXTO\\NORT\\COL",
+"dir": "SAN CALIXTO KDX D3 160 EL TAMACO",
+"tel": "3219310806"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "SAN CAYETANO NORTE DE SANTANDER\\NORT\\COL",
+"dir": "CL 3 5 69",
+"tel": "3156339488"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "SANTIAGO NORTE DE SANTANDER\\NORT\\COL",
+"dir": "MZ H LOTE 22",
+"tel": "3125810128"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "SARDINATA\\NORT\\COL",
+"dir": "KR 5 7 16",
+"tel": "3143440001"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "SILOS\\NORT\\COL",
+"dir": "KR 3 3 154 LC 6",
+"tel": "3142724533"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "TEORAMA\\NORT\\COL",
+"dir": "CL 5 3 12",
+"tel": "3112329001"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "TIBU\\NORT\\COL",
+"dir": "KR 7 7 09",
+"tel": "3107563691"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "TOLEDO NORTE DE SANTANDER\\NORT\\COL",
+"dir": "CL 15 4 38",
+"tel": "3115949309"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "VILLA CARO\\NORT\\COL",
+"dir": "KDX 101",
+"tel": "3213602459"
+},
+{
+"dep": "NORTE DE SANTANDER",
+"ciudad": "VILLA DEL ROSARIO\\NORT\\COL",
+"dir": "KR 7 6 56",
+"tel": "3114803589"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "COLON PUTUMAYO\\PUTU\\COL",
+"dir": "KR 8 ENTRE CL 8 Y 5",
+"tel": "3147058293"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "EL TIGRE (LA HORMIGA PUTUMAYO)\\HOR\\PUTU",
+"dir": "CL PRINCIPAL CENTRO",
+"tel": "3172274276"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "LA HORMIGA /VALLE DEL GUAMUEZ\\PUTU\\COL",
+"dir": "KR 2 7 05",
+"tel": "3219836780"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "LAS PLANADAS \\MCO\\PUTU",
+"dir": "VDA LAS PLANADAS",
+"tel": "3213347880"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "LEGUIZAMO\\PUTU\\COL",
+"dir": "KR 3 ESQ",
+"tel": "3138325828"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "MOCOA\\PUTU\\COL",
+"dir": "CONTIGUO EDIFICIO HORUS",
+"tel": "3232554455"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "ORITO\\PUTU\\COL",
+"dir": "CL 8 9 08",
+"tel": "3208462353"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "PTO UMBRIA (VILLAGARZON)\\VIL\\PUTU",
+"dir": "CL PRINCIPAL BRR LA ESMERALDA",
+"tel": "3223769500"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "PUERTO ASIS\\PUTU\\COL",
+"dir": "CL 10 NRO 25 45",
+"tel": "3188956494"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "PUERTO CAICEDO\\PUTU\\COL",
+"dir": "CL PRINCIPAL FRENTE AL PARQUE",
+"tel": "3115100636 -"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "PUERTO GUZMAN\\PUTU\\COL",
+"dir": "KR 1 4A 20",
+"tel": "3112768561"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "PUERTO LIMON (MOCOA)\\MCO\\PUTU",
+"dir": "BRR PUERTO NUEVO CL 4 N 4 40",
+"tel": "3232361270"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "SAN FRANCISCO PUTUMAYO\\PUTU\\COL",
+"dir": "CL 4 4 93",
+"tel": "3148017525"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "SAN MIGUEL/ LA DORADA\\PUTU\\COL",
+"dir": "ENSEGUIDA DEL JUZGADO MUNICIPAL",
+"tel": "3102829072"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "SANTA LUCIA(PTO GUZMAN)\\GUZ\\PUTU",
+"dir": "SANTA LUCIA",
+"tel": "3134295728"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "SANTANA (PUERTO ASIS )\\ASI\\PUTU",
+"dir": "KR SANTANA A TRES CASAS DE EFECTY",
+"tel": "3142223616"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "SANTIAGO PUTUMAYO\\PUTU\\COL",
+"dir": "KR 4 CL 4 y 5 DG A SUPERGIROS",
+"tel": "3147042392"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "SIBUNDOY\\PUTU\\COL",
+"dir": "KR 14 16 17",
+"tel": "3223175076"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "VILLAGARZON\\PUTU\\COL",
+"dir": "CL 6 5 47",
+"tel": "3207471491"
+},
+{
+"dep": "PUTUMAYO",
+"ciudad": "YARUMO (ORITO)\\ORI\\PUTU",
+"dir": "VDA YARUMO",
+"tel": "3124782777"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "ARMENIA_QUINDIO\\QUIN\\COL",
+"dir": "OF. PRINC CLL 9 17 36 GALAN",
+"tel": "018000942777"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "BARCELONA\\QUIN\\COL",
+"dir": "CL 11 CON KR 11 ESQ",
+"tel": "3135731714"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "BUENAVISTA QUINDIO\\QUIN\\COL",
+"dir": "CL 3 3 49",
+"tel": "3103361821"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "CALARCA\\QUIN\\COL",
+"dir": "CL 35 23 45",
+"tel": "3136613272"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "CIRCASIA\\QUIN\\COL",
+"dir": "CL 14 9 20",
+"tel": "3052716295"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "CORDOBA QUINDIO\\QUIN\\COL",
+"dir": "KR 10 12 39",
+"tel": "3116850644"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "EL CAIMO ( ARMENIA QUIND)\\AXM\\QUIN",
+"dir": "KR 2 1 A 55",
+"tel": "3153760204"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "FILANDIA\\QUIN\\COL",
+"dir": "KR 6 7 15 LC 2",
+"tel": "3137670328"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "GENOVA\\QUIN\\COL",
+"dir": "KR 10 18 10",
+"tel": "3142284269"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "LA BELLA (CALARCA )\\CAL\\QUIN",
+"dir": "KM 4 1 1 21 VIA CALARCA",
+"tel": "3135112683"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "LA INDIA (FILANDIA QUINDIO)\\FIL\\QUIN",
+"dir": "LA INDIA KM 2 8",
+"tel": "3206758597"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "LA TEBAIDA\\QUIN\\COL",
+"dir": "CL 12 5 71",
+"tel": "3206973116"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "MONTENEGRO\\QUIN\\COL",
+"dir": "CL 15 5 53",
+"tel": "3164422688"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "ONCE CASAS (MONTENEGRO)\\MON\\QUIN",
+"dir": "CS 17",
+"tel": "3168675514"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "PIJAO\\QUIN\\COL",
+"dir": "CL 11 4 40 L 1",
+"tel": "3158383681"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "PUEBLO TAPAO\\MON\\QUIN",
+"dir": "KR 4 14 9",
+"tel": "3188107548"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "QUIMBAYA\\QUIN\\COL",
+"dir": "KR 7 15 26 LC 110 EDIFICIO CARAMANTA",
+"tel": "3217760965"
+},
+{
+"dep": "QUINDIO",
+"ciudad": "SALENTO\\QUIN\\COL",
+"dir": "KR 6 6 ESQ",
+"tel": "3044464226"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "APIA\\RISA\\COL",
+"dir": "CL 9 N 8 25",
+"tel": "3234629870"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "BALBOA RISARALDA\\RISA\\COL",
+"dir": "CL 8 7 15",
+"tel": "3122656835"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "BELEN DE UMBRIA\\RISA\\COL",
+"dir": "AV UMBRIA 7 55",
+"tel": "3146455169"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "DOSQUEBRADAS\\RISA\\COL",
+"dir": "CL 15 9 31 LOTE 2 ZONA IND LA MACARENA",
+"tel": "3135569683"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "EL VERGEL (SANTA ROSA DE CABA\\SAN\\RISA",
+"dir": "CL 45 13 23",
+"tel": "3005527272"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "GUATICA\\RISA\\COL",
+"dir": "KR 6 5 33",
+"tel": "3162480788"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "LA CELIA\\RISA\\COL",
+"dir": "KR 3 2 40",
+"tel": "3146210005"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "LA HERMOSA(SANTA ROSA DE CABAL\\SAN\\RISA",
+"dir": "KR 23 21 04 LC 103",
+"tel": "3206191704"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "LA VIRGINIA\\RISA\\COL",
+"dir": "KR 10 8 00",
+"tel": "3166914979"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "MALL SAN PABLO (PEREIRA RISA)\\PEI\\RISA",
+"dir": "CORREGIMIENTO DE TRIBUNAS KM 5 MALL SAN PABLO LC 124",
+"tel": "3205670193"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "MARSELLA\\RISA\\COL",
+"dir": "KR 10 CL 9 16 50",
+"tel": "3108384094"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "MISTRATO\\RISA\\COL",
+"dir": "KR 05 04 02",
+"tel": "3133712457"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "PEREIRA\\RISA\\COL",
+"dir": "OF. PRINC Cr 8a Dg 9 91 Zon Ind Macarena B11",
+"tel": "018000942777"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "PUEBLO RICO\\RISA\\COL",
+"dir": "KR 3 7 19",
+"tel": "3127195116"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "PUERTO CALDAS ( CARTAGO)\\PEI\\RISA",
+"dir": "KR 2 11 106 LC 1",
+"tel": "3207055156"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "QUINCHIA\\RISA\\COL",
+"dir": "KR 7 4 47 LC 4",
+"tel": "3215634073"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "SAN CLEMENTE (GUATICA)\\GUA\\RISA",
+"dir": "PARQUE PPAL KR 3 CL 50",
+"tel": "3113705252"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "SANTA ROSA DE CABAL\\RISA\\COL",
+"dir": "KR 14 19 49",
+"tel": "3217585800"
+},
+{
+"dep": "RISARALDA",
+"ciudad": "SANTUARIO\\RISA\\COL",
+"dir": "CL 6 7 26",
+"tel": "3017778493"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "ACAPULCO (GIRON)\\GIR\\SANT",
+"dir": "LC 2 LOTE 19 MZ 3",
+"tel": "3507091984"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "AGUADA\\SANT\\COL",
+"dir": "CL 3 2 80",
+"tel": "3144783379"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "ALBANIA SANTANDER\\SANT\\COL",
+"dir": "CL 3 2 06",
+"tel": "3105792749"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "ARATOCA\\SANT\\COL",
+"dir": "KR 5 4 23 25",
+"tel": "3214621914"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "BARBOSA SANTANDER\\SANT\\COL",
+"dir": "CL 9 6 06",
+"tel": "3504076835"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "BARICHARA\\SANT\\COL",
+"dir": "KR 6 3 30",
+"tel": "3174929708"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "BARRANCABERMEJA\\SANT\\COL",
+"dir": "OF PPAL KR 15 47 72",
+"tel": "3203537709"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "BERLIN (TONA SANT)\\TON\\SANT",
+"dir": "AV PRINCIPAL # 3- 70",
+"tel": "3166749205"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "BETULIA SANTANDER\\SANT\\COL",
+"dir": "KR 6 A 6 13",
+"tel": "3133991656"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "BOLIVAR SANTANDER\\SANT\\COL",
+"dir": "KR 4 9 37",
+"tel": "3105677360"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "BUCARAMANGA\\SANT\\COL",
+"dir": "OF. PRINC CRA 15 # 19 - 50",
+"tel": "3232554455 3137120309"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CABRERA SANTANDER\\SANT\\COL",
+"dir": "CL 8 5 34",
+"tel": "3202220335"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CALIFORNIA\\SANT\\COL",
+"dir": "CL 5 7 64",
+"tel": "3124871019"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CAMPO 23 (BARRANCABERMEJA)\\BAR\\SANT",
+"dir": "CS 1 CORREGIMIENTO EL CENTRO",
+"tel": "3133368856"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CAPITANEJO\\SANT\\COL",
+"dir": "CL 4 3 78",
+"tel": "3115924451"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CARCASI\\SANT\\COL",
+"dir": "KR 3 2 13",
+"tel": "3115241921"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CENTRO\\BAR\\SANT",
+"dir": "CENTRO BARRANCA BERM CAMPO 22 LC 1",
+"tel": "3118995305"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CEPITA\\SANT\\COL",
+"dir": "CL 5 2 50",
+"tel": "3112752578"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CERRITO\\SANT\\COL",
+"dir": "KR 4 6 07",
+"tel": "3208007445"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CHARALA\\SANT\\COL",
+"dir": "KR 14 22 44 LC 1",
+"tel": "3002280872"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CHARTA\\SANT\\COL",
+"dir": "CL 2 5 05",
+"tel": "3132833091"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CHIMA SANTANDER\\SANT\\COL",
+"dir": "KR 6 5 13",
+"tel": "3125237435"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CHIPATA\\SANT\\COL",
+"dir": "CL 3 5 11",
+"tel": "3002420070"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CHOCOITA (GIRÓN)\\GIR\\SANT",
+"dir": "LC 1 VDA CHOCOITA LT 1",
+"tel": "3224139432"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CIMITARRA\\SANT\\COL",
+"dir": "KR 5 4 29",
+"tel": "3206423444"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CINCELADA\\COR\\SANT",
+"dir": "CL 4 4 45",
+"tel": "7248693"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CITE\\BAR\\SANT",
+"dir": "CL 4 2 15",
+"tel": "3163756511"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CONCEPCION SANTANDER\\SANT\\COL",
+"dir": "KR 4 5 62",
+"tel": "3219200628"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CONFINES\\SANT\\COL",
+"dir": "KR 7 4 35",
+"tel": "3165657023"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CONTRATACION\\SANT\\COL",
+"dir": "KR 4 5 19",
+"tel": "3132698427"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "COROMORO\\SANT\\COL",
+"dir": "KR 5 6 43",
+"tel": "3214132615"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CRUCE PUERTO PARRA (PUERTO PA\\PAR\\SANT",
+"dir": "BR EL CRUCE",
+"tel": "3154519488"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "CURITI\\SANT\\COL",
+"dir": "CL 7 9 18",
+"tel": "3118459923"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "EL CARMEN DE CHUCURI\\SANT\\COL",
+"dir": "CL 2 2 23",
+"tel": "3168634032"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "EL GUACAMAYO\\SANT\\COL",
+"dir": "KR 6 4 06",
+"tel": "3115201815"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "EL PENON SANTANDER\\SANT\\COL",
+"dir": "CL PRINCIPAL EL CENTRO",
+"tel": "3204874735"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "EL PLAYON\\SANT\\COL",
+"dir": "CL 9 5 41",
+"tel": "3016942693"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "ENCINO\\SANT\\COL",
+"dir": "KR 4 5 07",
+"tel": "3118118629"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "ENCISO\\SANT\\COL",
+"dir": "KR 4 4 35",
+"tel": "3138306082"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "FLORIAN\\SANT\\COL",
+"dir": "CL 3 2 14",
+"tel": "3112300372"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "FLORIDABLANCA\\SANT\\COL",
+"dir": "KR 8 2A 08",
+"tel": "3006791242"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "GALAN\\SANT\\COL",
+"dir": "CL 6 6 46",
+"tel": "3147544898"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "GAMBITA\\SANT\\COL",
+"dir": "KR 9 4A 02",
+"tel": "7453906"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "GIRON\\SANT\\COL",
+"dir": "DG 10A 56 08 BG 8 VEGAS DE VILLAMIZAR",
+"tel": "3125042713"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "GUACA\\SANT\\COL",
+"dir": "KR 8 5 34",
+"tel": "3192838188"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "GUADALUPE SANTANDER\\SANT\\COL",
+"dir": "KR 4 3 62",
+"tel": "314 2524384"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "GUAPOTA\\SANT\\COL",
+"dir": "KR 2 4 02",
+"tel": "3142333161"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "GUAVATA\\SANT\\COL",
+"dir": "PARQUE PRINCIPAL",
+"tel": "3138173342"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "GUEPSA\\SANT\\COL",
+"dir": "CL 3 5 30",
+"tel": "3102438952"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "HATO\\SANT\\COL",
+"dir": "KR 5 3 59",
+"tel": "3137731020"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "JESUS MARIA\\SANT\\COL",
+"dir": "KR 6 4A 28",
+"tel": "3105813731"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "JORDAN\\SANT\\COL",
+"dir": "CL PRINCIPAL JORDAN",
+"tel": "3103426821"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "LA BELLEZA\\SANT\\COL",
+"dir": "KR 4 06 03 LA TURRA LOC 2",
+"tel": "3105588990"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "LA FORTUNA (BARRANCABERMEJA)\\BAR\\SANT",
+"dir": "LOTE LA ESPERANZA",
+"tel": "3133368856"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "LA PAZ SANTANDER\\SANT\\COL",
+"dir": "KR 4 2 57",
+"tel": "3214802153"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "LA VEGA GUATIGUARA (PIEDECUEST\\PIE\\SANT",
+"dir": "CS 44",
+"tel": "3185947062"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "LANDAZURI\\SANT\\COL",
+"dir": "KR 6 7 03",
+"tel": "3152841414"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "LEBRIJA\\SANT\\COL",
+"dir": "KR 8 12 25",
+"tel": "3214659163"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "LOS SANTOS\\SANT\\COL",
+"dir": "CL 3 4 16",
+"tel": "3115960540"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "MACARAVITA\\SANT\\COL",
+"dir": "KR 4 4 33",
+"tel": "3112333252"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "MALAGA\\SANT\\COL",
+"dir": "CL 11 8 27 LC 101",
+"tel": "3212008494"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "MATANZA\\SANT\\COL",
+"dir": "KR 5 4 51",
+"tel": "3107957629"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "MESA DE LOS SANTOS \\SAN\\SANT",
+"dir": "100 MT DELANTE DE LA PLAZA CAMPESINA-",
+"tel": "3138581450"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "MOGOTES\\SANT\\COL",
+"dir": "KR 7 3 75",
+"tel": "3163881724"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "MOLAGAVITA\\SANT\\COL",
+"dir": "CL 5 2 35 LC 1",
+"tel": "3102788752"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "NUEVO GIRON(GIRON)\\GIR\\SANT",
+"dir": "DG 24B SUR 25B 02 MZ K SECTOR 4",
+"tel": "3226439842"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "OCAMONTE\\SANT\\COL",
+"dir": "KR 4 5 15",
+"tel": "3112772449"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "OIBA\\SANT\\COL",
+"dir": "CL 11 8 30 LC 1",
+"tel": "3208318017"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "OLIVAL\\SUA\\SANT",
+"dir": "KR 6 3 24",
+"tel": "3102689254"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "ONZAGA\\SANT\\COL",
+"dir": "KR 4 2 50",
+"tel": "3103003187"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "PALMAR\\SANT\\COL",
+"dir": "KR 4 5 25",
+"tel": "3142829604"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "PALMAS DEL SOCORRO\\SANT\\COL",
+"dir": "CL 6 2 19",
+"tel": "3134768726"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "PARAMO\\SANT\\COL",
+"dir": "KR 3 4 10",
+"tel": "3177574750"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "PIEDECUESTA\\SANT\\COL",
+"dir": "KR 6 25 LC 2 LA CASONA",
+"tel": "3003571168"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "PINCHOTE\\SANT\\COL",
+"dir": "KR 5 5 46",
+"tel": "3108679722"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "PUENTE NACIONAL\\SANT\\COL",
+"dir": "KR 07 06 82 LOC 02",
+"tel": "3107545294"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "PUERTO NUEVO(SIMACOTA)\\SIM\\SANT",
+"dir": "PUERTO NUEVO BAJO",
+"tel": "3154519488"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "PUERTO PARRA\\SANT\\COL",
+"dir": "KR 13 CL 20 14 18",
+"tel": "3152610638"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "PUERTO WILCHES\\SANT\\COL",
+"dir": "CL 7 KR 4 VIA PRINCIPAL DG A LA ESSA",
+"tel": "3023487100"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "RIONEGRO SANTANDER\\SANT\\COL",
+"dir": "CL 11 9 05",
+"tel": "3132305048"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SABANA DE TORRES\\SANT\\COL",
+"dir": "KR 11 13 69",
+"tel": "3227165784"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SAN ANDRES SANTANDER\\SANT\\COL",
+"dir": "KR 5 8 25",
+"tel": "3214983042"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SAN BENITO\\SANT\\COL",
+"dir": "CL 1 PARQUE PRINCIPAL",
+"tel": "3142909900"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SAN GIL\\SANT\\COL",
+"dir": "OFICINA PRINCIPAL AV SANTANDER 19 107",
+"tel": "3005698973"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SAN JOAQUIN\\SANT\\COL",
+"dir": "KR 4 5 56",
+"tel": "3138928336"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SAN JOSE DE MIRANDA\\SANT\\COL",
+"dir": "CL 5 4 42",
+"tel": "3133914131"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SAN MIGUEL\\SANT\\COL",
+"dir": "CL 4 2 82",
+"tel": "3212082904"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SAN RAFAEL DE RIONEGRO\\RIO\\SANT",
+"dir": "KR 3 9 106",
+"tel": "3196208129"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SAN VICENTE DE CHUCURI\\SANT\\COL",
+"dir": "KR 9 10 17",
+"tel": "3153161106"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SANTA BARBARA SANTANDER\\SANT\\COL",
+"dir": "CL 3 3 011",
+"tel": "3118303770"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SANTA HELENA DEL OPON\\SANT\\COL",
+"dir": "KR 5 3 23",
+"tel": "3123853088"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SIMACOTA\\SANT\\COL",
+"dir": "KR 6 3 61",
+"tel": "3102440366"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SOCORRO\\SANT\\COL",
+"dir": "KR 13 6 47",
+"tel": "3002168421"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SUAITA\\SANT\\COL",
+"dir": "CL 4 8 29",
+"tel": "3207813712"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SUCRE SANTANDER\\SANT\\COL",
+"dir": "KR 5 6 42",
+"tel": "3142510880"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "SURATA\\SANT\\COL",
+"dir": "CL 2 4 28",
+"tel": "3202582919"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "TIENDA NUEVA (BETULIA)\\BET\\SANT",
+"dir": "SEC TIENDA NUEVA VDA LA PUTANA",
+"tel": "3163554137"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "TONA\\SANT\\COL",
+"dir": "KR 4 3 52",
+"tel": "3143977409"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "VADO REAL\\SUA\\SANT",
+"dir": "KR 7 Nª 4 27",
+"tel": "3203051998"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "VALLE DE SAN JOSE\\SANT\\COL",
+"dir": "KR 7 5 46",
+"tel": "3008947578"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "VELEZ\\SANT\\COL",
+"dir": "CL 10 2 74",
+"tel": "3144144188"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "VETAS\\SANT\\COL",
+"dir": "KR 3 2 06",
+"tel": "3108070167"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "VILLANUEVA SANTANDER\\SANT\\COL",
+"dir": "CL 15 14 55",
+"tel": "3124268534"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "YARIMA ( EL CARMEN DE CHUCURI)\\CAR\\SANT",
+"dir": "KR 8 40 11",
+"tel": "3202419414"
+},
+{
+"dep": "SANTANDER",
+"ciudad": "ZAPATOCA\\SANT\\COL",
+"dir": "CL 18 9 35",
+"tel": "3197892317"
+},
+{
+"dep": "SUCRE",
+"ciudad": "ALBANIA(SAN JUAN DE BETULIA)\\SAN\\SUCR",
+"dir": "CL 4 KR 4A 46",
+"tel": "3145500186"
+},
+{
+"dep": "SUCRE",
+"ciudad": "BUENAVISTA SUCRE\\SUCR\\COL",
+"dir": "KR 9 7 65",
+"tel": "3107133618"
+},
+{
+"dep": "SUCRE",
+"ciudad": "CAIMITO\\SUCR\\COL",
+"dir": "CL 10 3 26",
+"tel": "3042469173"
+},
+{
+"dep": "SUCRE",
+"ciudad": "CHALAN\\SUCR\\COL",
+"dir": "CL SUR 1 KR 6 7",
+"tel": "3046631653"
+},
+{
+"dep": "SUCRE",
+"ciudad": "CHOCHÓ (SINCELEJO)\\SJO\\SUCR",
+"dir": "KR 6 6 15",
+"tel": "3045395392"
+},
+{
+"dep": "SUCRE",
+"ciudad": "COLOSO\\SUCR\\COL",
+"dir": "PLAZA PRINCIPAL CENTRO AL LADO DE LA ALCALDIA",
+"tel": "3107075523"
+},
+{
+"dep": "SUCRE",
+"ciudad": "COROZAL\\SUCR\\COL",
+"dir": "CL 29 23 36 OF PPAL",
+"tel": "3017292707"
+},
+{
+"dep": "SUCRE",
+"ciudad": "COVEÑAS\\SUCR\\COL",
+"dir": "KR 3 5 55",
+"tel": "3208033304"
+},
+{
+"dep": "SUCRE",
+"ciudad": "EL PIÑAL (LOS PALMITOS SUCRE)\\PAL\\SUCR",
+"dir": "CL 4 8 4 CL PRINCIPAL",
+"tel": "3013529791"
+},
+{
+"dep": "SUCRE",
+"ciudad": "EL ROBLE\\SUCR\\COL",
+"dir": "KR 4 CL 6 40",
+"tel": "3126534958"
+},
+{
+"dep": "SUCRE",
+"ciudad": "GALERAS\\SUCR\\COL",
+"dir": "CL 11 13 54 LC 3",
+"tel": "3014120526"
+},
+{
+"dep": "SUCRE",
+"ciudad": "GUARANDA\\SUCR\\COL",
+"dir": "CLL 9 CRA 5 60",
+"tel": "3113168438"
+},
+{
+"dep": "SUCRE",
+"ciudad": "LA PALMIRA (TOLU VIEJO)\\TOL\\SUCR",
+"dir": "KR 2 4 47",
+"tel": "3003101440"
+},
+{
+"dep": "SUCRE",
+"ciudad": "LA SIERPE (MAJAGUAL)\\MAJ\\SUCR",
+"dir": "CL PRINCIPAL",
+"tel": "3134872981"
+},
+{
+"dep": "SUCRE",
+"ciudad": "LA UNION SUCRE\\SUCR\\COL",
+"dir": "AV NUÑEZ CL 14B 10",
+"tel": "3106384976"
+},
+{
+"dep": "SUCRE",
+"ciudad": "LAS BRUJAS (COROZAL\\COR\\SUCR",
+"dir": "CT TRONCAL OCCIDENTE KM 2",
+"tel": "3234152961"
+},
+{
+"dep": "SUCRE",
+"ciudad": "LAS LLANADAS(EL ROBLE)\\ROB\\SUCR",
+"dir": "KR 6 7 23",
+"tel": "3022929327"
+},
+{
+"dep": "SUCRE",
+"ciudad": "LAS PALMITAS ( MAJAGUAL)\\MAJ\\SUCR",
+"dir": "KR 2 2 202",
+"tel": "3194568569"
+},
+{
+"dep": "SUCRE",
+"ciudad": "LOS PALMITOS\\SUC\\SUCR",
+"dir": "KR 11 54 51",
+"tel": "3008975006"
+},
+{
+"dep": "SUCRE",
+"ciudad": "MACAJAN (TOLU VIEJO)\\TOL\\SUCR",
+"dir": "KR 8 CL 5 46",
+"tel": "3042739198"
+},
+{
+"dep": "SUCRE",
+"ciudad": "MAJAGUAL\\SUCR\\COL",
+"dir": "CL 5 17 26",
+"tel": "3116867788"
+},
+{
+"dep": "SUCRE",
+"ciudad": "MORROA\\SUCR\\COL",
+"dir": "CL 6 6 15",
+"tel": "3045609269"
+},
+{
+"dep": "SUCRE",
+"ciudad": "OVEJAS\\SUCR\\COL",
+"dir": "KR 18 31 18",
+"tel": "3205108800"
+},
+{
+"dep": "SUCRE",
+"ciudad": "PUNTA SECA (COVEÑAS)\\COV\\SUCR",
+"dir": "KR 3B 1A SUR 137 PUNTA SECA",
+"tel": "3042462193"
+},
+{
+"dep": "SUCRE",
+"ciudad": "SABANAS DE BELTRAN(LOS PALMIT)\\SAN\\SUCR",
+"dir": "KR 4 7 25",
+"tel": "3205633812"
+},
+{
+"dep": "SUCRE",
+"ciudad": "SAMPUES\\SUCR\\COL",
+"dir": "KR 19 26 A 21",
+"tel": "3143585245"
+},
+{
+"dep": "SUCRE",
+"ciudad": "SAN ANTONIO DE PALMITOS\\SUCR\\COL",
+"dir": "KR 8 6 49",
+"tel": "3044240646"
+},
+{
+"dep": "SUCRE",
+"ciudad": "SAN BENITO ABAD\\SUCR\\COL",
+"dir": "CL 11 14 17",
+"tel": "3128527267"
+},
+{
+"dep": "SUCRE",
+"ciudad": "SAN JUAN DE BETULIA\\SUCR\\COL",
+"dir": "KR 5TA 1G 06",
+"tel": "3205348575"
+},
+{
+"dep": "SUCRE",
+"ciudad": "SAN MARCOS\\SUCR\\COL",
+"dir": "KR 24 18 A 88",
+"tel": "3215743520 - 310-4336048"
+},
+{
+"dep": "SUCRE",
+"ciudad": "SAN ONOFRE\\SUCR\\COL",
+"dir": "CL 19 16 A 104",
+"tel": "3215688047"
+},
+{
+"dep": "SUCRE",
+"ciudad": "SAN PEDRO SUCRE\\SUCR\\COL",
+"dir": "KR 9 19 135",
+"tel": "3116711977"
+},
+{
+"dep": "SUCRE",
+"ciudad": "SAN ROQUE (MAJAGUAL)\\MAJ\\SUCR",
+"dir": "CL 3 4 75",
+"tel": "3045230135"
+},
+{
+"dep": "SUCRE",
+"ciudad": "SIETE PALMAS( CAIMITO SUCRE)\\CAI\\SUCR",
+"dir": "CL 3 1 53",
+"tel": "3233231218"
+},
+{
+"dep": "SUCRE",
+"ciudad": "SINCE\\SUCR\\COL",
+"dir": "KR 12 14 59",
+"tel": "311-4090731 / 3116737111"
+},
+{
+"dep": "SUCRE",
+"ciudad": "SINCELEJO\\SUCR\\COL",
+"dir": "OF. PRINC CRA 04 # 25 - 138 BGA 04",
+"tel": "3232554455"
+},
+{
+"dep": "SUCRE",
+"ciudad": "SUCRE SUCRE\\SUCR\\COL",
+"dir": "CL 9 4 40",
+"tel": "3114271674"
+},
+{
+"dep": "SUCRE",
+"ciudad": "TOLU VIEJO\\SUCR\\COL",
+"dir": "DG 3 3 A 55",
+"tel": "3004417565"
+},
+{
+"dep": "SUCRE",
+"ciudad": "TOLU\\SUCR\\COL",
+"dir": "CL 16 3 09",
+"tel": "3013702912"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "ALPUJARRA\\TOLI\\COL",
+"dir": "CL 2 1 17",
+"tel": "3125847801"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "ALVARADO\\TOLI\\COL",
+"dir": "CL 3 3 91",
+"tel": "3107814225"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "AMBALEMA\\TOLI\\COL",
+"dir": "KR 7 11 07",
+"tel": "3108120220"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "ANZOATEGUI\\TOLI\\COL",
+"dir": "KR 2 12 62",
+"tel": "3228115785"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "ARMERO\\TOLI\\COL",
+"dir": "CL 6 5 A 27 CENTRO",
+"tel": "3016222391"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "ATACO\\TOLI\\COL",
+"dir": "CL 7 5 100",
+"tel": "3123299232"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "CAJAMARCA\\TOLI\\COL",
+"dir": "KR 7 6 49",
+"tel": "3214563088"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "CARMEN DE APICALA\\TOLI\\COL",
+"dir": "KR 7 NO 3 52",
+"tel": "3205633140"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "CASABIANCA\\TOLI\\COL",
+"dir": "KR 3 2 38 CL PRINCIPAL",
+"tel": "3105693252"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "CASTILLA\\COY\\TOLI",
+"dir": "CL 2 5 05",
+"tel": "3184042242"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "CHAPARRAL\\TOLI\\COL",
+"dir": "CL 10 5 47",
+"tel": "3192970405"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "CHICORAL\\TOLI\\COL",
+"dir": "CL 6 5 83",
+"tel": "3132438756"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "COELLO COCORA (CAJAMARCA)\\CAJ\\TOLI",
+"dir": "COELLO COCORA VIA CAJAMARCA CS 36",
+"tel": "3016470068"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "COELLO\\TOLI\\COL",
+"dir": "KR 2 2 95",
+"tel": "3102451209"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "CONVENIO (LIBANO)\\LIB\\TOLI",
+"dir": "KR 2 8A 35",
+"tel": "3178816250"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "COYAIMA\\TOLI\\COL",
+"dir": "KR 4 3 25",
+"tel": "3118351928"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "CUNDAY\\TOLI\\COL",
+"dir": "KR 5 6 45",
+"tel": "3153272556"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "DOLORES\\TOLI\\COL",
+"dir": "KR 7 4 13",
+"tel": "3213712696"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "EL LIMON ( CHAPARRAL)\\CHA\\TOLI",
+"dir": "KR 2 2 30",
+"tel": "3134305396"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "EL TOTUMO (IBAGUE)\\IBG\\TOLI",
+"dir": "VDA EL TOTUMO VIA CEMENTERIO",
+"tel": "3204922234"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "ESPINAL\\TOLI\\COL",
+"dir": "KR 4 9 37",
+"tel": "3138680598"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "FALAN\\TOLI\\COL",
+"dir": "CL 5 3 122",
+"tel": "3113411414"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "FLANDES\\TOLI\\COL",
+"dir": "CRA 8 # 10-82",
+"tel": "3187308568"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "FRESNO\\TOLI\\COL",
+"dir": "KR 6 4 45",
+"tel": "31528444368"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "GAITANIA\\PLA\\TOLI",
+"dir": "CL 2 5A 23",
+"tel": "3134995348"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "GUALANDAY\\COE\\TOLI",
+"dir": "KR 2 6 58",
+"tel": "3102861882"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "GUAMO\\TOLI\\COL",
+"dir": "CL 10 8 61",
+"tel": "3212096412"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "HERRERA\\RIO\\TOLI",
+"dir": "CL 2 7 69",
+"tel": "3228201966"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "HERVEO\\TOLI\\COL",
+"dir": "KR 5 4 28",
+"tel": "3113859400"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "HONDA\\TOLI\\COL",
+"dir": "KR 12 A 15 161",
+"tel": "3132840259"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "IBAGUE\\TOLI\\COL",
+"dir": "OF. PRINC CRA 8 #122-67 SALADO",
+"tel": "018000942777"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "ICONONZO\\TOLI\\COL",
+"dir": "KR 6 4 92",
+"tel": "3167602249 3213710762"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "JUNIN VENADILLO\\VEN\\TOLI",
+"dir": "CL PRINCIPAL JUNIN",
+"tel": "3174112216"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "LA ARADA\\TOLI\\COL",
+"dir": "KR 2 2 VIA PPAL",
+"tel": "3125823153"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "LERIDA\\TOLI\\COL",
+"dir": "KR 5 8 14 LC 12",
+"tel": "3212637879"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "LIBANO\\TOLI\\COL",
+"dir": "CL 5 9 66",
+"tel": "3112916574"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "MARIQUITA\\TOLI\\COL",
+"dir": "CL 6 A 2 81",
+"tel": "3007401876"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "MELGAR\\TOLI\\COL",
+"dir": "CL 6 23 13",
+"tel": "3118095333"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "MESA DE POLE (ATACO)\\ATA\\TOLI",
+"dir": "KR 5 CL 2 15",
+"tel": "3153930993"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "MURILLO\\TOLI\\COL",
+"dir": "CL 4 8 95 LC 1",
+"tel": "3132816909"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "NATAGAIMA\\TOLI\\COL",
+"dir": "KR 5 5 49",
+"tel": "3158009170"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "OLAYA HERRERA (ORTEGA)\\ORT\\TOLI",
+"dir": "CORR OLAYA HERRERA",
+"tel": "3214133746"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "ORTEGA\\TOLI\\COL",
+"dir": "CL 5 14 25",
+"tel": "3142356610 3127075383"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "PADILLA (LERIDA TOLIMA)\\LER\\TOLI",
+"dir": "FRENTA A LA ESCUELA DE LA VEREDA",
+"tel": "3164481491"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "PALOCABILDO\\TOLI\\COL",
+"dir": "CL 6 8 17",
+"tel": "3227785084"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "PASTALES (IBAGUE)\\IBG\\TOLI",
+"dir": "PASTALES SECTOR PIDO DE ORO CS 3",
+"tel": "3155513280"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "PAYANDE\\SAN\\TOLI",
+"dir": "KR 5 7 58",
+"tel": "3213449885"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "PIEDRAS\\TOLI\\COL",
+"dir": "KR 5 10 20 VIA PPAL",
+"tel": "3123979366"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "PLANADAS\\TOLI\\COL",
+"dir": "KR 05 06 26",
+"tel": "3132824803"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "PLAYARRICA (SAN ANTONIO-TOL)\\SAN\\TOLI",
+"dir": "CL 3 4 25 33 LC 03 CTO D",
+"tel": "3114419723"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "PRADO\\TOLI\\COL",
+"dir": "KR 9 5 31",
+"tel": "3104665867"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "PUENTE CUCUANA (ORTEGA)\\ORT\\TOLI",
+"dir": "KM 20 VIA GUAMO A ORTEGA",
+"tel": "3154781376"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "PURIFICACION\\TOLI\\COL",
+"dir": "KR 9 5 31",
+"tel": "3114813351"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "RIOBLANCO\\TOLI\\COL",
+"dir": "CL 5 3 A 14",
+"tel": "3134803685"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "RONCESVALLES\\TOLI\\COL",
+"dir": "KR 2 6 62",
+"tel": "3222014524"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "ROVIRA\\TOLI\\COL",
+"dir": "KR 3 5 24",
+"tel": "3124792422"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "SALDANA\\TOLI\\COL",
+"dir": "KR 18 15 34",
+"tel": "3103422816"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "SAN ANTONIO\\TOLI\\COL",
+"dir": "CL 5 5 10",
+"tel": "3143507346"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "SAN LUIS TOLIMA\\TOLI\\COL",
+"dir": "KR 5 6 36 LC 4",
+"tel": "3203246292"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "SAN RAFAEL (SANTA ISABEL TOLIM\\SAN\\TOLI",
+"dir": "KR CEN CENTRO POBLADO SAN RAFAEL",
+"tel": "3186080481"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "SANTA ISABEL\\TOLI\\COL",
+"dir": "KR 1 6 40",
+"tel": "3229299162"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "SANTIAGO PEREZ\\TOLI\\COL",
+"dir": "KR 4 6 12",
+"tel": "3123912864"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "STE PRUEBA 5-\\MEL\\TOLI",
+"dir": "LC 5 C.CIAL PLAZA",
+"tel": "3105772561"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "SUAREZ TOLIMA\\TOLI\\COL",
+"dir": "KR 2 1 33",
+"tel": "3138164273"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "VALLE DE SAN JUAN\\TOLI\\COL",
+"dir": "KR 4 5 57",
+"tel": "3134322180"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "VENADILLO\\TOLI\\COL",
+"dir": "CL 6 5 73",
+"tel": "3143782574"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "VERACRUZ(ANZOATEGUI)\\ANZO\\TOLI",
+"dir": "ALVARADO VDA VERACRUZ",
+"tel": "3212651905"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "VILLAHERMOSA\\TOLI\\COL",
+"dir": "KR 4 10 A 41",
+"tel": "3136063764"
+},
+{
+"dep": "TOLIMA",
+"ciudad": "VILLARRICA\\TOLI\\COL",
+"dir": "KR 2 3 11",
+"tel": "3118780022"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "ALBAN (EL CAIRO)\\CAI\\VALL",
+"dir": "CL 3 1 35",
+"tel": "3233175843"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "ALCALA\\VALL\\COL",
+"dir": "CL 5 4 33",
+"tel": "3214961556"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "ANDALUCIA\\VALL\\COL",
+"dir": "KR 4 21 68",
+"tel": "3162999230"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "ANSERMANUEVO\\VALL\\COL",
+"dir": "CL 3 A C 6",
+"tel": "3125450707"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "ARGELIA VALLE DEL CAUCA\\VALL\\COL",
+"dir": "CL 4 4 33",
+"tel": "3206915108"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "BOLIVAR VALLE DEL CAUCA\\VALL\\COL",
+"dir": "CL 5 2 14",
+"tel": "3104567346"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "BUENAVENTURA\\VALL\\COL",
+"dir": "KR 06 02 26",
+"tel": "3102592238"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "BUGA\\VALL\\COL",
+"dir": "KR 24 13 136",
+"tel": "3172438440"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "BUGALAGRANDE\\VALL\\COL",
+"dir": "CL 7 7 58",
+"tel": "3177310319"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "CAICEDONIA\\VALL\\COL",
+"dir": "CL 11 15 39",
+"tel": "3148851829"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "CALI\\VALL\\COL",
+"dir": "OF. PRINC CLL 66#1 NTE-67 DETRAS DEL CC CIAL LA 14 DE CALIMA",
+"tel": "3173310538"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "CALIMA DARIEN\\VALL\\COL",
+"dir": "CL 7 8 62",
+"tel": "31037026130"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "CANDELARIA VALLE DEL CAUCA\\VALL\\COL",
+"dir": "CL 7 6A 34",
+"tel": "3217040497"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "CARTAGO\\VALL\\COL",
+"dir": "KR 4 7 30",
+"tel": "3127912213"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "CISNEROS (DAGUA)\\DAG\\VALL",
+"dir": "KM 50 5N 750 CS 4",
+"tel": "3137636046"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "DAGUA\\VALL\\COL",
+"dir": "CL 10 20 50",
+"tel": "3218762400"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "EL AGUILA\\VALL\\COL",
+"dir": "KR 2 7 36 LC 2",
+"tel": "3158399503"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "EL CAIRO\\VALL\\COL",
+"dir": "KR 5 4 25",
+"tel": "3203253489"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "EL CARMELO \\CAN\\VALL",
+"dir": "KR 11 CL 17 ESQ",
+"tel": "3113961116"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "EL CERRITO\\VALL\\COL",
+"dir": "CL 6 10 44",
+"tel": "3173920422"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "EL DOVIO\\VALL\\COL",
+"dir": "KR 8 8 06",
+"tel": "2229584"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "EL PLACER(EL CERRITO VALLE)\\CER\\VALL",
+"dir": "CL 6 7 14",
+"tel": "3156358819"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "FLORIDA\\VALL\\COL",
+"dir": "CL 9 21 68",
+"tel": "3113341641"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "GINEBRA\\VALL\\COL",
+"dir": "CL 7 2 29",
+"tel": "3148277681"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "GUACARI\\VALL\\COL",
+"dir": "CL 3 3 50",
+"tel": "2532680"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "JAMUNDI\\VALL\\COL",
+"dir": "KR 11 12 56",
+"tel": "3116058101"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "LA CUMBRE\\VALL\\COL",
+"dir": "CL 2 4 54",
+"tel": "3206779951"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "LA PAILA\\ZAR\\VALL",
+"dir": "CL 11 KR 5 ESQ",
+"tel": "3216205654"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "LA UNION VALLE DEL CAUCA\\VALL\\COL",
+"dir": "KR 13 13 60",
+"tel": "3218012698"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "LA VICTORIA VALLE DEL CAUCA\\VALL\\COL",
+"dir": "CL 8 7 17",
+"tel": "3135618877"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "LOBO GUERRERO(DAGUA)\\DAG\\VALL",
+"dir": "DG AL PEAJE",
+"tel": "3113751355"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "OBANDO\\VALL\\COL",
+"dir": "KR 3 2 75",
+"tel": "3157406925"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "PALMIRA\\VALL\\COL",
+"dir": "KR 28 34 27 LC 2",
+"tel": "3183123499"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "PRADERA\\VALL\\COL",
+"dir": "CL 8 13 53",
+"tel": "3104968554"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "RESTREPO VALLE DEL CAUCA\\VALL\\COL",
+"dir": "CL 9 9 18",
+"tel": "3153124775"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "RIOFRIO\\VALL\\COL",
+"dir": "KR 9 5 72",
+"tel": "3137930782"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "ROLDANILLO\\VALL\\COL",
+"dir": "CL 8 6 63",
+"tel": "3103918824"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "ROZO \\PAL\\VALL",
+"dir": "CL 14 32",
+"tel": "3245100741"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "SAN PEDRO VALLE DEL CAUCA\\VALL\\COL",
+"dir": "KR 6 4 60",
+"tel": "3177601577"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "SEVILLA VALLE DEL CAUCA\\VALL\\COL",
+"dir": "KR 49 49 69",
+"tel": "3215014507"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "TERRANOVA (EL GUAVAL)(JAMUNDI\\JAM\\VALL",
+"dir": "KR 50 SUR 17 A 11",
+"tel": "3116058101"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "TORO\\VALL\\COL",
+"dir": "KR 4 8 77",
+"tel": "3128313883"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "TRUJILLO\\VALL\\COL",
+"dir": "CL 20 20 08",
+"tel": "3104403515"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "TULUA\\VALL\\COL",
+"dir": "CL 30 26 57",
+"tel": "3244935274"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "ULLOA\\VALL\\COL",
+"dir": "KR 3 5 59 LC 2",
+"tel": "3122441319"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "VERSALLES VALLE DEL CAUCA\\VALL\\COL",
+"dir": "KR 6 9 44",
+"tel": "3206148349"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "VIJES\\VALL\\COL",
+"dir": "CL 6 4 54",
+"tel": "3113543639"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "VILLA GORGONA\\CAN\\VALL",
+"dir": "CL 15 10 33",
+"tel": "3242132550"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "YOTOCO\\VALL\\COL",
+"dir": "KR 5 4 11",
+"tel": "3188158957"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "YUMBO\\VALL\\COL",
+"dir": "CL 10 3 19",
+"tel": "3147976623"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "ZARAGOZA (CARTAGO)\\CAR\\VALL",
+"dir": "CL 10 61 62 SEC ZARAGOZA",
+"tel": "3146324992"
+},
+{
+"dep": "VALLE DEL CAUCA",
+"ciudad": "ZARZAL\\VALL\\COL",
+"dir": "CL 11 10 80",
+"tel": "3155582538"
+},
+{
+"dep": "VAUPES",
+"ciudad": "CARURU\\VAUP\\COL",
+"dir": "CL 2 6 22",
+"tel": "3203215695"
+},
+{
+"dep": "VAUPES",
+"ciudad": "MITU\\VAUP\\COL",
+"dir": "AV 15 16 72",
+"tel": "3012266680"
+},
+{
+"dep": "VAUPES",
+"ciudad": "TARAIRA\\VAUP\\COL",
+"dir": "KR 6 4 25",
+"tel": "3125764847"
+},
+{
+"dep": "VICHADA",
+"ciudad": "CUMARIBO\\VICH\\COL",
+"dir": "CL 6 12 70",
+"tel": "3138340176"
+},
+{
+"dep": "VICHADA",
+"ciudad": "LA PRIMAVERA\\VICH\\COL",
+"dir": "CL 6 9 04",
+"tel": "3115291063"
+},
+{
+"dep": "VICHADA",
+"ciudad": "PUERTO CARRENO\\VICH\\COL",
+"dir": "CL 19 10 38",
+"tel": "3226652390"
+},
+{
+"dep": "VICHADA",
+"ciudad": "SANTA ROSALIA\\VICH\\COL",
+"dir": "KR 9 4 22",
+"tel": "3102042381"
+}
+]
