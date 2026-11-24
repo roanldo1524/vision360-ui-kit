@@ -751,3 +751,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - El envío de la 1 p. m. se quedó en cola por reinicios del chat; salió a las 3:19 p. m.: 121 casinos enviados, 0 fallos (de 386 tibios; 65 excluidos por pedido en los últimos 15 días).
 - Casino hoy: 5 ventas, ~$635.000.
 - Página del casino: publicada la v6 (5 tiros que suman, 💣 que resta, selección de producto + cantidad, fondo negro de borde a borde). Falta subir el ajuste que deja espacio para el menú de la tienda (espera aprobación de Shopify).
+- 2026-11-24 3:25 p. m. · Vuelta :19: vetado Elver Manuel Cordero 3234800789 (Necoclí): pidió oficina y luego aceptó resumen a casa; se le preguntó por Lucid casa u oficina (anotado en aclaraciones). El robot cambió 98187382 → 98204762 a transportadora más barata y reconfirmó. Lucid «Faltan campos obligatorios»: Diana María Roldán 573126782321 (Sabaneta, sin departamento) → Karen.
