@@ -746,3 +746,8 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
   - 8 mensajes enviados al CAS (todos OK): 4 escalas nuevas (Envía Medellín «no salió a reparto», Envía Valledupar, Inter Argelia, Inter Icononzo) y 4 respuestas pensadas (Vegachí ampliar custodia, El Paso nuevo intento, Sáchica custodia, Cisneros).
   - Ojo para la otra sesión (casino): a Nubia Reyes le llegó la promo del 10 % el 21-11 teniendo un pedido abierto.
   - Panel v14 publicado.
+
+### 2026-11-24 3:19 p. m. — Casino: envío de la 1 p. m. (salió tarde)
+- El envío de la 1 p. m. se quedó en cola por reinicios del chat; salió a las 3:19 p. m.: 121 casinos enviados, 0 fallos (de 386 tibios; 65 excluidos por pedido en los últimos 15 días).
+- Casino hoy: 5 ventas, ~$635.000.
+- Página del casino: publicada la v6 (5 tiros que suman, 💣 que resta, selección de producto + cantidad, fondo negro de borde a borde). Falta subir el ajuste que deja espacio para el menú de la tienda (espera aprobación de Shopify).
