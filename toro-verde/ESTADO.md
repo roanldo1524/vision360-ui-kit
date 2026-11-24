@@ -704,6 +704,7 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-24 8:55 a. m. (Bogotá): confirmados 2 (fichas leídas antes): Usbal Álvarez 3238255891 (98143495, litro $99.000, oficina Interrapidísimo San Carlos-Antioquia; 7 entregados/2 devueltos; flete $24.795) y Edgar Melo Guerra 3106117722 (98143198, litro, oficina Interrapidísimo El Tambo-Nariño; nuevo; «Por favor envíalo»). Hoy van 5 confirmados por el robot.
 - 2026-11-24 9:05 a. m. (Bogotá): QUEJAS CAS vuelta 8:47: 11 quejas nuevas (6 Interrapidísimo, 5 Envía). De las 31 de ayer, 10 guías ya se movieron y 21 siguen quietas (el seguimiento sale solo cuando cumplan 48 h desde la queja). 1 falla sin importancia (95829623, caso viejo de Karen ya cerrado).
 - 2026-11-24 9:10 a. m. (Bogotá): confirmado Anibal Pillimue Herrera 3178018215 (98147592, litro $99.000, oficina Interrapidísimo Piendamó-Cauca; nuevo; «Sí, está bien, está correcto»; dice que luego pedirá una poma). Van 6 del robot hoy.
+- 2026-11-24 9:25 a. m. (Bogotá): confirmada Hilda Arias 3125835038 (98149043, 2 litros $169.000, Carrera 6 # 7A-28 Los Senderos, Nátaga-Huila; 36 entregados/1 devuelto; «Si»; flete $28.645 ≤ tope 2 L). Van 7 del robot hoy.
 - 2026-11-23 6:25 p. m. (Bogotá): arreglado un fallo del candado: la segunda vuelta del robot (cuando edita un pedido y lo vuelve a revisar) se bloqueaba sola con ROBOT_OCUPADO. Confirmado Neris Oyola Martínez (Caucasia, galón, Shopify con CONFIRMAR PEDIDO hoy, 16 entregados).
 
 ### 2026-11-23 8:14 p. m. — Casino: empujón de urgencia
