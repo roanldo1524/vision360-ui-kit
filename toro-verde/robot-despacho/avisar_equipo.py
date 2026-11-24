@@ -10,10 +10,14 @@ REG = '/tmp/dropi/avisos_equipo.json'; reg = json.load(open(REG)) if os.path.exi
 def get(p): r = json.loads(urllib.request.urlopen(urllib.request.Request(API + p, headers={'X-ACCESS-TOKEN': K}), timeout=40).read()); return r.get('data', r) if isinstance(r, dict) else r
 def post(p, b=None): return urllib.request.urlopen(urllib.request.Request(API + p, data=json.dumps(b or {}).encode(), headers={'X-ACCESS-TOKEN': K, 'Content-Type': 'application/json'}, method='POST'), timeout=40).read().decode()
 def campo(c, f, v): return urllib.request.urlopen(urllib.request.Request(f'{API}/contacts/{c}/custom_fields/{f}', data=urllib.parse.urlencode({'value': v}).encode(), headers={'X-ACCESS-TOKEN': K, 'Content-Type': 'application/x-www-form-urlencoded'}, method='POST'), timeout=40).read()
+# Ronald 24-11: «notificas mucho por WhatsApp; solo al abrir el día y a las 9 de la noche un reporte (reporte.py)… Karen revisa por etiquetas».
+# Por eso el resumen de cada vuelta YA NO se manda. Solo sale al momento el comprobante de un anticipo (💰), que es plata por validar.
+for v in reg.values(): v['pendiente'] = [x for x in v.get('pendiente', []) if x.startswith('💰')]
+if not any(v['pendiente'] for v in reg.values()): json.dump(reg, open(REG, 'w'), ensure_ascii=False); print('AVISO apagado (solo reporte 7 a. m. y 9 p. m.)'); raise SystemExit
 plan = json.load(open('/tmp/dropi/plan.json'))
 conf = plan.get('confirmar', []); nuevos = plan.get('etiquetar', []); total_rev = len(plan.get('revisar_total', []))
 vet = [l.split('\t') for l in open('/tmp/dropi/vetados.txt').read().splitlines()] if os.path.exists('/tmp/dropi/vetados.txt') else []
-novedad = bool(conf or nuevos or vet)
+novedad = False  # el resumen de la vuelta ya no se envía (ver arriba)
 if not novedad and not any(v.get('pendiente') for v in reg.values()): print('AVISO sin novedades'); raise SystemExit
 hora = (datetime.datetime.utcnow() - datetime.timedelta(hours=5)).strftime('%I:%M %p').lstrip('0').lower()
 t = f"🤖 Robot de despacho · {hora}\n✅ Confirmados: {len(conf)}"
