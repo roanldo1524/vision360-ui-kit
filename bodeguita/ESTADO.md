@@ -167,6 +167,10 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   producto con el precio. Respaldo: bdg/botf/456432_antes_quieropremio_*.json.
 - Envío 24-nov 10:15 a. m. (mensaje v2): 482 tibios, 93 ya compraron, 146 ya lo recibieron en 3 días → 243 para enviar,
   **242 enviados, 0 fallos** (1 escribió en las últimas 6 h y se saltó).
+- 24-nov 11:00: 626 recibieron (384 + 242); 1 pedido posible (afilador, sin código). De los 242 de hoy, 1 respondió
+  «¿cómo hago para jugar?» y el bot le explicó el USO del afilador: el bot NO puede leer el texto debajo de la foto
+  (para él es solo una imagen). Arreglo: regla 0 ahora reconoce «jugar / casino / ruleta / tiros / premio / el 10%»
+  y sabe que una imagen enviada + esas palabras = casino. Respaldo bdg/botf/456432_antes_jugar_*.json.
 - Ronald (24-nov): en este chat SOLO datos de La Bodeguita; no compararla ni mencionar Toro Verde.
 - Pendiente técnico: la foto de la máquina y los sonidos del casino todavía se cargan desde el almacenamiento de
   Shopify de otra tienda (no se ve marca). Pasarlos a un alojamiento propio de La Bodeguita.
