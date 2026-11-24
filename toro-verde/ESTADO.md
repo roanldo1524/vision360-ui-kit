@@ -734,3 +734,15 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - El total sigue siendo el 10 % (galón $26.900, 2 L $16.900, 1 L $9.900), código RULETA10: el bot no cambia.
 - Publicado en toroverde.co/pages/premios y probado en celular (sin errores). Clarity: etiqueta casino=v5 para comparar con la v3.
 - Mensajes de WhatsApp del casino (envío y recordatorio) y las 2 fotos para el grupo de la comunidad ahora dicen «5 tiros».
+
+- 2026-11-24 3:30 p. m. (Bogotá) · Agente de confirmación y posventa (se juntaron las vueltas de 12:19 a 3:04 por un reinicio de la máquina):
+  - Confirmados por el robot (fichas leídas): Hernando Riveros 3107551264 (1 L, Gutiérrez), José Valderrama 3212056733 (galón, Palestina-Huila), José Betancour 3234770981 (2 L, San Carlos de Guaroa), Arley Bolaños 3142548889 (1 L, La Cruz), Aider Castro 3150108828 (1 L con 10 %, cliente nuevo, San Alberto). 3 de ellos ya los había confirmado Karen. Todos en oficina Interrapidísimo y flete dentro del tope.
+  - Devoluciones injustificadas: 157 leídas, 0 nuevas que cumplan las causales de Dropi (no se creó ticket hoy).
+  - CAS, respuestas de asesores humanos de Interrapidísimo a las 31 escalas de ayer:
+    - En oficina, avisar al cliente (chat cerrado, sin plantilla para clientes → Karen): Luis Ernesto Cárdenas 3017884728 (Vegachí, CRA 50 53 98, ¡desde el 17/11!), Gustavo Grisales 3001225351 (Pácora, CRA 3 6 62), Diego Rendón 3148762583 (Doradal, CLL 23 25 30), Deisy Pasu 3225157397 (Corinto, Calle 7 # 9-35), Denis Muelas (Silvia, «reclame en oficina»).
+    - 3 intentos fallidos: Lacides Manjarres 3173773899 (El Paso) y Nubia Reyes 3118854504 (Sáchica). Se pidió nuevo intento o custodia en oficina, sin devolución.
+    - Entregados: 97438565 y 97328652. «Se genera recomendación / se escala novedad»: 97041134, 97177009, 97190484, 97559625, 97591259 (revisar en 24 h).
+    - Cisneros (Roberto Pérez 3128212711): el asesor repitió «disponible en oficina». Se volvió a pedir custodia máxima y la fecha límite, o que reclame un familiar con carta de autorización.
+  - 8 mensajes enviados al CAS (todos OK): 4 escalas nuevas (Envía Medellín «no salió a reparto», Envía Valledupar, Inter Argelia, Inter Icononzo) y 4 respuestas pensadas (Vegachí ampliar custodia, El Paso nuevo intento, Sáchica custodia, Cisneros).
+  - Ojo para la otra sesión (casino): a Nubia Reyes le llegó la promo del 10 % el 21-11 teniendo un pedido abierto.
+  - Panel v14 publicado.
