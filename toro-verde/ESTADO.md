@@ -754,3 +754,6 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-24 3:25 p. m. · Vuelta :19: vetado Elver Manuel Cordero 3234800789 (Necoclí): pidió oficina y luego aceptó resumen a casa; se le preguntó por Lucid casa u oficina (anotado en aclaraciones). El robot cambió 98187382 → 98204762 a transportadora más barata y reconfirmó. Lucid «Faltan campos obligatorios»: Diana María Roldán 573126782321 (Sabaneta, sin departamento) → Karen.
 - 2026-11-24 3:55 p. m. · Confirmado Eduar Estrada 3148969515 (2 L, oficina San Marcos-Sucre, 3/4 entregados). Ronda de quejas de la tarde: 3 a Envía (nuevas: Santa Marta 97724066, Socorro 96471126; seguimiento: Barranquilla 95829623), 0 fallas.
 - 2026-11-24 4:10 p. m. · Confirmados: Alejandra Zapata (pedido de Albeiro) 3012053728 (2 L, Rionegro, teléfono del chat puesto en Dropi), Carmelo Areniz 3202341054 (galón, oficina Fortul, 8/9 entregados), Daider Hernández 3113717130 (1 L, oficina Guadalupe-Ant).
+
+### 2026-11-24 4:14 p. m. — Casino: envío de las 4 p. m.
+- 22 casinos enviados, 0 fallos (casi todos los tibios del día ya lo recibieron a la 1 p. m.). Casino hoy: 6 ventas, ~$734.000.
