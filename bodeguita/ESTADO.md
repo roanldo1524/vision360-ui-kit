@@ -172,6 +172,11 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   (para él es solo una imagen). Arreglo: regla 0 ahora reconoce «jugar / casino / ruleta / tiros / premio / el 10%»
   y sabe que una imagen enviada + esas palabras = casino. Respaldo bdg/botf/456432_antes_jugar_*.json.
 - 24-nov 11:05: con el sí de Ronald se le mandó a …4009 el premio directo (afilador $116.100 en vez de $129.000). Revisado antes: no tiene pedidos.
+- Ronald (24-nov): en los pedidos del casino el valor debe quedar CON el descuento (para que la asesora lo vea y a Dropi
+  suba ese valor). Regla 0, punto 5: precio, subtotal y «Total pedido» siempre con el 10 % descontado + nota
+  «CASINO BODEGUITA10 – precio con 10%: $X (normal $Y)». Respaldo bdg/botf/456432_antes_preciodropi_*.json.
+  Falta comprobarlo con el primer pedido real del casino. Para que yo suba o confirme en Dropi hace falta acceso a la
+  cuenta de Dropi de La Bodeguita (aún no lo hay).
 - Ronald (24-nov): en este chat SOLO datos de La Bodeguita; no compararla ni mencionar Toro Verde.
 - Pendiente técnico: la foto de la máquina y los sonidos del casino todavía se cargan desde el almacenamiento de
   Shopify de otra tienda (no se ve marca). Pasarlos a un alojamiento propio de La Bodeguita.
