@@ -42,6 +42,11 @@ if 7 <= h < 21:
         partes = [p.strip() for p in a['motivo'].split(';') if p.strip()]
         if not partes or not all(DEVUELVE.search(p) for p in partes): continue  # solo si el ÚNICO problema es que devuelve
         d = det.get(a['id'], {}); c = d.get('chat') or '57' + d.get('phone', '')
+        # Ronald 24-11: «no puedes mandar a clientes que tienen buena entrega, solo a clientes con devoluciones altas, más del 50 %».
+        # Se mira el historial COMPLETO del cliente en Dropi (todas las tiendas), no solo una transportadora o la etiqueta de riesgo.
+        lt = (((d.get('huella') or {}).get('global_profile') or {}).get('lifetime_totals') or {})
+        ent, dev = int(lt.get('delivered') or 0), int(lt.get('returned') or 0)
+        if ent + dev == 0 or dev / (ent + dev) <= 0.5: continue
         if c in reg: continue
         try:
             info = get(f'/contacts/{c}')
