@@ -165,6 +165,8 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
 - Cambio 1 (24-nov 10:15): mensaje v2 que explica en una línea y da 2 caminos: jugar en el enlace o responder
   «QUIERO MI PREMIO». Bot (regla 0, campo 456432) reconoce «QUIERO MI PREMIO» / «cómo se juega» y da el 10 % del último
   producto con el precio. Respaldo: bdg/botf/456432_antes_quieropremio_*.json.
+- Envío 24-nov 10:15 a. m. (mensaje v2): 482 tibios, 93 ya compraron, 146 ya lo recibieron en 3 días → 243 para enviar,
+  **242 enviados, 0 fallos** (1 escribió en las últimas 6 h y se saltó).
 - Ronald (24-nov): en este chat SOLO datos de La Bodeguita; no compararla ni mencionar Toro Verde.
 - Pendiente técnico: la foto de la máquina y los sonidos del casino todavía se cargan desde el almacenamiento de
   Shopify de otra tienda (no se ve marca). Pasarlos a un alojamiento propio de La Bodeguita.
