@@ -723,3 +723,9 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 ### 2026-11-24 10:15 a. m. — Casino: envío de la mañana
 - Salieron ~281 casinos (el registro pasó de 2.879 a 3.160); el envío se cortó por tiempo (15 min) antes de terminar la lista. El de la 1 p. m. sigue con los que faltan.
 - Ventas del casino hoy: 3 pedidos, ~$437.000. Ayer cerró en 11 pedidos, ~$1.571.000. Acumulado desde el 18-11: 84 pedidos, ~$14,5 millones.
+
+### 2026-11-24 11 a. m. — Casino v5: 5 tiros que van sumando (Ronald: «más dopamínico, que vayan ganando de poquito y sumando, que no se sienta marketing sino real»)
+- Antes: 3 tiros, perdía 2 y ganaba de una ($26.900). Ahora: 5 tiros con premios irregulares que se acumulan en la pantalla (ej. +$3.400 → nada → +$6.800 → +$4.300 → 7-7-7 = $26.900). Un tiro sin premio (casi gana) para que se sienta real. Dos jugadas distintas al azar por persona (no todos ven lo mismo).
+- El total sigue siendo el 10 % (galón $26.900, 2 L $16.900, 1 L $9.900), código RULETA10: el bot no cambia.
+- Publicado en toroverde.co/pages/premios y probado en celular (sin errores). Clarity: etiqueta casino=v5 para comparar con la v3.
+- Mensajes de WhatsApp del casino (envío y recordatorio) y las 2 fotos para el grupo de la comunidad ahora dicen «5 tiros».
