@@ -757,3 +757,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 
 ### 2026-11-24 4:14 p. m. — Casino: envío de las 4 p. m.
 - 22 casinos enviados, 0 fallos (casi todos los tibios del día ya lo recibieron a la 1 p. m.). Casino hoy: 6 ventas, ~$734.000.
+- 2026-11-24 4:30 p. m. · Vuelta :19: confirmados Ilberto Pedroza 3133542367 (galón, El Dorado-Meta, 11/11), Myriam Campiño 3103958374 (1 L, Versalles), Samuel Uribe 3107552361 (1 L, oficina Alpujarra), Marco Aurelio Gómez 3142279243 (2 L, oficina Cajamarca). Vetado Lució/Eduardo Perdomo 3102240043 (galón, Bogotá «oficina principal» viviendo en Bosa): se le preguntó qué oficina le queda cerca. Lucid: subido 573133542367. Elver (Necoclí) aún sin responder.
