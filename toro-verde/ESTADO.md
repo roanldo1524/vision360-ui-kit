@@ -719,3 +719,7 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - Lucid «Error al subir»: Estiven Quiñones 3205699491 (El Tambo, litro, oficina) no sube: falta el departamento (El Tambo existe en Cauca y Nariño). Lo sube una persona.
 - Medición del día: salieron 73 pedidos, el robot confirmó 37 (50 %). Lo que más frenó pedidos buenos: «no escribió confirmar en el chat» (5 de 7 los aprobó una persona) y «dirección sin número» (3 de 6). Entrega por semana (persona): S44 87 %, S45 91 %, S46 95 %. Los del robot (desde S47) siguen en camino: 125 + 21, aún sin entregados ni devueltos para medir.
 - Reglas sin cambios (decisión de Ronald 23-11).
+
+### 2026-11-24 10:15 a. m. — Casino: envío de la mañana
+- Salieron ~281 casinos (el registro pasó de 2.879 a 3.160); el envío se cortó por tiempo (15 min) antes de terminar la lista. El de la 1 p. m. sigue con los que faltan.
+- Ventas del casino hoy: 3 pedidos, ~$437.000. Ayer cerró en 11 pedidos, ~$1.571.000. Acumulado desde el 18-11: 84 pedidos, ~$14,5 millones.
