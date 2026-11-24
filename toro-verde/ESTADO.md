@@ -768,3 +768,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - Embudo de 642 casinos enviados (48 h): 43 respondieron (7 %) → 8 reclamaron el premio → 8 pedidos. 599 no respondieron nada (93 %): la pérdida grande está antes de jugar o al salir del juego.
 - 3 reclamaron y no tienen pedido (contactos 1131797309663906, 573122368540, 573105089905) y 11 escribieron con interés (precio, ciudad, «me interesa») sin cerrar: lista para el equipo.
 - Objeción que más se repite: «muy costoso» (6 personas). El mensaje del casino no muestra lo que rinde el producto.
+- 2026-11-24 5:40 p. m. · Confirmados: Celidonio Gómez 3116384720 (galón, oficina El Tambo; vive en vereda y recoge el sábado 5-12: si la guía queda en oficina, pedir custodia por CAS), Juan Carlos González 3126622919 (galón Shopify, Tuluá, 1/1).
