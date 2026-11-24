@@ -700,3 +700,10 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 ### 2026-11-23 8:14 p. m. — Casino: empujón de urgencia
 - Recordatorio de las 8 p. m. enviado a 150 personas (de 357 que recibieron el casino hoy y no han pedido).
 - Ventas del casino hoy: 10 pedidos, ~$1.472.000. Acumulado desde el 18-11: 81 pedidos, ~$14,2 millones (pedidos hechos después de recibir el casino).
+
+### 2026-11-23 8:19 p. m. — Robot: vuelta completa + medición del día
+- Confirmados por el robot en las vueltas de la noche: César Carmona (Lorica, galón, oficina), Nelson Tamayo (Argelia, galón, oficina), Aymer Meneses (Saladoblanco, galón, oficina), Yobanny Vargas (Zetaquira, galón, oficina).
+- Vetado: Jesús Enrique Salazar 3118027156 (Ginebra, 2 litros): pidió cambiar a oficina de Interrapidísimo y no ha confirmado el cambio.
+- Lucid «Error al subir»: Estiven Quiñones 3205699491 (El Tambo, litro, oficina) no sube: falta el departamento (El Tambo existe en Cauca y Nariño). Lo sube una persona.
+- Medición del día: salieron 73 pedidos, el robot confirmó 37 (50 %). Lo que más frenó pedidos buenos: «no escribió confirmar en el chat» (5 de 7 los aprobó una persona) y «dirección sin número» (3 de 6). Entrega por semana (persona): S44 87 %, S45 91 %, S46 95 %. Los del robot (desde S47) siguen en camino: 125 + 21, aún sin entregados ni devueltos para medir.
+- Reglas sin cambios (decisión de Ronald 23-11).
