@@ -149,7 +149,7 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   Manda sobre las reglas de descuento 14, 24, 86 y 96; 10 % solo sobre lo que trae el mensaje; nota «CASINO BODEGUITA10».
   Lectura: GET /accounts/bot_fields/456432. Escritura: POST /accounts/bot_fields/456432 con FORMULARIO (value=…);
   con JSON da 400. Respaldo: scratchpad bdg/botf/456432_antes_casino_*.json. Las otras 109 reglas quedaron iguales.
-- Primer envío real lanzado a las 8:40 p. m. (--enviar --max 400).
+- Primer envío real 23-nov 8:40 p. m.: 445 tibios de 6–23 h, 61 ya habían comprado (fuera) → **384 enviados, 0 fallos**.
 - Tarea programada «Casino La Bodeguita 10 a. m. y 4 p. m.» (trig_01G3woJafayZRfv8QHcMHaD6, 10:07 y 16:07 Bogotá):
   envía, mide con casino_medir.py, anota aquí y le reporta a Ronald.
 - casino_medir.py: pedidos de 705299 creados después del envío (hasta 3 días). created_at de Lucid viene en UTC.
