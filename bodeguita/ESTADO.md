@@ -177,6 +177,10 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   «CASINO BODEGUITA10 – precio con 10%: $X (normal $Y)». Respaldo bdg/botf/456432_antes_preciodropi_*.json.
   Falta comprobarlo con el primer pedido real del casino. Para que yo suba o confirme en Dropi hace falta acceso a la
   cuenta de Dropi de La Bodeguita (aún no lo hay).
+- 24-nov 4:07 p. m.: 332 tibios, 55 ya compraron → **95 enviados, 0 fallos**. Total casino: 721 recibieron.
+  Ventas después del casino: 2 pedidos a precio normal (afilador $129.000 y cubre canas $69.900 = $198.900), 0 con el
+  código. Respuestas: casi ninguna (7 de 626). casino_medir.py marca $0 porque esos pedidos no traen «Total» en el título.
+  Propuesta a Ronald: cambio 2 = premio directo sin juego («hoy en $X en vez de $Y, responde SÍ»).
 - Ronald (24-nov): en este chat SOLO datos de La Bodeguita; no compararla ni mencionar Toro Verde.
 - Pendiente técnico: la foto de la máquina y los sonidos del casino todavía se cargan desde el almacenamiento de
   Shopify de otra tienda (no se ve marca). Pasarlos a un alojamiento propio de La Bodeguita.
