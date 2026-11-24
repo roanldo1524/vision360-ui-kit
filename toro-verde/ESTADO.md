@@ -762,3 +762,9 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 2026-11-24 4:40 p. m. · Confirmado Armando Cucuñame 3105044182 (galón, oficina Morales-Cauca, 4/4 entregados).
 - 2026-11-24 4:55 p. m. · Confirmado Héctor Naranjo 3156648469 (1 L, oficina La Cumbre-Valle, 2/2 entregados).
 - 2026-11-24 5:30 p. m. · Vuelta :19: confirmados Nelson Vera 3203909279 (1 L, oficina Briceño), Luz Marina Yatacue 3176509516 (2 L, oficina Morales, 13/19 entregados), Henrique Narváez (1 L, Cali; teléfono corregido a 3122570234 según el chat; solo hay quien reciba hasta el sábado 28). Lucid: subidos 573176509516 y 573203909279; «Faltan campos obligatorios» 573106459456 → Karen.
+
+### 2026-11-24 5:40 p. m. — Casino: dónde se pierden las ventas (últimas 48 h)
+- Publicado el arreglo de la página (la parte de arriba ya no queda tapada por el menú de la tienda).
+- Embudo de 642 casinos enviados (48 h): 43 respondieron (7 %) → 8 reclamaron el premio → 8 pedidos. 599 no respondieron nada (93 %): la pérdida grande está antes de jugar o al salir del juego.
+- 3 reclamaron y no tienen pedido (contactos 1131797309663906, 573122368540, 573105089905) y 11 escribieron con interés (precio, ciudad, «me interesa») sin cerrar: lista para el equipo.
+- Objeción que más se repite: «muy costoso» (6 personas). El mensaje del casino no muestra lo que rinde el producto.
