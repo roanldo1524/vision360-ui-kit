@@ -143,6 +143,21 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
 - HALLAZGO: el bot de posventa responde «mi función es el seguimiento de tu pedido y no gestiono ventas» cuando un
   cliente que ya compró pregunta por otro producto (ej. …9410 pidió info del detector). Venta perdida: arreglar.
 
+## ARRANCÓ (2026-11-23 8:40 p. m. Bogotá) — Ronald: «sí, empecemos, full al casino»
+- Ronald aprobó la foto con texto en un solo mensaje → casino_envio.py manda 1 mensaje (imagen con pie de foto).
+- Bot: nueva regla «0 - CASINO LA BODEGUITA (BODEGUITA10)» al inicio de Reglas_adicionales2_LucidSales (bot field 456432).
+  Manda sobre las reglas de descuento 14, 24, 86 y 96; 10 % solo sobre lo que trae el mensaje; nota «CASINO BODEGUITA10».
+  Lectura: GET /accounts/bot_fields/456432. Escritura: POST /accounts/bot_fields/456432 con FORMULARIO (value=…);
+  con JSON da 400. Respaldo: scratchpad bdg/botf/456432_antes_casino_*.json. Las otras 109 reglas quedaron iguales.
+- Primer envío real lanzado a las 8:40 p. m. (--enviar --max 400).
+- Tarea programada «Casino La Bodeguita 10 a. m. y 4 p. m.» (trig_01G3woJafayZRfv8QHcMHaD6, 10:07 y 16:07 Bogotá):
+  envía, mide con casino_medir.py, anota aquí y le reporta a Ronald.
+- casino_medir.py: pedidos de 705299 creados después del envío (hasta 3 días). created_at de Lucid viene en UTC.
+- RIESGO: enviados.json (a quién y cuándo se mandó) vive solo en el contenedor y NO se sube (tiene teléfonos y el
+  repo es público). Si el contenedor se borra se pierde el «no repetir en 3 días» y la medición. Pendiente: guardarlo
+  en Lucid (etiqueta o campo por contacto).
+- Pendiente: aviso de las 9 p. m. («vence a medianoche») para La Bodeguita; arreglar la posventa que dice «no gestiono ventas».
+
 ## Lo que sigue (cuando llegue lo anterior)
 2. Buscar en Lucid el embudo de pedidos y el campo del anuncio de La Bodeguita.
 3. Página `/pages/premios` en la tienda de La Bodeguita + subir foto y sonidos.

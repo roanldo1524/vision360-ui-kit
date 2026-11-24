@@ -219,9 +219,9 @@ for i, (c, nom, p) in enumerate(lista[:MAX]):
     s = f"¡Hola {n}! 👋" if n else "¡Hola! 👋"
     txt = random.choice(MENSAJES).format(s=s, u=u, prod=nb.lower())
     try:
+        # Un solo mensaje: la foto con el texto debajo (pie de foto). Ronald lo aprobó el 24-nov.
         r = post(f'/contacts/{c}/send_content', {'messages': [
-            {'message': {'attachment': {'type': 'image', 'payload': {'url': IMAGEN}}}},
-            {'message': {'text': txt}}]})
+            {'message': {'attachment': {'type': 'image', 'payload': {'url': IMAGEN, 'caption': txt}}}}]})
         if 'true' in json.dumps(r).lower():
             ok += 1
             if not PRUEBA:
