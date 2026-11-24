@@ -197,9 +197,8 @@ if '--mostrar' in sys.argv:  # muestra qué producto y premio le tocaría a los 
 if not (ENVIAR or PRUEBA):
     sys.exit(0)
 
-MENSAJES = [
-    "{s} 🎰 *Hoy juegas GRATIS en el Casino La Bodeguita*\n\nTienes 3 tiros para ganar *hasta 10% de descuento* en tu {prod} 💰\n\n👉 *Toca aquí y juega:* {u}\n\n⏰ Tus tiros vencen hoy a medianoche",
-    "{s} 💰 *Te regalamos 3 tiros gratis* en la máquina de La Bodeguita\n\nPuedes ganar *hasta 10% de descuento* en tu {prod} 🎰\n\n👉 *Juega aquí:* {u}\n\n⏰ Solo por hoy · Pagas al recibir",
+MENSAJES = [  # v2 (24-nov): explica en una línea y da 2 caminos; anoche 2 preguntaron «¿cómo se juega?»
+    "{s} 🎁 *Te ganaste 3 tiros GRATIS* en el Casino La Bodeguita: puedes llevarte *10% de descuento* en tu {prod} 💰\n\n🎰 Juega aquí (toca el enlace): {u}\n\n💬 ¿Sin tiempo para jugar? Responde *QUIERO MI PREMIO* y te lo aplico de una.\n\n⏰ Vence hoy a medianoche · Pagas al recibir",
 ]
 ok = fail = 0
 for i, (c, nom, p) in enumerate(lista[:MAX]):

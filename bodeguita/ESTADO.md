@@ -158,6 +158,17 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   en Lucid (etiqueta o campo por contacto).
 - Pendiente: aviso de las 9 p. m. («vence a medianoche») para La Bodeguita; arreglar la posventa que dice «no gestiono ventas».
 
+## Resultados del casino
+- 24-nov 10:09 a. m. — Envío del 23-nov (8:48 p. m., 384): 377 no respondieron, 6 respondieron (2 «¿cómo se juega?»,
+  1 «¿qué es eso?», 1 «hasta el 5 no me pagan», 1 pidió info, 1 automático). 0 escribieron «gané». 1 pedido después
+  (1 afilador, sin código: no se sabe si vino del casino). El mensaje del casino sale en Lucid como «[Complex Message]».
+- Cambio 1 (24-nov 10:15): mensaje v2 que explica en una línea y da 2 caminos: jugar en el enlace o responder
+  «QUIERO MI PREMIO». Bot (regla 0, campo 456432) reconoce «QUIERO MI PREMIO» / «cómo se juega» y da el 10 % del último
+  producto con el precio. Respaldo: bdg/botf/456432_antes_quieropremio_*.json.
+- Ronald (24-nov): en este chat SOLO datos de La Bodeguita; no compararla ni mencionar Toro Verde.
+- Pendiente técnico: la foto de la máquina y los sonidos del casino todavía se cargan desde el almacenamiento de
+  Shopify de otra tienda (no se ve marca). Pasarlos a un alojamiento propio de La Bodeguita.
+
 ## Lo que sigue (cuando llegue lo anterior)
 2. Buscar en Lucid el embudo de pedidos y el campo del anuncio de La Bodeguita.
 3. Página `/pages/premios` en la tienda de La Bodeguita + subir foto y sonidos.
