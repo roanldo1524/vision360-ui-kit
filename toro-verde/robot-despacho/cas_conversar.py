@@ -25,3 +25,16 @@ json.dump({'responder': responder, 'escalar': escalar}, open('/tmp/dropi/cas_pen
 print('RESPONDER', len(responder), '· ESCALAR', len(escalar))
 for x in responder: print(' R', x['pedido'], x['dc'], x['estado'], (x.get('asesor') or '')[:20], '|', (x.get('ult') or '').replace('\n', ' ')[:160])
 for x in escalar[:40]: print(' E', x['pedido'], x['dc'], x['estado'])
+
+# Guía de razonamiento que el agente lee en cada ronda (Ronald 24-11: «tú eres un experto en logística, hacer mejor las cosas que Karen,
+# buscar alternativas para evitar que lo devuelvan, siempre»).
+print('''
+GUÍA (experto en logística: que se ENTREGUE y NUNCA se devuelva si hay otra salida):
+ · Antes de responder, lee la conversación del CAS (cas_hilo.js) Y el chat del cliente en Lucid (viaje, otra dirección, horario, otro teléfono).
+ · Disponible en oficina → avisa al cliente (dirección, cédula original, horario, pago contra entrega). Si no puede ir: pide a la
+   transportadora ampliar la custodia, permitir que lo reclame un familiar con carta de autorización y copia de la cédula, o pasarlo a domicilio.
+ · Novedad / va a devolución → antes de aceptarlo, pide un NUEVO OFRECIMIENTO con el teléfono y la dirección correctos del chat.
+ · En reparto / programado → agradece y pide fecha; si a las 24 h sigue igual, seguimiento.
+ · Solo repite el estado → responde con respeto que no ha cambiado en X horas y pide gestión concreta y fecha.
+ · Pide datos → dáselos (Dropi o chat). Si el chat del cliente está cerrado, anota para Karen el dato exacto a pedirle.
+ · Tono Karen: formal, corto, concreto, agradece. Un mensaje pensado por caso, nunca copiar y pegar.''')
