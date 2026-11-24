@@ -11,8 +11,10 @@ def node(*a, t=240):
     return out[-1] if out else 'ERROR sin salida'
 # Mensajes con la redacción de Karen (así logra que la IA de Dropi pase el caso a un asesor humano).
 def humano(q):
-    return (f"Solicitamos por favor su intervención, con el fin de agilizar los procesos internos pendientes y permitir que la guía {q['guia']} continúe su movimiento hasta llegar a destino. "
-            f"Lleva {q['horas']} horas en «{q['estado'][:30]}» desde el {q['desde']} sin ningún cambio. Agradecemos su pronta gestión y apoyo para evitar mayores retrasos.")
+    return (f"Buen día. Solicitamos por favor la atención de un asesor: la guía {q['guia']} de {q['dc'].title()} sigue en «{q['estado'][:30].title()}» desde el {q['desde']}, "
+            f"{q['horas']} horas sin ningún movimiento, y la consulta automática solo repite el mismo estado. Pedimos verificar con la transportadora dónde está el paquete, "
+            f"gestionar la entrega al destinatario y darnos una fecha estimada. Si el paquete ya está disponible en oficina, por favor indicarnos la dirección para avisarle al cliente. "
+            f"Agradecemos su pronta gestión.")
 def seguir(q):
     return (f"Buen día. Seguimos sin movimiento en la guía {q['guia']}: {q['horas']} horas en «{q['estado'][:30]}» desde el {q['desde']}. "
             f"Solicitamos por favor su intervención con {q['dc']} para agilizar la entrega al destinatario. Agradecemos su pronta gestión y apoyo para evitar mayores retrasos.")
