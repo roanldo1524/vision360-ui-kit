@@ -65,7 +65,7 @@ body{margin:0;background:var(--noche);color:var(--texto);font-family:var(--cuerp
 </style>
 
 <canvas id="escena" aria-label="Edificio 3D con los agentes de Toro Verde"></canvas>
-<header id="marca" class="vidrio"><div class="logo">TV</div><div><h1>Torre Toro Verde</h1><p><span class="punto"></span>Agentes en vivo · <span id="act"></span></p></div></header>
+<header id="marca" class="vidrio"><div class="logo">TV</div><div><h1>Torre Toro Verde · Logística</h1><p><span class="punto"></span>Agentes en vivo · <span id="act"></span></p></div></header>
 <section id="reloj" class="vidrio" aria-label="Hoy">
   <div class="hora" id="hora">--:--</div><div class="fecha" id="fecha"></div>
   <div class="cifras">
@@ -200,6 +200,7 @@ const mastil = new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,5,8), columnaMa
 const faro = new THREE.Mesh(new THREE.SphereGeometry(.3,12,12), new THREE.MeshBasicMaterial({color:'#3ccf7e'})); faro.position.y = techo.position.y + 5.1; torre.add(faro);
 const letrero = etiqueta('TORO VERDE · vendido hoy ' + pesos(DATOS.vendido), '#3ccf7e', 1024); letrero.scale.set(16, 1.5, 1); letrero.position.y = techo.position.y + 1.6; torre.add(letrero);
 controls.target.set(0, (pisos.length*ALTO)/2, 0);
+const lejos = 14 + pisos.length*ALTO*1.25; camera.position.set(lejos*.72, pisos.length*ALTO*.75, lejos); controls.maxDistance = Math.max(90, lejos*1.8);
 
 // ---------- Paneles ----------
 let elegido = pisos[pisos.length-1];

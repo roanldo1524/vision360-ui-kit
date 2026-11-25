@@ -55,48 +55,55 @@ except Exception:
 # horario: minutos de la hora en que trabaja (hora Bogotá) y horas del día
 A = lambda **k: k
 pisos = [
-    A(n=4, nombre='Reportes', area='Lo que ve el equipo', color='#7aa6ff', agentes=[
-        A(id='reportero', nombre='Reportero de WhatsApp', hace='Manda 2 reportes al día al equipo: robot vs humano, novedades y tickets',
-          horas=[6, 20], min=[57], dato=f"{rep.get('conf_robot', 0)} robot · {rep.get('conf_humano', 0)} Karen (ayer)"),
-        A(id='medidor', nombre='Medidor', hace='Mide % confirmado por el robot y % entregado por semana',
-          horas=list(range(5, 21)), min=[19], dato='panel publicado cada hora'),
+    A(n=7, nombre='Líder de Logística', area='Que toda el área funcione y avisar a tiempo si algo se cae', color='#7aa6ff', agentes=[
+        A(id='reportero', nombre='Reportes del día', hace='2 reportes por WhatsApp (7 a. m. y 9 p. m.): robot vs Karen, novedades, tickets',
+          horas=[6, 20], min=[57], dato=f"ayer: {rep.get('conf_robot', 0)} robot · {rep.get('conf_humano', 0)} Karen"),
+        A(id='medidor', nombre='Panel y torre', hace='Publica el panel y esta torre cada hora con los números reales',
+          horas=list(range(5, 21)), min=[19], dato='publicados cada hora'),
+        A(id='salud', nombre='Chequeo de que todos trabajaron', hace='Revisa que cada cargo corrió a su hora y relanza al que falló',
+          horas=[], min=[], dato='por construir'),
     ]),
-    A(n=3, nombre='Logística', area='Del despacho a la entrega, fase por fase', color='#f2a33a', agentes=[
-        A(id='represados', fase='1 · Despacho', nombre='Vigía de represados', hace='Avisa los pedidos confirmados que llevan horas sin guía generada',
-          horas=[], min=[], dato='en construcción'),
-        A(id='vigia', fase='2 · En camino', nombre='Vigía de guías quietas', hace='Lee el historial de cada guía y marca las que llevan +48 h sin moverse',
+    A(n=6, nombre='Jefe de inventarios', area='Que nunca se confirme un pedido sin producto en bodega', color='#c9a227', agentes=[
+        A(id='stock', nombre='Monitor de stock', hace='Cada 30 min: stock por bodega vs pedidos confirmados sin guía; avisa antes de agotarse',
+          horas=[], min=[], dato='por construir'),
+    ]),
+    A(n=5, nombre='Rastreador de oficinas', area='Que todo paquete en oficina se reclame antes de que lo devuelvan', color='#ff8a65', agentes=[
+        A(id='oficina', nombre='Vigía de paquetes en oficina', hace='Lista lo que está en oficina y cuántos días lleva; valida que el cliente recibió la plantilla de Lucid',
+          horas=[], min=[], dato='por construir (hoy lo hace con los casos del CAS)'),
+        A(id='custodia', nombre='Gestor de custodia', hace='Si el cliente no puede ir: pide al CAS ampliar custodia o que reclame un familiar',
+          horas=[10, 12, 16, 18], min=[23], dato='activo dentro de la conversación del CAS'),
+    ]),
+    A(n=4, nombre='Abogado de devoluciones', area='Que no nos cobren fletes de devoluciones injustificadas', color='#e05a7a', agentes=[
+        A(id='reclamador', nombre='Analista de causales', hace='Revisa cada devolución con las causales de Dropi y los plazos (Inter 7 días, demás 30)',
+          horas=[12], min=[43], dato=f"{len(devol)} guías reclamadas"),
+        A(id='ticket', nombre='Ticket Dev_injustificadas', hace='Llena el Excel de Dropi, abre el ticket y hace seguimiento con evidencia',
+          horas=[12], min=[43], dato=f"tickets: {', '.join('#' + t for t in tickets) or '—'}"),
+    ]),
+    A(n=3, nombre='Gestor de tickets y CAS', area='Que ningún paquete se quede quieto más de 48 h', color='#f2a33a', agentes=[
+        A(id='vigia', nombre='Vigía de guías quietas', hace='Lee el historial de cada guía; marca +48 h quietas y descarta errores de actualización de Dropi',
           horas=[8, 14], min=[47], dato=f'{len(quietas)} guías quietas vigiladas'),
-        A(id='abogado', fase='2 · En camino', nombre='Abogado de CAS', hace='Pone la queja en el CAS de Dropi con el pantallazo del historial',
+        A(id='abogado', nombre='Quejas al CAS', hace='Pone la queja con el pantallazo del historial; si la IA la cierra, pide asesor humano',
           horas=[8, 14], min=[47], dato=f'{quejas_hoy} quejas hoy · {len(quejas)} en total'),
-        A(id='conversador', fase='2 · En camino', nombre='Negociador con transportadoras', hace='Chatea con los asesores del CAS: custodia, nuevo intento, fecha de entrega',
-          horas=[10, 12, 16, 18], min=[23], dato=f"{len(pend_cas.get('responder', []))} respuestas leídas · {cas_activos} casos abiertos"),
-        A(id='novedades', fase='3 · Novedades', nombre='Gestor de novedades', hace='Resuelve novedades con el cliente (lo hace el bot de Lucid, en el otro chat)',
-          horas=[], min=[], dato='a cargo del bot de Lucid'),
-        A(id='oficina', fase='4 · En oficina', nombre='Avisador de oficina', hace='Cuando el paquete llega a oficina, le avisa al cliente dirección, cédula y horario',
-          horas=[], min=[], dato='en construcción'),
-        A(id='reclamador', fase='5 · Devolución', nombre='Reclamador de fletes', hace='Analiza devoluciones injustificadas y abre el ticket para que no cobren el envío',
-          horas=[12], min=[43], dato=f"{len(devol)} guías reclamadas · ticket {', '.join('#' + t for t in tickets) or '—'}"),
-        A(id='auditor', fase='6 · Cierre', nombre='Auditor del día', hace='En la noche revisa qué salió, qué quedó represado y qué se devolvió',
-          horas=[], min=[], dato='en construcción'),
+        A(id='conversador', nombre='Negociador con transportadoras', hace='Conversa con el asesor: fecha, nuevo intento, custodia, datos correctos',
+          horas=[10, 12, 16, 18], min=[23], dato=f"{cas_activos} casos abiertos"),
     ]),
-    A(n=2, nombre='Confirmación', area='Pedido bueno sale hoy', color='#3ccf7e', agentes=[
-        A(id='confirmador', nombre='Confirmador', hace='Lee cada chat como Karen, revisa historial, flete y dirección, y confirma en Dropi',
+    A(n=2, nombre='Resolutor de novedades', area='Que ninguna novedad termine en devolución por falta de respuesta', color='#5ec8e5', agentes=[
+        A(id='novedades', nombre='Bot de Lucid', hace='Resuelve cada novedad con el cliente y da la solución en Dropi (lo maneja el otro chat)',
+          horas=list(range(6, 21)), min=list(range(0, 60, 15)), dato=f"novedades abiertas ayer: {rep.get('nov_abiertas', 0)}"),
+    ]),
+    A(n=1, nombre='Confirmador de pedidos', area='Que todo pedido bueno salga hoy y ninguno dudoso salga sin preguntar', color='#3ccf7e', agentes=[
+        A(id='confirmador', nombre='Lector de chats', hace='Lee cada chat como Karen y confirma en Dropi con CONFIRMADO AGENTE',
           horas=list(range(5, 21)), min=[19], dato=f'{conf_robot} confirmados hoy'),
-        A(id='liviana', nombre='Vigilante de turno', hace='Vuelta rápida a los :04, :34 y :49 para que nadie espere',
+        A(id='liviana', nombre='Vuelta rápida', hace='A los :04, :34 y :49 para que nadie espere',
           horas=list(range(5, 21)), min=[4, 34, 49], dato=f'{pend} esperando confirmación'),
-        A(id='portero', nombre='Portero de dudas', hace='Frena lo dudoso (casa/oficina, pago mañana) y le pregunta al cliente',
-          horas=list(range(5, 21)), min=[4, 19, 34, 49], dato=f'{len(vetos)} frenados con motivo · {len(aclar)} preguntas abiertas'),
-        A(id='anticipo', nombre='Guardián de devoluciones', hace='Pide anticipo solo a clientes con más del 50 % de devoluciones',
+        A(id='portero', nombre='Portero de dudas', hace='Frena lo dudoso y le pregunta al cliente',
+          horas=list(range(5, 21)), min=[4, 19, 34, 49], dato=f'{len(vetos)} frenados · {len(aclar)} preguntas abiertas'),
+        A(id='anticipo', nombre='Guardián de devoluciones', hace='Anticipo solo a clientes con más del 50 % de devoluciones',
           horas=list(range(7, 21)), min=[19], dato=f'{len(anticipos)} anticipos pedidos'),
-    ]),
-    A(n=1, nombre='Sala de máquinas', area='Conexiones Lucid ↔ Dropi', color='#b98cff', agentes=[
-        A(id='lucid', nombre='Mecánico de Lucid', hace='Revisa pedidos con «Error al subir» y los vuelve a subir sin duplicar',
-          horas=list(range(5, 21)), min=[19], dato=f'{subidos} pedidos rescatados'),
-        A(id='sesion', nombre='Llavero de Dropi', hace='Mantiene la sesión de Dropi abierta para todos los demás',
-          horas=list(range(5, 21)), min=[4, 19, 34, 49], dato='sesión activa'),
+        A(id='lucid', nombre='Rescate de Lucid', hace='Vuelve a subir pedidos con «Error al subir» sin duplicar',
+          horas=list(range(5, 21)), min=[19], dato=f'{subidos} rescatados'),
     ]),
 ]
-
 datos = dict(
     actualizado=ahora.strftime('%d %b, %I:%M %p').replace('AM', 'a. m.').replace('PM', 'p. m.'),
     vendido=vendido, pedidos=len(validos), conf_robot=conf_robot, revisar=revisar, guias=guias,
