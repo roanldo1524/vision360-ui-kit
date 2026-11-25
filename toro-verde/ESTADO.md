@@ -835,3 +835,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 25-11 12:43 p. m. devoluciones: 192 leídas, 0 injustificadas nuevas (19 con señal de culpa de transportadora, 32 el cliente no quería) → no se creó ticket.
   Ticket 159637423 (9 guías, $218.937 en fletes) NEGADO por Dropi el 24-11: «la transportadora cumplió con los intentos de entrega». Lección: solo reclamar guías con UN solo intento y sin novedad, o con la solución de la novedad ignorada; revisar intentos en la lupa antes de reclamar.
   Nuevo: leer_tickets.js (solo lectura) lee las respuestas del chat de soporte de Dropi (Intercom → Mensajes).
+- 25-11 tarde: confirmados por IA Víctor Pinilla (galón, oficina Anzoátegui KR 2 12 62; se le aclaró por WhatsApp que es Interrapidísimo, no Servientrega) y Alexander Casas (galón, oficina Líbano CL 5 9 66, tel. de quien recibe 3175342927). Reglas sin IA: ahora aceptan «Es correcto», «Está correcto», «Ah, listo».
