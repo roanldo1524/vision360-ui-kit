@@ -161,7 +161,17 @@ for _p in pisos:
     for _c in _p['agentes']:
         _c['persona'] = NOMBRES.get(_c['nombre'], '')
 
-datos = dict(
+import sys as _sys
+_sys.path.insert(0, os.path.dirname(AQUI))
+try:
+    import oficina_datos as _od
+    _ev = _od.eventos()
+    _reu = _od.reunion(kpi, salud, _ev, revisar)
+    _iso = _od.calidad(kpi, salud, _reu)
+except Exception as _e:
+    _ev, _reu, _iso = [], {}, {}
+    print('OJO oficina_datos', _e)
+datos = dict(eventos=_ev, reunion=_reu, iso=_iso,
     actualizado=ahora.strftime('%d %b, %I:%M %p').replace('AM', 'a. m.').replace('PM', 'p. m.'),
     vendido=vendido, pedidos=len(validos), conf_robot=conf_robot, revisar=revisar, guias=guias,
     quejas_hoy=quejas_hoy, cas_activos=cas_activos, fletes=fletes, kpi=kpi, salud=salud, pisos=pisos,
