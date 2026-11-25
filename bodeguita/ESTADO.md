@@ -181,6 +181,9 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   Ventas después del casino: 2 pedidos a precio normal (afilador $129.000 y cubre canas $69.900 = $198.900), 0 con el
   código. Respuestas: casi ninguna (7 de 626). casino_medir.py marca $0 porque esos pedidos no traen «Total» en el título.
   Propuesta a Ronald: cambio 2 = premio directo sin juego («hoy en $X en vez de $Y, responde SÍ»).
+- 25-nov 10:33 a. m.: 466 tibios, 77 ya compraron → **378 enviados, 0 fallos**. Total casino: 1.099 recibieron.
+  Pedidos después del casino: 4 (afilador $129.000, cubre canas $69.900, imán y mandalas el 24-nov ~6:40 p. m.,
+  títulos sin total), NINGUNO usó el premio. Ronald aún no responde a la propuesta del premio directo sin juego.
 - Ronald (24-nov): en este chat SOLO datos de La Bodeguita; no compararla ni mencionar Toro Verde.
 - Pendiente técnico: la foto de la máquina y los sonidos del casino todavía se cargan desde el almacenamiento de
   Shopify de otra tienda (no se ve marca). Pasarlos a un alojamiento propio de La Bodeguita.
