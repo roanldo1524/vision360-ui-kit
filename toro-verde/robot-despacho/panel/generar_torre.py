@@ -160,7 +160,7 @@ datos = dict(
     vendido=vendido, pedidos=len(validos), conf_robot=conf_robot, revisar=revisar, guias=guias,
     quejas_hoy=quejas_hoy, cas_activos=cas_activos, fletes=fletes, kpi=kpi, pisos=pisos,
 )
-plantilla = open(os.path.join(AQUI, 'torre.html'), encoding='utf-8').read()
+plantilla = open(os.path.join(AQUI, sys.argv[2] if len(sys.argv) > 2 else 'torre.html'), encoding='utf-8').read()
 html = plantilla.replace('/*DATOS*/null', json.dumps(datos, ensure_ascii=False))
 salida = sys.argv[1] if len(sys.argv) > 1 else '/tmp/torre.html'
 os.makedirs(os.path.dirname(salida), exist_ok=True)
