@@ -822,3 +822,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
   · Sede: la líder de logística revisa con cada agente su conteo real vs su meta; el líder de tecnología con su equipo (salud, repositorio, reglas, auditoría).
   · Ojo: la API de mensajes de Lucid a veces devuelve solo los últimos mensajes; si no se ve la aceptación, las reglas no confirman (va a IA/Karen).
 - 25-11 9:05 a. m.: el bucle sin IA confirmó solo a Maicol (98271305). Dudas revisadas por IA: Rafael Martínez Correa (galón, Montería, teléfono de entrega 3127148426) confirmado. El bucle se cae con cada reinicio de la sesión: la vuelta de los :19 lo revive.
+- 25-11 quejas CAS (8:47 a. m.): 1 queja nueva (97291930, Envía, Popayán), 0 fallas; 134 guías quietas leídas, 38 sin poder leer.
