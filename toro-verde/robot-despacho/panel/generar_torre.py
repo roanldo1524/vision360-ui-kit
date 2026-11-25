@@ -41,7 +41,7 @@ pend_cas = leer('cas_pendientes.json', {'responder': [], 'escalar': []})
 bandeja = leer('cas_bandeja.json', [])
 cas_activos = sum(1 for x in bandeja if x.get('estado') in ('active', 'queues'))
 devol = leer('devol_reg.json', {})
-fletes = sum(v.get('flete') or 0 for v in devol.values())
+fletes = sum(float(str(v.get('flete') or 0).replace(',', '').replace('$', '') or 0) for v in devol.values())
 tickets = sorted({str(v.get('ticket')) for v in devol.values() if v.get('ticket')})
 aclar = leer('aclaraciones.json', {})
 vetos = leer('vetos.json', {})
@@ -61,15 +61,23 @@ pisos = [
         A(id='medidor', nombre='Medidor', hace='Mide % confirmado por el robot y % entregado por semana',
           horas=list(range(5, 21)), min=[19], dato='panel publicado cada hora'),
     ]),
-    A(n=3, nombre='Despacho y logística', area='Que el paquete se ENTREGUE', color='#f2a33a', agentes=[
-        A(id='vigia', nombre='Vigía de guías quietas', hace='Lee el historial de cada guía y marca las que llevan +48 h sin moverse',
+    A(n=3, nombre='Logística', area='Del despacho a la entrega, fase por fase', color='#f2a33a', agentes=[
+        A(id='represados', fase='1 · Despacho', nombre='Vigía de represados', hace='Avisa los pedidos confirmados que llevan horas sin guía generada',
+          horas=[], min=[], dato='en construcción'),
+        A(id='vigia', fase='2 · En camino', nombre='Vigía de guías quietas', hace='Lee el historial de cada guía y marca las que llevan +48 h sin moverse',
           horas=[8, 14], min=[47], dato=f'{len(quietas)} guías quietas vigiladas'),
-        A(id='abogado', nombre='Abogado de CAS', hace='Pone la queja en el CAS de Dropi con el pantallazo del historial',
+        A(id='abogado', fase='2 · En camino', nombre='Abogado de CAS', hace='Pone la queja en el CAS de Dropi con el pantallazo del historial',
           horas=[8, 14], min=[47], dato=f'{quejas_hoy} quejas hoy · {len(quejas)} en total'),
-        A(id='conversador', nombre='Negociador con transportadoras', hace='Lee lo que contestan los asesores y responde: custodia, nuevo intento, fecha',
+        A(id='conversador', fase='2 · En camino', nombre='Negociador con transportadoras', hace='Chatea con los asesores del CAS: custodia, nuevo intento, fecha de entrega',
           horas=[10, 12, 16, 18], min=[23], dato=f"{len(pend_cas.get('responder', []))} respuestas leídas · {cas_activos} casos abiertos"),
-        A(id='reclamador', nombre='Reclamador de fletes', hace='Analiza devoluciones injustificadas y abre el ticket para que no cobren el envío',
+        A(id='novedades', fase='3 · Novedades', nombre='Gestor de novedades', hace='Resuelve novedades con el cliente (lo hace el bot de Lucid, en el otro chat)',
+          horas=[], min=[], dato='a cargo del bot de Lucid'),
+        A(id='oficina', fase='4 · En oficina', nombre='Avisador de oficina', hace='Cuando el paquete llega a oficina, le avisa al cliente dirección, cédula y horario',
+          horas=[], min=[], dato='en construcción'),
+        A(id='reclamador', fase='5 · Devolución', nombre='Reclamador de fletes', hace='Analiza devoluciones injustificadas y abre el ticket para que no cobren el envío',
           horas=[12], min=[43], dato=f"{len(devol)} guías reclamadas · ticket {', '.join('#' + t for t in tickets) or '—'}"),
+        A(id='auditor', fase='6 · Cierre', nombre='Auditor del día', hace='En la noche revisa qué salió, qué quedó represado y qué se devolvió',
+          horas=[], min=[], dato='en construcción'),
     ]),
     A(n=2, nombre='Confirmación', area='Pedido bueno sale hoy', color='#3ccf7e', agentes=[
         A(id='confirmador', nombre='Confirmador', hace='Lee cada chat como Karen, revisa historial, flete y dirección, y confirma en Dropi',

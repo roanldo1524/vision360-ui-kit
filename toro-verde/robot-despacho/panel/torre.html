@@ -1,0 +1,261 @@
+<title>Torre Toro Verde</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Escena 3D a pantalla completa; paneles de vidrio encima: marca arriba-izquierda, reloj y ventas arriba-derecha,
+   pisos a la izquierda, ficha del piso a la derecha. Un solo mundo nocturno de campo (tema oscuro fijo). */
+:root{
+  --noche:#0b1410; --vidrio:rgba(14,26,20,.82); --borde:rgba(160,220,180,.16);
+  --texto:#e9f3ec; --suave:#9fb8a8; --verde:#3ccf7e; --oro:#f2c94c; --alerta:#ff8a65;
+  --display:"Bricolage Grotesque",system-ui,sans-serif; --cuerpo:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{margin:0;background:var(--noche);color:var(--texto);font-family:var(--cuerpo);overflow:hidden}
+#escena{position:fixed;inset:0}
+.vidrio{position:fixed;background:var(--vidrio);border:1px solid var(--borde);border-radius:14px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#marca{top:calc(14px + env(safe-area-inset-top,0px));left:max(14px,env(safe-area-inset-left,0px));padding:12px 16px;display:flex;gap:12px;align-items:center}
+#marca .logo{width:34px;height:34px;border-radius:9px;background:var(--verde);display:grid;place-items:center;font-family:var(--display);font-weight:800;color:#06210f}
+#marca h1{margin:0;font-family:var(--display);font-size:18px;letter-spacing:.01em}
+#marca p{margin:2px 0 0;font-size:12px;color:var(--suave)}
+.punto{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--verde);margin-right:6px;box-shadow:0 0 8px var(--verde);animation:latir 1.6s infinite}
+@keyframes latir{50%{opacity:.35}}
+#reloj{top:calc(14px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));padding:12px 16px;min-width:250px}
+#reloj .hora{font-family:var(--mono);font-size:26px}
+#reloj .fecha{font-size:12px;color:var(--suave)}
+.cifras{display:grid;grid-template-columns:repeat(3,auto);gap:4px 16px;margin-top:8px}
+.cifras small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--suave)}
+.cifras b{font-family:var(--mono);font-size:15px;font-variant-numeric:tabular-nums}
+#pisos{top:calc(96px + env(safe-area-inset-top,0px));left:max(14px,env(safe-area-inset-left,0px));padding:10px;width:230px}
+#pisos h2,#ficha h2{margin:2px 6px 8px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--suave);font-weight:600}
+#pisos button{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;width:calc(100% - 16px);padding:8px;border-radius:9px;font-size:14px}
+#pisos button:hover,#pisos button[aria-pressed="true"]{background:rgba(255,255,255,.07)}
+#pisos button:focus-visible{outline:2px solid var(--verde)}
+#pisos .num{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font-family:var(--mono);font-size:12px;color:#0b1410}
+#pisos .ahora{margin-left:auto;font-size:11px;color:var(--verde)}
+#ficha{top:calc(178px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));width:320px;max-height:calc(100% - 250px);overflow:auto;padding:12px}
+#ficha h3{margin:0 6px 2px;font-family:var(--display);font-size:20px}
+#ficha .area{margin:0 6px 10px;font-size:12px;color:var(--suave)}
+.agente{padding:10px;border-radius:10px;border:1px solid transparent;margin-bottom:6px}
+.agente.trabaja{border-color:rgba(60,207,126,.35);background:rgba(60,207,126,.06)}
+.agente .fase{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--oro);margin-bottom:3px}
+.agente.obra{opacity:.6;border-style:dashed;border-color:var(--borde)}
+.agente .t{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px}
+.estado{margin-left:auto;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:99px;background:rgba(255,255,255,.08);color:var(--suave);white-space:nowrap}
+.trabaja .estado{background:rgba(60,207,126,.2);color:var(--verde)}
+.agente p{margin:4px 0 0;font-size:12.5px;color:var(--suave);line-height:1.4}
+.agente .dato{margin-top:6px;font-family:var(--mono);font-size:12px;color:var(--oro)}
+.agente .prox{font-size:11px;color:var(--suave);margin-top:3px}
+#pie{bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);padding:8px 14px;font-size:12px;color:var(--suave);white-space:nowrap}
+#pie b{color:var(--texto)}
+@media (max-width:820px){
+  #pisos{top:auto;bottom:calc(56px + env(safe-area-inset-bottom,0px));width:auto;right:max(14px,env(safe-area-inset-right,0px));display:flex;overflow-x:auto;gap:4px;padding:6px}
+  #pisos h2{display:none}
+  #pisos button{width:auto;white-space:nowrap}
+  #pisos .ahora{display:none}
+  #ficha{top:auto;bottom:calc(118px + env(safe-area-inset-bottom,0px));left:max(14px,env(safe-area-inset-left,0px));width:auto;max-height:38%}
+  #reloj{min-width:0}
+  #reloj .cifras{grid-template-columns:repeat(2,auto)}
+  #marca p{display:none}
+  #pie{display:none}
+}
+@media (max-width:520px){#reloj .fecha,#reloj .cifras div:nth-child(3){display:none}}
+@media (prefers-reduced-motion:reduce){.punto{animation:none}}
+</style>
+
+<canvas id="escena" aria-label="Edificio 3D con los agentes de Toro Verde"></canvas>
+<header id="marca" class="vidrio"><div class="logo">TV</div><div><h1>Torre Toro Verde</h1><p><span class="punto"></span>Agentes en vivo · <span id="act"></span></p></div></header>
+<section id="reloj" class="vidrio" aria-label="Hoy">
+  <div class="hora" id="hora">--:--</div><div class="fecha" id="fecha"></div>
+  <div class="cifras">
+    <div><small>Vendido hoy</small><b id="vendido"></b></div>
+    <div><small>Pedidos</small><b id="pedidos"></b></div>
+    <div><small>Robot confirmó</small><b id="robot"></b></div>
+  </div>
+</section>
+<nav id="pisos" class="vidrio" aria-label="Pisos"><h2>Pisos</h2></nav>
+<aside id="ficha" class="vidrio" aria-live="polite"></aside>
+<div id="pie" class="vidrio">Arrastra para girar · rueda o pellizco para acercar · toca un piso · <b id="trabajando">0</b> trabajando ahora</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const DATOS = /*DATOS*/null || {actualizado:'ejemplo',vendido:0,pedidos:0,conf_robot:0,pisos:[]};
+const $ = id => document.getElementById(id);
+const pesos = n => '$' + Math.round(n).toLocaleString('es-CO');
+$('act').textContent = 'datos de las ' + DATOS.actualizado;
+$('vendido').textContent = pesos(DATOS.vendido);
+$('pedidos').textContent = DATOS.pedidos;
+$('robot').textContent = DATOS.conf_robot;
+
+// Hora de Bogotá y si a un agente "le toca ahora" (corre en los 12 min después de su minuto programado)
+function bogota(){ const d = new Date(Date.now() - 5*3600e3); return {h:d.getUTCHours(), m:d.getUTCMinutes(), d}; }
+function trabaja(a){ const {h,m} = bogota(); return a.horas.includes(h) && a.min.some(x => m >= x && m < x + 12); }
+function proxima(a){
+  const {h,m} = bogota();
+  if (!a.horas.length) return 'en construcción';
+  for (let add = 0; add < 24*60; add++){
+    const t = h*60 + m + add + 1, hh = Math.floor(t/60) % 24, mm = t % 60;
+    if (a.horas.includes(hh) && a.min.includes(mm)){ return `${(hh%12)||12}:${String(mm).padStart(2,'0')} ${hh<12?'a. m.':'p. m.'}`; }
+  }
+  return '—';
+}
+function relojTick(){
+  const {d} = bogota();
+  $('hora').textContent = d.toISOString().slice(11,19);
+  $('fecha').textContent = d.toLocaleDateString('es-CO',{weekday:'long',day:'numeric',month:'long',timeZone:'UTC'});
+}
+relojTick(); setInterval(relojTick, 1000);
+
+// ---------- Escena 3D ----------
+const canvas = $('escena');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#0b1410');
+scene.fog = new THREE.Fog('#0b1410', 60, 140);
+const camera = new THREE.PerspectiveCamera(42, 1, .1, 400);
+camera.position.set(30, 22, 34);
+const controls = new THREE.OrbitControls(camera, canvas);
+controls.enableDamping = true; controls.maxPolarAngle = Math.PI*.49; controls.minDistance = 12; controls.maxDistance = 90;
+scene.add(new THREE.HemisphereLight('#cfe9d8', '#0e2016', .75));
+const sol = new THREE.DirectionalLight('#fff2d6', .9); sol.position.set(20, 40, 15); sol.castShadow = true;
+sol.shadow.mapSize.set(1024,1024); Object.assign(sol.shadow.camera,{left:-30,right:30,top:30,bottom:-30}); scene.add(sol);
+
+// Campo: suelo, surcos de cultivo y matas de maíz alrededor
+const suelo = new THREE.Mesh(new THREE.CircleGeometry(120, 64), new THREE.MeshLambertMaterial({color:'#173022'}));
+suelo.rotation.x = -Math.PI/2; suelo.receiveShadow = true; scene.add(suelo);
+const surco = new THREE.MeshLambertMaterial({color:'#21412d'});
+for (let i = -10; i <= 10; i++){ if (Math.abs(i) < 3) continue;
+  const s = new THREE.Mesh(new THREE.BoxGeometry(80, .15, .8), surco); s.position.set(0, .07, i*3.2); scene.add(s); }
+const tallo = new THREE.MeshLambertMaterial({color:'#4c9a52'}), mazorca = new THREE.MeshLambertMaterial({color:'#e8b93a'});
+for (let i = 0; i < 160; i++){
+  const r = 16 + Math.random()*40, a = Math.random()*Math.PI*2, g = new THREE.Group();
+  const t = new THREE.Mesh(new THREE.ConeGeometry(.35, 2.4, 5), tallo); t.position.y = 1.2; g.add(t);
+  if (Math.random() < .5){ const m = new THREE.Mesh(new THREE.CylinderGeometry(.18,.18,.6,6), mazorca); m.position.set(.25,1.3,0); m.rotation.z = -.5; g.add(m); }
+  g.position.set(Math.cos(a)*r, 0, Math.sin(a)*r); g.rotation.y = Math.random()*6; scene.add(g);
+}
+
+// Torre: un piso por departamento, de abajo (1) hacia arriba
+const ALTO = 4.2, ANCHO = 14, FONDO = 10;
+const pisos = [...DATOS.pisos].sort((a,b) => a.n - b.n);
+const torre = new THREE.Group(); scene.add(torre);
+const base = new THREE.Mesh(new THREE.BoxGeometry(ANCHO+2, 1, FONDO+2), new THREE.MeshLambertMaterial({color:'#2b3a31'}));
+base.position.y = .5; base.receiveShadow = true; torre.add(base);
+const losaMat = new THREE.MeshLambertMaterial({color:'#d9d3c3'}), pisoMat = new THREE.MeshLambertMaterial({color:'#7a5a3a'});
+const vidrioMat = new THREE.MeshPhongMaterial({color:'#9fe0c0', transparent:true, opacity:.12, shininess:90});
+const columnaMat = new THREE.MeshLambertMaterial({color:'#eae6da'});
+const robots = [], pisoMallas = [];
+
+function etiqueta(texto, color, ancho = 512){
+  const c = document.createElement('canvas'); c.width = ancho; c.height = 96; const x = c.getContext('2d');
+  x.fillStyle = 'rgba(8,18,13,.85)'; x.fillRect(0,0,ancho,96);
+  x.fillStyle = color; x.fillRect(0,0,14,96);
+  x.fillStyle = '#e9f3ec'; x.font = '600 40px "IBM Plex Sans", sans-serif'; x.fillText(texto, 34, 62);
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c), depthTest:false}));
+  s.scale.set(6*ancho/512, 1.125, 1); return s;
+}
+
+function robot(color){
+  const g = new THREE.Group(), blanco = new THREE.MeshPhongMaterial({color:'#f3f5f2', shininess:60});
+  const cuerpo = new THREE.Mesh(new THREE.CylinderGeometry(.38,.45,.9,16), blanco); cuerpo.position.y = .45; g.add(cuerpo);
+  const cabeza = new THREE.Mesh(new THREE.SphereGeometry(.42,20,16), blanco); cabeza.position.y = 1.2; g.add(cabeza);
+  const visor = new THREE.Mesh(new THREE.BoxGeometry(.55,.18,.1), new THREE.MeshBasicMaterial({color:'#132018'})); visor.position.set(0,1.22,.38); g.add(visor);
+  const ojos = new THREE.Mesh(new THREE.BoxGeometry(.4,.06,.02), new THREE.MeshBasicMaterial({color})); ojos.position.set(0,1.22,.44); g.add(ojos);
+  const antena = new THREE.Mesh(new THREE.SphereGeometry(.07,8,8), new THREE.MeshBasicMaterial({color})); antena.position.y = 1.72; g.add(antena);
+  const palo = new THREE.Mesh(new THREE.CylinderGeometry(.02,.02,.25,6), blanco); palo.position.y = 1.6; g.add(palo);
+  g.traverse(o => o.castShadow = true);
+  g.userData = {cabeza, ojos, antena}; return g;
+}
+
+pisos.forEach((p, i) => {
+  const y = 1 + i*ALTO, g = new THREE.Group(); g.position.y = y; torre.add(g);
+  const losa = new THREE.Mesh(new THREE.BoxGeometry(ANCHO, .3, FONDO), losaMat); losa.position.y = .15; losa.receiveShadow = true; g.add(losa);
+  const piso = new THREE.Mesh(new THREE.BoxGeometry(ANCHO-.6, .05, FONDO-.6), pisoMat); piso.position.y = .33; piso.receiveShadow = true; g.add(piso);
+  const alfombra = new THREE.Mesh(new THREE.BoxGeometry(ANCHO-3, .04, FONDO-3.5), new THREE.MeshLambertMaterial({color:new THREE.Color(p.color).multiplyScalar(.35)}));
+  alfombra.position.y = .37; g.add(alfombra);
+  const caja = new THREE.Mesh(new THREE.BoxGeometry(ANCHO, ALTO-.3, FONDO), vidrioMat); caja.position.y = .3 + (ALTO-.3)/2;
+  caja.userData.piso = p; g.add(caja); pisoMallas.push(caja);
+  [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([a,b]) => { const c = new THREE.Mesh(new THREE.BoxGeometry(.5, ALTO, .5), columnaMat); c.position.set(a*(ANCHO/2-.25), ALTO/2, b*(FONDO/2-.25)); c.castShadow = true; g.add(c); });
+  const franja = new THREE.Mesh(new THREE.BoxGeometry(ANCHO+.02, .25, .05), new THREE.MeshBasicMaterial({color:p.color})); franja.position.set(0, ALTO-.2, FONDO/2+.01); g.add(franja);
+  const et = etiqueta(`${p.n}  ${p.nombre}`, p.color); et.position.set(-ANCHO/2-3.6, ALTO*.55, FONDO/2); g.add(et);
+  const n = p.agentes.length, mesaMat = new THREE.MeshLambertMaterial({color:'#9c6b3f'});
+  p.agentes.forEach((a, k) => {
+    const filas = n > 4 ? 2 : 1, porFila = Math.ceil(n / filas), fila = Math.floor(k / porFila), col = k % porFila;
+    const x = (col - (porFila-1)/2) * (ANCHO-2.5) / Math.max(porFila, 2), z = filas === 2 ? (fila ? 1.6 : -3.2) : -.5;
+    const mesa = new THREE.Mesh(new THREE.BoxGeometry(2.1, .9, 1.1), mesaMat); mesa.position.set(x, .8, z+.9); mesa.castShadow = true; g.add(mesa);
+    const pantalla = new THREE.Mesh(new THREE.BoxGeometry(1, .62, .06), new THREE.MeshBasicMaterial({color:'#0f2a1c'})); pantalla.position.set(x, 1.6, z+.75); g.add(pantalla);
+    const brillo = new THREE.Mesh(new THREE.PlaneGeometry(.9,.52), new THREE.MeshBasicMaterial({color:p.color, transparent:true, opacity:.25})); brillo.position.set(x,1.6,z+.79); g.add(brillo);
+    const r = robot(p.color); r.position.set(x, .4, z-.25); g.add(r);
+    const aro = new THREE.Mesh(new THREE.RingGeometry(1.15, 1.3, 40), new THREE.MeshBasicMaterial({color:'#3ccf7e', transparent:true, opacity:0, side:THREE.DoubleSide}));
+    aro.rotation.x = -Math.PI/2; aro.position.set(x, .4, z+.3); g.add(aro);
+    robots.push({a, r, aro, brillo, fase:Math.random()*6});
+  });
+});
+// Techo y antena con el toro
+const techo = new THREE.Mesh(new THREE.BoxGeometry(ANCHO+.6, .5, FONDO+.6), losaMat); techo.position.y = 1 + pisos.length*ALTO + .25; torre.add(techo);
+const mastil = new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,5,8), columnaMat); mastil.position.y = techo.position.y + 2.5; torre.add(mastil);
+const faro = new THREE.Mesh(new THREE.SphereGeometry(.3,12,12), new THREE.MeshBasicMaterial({color:'#3ccf7e'})); faro.position.y = techo.position.y + 5.1; torre.add(faro);
+const letrero = etiqueta('TORO VERDE · vendido hoy ' + pesos(DATOS.vendido), '#3ccf7e', 1024); letrero.scale.set(16, 1.5, 1); letrero.position.y = techo.position.y + 1.6; torre.add(letrero);
+controls.target.set(0, (pisos.length*ALTO)/2, 0);
+
+// ---------- Paneles ----------
+let elegido = pisos[pisos.length-1];
+function pintarPisos(){
+  const nav = $('pisos'); nav.querySelectorAll('button').forEach(b => b.remove());
+  [...pisos].reverse().forEach(p => {
+    const b = document.createElement('button'), act = p.agentes.filter(trabaja).length;
+    b.setAttribute('aria-pressed', p === elegido);
+    b.innerHTML = `<span class="num" style="background:${p.color}">${p.n}</span>${p.nombre}${act ? `<span class="ahora">● ${act}</span>` : ''}`;
+    b.onclick = () => elegir(p); nav.appendChild(b);
+  });
+}
+function pintarFicha(){
+  const p = elegido, f = $('ficha');
+  f.innerHTML = `<h2>Piso ${p.n}</h2><h3>${p.nombre}</h3><p class="area">${p.area} · ${p.agentes.length} agentes</p>` +
+    p.agentes.map(a => { const t = trabaja(a); return `<div class="agente ${t?'trabaja':''} ${a.horas.length?'':'obra'}">${a.fase?`<div class="fase">${a.fase}</div>`:''}<div class="t">${a.nombre}<span class="estado">${t?'trabajando ahora':(a.horas.length?'en espera':'en construcción')}</span></div>
+      <p>${a.hace}</p><div class="dato">${a.dato}</div>${t||!a.horas.length?'':`<div class="prox">Próxima vuelta: ${proxima(a)}</div>`}</div>`; }).join('');
+}
+function elegir(p){
+  elegido = p; pintarPisos(); pintarFicha();
+  const i = pisos.indexOf(p), y = 1 + i*ALTO + ALTO/2;
+  destino = {y, dist: 20};
+}
+let destino = null;
+function refrescar(){ pintarPisos(); pintarFicha(); $('trabajando').textContent = robots.filter(o => trabaja(o.a)).length; }
+refrescar(); setInterval(refrescar, 20000);
+
+// Clic en un piso del edificio
+const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(); let down = null;
+canvas.addEventListener('pointerdown', e => down = [e.clientX, e.clientY]);
+canvas.addEventListener('pointerup', e => {
+  if (!down || Math.hypot(e.clientX-down[0], e.clientY-down[1]) > 6) return;
+  mouse.set(e.clientX/innerWidth*2-1, -(e.clientY/innerHeight)*2+1); ray.setFromCamera(mouse, camera);
+  const hit = ray.intersectObjects(pisoMallas)[0]; if (hit) elegir(hit.object.userData.piso);
+});
+
+function tam(){ renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth/innerHeight;
+  camera.fov = innerWidth < 600 ? 55 : 42; camera.updateProjectionMatrix(); }
+addEventListener('resize', tam); tam();
+const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reloj3d = new THREE.Clock();
+(function animar(){
+  requestAnimationFrame(animar);
+  const t = reloj3d.getElapsedTime();
+  robots.forEach(o => {
+    const on = trabaja(o.a), u = o.r.userData;
+    o.aro.material.opacity = on ? .55 + Math.sin(t*3)*.25 : 0;
+    o.brillo.material.opacity = on ? .55 + Math.sin(t*6+o.fase)*.2 : .18;
+    if (!quieto){ u.cabeza.rotation.y = on ? Math.sin(t*2+o.fase)*.35 : Math.sin(t*.4+o.fase)*.1;
+      o.r.position.y = .4 + (on ? Math.abs(Math.sin(t*4+o.fase))*.06 : 0); }
+    u.antena.material.color.set(on ? '#3ccf7e' : '#5d6e64');
+  });
+  faro.material.color.setHSL(.4, .7, .45 + Math.sin(t*2)*.15);
+  if (destino){ controls.target.y += (destino.y - controls.target.y)*.08;
+    if (Math.abs(destino.y - controls.target.y) < .02) destino = null; }
+  if (!quieto && !destino) torre.rotation.y = 0;
+  controls.update(); renderer.render(scene, camera);
+})();
+</script>
