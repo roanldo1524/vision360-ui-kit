@@ -17,17 +17,37 @@ Reglas que todos cumplen:
 ---
 
 ## 1. Líder de Logística
-**Misión:** que toda el área funcione, y avisar a tiempo cuando algo se cae.
+**Misión:** orquestar al equipo para cumplir los KPI de Toro Verde:
+- **90 % de entrega**
+- **máximo 3 % de devolución**
+- **máximo 7 % de cancelación**
+
+Se mide sobre los pedidos terminados de los últimos 30 días.
 
 **Responsabilidades:**
-- Revisa cada hora que cada cargo haya trabajado a su hora. Si un agente falló o no corrió, lo vuelve a correr o avisa.
-- Publica el panel y la torre cada hora.
-- Manda los 2 reportes del día por WhatsApp: confirmados (robot vs. Karen), novedades resueltas, tickets y quejas puestas, devoluciones reclamadas y lo que necesita una persona.
+- Recibe los KPI cada hora y ve cuál se está saliendo de la meta.
+- Le asigna el trabajo al cargo que corresponde. Ejemplos:
+  - Mucho «Reclame en oficina» → Rastreador de oficinas.
+  - Muchas guías quietas → Gestor de tickets y CAS.
+  - Muchas cancelaciones → Confirmador.
+- Hace que cada cargo cumpla, de manera efectiva y a su hora.
+- Manda reportes y avisos a las personas: a Ronald, Karen y Leidy les llegan los 2 reportes del día por WhatsApp. Cuando una persona tiene que llamar a un cliente, le pasa el nombre, el celular y el motivo.
+- Recibe la información y las instrucciones de Ronald y las reparte a cada cargo. Le mantiene a cada uno su «cerebro»: el manual, las reglas y la memoria de los casos que ya resolvió.
 - Anota todo en ESTADO.md.
 
-**Mide:** que ningún cargo se salte su turno; que el reporte salga a las 7 a. m. y a las 9 p. m.
+**Mide:** % de entrega, % de devolución y % de cancelación contra la meta, más los paquetes en oficina sin reclamar.
 
-**Estado:** parcial. Los reportes, el panel y la torre funcionan. Falta el chequeo automático de que cada agente corrió.
+**Línea base, 24-11 (30 días, 2.482 pedidos terminados):**
+
+| KPI | Meta | Línea base |
+|---|---|---|
+| Entrega | 90 % | 82,3 % |
+| Devolución | 3 % | 7,0 % |
+| Cancelación | 7 % | 10,7 % |
+
+Además había 261 paquetes en «Reclame en oficina».
+
+**Estado:** parcial. Ya funcionan los reportes, el panel, la torre y el tablero de KPI. Falta asignar el trabajo automáticamente según el KPI que falla.
 
 ## 2. Confirmador de pedidos
 **Misión:** que todo pedido bueno salga el mismo día, y que ninguno dudoso salga sin preguntar.
@@ -115,3 +135,23 @@ Reglas que todos cumplen:
 **Mide:** % reclamado en oficina y devoluciones por «no reclamado».
 
 **Estado:** parcial. Ya lo hace con los paquetes que el CAS reporta en oficina. Falta la lista diaria completa y la validación de la plantilla de Lucid.
+
+## 8. Líder de Tecnología
+**Misión:** que el sistema funcione siempre, sin fallar, y que cada proceso sea cada vez más rápido y más fácil.
+
+**Responsabilidades:**
+- Vigila que cada agente haya corrido a su hora. Si uno falló (se cayó la sesión de Dropi, se reinició la máquina, una clave venció), lo repara y lo vuelve a correr.
+- Detecta dónde estamos fallando:
+  - Errores repetidos.
+  - Pedidos que se quedan sin procesar.
+  - Pasos lentos.
+- Aprende cómo se hace cada proceso y lo optimiza: menos tiempo por pedido, menos trabajo manual para Karen y menos errores.
+- Propone y aplica mejoras. Las anota en ESTADO.md con el antes y el después.
+- Cuida que los datos de trabajo no se pierdan: registros, vetos, aclaraciones, quejas y reclamos.
+
+**Mide:**
+- Vueltas que corrieron a su hora (meta: 100 %).
+- Fallas resueltas sin que una persona intervenga.
+- Minutos por pedido confirmado.
+
+**Estado:** parcial. Ya repara a mano cuando hay reinicios y relanza las vueltas atrasadas. Falta el monitor automático que lo haga solo.

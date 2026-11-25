@@ -47,6 +47,13 @@ aclar = leer('aclaraciones.json', {})
 vetos = leer('vetos.json', {})
 anticipos = leer('anticipos.json', {})
 rep = leer('reporte_datos.json', {})
+p30 = leer('hoy30.json', [])
+p30 = p30 if isinstance(p30, list) else p30.get('orders', [])
+st30 = collections.Counter(o.get('status') for o in p30)
+ent, dev = st30.get('ENTREGADO', 0), st30.get('DEVOLUCION', 0) + st30.get('RECHAZADO', 0) + st30.get('DESTRUCCION - SALVAMENTO - DONACION', 0)
+can = st30.get('CANCELADO', 0); fin = ent + dev + can
+pct = lambda x: round(100 * x / fin, 1) if fin else 0
+kpi = dict(entrega=pct(ent), devolucion=pct(dev), cancelacion=pct(can), oficina=st30.get('RECLAME EN OFICINA', 0), base=fin)
 try:
     subidos = sum(1 for _ in open('/tmp/robot/ya_subidos.txt'))
 except Exception:
@@ -55,13 +62,21 @@ except Exception:
 # horario: minutos de la hora en que trabaja (hora Bogotá) y horas del día
 A = lambda **k: k
 pisos = [
-    A(n=7, nombre='Líder de Logística', area='Que toda el área funcione y avisar a tiempo si algo se cae', color='#7aa6ff', agentes=[
-        A(id='reportero', nombre='Reportes del día', hace='2 reportes por WhatsApp (7 a. m. y 9 p. m.): robot vs Karen, novedades, tickets',
+    A(n=8, nombre='Líder de Tecnología', area='Que el sistema funcione siempre y cada proceso sea más rápido', color='#9aa7b8', agentes=[
+        A(id='monitor', nombre='Monitor de fallas', hace='Vigila que cada agente corrió a su hora; si se cayó la sesión o la máquina, lo repara y relanza',
+          horas=[], min=[], dato='por construir (hoy se repara a mano)'),
+        A(id='optimizador', nombre='Optimizador de procesos', hace='Aprende cómo se hace cada proceso y lo hace más rápido y con menos trabajo para Karen',
+          horas=[], min=[], dato='por construir'),
+    ]),
+    A(n=7, nombre='Líder de Logística', area='Orquesta al equipo para cumplir 90 % entrega · 3 % devolución · 7 % cancelación', color='#7aa6ff', agentes=[
+        A(id='kpi', nombre='Tablero de KPI', hace=f"Últimos 30 días ({kpi['base']} pedidos terminados) contra la meta",
+          horas=list(range(5, 21)), min=[19], dato=f"entrega {kpi['entrega']} % (meta 90) · devolución {kpi['devolucion']} % (meta 3) · cancelación {kpi['cancelacion']} % (meta 7) · {kpi['oficina']} en oficina"),
+        A(id='reportero', nombre='Reportes y avisos', hace='2 reportes por WhatsApp a Ronald, Karen y Leidy; avisa a quien debe llamar a un cliente',
           horas=[6, 20], min=[57], dato=f"ayer: {rep.get('conf_robot', 0)} robot · {rep.get('conf_humano', 0)} Karen"),
+        A(id='coordinador', nombre='Coordinador', hace='Recibe la información de Ronald, la reparte y le cuida a cada cargo su cerebro (manual + memoria de casos)',
+          horas=[], min=[], dato='por construir'),
         A(id='medidor', nombre='Panel y torre', hace='Publica el panel y esta torre cada hora con los números reales',
           horas=list(range(5, 21)), min=[19], dato='publicados cada hora'),
-        A(id='salud', nombre='Chequeo de que todos trabajaron', hace='Revisa que cada cargo corrió a su hora y relanza al que falló',
-          horas=[], min=[], dato='por construir'),
     ]),
     A(n=6, nombre='Jefe de inventarios', area='Que nunca se confirme un pedido sin producto en bodega', color='#c9a227', agentes=[
         A(id='stock', nombre='Monitor de stock', hace='Cada 30 min: stock por bodega vs pedidos confirmados sin guía; avisa antes de agotarse',
@@ -107,7 +122,7 @@ pisos = [
 datos = dict(
     actualizado=ahora.strftime('%d %b, %I:%M %p').replace('AM', 'a. m.').replace('PM', 'p. m.'),
     vendido=vendido, pedidos=len(validos), conf_robot=conf_robot, revisar=revisar, guias=guias,
-    quejas_hoy=quejas_hoy, cas_activos=cas_activos, fletes=fletes, pisos=pisos,
+    quejas_hoy=quejas_hoy, cas_activos=cas_activos, fletes=fletes, kpi=kpi, pisos=pisos,
 )
 plantilla = open(os.path.join(AQUI, 'torre.html'), encoding='utf-8').read()
 html = plantilla.replace('/*DATOS*/null', json.dumps(datos, ensure_ascii=False))

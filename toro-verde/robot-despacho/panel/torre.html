@@ -26,6 +26,7 @@ body{margin:0;background:var(--noche);color:var(--texto);font-family:var(--cuerp
 #reloj .fecha{font-size:12px;color:var(--suave)}
 .cifras{display:grid;grid-template-columns:repeat(3,auto);gap:4px 16px;margin-top:8px}
 .cifras small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--suave)}
+.kpi{margin-top:10px;padding-top:8px;border-top:1px solid var(--borde)}
 .cifras b{font-family:var(--mono);font-size:15px;font-variant-numeric:tabular-nums}
 #pisos{top:calc(96px + env(safe-area-inset-top,0px));left:max(14px,env(safe-area-inset-left,0px));padding:10px;width:230px}
 #pisos h2,#ficha h2{margin:2px 6px 8px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--suave);font-weight:600}
@@ -34,7 +35,7 @@ body{margin:0;background:var(--noche);color:var(--texto);font-family:var(--cuerp
 #pisos button:focus-visible{outline:2px solid var(--verde)}
 #pisos .num{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font-family:var(--mono);font-size:12px;color:#0b1410}
 #pisos .ahora{margin-left:auto;font-size:11px;color:var(--verde)}
-#ficha{top:calc(178px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));width:320px;max-height:calc(100% - 250px);overflow:auto;padding:12px}
+#ficha{top:calc(222px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));width:320px;max-height:calc(100% - 250px);overflow:auto;padding:12px}
 #ficha h3{margin:0 6px 2px;font-family:var(--display);font-size:20px}
 #ficha .area{margin:0 6px 10px;font-size:12px;color:var(--suave)}
 .agente{padding:10px;border-radius:10px;border:1px solid transparent;margin-bottom:6px}
@@ -73,6 +74,11 @@ body{margin:0;background:var(--noche);color:var(--texto);font-family:var(--cuerp
     <div><small>Pedidos</small><b id="pedidos"></b></div>
     <div><small>Robot confirmó</small><b id="robot"></b></div>
   </div>
+  <div class="cifras kpi">
+    <div><small>Entrega · meta 90</small><b id="k_ent"></b></div>
+    <div><small>Devolución · meta 3</small><b id="k_dev"></b></div>
+    <div><small>Cancelación · meta 7</small><b id="k_can"></b></div>
+  </div>
 </section>
 <nav id="pisos" class="vidrio" aria-label="Pisos"><h2>Pisos</h2></nav>
 <aside id="ficha" class="vidrio" aria-live="polite"></aside>
@@ -88,6 +94,9 @@ $('act').textContent = 'datos de las ' + DATOS.actualizado;
 $('vendido').textContent = pesos(DATOS.vendido);
 $('pedidos').textContent = DATOS.pedidos;
 $('robot').textContent = DATOS.conf_robot;
+const K = DATOS.kpi || {};
+[['k_ent', K.entrega, v => v >= 90], ['k_dev', K.devolucion, v => v <= 3], ['k_can', K.cancelacion, v => v <= 7]].forEach(([id, v, ok]) => {
+  const el = $(id); el.textContent = v == null ? '—' : v + ' %'; if (v != null) el.style.color = ok(v) ? 'var(--verde)' : 'var(--alerta)'; });
 
 // Hora de Bogotá y si a un agente "le toca ahora" (corre en los 12 min después de su minuto programado)
 function bogota(){ const d = new Date(Date.now() - 5*3600e3); return {h:d.getUTCHours(), m:d.getUTCMinutes(), d}; }
