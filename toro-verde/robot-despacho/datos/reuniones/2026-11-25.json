@@ -26,7 +26,7 @@
   },
   {
    "quien": "Confirmador de pedidos",
-   "dice": "Hoy confirmé 16 pedidos con chat leído y frené 4 con motivo. Quedan 5 en revisión de Karen."
+   "dice": "Hoy confirmé 16 pedidos con chat leído y frené 4 con motivo. Quedan 7 en revisión de Karen."
   },
   {
    "quien": "Gestor de tickets y CAS",
@@ -89,7 +89,7 @@
   },
   {
    "id": "T-20261125-05",
-   "titulo": "Revisar 5 pedidos frenados por el robot (llamar o confirmar)",
+   "titulo": "Revisar 7 pedidos frenados por el robot (llamar o confirmar)",
    "responsable": "Karen (humana)",
    "fecha": "2026-11-25",
    "estado": "requiere aprobación humana",
