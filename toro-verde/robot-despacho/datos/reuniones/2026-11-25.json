@@ -26,7 +26,7 @@
   },
   {
    "quien": "Confirmador de pedidos",
-   "dice": "Hoy confirmé 16 pedidos con chat leído y frené 4 con motivo. Quedan 7 en revisión de Karen."
+   "dice": "Hoy confirmé 18 pedidos con chat leído y frené 4 con motivo. Quedan 7 en revisión de Karen."
   },
   {
    "quien": "Gestor de tickets y CAS",
@@ -38,7 +38,7 @@
   },
   {
    "quien": "Monitor de fallas",
-   "dice": "4 de 5 agentes al día: fallas en Guardián de datos (repositorio al día)"
+   "dice": "5 de 5 agentes al día, sin fallas."
   },
   {
    "quien": "Líder de Tecnología",
@@ -48,7 +48,7 @@
  "conclusiones": [
   "La meta que más se aleja es la entrega.",
   "Las decisiones de dinero (anticipos, descuentos, topes de flete) las aprueba una persona.",
-  "7 tareas asignadas con responsable y fecha."
+  "6 tareas asignadas con responsable y fecha."
  ],
  "tareas": [
   {
@@ -80,15 +80,6 @@
   },
   {
    "id": "T-20261125-04",
-   "titulo": "Relanzar y corregir: Guardián de datos (repositorio al día)",
-   "responsable": "Monitor de fallas",
-   "fecha": "2026-11-25",
-   "estado": "abierta",
-   "aprobacion_humana": false,
-   "proceso": "Tecnología"
-  },
-  {
-   "id": "T-20261125-05",
    "titulo": "Revisar 7 pedidos frenados por el robot (llamar o confirmar)",
    "responsable": "Karen (humana)",
    "fecha": "2026-11-25",
@@ -97,7 +88,7 @@
    "proceso": "Confirmación"
   },
   {
-   "id": "T-20261125-06",
+   "id": "T-20261125-05",
    "titulo": "Construir el monitor de stock (Jefe de inventarios)",
    "responsable": "Líder de Tecnología",
    "fecha": "2026-12-02",
@@ -106,7 +97,7 @@
    "proceso": "Inventarios"
   },
   {
-   "id": "T-20261125-07",
+   "id": "T-20261125-06",
    "titulo": "Cualquier anticipo, descuento o cambio de tope de flete",
    "responsable": "Ronald (humano)",
    "fecha": "2026-11-25",
