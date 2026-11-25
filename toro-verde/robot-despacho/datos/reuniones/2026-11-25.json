@@ -26,11 +26,11 @@
   },
   {
    "quien": "Confirmador de pedidos",
-   "dice": "Hoy confirmé 18 pedidos con chat leído y frené 4 con motivo. Quedan 7 en revisión de Karen."
+   "dice": "Hoy confirmé 2 pedidos con chat leído y frené 4 con motivo. Quedan 1 en revisión de Karen."
   },
   {
    "quien": "Gestor de tickets y CAS",
-   "dice": "Hoy puse 0 quejas al CAS; 0 guías aparecen disponibles en oficina según los asesores."
+   "dice": "Hoy puse 1 quejas al CAS; 0 guías aparecen disponibles en oficina según los asesores."
   },
   {
    "quien": "Rastreador de oficinas",
@@ -38,7 +38,7 @@
   },
   {
    "quien": "Monitor de fallas",
-   "dice": "5 de 5 agentes al día, sin fallas."
+   "dice": "6 de 6 agentes al día, sin fallas."
   },
   {
    "quien": "Líder de Tecnología",
@@ -80,7 +80,7 @@
   },
   {
    "id": "T-20261125-04",
-   "titulo": "Revisar 7 pedidos frenados por el robot (llamar o confirmar)",
+   "titulo": "Revisar 1 pedidos frenados por el robot (llamar o confirmar)",
    "responsable": "Karen (humana)",
    "fecha": "2026-11-25",
    "estado": "requiere aprobación humana",
