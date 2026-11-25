@@ -846,3 +846,5 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - Reglas sin IA: 0 pedidos nuevos para confirmar, 0 dudas. 12 siguen en REVISAR HUMANO.
 - Lucid «Error al subir» nuevo: Néstor Delgado 3228431636 (Rioblanco, 2 litros, $169.000, oficina): le faltan departamento (Tolima) y dirección. Subir a mano con «dirección del punto, RECLAMA EN OFICINA INTERRAPIDÍSIMO».
 - Sigue pendiente Yilbray Amador 3235056442 (Inzá, Cauca).
+
+- 5:49 p. m.: las reglas (sin IA) confirmaron 2: Felipe (98346369, tocó «CONFIRMAR PEDIDO») y Francisco (98345544, aceptó el resumen). 0 dudas.
