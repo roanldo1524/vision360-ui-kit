@@ -43,6 +43,10 @@ body{margin:0;background:var(--noche);color:var(--texto);font-family:var(--cuerp
 .agente.trabaja{border-color:rgba(60,207,126,.35);background:rgba(60,207,126,.06)}
 .agente .fase{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--oro);margin-bottom:3px}
 .agente.obra{opacity:.6;border-style:dashed;border-color:var(--borde)}
+.fun{margin-top:6px;padding-top:6px;border-top:1px dashed var(--borde);font-size:12px;color:var(--suave);line-height:1.4}
+.fun b{color:var(--texto);font-weight:600}
+.fun .estado{float:right;margin-left:6px}
+.fun .estado.on{background:rgba(60,207,126,.2);color:var(--verde)}
 .agente .t{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px}
 .estado{margin-left:auto;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:99px;background:rgba(255,255,255,.08);color:var(--suave);white-space:nowrap}
 .trabaja .estado{background:rgba(60,207,126,.2);color:var(--verde)}
@@ -102,6 +106,7 @@ const K = DATOS.kpi || {};
 
 // Hora de Bogotá y si a un agente "le toca ahora" (corre en los 12 min después de su minuto programado)
 function bogota(){ const d = new Date(Date.now() - 5*3600e3); return {h:d.getUTCHours(), m:d.getUTCMinutes(), d}; }
+function trabajaC(c){ return (c.funciones || [c]).some(trabaja); }
 function trabaja(a){ const {h,m} = bogota(); return a.horas.includes(h) && a.min.some(x => m >= x && m < x + 12); }
 function proxima(a){
   const {h,m} = bogota();
@@ -167,7 +172,7 @@ for (let k = -18; k <= 18; k += 6){ arbol(k, 14.5); arbol(k, 25.5); }
 [-20, -12, 12, 20].forEach(z => { arbol(-20.5, z); arbol(20.5, z); });
 
 // Torre: un piso por departamento, de abajo (1) hacia arriba
-const ALTO = 4.2, ANCHO = 14, FONDO = 10;
+const ALTO = 4.6, ANCHO = 24, FONDO = 16;
 const pisos = [...DATOS.pisos].sort((a,b) => a.n - b.n);
 const torre = new THREE.Group(); scene.add(torre);
 const base = new THREE.Mesh(new THREE.BoxGeometry(ANCHO+2, 1, FONDO+2), new THREE.MeshLambertMaterial({color:'#8e8f8b'}));
@@ -229,15 +234,48 @@ pisos.forEach((p, i) => {
   const et = etiqueta(`${p.n}  ${p.nombre}`, p.color); et.position.set(-ANCHO/2-3.6, ALTO*.55, FONDO/2); g.add(et);
   const n = p.agentes.length, mesaMat = new THREE.MeshLambertMaterial({color:'#f3f2ee'}), pataMat = new THREE.MeshLambertMaterial({color:'#1f2125'});
   [[-ANCHO/2+1, -FONDO/2+1], [ANCHO/2-1, -FONDO/2+1], [ANCHO/2-1, FONDO/2-1]].forEach(([px, pz]) => { const pl = planta(); pl.position.set(px, .35, pz); g.add(pl); });
+  if (p.tipo === 'bodega'){
+    const metal = new THREE.MeshLambertMaterial({color:'#4a6178'}), carton = new THREE.MeshLambertMaterial({color:'#c49a63'}), verde = new THREE.MeshLambertMaterial({color:'#3a9a5a'});
+    for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++){
+      const rx = 1 + c*3.6, rz = -5 + r*4.2;
+      [[-1.5,-.5],[1.5,-.5],[-1.5,.5],[1.5,.5]].forEach(([dx,dz]) => { const u = new THREE.Mesh(new THREE.BoxGeometry(.08,3.4,.08), metal); u.position.set(rx+dx, 2.05, rz+dz); g.add(u); });
+      for (let n2 = 0; n2 < 3; n2++){ const y2 = .7 + n2*1.1;
+        const rep2 = new THREE.Mesh(new THREE.BoxGeometry(3.1,.06,1.1), metal); rep2.position.set(rx, y2, rz); g.add(rep2);
+        for (let b2 = 0; b2 < 4; b2++){ const caja = new THREE.Mesh(new THREE.BoxGeometry(.62,.55,.75), (b2+n2+r) % 3 ? carton : verde);
+          caja.position.set(rx - 1.1 + b2*.74, y2 + .31, rz); caja.castShadow = true; g.add(caja); } }
+    }
+    const mostrador = new THREE.Mesh(new THREE.BoxGeometry(4,1.1,.9), new THREE.MeshLambertMaterial({color:'#e9e4da'})); mostrador.position.set(-7, .9, 6.2); mostrador.castShadow = true; g.add(mostrador);
+    const tope = new THREE.Mesh(new THREE.BoxGeometry(4.2,.08,1.1), new THREE.MeshLambertMaterial({color:'#caa47c'})); tope.position.set(-7, 1.48, 6.2); g.add(tope);
+    const rot = etiqueta('RECEPCIÓN', '#c9a227', 380); rot.scale.set(3, .75, 1); rot.position.set(-7, 2.6, 6.6); g.add(rot);
+    for (let k2 = 0; k2 < 3; k2++){ const pal = new THREE.Mesh(new THREE.BoxGeometry(1.2,.15,1.2), new THREE.MeshLambertMaterial({color:'#8a6a45'})); pal.position.set(-10 + k2*1.6, .42, -5);
+      g.add(pal); const pila = new THREE.Mesh(new THREE.BoxGeometry(1.1,.9,1.1), carton); pila.position.set(-10 + k2*1.6, .95, -5); pila.castShadow = true; g.add(pila); }
+  }
+  if (p.tipo === 'oficina'){
+    const K = DATOS.kpi || {};
+    const tv = etiqueta(`KPI 30 días · entrega ${K.entrega ?? '—'} % · devolución ${K.devolucion ?? '—'} % · cancelación ${K.cancelacion ?? '—'} %`, '#3ccf7e', 1400);
+    tv.scale.set(12, .8, 1); tv.position.set(0, 3.4, -FONDO/2 + .4); g.add(tv);
+    for (let k2 = 0; k2 < 6; k2++){ const pl = planta(); pl.position.set(-ANCHO/2 + 1 + k2*((ANCHO-2)/5), .35, FONDO/2 - 1); g.add(pl); }
+  }
+  if (p.tipo === 'estudio'){
+    const fondo = new THREE.Mesh(new THREE.BoxGeometry(6,3.4,.1), new THREE.MeshLambertMaterial({color:'#f4efe6'})); fondo.position.set(7.5, 2.05, -6.5); g.add(fondo);
+    const piso2 = new THREE.Mesh(new THREE.BoxGeometry(6,.04,3), new THREE.MeshLambertMaterial({color:'#f4efe6'})); piso2.position.set(7.5, .4, -5); g.add(piso2);
+    const aro = new THREE.Mesh(new THREE.TorusGeometry(.5,.05,10,40), new THREE.MeshBasicMaterial({color:'#fff6dc'})); aro.position.set(7.5, 1.9, -1.6); g.add(aro);
+    const tripode = new THREE.Mesh(new THREE.CylinderGeometry(.03,.03,1.5,6), new THREE.MeshLambertMaterial({color:'#1f2125'})); tripode.position.set(7.5, 1.15, -1.6); g.add(tripode);
+    const camara = new THREE.Mesh(new THREE.BoxGeometry(.35,.25,.3), new THREE.MeshLambertMaterial({color:'#1f2125'})); camara.position.set(6.6, 1.6, -1.2); g.add(camara);
+    const sofa = new THREE.Mesh(new THREE.BoxGeometry(3,.7,1.1), new THREE.MeshLambertMaterial({color:'#6c7a86'})); sofa.position.set(7.5, .75, 5.5); sofa.castShadow = true; g.add(sofa);
+    const creadora = persona('#e06ac0', 3); creadora.position.set(7.5, .42, -5.2); g.add(creadora);
+  }
   p.agentes.forEach((a, k) => {
-    const filas = n > 4 ? 2 : 1, porFila = Math.ceil(n / filas), fila = Math.floor(k / porFila), col = k % porFila;
-    const x = (col - (porFila-1)/2) * (ANCHO-2.5) / Math.max(porFila, 2), z = filas === 2 ? (fila ? 1.6 : -3.2) : -.5;
+    const porFila = Math.min(4, n), filas = Math.ceil(n / porFila), fila = Math.floor(k / porFila), col = k % porFila;
+    const x = (col - (porFila-1)/2) * (ANCHO-5) / Math.max(porFila, 2) + (p.tipo === 'bodega' ? -7 : p.tipo === 'estudio' ? -3 : 0);
+    const z = (fila - (filas-1)/2) * 3.8 - .6 + (p.tipo === 'bodega' ? 3 : 0);
     const mesa = new THREE.Mesh(new THREE.BoxGeometry(1.9, .06, 1), mesaMat); mesa.position.set(x, 1.12, z+.9); mesa.castShadow = mesa.receiveShadow = true; g.add(mesa);
     [[-.85,.4],[.85,.4],[-.85,1.4],[.85,1.4]].forEach(([dx, dz]) => { const l = new THREE.Mesh(new THREE.BoxGeometry(.05,.74,.05), pataMat); l.position.set(x+dx, .75, z+dz); g.add(l); });
     const pantalla = new THREE.Mesh(new THREE.BoxGeometry(.95, .55, .04), pataMat); pantalla.position.set(x, 1.58, z+1.2); g.add(pantalla);
-    const brillo = new THREE.Mesh(new THREE.PlaneGeometry(.88,.48), new THREE.MeshBasicMaterial({color:p.color, transparent:true, opacity:.35})); brillo.position.set(x,1.58,z+1.175); brillo.rotation.y = Math.PI; g.add(brillo);
+    const brillo = new THREE.Mesh(new THREE.PlaneGeometry(.88,.48), new THREE.MeshBasicMaterial({color:a.color || p.color, transparent:true, opacity:.35})); brillo.position.set(x,1.58,z+1.175); brillo.rotation.y = Math.PI; g.add(brillo);
     const si = silla(); si.position.set(x, .38, z+.05); g.add(si);
-    const r = persona(p.color, k); r.position.set(x, .38, z+.1); g.add(r);
+    const r = persona(a.color || p.color, k); r.position.set(x, .38, z+.1); g.add(r);
+    if (a.persona){ const nom = etiqueta(a.persona.split(' ')[0], a.color || p.color, 300); nom.scale.set(1.7, .54, 1); nom.position.set(0, 2.35, 0); r.add(nom); }
     const aro = new THREE.Mesh(new THREE.RingGeometry(1.15, 1.3, 40), new THREE.MeshBasicMaterial({color:'#3ccf7e', transparent:true, opacity:0, side:THREE.DoubleSide}));
     aro.rotation.x = -Math.PI/2; aro.position.set(x, .4, z+.3); g.add(aro);
     robots.push({a, r, aro, brillo, si, casa:{x, z:z+.1}, fase:Math.random()*6});
@@ -249,16 +287,16 @@ const mastil = new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,5,8), columnaMa
 const faro = new THREE.Mesh(new THREE.SphereGeometry(.3,12,12), new THREE.MeshBasicMaterial({color:'#3ccf7e'})); faro.position.y = techo.position.y + 5.1; torre.add(faro);
 const letrero = etiqueta('TORO VERDE · vendido hoy ' + pesos(DATOS.vendido), '#3ccf7e', 1024); letrero.scale.set(16, 1.5, 1); letrero.position.y = techo.position.y + 1.6; torre.add(letrero);
 controls.target.set(0, (pisos.length*ALTO)/2, 0);
-const lejos = 14 + pisos.length*ALTO*1.25; camera.position.set(lejos*.72, pisos.length*ALTO*.75, lejos); controls.maxDistance = Math.max(90, lejos*1.8);
+const lejos = 30; { const io = Math.max(0, pisos.findIndex(p => p.tipo === 'oficina')); controls.target.set(0, 1 + io*ALTO + ALTO/2, 0); camera.position.set(lejos*.55, 1 + io*ALTO + 12, lejos); } controls.maxDistance = Math.max(90, lejos*1.8);
 
 // ---------- Paneles ----------
-let elegido = pisos[pisos.length-1];
+let elegido = pisos.find(p => p.tipo === 'oficina') || pisos[pisos.length-1];
 function pintarPisos(){
   const nav = $('pisos'); nav.querySelectorAll('button,.zona').forEach(b => b.remove());
   let zona = null;
   [...pisos].reverse().forEach(p => {
     if (p.zona && p.zona !== zona){ zona = p.zona; const z = document.createElement('div'); z.className = 'zona'; z.textContent = zona; nav.appendChild(z); }
-    const b = document.createElement('button'), act = p.agentes.filter(trabaja).length;
+    const b = document.createElement('button'), act = p.agentes.filter(trabajaC).length;
     b.setAttribute('aria-pressed', p === elegido);
     b.innerHTML = `<span class="num" style="background:${p.color}">${p.n}</span>${p.nombre}${act ? `<span class="ahora">● ${act}</span>` : ''}`;
     b.onclick = () => elegir(p); nav.appendChild(b);
@@ -266,9 +304,12 @@ function pintarPisos(){
 }
 function pintarFicha(){
   const p = elegido, f = $('ficha');
-  f.innerHTML = `<h2>Piso ${p.n}</h2><h3>${p.nombre}</h3><p class="area">${p.area} · ${p.agentes.length} agentes</p>` +
-    p.agentes.map(a => { const t = trabaja(a); return `<div class="agente ${t?'trabaja':''} ${a.horas.length||/otro chat/.test(a.dato)?'':'obra'}">${a.fase?`<div class="fase">${a.fase}</div>`:''}<div class="t">${a.nombre}<span class="estado">${t?'trabajando ahora':(a.horas.length?'en espera':(/otro chat/.test(a.dato)?'en el otro chat':'en construcción'))}</span></div>
-      <p>${a.hace}</p><div class="dato">${a.dato}</div>${t||!a.horas.length?'':`<div class="prox">Próxima vuelta: ${proxima(a)}</div>`}</div>`; }).join('');
+  const fun = a => { const t = trabaja(a), otro = /otro chat/.test(a.dato);
+    return `<div class="fun"><span class="estado ${t?'on':''}">${t?'ahora':(a.horas.length?proxima(a):(otro?'otro chat':'en construcción'))}</span><b>${a.nombre}</b> · ${a.hace}<div class="dato">${a.dato}</div></div>`; };
+  f.innerHTML = `<h2>Piso ${p.n}</h2><h3>${p.nombre}</h3><p class="area">${p.area} · ${p.agentes.length} personas</p>` +
+    p.agentes.map(c => { const t = trabajaC(c), obra = !c.funciones.some(a => a.horas.length || /otro chat/.test(a.dato));
+      return `<div class="agente ${t?'trabaja':''} ${obra?'obra':''}"><div class="fase">${c.area}</div><div class="t">${c.persona ? c.persona + ' · ' : ''}${c.nombre}<span class="estado">${t?'trabajando ahora':(obra?'en construcción':'en su puesto')}</span></div>
+      <p>${c.mision}</p>${c.funciones.length > 1 || c.funciones[0].nombre !== c.nombre ? c.funciones.map(fun).join('') : `<div class="dato">${c.funciones[0].dato}</div>`}</div>`; }).join('');
 }
 function elegir(p){
   elegido = p; pintarPisos(); pintarFicha();
@@ -276,7 +317,7 @@ function elegir(p){
   destino = {y, dist: 20};
 }
 let destino = null;
-function refrescar(){ pintarPisos(); pintarFicha(); $('trabajando').textContent = robots.filter(o => trabaja(o.a)).length; }
+function refrescar(){ pintarPisos(); pintarFicha(); $('trabajando').textContent = robots.filter(o => trabajaC(o.a)).length; }
 refrescar(); setInterval(refrescar, 20000);
 
 // Clic en un piso del edificio
@@ -297,7 +338,7 @@ const reloj3d = new THREE.Clock();
   requestAnimationFrame(animar);
   const t = reloj3d.getElapsedTime();
   robots.forEach(o => {
-    const on = trabaja(o.a), u = o.r.userData;
+    const on = trabajaC(o.a), u = o.r.userData;
     o.aro.material.opacity = on ? .55 + Math.sin(t*3)*.25 : 0;
     o.brillo.material.opacity = on ? .55 + Math.sin(t*6+o.fase)*.2 : .18;
     if (on && !quieto){
@@ -311,7 +352,8 @@ const reloj3d = new THREE.Clock();
       // sentado en su puesto, mirando el monitor
       o.r.position.set(o.casa.x, -.05, o.casa.z); o.r.rotation.y = 0;
       u.pi.rotation.x = u.pd.rotation.x = -Math.PI/2; u.bi.rotation.x = u.bd.rotation.x = -1.1;
-      if (!quieto) u.cabeza.rotation.y = Math.sin(t*.4 + o.fase)*.15;
+      if (!quieto){ u.cabeza.rotation.y = Math.sin(t*.4 + o.fase)*.15;
+        const tecla = Math.sin(t*9 + o.fase)*.08; u.bi.rotation.x = -1.1 + tecla; u.bd.rotation.x = -1.1 - tecla; }
     }
   });
   faro.material.color.setHSL(.4, .7, .45 + Math.sin(t*2)*.15);

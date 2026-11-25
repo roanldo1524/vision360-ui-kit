@@ -130,6 +130,31 @@ pisos = [
           horas=list(range(5, 21)), min=[19], dato=f'{subidos} rescatados'),
     ]),
 ]
+# Edificio de 3 pisos (Ronald 24-11): 1 recepción y bodega, 2 oficinas (logística, atención y tecnología), 3 creación de contenido.
+# Cada persona es un CARGO; sus funciones (agentes reales con horario) se ven en la ficha.
+_old = {x['nombre']: x for x in pisos}
+def _cargo(x, area): return dict(nombre=x['nombre'], mision=x['area'], color=x['color'], area=area, funciones=x['agentes'])
+def _uno(a, color, area): return dict(nombre=a['nombre'], mision=a['hace'], color=color, area=area, funciones=[a])
+NOMBRES = {'Jefe de inventarios': 'Jorge Salazar', 'Líder de Logística': 'Valentina Ríos', 'Confirmador de pedidos': 'Daniela Mejía',
+    'Resolutor de novedades': 'Andrés Gómez', 'Gestor de tickets y CAS': 'Camilo Herrera', 'Abogado de devoluciones': 'Juliana Paredes',
+    'Rastreador de oficinas': 'Mateo Castaño', 'Líder de Tecnología': 'Santiago Duarte', 'Monitor de fallas': 'Felipe Ortiz',
+    'Auditor de calidad': 'Laura Restrepo', 'Optimizador de procesos': 'Nicolás Vargas', 'Guardián de datos': 'Sara Montoya',
+    'Vendedor de WhatsApp': 'Isabella Cruz', 'Casino y remarketing': 'Tomás Rincón', 'Máquina Creativa': 'Mariana López', 'Analista de pauta': 'David Arango'}
+pisos = [
+    dict(n=1, tipo='bodega', nombre='Recepción y bodega', area='Recibir la mercancía, guardarla y que nunca falte producto', color='#c9a227',
+         agentes=[_cargo(_old['Jefe de inventarios'], 'Bodega')]),
+    dict(n=2, tipo='oficina', nombre='Oficinas', area='Logística y atención al cliente + Tecnología', color='#3ccf7e',
+         agentes=[_cargo(_old[k], 'Logística y atención') for k in ['Líder de Logística', 'Confirmador de pedidos', 'Resolutor de novedades',
+                  'Gestor de tickets y CAS', 'Abogado de devoluciones', 'Rastreador de oficinas']]
+                 + [_uno(a, _old['Tecnología']['color'], 'Tecnología') for a in _old['Tecnología']['agentes']]),
+    dict(n=3, tipo='estudio', nombre='Creación de contenido', area='Contenido para redes y ventas (lo maneja el chat «LUCID BOT TORO VERDE»)', color='#e06ac0',
+         agentes=[_uno(a, _old['Marketing y ventas']['color'], 'Marketing') for a in _old['Marketing y ventas']['agentes']]),
+]
+
+for _p in pisos:
+    for _c in _p['agentes']:
+        _c['persona'] = NOMBRES.get(_c['nombre'], '')
+
 datos = dict(
     actualizado=ahora.strftime('%d %b, %I:%M %p').replace('AM', 'a. m.').replace('PM', 'p. m.'),
     vendido=vendido, pedidos=len(validos), conf_robot=conf_robot, revisar=revisar, guias=guias,
