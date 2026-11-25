@@ -1,1 +1,74 @@
-{"96721620": {"ticket": "159637423", "fecha": 1795476942.0065749, "guia": "240065751116", "dc": "INTERRAPIDISIMO", "flete": "34145.00"}, "96361631": {"ticket": "159637423", "fecha": 1795476942.0065773, "guia": "240065554180", "dc": "INTERRAPIDISIMO", "flete": "23115.00"}, "95880023": {"ticket": "159637423", "fecha": 1795476942.0065784, "guia": "240065228558", "dc": "INTERRAPIDISIMO", "flete": "28645.00"}, "95839710": {"ticket": "159637423", "fecha": 1795476942.006579, "guia": "024035648060", "dc": "ENVIA", "flete": "19065.00"}, "95834997": {"ticket": "159637423", "fecha": 1795476942.0065796, "guia": "024035648083", "dc": "ENVIA", "flete": "22215.00"}, "95055195": {"ticket": "159637423", "fecha": 1795476942.00658, "guia": "WCO2001140678", "dc": "JAMV-DRIVE", "flete": "16470.00"}, "95036192": {"ticket": "159637423", "fecha": 1795476942.0065808, "guia": "36397129497", "dc": "COORDINADORA", "flete": "22653.35"}, "93664274": {"ticket": "159637423", "fecha": 1795476942.0065813, "guia": "36397028448", "dc": "COORDINADORA", "flete": "25913.85"}, "93657902": {"ticket": "159637423", "fecha": 1795476942.0065815, "guia": "024035419717", "dc": "ENVIA", "flete": "26715.00"}}
+{
+ "96721620": {
+  "ticket": "159637423",
+  "fecha": 1795476942.0065749,
+  "guia": "240065751116",
+  "dc": "INTERRAPIDISIMO",
+  "flete": "34145.00",
+  "respuesta": "NEGADO 24-11 (Meliza, Dropi): la transportadora cumplió los intentos de entrega"
+ },
+ "96361631": {
+  "ticket": "159637423",
+  "fecha": 1795476942.0065773,
+  "guia": "240065554180",
+  "dc": "INTERRAPIDISIMO",
+  "flete": "23115.00",
+  "respuesta": "NEGADO 24-11 (Meliza, Dropi): la transportadora cumplió los intentos de entrega"
+ },
+ "95880023": {
+  "ticket": "159637423",
+  "fecha": 1795476942.0065784,
+  "guia": "240065228558",
+  "dc": "INTERRAPIDISIMO",
+  "flete": "28645.00",
+  "respuesta": "NEGADO 24-11 (Meliza, Dropi): la transportadora cumplió los intentos de entrega"
+ },
+ "95839710": {
+  "ticket": "159637423",
+  "fecha": 1795476942.006579,
+  "guia": "024035648060",
+  "dc": "ENVIA",
+  "flete": "19065.00",
+  "respuesta": "NEGADO 24-11 (Meliza, Dropi): la transportadora cumplió los intentos de entrega"
+ },
+ "95834997": {
+  "ticket": "159637423",
+  "fecha": 1795476942.0065796,
+  "guia": "024035648083",
+  "dc": "ENVIA",
+  "flete": "22215.00",
+  "respuesta": "NEGADO 24-11 (Meliza, Dropi): la transportadora cumplió los intentos de entrega"
+ },
+ "95055195": {
+  "ticket": "159637423",
+  "fecha": 1795476942.00658,
+  "guia": "WCO2001140678",
+  "dc": "JAMV-DRIVE",
+  "flete": "16470.00",
+  "respuesta": "NEGADO 24-11 (Meliza, Dropi): la transportadora cumplió los intentos de entrega"
+ },
+ "95036192": {
+  "ticket": "159637423",
+  "fecha": 1795476942.0065808,
+  "guia": "36397129497",
+  "dc": "COORDINADORA",
+  "flete": "22653.35",
+  "respuesta": "NEGADO 24-11 (Meliza, Dropi): la transportadora cumplió los intentos de entrega"
+ },
+ "93664274": {
+  "ticket": "159637423",
+  "fecha": 1795476942.0065813,
+  "guia": "36397028448",
+  "dc": "COORDINADORA",
+  "flete": "25913.85",
+  "respuesta": "NEGADO 24-11 (Meliza, Dropi): la transportadora cumplió los intentos de entrega"
+ },
+ "93657902": {
+  "ticket": "159637423",
+  "fecha": 1795476942.0065815,
+  "guia": "024035419717",
+  "dc": "ENVIA",
+  "flete": "26715.00",
+  "respuesta": "NEGADO 24-11 (Meliza, Dropi): la transportadora cumplió los intentos de entrega"
+ }
+}
