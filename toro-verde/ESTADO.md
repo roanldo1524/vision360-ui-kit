@@ -848,3 +848,5 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - Sigue pendiente Yilbray Amador 3235056442 (Inzá, Cauca).
 
 - 5:49 p. m.: las reglas (sin IA) confirmaron 2: Felipe (98346369, tocó «CONFIRMAR PEDIDO») y Francisco (98345544, aceptó el resumen). 0 dudas.
+- 6:04 p. m.: las reglas confirmaron 2: Edmundo (98347477, Córdoba, Quindío) y Orlando Avendaño (98347248, Amalfi, galón). Revisión: los dos iban a oficina sin la dirección del punto → corregido (Amalfi KR ARANZAZU 20 79; Córdoba KR 10 12 39, RECLAMA EN OFICINA INTERRAPIDÍSIMO). Orlando dio el número de quien reclama (su hermano, sin celular táctil): teléfono cambiado 3106306255 → 3147224122 (el viejo queda en notas). Se le pidió por Lucid nombre completo y cédula del hermano para que la guía salga a su nombre. **Karen**: si responde, cambiar el nombre del destinatario en Dropi.
+- Arreglo permanente: revision_auto.py ahora pone la dirección del punto de oficina ANTES de confirmar (si no la encuentra, va a duda). tel_lote.js acepta TODOS=1 para pedidos ya confirmados sin guía.

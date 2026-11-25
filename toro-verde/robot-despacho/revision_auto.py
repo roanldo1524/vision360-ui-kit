@@ -86,6 +86,24 @@ if __name__ == '__main__':
             t0 = desde.setdefault(str(x['id']), time.time())
             if time.time() - t0 > ESPERA_IA: plan.setdefault('etiquetar', []).append({'id': x['id'], 'motivo': f'sin revisión de la IA en 2 h: {m}'})
             else: dudas.append(dict(x, motivo_duda=m))
+        # Ronald 25-11: oficina = «dirección del punto, RECLAMA EN OFICINA INTERRAPIDÍSIMO». Si Dropi solo dice «reclama en oficina», se pone el punto antes de confirmar.
+        import subprocess; sys.path.insert(0, os.path.join(os.getcwd(), 'robot')); import oficinas as _ofi
+        arreglos = []
+        for x in list(seguros):
+            d = det.get(x['id']) or {}; dirx = re.sub(r'\s+', ' ', d.get('dir') or '').strip(' ,')
+            if not re.search(r'oficina|reclam', dirx, re.I): continue
+            nueva = _ofi.dir_oficina(d.get('state'), d.get('city'), dirx)
+            if not nueva:
+                seguros.remove(x); dudas.append(dict(x, motivo_duda='oficina sin dirección del punto y no la encuentro')); continue
+            if nueva.upper() != dirx.upper(): arreglos.append(f"{x['id']}\t{nueva}")
+        if arreglos:
+            open('/tmp/dropi/dir_auto.tsv', 'w').write('\n'.join(arreglos) + '\n')
+            out = subprocess.run(['node', 'dir_lote.js', 'dir_auto.tsv'], cwd='/tmp/dropi', capture_output=True, text=True, timeout=300).stdout
+            print('AUTO_DIR_OFICINA', out.strip().replace('\n', ' | '))
+            malos = {int(l.split()[1]) for l in out.splitlines() if l.startswith(('FALLO', 'SALTO'))}
+            malos |= {int(a.split('\t')[0]) for a in arreglos if f"OK {a.split(chr(9))[0]}" not in out}
+            for x in [s for s in seguros if s['id'] in malos]:
+                seguros.remove(x); dudas.append(dict(x, motivo_duda='no pude poner la dirección del punto de oficina'))
         json.dump(desde, open(DESDE, 'w'))
         json.dump(dudas, open(DUD, 'w'), ensure_ascii=False)
         plan['confirmar'] = seguros; json.dump(plan, open(P, 'w'), ensure_ascii=False)
