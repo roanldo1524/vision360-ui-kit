@@ -24,9 +24,10 @@ python3 -I robot/razonar.py | head -1
 python3 -I -c "
 import json;a=json.load(open('/tmp/dropi/acciones.json'))
 for x in a:
-  if x['accion']=='EDITAR_Y_CONFIRMAR': print(x['id'],x['editar'].get('precio','-'),x['editar'].get('transportadora','-'),x.get('dc','-'))" | while read id precio trans dc; do
+  if x['accion']=='EDITAR_Y_CONFIRMAR': print(x['id'],x['editar'].get('precio','-'),x['editar'].get('transportadora','-'),x.get('dc','-'),x['editar'].get('cantidad','-'))" | while read id precio trans dc cant; do
+  [ "$cant" = "-" ] && cant=
   [ "$precio" = "-" ] && precio=""; [ "$trans" = "-" ] && trans=
-  r=$(cd /tmp/dropi && node ui_editar3.js "$id" "$precio" "$trans" guardar "$dc" </dev/null 2>&1 | grep -E "COTIZA|SIN_CAMBIO|CHEQUEO|NO_GUARDO|API POST 200 https://api.dropi.co/api/orders/myorders " | cut -c1-160); echo "$id $r"
+  r=$(cd /tmp/dropi && CANT="$cant" node ui_editar3.js "$id" "$precio" "$trans" guardar "$dc" </dev/null 2>&1 | grep -E "CANTIDAD|COTIZA|SIN_CAMBIO|CHEQUEO|NO_GUARDO|API POST 200 https://api.dropi.co/api/orders/myorders " | cut -c1-160); echo "$id $r"
   echo "$r" | grep -q NO_GUARDO && echo "$id" >> /tmp/dropi/no_editados.txt
   echo "$r" | grep -q SIN_CAMBIO && echo "$id" >> /tmp/dropi/sin_cambio.txt
   echo "$r" | grep -q "api/orders/myorders " && echo "$id" >> /tmp/dropi/editados_vuelta.txt; done

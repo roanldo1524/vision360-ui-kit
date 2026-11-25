@@ -6,7 +6,8 @@ import os
 #  4) Chat: intención de compra confirmada, sin arrepentimiento, sin pago por adelantado sin validar.
 #  5) Producto, presentación y cantidad: los que pidió el cliente.
 #  6) Flete mayor al tope (1 L $25.000, 2 L $29.000, galón $35.000, lo demás $30.000; Ronald 22-11): no se confirma, revisión humana.
-import json, re
+import json, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import oficinas as _ofi
 TR = {int(k): v for k, v in json.load(open('/tmp/dropi/transportadoras.json')).items()}
 UI = {'INTERRAPIDISIMO': 'Interrapidisimo', 'ENVIA': 'Envia', 'COORDINADORA': 'Coordinadora', 'SERVIENTREGA': 'Servientrega', 'TCC': 'Tcc', 'DOMINA': 'Domina', 'VELOCES': 'Veloces'}
 PRECIOS = {99000, 169000, 269000, 89100, 152100, 242100, 995000, 895500}
@@ -40,7 +41,8 @@ for d in det:
     es_oficina_std = bool(re.search(r'(reclama|recoge|retira)\w* en (la )?oficina|^oficina (de )?interrap|oficina interrap', dirx))
     tiene_via = bool(re.search(r'\b(calle|cl|cll|carrera|cra|cr|kr|kra|carera|avenida|av|diagonal|dg|diag|transversal|tv|trans|manzana|mz|mza|vereda|vda|finca|corregimiento|barrio|km|kil[oó]metro|sector|lote|casa)\b', dirx)) and bool(re.search(r'\d', dirx) or re.search(r'vereda|finca|corregimiento|sector', dirx))
     if re.search(r'servientrega|coordinadora|\benv[ií]a\b|\btcc\b|deprisa|\b472\b|domina|veloces', dirx): motivos.append(f'la dirección nombra otra transportadora (solo enviamos a oficinas de Interrapidísimo): «{(d["dir"] or "").strip()[:70]}»')
-    if oficina and not es_oficina_std: motivos.append(f'dirección rara para oficina: «{d["dir"].strip()[:70]}»')
+    # Ronald 25-11: la dirección de oficina la arregla oficinas.py («dirección del punto, RECLAMA EN OFICINA INTERRAPIDÍSIMO»); solo se frena si no se encuentra la oficina
+    if oficina and not es_oficina_std and not _ofi.dir_oficina(d.get('state'), d.get('city'), d['dir']): motivos.append(f'dirección rara para oficina y no encuentro la oficina de Interrapidísimo del municipio: «{d["dir"].strip()[:70]}»')
     elif not oficina and not (re.search(r'#\s*\d+|\bn[oº°]\.?\s*\d+|\d+\s*[a-z]?\s*-\s*\d+|\bmz[a]?\.?\s*\w+\s*(cs|casa|lt|lote)\.?\s*\d+|\b(km|kil[oó]metro)\s*\d+', dirx) or re.search(r'vereda|finca|corregimiento|v[ií]a a |sector|parcela|hacienda', dirx)):
         motivos.append(f'dirección sin número de puerta, no es clara: «{(d["dir"] or "").strip()[:70]}»')
     elif not oficina and not tiene_via: motivos.append(f'dirección incompleta o rara: «{(d["dir"] or "").strip()[:70]}»')
@@ -63,7 +65,16 @@ for d in det:
     # 5) Producto y cantidad
     if f:
         lc = litros_chat(f.get('producto', '')); ld = sum((i['q'] or 0) * next((v for k, v in LITROS.items() if k in (i['pres'] or '').upper()), 0) for i in d['items'])
-        if lc and ld and lc != ld: motivos.append(f'producto distinto: en el chat {lc} L, en Dropi {ld} L')
+        if lc and ld and lc != ld:
+            # Ronald 25-11: producto y cantidad tal cual el último resumen del chat, con su valor. Solo litros (1, 2 o 3 L) se corrigen solos;
+            # cambiar a galón o poma es otra presentación en Dropi y va a revisión humana.
+            try: vcc = float(re.sub(r'[^\d.]', '', f.get('valor') or '') or 0)
+            except Exception: vcc = 0
+            solo_litro = len(d['items']) == 1 and re.fullmatch(r'\s*LITRO\s*', (d['items'][0]['pres'] or '').upper().replace('PRESENTACION :', '').replace('PRESENTACION:', ''))
+            cuadra = {1: (99000, 89100), 2: (169000, 152100)}.get(lc, ())  # el valor del chat tiene que ser el de esa cantidad
+            if solo_litro and vcc in cuadra: editar.update(cantidad=lc, precio=int(vcc))
+            elif solo_litro and vcc: motivos.append(f'producto distinto: en el chat {lc} L pero el valor del chat es ${vcc:,.0f}, en Dropi {ld} L: aclarar con el cliente'.replace(',', '.'))
+            else: motivos.append(f'producto distinto: en el chat {lc} L, en Dropi {ld} L')
     if f and f.get('origen') == 'pagina' and round(d['total']) not in PRECIOS: motivos.append(f'pedido de la página con precio raro: {d["total"]:.0f}')
     # Lo que el agente ya frenó al leer el chat no se vuelve a proponer (hasta que una persona lo resuelva)
     _V = '/tmp/dropi/vetos.json'
@@ -74,7 +85,7 @@ for d in det:
     ya_compro = sum(k.get('delivered', 0) for k in ms.get('by_courier') or []) or ms.get('period_delivered', 0)
     if round(d['total']) in DESC and ya_compro: motivos.append(f'ya nos había comprado ({ya_compro} entregados) y lleva precio con descuento ${d["total"]:,.0f}: decidir el precio'.replace(',', '.'))
     # 3) Precio del chat
-    if f and not motivos:
+    if f and not motivos and 'cantidad' not in editar:
         try: vc = float(re.sub(r'[^\d.]', '', f['valor']) or 0)
         except Exception: vc = 0
         if vc and abs(vc - d['total']) > 1:

@@ -798,3 +798,8 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 25-11: los agentes ahora se responden entre sí: quien recibe contesta con el siguiente paso real del proceso (ej. Valentina a Daniela: «Queda en REVISAR HUMANO para Karen»). Sale en burbuja, en la lista y en el televisor de actividad.
 - 25-11: al elegir un piso se ve SOLO ese piso (se ocultan los de arriba y abajo, techo y letrero) y la cámara entra a ese piso; «Edificio» vuelve a mostrar todo. Seguir agente y Pantallas también abren solo su piso.
 - 25-11 madrugada: vueltas 5:04–6:04 confirmaron 11 pedidos (Jesús A. Flórez, Jesús G. Quintero —dirección pasada a oficina—, Mauricio Roldán, Álvaro Murillo, Arnoldo Cardona, Wilder Jiménez, Luz Dari Botero, Alberto Rivera, Walter Otoya, Alirio Taborda, Efrén Hoyos). 5 pedidos de Lucid con «Faltan campos obligatorios» (sin departamento) para subir a mano.
+- 25-11 (Ronald): reglas nuevas del robot.
+  · Oficina: SIEMPRE «dirección del punto, RECLAMA EN OFICINA INTERRAPIDÍSIMO» (oficinas.py; en ciudades grandes se respeta la dirección de oficina que dio el cliente si trae número). Ya no frena por «dirección rara para oficina» si encuentra la oficina. Jesús Germán corregido a KR 9 10 17.
+  · Producto/cantidad distinta: el robot corrige Dropi a la cantidad y valor del último resumen del chat (solo litros 1–2 L y si el valor cuadra con la cantidad; «Precio de venta» en Dropi es por unidad). Galón/poma o valor que no cuadra → humano.
+  · Plantillas de Meta redactadas en docs/plantillas-meta.md (Ronald las crea en Lucid/Meta).
+  · Pendiente: pagos Bancolombia Negocios (Gmail desconectado: reconectar) y servidor propio.
