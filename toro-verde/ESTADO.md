@@ -841,3 +841,8 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 25-11 4:16 p. m.: casino de las 4 p. m. a 47 personas (0 fallos). Ventas del casino hoy: 11 pedidos, $1.839.000.
 - 25-11 3:49 p. m.: confirmada por IA Liliana Cabrera (galón, Pasto, 38/38). Pidió factura electrónica a nombre de Liliana Carolina Cabrera Luna CC 1085317009 → Karen. Reglas sin IA confirmaron también Jorge Fredy, Ángel, Jhon, Jardiel, María, Lino, Héctor.
 - 25-11 4:23 p. m. CAS: Inter respondió 97053523 (Jeison Mejía, Carcasí): «rehusado / ya recibió», va a devolución; el cliente NUNCA rechazó en el chat → se pidió a Inter no devolver y dejarlo en oficina Carcasí (KR 3 2 13) o nuevo ofrecimiento; al cliente se le escribió por Lucid. Escalados a asesor: 97479921 (Envía Pasto, «inconvenientes operativos») y 97653934 (Coordinadora Salazar, en reparto 50 h). 97291930 en novedad (bot Lucid); 97374668 y 97393818 ya en oficina.
+
+### 25-11 5:19 p. m. (vuelta completa)
+- Reglas sin IA: 0 pedidos nuevos para confirmar, 0 dudas. 12 siguen en REVISAR HUMANO.
+- Lucid «Error al subir» nuevo: Néstor Delgado 3228431636 (Rioblanco, 2 litros, $169.000, oficina): le faltan departamento (Tolima) y dirección. Subir a mano con «dirección del punto, RECLAMA EN OFICINA INTERRAPIDÍSIMO».
+- Sigue pendiente Yilbray Amador 3235056442 (Inzá, Cauca).
