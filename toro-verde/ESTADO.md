@@ -808,3 +808,7 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 25-11 7:34 a. m.: confirmados Hoover Guachaves (2 L, oficina Consacá), Hervin Contreras (galón, El Carmen N. de S., cliente nuevo) y Orlando Vargas (1 L, oficina Marsella).
 - 25-11 7:49 a. m.: frenado Ferney Portilla 3214568843 (galón): pidió oficina de BRUSELAS (Pitalito); Dropi con ciudad Pitalito. Karen cambia ciudad; dirección ya puesta CL 7 KR 5 LC 5.
 - 25-11 8:04 a. m.: confirmados Jimmy Velásquez (1 L, Villavicencio, nuevo), Javier Suárez Torres (galón, oficina Andalucía) y Néstor Sanabria (2 L, oficina Une).
+- 25-11 8:34 a. m.: confirmados Segundo Arquímedes Díaz (1 L, oficina Puente Nacional) y Óscar Arbey Orozco (1 L, oficina Cajibío).
+- 25-11 (Ronald): el agente del CAS no suelta el caso hasta cerrarlo; solo pasa a humano lo que no puede hacer (llamar, plata, chat cerrado).
+  Herramientas nuevas de evidencia: evidencia_cliente.py (baja fotos que el cliente mandó por WhatsApp), pantallazo_pedido.js (captura del pedido en Dropi),
+  reabrir_cas.js con ADJUNTO=… (adjunta archivos en el chat del CAS; PRUEBA=1 no envía). Probado sin enviar en el caso 96710562.

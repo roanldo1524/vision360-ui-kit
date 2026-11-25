@@ -37,4 +37,10 @@ GUÍA (experto en logística: que se ENTREGUE y NUNCA se devuelva si hay otra sa
  · En reparto / programado → agradece y pide fecha; si a las 24 h sigue igual, seguimiento.
  · Solo repite el estado → responde con respeto que no ha cambiado en X horas y pide gestión concreta y fecha.
  · Pide datos → dáselos (Dropi o chat). Si el chat del cliente está cerrado, anota para Karen el dato exacto a pedirle.
+ · Ronald 25-11: NO sueltes el caso. Sigue conversando con el asesor del CAS (cada ronda) hasta que quede resuelto: entregado, en oficina
+   con el cliente avisado, o nuevo ofrecimiento programado. A Karen/humano solo lo que de verdad no puedes hacer tú (llamar, plata, chat cerrado).
+ · Evidencias: si el CAS pide pruebas (foto del paquete, de la fachada, de la cédula, de que nadie fue), pídeselas al cliente por Lucid
+   (solo si el chat está abierto, 5 a. m.–8 p. m.). Las fotos que mande el cliente: `python3 -I evidencia_cliente.py <telefono>` las baja a
+   /tmp/dropi/evidencias/<telefono>/. Pantallazo del pedido en Dropi (estado y guía): `node pantallazo_pedido.js <pedido>`.
+   Para enviarlas al CAS: `ADJUNTO=/ruta1,/ruta2 node reabrir_cas.js <pedido> "<mensaje>" seguir`.
  · Tono Karen: formal, corto, concreto, agradece. Un mensaje pensado por caso, nunca copiar y pegar.''')
