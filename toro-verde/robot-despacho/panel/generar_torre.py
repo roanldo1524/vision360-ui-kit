@@ -62,13 +62,24 @@ except Exception:
 # horario: minutos de la hora en que trabaja (hora Bogotá) y horas del día
 A = lambda **k: k
 pisos = [
-    A(n=8, nombre='Líder de Tecnología', area='Que el sistema funcione siempre y cada proceso sea más rápido', color='#9aa7b8', agentes=[
-        A(id='monitor', nombre='Monitor de fallas', hace='Vigila que cada agente corrió a su hora; si se cayó la sesión o la máquina, lo repara y relanza',
-          horas=[], min=[], dato='por construir (hoy se repara a mano)'),
-        A(id='optimizador', nombre='Optimizador de procesos', hace='Aprende cómo se hace cada proceso y lo hace más rápido y con menos trabajo para Karen',
-          horas=[], min=[], dato='por construir'),
+    A(n=9, zona='Marketing', nombre='Marketing y ventas', area='Traer clientes y vender por WhatsApp (lo maneja el chat «LUCID BOT TORO VERDE»)', color='#e06ac0', agentes=[
+        A(id='vendedor', nombre='Vendedor de WhatsApp', hace='El bot de Lucid atiende, asesora y arma el resumen del pedido', horas=[], min=[], dato='a cargo del otro chat'),
+        A(id='casino', nombre='Casino y remarketing', hace='Promos solo para quien nunca ha comprado, para impulsar el cierre', horas=[], min=[], dato='a cargo del otro chat'),
+        A(id='creativa', nombre='Máquina Creativa', hace='Guiones UGC con creadoras; dos aprobaciones humanas: antes de grabar y antes de lanzar', horas=[], min=[], dato='a cargo del otro chat'),
+        A(id='pauta', nombre='Analista de pauta', hace='Lee Meta Ads: qué escalar, pausar o renovar', horas=[], min=[], dato='a cargo del otro chat'),
     ]),
-    A(n=7, nombre='Líder de Logística', area='Orquesta al equipo para cumplir 90 % entrega · 3 % devolución · 7 % cancelación', color='#7aa6ff', agentes=[
+    A(n=8, zona='Tecnología', nombre='Tecnología', area='Que el sistema nunca falle y cada proceso sea más rápido y fácil', color='#9aa7b8', agentes=[
+        A(id='lider_tec', nombre='Líder de Tecnología', hace='Orquesta las mejoras: dónde fallamos, qué proceso optimizar primero', horas=[], min=[], dato='por construir el monitor automático'),
+        A(id='monitor', nombre='Monitor de fallas', hace='Vigila que cada agente corrió a su hora; si se cayó la sesión o la máquina, lo repara y relanza',
+          horas=[], min=[], dato='hoy se repara a mano'),
+        A(id='auditor_calidad', nombre='Auditor de calidad', hace='Compara lo que frenó el robot con lo que luego aprobó Karen y ajusta las reglas',
+          horas=[20], min=[19], dato='medición diaria de las 8 p. m.'),
+        A(id='optimizador', nombre='Optimizador de procesos', hace='Aprende cómo se hace cada proceso y lo hace con menos tiempo y menos trabajo para Karen',
+          horas=[], min=[], dato='por construir'),
+        A(id='datos', nombre='Guardián de datos', hace='Guarda en el repositorio vetos, aclaraciones, quejas y reclamos para que no se pierdan',
+          horas=list(range(5, 21)), min=[19], dato='copia cada vuelta'),
+    ]),
+    A(n=7, zona='Logística y atención al cliente', nombre='Líder de Logística', area='Orquesta al equipo para cumplir 90 % entrega · 3 % devolución · 7 % cancelación', color='#7aa6ff', agentes=[
         A(id='kpi', nombre='Tablero de KPI', hace=f"Últimos 30 días ({kpi['base']} pedidos terminados) contra la meta",
           horas=list(range(5, 21)), min=[19], dato=f"entrega {kpi['entrega']} % (meta 90) · devolución {kpi['devolucion']} % (meta 3) · cancelación {kpi['cancelacion']} % (meta 7) · {kpi['oficina']} en oficina"),
         A(id='reportero', nombre='Reportes y avisos', hace='2 reportes por WhatsApp a Ronald, Karen y Leidy; avisa a quien debe llamar a un cliente',
@@ -78,23 +89,23 @@ pisos = [
         A(id='medidor', nombre='Panel y torre', hace='Publica el panel y esta torre cada hora con los números reales',
           horas=list(range(5, 21)), min=[19], dato='publicados cada hora'),
     ]),
-    A(n=6, nombre='Jefe de inventarios', area='Que nunca se confirme un pedido sin producto en bodega', color='#c9a227', agentes=[
+    A(n=6, zona='Logística y atención al cliente', nombre='Jefe de inventarios', area='Que nunca se confirme un pedido sin producto en bodega', color='#c9a227', agentes=[
         A(id='stock', nombre='Monitor de stock', hace='Cada 30 min: stock por bodega vs pedidos confirmados sin guía; avisa antes de agotarse',
           horas=[], min=[], dato='por construir'),
     ]),
-    A(n=5, nombre='Rastreador de oficinas', area='Que todo paquete en oficina se reclame antes de que lo devuelvan', color='#ff8a65', agentes=[
+    A(n=5, zona='Logística y atención al cliente', nombre='Rastreador de oficinas', area='Que todo paquete en oficina se reclame antes de que lo devuelvan', color='#ff8a65', agentes=[
         A(id='oficina', nombre='Vigía de paquetes en oficina', hace='Lista lo que está en oficina y cuántos días lleva; valida que el cliente recibió la plantilla de Lucid',
           horas=[], min=[], dato='por construir (hoy lo hace con los casos del CAS)'),
         A(id='custodia', nombre='Gestor de custodia', hace='Si el cliente no puede ir: pide al CAS ampliar custodia o que reclame un familiar',
           horas=[10, 12, 16, 18], min=[23], dato='activo dentro de la conversación del CAS'),
     ]),
-    A(n=4, nombre='Abogado de devoluciones', area='Que no nos cobren fletes de devoluciones injustificadas', color='#e05a7a', agentes=[
+    A(n=4, zona='Logística y atención al cliente', nombre='Abogado de devoluciones', area='Que no nos cobren fletes de devoluciones injustificadas', color='#e05a7a', agentes=[
         A(id='reclamador', nombre='Analista de causales', hace='Revisa cada devolución con las causales de Dropi y los plazos (Inter 7 días, demás 30)',
           horas=[12], min=[43], dato=f"{len(devol)} guías reclamadas"),
         A(id='ticket', nombre='Ticket Dev_injustificadas', hace='Llena el Excel de Dropi, abre el ticket y hace seguimiento con evidencia',
           horas=[12], min=[43], dato=f"tickets: {', '.join('#' + t for t in tickets) or '—'}"),
     ]),
-    A(n=3, nombre='Gestor de tickets y CAS', area='Que ningún paquete se quede quieto más de 48 h', color='#f2a33a', agentes=[
+    A(n=3, zona='Logística y atención al cliente', nombre='Gestor de tickets y CAS', area='Que ningún paquete se quede quieto más de 48 h', color='#f2a33a', agentes=[
         A(id='vigia', nombre='Vigía de guías quietas', hace='Lee el historial de cada guía; marca +48 h quietas y descarta errores de actualización de Dropi',
           horas=[8, 14], min=[47], dato=f'{len(quietas)} guías quietas vigiladas'),
         A(id='abogado', nombre='Quejas al CAS', hace='Pone la queja con el pantallazo del historial; si la IA la cierra, pide asesor humano',
@@ -102,11 +113,11 @@ pisos = [
         A(id='conversador', nombre='Negociador con transportadoras', hace='Conversa con el asesor: fecha, nuevo intento, custodia, datos correctos',
           horas=[10, 12, 16, 18], min=[23], dato=f"{cas_activos} casos abiertos"),
     ]),
-    A(n=2, nombre='Resolutor de novedades', area='Que ninguna novedad termine en devolución por falta de respuesta', color='#5ec8e5', agentes=[
+    A(n=2, zona='Logística y atención al cliente', nombre='Resolutor de novedades', area='Que ninguna novedad termine en devolución por falta de respuesta', color='#5ec8e5', agentes=[
         A(id='novedades', nombre='Bot de Lucid', hace='Resuelve cada novedad con el cliente y da la solución en Dropi (lo maneja el otro chat)',
           horas=list(range(6, 21)), min=list(range(0, 60, 15)), dato=f"novedades abiertas ayer: {rep.get('nov_abiertas', 0)}"),
     ]),
-    A(n=1, nombre='Confirmador de pedidos', area='Que todo pedido bueno salga hoy y ninguno dudoso salga sin preguntar', color='#3ccf7e', agentes=[
+    A(n=1, zona='Logística y atención al cliente', nombre='Confirmador de pedidos', area='Que todo pedido bueno salga hoy y ninguno dudoso salga sin preguntar', color='#3ccf7e', agentes=[
         A(id='confirmador', nombre='Lector de chats', hace='Lee cada chat como Karen y confirma en Dropi con CONFIRMADO AGENTE',
           horas=list(range(5, 21)), min=[19], dato=f'{conf_robot} confirmados hoy'),
         A(id='liviana', nombre='Vuelta rápida', hace='A los :04, :34 y :49 para que nadie espere',

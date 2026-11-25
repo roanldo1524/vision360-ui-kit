@@ -1,3 +1,16 @@
+# Organigrama de Toro Verde
+
+La empresa tiene tres áreas:
+
+- **Marketing y ventas:** traer clientes y vender por WhatsApp.
+  - Funciones: vendedor del bot de Lucid, casino y remarketing, Máquina Creativa (guiones UGC) y analista de pauta.
+  - Lo maneja el chat «LUCID BOT TORO VERDE».
+- **Logística y atención al cliente:** este manual.
+  - Cargos: Líder de Logística, Confirmador, Resolutor de novedades, Gestor de tickets y CAS, Abogado de devoluciones, Jefe de inventarios y Rastreador de oficinas.
+  - Lo maneja este chat.
+- **Tecnología:** varios agentes revisan y orquestan qué mejorar en los procesos de toda la empresa.
+  - Líder de Tecnología, Monitor de fallas, Auditor de calidad, Optimizador de procesos y Guardián de datos.
+
 # Equipo de Logística de Toro Verde
 
 Ronald (24-11): «Cada uno tiene un rol, misión del cargo y responsabilidad que debe cumplir, de que todo funcione a la perfección».
