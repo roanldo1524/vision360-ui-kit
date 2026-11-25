@@ -804,3 +804,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
   · Plantillas de Meta redactadas en docs/plantillas-meta.md (Ronald las crea en Lucid/Meta).
   · Pendiente: pagos Bancolombia Negocios (Gmail desconectado: reconectar) y servidor propio.
 - 25-11 6:19 a. m.: confirmados Fabiola Caracas, Emilse Nieto, Johana Pérez, Nury Cifuentes, Diego Armando Mosquera y Nancy Ardila (los 3 últimos gracias a la regla nueva de oficina). Lucid: 3 OJO_YA_SUBIDO (3102613969, 3147683739, 3218782445) y Yilbray 3235056442 sin departamento.
+- 25-11 7:04–7:19 a. m.: confirmados Javier Bastidas (oficina San Carlos, KR 19 19 19) y Dalabier Zapata (oficina Caicedo). Reporte de la mañana enviado. Lucid: Yilbray 3235056442 sigue sin departamento; 3 OJO_YA_SUBIDO.
