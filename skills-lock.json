@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "skills": {
+    "architecture-rendering": {
+      "source": "modbender/skill-library-mcp",
+      "commit": "d9c8fe903b5b4e82237dbe8d0df8567783022e18",
+      "sourceType": "github",
+      "skillPath": "data/architecture-rendering/SKILL.md",
+      "computedHash": "423b6292a4f34c6ec437f97c424052c5b6af8a875ef79b7fcc2a41b73dbd22c9"
+    }
+  }
+}
