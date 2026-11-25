@@ -794,3 +794,5 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - Los agentes se mueven SOLO con eventos reales de hoy (oficina_datos.py), ahora más rápido (cada 2,4 s).
 - Reunión diaria R-AAAAMMDD con agenda, conversación basada en reglas y datos reales, tareas con responsable y fecha; pestaña Calidad ISO 9001 (PHVA, procesos, riesgos, acciones).
 - Inventario: sigue «en construcción» (no se inventan cifras).
+
+- 25-11: los agentes ahora se responden entre sí: quien recibe contesta con el siguiente paso real del proceso (ej. Valentina a Daniela: «Queda en REVISAR HUMANO para Karen»). Sale en burbuja, en la lista y en el televisor de actividad.

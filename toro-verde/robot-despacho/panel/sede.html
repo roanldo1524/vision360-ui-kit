@@ -430,11 +430,23 @@ Object.entries(PUESTOS).forEach(([nombre, [x, pi, z, rot]]) => {
 const EVENTOS = (DATOS.eventos || []).filter(e => gente[e.de]);
 const lista = $('lista'), historial = [];
 let tab = 'agente', sel = 'Líder de Logística';
-function burbuja(g, txt, color){ if (g.burbuja) g.r.remove(g.burbuja); const corto2 = txt.length > 46 ? txt.slice(0, 45) + '…' : txt;
+function burbuja(g, txt, color){ if (g.burbuja) g.r.remove(g.burbuja); const corto2 = txt.length > 52 ? txt.slice(0, 51) + '…' : txt;
   const s = etiqueta(corto2, null, color || '#e9b84f', Math.min(1400, 80 + corto2.length*24)); s.scale.multiplyScalar(.62); s.position.set(0, 2.95, 0); g.r.add(s); g.burbuja = s; }
 function quitarBurbuja(g){ if (g.burbuja){ g.r.remove(g.burbuja); g.burbuja = null; } }
 function registrar(e){ historial.unshift(`<li><span class="h">${esc(e.hora)}</span><b>${esc(corto(e.de))}</b>${e.para ? ' → <b>' + esc(corto(e.para)) + '</b>' : ''}: ${esc(e.texto)}</li>`);
   lista.innerHTML = historial.slice(0, 6).join(''); VIVO.unshift(e); if (VIVO.length > 20) VIVO.pop(); telVivo.pintar(); }
+// Respuesta de quien recibe: es el paso siguiente real del proceso para ese tipo de evento (no se inventan datos)
+const RESPUESTA = {
+  veto: 'Recibido. Queda en REVISAR HUMANO para Karen',
+  cas_oficina: 'Anotado. Vigilo que el cliente lo recoja',
+  cas_intento: 'Bien. Si no entregan, Karen llama al cliente',
+  cas_entregado: 'Listo: lo cuento como entregado, no devolución',
+  ticket: 'Bien. Sigo el ticket hasta que Dropi responda',
+  falla: 'Recibido. Se relanza en la próxima vuelta',
+};
+function responder(g, e){ const r = RESPUESTA[e.tipo] || 'Recibido, queda en mi lista'; burbuja(g, '↩ ' + r, '#7ed957');
+  historial.unshift(`<li><span class="h">${esc(e.hora)}</span><b>${esc(corto(e.para))}</b> → <b>${esc(corto(e.de))}</b>: ${esc(r)}</li>`); lista.innerHTML = historial.slice(0, 6).join('');
+  VIVO.unshift({hora:e.hora, de:e.para, para:e.de, texto:r}); telVivo.pintar(); }
 const PASILLO = 3.1;
 function ruta(a, b){ return [{x:a.x, z:a.z}, {x:a.x + .95, z:a.z}, {x:a.x + .95, z:PASILLO}, {x:b.x, z:PASILLO}]; }
 function largo(p){ let s = 0; for (let i = 1; i < p.length; i++) s += Math.hypot(p[i].x - p[i-1].x, p[i].z - p[i-1].z); return s; }
@@ -583,7 +595,8 @@ const vTmp = new THREE.Vector3(), vTmp2 = new THREE.Vector3(); let tPrev = 0;
       u.pi.rotation.x = u.pd.rotation.x = -Math.PI/2; u.bi.rotation.x = u.bd.rotation.x = -.9; return; }
     if (a.tipo === 'charla'){ const u = g.r.userData; u.pi.rotation.x = u.pd.rotation.x = 0; g.r.rotation.y = a.rol === 'lleva' ? Math.PI/2 : -Math.PI/2;
       u.bd.rotation.x = a.rol === 'lleva' ? -1 + Math.sin(t*4)*.15 : -.3; u.bi.rotation.x = 0; u.cabeza.rotation.y = Math.sin(t*2 + g.fase)*.2;
-      if (t - a.ini > 1.8){ const pts = [...a.pts].reverse(); g.accion = {tipo:'volver', ini:t, pts, L:largo(pts)}; if (a.rol === 'lleva') quitarBurbuja(g); } }
+      if (a.rol === 'recibe' && !a.respondio && t - a.ini > 1.1){ a.respondio = true; responder(g, a.e); }
+      if (t - a.ini > 3.4){ const pts = [...a.pts].reverse(); g.accion = {tipo:'volver', ini:t, pts, L:largo(pts)}; if (a.rol === 'lleva') quitarBurbuja(g); } }
   });
   if (modo === 'seguir' && seguido && gente[seguido]){ const p = gente[seguido].r.position; controls.target.lerp(vTmp.set(p.x, p.y + 1.2, p.z), 1 - Math.exp(-dt*5));
     camera.position.lerp(vTmp2.set(p.x - 2.5, p.y + 3.6, p.z + 7.5), 1 - Math.exp(-dt*3)); }
