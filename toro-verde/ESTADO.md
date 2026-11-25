@@ -828,3 +828,5 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 ### 25-11 10:14 a. m. — Casino
 - Envío de las 10 a. m.: 301 personas (se cortó a los 15 minutos por el límite de tiempo; el resto sale en el envío de la 1 p. m.).
 - Remarketing total del 17 al 25-11: 4.196 mensajes, 111 ventas, ~$18,1 millones (casino 84 ventas $14,7 M exactos; mensajes 17 y 18-11: 24 ventas ~$2,8 M estimado; empujón 21-11: 3 ventas $637.000).
+- 25-11 10:23 a. m. CAS: Envía respondió 10 casos (asesor Mateo Ramírez): 3 en reparto hoy en Medellín (96893876 Nohelia, 97405011 Elerban, 97598644 Jeiber) → avisados por Lucid; 3 en reexpedición 10–15 días (97329070, 97296065 Santander de Quilichao; 97657529 Risaralda); 1 despachada (97284203 Floridablanca); 3 en novedad (97248180 Soacha, 97241131 Medellín, 97393751 Valledupar «destinatario no se encuentra», fachada rejas negras) → bot de Lucid.
+  Escalar: 97374668 (Uribe) y 97393818 (Acevedo) ya están en RECLAME EN OFICINA → no se escribió al CAS; clientes avisados por Lucid con dirección de la oficina. 97291930 (Envía, Popayán, en reparto) queja de hoy, esperando asesor.
