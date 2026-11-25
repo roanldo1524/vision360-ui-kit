@@ -26,7 +26,7 @@
   },
   {
    "quien": "Confirmador de pedidos",
-   "dice": "Hoy confirmé 2 pedidos con chat leído y frené 4 con motivo. Quedan 1 en revisión de Karen."
+   "dice": "Hoy confirmé 3 pedidos con chat leído y frené 4 con motivo. Quedan 0 en revisión de Karen."
   },
   {
    "quien": "Gestor de tickets y CAS",
@@ -48,7 +48,7 @@
  "conclusiones": [
   "La meta que más se aleja es la entrega.",
   "Las decisiones de dinero (anticipos, descuentos, topes de flete) las aprueba una persona.",
-  "6 tareas asignadas con responsable y fecha."
+  "5 tareas asignadas con responsable y fecha."
  ],
  "tareas": [
   {
@@ -80,15 +80,6 @@
   },
   {
    "id": "T-20261125-04",
-   "titulo": "Revisar 1 pedidos frenados por el robot (llamar o confirmar)",
-   "responsable": "Karen (humana)",
-   "fecha": "2026-11-25",
-   "estado": "requiere aprobación humana",
-   "aprobacion_humana": true,
-   "proceso": "Confirmación"
-  },
-  {
-   "id": "T-20261125-05",
    "titulo": "Construir el monitor de stock (Jefe de inventarios)",
    "responsable": "Líder de Tecnología",
    "fecha": "2026-12-02",
@@ -97,7 +88,7 @@
    "proceso": "Inventarios"
   },
   {
-   "id": "T-20261125-06",
+   "id": "T-20261125-05",
    "titulo": "Cualquier anticipo, descuento o cambio de tope de flete",
    "responsable": "Ronald (humano)",
    "fecha": "2026-11-25",
