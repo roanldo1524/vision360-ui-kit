@@ -824,3 +824,7 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 25-11 9:05 a. m.: el bucle sin IA confirmó solo a Maicol (98271305). Dudas revisadas por IA: Rafael Martínez Correa (galón, Montería, teléfono de entrega 3127148426) confirmado. El bucle se cae con cada reinicio de la sesión: la vuelta de los :19 lo revive.
 - 25-11 quejas CAS (8:47 a. m.): 1 queja nueva (97291930, Envía, Popayán), 0 fallas; 134 guías quietas leídas, 38 sin poder leer.
 - 25-11 9:19 a. m.: reglas sin IA confirmaron a Jhosel (98272539); 0 dudas para la IA.
+
+### 25-11 10:14 a. m. — Casino
+- Envío de las 10 a. m.: 301 personas (se cortó a los 15 minutos por el límite de tiempo; el resto sale en el envío de la 1 p. m.).
+- Remarketing total del 17 al 25-11: 4.196 mensajes, 111 ventas, ~$18,1 millones (casino 84 ventas $14,7 M exactos; mensajes 17 y 18-11: 24 ventas ~$2,8 M estimado; empujón 21-11: 3 ventas $637.000).
