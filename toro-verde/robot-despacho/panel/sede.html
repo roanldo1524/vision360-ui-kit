@@ -194,10 +194,16 @@ function cartel(texto, color, ancho = 420, alto = 72, oscuro = false){
 }
 function silla(x, y, z, rot){ const g = new THREE.Group(), n = S('#151617'); caja(.5, .08, .5, n, 0, .48, 0, g); caja(.5, .6, .06, n, 0, .84, -.24, g);
   caja(.04, .42, .04, n, 0, .24, 0, g); caja(.55, .03, .55, n, 0, .03, 0, g); g.position.set(x, y, z); g.rotation.y = rot; scene.add(g); }
-function escritorio(x, y, z, color){ const g = new THREE.Group();
-  caja(1.4, .05, .7, blanco, 0, .74, 0, g); caja(.04, .72, .64, S('#2a2c2e'), -.65, .37, 0, g); caja(.4, .62, .6, blanco, .45, .32, 0, g);
-  caja(.5, .3, .03, S('#111'), 0, .98, -.2, g); const pan = new THREE.Mesh(new THREE.PlaneGeometry(.46, .26), E(color)); pan.position.set(0, .98, -.18); g.add(pan);
-  g.position.set(x, y, z); scene.add(g); return {pan}; }
+function escritorio(x, y, z, color, rot = 0, ancho = 1.4, pantallas = 2){ const g = new THREE.Group();
+  caja(ancho, .05, .72, roble, 0, .74, 0, g); caja(.05, .72, .66, S('#1b1c1e', {metalness:.5}), -ancho/2 + .05, .37, 0, g); caja(.05, .72, .66, S('#1b1c1e', {metalness:.5}), ancho/2 - .05, .37, 0, g);
+  caja(.38, .58, .55, blanco, ancho/2 - .3, .3, 0, g);
+  let pan = null;
+  for (let i = 0; i < pantallas; i++){ const ox = (i - (pantallas - 1)/2) * .56;
+    caja(.52, .31, .03, S('#0d0d0e'), ox, 1.0, -.22, g); caja(.04, .16, .04, S('#0d0d0e'), ox, .83, -.24, g);
+    const p2 = new THREE.Mesh(new THREE.PlaneGeometry(.48, .27), E(color)); p2.position.set(ox, 1.0, -.202); g.add(p2); if (!pan) pan = p2; else p2.material = pan.material; }
+  caja(.4, .02, .13, S('#2c2f33'), 0, .77, .08, g);
+  caja(.02, .38, .02, S('#1b1c1e'), -ancho/2 + .18, .95, -.22, g); caja(.18, .04, .1, E('#ffe2a8'), -ancho/2 + .25, 1.14, -.18, g);   // lámpara de escritorio
+  g.position.set(x, y, z); g.rotation.y = rot; scene.add(g); return {pan}; }
 const PIEL = ['#f1c7a5','#d9a27c','#b97f5a','#8d5a3b'], PELO = ['#2b1d14','#4a3022','#1b1b1b','#7a5230'];
 const MUJERES = /^(Daniela|Juliana|Valentina|Laura|Sara|Isabella|Mariana)/;
 function persona(color, k, mujer){
@@ -247,8 +253,21 @@ caja(7.3, 3.1, .12, S('#111'), 0, y2 + 1.95, -D/2 + .2);
 const pantalla = new THREE.Mesh(new THREE.PlaneGeometry(7, 2.87), new THREE.MeshBasicMaterial({map:texKPI()})); pantalla.position.set(0, y2 + 1.95, -D/2 + .27); scene.add(pantalla);
 const brilloKPI = new THREE.PointLight('#9df05a', .7, 9, 2); brilloKPI.position.set(0, y2 + 2, -2.5); scene.add(brilloKPI);
 [[-7.5, 'Confirmación · Novedades · CAS'], [7.5, 'Tecnología']].forEach(([x, t]) => { const s = cartel(t, '#9df05a', 560, 80, true); s.position.set(x, y2 + 2.9, -D/2 + .4); scene.add(s); });
-[-3.6, 3.6].forEach(x => planta(x, y2, -.3, 1.2)); planta(-11, y2, -3.8, 1.3); planta(11.2, y2, -3.8, 1.3);
-caja(2.4, .5, .5, S('#d9d5cc'), -6.9, y2 + .25, 2.6); for (let k = 0; k < 6; k++){ const f = new THREE.Mesh(new THREE.IcosahedronGeometry(.25, 0), k % 2 ? hoja : hoja2); f.position.set(-7.9 + k*.4, y2 + .68, 2.6); scene.add(f); }
+// Distribución del piso 2 (arquitectura): banco doble de Logística | centro de mando con sala de juntas | banco doble de Tecnología + AI Core
+function tapete(x, z, w, d, c){ caja(w, .015, d, S(c, {roughness:.95}), x, y2 + .03, z); }
+tapete(-8, -.8, 7.2, 5.2, '#2f3437'); tapete(0, -.3, 5.6, 6.4, '#3b3228'); tapete(6.5, -.8, 6.2, 5.2, '#2f3437');
+[[-8, 6.6], [6.5, 6.6]].forEach(([cx, largo]) => { caja(largo, .42, .04, S('#55606a', {roughness:.9}), cx, y2 + 1.0, -.8);   // divisor acústico del banco
+  caja(largo, .03, .06, E('#ffd9a0'), cx, y2 + 1.22, -.8); });
+function colgante(x, z){ caja(.012, 1.3, .012, S('#111'), x, y2 + H - .65, z); caja(1.4, .05, .12, S('#111'), x, y2 + H - 1.32, z); caja(1.3, .02, .08, E('#fff0d0'), x, y2 + H - 1.36, z); }
+[-10, -8, -6].forEach(x => colgante(x, -.8)); [4.5, 6.5, 8.5].forEach(x => colgante(x, -.8)); colgante(0, .9);
+// sala de juntas abierta frente a la líder
+caja(3.2, .06, 1.3, roble, 0, y2 + .74, 1.0); caja(.12, .7, .12, S('#1b1c1e', {metalness:.5}), -1.2, y2 + .37, 1.0); caja(.12, .7, .12, S('#1b1c1e', {metalness:.5}), 1.2, y2 + .37, 1.0);
+[-1, 0, 1].forEach(x => { silla(x, y2, .15, 0); silla(x, y2, 1.85, Math.PI); });
+caja(.9, .02, .6, S('#fafafa'), -.6, y2 + .78, 1); caja(.3, .02, .2, S('#111'), .5, y2 + .78, 1.1);
+// materas que separan zonas y jardinera frente al pasillo
+[-4.1, 3.0].forEach(x => { caja(.6, .7, 3.6, S('#d9d5cc'), x, y2 + .35, -1.4); for (let k2 = 0; k2 < 7; k2++){ const f = new THREE.Mesh(new THREE.IcosahedronGeometry(.3, 0), k2 % 2 ? hoja : hoja2); f.position.set(x + (Math.random()-.5)*.3, y2 + .95 + Math.random()*.3, -3 + k2*.5); scene.add(f); } });
+planta(-11.3, y2, -3.9, 1.3); planta(-11.3, y2, 1.8, 1.1); planta(11.6, y2, 1.8, 1.1);
+
 
 // AI Core: núcleo de servidores tras cristal, iluminado en cian (pieza escultural de Tecnología)
 for (let r = 0; r < 2; r++){ const rx = 10.4 + r*1.05; caja(.95, 2.6, .9, S('#0e1012', {metalness:.6, roughness:.3}), rx, y2 + 1.3, -3.9);
@@ -272,22 +291,23 @@ planta(-11, y3, -3.8, 1.3); planta(5.6, y3, 3.6, 1.1); planta(-3.8, y3, 3.6, 1.1
 // ---------- Personas en sus puestos ----------
 const PUESTOS = {
   'Jefe de inventarios':      [-4.5, y1, 1.7],
-  'Confirmador de pedidos':   [-10, y2, -1.6], 'Resolutor de novedades': [-8, y2, -1.6], 'Gestor de tickets y CAS': [-6, y2, -1.6],
-  'Abogado de devoluciones':  [-10, y2, 1.0],  'Rastreador de oficinas': [-8, y2, 1.0],
-  'Líder de Logística':       [0, y2, -.3],
-  'Líder de Tecnología':      [6, y2, -1.6], 'Monitor de fallas': [8, y2, -1.6], 'Auditor de calidad': [10, y2, -1.6],
-  'Optimizador de procesos':  [7, y2, 1.0], 'Guardián de datos': [9, y2, 1.0],
+  'Confirmador de pedidos':   [-10, y2, -2.3, 0], 'Resolutor de novedades': [-8, y2, -2.3, 0], 'Gestor de tickets y CAS': [-6, y2, -2.3, 0],
+  'Abogado de devoluciones':  [-9, y2, .7, Math.PI], 'Rastreador de oficinas': [-7, y2, .7, Math.PI],
+  'Líder de Logística':       [0, y2, -2.6, 0],
+  'Líder de Tecnología':      [4.5, y2, -2.3, 0], 'Monitor de fallas': [6.5, y2, -2.3, 0], 'Auditor de calidad': [8.5, y2, -2.3, 0],
+  'Optimizador de procesos':  [5.5, y2, .7, Math.PI], 'Guardián de datos': [7.5, y2, .7, Math.PI],
   'Vendedor de WhatsApp':     [-10, y3, -1.4], 'Casino y remarketing': [-8, y3, -1.4], 'Máquina Creativa': [-6, y3, -1.4], 'Analista de pauta': [-8, y3, 1.2],
 };
 const gente = {}, clicables = []; let k = 0;
-Object.entries(PUESTOS).forEach(([nombre, [x, y, z]]) => {
+Object.entries(PUESTOS).forEach(([nombre, [x, y, z, rot = 0]]) => {
   const c = todos[nombre]; if (!c) return;
-  const esc = escritorio(x, y, z + .55, c.color);
-  if (nombre !== 'Jefe de inventarios') silla(x, y, z, 0);
-  const r = persona(c.color, k++, MUJERES.test(c.persona || '')); r.position.set(x, y - .05, z); scene.add(r);
+  const lider = nombre === 'Líder de Logística';
+  const esc = escritorio(x + Math.sin(rot)*.55, y, z + Math.cos(rot)*.55, c.color, rot, lider ? 2.2 : 1.4, lider ? 3 : 2);
+  if (nombre !== 'Jefe de inventarios') silla(x, y, z, rot);
+  const r = persona(c.color, k++, MUJERES.test(c.persona || '')); r.position.set(x, y - .05, z); r.rotation.y = rot; scene.add(r);
   r.traverse(o => { o.userData.cargo = nombre; clicables.push(o); });
   const nom = cartel((c.persona || c.nombre).split(' ')[0], c.color, 260, 60); nom.position.set(0, 2.05, 0); r.add(nom);
-  gente[nombre] = {c, r, casa:{x, y, z}, esc, fase:Math.random()*6, viaje:null, burbuja:null};
+  gente[nombre] = {c, r, casa:{x, y, z, rot}, esc, fase:Math.random()*6, viaje:null, burbuja:null};
 });
 // creadora grabando en el estudio
 const creadora = persona('#e06ac0', 3, true); creadora.position.set(0, y3, -3.4); creadora.rotation.y = 0; scene.add(creadora);
@@ -313,9 +333,10 @@ function anotar(de, a, que){
   historial.unshift(`<li><span>${hora}</span> <b>${(de.c.persona||de.c.nombre).split(' ')[0]}</b> → <b>${(a.c.persona||a.c.nombre).split(' ')[0]}</b>: ${que}</li>`);
   lista.innerHTML = historial.slice(0, 5).join('');
 }
-const PASILLO = 2.6;
+const PASILLO = 3.0;
 function ruta(de, para){ const a = de.casa, b = para.casa;
-  return [{x:a.x, z:a.z}, {x:a.x + .9, z:a.z}, {x:a.x + .9, z:PASILLO}, {x:b.x + .9, z:PASILLO}, {x:b.x + .9, z:b.z + .3}]; }
+  const sa = a.z < -1 ? -1.6 : 1.5, sb = b.z < -1 ? -1.6 : 1.5;
+  return [{x:a.x, z:a.z}, {x:a.x + 1, z:a.z}, {x:a.x + 1, z:PASILLO}, {x:b.x + 1, z:PASILLO}, {x:b.x + 1, z:b.z + (b.z < -1 ? .5 : -.5)}]; }
 function largo(p){ let s = 0; for (let i = 1; i < p.length; i++) s += Math.hypot(p[i].x - p[i-1].x, p[i].z - p[i-1].z); return s; }
 function punto(p, d){ for (let i = 1; i < p.length; i++){ const L = Math.hypot(p[i].x - p[i-1].x, p[i].z - p[i-1].z);
   if (d <= L){ const k2 = L ? d/L : 0; return {x:p[i-1].x + (p[i].x - p[i-1].x)*k2, z:p[i-1].z + (p[i].z - p[i-1].z)*k2, dir:Math.atan2(p[i].x - p[i-1].x, p[i].z - p[i-1].z)}; } d -= L; }
@@ -376,7 +397,7 @@ const reloj = new THREE.Clock();
       if (g.viaje) return;
     }
     const sentado = g.c.nombre !== 'Jefe de inventarios';
-    g.r.position.set(g.casa.x, g.casa.y - (sentado ? .05 : 0), g.casa.z); g.r.rotation.y = 0;
+    g.r.position.set(g.casa.x, g.casa.y - (sentado ? .05 : 0), g.casa.z); g.r.rotation.y = g.casa.rot || 0;
     u.pi.rotation.x = u.pd.rotation.x = sentado ? -Math.PI/2 : 0;
     const tecla = quieto ? 0 : Math.sin(t*9 + g.fase)*.08; u.bi.rotation.x = -1.15 + tecla; u.bd.rotation.x = -1.15 - tecla;
     if (!quieto) u.cabeza.rotation.y = Math.sin(t*.4 + g.fase)*.12;
