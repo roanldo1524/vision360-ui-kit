@@ -838,3 +838,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 25-11 tarde: confirmados por IA Víctor Pinilla (galón, oficina Anzoátegui KR 2 12 62; se le aclaró por WhatsApp que es Interrapidísimo, no Servientrega) y Alexander Casas (galón, oficina Líbano CL 5 9 66, tel. de quien recibe 3175342927). Reglas sin IA: ahora aceptan «Es correcto», «Está correcto», «Ah, listo».
 - 25-11 1:35 p. m.: casino de la 1 p. m. a 73 personas (0 fallos; salió 20 min tarde por reinicio). Ventas del casino hoy: 8 pedidos, $1.302.000.
 - 25-11 quejas CAS (2:47 p. m.): 2 quejas nuevas (97653934 Coordinadora Salazar; 97479921 Envía Pasto), 0 fallas. Efecto: de 48 guías con queja, 29 ya se movieron y 19 siguen quietas.
+- 25-11 4:16 p. m.: casino de las 4 p. m. a 47 personas (0 fallos). Ventas del casino hoy: 11 pedidos, $1.839.000.
