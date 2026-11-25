@@ -835,3 +835,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 25-11 12:43 p. m. devoluciones: 192 leídas, 0 injustificadas nuevas (19 con señal de culpa de transportadora, 32 el cliente no quería) → no se creó ticket.
   Ticket 159637423 (9 guías, $218.937 en fletes) NEGADO por Dropi el 24-11: «la transportadora cumplió con los intentos de entrega». Lección: solo reclamar guías con UN solo intento y sin novedad, o con la solución de la novedad ignorada; revisar intentos en la lupa antes de reclamar.
   Nuevo: leer_tickets.js (solo lectura) lee las respuestas del chat de soporte de Dropi (Intercom → Mensajes).
+- 25-11 1:35 p. m.: casino de la 1 p. m. a 73 personas (0 fallos; salió 20 min tarde por reinicio). Ventas del casino hoy: 8 pedidos, $1.302.000.
