@@ -796,3 +796,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - Inventario: sigue «en construcción» (no se inventan cifras).
 
 - 25-11: los agentes ahora se responden entre sí: quien recibe contesta con el siguiente paso real del proceso (ej. Valentina a Daniela: «Queda en REVISAR HUMANO para Karen»). Sale en burbuja, en la lista y en el televisor de actividad.
+- 25-11: al elegir un piso se ve SOLO ese piso (se ocultan los de arriba y abajo, techo y letrero) y la cámara entra a ese piso; «Edificio» vuelve a mostrar todo. Seguir agente y Pantallas también abren solo su piso.

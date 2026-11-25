@@ -395,11 +395,17 @@ for (let yy = .7; yy < 3.3; yy += .8){ caja(2.2, .04, .4, MAT.nogal, 8.4, y3 + y
 planta(-8.4, y3, -4.8, 1.2); planta(1.2, y3, -4.8, 1.2); planta(14.4, y3, -4.8, 1.2);
 
 // --------- Instancias finales ---------
-{ const ig = new THREE.IcosahedronGeometry(1, 0), im = new THREE.InstancedMesh(ig, MAT.hoja, hojas.length), m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler();
-  hojas.forEach(([x, y, z, s], i) => { e.set(Math.random()*3, Math.random()*3, 0); q.setFromEuler(e); m4.compose(new THREE.Vector3(x, y, z), q, new THREE.Vector3(s, s*1.2, s)); im.setMatrixAt(i, m4);
-    im.setColorAt(i, new THREE.Color(Math.random() < .5 ? '#3f8a3a' : '#2c6a2a')); }); im.castShadow = true; scene.add(im); }
+// las hojas se agrupan por piso (y aparte la ciudad) para poder mostrar un solo piso
+const esCiudad = (x, z) => Math.abs(x) > W/2 + 3 || z > D/2 + 3 || z < -D/2 - 3;
+const pisoDeY = y => Math.max(0, Math.min(3, Math.floor((y + .3)/H)));
+{ const ig = new THREE.IcosahedronGeometry(1, 0), grupos = {}, m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler();
+  hojas.forEach(h => { const k = esCiudad(h[0], h[2]) ? 'c' : pisoDeY(h[1]); (grupos[k] = grupos[k] || []).push(h); });
+  Object.entries(grupos).forEach(([k, lista]) => { const im = new THREE.InstancedMesh(ig, MAT.hoja, lista.length);
+    lista.forEach(([x, y, z, s], i) => { e.set(Math.random()*3, Math.random()*3, 0); q.setFromEuler(e); m4.compose(new THREE.Vector3(x, y, z), q, new THREE.Vector3(s, s*1.2, s)); im.setMatrixAt(i, m4);
+      im.setColorAt(i, new THREE.Color(Math.random() < .5 ? '#3f8a3a' : '#2c6a2a')); });
+    im.castShadow = true; im.userData.piso = k === 'c' ? 'c' : +k; scene.add(im); }); }
 { const im = new THREE.InstancedMesh(GEO_CAJA, MAT.carton, cajas.length), m4 = new THREE.Matrix4(), q = new THREE.Quaternion();
-  cajas.forEach(([x, y, z, w, h, d], i) => { m4.compose(new THREE.Vector3(x, y, z), q, new THREE.Vector3(w, h, d)); im.setMatrixAt(i, m4); }); im.castShadow = im.receiveShadow = true; scene.add(im); }
+  cajas.forEach(([x, y, z, w, h, d], i) => { m4.compose(new THREE.Vector3(x, y, z), q, new THREE.Vector3(w, h, d)); im.setMatrixAt(i, m4); }); im.castShadow = im.receiveShadow = true; im.userData.piso = 0; scene.add(im); }
 
 // ================= AGENTES =================
 // [x, piso, z, rot]; las filas de cada ala miran hacia la cámara, como en la referencia
@@ -544,16 +550,28 @@ function ver(m, arg){
   modo = m; ['edificio','piso','seguir','pantallas'].forEach(x => $('m_' + x).setAttribute('aria-pressed', x === m));
   document.querySelectorAll('.pisos button').forEach(b => b.setAttribute('aria-pressed', m === 'piso' && +b.dataset.piso === pisoSel));
   const movil = innerWidth < 700;
+  const corte = m === 'piso' ? (arg ?? pisoSel) : m === 'pantallas' || m === 'tele' ? 1 : m === 'seguir' ? (gente[arg || sel] || {}).piso : null;
   if (m === 'edificio'){ destinoCam.pos.set(-6, 9, movil ? 64 : 44); destinoCam.tgt.set(0, 6.6, 0); }
-  if (m === 'piso'){ pisoSel = arg ?? pisoSel; const y = YS[pisoSel]; destinoCam.pos.set(-3, y + 5.4, movil ? 32 : 20); destinoCam.tgt.set(0, y + 1.4, -.5);
+  if (m === 'piso'){ pisoSel = arg ?? pisoSel; const y = YS[pisoSel]; destinoCam.pos.set(-1.5, y + 10.5, movil ? 40 : 25); destinoCam.tgt.set(0, y + .6, -.8);
     document.querySelectorAll('.pisos button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.piso === pisoSel)); }
   if (m === 'seguir'){ seguido = arg || sel; sel = seguido; tab = 'agente'; pintar(); }
   if (m === 'pantallas'){ ladoTV = arg; const x = ladoTV * 10; destinoCam.pos.set(x, y2 + 2.05, movil ? -.4 : -1.5); destinoCam.tgt.set(x, y2 + 2.1, -5.9); }
   if (m === 'tele'){ modo = 'pantallas'; $('m_pantallas').setAttribute('aria-pressed', true); destinoCam.pos.set(arg.x, arg.y, arg.z + 5.1); destinoCam.tgt.set(arg.x, arg.y, arg.z); }
   destinoCam.activo = m !== 'seguir';
-  modoTV = modo === 'pantallas'; ETIQUETAS.forEach(s => s.visible = !modoTV);
+  modoTV = modo === 'pantallas'; ETIQUETAS.forEach(s => { if (modoTV) s.visible = false; else if (s.parent !== scene) s.visible = true; });
+  cortar(corte); if (modoTV) ETIQUETAS.forEach(s => s.visible = false);
 }
-let ladoTV = 1;
+let ladoTV = 1, PARTES = null;
+// Muestra solo un piso (n) como maqueta abierta: oculta los pisos de arriba y de abajo, la cubierta y el letrero; la ciudad queda.
+function cortar(n){
+  if (!PARTES) PARTES = scene.children.filter(o => !o.isLight).map(o => {
+    if (o.userData.piso !== undefined) return {o, f:o.userData.piso};
+    const p = o.position, sc = o.scale || {x:1, y:1};
+    if (sc.x > 60 || esCiudad(p.x, p.z)) return {o, f:'c'};
+    if (o.isMesh && sc.y > H + .5) return {o, f:'alto'};
+    return {o, f:pisoDeY(p.y)}; });
+  PARTES.forEach(({o, f}) => o.visible = n == null || f === 'c' || f === n);
+}
 $('m_edificio').onclick = () => ver('edificio'); $('m_piso').onclick = () => ver('piso', pisoSel); $('m_seguir').onclick = () => ver('seguir', sel);
 $('m_pantallas').onclick = () => ver('pantallas', modo === 'pantallas' ? -ladoTV : -1);
 document.querySelectorAll('.pisos button').forEach(b => b.onclick = () => ver('piso', +b.dataset.piso));
