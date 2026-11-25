@@ -3,6 +3,16 @@
 # (Envía o Interrapidísimo, más entregas y >50 %), se cambia y se vuelve a CONFIRMAR al momento (Ronald 21-11).
 cd /tmp/dropi || exit 1
 node buscar_conf.js >/dev/null 2>&1
+# Ronald 25-11: confirmados a oficina sin la dirección del punto → «dirección del punto, RECLAMA EN OFICINA INTERRAPIDÍSIMO».
+python3 -I -c "
+import json,re,sys; sys.path.insert(0,'/tmp/robot/robot'); import oficinas as o
+for x in json.load(open('confirmados.json')):
+  if x.get('status')!='PENDIENTE' or x.get('shipping_guide'): continue
+  d=re.sub(r'\s+',' ',x.get('dir') or '').strip(' ,')
+  if re.search(r'oficina|reclam',d,re.I) and not re.search(r'\d',d):
+    n=o.dir_oficina(x.get('state'),x.get('city'),d)
+    if n: print(f\"{x['id']}\t{n}\")" > dir_ofi_conf.tsv 2>/dev/null
+[ -s dir_ofi_conf.tsv ] && node dir_lote.js dir_ofi_conf.tsv | sed 's/^/OFICINA_PUNTO /'
 python3 -I -c "
 import json
 for o in json.load(open('confirmados.json')):
