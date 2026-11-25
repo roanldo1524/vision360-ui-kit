@@ -1,0 +1,350 @@
+<title>Comercializadora del Rey</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Sede de 3 pisos en corte frontal, de noche, a pantalla completa. Paneles de vidrio oscuro con borde verde:
+   marca arriba-izquierda, KPI arriba-derecha, ficha de la persona a la derecha, «lo que pasa ahora» abajo. Tema oscuro fijo. */
+:root{
+  --noche:#0d0f0e; --vidrio:rgba(14,20,17,.84); --borde:rgba(140,230,90,.35);
+  --texto:#eef4ef; --suave:#a7b6ad; --verde:#8de04a; --oro:#f2c14e; --alerta:#ff7a59;
+  --display:"Bricolage Grotesque",system-ui,sans-serif; --cuerpo:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{margin:0;background:var(--noche);color:var(--texto);font-family:var(--cuerpo);overflow:hidden}
+#escena{position:fixed;inset:0}
+.vidrio{position:fixed;background:var(--vidrio);border:1px solid var(--borde);border-radius:14px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 0 22px rgba(141,224,74,.12)}
+#marca{top:calc(14px + env(safe-area-inset-top,0px));left:max(14px,env(safe-area-inset-left,0px));padding:12px 16px}
+#marca h1{margin:0;font-family:var(--display);font-size:19px}
+#marca p{margin:3px 0 0;font-size:12px;color:var(--suave)}
+#kpi{top:calc(14px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));padding:10px 14px;display:grid;grid-template-columns:repeat(4,auto);gap:2px 16px}
+#kpi small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--suave)}
+#kpi b{font-family:var(--mono);font-size:15px;font-variant-numeric:tabular-nums}
+#ficha{top:calc(84px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));width:300px;max-height:calc(100% - 320px);overflow:auto;padding:14px}
+#ficha .area{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--oro)}
+#ficha h3{margin:4px 0 0;font-family:var(--display);font-size:20px}
+#ficha .cargo{font-size:13px;color:var(--suave);margin:2px 0 8px}
+#ficha p{font-size:13px;line-height:1.45;margin:0 0 8px}
+.fun{border-top:1px dashed rgba(255,255,255,.14);padding-top:6px;margin-top:6px;font-size:12px;color:var(--suave);line-height:1.4}
+.fun b{color:var(--texto)}
+.fun .dato{font-family:var(--mono);color:var(--oro);margin-top:2px}
+.pill{float:right;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:99px;background:rgba(255,255,255,.08);color:var(--suave)}
+.pill.on{background:rgba(141,224,74,.18);color:var(--verde)}
+#flujo{left:max(14px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));width:360px;padding:10px 12px;max-height:200px;overflow:hidden}
+#flujo h2,#ficha h2{margin:0 0 6px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--suave);font-weight:600}
+#flujo ol{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+#flujo li{font-size:12.5px;line-height:1.35}
+#flujo li span{color:var(--suave)}
+#ayuda{bottom:calc(14px + env(safe-area-inset-bottom,0px));right:max(14px,env(safe-area-inset-right,0px));padding:8px 12px;font-size:12px;color:var(--suave)}
+@media (max-width:820px){
+  #kpi{grid-template-columns:repeat(2,auto)}
+  #ficha{top:auto;bottom:calc(190px + env(safe-area-inset-bottom,0px));left:max(14px,env(safe-area-inset-left,0px));width:auto;max-height:26%}
+  #flujo{width:auto;right:max(14px,env(safe-area-inset-right,0px));max-height:150px}
+  #ayuda{display:none}
+  #marca p{display:none}
+}
+</style>
+
+<canvas id="escena" aria-label="Sede de Comercializadora del Rey en 3D con el equipo trabajando"></canvas>
+<header id="marca" class="vidrio"><h1>Comercializadora del Rey</h1><p>Oficina IA · datos de las <span id="act"></span></p></header>
+<section id="kpi" class="vidrio" aria-label="KPI">
+  <div><small>Vendido hoy</small><b id="vendido"></b></div>
+  <div><small>Entrega · meta 90</small><b id="k_ent"></b></div>
+  <div><small>Devolución · meta 3</small><b id="k_dev"></b></div>
+  <div><small>Cancelación · meta 7</small><b id="k_can"></b></div>
+</section>
+<aside id="ficha" class="vidrio" aria-live="polite"></aside>
+<section id="flujo" class="vidrio" aria-live="polite"><h2>Lo que pasa ahora</h2><ol id="lista"></ol></section>
+<div id="ayuda" class="vidrio">Toca a una persona · arrastra para girar · rueda o pellizco para acercar</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const DATOS = /*DATOS*/null || {pisos:[]};
+const $ = id => document.getElementById(id);
+const pesos = n => '$' + Math.round(n||0).toLocaleString('es-CO');
+$('act').textContent = DATOS.actualizado || '';
+$('vendido').textContent = pesos(DATOS.vendido);
+const K = DATOS.kpi || {};
+[['k_ent', K.entrega, v => v >= 90], ['k_dev', K.devolucion, v => v <= 3], ['k_can', K.cancelacion, v => v <= 7]].forEach(([id, v, ok]) => {
+  const el = $(id); el.textContent = v == null ? '—' : v + ' %'; if (v != null) el.style.color = ok(v) ? 'var(--verde)' : 'var(--alerta)'; });
+function bogota(){ const d = new Date(Date.now() - 5*3600e3); return {h:d.getUTCHours(), m:d.getUTCMinutes()}; }
+function trabaja(a){ const {h,m} = bogota(); return a.horas.includes(h) && a.min.some(x => m >= x && m < x + 12); }
+function proxima(a){ const {h,m} = bogota(); if (!a.horas.length) return null;
+  for (let add = 1; add < 1440; add++){ const t = h*60 + m + add, hh = Math.floor(t/60) % 24, mm = t % 60;
+    if (a.horas.includes(hh) && a.min.includes(mm)) return `${(hh%12)||12}:${String(mm).padStart(2,'0')} ${hh<12?'a. m.':'p. m.'}`; } return null; }
+const todos = {}; (DATOS.pisos || []).forEach(p => p.agentes.forEach(c => todos[c.nombre] = c));
+
+// ---------- Escena ----------
+const canvas = $('escena');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.outputEncoding = THREE.sRGBEncoding; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .78;
+const scene = new THREE.Scene(); scene.background = new THREE.Color('#0b0d0c'); scene.fog = new THREE.Fog('#0b0d0c', 40, 90);
+const camera = new THREE.PerspectiveCamera(38, 1, .1, 300);
+const controls = new THREE.OrbitControls(camera, canvas);
+controls.enableDamping = true; controls.minDistance = 8; controls.maxDistance = 60; controls.maxPolarAngle = Math.PI*.55;
+controls.minAzimuthAngle = -Math.PI*.38; controls.maxAzimuthAngle = Math.PI*.38;
+scene.add(new THREE.HemisphereLight('#ffd9a8', '#141814', .32));
+const luna = new THREE.DirectionalLight('#ffe2b8', .35); luna.position.set(-6, 14, 18); scene.add(luna);
+
+const S = (c, o = {}) => new THREE.MeshStandardMaterial(Object.assign({color:c, roughness:.75, metalness:0}, o));
+const E = c => new THREE.MeshBasicMaterial({color:c});
+const caja = (w, h, d, mat, x, y, z, padre = scene) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); m.position.set(x, y, z); padre.add(m); return m; };
+const W = 24, D = 10, H = 3.8, PISOS_Y = [0, H, 2*H];
+const piedra = S('#4b4d4f', {roughness:.5}), grafito = S('#1c1e20', {roughness:.6, metalness:.3}), roble = S('#b07a48', {roughness:.6}),
+      blanco = S('#eeeae2', {roughness:.5}), hoja = S('#3f8f3a'), hoja2 = S('#2f6e2d'), carton = S('#c99a62'), azulMetal = S('#2d4f8f', {metalness:.4, roughness:.4}),
+      vidrio = new THREE.MeshStandardMaterial({color:'#bfe3ea', transparent:true, opacity:.16, roughness:.05, metalness:.2, depthWrite:false});
+
+// Estructura: losas, paredes de fondo con listones de roble, luces lineales LED y barandas de vidrio
+PISOS_Y.forEach((y, i) => {
+  caja(W, .35, D, i ? grafito : S('#2a2c2e'), 0, y - .175, 0);
+  caja(W, .02, D, i === 0 ? S('#6f7174', {roughness:.25, metalness:.1}) : S('#3a3c3f', {roughness:.35}), 0, y + .01, 0);
+  caja(W, H, .3, S('#191b1c'), 0, y + H/2, -D/2 - .15);
+  for (let x = -W/2 + .3; x < W/2; x += .22) if (Math.abs(x) > 3.8 || i === 1 ? Math.abs(x) > 3.6 : true) caja(.09, H - .4, .06, roble, x, y + H/2, -D/2 + .02);
+  caja(W + .4, .25, .3, grafito, 0, y + H - .05, D/2);                        // canto frontal de la losa superior
+  caja(W, .04, .06, E('#ffcf8a'), 0, y + H - .19, D/2 + .14);                 // luz del canto
+  for (let k = -3; k <= 3; k++) caja(2.6, .05, .14, E('#fff1d6'), k*3.3, y + H - .08, -1.5);   // perfiles LED en el techo
+  const l = new THREE.PointLight('#ffd9a8', i === 0 ? 1.1 : 1.0, 16, 2); l.position.set(-5, y + H - .6, 1); scene.add(l);
+  const l2 = l.clone(); l2.position.set(6, y + H - .6, 1); scene.add(l2);
+  if (i > 0){ caja(W - 6, 1.05, .04, vidrio, 3, y + .55, D/2 - .1); caja(W - 6, .05, .08, S('#c8c8c8', {metalness:.8, roughness:.2}), 3, y + 1.08, D/2 - .1);
+    caja(W - 6, .03, .03, E('#9df05a'), 3, y + .04, D/2 - .08); }
+});
+caja(W + .4, .35, D, grafito, 0, 3*H + .17, 0);                                    // techo
+caja(W + 6, .3, 6, S('#232527', {roughness:.4}), 0, -.36, D/2 + 3);                // andén frontal
+
+// Muro verde con el letrero de la empresa (lado izquierdo, toda la altura)
+const muro = new THREE.Group(); muro.position.set(-W/2 - 1.6, 0, 1); scene.add(muro);
+caja(3.2, 3*H, .5, S('#1f3a1f'), 0, 3*H/2, 0, muro);
+for (let i = 0; i < 260; i++){ const f = new THREE.Mesh(new THREE.IcosahedronGeometry(.12 + Math.random()*.16, 0), Math.random() < .5 ? hoja : hoja2);
+  const fy = .3 + Math.random()*(3*H - .6); if (fy > 3*H - 7.3 && fy < 3*H - 1.1 && i % 5) continue; f.position.set(-1.5 + Math.random()*3, fy, .28 + Math.random()*.1); muro.add(f); }
+function texLetrero(){
+  const c = document.createElement('canvas'); c.width = 512; c.height = 1024; const x = c.getContext('2d');
+  x.clearRect(0, 0, 512, 1024);
+  // corona
+  x.strokeStyle = '#a6f05a'; x.fillStyle = 'rgba(166,240,90,.15)'; x.lineWidth = 14; x.lineJoin = 'round';
+  x.beginPath(); x.moveTo(110, 300); x.lineTo(130, 150); x.lineTo(200, 230); x.lineTo(256, 120); x.lineTo(312, 230); x.lineTo(382, 150); x.lineTo(402, 300); x.closePath(); x.fill(); x.stroke();
+  [[130,150],[256,120],[382,150]].forEach(([a, b]) => { x.beginPath(); x.arc(a, b - 10, 16, 0, Math.PI*2); x.fillStyle = '#a6f05a'; x.fill(); });
+  x.fillStyle = '#ffffff'; x.textAlign = 'center'; x.shadowColor = '#a6f05a'; x.shadowBlur = 24;
+  x.font = '800 62px "Bricolage Grotesque", sans-serif'; x.fillText('COMERCIALIZADORA', 256, 400); x.font = '800 92px "Bricolage Grotesque", sans-serif'; x.fillText('DEL REY', 256, 495);
+  x.shadowBlur = 0; x.strokeStyle = '#a6f05a'; x.lineWidth = 6; x.beginPath(); x.roundRect ? x.roundRect(96, 545, 320, 90, 45) : x.rect(96, 545, 320, 90); x.stroke();
+  x.fillStyle = '#ffffff'; x.font = '700 54px "IBM Plex Sans", sans-serif'; x.fillText('Oficina IA', 256, 607);
+  x.font = '500 40px "IBM Plex Sans", sans-serif'; x.fillStyle = '#e7f2e2'; ['Logística', 'Confirmación', 'Contenido', 'Tecnología'].forEach((t, i) => x.fillText(t, 256, 720 + i*58));
+  const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; return t;
+}
+const letrero = new THREE.Mesh(new THREE.PlaneGeometry(3, 6), new THREE.MeshBasicMaterial({map:texLetrero(), transparent:true}));
+letrero.position.set(0, 3*H - 4.2, .75); muro.add(letrero);
+const brilloMuro = new THREE.PointLight('#a6f05a', .9, 10, 2); brilloMuro.position.set(-W/2 - 1, 8, 4); scene.add(brilloMuro);
+
+// Escalera iluminada del piso 1 al 2
+for (let s = 0; s < 16; s++){ const y = (s + 1)*H/16, x = -W/2 + .9 + s*.38;
+  caja(.38, .1, 1.6, S('#2b2d2f'), x, y - .05, 3.6); caja(.38, .02, .05, E('#ffcf8a'), x, y + .01, 4.42); }
+caja(6.2, .04, .04, S('#c8c8c8', {metalness:.8, roughness:.2}), -W/2 + 3.9, 2.6, 4.45).rotation.z = Math.atan2(H, 6.1);
+caja(6.2, 1, .03, vidrio, -W/2 + 3.9, 2.4, 4.45).rotation.z = Math.atan2(H, 6.1);
+
+// Utilidades
+function planta(x, y, z, s = 1){ const g = new THREE.Group(); caja(.5*s, .55*s, .5*s, S('#d9d5cc'), 0, .28*s, 0, g);
+  for (let i = 0; i < 5; i++){ const f = new THREE.Mesh(new THREE.IcosahedronGeometry(.32*s, 0), i % 2 ? hoja : hoja2); f.position.set((Math.random()-.5)*.4*s, (.8 + Math.random()*.6)*s, (Math.random()-.5)*.4*s); g.add(f); }
+  g.position.set(x, y, z); scene.add(g); }
+function cartel(texto, color, ancho = 420, alto = 72, oscuro = false){
+  const c = document.createElement('canvas'); c.width = ancho; c.height = alto; const x = c.getContext('2d');
+  x.fillStyle = oscuro ? 'rgba(14,22,17,.92)' : 'rgba(255,255,255,.95)'; x.beginPath(); x.roundRect ? x.roundRect(0, 0, ancho, alto, 18) : x.rect(0, 0, ancho, alto); x.fill();
+  if (oscuro){ x.strokeStyle = '#9df05a'; x.lineWidth = 4; x.stroke(); } else { x.fillStyle = color; x.fillRect(0, 0, 10, alto); }
+  x.fillStyle = oscuro ? '#ffffff' : '#1d2420'; x.font = `600 ${Math.round(alto*.42)}px "IBM Plex Sans", sans-serif`; x.textBaseline = 'middle'; x.fillText(texto, oscuro ? 26 : 24, alto/2 + 1);
+  const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding;
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({map:t, depthTest:false})); s.scale.set(ancho/220, alto/220, 1); s.renderOrder = 5; return s;
+}
+function silla(x, y, z, rot){ const g = new THREE.Group(), n = S('#151617'); caja(.5, .08, .5, n, 0, .48, 0, g); caja(.5, .6, .06, n, 0, .84, -.24, g);
+  caja(.04, .42, .04, n, 0, .24, 0, g); caja(.55, .03, .55, n, 0, .03, 0, g); g.position.set(x, y, z); g.rotation.y = rot; scene.add(g); }
+function escritorio(x, y, z, color){ const g = new THREE.Group();
+  caja(1.4, .05, .7, blanco, 0, .74, 0, g); caja(.04, .72, .64, S('#2a2c2e'), -.65, .37, 0, g); caja(.4, .62, .6, blanco, .45, .32, 0, g);
+  caja(.5, .3, .03, S('#111'), 0, .98, -.2, g); const pan = new THREE.Mesh(new THREE.PlaneGeometry(.46, .26), E(color)); pan.position.set(0, .98, -.18); g.add(pan);
+  g.position.set(x, y, z); scene.add(g); return {pan}; }
+const PIEL = ['#f1c7a5','#d9a27c','#b97f5a','#8d5a3b'], PELO = ['#2b1d14','#4a3022','#1b1b1b','#7a5230'];
+const MUJERES = /^(Daniela|Juliana|Valentina|Laura|Sara|Isabella|Mariana)/;
+function persona(color, k, mujer){
+  const g = new THREE.Group(), cam = S(color), pan = S('#2a303a'), piel = S(PIEL[k % 4]), pelo = S(PELO[(k+1) % 4]);
+  const pierna = l => { const p = new THREE.Group(); caja(.17, .7, .19, pan, 0, -.35, 0, p); caja(.19, .08, .28, S('#111'), 0, -.72, .05, p); p.position.set(l*.11, .75, 0); g.add(p); return p; };
+  const brazo = l => { const p = new THREE.Group(); caja(.13, .55, .15, cam, 0, -.27, 0, p); caja(.11, .11, .11, piel, 0, -.58, 0, p); p.position.set(l*.29, 1.32, 0); g.add(p); return p; };
+  const pi = pierna(-1), pd = pierna(1), bi = brazo(-1), bd = brazo(1);
+  caja(mujer ? .4 : .46, .58, .26, cam, 0, 1.05, 0, g);
+  const cabeza = new THREE.Mesh(new THREE.SphereGeometry(.17, 16, 12), piel); cabeza.position.y = 1.55; g.add(cabeza);
+  const cab = new THREE.Mesh(new THREE.SphereGeometry(.18, 16, 12, 0, Math.PI*2, 0, Math.PI*.55), pelo); cab.position.y = 1.58; g.add(cab);
+  if (mujer){ caja(.34, .42, .1, pelo, 0, 1.4, -.12, g); caja(.07, .32, .16, pelo, -.16, 1.45, -.02, g); caja(.07, .32, .16, pelo, .16, 1.45, -.02, g); }
+  g.userData = {pi, pd, bi, bd, cabeza}; return g;
+}
+function rotulo(texto, y){ const s = cartel(texto, '#9df05a', 900, 110, true); s.position.set(-W/2 + 6.4, y + H - 1.0, D/2 + .6); scene.add(s); }
+rotulo('Piso 1 · Recepción y bodega', 0); rotulo('Piso 2 · Oficinas', H); rotulo('Piso 3 · Creación de contenido', 2*H);
+
+// PISO 1 · Recepción y bodega
+const y1 = 0;
+caja(4.2, 1.1, 1, S('#2a2c2e'), -4.5, y1 + .55, 2.6); caja(4.4, .08, 1.15, roble, -4.5, y1 + 1.14, 2.6);
+caja(4.2, .04, .04, E('#ffcf8a'), -4.5, y1 + .06, 3.12);
+const marcaRec = cartel('♛  Comercializadora del Rey', '#9df05a', 620, 90, true); marcaRec.position.set(-4.5, y1 + .6, 3.25); marcaRec.scale.set(2.6, .38, 1); scene.add(marcaRec);
+for (let r = 0; r < 2; r++) for (let c = 0; c < 4; c++){
+  const rx = 1.5 + c*2.7, rz = -3.4 + r*3;
+  [[-1.1,-.45],[1.1,-.45],[-1.1,.45],[1.1,.45]].forEach(([dx, dz]) => caja(.08, 3, .08, azulMetal, rx + dx, y1 + 1.5, rz + dz));
+  for (let n = 0; n < 3; n++){ const yy = y1 + .5 + n*1; caja(2.3, .06, 1, S('#d9682e', {metalness:.4}), rx, yy, rz);
+    for (let b = 0; b < 3; b++){ caja(.62, .5, .7, carton, rx - .75 + b*.75, yy + .28, rz); } }
+}
+caja(1.2, .14, 1.2, S('#8a6a45'), -.8, y1 + .07, 0); caja(1.1, .9, 1.1, carton, -.8, y1 + .6, 0);
+caja(.5, .2, 1.3, S('#f2c230', {metalness:.3}), .8, y1 + .2, 2.2); caja(.06, 1.1, .06, S('#222'), .8, y1 + .75, 1.6);
+planta(-10.5, y1, 3.8, 1.3); planta(-1.5, y1, 3.8, 1.1); planta(11, y1, 3.8, 1.3);
+
+// PISO 2 · Oficinas (Logística y atención a la izquierda, líder al centro con la pantalla de KPI, Tecnología a la derecha)
+const y2 = H;
+function texKPI(){
+  const c = document.createElement('canvas'); c.width = 1024; c.height = 420; const x = c.getContext('2d');
+  x.fillStyle = '#07140d'; x.fillRect(0, 0, 1024, 420); x.strokeStyle = '#9df05a'; x.lineWidth = 6; x.strokeRect(3, 3, 1018, 414);
+  x.fillStyle = '#ffffff'; x.font = '700 40px "IBM Plex Sans", sans-serif'; x.fillText('KPI Operación IA · últimos 30 días', 36, 62);
+  const caja2 = (cx, t, v, meta, ok) => { x.fillStyle = '#0f2418'; x.fillRect(cx, 100, 300, 170); x.fillStyle = '#a7b6ad'; x.font = '500 30px "IBM Plex Sans", sans-serif'; x.fillText(t, cx + 20, 145);
+    x.fillStyle = ok ? '#8de04a' : '#ff7a59'; x.font = '700 76px "IBM Plex Mono", monospace'; x.fillText(v == null ? '—' : v + '%', cx + 20, 230); x.fillStyle = '#a7b6ad'; x.font = '500 24px "IBM Plex Sans", sans-serif'; x.fillText(meta, cx + 20, 262); };
+  caja2(36, 'Entrega', K.entrega, 'meta 90 %', K.entrega >= 90); caja2(362, 'Devolución', K.devolucion, 'meta 3 %', K.devolucion <= 3); caja2(688, 'Cancelación', K.cancelacion, 'meta 7 %', K.cancelacion <= 7);
+  x.fillStyle = '#e7f2e2'; x.font = '500 30px "IBM Plex Sans", sans-serif';
+  x.fillText(`Vendido hoy ${pesos(DATOS.vendido)} · ${DATOS.pedidos || 0} pedidos · ${DATOS.conf_robot || 0} confirmados por el robot`, 36, 340);
+  x.fillText(`${K.oficina || 0} paquetes esperando en oficina · ${DATOS.quejas_hoy || 0} quejas al CAS hoy`, 36, 390);
+  const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; return t;
+}
+caja(7.3, 3.1, .12, S('#111'), 0, y2 + 1.95, -D/2 + .2);
+const pantalla = new THREE.Mesh(new THREE.PlaneGeometry(7, 2.87), new THREE.MeshBasicMaterial({map:texKPI()})); pantalla.position.set(0, y2 + 1.95, -D/2 + .27); scene.add(pantalla);
+const brilloKPI = new THREE.PointLight('#9df05a', .7, 9, 2); brilloKPI.position.set(0, y2 + 2, -2.5); scene.add(brilloKPI);
+[[-7.5, 'Confirmación · Novedades · CAS'], [7.5, 'Tecnología']].forEach(([x, t]) => { const s = cartel(t, '#9df05a', 560, 80, true); s.position.set(x, y2 + 2.9, -D/2 + .4); scene.add(s); });
+[-3.6, 3.6].forEach(x => planta(x, y2, -.3, 1.2)); planta(-11, y2, -3.8, 1.3); planta(11.2, y2, -3.8, 1.3);
+caja(2.4, .5, .5, S('#d9d5cc'), -6.9, y2 + .25, 2.6); for (let k = 0; k < 6; k++){ const f = new THREE.Mesh(new THREE.IcosahedronGeometry(.25, 0), k % 2 ? hoja : hoja2); f.position.set(-7.9 + k*.4, y2 + .68, 2.6); scene.add(f); }
+
+// AI Core: núcleo de servidores tras cristal, iluminado en cian (pieza escultural de Tecnología)
+for (let r = 0; r < 2; r++){ const rx = 10.4 + r*1.05; caja(.95, 2.6, .9, S('#0e1012', {metalness:.6, roughness:.3}), rx, y2 + 1.3, -3.9);
+  for (let yy = .3; yy < 2.5; yy += .16) caja(.8, .025, .02, E(yy*7 % 2 < 1 ? '#3be6ff' : '#9df05a'), rx, y2 + yy, -3.44); }
+caja(2.4, 2.9, .04, vidrio, 10.9, y2 + 1.45, -3.1); caja(.04, 2.9, 1.8, vidrio, 9.7, y2 + 1.45, -4);
+const cian = new THREE.PointLight('#3be6ff', .9, 6, 2); cian.position.set(10.9, y2 + 1.6, -2.6); scene.add(cian);
+const coreRot = cartel('AI Core', '#3be6ff', 300, 70, true); coreRot.position.set(10.9, y2 + 3.1, -3); scene.add(coreRot);
+
+// PISO 3 · Creación de contenido: estudio con pantalla verde, luces y cámara + lounge con biblioteca
+const y3 = 2*H;
+caja(5.5, 3.2, .1, S('#19c94a', {roughness:.9}), 0, y3 + 1.6, -D/2 + .3); caja(5.5, .05, 3, S('#19c94a', {roughness:.9}), 0, y3 + .03, -3.3);
+const verde = new THREE.PointLight('#5dff7a', .6, 8, 2); verde.position.set(0, y3 + 2, -2.5); scene.add(verde);
+[[-2.2, -1.6], [2.2, -1.6]].forEach(([x, z]) => { caja(.04, 1.8, .04, S('#111'), x, y3 + .9, z);
+  const sb = new THREE.Mesh(new THREE.ConeGeometry(.5, .6, 4, 1, true), new THREE.MeshBasicMaterial({color:'#fffbe8', side:THREE.DoubleSide})); sb.position.set(x, y3 + 2, z); sb.rotation.x = -Math.PI/2.3; scene.add(sb); });
+caja(.04, 1.4, .04, S('#111'), 0, y3 + .7, -.2); caja(.4, .28, .5, S('#111'), 0, y3 + 1.5, -.2);
+caja(3.2, .45, 1, S('#e9e4da'), 8.5, y3 + .3, 1.8); caja(3.2, .5, .22, S('#e9e4da'), 8.5, y3 + .7, 1.3); caja(1.4, .05, .7, roble, 8.5, y3 + .42, 3);
+caja(3.8, 3, .4, roble, 8.5, y3 + 1.5, -D/2 + .4); for (let yy = .6; yy < 3; yy += .7){ caja(3.6, .04, .4, S('#7c552f'), 8.5, y3 + yy, -D/2 + .45); planta(7.3, y3 + yy + .02, -D/2 + .45, .45); planta(9.6, y3 + yy + .02, -D/2 + .45, .45); }
+const corona = cartel('♛', '#9df05a', 120, 120, true); corona.position.set(8.5, y3 + 3.2, -D/2 + .8); scene.add(corona);
+planta(-11, y3, -3.8, 1.3); planta(5.6, y3, 3.6, 1.1); planta(-3.8, y3, 3.6, 1.1);
+
+// ---------- Personas en sus puestos ----------
+const PUESTOS = {
+  'Jefe de inventarios':      [-4.5, y1, 1.7],
+  'Confirmador de pedidos':   [-10, y2, -1.6], 'Resolutor de novedades': [-8, y2, -1.6], 'Gestor de tickets y CAS': [-6, y2, -1.6],
+  'Abogado de devoluciones':  [-10, y2, 1.0],  'Rastreador de oficinas': [-8, y2, 1.0],
+  'Líder de Logística':       [0, y2, -.3],
+  'Líder de Tecnología':      [6, y2, -1.6], 'Monitor de fallas': [8, y2, -1.6], 'Auditor de calidad': [10, y2, -1.6],
+  'Optimizador de procesos':  [7, y2, 1.0], 'Guardián de datos': [9, y2, 1.0],
+  'Vendedor de WhatsApp':     [-10, y3, -1.4], 'Casino y remarketing': [-8, y3, -1.4], 'Máquina Creativa': [-6, y3, -1.4], 'Analista de pauta': [-8, y3, 1.2],
+};
+const gente = {}, clicables = []; let k = 0;
+Object.entries(PUESTOS).forEach(([nombre, [x, y, z]]) => {
+  const c = todos[nombre]; if (!c) return;
+  const esc = escritorio(x, y, z + .55, c.color);
+  if (nombre !== 'Jefe de inventarios') silla(x, y, z, 0);
+  const r = persona(c.color, k++, MUJERES.test(c.persona || '')); r.position.set(x, y - .05, z); scene.add(r);
+  r.traverse(o => { o.userData.cargo = nombre; clicables.push(o); });
+  const nom = cartel((c.persona || c.nombre).split(' ')[0], c.color, 260, 60); nom.position.set(0, 2.05, 0); r.add(nom);
+  gente[nombre] = {c, r, casa:{x, y, z}, esc, fase:Math.random()*6, viaje:null, burbuja:null};
+});
+// creadora grabando en el estudio
+const creadora = persona('#e06ac0', 3, true); creadora.position.set(0, y3, -3.4); creadora.rotation.y = 0; scene.add(creadora);
+
+// ---------- Flujos de información (piso 2) ----------
+const FLUJOS = [
+  ['Confirmador de pedidos', 'Líder de Logística', 'pedido frenado: casa y oficina mezcladas'],
+  ['Gestor de tickets y CAS', 'Rastreador de oficinas', 'el CAS dice: paquete disponible en oficina'],
+  ['Gestor de tickets y CAS', 'Abogado de devoluciones', 'guía devuelta sin segundo intento'],
+  ['Resolutor de novedades', 'Rastreador de oficinas', 'novedad resuelta: reclama en oficina'],
+  ['Auditor de calidad', 'Confirmador de pedidos', 'regla ajustada con lo que aprobó Karen'],
+  ['Monitor de fallas', 'Líder de Tecnología', 'una vuelta no corrió a su hora'],
+  ['Rastreador de oficinas', 'Líder de Logística', 'cliente para que Karen lo llame'],
+  ['Líder de Logística', 'Gestor de tickets y CAS', 'suben las guías quietas: prioridad'],
+  ['Abogado de devoluciones', 'Líder de Logística', 'ticket de fletes enviado a Dropi'],
+  ['Optimizador de procesos', 'Confirmador de pedidos', 'un paso más rápido para confirmar'],
+  ['Guardián de datos', 'Líder de Tecnología', 'copia de vetos y quejas guardada'],
+  ['Líder de Logística', 'Líder de Tecnología', 'la entrega va en 82 %: ¿qué optimizamos?'],
+];
+const lista = $('lista'), historial = [];
+function anotar(de, a, que){
+  const hora = new Date().toLocaleTimeString('es-CO', {hour:'2-digit', minute:'2-digit', timeZone:'America/Bogota'});
+  historial.unshift(`<li><span>${hora}</span> <b>${(de.c.persona||de.c.nombre).split(' ')[0]}</b> → <b>${(a.c.persona||a.c.nombre).split(' ')[0]}</b>: ${que}</li>`);
+  lista.innerHTML = historial.slice(0, 5).join('');
+}
+const PASILLO = 2.6;
+function ruta(de, para){ const a = de.casa, b = para.casa;
+  return [{x:a.x, z:a.z}, {x:a.x + .9, z:a.z}, {x:a.x + .9, z:PASILLO}, {x:b.x + .9, z:PASILLO}, {x:b.x + .9, z:b.z + .3}]; }
+function largo(p){ let s = 0; for (let i = 1; i < p.length; i++) s += Math.hypot(p[i].x - p[i-1].x, p[i].z - p[i-1].z); return s; }
+function punto(p, d){ for (let i = 1; i < p.length; i++){ const L = Math.hypot(p[i].x - p[i-1].x, p[i].z - p[i-1].z);
+  if (d <= L){ const k2 = L ? d/L : 0; return {x:p[i-1].x + (p[i].x - p[i-1].x)*k2, z:p[i-1].z + (p[i].z - p[i-1].z)*k2, dir:Math.atan2(p[i].x - p[i-1].x, p[i].z - p[i-1].z)}; } d -= L; }
+  const a = p[p.length-2], b = p[p.length-1]; return {x:b.x, z:b.z, dir:Math.atan2(b.x - a.x, b.z - a.z)}; }
+let siguiente = 1.5;
+function lanzarFlujo(t){
+  const libres = FLUJOS.filter(([d, a]) => gente[d] && gente[a] && !gente[d].viaje && !gente[a].viaje);
+  if (!libres.length) return;
+  const [d, a, que] = libres[Math.floor(Math.random()*libres.length)];
+  const de = gente[d], para = gente[a], pts = ruta(de, para);
+  de.viaje = {ini:t, pts, L:largo(pts), para, fase:'ida'};
+  de.burbuja = cartel('📄 ' + que, de.c.color, Math.min(900, 30 + que.length*17), 60); de.burbuja.position.set(0, 2.5, 0); de.r.add(de.burbuja);
+  anotar(de, para, que);
+}
+
+// ---------- Ficha ----------
+function pintarFicha(nombre){
+  const g = gente[nombre]; if (!g) return; const c = g.c, on = c.funciones.some(trabaja);
+  $('ficha').innerHTML = `<h2>Persona</h2><div class="area">${c.area || ''}</div><h3>${c.persona || c.nombre}</h3><div class="cargo">${c.nombre} <span class="pill ${on?'on':''}">${on?'trabajando ahora':'en su puesto'}</span></div><p>${c.mision}</p>` +
+    c.funciones.map(a => { const t = trabaja(a), prox = proxima(a), otro = /otro chat/.test(a.dato);
+      return `<div class="fun"><span class="pill ${t?'on':''}">${t?'ahora':(prox||(otro?'otro chat':'en construcción'))}</span><b>${a.nombre}</b> · ${a.hace}<div class="dato">${a.dato}</div></div>`; }).join('');
+}
+let elegido = 'Líder de Logística'; pintarFicha(elegido); setInterval(() => pintarFicha(elegido), 20000);
+const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(); let abajo = null;
+canvas.addEventListener('pointerdown', e => abajo = [e.clientX, e.clientY]);
+canvas.addEventListener('pointerup', e => {
+  if (!abajo || Math.hypot(e.clientX-abajo[0], e.clientY-abajo[1]) > 6) return;
+  mouse.set(e.clientX/innerWidth*2-1, -(e.clientY/innerHeight)*2+1); ray.setFromCamera(mouse, camera);
+  const hit = ray.intersectObjects(clicables)[0]; if (hit){ elegido = hit.object.userData.cargo; pintarFicha(elegido); }
+});
+
+function tam(){ renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth/innerHeight;
+  const lejos = innerWidth < 700 ? 46 : 31; camera.position.set(-1.5, 5.8, lejos); controls.target.set(-1.5, 5.8, 0); camera.updateProjectionMatrix(); }
+addEventListener('resize', tam); tam();
+
+const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reloj = new THREE.Clock();
+(function animar(){
+  requestAnimationFrame(animar);
+  const t = reloj.getElapsedTime();
+  if (!quieto && t > siguiente){ lanzarFlujo(t); siguiente = t + 3.5 + Math.random()*3; }
+  Object.values(gente).forEach(g => {
+    const u = g.r.userData, on = g.c.funciones.some(trabaja);
+    g.esc.pan.material.color.set(on ? '#9df05a' : g.c.color);
+    if (g.viaje){
+      const v = g.viaje;
+      if (v.fase !== 'charla'){
+        const d = (t - v.ini)*1.3, pts = v.fase === 'ida' ? v.pts : [...v.pts].reverse(), q = punto(pts, Math.min(d, v.L));
+        g.r.position.set(q.x, g.casa.y, q.z); g.r.rotation.y = q.dir;
+        const paso = Math.sin(t*8)*.55; u.pi.rotation.x = paso; u.pd.rotation.x = -paso; u.bi.rotation.x = -paso*.7; u.bd.rotation.x = paso*.7;
+        if (d >= v.L){ if (v.fase === 'ida'){ v.fase = 'charla'; v.ini = t; } else g.viaje = null; }
+      } else {
+        const p = v.para.r.position; g.r.rotation.y = Math.atan2(p.x - g.r.position.x, p.z - g.r.position.z);
+        u.pi.rotation.x = u.pd.rotation.x = 0; u.bi.rotation.x = 0; u.bd.rotation.x = -.9 + Math.sin(t*4)*.2;
+        v.para.r.userData.cabeza.rotation.y = Math.sin(t*2)*.25;
+        if (t - v.ini > 2.2){ v.fase = 'vuelta'; v.ini = t; if (g.burbuja){ g.r.remove(g.burbuja); g.burbuja = null; } }
+      }
+      if (g.viaje) return;
+    }
+    const sentado = g.c.nombre !== 'Jefe de inventarios';
+    g.r.position.set(g.casa.x, g.casa.y - (sentado ? .05 : 0), g.casa.z); g.r.rotation.y = 0;
+    u.pi.rotation.x = u.pd.rotation.x = sentado ? -Math.PI/2 : 0;
+    const tecla = quieto ? 0 : Math.sin(t*9 + g.fase)*.08; u.bi.rotation.x = -1.15 + tecla; u.bd.rotation.x = -1.15 - tecla;
+    if (!quieto) u.cabeza.rotation.y = Math.sin(t*.4 + g.fase)*.12;
+  });
+  if (!quieto){ const cu = creadora.userData; cu.bd.rotation.x = -.6 + Math.sin(t*2)*.5; cu.cabeza.rotation.y = Math.sin(t*1.3)*.3; }
+  controls.update(); renderer.render(scene, camera);
+})();
+</script>
