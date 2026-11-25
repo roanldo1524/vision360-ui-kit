@@ -82,6 +82,35 @@ def eventos():
     p = os.path.join(D, 'reporte_datos.json')
     if os.path.exists(p):
         add(os.path.getmtime(p), 'Líder de Logística', None, 'envió el reporte del día por WhatsApp a Ronald, Karen y Leidy', 'reporte')
+    # Ronald 25-11: «la líder debe poder hablar con TODO el equipo y garantizar los KPI». Después del último trabajo real de cada agente,
+    # la líder pasa por su puesto y revisa lo hecho contra la meta. Cada texto cita el conteo real de hoy (nada inventado).
+    UNID = {'Confirmador de pedidos': 'pedidos trabajados', 'Gestor de tickets y CAS': 'gestiones en el CAS', 'Abogado de devoluciones': 'reclamos de flete',
+            'Rastreador de oficinas': 'avisos de oficina', 'Resolutor de novedades': 'novedades', 'Jefe de inventarios': 'movimientos'}
+    META = {'Confirmador de pedidos': 'meta: confirmar bien para llegar a 90 % de entrega',
+            'Gestor de tickets y CAS': 'meta: ningún paquete quieto más de 48 h',
+            'Abogado de devoluciones': 'meta: devolución por debajo de 3 %',
+            'Rastreador de oficinas': 'meta: que todo paquete en oficina se reclame',
+            'Resolutor de novedades': 'meta: cancelación por debajo de 7 %', 'Jefe de inventarios': 'meta: nunca quedarnos sin producto'}
+    cnt = {}
+    for e in list(ev):
+        if e['de'] in UNID:
+            c = cnt.setdefault(e['de'], [0, 0]); c[0] += 1; c[1] = max(c[1], e['t'])
+    for ag, (k, t) in cnt.items():
+        add(t + 90, 'Líder de Logística', ag, f'revisión de turno: {k} {UNID[ag]} hoy · {META[ag]}', 'lider')
+    # Líder de Tecnología con su equipo, con datos del monitor de salud y del cerebro de reglas
+    p = os.path.join(D, 'salud.json')
+    if os.path.exists(p):
+        t = os.path.getmtime(p)
+        add(t + 30, 'Líder de Tecnología', 'Monitor de fallas', f'revisión: {sal.get("ok", 0)} de {sal.get("revisados", 0)} procesos al día, {len(sal.get("fallas", []))} fallas', 'lider')
+        g = next((x for x in sal.get('detalle', []) if x['agente'].startswith('Guardián')), None)
+        if g: add(t + 60, 'Líder de Tecnología', 'Guardián de datos', f'repositorio: {g["ultima"]}', 'lider')
+    lg = '/tmp/robot/bucle.log'
+    if os.path.exists(lg):
+        txt = open(lg, errors='ignore').read()
+        seg = txt.count('AUTO SEGURO'); dud = txt.count('AUTO DUDA')
+        if seg + dud: add(os.path.getmtime(lg), 'Líder de Tecnología', 'Optimizador de procesos', f'cerebro de reglas: {seg} pedidos seguros sin gastar IA, {dud} dudas a revisión', 'lider')
+    n_v = sum(1 for e in ev if e['tipo'] == 'veto')
+    if n_v: add(max(e['t'] for e in ev if e['tipo'] == 'veto') + 120, 'Líder de Tecnología', 'Auditor de calidad', f'auditar los {n_v} pedidos frenados hoy: ¿el motivo era real?', 'lider')
     ev.sort(key=lambda e: e['t'])
     return ev
 

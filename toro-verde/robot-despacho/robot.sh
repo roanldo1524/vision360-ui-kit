@@ -71,7 +71,17 @@ EDITADOS=$(grep -c "" /tmp/dropi/editados_vuelta.txt 2>/dev/null || echo 0); rm 
 # deja las fichas para que Claude lea cada chat como una persona, vete lo dudoso y luego corra robot/confirmar_aprobados.sh.
 if [ -n "$ROBOT_PAUSA" ]; then
   if [ "${EDITADOS:-0}" -gt 0 ] && [ -z "$ROBOT_SEGUNDA" ]; then echo "SEGUNDA_VUELTA $EDITADOS editados"; sleep 10; ROBOT_SEGUNDA=1 bash "$0"; exit; fi
-  bash robot/corregir_confirmados.sh; python3 -I robot/fichas.py; rm -f /tmp/dropi/vetados.txt; echo ESPERA_REVISION_DEL_AGENTE; exit 0
+  bash robot/corregir_confirmados.sh
+  # Ronald 25-11: «muy poca IA». Las reglas (revision_auto.py) confirman de una lo SEGURO; solo las DUDAS quedan en fichas para la IA.
+  # Si la IA no las revisa en 2 h (sin cupo), pasan solas a REVISAR HUMANO para Karen: el sistema nunca se queda quieto.
+  python3 -I robot/revision_auto.py partir | grep -E "^AUTO"
+  (cd /tmp/dropi && node confirmar.js) | awk -F' \\| ' '{print $1}' | sort | uniq -c | sed 's/^ */AUTO_CONFIRMAR /'
+  python3 -I -c "
+import json,os
+E='/tmp/dropi/etiquetados.json';ya=set(json.load(open(E))) if os.path.exists(E) else set()
+p=json.load(open('/tmp/dropi/plan.json'));json.dump(sorted(ya|{x['id'] for x in p.get('etiquetar',[])}),open(E,'w'))"
+  python3 -I robot/revision_auto.py resto
+  python3 -I robot/fichas.py; rm -f /tmp/dropi/vetados.txt; echo ESPERA_REVISION_DEL_AGENTE; exit 0
 fi
 (cd /tmp/dropi && node confirmar.js) | awk -F' \\| ' '{print $1}' | sort | uniq -c
 python3 -I -c "

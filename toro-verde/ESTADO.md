@@ -812,3 +812,12 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 25-11 (Ronald): el agente del CAS no suelta el caso hasta cerrarlo; solo pasa a humano lo que no puede hacer (llamar, plata, chat cerrado).
   Herramientas nuevas de evidencia: evidencia_cliente.py (baja fotos que el cliente mandó por WhatsApp), pantallazo_pedido.js (captura del pedido en Dropi),
   reabrir_cas.js con ADJUNTO=… (adjunta archivos en el chat del CAS; PRUEBA=1 no envía). Probado sin enviar en el caso 96710562.
+- 25-11 9 a. m. (Ronald: «muy poca IA, sin errores, que siga funcionando si se acaba el límite»):
+  · revision_auto.py = cerebro de reglas sin IA. Confirma solo si el cliente aceptó el último resumen (o tocó CONFIRMAR PEDIDO) en las últimas 48 h,
+    sin pedir cambios ni otra forma de pago, y ciudad, valor, casa/oficina y números de la dirección del resumen cuadran con Dropi.
+    Probado con los 26 confirmados de hoy: 21 los habría confirmado solo (coinciden con la revisión de la IA); 5 los pasa a la IA. Ninguno distinto.
+    Las dudas van a la IA; si nadie las revisa en 2 h pasan a REVISAR HUMANO.
+  · bucle.sh corre la vuelta cada 15 min SIN Claude (pid en /tmp/robot/bucle.pid, log /tmp/robot/bucle.log), más salud y pantallas.
+  · Panel: cada pedido frenado trae «Qué hacer» (receta concreta para Karen).
+  · Sede: la líder de logística revisa con cada agente su conteo real vs su meta; el líder de tecnología con su equipo (salud, repositorio, reglas, auditoría).
+  · Ojo: la API de mensajes de Lucid a veces devuelve solo los últimos mensajes; si no se ve la aceptación, las reglas no confirman (va a IA/Karen).
