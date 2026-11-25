@@ -47,6 +47,12 @@ aclar = leer('aclaraciones.json', {})
 vetos = leer('vetos.json', {})
 anticipos = leer('anticipos.json', {})
 rep = leer('reporte_datos.json', {})
+try:
+    import subprocess as _sp
+    _sp.run(['python3', '-I', os.path.join(os.path.dirname(AQUI), 'salud.py')], capture_output=True, timeout=60)
+except Exception:
+    pass
+salud = leer('salud.json', {})
 p30 = leer('hoy30.json', [])
 p30 = p30 if isinstance(p30, list) else p30.get('orders', [])
 st30 = collections.Counter(o.get('status') for o in p30)
@@ -70,8 +76,8 @@ pisos = [
     ]),
     A(n=8, zona='Tecnología', nombre='Tecnología', area='Que el sistema nunca falle y cada proceso sea más rápido y fácil', color='#9aa7b8', agentes=[
         A(id='lider_tec', nombre='Líder de Tecnología', hace='Orquesta las mejoras: dónde fallamos, qué proceso optimizar primero', horas=[], min=[], dato='por construir el monitor automático'),
-        A(id='monitor', nombre='Monitor de fallas', hace='Vigila que cada agente corrió a su hora; si se cayó la sesión o la máquina, lo repara y relanza',
-          horas=[], min=[], dato='hoy se repara a mano'),
+        A(id='monitor', nombre='Monitor de fallas', hace='Revisa cada hora que cada agente trabajó a su hora; el que se atrasó se relanza en la vuelta siguiente',
+          horas=list(range(5, 21)), min=[19], dato=(f"{salud.get('ok', 0)} de {salud.get('revisados', 0)} al día" + (' · falla: ' + ', '.join(f['agente'] for f in salud.get('fallas', [])) if salud.get('fallas') else ' · todo en orden')) if salud else 'sin revisar aún'),
         A(id='auditor_calidad', nombre='Auditor de calidad', hace='Compara lo que frenó el robot con lo que luego aprobó Karen y ajusta las reglas',
           horas=[20], min=[19], dato='medición diaria de las 8 p. m.'),
         A(id='optimizador', nombre='Optimizador de procesos', hace='Aprende cómo se hace cada proceso y lo hace con menos tiempo y menos trabajo para Karen',
@@ -158,7 +164,7 @@ for _p in pisos:
 datos = dict(
     actualizado=ahora.strftime('%d %b, %I:%M %p').replace('AM', 'a. m.').replace('PM', 'p. m.'),
     vendido=vendido, pedidos=len(validos), conf_robot=conf_robot, revisar=revisar, guias=guias,
-    quejas_hoy=quejas_hoy, cas_activos=cas_activos, fletes=fletes, kpi=kpi, pisos=pisos,
+    quejas_hoy=quejas_hoy, cas_activos=cas_activos, fletes=fletes, kpi=kpi, salud=salud, pisos=pisos,
 )
 plantilla = open(os.path.join(AQUI, sys.argv[2] if len(sys.argv) > 2 else 'torre.html'), encoding='utf-8').read()
 html = plantilla.replace('/*DATOS*/null', json.dumps(datos, ensure_ascii=False))

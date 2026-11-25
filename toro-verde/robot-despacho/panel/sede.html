@@ -18,7 +18,7 @@ body{margin:0;background:var(--noche);color:var(--texto);font-family:var(--cuerp
 #marca{top:calc(14px + env(safe-area-inset-top,0px));left:max(14px,env(safe-area-inset-left,0px));padding:12px 16px}
 #marca h1{margin:0;font-family:var(--display);font-size:19px}
 #marca p{margin:3px 0 0;font-size:12px;color:var(--suave)}
-#kpi{top:calc(14px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));padding:10px 14px;display:grid;grid-template-columns:repeat(4,auto);gap:2px 16px}
+#kpi{top:calc(14px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));padding:10px 14px;display:grid;grid-template-columns:repeat(5,auto);gap:2px 16px}
 #kpi small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--suave)}
 #kpi b{font-family:var(--mono);font-size:15px;font-variant-numeric:tabular-nums}
 #ficha{top:calc(84px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));width:300px;max-height:calc(100% - 320px);overflow:auto;padding:14px}
@@ -53,6 +53,7 @@ body{margin:0;background:var(--noche);color:var(--texto);font-family:var(--cuerp
   <div><small>Entrega · meta 90</small><b id="k_ent"></b></div>
   <div><small>Devolución · meta 3</small><b id="k_dev"></b></div>
   <div><small>Cancelación · meta 7</small><b id="k_can"></b></div>
+  <div><small>Equipo al día</small><b id="k_sal"></b></div>
 </section>
 <aside id="ficha" class="vidrio" aria-live="polite"></aside>
 <section id="flujo" class="vidrio" aria-live="polite"><h2>Lo que pasa ahora</h2><ol id="lista"></ol></section>
@@ -69,6 +70,8 @@ $('vendido').textContent = pesos(DATOS.vendido);
 const K = DATOS.kpi || {};
 [['k_ent', K.entrega, v => v >= 90], ['k_dev', K.devolucion, v => v <= 3], ['k_can', K.cancelacion, v => v <= 7]].forEach(([id, v, ok]) => {
   const el = $(id); el.textContent = v == null ? '—' : v + ' %'; if (v != null) el.style.color = ok(v) ? 'var(--verde)' : 'var(--alerta)'; });
+{ const sa = DATOS.salud || {}, el = $('k_sal'); el.textContent = sa.revisados ? `${sa.ok}/${sa.revisados}` : '—';
+  el.title = (sa.fallas || []).map(f => f.agente).join(', ') || 'todo en orden'; el.style.color = (sa.fallas || []).length ? 'var(--alerta)' : 'var(--verde)'; }
 function bogota(){ const d = new Date(Date.now() - 5*3600e3); return {h:d.getUTCHours(), m:d.getUTCMinutes()}; }
 function trabaja(a){ const {h,m} = bogota(); return a.horas.includes(h) && a.min.some(x => m >= x && m < x + 12); }
 function proxima(a){ const {h,m} = bogota(); if (!a.horas.length) return null;
@@ -81,7 +84,7 @@ const canvas = $('escena');
 const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.outputEncoding = THREE.sRGBEncoding; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .78;
-const scene = new THREE.Scene(); scene.background = new THREE.Color('#0b0d0c'); scene.fog = new THREE.Fog('#0b0d0c', 40, 90);
+const scene = new THREE.Scene(); scene.background = new THREE.Color('#0b0d0c'); scene.fog = new THREE.Fog('#0b0d0c', 55, 110);
 const camera = new THREE.PerspectiveCamera(38, 1, .1, 300);
 const controls = new THREE.OrbitControls(camera, canvas);
 controls.enableDamping = true; controls.minDistance = 8; controls.maxDistance = 60; controls.maxPolarAngle = Math.PI*.55;
@@ -113,6 +116,40 @@ PISOS_Y.forEach((y, i) => {
 });
 caja(W + .4, .35, D, grafito, 0, 3*H + .17, 0);                                    // techo
 caja(W + 6, .3, 6, S('#232527', {roughness:.4}), 0, -.36, D/2 + 3);                // andén frontal
+// ---------- Exterior: andén, calle, faroles, árboles, carros, aletas de fachada, terraza y ciudad de noche ----------
+caja(160, .1, 160, S('#151716'), 0, -.56, 0);                                                  // terreno
+caja(80, .06, 8, S('#26282b', {roughness:.6}), 0, -.5, D/2 + 10);                               // calle
+for (let x = -38; x < 40; x += 4) caja(2, .02, .14, E('#d9d2bf'), x, -.46, D/2 + 10);          // líneas de la calle
+caja(80, .25, 2.2, S('#3a3c3f', {roughness:.5}), 0, -.4, D/2 + 15.1);                          // andén del frente
+function farol(x, z){ caja(.08, 4.2, .08, S('#1a1a1a', {metalness:.6}), x, 1.6, z); caja(.9, .06, .08, S('#1a1a1a'), x + .4, 3.7, z);
+  caja(.3, .06, .2, E('#ffd79a'), x + .8, 3.64, z); const l = new THREE.PointLight('#ffc98a', .7, 9, 2); l.position.set(x + .8, 3.4, z); scene.add(l); }
+[-13, -4.5, 4.5, 13].forEach(x => farol(x, D/2 + 5.6));
+function arbol(x, z, s = 1){ caja(1.2*s, .5, 1.2*s, S('#4a4c4f'), x, -.1, z); caja(.14*s, 2.2*s, .14*s, S('#4a3426'), x, 1*s, z);
+  for (let i = 0; i < 6; i++){ const f = new THREE.Mesh(new THREE.IcosahedronGeometry(.75*s, 0), i % 2 ? hoja : hoja2); f.position.set(x + (Math.random()-.5)*1.1*s, (2.4 + Math.random()*.9)*s, z + (Math.random()-.5)*1.1*s); scene.add(f); } }
+[-20, -16, 16, 20].forEach(x => arbol(x, D/2 + 6.5, 1));
+function carro(x, z, color){ const g = new THREE.Group(); caja(4, .7, 1.8, S(color, {metalness:.6, roughness:.35}), 0, .55, 0, g);
+  caja(2.2, .55, 1.6, S('#1b2530', {metalness:.4, roughness:.1}), -.2, 1.15, 0, g);
+  [[-1.3,.9],[1.3,.9],[-1.3,-.9],[1.3,-.9]].forEach(([a, b]) => { const r = new THREE.Mesh(new THREE.CylinderGeometry(.33,.33,.25,14), S('#111')); r.rotation.x = Math.PI/2; r.position.set(a, .33, b); g.add(r); });
+  caja(.05, .16, .4, E('#fff4d0'), 2.01, .62, .55, g); caja(.05, .16, .4, E('#fff4d0'), 2.01, .62, -.55, g);
+  g.position.set(x, -.5, z); scene.add(g); }
+carro(-17, D/2 + 9.4, '#8c1d22'); carro(17, D/2 + 9.4, '#d9dadb');
+for (let i = 0; i < 14; i++) caja(.18, 3*H + .4, .5, S('#2c2f33', {metalness:.7, roughness:.3}), W/2 + .15, 3*H/2, -D/2 + .4 + i*.72);   // aletas de aluminio en el costado
+caja(.05, 3*H, D, S('#141a1c', {metalness:.3, roughness:.1, transparent:true, opacity:.8}), W/2 + .02, 3*H/2, 0);
+// terraza verde y letrero luminoso en la cubierta
+caja(W - 2, .45, 2, S('#d9d5cc'), 0, 3*H + .55, -D/2 + 1.2);
+for (let i = 0; i < 30; i++){ const f = new THREE.Mesh(new THREE.IcosahedronGeometry(.3 + Math.random()*.2, 0), i % 2 ? hoja : hoja2); f.position.set(-W/2 + 1.5 + i*.72, 3*H + 1.05, -D/2 + 1.2 + (Math.random()-.5)*.6); scene.add(f); }
+{ const c = document.createElement('canvas'); c.width = 1600; c.height = 200; const x = c.getContext('2d');
+  x.fillStyle = '#ffffff'; x.shadowColor = '#a6f05a'; x.shadowBlur = 30; x.font = '800 118px "Bricolage Grotesque", sans-serif'; x.textAlign = 'center'; x.fillText('♛ COMERCIALIZADORA DEL REY', 800, 145);
+  const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding;
+  const rotRoof = new THREE.Mesh(new THREE.PlaneGeometry(11, 1.4), new THREE.MeshBasicMaterial({map:t, transparent:true})); rotRoof.position.set(0, 3*H + 1.9, D/2 - .5); scene.add(rotRoof);
+  caja(11.2, .08, .08, S('#222'), 0, 3*H + 1.1, D/2 - .52); }
+// ciudad de noche al fondo
+{ const c = document.createElement('canvas'); c.width = 64; c.height = 128; const x = c.getContext('2d'); x.fillStyle = '#121518'; x.fillRect(0, 0, 64, 128);
+  for (let r = 0; r < 16; r++) for (let k = 0; k < 4; k++){ x.fillStyle = Math.random() < .35 ? '#f3c97a' : '#1f262b'; x.fillRect(4 + k*15, 4 + r*8, 9, 4); }
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  for (let i = 0; i < 26; i++){ const alto = 10 + Math.random()*26, w = 6 + Math.random()*8, tex = t.clone(); tex.needsUpdate = true; tex.repeat.set(Math.round(w/4), Math.round(alto/6));
+    const e = new THREE.Mesh(new THREE.BoxGeometry(w, alto, 6), new THREE.MeshBasicMaterial({map:tex, color:'#6c7378'}));
+    e.position.set(-75 + i*6 + Math.random()*2, alto/2 - .5, -55 - Math.random()*20); scene.add(e); } }
 
 // Muro verde con el letrero de la empresa (lado izquierdo, toda la altura)
 const muro = new THREE.Group(); muro.position.set(-W/2 - 1.6, 0, 1); scene.add(muro);
@@ -127,7 +164,7 @@ function texLetrero(){
   x.beginPath(); x.moveTo(110, 300); x.lineTo(130, 150); x.lineTo(200, 230); x.lineTo(256, 120); x.lineTo(312, 230); x.lineTo(382, 150); x.lineTo(402, 300); x.closePath(); x.fill(); x.stroke();
   [[130,150],[256,120],[382,150]].forEach(([a, b]) => { x.beginPath(); x.arc(a, b - 10, 16, 0, Math.PI*2); x.fillStyle = '#a6f05a'; x.fill(); });
   x.fillStyle = '#ffffff'; x.textAlign = 'center'; x.shadowColor = '#a6f05a'; x.shadowBlur = 24;
-  x.font = '800 62px "Bricolage Grotesque", sans-serif'; x.fillText('COMERCIALIZADORA', 256, 400); x.font = '800 92px "Bricolage Grotesque", sans-serif'; x.fillText('DEL REY', 256, 495);
+  x.font = '800 50px "Bricolage Grotesque", sans-serif'; x.fillText('COMERCIALIZADORA', 256, 400); x.font = '800 92px "Bricolage Grotesque", sans-serif'; x.fillText('DEL REY', 256, 495);
   x.shadowBlur = 0; x.strokeStyle = '#a6f05a'; x.lineWidth = 6; x.beginPath(); x.roundRect ? x.roundRect(96, 545, 320, 90, 45) : x.rect(96, 545, 320, 90); x.stroke();
   x.fillStyle = '#ffffff'; x.font = '700 54px "IBM Plex Sans", sans-serif'; x.fillText('Oficina IA', 256, 607);
   x.font = '500 40px "IBM Plex Sans", sans-serif'; x.fillStyle = '#e7f2e2'; ['Logística', 'Confirmación', 'Contenido', 'Tecnología'].forEach((t, i) => x.fillText(t, 256, 720 + i*58));
@@ -311,7 +348,7 @@ canvas.addEventListener('pointerup', e => {
 });
 
 function tam(){ renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth/innerHeight;
-  const lejos = innerWidth < 700 ? 46 : 31; camera.position.set(-1.5, 5.8, lejos); controls.target.set(-1.5, 5.8, 0); camera.updateProjectionMatrix(); }
+  const lejos = innerWidth < 700 ? 50 : 36; camera.position.set(-1.5, 5.8, lejos); controls.target.set(-1.5, 5.8, 0); camera.updateProjectionMatrix(); }
 addEventListener('resize', tam); tam();
 
 const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
