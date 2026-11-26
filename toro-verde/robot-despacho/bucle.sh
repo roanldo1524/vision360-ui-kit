@@ -12,6 +12,6 @@ while true; do
   mkdir -p $V && python3 -I $R/panel/generar_panel.py $V/robot-despacho.html >/dev/null 2>&1
   (cd $R/panel && python3 -I generar_torre.py $V/sede.html sede.html >/dev/null 2>&1)
   echo "--- $(TZ=America/Bogota date '+%d-%m %H:%M') fin de vuelta" >> /tmp/robot/bucle.log
-  # Ronald 26-11: «a las 9 a. m. todo confirmado»: cada 15 min de 5 a 9 a. m.; después, cada hora
-  if [ "$(TZ=America/Bogota date +%-H)" -lt 9 ]; then sleep 900; else sleep 3600; fi
+  # Ronald 26-11: «a las 9 a. m. todo confirmado»: cada 15 min de 5 a 9 a. m.; después, cada 30 min (Ronald 26-11 1 p. m.: «veo que estás confirmando pocas»)
+  if [ "$(TZ=America/Bogota date +%-H)" -lt 9 ]; then sleep 900; else sleep 1800; fi
 done
