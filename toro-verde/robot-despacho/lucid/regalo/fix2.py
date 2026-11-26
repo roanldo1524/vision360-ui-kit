@@ -49,5 +49,19 @@ if 'Documento:' not in n: n=n.replace(', Productos:',', Documento: "", Productos
 n=re.sub(r'Toro Verde - (LITRO|GALON|GALÓN|POMA[^-]*) - Nombre_variable: \1',lambda m:'Toro Verde - Nombre_variable: Presentación: '+m.group(1),n)
 for ciu,dep in [('EL CARMEN DE VIBORAL','Antioquia'),('PAZ DE ARIPORO','Casanare'),('ITAGUI','Antioquia'),('PIENDAMO','Cauca'),('TAURAMENA','Casanare'),('LA CUMBRE','Valle del Cauca'),('CODAZZI','Cesar'),('YOPAL','Casanare'),('POPAYAN','Cauca'),('ITAGÜÍ','Antioquia'),('MEDELLIN','Antioquia'),('ENVIGADO','Antioquia'),('BELLO','Antioquia')]:
     if ciu in n.upper() and re.search(r'Departamento:\s*(?:"")?\s*,',n): n=re.sub(r'Departamento:\s*(?:"")?\s*,','Departamento: %s,'%dep,n,1)
+# 6) Ronald 25-11: pedidos sin departamento (municipio pequeño) y de oficina sin dirección → se llenan solos con el portal de Interrapidísimo
+#    (solo si el municipio existe en UN solo departamento) y la dirección queda «dirección del punto, RECLAMA EN OFICINA INTERRAPIDÍSIMO».
+try:
+    sys.path.insert(0, '/tmp/robot/robot'); import oficinas as _o
+    mc = re.search(r'Ciudad:\s*([^,]+)', n); ciu = _o.muni(mc.group(1)) if mc else ''
+    if ciu and re.search(r'Departamento:\s*(?:"")?\s*,', n):
+        deps = {dd for (dd, cc) in _o.of if cc == ciu}
+        if len(deps) == 1: n = re.sub(r'Departamento:\s*(?:"")?\s*,', 'Departamento: %s,' % deps.pop().title(), n, count=1)
+    md = re.search(r'Departamento:\s*([^,"]+),', n)
+    mdir = re.search(r'Direcci[oó]n:\s*([^,]*),', n)
+    if ciu and md and mdir and not re.search(r'\d', mdir.group(1)) and re.search(r'oficina|reclam|interr?ap', n, re.I):
+        d = _o.dir_oficina(md.group(1), ciu, '')
+        if d: n = n.replace(mdir.group(0), 'Dirección: %s,' % d, 1)
+except Exception as e: print('OFICINA_ERR', str(e)[:60])
 if n==v: print('SIN_CAMBIO'); sys.exit(1)
 open(f'regalo/{c}_nuevo.txt','w').write(n); print(c, n[:260])
