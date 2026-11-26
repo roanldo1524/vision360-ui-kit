@@ -28,6 +28,32 @@ t = (f"{'☀️ Buenos días' if modo == 'manana' else '🌙 Cierre del día'} �
      f"🏷️ En REVISAR HUMANO ahora: {r['en_revision']} de {r['pendientes']} pendientes por confirmar")
 print(t)
 if '--enviar' not in sys.argv: raise SystemExit
+# Ronald 26-11: «también puedes enviar reportes por el grupo desde ese número, ejemplo en el ESTRATÉGICO: cosas que hiciste, notables, etc.;
+# el reporte diario de finalizar el día». → en modo noche, un reporte completo al grupo «ESTRATEGICO CDR» por el WhatsApp del equipo (whatsapp/wa_grupo.js).
+if modo == 'noche' and os.path.exists('/tmp/wa/auth/creds.json'):
+    try:
+        lid = reg('reportes_lideres.json')
+        cas = (json.load(open('/tmp/dropi/cas_auto.json')) if os.path.exists('/tmp/dropi/cas_auto.json') else {}).get('conteo', {})
+        ab = json.load(open('/tmp/wa/abonos_registro.json')) if os.path.exists('/tmp/wa/abonos_registro.json') else []
+        ab_hoy = [x for x in ab if x.get('fecha') == ahora.strftime('%d/%m/%Y')]
+        g = [f"🌙 *Cierre del día · El Toro* ({ahora.strftime('%d/%m')})", "",
+             f"✅ Confirmados: *{conf}* → robot {r['conf_robot']} ({pct} %) · equipo {r['conf_humano']}  (meta: 95 % robot)",
+             f"🔧 Novedades resueltas: {r['nov_sol']} · abiertas: {r['nov_abiertas']}",
+             f"📨 Quejas a transportadoras: {len(q)}" + (f" · casos CAS manejados por el robot: {sum(v for k, v in cas.items() if k != 'ya_cerrado')}" if cas else ''),
+             f"💰 Abonos aprobados hoy: {len(ab_hoy)}" + (f" (${sum(x.get('abono') or 0 for x in ab_hoy):,.0f})".replace(',', '.') if ab_hoy else ''),
+             f"🏷️ Pendientes en revisión humana: {r['en_revision']} de {r['pendientes']}", "", "*Lo que hizo cada líder hoy:*"]
+        for quien, x in lid.items():
+            if quien.startswith('_'): continue
+            NOM = {'Líder de Logística': 'Valentina (líder)', 'Confirmador de pedidos': 'Daniela (confirmación)', 'Gestor de tickets y CAS': 'Camilo (CAS)',
+                   'Rastreador de oficinas': 'Mateo (rastreo)', 'Abogado de devoluciones': 'Juliana (devoluciones)', 'Líder de Tecnología': 'Santiago (tecnología)',
+                   'Casino y remarketing': 'Tomás (marketing)'}
+            g.append(f"• *{NOM.get(quien, quien)}*: {x.get('nuevo', '')}")
+            if x.get('problema'): g.append(f"   ⚠️ {x['problema']} → {x.get('solucion', '')}")
+        os.makedirs('/tmp/wa/salida', exist_ok=True)
+        json.dump({'grupo': 'ESTRATEGICO CDR', 'mencionar': [], 'texto': '\n'.join(g)[:3800]},
+                  open(f'/tmp/wa/salida/{int(time.time()*1000)}_cierre.json', 'w'), ensure_ascii=False)
+        print('REPORTE grupo ESTRATEGICO en cola')
+    except Exception as e: print('REPORTE grupo error', str(e)[:80])
 os.chdir('/tmp/robot'); K = open('lucidbot.key').read().strip(); API = 'https://panel.lucidbot.co/api'
 EQUIPO = ['573218940042', '573234209080', '573206357423']  # Ronald, Leidy, Karen
 def get(p): x = json.loads(urllib.request.urlopen(urllib.request.Request(API + p, headers={'X-ACCESS-TOKEN': K}), timeout=40).read()); return x.get('data', x) if isinstance(x, dict) else x
