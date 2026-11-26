@@ -91,9 +91,21 @@ function escuchar(){ if (!sock) return; sock.ev.on('messages.upsert', ({ message
       if (!(['573218940042', '94502349988013'].includes(quien_num) || /ronald/i.test(m.pushName || ''))) { log('MENCION_IGNORADA', m.pushName || '', quien_num); continue; }
       const datos = JSON.stringify({ pregunta: tx.replace(/@\d+/g, '').trim(), quien: m.pushName || '', quien_num: /^57\d{10}$/.test(quien_num) ? quien_num : '', grupo: m.key.remoteJid, grupo_nombre: (grupos[m.key.remoteJid] || {}).subject || '' });
       const ch = require('child_process').spawn('python3', ['-I', path.join(BASE, 'responder.py')], { cwd: BASE }); ch.stdin.end(datos);
-      ch.stdout.on('data', d => log('RESPONDER', String(d).trim().slice(0, 120))); log('MENCION', m.pushName || '', tx.slice(0, 60));
+      ch.stdout.on('data', d => log('RESPONDER', String(d).trim().slice(0, 120))); log('MENCION', m.pushName || '', tx.slice(0, 60)); continue;
     } } catch (e) { log('MENCION_ERROR', e.message); }
   const msg = m.message, ctx = (msg.extendedTextMessage || msg.imageMessage || msg.videoMessage || {}).contextInfo || {};
+  // Ronald 26-11: «si selecciono tu mensaje y te respondo, es como un hilo de conversación y tienes que responder; ahí no me toca mencionarte»
+  { const qm = ctx.quotedMessage || {}, qt = qm.conversation || (qm.extendedTextMessage || {}).text || (qm.imageMessage || {}).caption || '';
+    const yoIds = [(sock.user.id || '').split(':')[0].split('@')[0], (sock.user.lid || '').split(':')[0].split('@')[0]].filter(Boolean);
+    const citaAlBot = !!ctx.stanzaId && ((ctx.participant && yoIds.includes(ctx.participant.split('@')[0].split(':')[0])) || !!leerIds()[ctx.stanzaId]);
+    const esComprobante = /Comprobante/i.test(qt) && /Pedido Dropi:\s*\d+/.test(qt);
+    const qn = (m.key.participantPn || m.key.participantAlt || m.key.participant || m.key.remoteJid || '').split('@')[0].split(':')[0];
+    const esRonald = ['573218940042', '94502349988013'].includes(qn) || /ronald/i.test(m.pushName || '');
+    const tx2 = msg.conversation || (msg.extendedTextMessage || {}).text || '';
+    if (citaAlBot && !esComprobante && esRonald && tx2) {
+      const datos = JSON.stringify({ pregunta: tx2.replace(/@\d+/g, '').trim(), contexto: qt.slice(0, 1500), quien: m.pushName || 'Ronald', quien_num: '', grupo: m.key.remoteJid, grupo_nombre: (grupos[m.key.remoteJid] || {}).subject || 'chat privado' });
+      const ch = require('child_process').spawn('python3', ['-I', path.join(BASE, 'responder.py')], { cwd: BASE }); ch.stdin.end(datos);
+      ch.stdout.on('data', d => log('RESPONDER', String(d).trim().slice(0, 120))); log('HILO', m.pushName || '', tx2.slice(0, 60)); continue; } }
   let ref = ctx.stanzaId && leerIds()[ctx.stanzaId];
   if (!ref && ctx.quotedMessage){ const q = ctx.quotedMessage, qt = q.conversation || (q.extendedTextMessage || {}).text || (q.imageMessage || {}).caption || '';
     if (/Comprobante de anticipo/i.test(qt) && /Pedido Dropi:\s*\d+/.test(qt)) ref = { texto: qt }; }

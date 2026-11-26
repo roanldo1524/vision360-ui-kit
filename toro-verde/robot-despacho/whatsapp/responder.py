@@ -49,7 +49,7 @@ sistema = ("Eres el Agente de Confirmaciones de Comercializadora del Rey (tienda
            "dilo y di que lo revisas en la próxima vuelta. No inventes números. No prometas plata ni hagas acciones: si te piden algo (confirmar, revisar un pedido, "
            "cambiar algo), di que quedó anotado como tarea y que la vuelta del robot lo hace. " + reglas)
 msg = [{'role': 'system', 'content': sistema + '\n\nDATOS DE HOY:\n' + datos},
-       {'role': 'user', 'content': f"{p.get('quien') or 'Alguien'} pregunta en el grupo «{p.get('grupo_nombre', '')}»: {p.get('pregunta', '')}"}]
+       {'role': 'user', 'content': (f"Ronald está respondiendo a este mensaje tuyo (hilo de conversación):\n«{p['contexto']}»\n\n" if p.get('contexto') else '') + f"{p.get('quien') or 'Alguien'} pregunta en el grupo «{p.get('grupo_nombre', '')}»: {p.get('pregunta', '')}"}]
 try:
     req = urllib.request.Request('https://api.openai.com/v1/chat/completions', method='POST',
         data=json.dumps({'model': 'gpt-4o-mini', 'messages': msg, 'max_tokens': 350, 'temperature': 0.3}).encode(),
