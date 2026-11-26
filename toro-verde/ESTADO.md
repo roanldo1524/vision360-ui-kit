@@ -865,3 +865,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - Entrega por semana: S47 robot 100 % (30/0, 95 en camino) vs persona 98 %; S48 aún en camino casi todo (robot 1/1, persona 8/1).
 - Arreglos de hoy en reglas: dirección del punto de oficina antes de confirmar, teléfono del resumen aceptado, «gracias» como aceptación, producto/cantidad del resumen = Dropi; confirmados a oficina sin punto se corrigen cada vuelta completa; Lucid llena departamento y oficina solo.
 - Respaldo: vetos.json, aclaraciones.json y anticipos.json copiados a datos/.
+- 25-11 8:15 p. m.: recordatorio del casino enviado (ver cifra abajo). Ventas del casino el 25-11 hasta las 8:15 p. m.: 15 pedidos, $2.715.000. Remarketing total 17-25/11: 115 ventas, ~$19,3 M.
