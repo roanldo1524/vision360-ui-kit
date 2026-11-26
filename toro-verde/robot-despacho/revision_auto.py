@@ -25,7 +25,7 @@ def chat(c):
         out.append((m.group(1), f, m.group(3).strip()))
     return out
 
-SI = re.compile(r'^\W*((es|est[aá]|todo|ok|si|s[ií],?)\s+(muy\s+)?correct|ah,?\s+listo|s[ií]+|sip|sii|si se[ñn]or|correct|corect|perfect|confirm|listo|ok|okey|de acuerdo|dale|claro|as[ií] es|exacto|todo (est[aá] )?(bien|correcto)|est[aá]n? bien|bien|👍)', re.I)
+SI = re.compile(r'^\W*((es|est[aá]|todo|ok|si|s[ií],?)\s+(muy\s+)?correct|ah,?\s+listo|(muchas\s+)?gracias\W*$|s[ií]+|sip|sii|si se[ñn]or|correct|corect|perfect|confirm|listo|ok|okey|de acuerdo|dale|claro|as[ií] es|exacto|todo (est[aá] )?(bien|correcto)|est[aá]n? bien|bien|👍)', re.I)
 RIESGO = re.compile(r'cambi|corrij|correg|otra direc|otra ciudad|mejor (a|en|para|lo)|no lo quiero|ya no|cancel|anul|ma[ñn]ana (te|le) (pago|confirmo)|pago (ma[ñn]ana|despu|luego)|nequi|netflix|daviplata|transfer|consign|addi|cuota|tarjeta|devolu|esper(e|a) (un|que)|despu[eé]s (le|te) (digo|confirmo)|no (estoy|voy a estar)|viaj', re.I)
 HOY_MIN = 48  # horas: la aceptación tiene que ser reciente (nada de «CONFIRMAR PEDIDO» de un pedido viejo)
 
@@ -67,6 +67,9 @@ def revisar(d):
         if not nr: return 'DUDA', 'el resumen no trae números de dirección'
         if not nr <= nd: return 'DUDA', f'números de la dirección del resumen ({" ".join(sorted(nr))}) no están en Dropi'
     if not ciudad or not direc: return 'DUDA', 'resumen incompleto en el chat'
+    # Ronald 25-11: muchos clientes dan otro número en el chat; el del resumen aceptado es el que va en Dropi
+    tc = re.sub(r'\D', '', campo('Contacto'))[-10:]
+    if len(tc) == 10 and tc.startswith('3') and tc != re.sub(r'\D', '', d.get('phone') or '')[-10:]: d['_tel'] = tc
     return 'SEGURO', f'aceptó el resumen («{acepta[1][:25]}») y todo cuadra'
 
 if __name__ == '__main__':
@@ -88,6 +91,14 @@ if __name__ == '__main__':
             else: dudas.append(dict(x, motivo_duda=m))
         # Ronald 25-11: oficina = «dirección del punto, RECLAMA EN OFICINA INTERRAPIDÍSIMO». Si Dropi solo dice «reclama en oficina», se pone el punto antes de confirmar.
         import subprocess; sys.path.insert(0, os.path.join(os.getcwd(), 'robot')); import oficinas as _ofi
+        tels = [f"{x['id']}\t{det[x['id']]['_tel']}" for x in seguros if (det.get(x['id']) or {}).get('_tel')]
+        if tels:
+            open('/tmp/dropi/tel_auto.tsv', 'w').write('\n'.join(tels) + '\n')
+            out = subprocess.run(['node', 'tel_lote.js', 'tel_auto.tsv'], cwd='/tmp/dropi', capture_output=True, text=True, timeout=300).stdout
+            print('AUTO_TEL', out.strip().replace('\n', ' | '))
+            malos = {int(t.split('\t')[0]) for t in tels if f"TEL_OK {t.split(chr(9))[0]}" not in out and f"YA {t.split(chr(9))[0]}" not in out}
+            for x in [s_ for s_ in seguros if s_['id'] in malos]:
+                seguros.remove(x); dudas.append(dict(x, motivo_duda='el teléfono del resumen es otro y no pude cambiarlo'))
         arreglos = []
         for x in list(seguros):
             d = det.get(x['id']) or {}; dirx = re.sub(r'\s+', ' ', d.get('dir') or '').strip(' ,')
