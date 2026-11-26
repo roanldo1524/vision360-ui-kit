@@ -18,18 +18,28 @@ est = collections.Counter(o.get('status') for o in hoy)
 datos = (f"Pedidos de hoy: {len(dia)}; confirmados por el robot: {robot}. Estados en los últimos días: " +
          ', '.join(f'{k} {v}' for k, v in est.most_common(8)) + ".\nLíderes:\n" +
          '\n'.join(f"- {k}: nuevo: {v.get('nuevo')}; problema: {v.get('problema')}; solución: {v.get('solucion')}" for k, v in lid.items() if not k.startswith('_')))
+# Ronald 26-11: «por medio de este número podemos conocer información también, cosas que están pasando en la oficina»
+try:
+    est_md = open('/home/user/vision360-ui-kit/toro-verde/ESTADO.md', encoding='utf-8').read()[-3500:]
+except Exception: est_md = ''
+cas = (leer('/tmp/dropi/cas_auto.json', {}) or {}).get('conteo', {})
+gar = leer('/tmp/dropi/garantias_filas.json', []) or []
+ab = leer('/tmp/wa/abonos_registro.json', []) or []
+comp = leer('/tmp/wa/comprobantes_enviados.json', {}) or {}
+datos += (f"\nCAS hoy: {cas}. Garantías abiertas: {len(gar)} (" + ', '.join(f'{k} {v}' for k, v in collections.Counter(g.get('categoria') for g in gar).items()) +
+          f"). Comprobantes publicados en el grupo: {len(comp)}; abonos aprobados: {len(ab)}.\nÚLTIMO EN LA OFICINA (bitácora):\n{est_md}")
 reglas = ("Reglas: nunca decir orgánico, ecológico, natural, sin veneno ni no tóxico; uso: mínimo 130 ml por bomba de 20 litros y agite el envase; "
           "descuentos solo a quien nunca compró; abono si el cliente devuelve más del 50 %; flete hasta 15 % sobre el tope (1 L $28.750, 2 L $33.350, galón $40.250); "
           "nunca se cancelan pedidos; la plata (reenvíos, devoluciones, aprobar abonos) la decide Ronald o el equipo en el grupo de comprobantes.")
 sistema = ("Eres el Agente de Confirmaciones de Comercializadora del Rey (tienda El Toro, herbicida Toro Verde, Colombia), miembro del equipo en WhatsApp. "
-           "Respondes en español sencillo, cálido y MUY corto (máximo 4 líneas), como una persona del equipo. Usa solo los datos que te doy; si no tienes el dato, "
+           "Respondes en español sencillo, cálido y corto (máximo 6 líneas), como una persona del equipo. Usa solo los datos que te doy; si no tienes el dato, "
            "dilo y di que lo revisas en la próxima vuelta. No inventes números. No prometas plata ni hagas acciones: si te piden algo (confirmar, revisar un pedido, "
            "cambiar algo), di que quedó anotado como tarea y que la vuelta del robot lo hace. " + reglas)
 msg = [{'role': 'system', 'content': sistema + '\n\nDATOS DE HOY:\n' + datos},
        {'role': 'user', 'content': f"{p.get('quien') or 'Alguien'} pregunta en el grupo «{p.get('grupo_nombre', '')}»: {p.get('pregunta', '')}"}]
 try:
     req = urllib.request.Request('https://api.openai.com/v1/chat/completions', method='POST',
-        data=json.dumps({'model': 'gpt-4o-mini', 'messages': msg, 'max_tokens': 220, 'temperature': 0.3}).encode(),
+        data=json.dumps({'model': 'gpt-4o-mini', 'messages': msg, 'max_tokens': 350, 'temperature': 0.3}).encode(),
         headers={'Authorization': 'Bearer x', 'Content-Type': 'application/json'})
     r = json.loads(urllib.request.urlopen(req, timeout=60).read())['choices'][0]['message']['content'].strip()
 except Exception as e:

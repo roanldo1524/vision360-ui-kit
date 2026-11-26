@@ -40,7 +40,7 @@ var iniciar = async function() {
 }
 
 function buscaGrupo(q) {
-  if (/@g\.us$/.test(q)) return q;
+  if (/@(g\.us|s\.whatsapp\.net|lid)$/.test(q)) return q;
   const n = s => (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   const m = Object.values(grupos).filter(g => n(g.subject).includes(n(q)));
   return m.length === 1 ? m[0].id : null;
@@ -80,6 +80,11 @@ function escuchar(){ if (!sock) return; sock.ev.on('messages.upsert', ({ message
   try { const mm = m.message, ci = (mm.extendedTextMessage || mm.imageMessage || {}).contextInfo || {}, men = ci.mentionedJid || [];
     const yo = [(sock.user.id || '').split(':')[0].split('@')[0], (sock.user.lid || '').split(':')[0].split('@')[0]].filter(Boolean);
     const tx = mm.conversation || (mm.extendedTextMessage || {}).text || (mm.imageMessage || {}).caption || '';
+    // Ronald 26-11: también por chat PRIVADO a este número (solo Ronald)
+    const privado = !m.key.remoteJid.endsWith('@g.us') && (m.key.remoteJid.startsWith('573218940042') || (m.key.remoteJidAlt || '').startsWith('573218940042') || /ronald/i.test(m.pushName || ''));
+    if (privado && tx) { const datos = JSON.stringify({ pregunta: tx, quien: m.pushName || 'Ronald', quien_num: '', grupo: m.key.remoteJid, grupo_nombre: 'chat privado' });
+      const ch = require('child_process').spawn('python3', ['-I', path.join(BASE, 'responder.py')], { cwd: BASE }); ch.stdin.end(datos);
+      ch.stdout.on('data', d => log('RESPONDER', String(d).trim().slice(0, 120))); log('PRIVADO', m.pushName || '', tx.slice(0, 60)); continue; }
     if (m.key.remoteJid.endsWith('@g.us') && (men.some(j => yo.includes(j.split('@')[0].split(':')[0])) || yo.some(n => tx.includes('@' + n)))) {
       const quien_num = (m.key.participantPn || m.key.participantAlt || m.key.participant || '').split('@')[0].split(':')[0];
       // Ronald 26-11: «solo si lo pregunta Ronaldo; a nadie más le puedes responder tú como bot cosas del sistema»
