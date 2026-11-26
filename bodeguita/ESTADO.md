@@ -191,6 +191,12 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
 - 26-nov 10:30 a. m.: 400 tibios, 75 ya compraron → **304 enviados, 0 fallos**. Total casino: 1.530 recibieron.
   Pedidos de gente que recibió el casino: 7 (6 afiladores + 1 cubre canas) = **$843.900**, todos a precio normal,
   0 con el premio. Hoy 7:35 a. m. entró 1 afilador (…0346). Ronald sigue sin responder al cambio «premio directo».
+- 26-nov 2:16 p. m.: hoy 35 pedidos en total. Del casino hoy: 3 pedidos a precio normal (afilador $129.000, imán $99.900,
+  cubre canas $69.900) = $298.800; 0 con el premio.
+- ⚠️ 26-nov: 4 pedidos NO subieron a Dropi («Producto 1/2: El producto no existe o no pertenece a esta tienda»), los 4 de
+  SH CUBRE CANAS color NEGRO ($99.900, $69.900, $129.900, $99.900 = $399.600): …8588, …6017, …1892, …7819
+  (Lucid 146647, 177239, 179328, 763029). Hoy sí subieron 7 de cubre canas de otros colores → probablemente la variante
+  NEGRO cambió o se borró en Dropi. Avisado a Ronald/Sandra; hay que corregir el producto en Lucid/Dropi y subirlos a mano.
 - Ronald (24-nov): en este chat SOLO datos de La Bodeguita; no compararla ni mencionar Toro Verde.
 - Pendiente técnico: la foto de la máquina y los sonidos del casino todavía se cargan desde el almacenamiento de
   Shopify de otra tienda (no se ve marca). Pasarlos a un alojamiento propio de La Bodeguita.
