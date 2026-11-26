@@ -957,3 +957,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
   - El registro se guarda en /tmp/wa/abonos_registro.json. La vuelta de los :19 sube la foto a Drive › Abonos de dinero › mes, nombrada con el código ABN (formato de la hoja EL TORO).
   - OJO: «REGISTRO DE ABONOS 2026» es un .xlsx de Johana y nuestra cuenta no tiene permiso de edición.
 - 26-11 4:52 p. m. Comprobantes: (1) comprobantes_pend.py publica en el grupo TODO comprobante de un pedido sin confirmar: el cliente mandó una foto después de que se le pidió pagar por transferencia. Ya salió el de Franklin (98318557). Corre en cada vuelta del bucle. (2) abonos.py acepta la aprobación de Ronald, Karen o Leidy.
+- 26-11 5:21 p. m. El agente se presentó en «Comprobantes de Pago CDR», «El Toro CDR» y «ESTRATEGICO CDR», mencionando a Ronald. WhatsApp se caía con la desconexión 428 de WhatsApp; ahora wa_vigilante.sh lo reinicia en 5 s, y bucle.sh revive al vigilante.

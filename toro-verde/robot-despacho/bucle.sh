@@ -20,7 +20,7 @@ while true; do
   cp $R/abonos.py /tmp/wa/ 2>/dev/null
   # Ronald 26-11: todo comprobante sin confirmar va al grupo; el equipo aprueba y el robot despacha (abonos.py)
   if [ "$H" -ge 6 ] && [ "$H" -lt 21 ] && [ -f /tmp/wa/auth/creds.json ]; then timeout 600 python3 -I $R/comprobantes_pend.py --enviar >> /tmp/robot/comprobantes.log 2>&1; (cd /tmp/wa && timeout 300 python3 -I abonos.py --enviar >> /tmp/robot/comprobantes.log 2>&1); fi
-  if [ -f /tmp/wa/auth/creds.json ] && ! kill -0 $(cat /tmp/wa/wa.pid 2>/dev/null) 2>/dev/null; then (cd /tmp/wa && cp $R/whatsapp/wa_grupo.js . && setsid nohup node wa_grupo.js >> wa.log 2>&1 < /dev/null & echo $! > /tmp/wa/wa.pid); fi
+  if [ -f /tmp/wa/auth/creds.json ] && ! kill -0 $(cat /tmp/wa/vigilante.pid 2>/dev/null) 2>/dev/null; then (cp $R/whatsapp/wa_grupo.js $R/whatsapp/wa_vigilante.sh /tmp/wa/ && setsid nohup bash /tmp/wa/wa_vigilante.sh >/dev/null 2>&1 < /dev/null &); fi
   python3 -I $R/salud.py >/dev/null 2>&1
   mkdir -p $V && python3 -I $R/panel/generar_panel.py $V/robot-despacho.html >/dev/null 2>&1
   (cd $R/panel && python3 -I generar_torre.py $V/sede.html sede.html >/dev/null 2>&1)
