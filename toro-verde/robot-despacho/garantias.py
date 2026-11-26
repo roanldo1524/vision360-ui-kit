@@ -50,23 +50,26 @@ def texto(cat, nom):
     # Textos de la política «POLITICAS GARANTIAS» (Drive), con la dosis de la marca: mínimo 130 ml por bomba de 20 L y agitar el envase.
     nom = nom or 'compita'
     if cat == 'FALTAN_DATOS':
-        return (f"Hola {nom} 👋 Te escribe Sofía, del área de garantías de Toro Verde. Gracias por escribirnos. "
-                "Para darte una solución rápida y precisa necesitamos unas pregunticas sobre cómo aplicaste:\n\n"
-                "1️⃣ ¿Cuántos ml de producto le echaste a cada bomba y con cuánta agua?\n"
-                "2️⃣ ¿Agitaste bien el envase antes de usarlo?\n"
-                "3️⃣ ¿Le agregaste algo más al agua (corrector de pH, fertilizante, otro químico)?\n"
-                "4️⃣ ¿Qué maleza querías controlar, de qué tamaño estaba y cómo estuvo el clima? ¿Llovió ese día o después?\n"
-                "5️⃣ ¿Cómo reaccionó la maleza en los días siguientes y cuántos días han pasado?\n"
-                "6️⃣ ¿Lo aplicaste tú mismo o alguien más? ¿Con qué boquilla?\n"
-                "7️⃣ ¿El agua era limpia (sin barro ni residuos)?\n\n"
-                "📸 Por favor mándanos *fotos o video del lote* donde aplicaste y *una foto del frasco* (para revisar el lote del producto). "
-                "Apenas tengamos tus respuestas te damos la solución. ¡Estamos para ayudarte! 💪")
+        # Ronald 26-11: encuesta corta con preguntas ABIERTAS para saber si es problema de la aplicación o del producto
+        # (dosis según la maleza, limón según el agua del municipio, agitar, agua, clima, quién aplicó, boquilla).
+        return (f"Hola {nom} 👋 Te escribe Sofía, del área de garantías de Toro Verde. Lamentamos que el resultado no fuera el esperado "
+                "y queremos entender bien qué pasó para darte una solución. Cuéntanos con tus palabras:\n\n"
+                "1️⃣ ¿Cómo preparaste la mezcla? (cuánta agua, cuántos ml de Toro Verde, si le echaste limón y cuánto, y si agitaste el envase)\n"
+                "2️⃣ ¿Qué maleza querías controlar y qué tan grande o dura estaba?\n"
+                "3️⃣ ¿Cómo estaba el día cuando aplicaste y qué le pasó a la maleza en los días siguientes?\n"
+                "4️⃣ ¿Quién hizo la aplicación, con qué bomba o boquilla, y de dónde sacaron el agua?\n"
+                "5️⃣ ¿En qué municipio está el lote?\n\n"
+                "📸 *Lo más importante son las evidencias* (sin ellas no podemos revisar la garantía):\n"
+                "• Fotos claras o un video corto del lote donde aplicaste (de día, que se vea la maleza de cerca y el lote completo)\n"
+                "• Una foto clara del *envase* de Toro Verde donde se vea la etiqueta y el número de lote\n\n"
+                "Con eso revisamos tu caso y te damos la solución. ¡Gracias! 🌱")
     if cat == 'DOSIS':
         return (f"{nom}, gracias por contarnos 🙏 Ya vimos qué pasó: la dosis mínima es *130 ml por bomba de 20 litros* "
-                "(150 ml si la maleza está grande o fuerte) y hay que *agitar el envase* antes de usarlo.\n\n"
+                "(150 ml si la maleza es grande y dura, 200 ml si es dura y alta) y hay que *agitar el envase* antes de usarlo.\n\n"
                 "Hagamos una prueba controlada en un pedacito del lote para ver el resultado real:\n"
-                "✅ Agua limpia\n✅ Mínimo 130 ml por bomba de 20 litros\n✅ Boquilla de alto descargue\n"
-                "✅ Día soleado, sin lluvia\n✅ No mezclar con otros químicos\n✅ Agitar bien el envase antes de aplicar\n\n"
+                "✅ Agua limpia\n✅ El limón que corresponde al agua de tu municipio (te decimos cuánto)\n✅ Agitar bien el envase\n"
+                "✅ Mínimo 130 ml por bomba de 20 litros (150 ml si la maleza es grande y dura, 200 ml si es dura y alta)\n"
+                "✅ Boquilla de alto descargue, día soleado y sin lluvia\n✅ No mezclar con otros químicos\n\n"
                 "Cuéntanos qué día lo vas a hacer y al día 7 nos mandas fotos 📸 ¡Estamos aquí para guiarte! 🌱")
     if cat == 'PACIENCIA':
         return (f"{nom}, gracias por escribirnos 🙏 El efecto se ve entre 3 y 7 días después de aplicar: primero la maleza se pone "

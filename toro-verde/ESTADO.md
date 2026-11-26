@@ -901,3 +901,9 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - Tarea programada trig_017WaCDRiMoyA1sbswpsKCvX: 9:41 a. m. y 3:41 p. m. (pide fotos, registra en el Excel, recomienda reenvío/negar según la política; Ronald decide).
 - /tmp/dropi/garantia_contactos.txt: lista de clientes en garantía para que el casino/remarketing no les mande promociones (hoy el casino sí les manda: Héctor 3148748282 recibió «tienes un premio» estando en garantía).
 - OJO política: el doc dice «dosis mínima 100 ml» y la marca dice 130 ml → los mensajes usan 130 ml. Ronald: actualizar el doc.
+
+### 26-11 · Garantías (Sofía): evidencias y encuesta que sirve
+- Sofía pide evidencias claras (lote de día, maleza de cerca y el lote completo, y foto del envase con la etiqueta y el lote). Se guardan en la carpeta «Evidencias» de Drive, una subcarpeta por caso.
+- Se analizó la encuesta vieja (96 respuestas; 17 del herbicida). El 29 % usó menos de 130 ml, el 24 % tuvo lluvia y el 35 % tuvo rebrote en pastos. Nunca se preguntaba por el limón ni por el municipio.
+- El Excel del robot tiene 12 columnas nuevas (O:Z) con las respuestas ordenadas y el diagnóstico de si fue la aplicación o el producto.
+- Política nueva 2026 en borrador, pendiente de la aprobación de Ronald: docs/politica-garantias-2026.md.
