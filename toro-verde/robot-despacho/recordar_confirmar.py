@@ -14,7 +14,7 @@ TXT_SHOPIFY = ('Hola, ¿Cómo estás? 😊 ¡Muchísimas gracias por tu compra y
                'Apenas tengamos el número de guía, te lo estaremos compartiendo para que puedas hacer seguimiento a tu envío. ¡Estamos atentos y felices de atenderte! 🌱🐂')  # Resumen_confirmacion_pedido: {{2}} de la plantilla
 REG = '/tmp/dropi/recordados_conf.json'; reg = json.load(open(REG)) if os.path.exists(REG) else {}
 hora = (datetime.datetime.utcnow() - datetime.timedelta(hours=5)).hour
-if not 8 <= hora < 20: print('RECORDAR_CONFIRMAR fuera de horario'); raise SystemExit
+if not 6 <= hora < 20: print('RECORDAR_CONFIRMAR fuera de horario'); raise SystemExit
 def get(p): return json.loads(urllib.request.urlopen(urllib.request.Request(API + p, headers={'X-ACCESS-TOKEN': K}), timeout=40).read())
 def post(p, body=None):
     return urllib.request.urlopen(urllib.request.Request(API + p, data=json.dumps(body or {}).encode(), headers={'X-ACCESS-TOKEN': K, 'Content-Type': 'application/json'}, method='POST'), timeout=40).read().decode()
