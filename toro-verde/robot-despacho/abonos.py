@@ -1,7 +1,7 @@
 # Ronald 26-11: «si yo respondo por WhatsApp "confirmado", o "sí está el dinero", o "aprobado", o algo positivo, tú puedes
 # despacharlo y registrarlo en el Excel de comprobantes» + «subir el comprobante según el mes» (Drive: Ingresos › Abonos de dinero › MES).
 # Lee /tmp/wa/respuestas/*.json (respuestas en el grupo «Comprobantes de Pago CDR» que CITAN un comprobante del robot; whatsapp/wa_grupo.js).
-# SOLO vale la respuesta de Ronald (3218940042). Sin IA:
+# Vale la respuesta de Ronald, Karen o Leidy (Ronald 26-11: «yo confirmo o alguien del equipo»). Sin IA:
 #   POSITIVA con valor («aprobado 50000», «sí llegó 269.000 nequi») → en Dropi: total = total − abono (si queda algo por cobrar),
 #       estado PENDIENTE (confirmado) + etiqueta CONFIRMADO AGENTE; avisa en el grupo y deja el abono listo para el registro.
 #   POSITIVA sin valor → pregunta en el grupo «¿de cuánto fue el abono?» (no adivina plata).
@@ -11,7 +11,7 @@
 # con los conectores de Google, leyendo /tmp/wa/abonos_registro.json. Uso: python3 -I abonos.py [--enviar]
 import json, os, re, sys, glob, time, datetime, subprocess
 ENVIAR = '--enviar' in sys.argv
-RONALD = '3218940042'
+EQUIPO = {'3218940042': 'Ronald', '3234209080': 'Leidy', '3206357423': 'Karen'}  # Ronald 26-11: «yo confirmo o alguien del equipo»
 W = '/tmp/wa'; D = '/tmp/dropi'; REG = f'{W}/abonos_registro.json'; HECHOS = f'{W}/abonos_hechos.json'
 reg = json.load(open(REG)) if os.path.exists(REG) else []
 hechos = json.load(open(HECHOS)) if os.path.exists(HECHOS) else {}
@@ -25,9 +25,12 @@ def monto(t):
     ns = [int(x) for x in re.findall(r'\d{4,7}', t2)]
     ns = [n for n in ns if 1000 <= n < 3000000]
     return ns[0] if ns else None
-def es_ronald(r):
+def es_equipo(r):
     q = (r.get('quien_pn') or '') + ' ' + (r.get('quien') or '')
-    return RONALD in q or re.search(r'ronald', r.get('nombre') or '', re.I) is not None
+    for n, nom in EQUIPO.items():
+        if n in q: return nom
+    m = re.search(r'ronald|karen|leidy', r.get('nombre') or '', re.I)
+    return m.group(0).title() if m else None
 def al_grupo(texto, karen=False):
     if not ENVIAR: return
     os.makedirs(f'{W}/salida', exist_ok=True)
@@ -44,8 +47,9 @@ for f in sorted(glob.glob(f'{W}/respuestas/*.json')):
     nombre = ref.get('nombre') or (re.search(r'Cliente:\s*([^\n]+)', ref.get('texto') or '') or [None, ''])[1]
     clave = os.path.basename(f)
     if clave in hechos: continue
-    if not pedido or not es_ronald(r):
-        hechos[clave] = 'ignorada (no es de Ronald o sin pedido)'; continue
+    aprobo = es_equipo(r)
+    if not pedido or not aprobo:
+        hechos[clave] = 'ignorada (no es del equipo o sin pedido)'; continue
     if NEG.search(texto) and not re.search(r'no hay problema', texto, re.I):
         hechos[clave] = 'negativa'; al_grupo(f"❌ Anotado: el abono de {nombre} (pedido {pedido}) NO está. El pedido sigue frenado; no se despacha."); n += 1; continue
     if not POS.search(texto):
@@ -59,7 +63,7 @@ for f in sorted(glob.glob(f'{W}/respuestas/*.json')):
         al_grupo(f"Ronald, ¿de cuánto fue el abono de {nombre} (pedido {pedido}, total ${total:,.0f})? Respóndeme citando el comprobante, por ejemplo: «aprobado 50000 nequi».".replace(',', '.'))
         hechos[clave] = 'falta valor'; n += 1; continue
     if v >= total:
-        al_grupo(f"✅ Ronald aprobó el pago COMPLETO de {nombre} (pedido {pedido}, ${v:,.0f}). Karen: márcalo SIN RECAUDO en Dropi y despáchalo (el robot no cambia la forma de pago).".replace(',', '.'), karen=True)
+        al_grupo(f"✅ {aprobo} aprobó el pago COMPLETO de {nombre} (pedido {pedido}, ${v:,.0f}). Karen: márcalo SIN RECAUDO en Dropi y despáchalo (el robot no cambia la forma de pago).".replace(',', '.'), karen=True)
         estado = 'pago completo: Karen marca SIN RECAUDO'
     else:
         nuevo = total - v
@@ -73,7 +77,7 @@ for f in sorted(glob.glob(f'{W}/respuestas/*.json')):
                   f"⚠️ No pude actualizar el pedido {pedido} en Dropi. Karen, revísalo: descontar ${v:,.0f} del total y confirmar.").replace(',', '.'), karen=not ok)
     hoy = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=5))
     reg.append({'fecha': hoy.strftime('%d/%m/%Y'), 'mes': hoy.month, 'cliente': nombre, 'telefono': cel, 'pedido': pedido, 'producto': '',
-                'abono': v, 'banco': banco, 'motivo': 'A/ VOLUNTARIO', 'imagen': ref.get('imagen', ''), 'estado': estado, 'registrado': False})
+                'abono': v, 'banco': banco, 'motivo': 'A/ VOLUNTARIO', 'imagen': ref.get('imagen', ''), 'estado': estado, 'aprobo': aprobo, 'registrado': False})
     hechos[clave] = estado; n += 1
 if ENVIAR:
     json.dump(reg, open(REG, 'w'), ensure_ascii=False); json.dump(hechos, open(HECHOS, 'w'), ensure_ascii=False)

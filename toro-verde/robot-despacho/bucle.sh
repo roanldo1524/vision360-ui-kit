@@ -18,6 +18,8 @@ while true; do
   if [ "$H" -ge 7 ] && [ "$H" -lt 20 ]; then (cd /tmp/dropi && cp $R/dropi/oficina_desde.js . && timeout 1500 python3 -I $R/rastreo.py --enviar >> /tmp/robot/rastreo.log 2>&1); fi
   # Ronald 26-11: WhatsApp del equipo (310 846 7560, grupo «Comprobantes de Pago CDR»): si el servidor se reinició, se vuelve a encender solo
   cp $R/abonos.py /tmp/wa/ 2>/dev/null
+  # Ronald 26-11: todo comprobante sin confirmar va al grupo; el equipo aprueba y el robot despacha (abonos.py)
+  if [ "$H" -ge 6 ] && [ "$H" -lt 21 ] && [ -f /tmp/wa/auth/creds.json ]; then timeout 600 python3 -I $R/comprobantes_pend.py --enviar >> /tmp/robot/comprobantes.log 2>&1; (cd /tmp/wa && timeout 300 python3 -I abonos.py --enviar >> /tmp/robot/comprobantes.log 2>&1); fi
   if [ -f /tmp/wa/auth/creds.json ] && ! kill -0 $(cat /tmp/wa/wa.pid 2>/dev/null) 2>/dev/null; then (cd /tmp/wa && cp $R/whatsapp/wa_grupo.js . && setsid nohup node wa_grupo.js >> wa.log 2>&1 < /dev/null & echo $! > /tmp/wa/wa.pid); fi
   python3 -I $R/salud.py >/dev/null 2>&1
   mkdir -p $V && python3 -I $R/panel/generar_panel.py $V/robot-despacho.html >/dev/null 2>&1

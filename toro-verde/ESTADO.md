@@ -956,3 +956,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
   - Si no trae el valor, pregunta de cuánto fue. Si el abono cubre todo el pedido, le pide a Karen marcarlo SIN RECAUDO. Si es negativo, el pedido no se despacha.
   - El registro se guarda en /tmp/wa/abonos_registro.json. La vuelta de los :19 sube la foto a Drive › Abonos de dinero › mes, nombrada con el código ABN (formato de la hoja EL TORO).
   - OJO: «REGISTRO DE ABONOS 2026» es un .xlsx de Johana y nuestra cuenta no tiene permiso de edición.
+- 26-11 4:52 p. m. Comprobantes: (1) comprobantes_pend.py publica en el grupo TODO comprobante de un pedido sin confirmar: el cliente mandó una foto después de que se le pidió pagar por transferencia. Ya salió el de Franklin (98318557). Corre en cada vuelta del bucle. (2) abonos.py acepta la aprobación de Ronald, Karen o Leidy.
