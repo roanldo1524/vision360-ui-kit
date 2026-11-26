@@ -948,3 +948,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
   - Lucid subió solos 2 pedidos. El de 3202304495 falló por «Faltan campos obligatorios» y queda para revisar.
   - WhatsApp del equipo (310 846 7560): Ronald no alcanzó a vincular con el código XGEMHDH1, que venció. wa_grupo.js ya no se cae cuando se cierra la sesión.
   - Garantías: el buscador de compras está bien. Los «sin compra» que sí tienen pedido en Dropi lo tienen devuelto o cancelado, es decir, nunca lo recibieron. Quedan 6 casos nuevos por subir al Excel (GRT-R158 a R163), porque la aprobación de la escritura quedó sin responder.
+- 26-11 4:38 p. m. WhatsApp del equipo CONECTADO (310 846 7560, vinculado con código). Los comprobantes 💰 se publican en «Comprobantes de Pago CDR» con la foto y mencionando a Ronald, Leidy y Karen. Ya salió el primero (Horacio, pedido 98403862). bucle.sh lo vuelve a encender si el servidor se reinicia.

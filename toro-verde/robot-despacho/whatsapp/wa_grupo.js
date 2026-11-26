@@ -55,8 +55,12 @@ async function despachar() {
     const jid = buscaGrupo(j.grupo || conf || process.env.WA_GRUPO || '');
     if (!jid) { log('SIN_GRUPO', f, j.grupo); continue; }
     try {
-      if (j.imagen && fs.existsSync(j.imagen)) await sock.sendMessage(jid, { image: fs.readFileSync(j.imagen), caption: j.texto || '' });
-      else await sock.sendMessage(jid, { text: j.texto || '' });
+      // Ronald 26-11: «mencionar a Ronaldo, a Karen y a Leidy» → @ en el texto + mentions (números en /tmp/wa/mencionar.txt o en j.mencionar)
+      const men = (j.mencionar || (() => { try { return fs.readFileSync(path.join(BASE, 'mencionar.txt'), 'utf8').split(/\s+/).filter(Boolean); } catch (e) { return []; } })()).map(n => n.replace(/\D/g, '')).filter(Boolean);
+      const mentions = men.map(n => n + '@s.whatsapp.net');
+      const txt = (j.texto || '') + (men.length ? '\n\n' + men.map(n => '@' + n).join(' ') : '');
+      if (j.imagen && fs.existsSync(j.imagen)) await sock.sendMessage(jid, { image: fs.readFileSync(j.imagen), caption: txt, mentions });
+      else await sock.sendMessage(jid, { text: txt, mentions });
       fs.renameSync(p, path.join(ENV, f)); log('ENVIADO', f);
       await new Promise(r => setTimeout(r, 2500));  // despacio, como una persona
     } catch (e) { log('ENVIO_ERROR', f, e.message); }
