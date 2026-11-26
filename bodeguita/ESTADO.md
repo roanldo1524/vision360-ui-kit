@@ -187,6 +187,7 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
 - 25-nov 4:22 p. m.: 386 tibios, 49 ya compraron → **127 enviados, 0 fallos**. Total casino: 1.226 recibieron.
   Pedidos después del casino (medidor): 4 a precio normal — afiladores $129.000 x3 (…1437 el 24, …8645 y …1527 hoy) y
   cubre canas $69.900 = **$456.900**; 0 con el premio. Los pedidos de imán y mandalas de anoche ya no aparecen en 705299.
+- 25-nov 8:32 p. m.: hoy 42 pedidos en total en La Bodeguita; 4 de gente que recibió el casino (4 afiladores x $129.000 = $516.000), 0 con el premio.
 - Ronald (24-nov): en este chat SOLO datos de La Bodeguita; no compararla ni mencionar Toro Verde.
 - Pendiente técnico: la foto de la máquina y los sonidos del casino todavía se cargan desde el almacenamiento de
   Shopify de otra tienda (no se ve marca). Pasarlos a un alojamiento propio de La Bodeguita.
