@@ -22,11 +22,11 @@
  "intervenciones": [
   {
    "quien": "Líder de Logística",
-   "dice": "Últimos 30 días: entrega 82.3 % (meta 90), devolución 7.0 % (meta 3), cancelación 10.7 % (meta 7)."
+   "dice": "Últimos 30 días: entrega 82.5 % (meta 90), devolución 6.8 % (meta 3), cancelación 10.7 % (meta 7)."
   },
   {
    "quien": "Confirmador de pedidos",
-   "dice": "Hoy confirmé 25 pedidos con chat leído y frené 9 con motivo. Quedan 10 en revisión de Karen."
+   "dice": "Hoy confirmé 27 pedidos con chat leído y frené 9 con motivo. Quedan 11 en revisión de Karen."
   },
   {
    "quien": "Gestor de tickets y CAS",
@@ -34,7 +34,7 @@
   },
   {
    "quien": "Rastreador de oficinas",
-   "dice": "Hay 261 paquetes en «Reclame en oficina» en los últimos 30 días; es la fuga más grande de la entrega."
+   "dice": "Hay 268 paquetes en «Reclame en oficina» en los últimos 30 días; es la fuga más grande de la entrega."
   },
   {
    "quien": "Monitor de fallas",
@@ -53,7 +53,7 @@
  "tareas": [
   {
    "id": "T-20261125-01",
-   "titulo": "Lista diaria de paquetes en oficina (261) con días en oficina y aviso al cliente",
+   "titulo": "Lista diaria de paquetes en oficina (268) con días en oficina y aviso al cliente",
    "responsable": "Rastreador de oficinas",
    "fecha": "2026-11-27",
    "estado": "abierta",
@@ -80,7 +80,7 @@
   },
   {
    "id": "T-20261125-04",
-   "titulo": "Revisar 10 pedidos frenados por el robot (llamar o confirmar)",
+   "titulo": "Revisar 11 pedidos frenados por el robot (llamar o confirmar)",
    "responsable": "Karen (humana)",
    "fecha": "2026-11-25",
    "estado": "requiere aprobación humana",
