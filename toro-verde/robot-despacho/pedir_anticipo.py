@@ -74,7 +74,7 @@ for c, r in reg.items():
             os.makedirs('/tmp/wa/salida', exist_ok=True); img = ''
             if urls:
                 img = f'/tmp/wa/comp_{c}.jpg'; open(img, 'wb').write(urllib.request.urlopen(urls[-1], timeout=40).read())
-            json.dump({'grupo': os.environ.get('WA_GRUPO', ''), 'imagen': img,
+            json.dump({'grupo': os.environ.get('WA_GRUPO', ''), 'imagen': img, 'pedido': r['pedido'], 'cel': c[2:], 'nombre': r['nombre'], 'total': r.get('total'),
                        'texto': f"💰 Comprobante de anticipo\nCliente: {r['nombre']}\nCelular: {c[2:]}\nPedido Dropi: {r['pedido']}\nValor del pedido: ${(r.get('total') or 0):,.0f}".replace(',', '.') + "\nEstado: POR VALIDAR (revisar en Bancolombia)"},
                       open(f'/tmp/wa/salida/{int(time.time())}_{c}.json', 'w'), ensure_ascii=False)
         except Exception as e: print('WA_GRUPO_ERROR', str(e)[:60])

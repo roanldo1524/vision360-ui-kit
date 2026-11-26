@@ -17,6 +17,7 @@ while true; do
   # Ronald 26-11: Lucid ya avisa por estado; rastreo.py solo INSISTE (2 y 4 días en oficina sin que el cliente responda).
   if [ "$H" -ge 7 ] && [ "$H" -lt 20 ]; then (cd /tmp/dropi && cp $R/dropi/oficina_desde.js . && timeout 1500 python3 -I $R/rastreo.py --enviar >> /tmp/robot/rastreo.log 2>&1); fi
   # Ronald 26-11: WhatsApp del equipo (310 846 7560, grupo «Comprobantes de Pago CDR»): si el servidor se reinició, se vuelve a encender solo
+  cp $R/abonos.py /tmp/wa/ 2>/dev/null
   if [ -f /tmp/wa/auth/creds.json ] && ! kill -0 $(cat /tmp/wa/wa.pid 2>/dev/null) 2>/dev/null; then (cd /tmp/wa && cp $R/whatsapp/wa_grupo.js . && setsid nohup node wa_grupo.js >> wa.log 2>&1 < /dev/null & echo $! > /tmp/wa/wa.pid); fi
   python3 -I $R/salud.py >/dev/null 2>&1
   mkdir -p $V && python3 -I $R/panel/generar_panel.py $V/robot-despacho.html >/dev/null 2>&1

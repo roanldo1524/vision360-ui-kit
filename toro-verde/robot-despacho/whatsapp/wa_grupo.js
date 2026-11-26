@@ -14,7 +14,7 @@ for (const d of [SAL, ENV]) fs.mkdirSync(d, { recursive: true });
 const log = (...a) => console.log(new Date().toISOString().slice(0, 19), ...a);
 let sock = null, grupos = {};
 
-async function iniciar() {
+var iniciar = async function() {
   const { state, saveCreds } = await useMultiFileAuthState(path.join(BASE, 'auth'));
   const { version } = await fetchLatestBaileysVersion().catch(() => ({ version: undefined }));
   const agent = process.env.HTTPS_PROXY ? new HttpsProxyAgent(process.env.HTTPS_PROXY) : undefined;
@@ -59,12 +59,31 @@ async function despachar() {
       const men = (j.mencionar || (() => { try { return fs.readFileSync(path.join(BASE, 'mencionar.txt'), 'utf8').split(/\s+/).filter(Boolean); } catch (e) { return []; } })()).map(n => n.replace(/\D/g, '')).filter(Boolean);
       const mentions = men.map(n => n + '@s.whatsapp.net');
       const txt = (j.texto || '') + (men.length ? '\n\n' + men.map(n => '@' + n).join(' ') : '');
-      if (j.imagen && fs.existsSync(j.imagen)) await sock.sendMessage(jid, { image: fs.readFileSync(j.imagen), caption: txt, mentions });
-      else await sock.sendMessage(jid, { text: txt, mentions });
+      const enviado = (j.imagen && fs.existsSync(j.imagen)) ? await sock.sendMessage(jid, { image: fs.readFileSync(j.imagen), caption: txt, mentions })
+                                                            : await sock.sendMessage(jid, { text: txt, mentions });
+      try { const ids = leerIds(); ids[enviado.key.id] = { ...j, archivo: f, jid, cuando: Date.now() }; fs.writeFileSync(IDS, JSON.stringify(ids)); } catch (e) {}
       fs.renameSync(p, path.join(ENV, f)); log('ENVIADO', f);
       await new Promise(r => setTimeout(r, 2500));  // despacio, como una persona
     } catch (e) { log('ENVIO_ERROR', f, e.message); }
   }
 }
 process.on('unhandledRejection', e => log('ERROR', e && e.message)); process.on('uncaughtException', e => log('ERROR', e && e.message));
+// Ronald 26-11: «si yo respondo por WhatsApp confirmado, o que sí está el dinero, o aprobado, tú puedes despacharlo y registrarlo».
+// Escucha SOLO el grupo configurado; guarda cada respuesta que CITA un comprobante enviado por el robot en /tmp/wa/respuestas/*.json.
+// abonos.py decide (solo vale si responde Ronald) y hace el trabajo en Dropi. Este programa no decide nada.
+const IDS = path.join(BASE, 'ids.json'), RESP = path.join(BASE, 'respuestas'); fs.mkdirSync(RESP, { recursive: true });
+function leerIds(){ try { return JSON.parse(fs.readFileSync(IDS, 'utf8')); } catch (e) { return {}; } }
+function escuchar(){ if (!sock) return; sock.ev.on('messages.upsert', ({ messages }) => { for (const m of messages || []) { try {
+  if (!m.message || m.key.fromMe) continue;
+  const msg = m.message, ctx = (msg.extendedTextMessage || msg.imageMessage || msg.videoMessage || {}).contextInfo || {};
+  let ref = ctx.stanzaId && leerIds()[ctx.stanzaId];
+  if (!ref && ctx.quotedMessage){ const q = ctx.quotedMessage, qt = q.conversation || (q.extendedTextMessage || {}).text || (q.imageMessage || {}).caption || '';
+    if (/Comprobante de anticipo/i.test(qt) && /Pedido Dropi:\s*\d+/.test(qt)) ref = { texto: qt }; }
+  if (!ref) continue;
+  const texto = msg.conversation || (msg.extendedTextMessage || {}).text || (msg.imageMessage || {}).caption || '';
+  const r = { texto, quien: m.key.participant || '', quien_pn: m.key.participantPn || m.key.participantAlt || '', nombre: m.pushName || '', fecha: Date.now(), ref };
+  fs.writeFileSync(path.join(RESP, Date.now() + '_' + (m.key.id || '') + '.json'), JSON.stringify(r)); log('RESPUESTA', r.nombre, texto.slice(0, 60));
+  try { require('child_process').execFile('python3', ['-I', path.join(BASE, 'abonos.py'), '--enviar'], { cwd: BASE, timeout: 300000 }, (e, so) => log('ABONOS', (so || '').trim().slice(-160))); } catch (e) {}
+} catch (e) { log('RESPUESTA_ERROR', e.message); } } }); }
+const _iniciar = iniciar; iniciar = async function(){ await _iniciar(); escuchar(); };
 iniciar(); setInterval(despachar, 20000);
