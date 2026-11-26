@@ -73,7 +73,7 @@ process.on('unhandledRejection', e => log('ERROR', e && e.message)); process.on(
 // abonos.py decide (solo vale si responde Ronald) y hace el trabajo en Dropi. Este programa no decide nada.
 const IDS = path.join(BASE, 'ids.json'), RESP = path.join(BASE, 'respuestas'); fs.mkdirSync(RESP, { recursive: true });
 function leerIds(){ try { return JSON.parse(fs.readFileSync(IDS, 'utf8')); } catch (e) { return {}; } }
-function escuchar(){ if (!sock) return; sock.ev.on('messages.upsert', ({ messages }) => { for (const m of messages || []) { try {
+function escuchar(){ if (!sock) return; sock.ev.on('messages.upsert', ({ messages, type }) => { log('UPSERT', type, (messages || []).length, (messages || []).map(x => (x.key || {}).remoteJid + (x.key && x.key.fromMe ? '(yo)' : '')).join(' ').slice(0, 160)); for (const m of messages || []) { try {
   if (m.key.remoteJid && m.key.remoteJid.endsWith('@g.us') && !m.key.fromMe) log('MSG_GRUPO', (grupos[m.key.remoteJid] || {}).subject || m.key.remoteJid, m.pushName || '', m.message ? Object.keys(m.message).join(',') : 'SIN_CONTENIDO(no descifrado)', ((m.message || {}).conversation || ((m.message || {}).extendedTextMessage || {}).text || '').slice(0, 120));
   if (!m.message || m.key.fromMe) continue;
   // Ronald 26-11: si mencionan al agente en cualquier grupo, responde (responder.py)
