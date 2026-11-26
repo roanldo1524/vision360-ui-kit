@@ -20,6 +20,9 @@ async function iniciar() {
   const agent = process.env.HTTPS_PROXY ? new HttpsProxyAgent(process.env.HTTPS_PROXY) : undefined;
   sock = makeWASocket({ auth: state, version, agent, fetchAgent: agent, logger: pino({ level: 'silent' }), browser: ['Toro Verde Robot', 'Chrome', '1.0'], markOnlineOnConnect: false, syncFullHistory: false });
   sock.ev.on('creds.update', saveCreds);
+  // Ronald 26-11: «el QR no lo coge» → vincular con CÓDIGO de 8 letras (WhatsApp → Dispositivos vinculados → Vincular con número de teléfono).
+  // Uso: WA_NUMERO=57XXXXXXXXXX node wa_grupo.js → escribe el código en /tmp/wa/codigo.txt
+  if (process.env.WA_NUMERO && !state.creds.registered) setTimeout(async () => { try { const code = await sock.requestPairingCode(process.env.WA_NUMERO.replace(/\D/g, '')); fs.writeFileSync(path.join(BASE, 'codigo.txt'), code); log('CODIGO', code); } catch (e) { log('CODIGO_ERROR', e.message); } }, 4000);
   sock.ev.on('connection.update', async (u) => {
     if (u.qr) { await QRCode.toFile(QR_PNG, u.qr, { width: 420, margin: 2 }); log('QR_LISTO', QR_PNG); }
     if (u.connection === 'open') {
@@ -29,7 +32,7 @@ async function iniciar() {
     }
     if (u.connection === 'close') {
       const code = u.lastDisconnect && u.lastDisconnect.error && u.lastDisconnect.error.output && u.lastDisconnect.error.output.statusCode;
-      if (code === DisconnectReason.loggedOut) { log('SESION_CERRADA (hay que volver a escanear el QR)'); fs.rmSync(path.join(BASE, 'auth'), { recursive: true, force: true }); }
+      if (code === DisconnectReason.loggedOut) { log('SESION_CERRADA (hay que volver a escanear el QR)'); try { fs.renameSync(path.join(BASE, 'auth'), path.join(BASE, 'auth_vieja_' + Date.now())); } catch (e) {} }
       else log('DESCONECTADO', code, '→ reconecto');
       setTimeout(iniciar, 5000);
     }
@@ -59,4 +62,5 @@ async function despachar() {
     } catch (e) { log('ENVIO_ERROR', f, e.message); }
   }
 }
+process.on('unhandledRejection', e => log('ERROR', e && e.message)); process.on('uncaughtException', e => log('ERROR', e && e.message));
 iniciar(); setInterval(despachar, 20000);

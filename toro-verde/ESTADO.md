@@ -942,3 +942,9 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
   - Arreglado avisar_equipo.py: se colaba al WhatsApp del equipo el resumen de confirmados. Ahora solo salen los comprobantes 💰. Queda pendiente el comprobante de Horacio (98403862) para el tercer número del equipo, que tiene el chat cerrado.
   - No hubo tareas de la reunión.
 - 26-11 4:20 p. m. — Casino: 39 personas, 0 fallos. Casino hoy: 8 pedidos $1.022.100.
+- 26-11 4:20 p. m. Vuelta de los :19:
+  - El bucle estaba apagado otra vez por un reinicio; se revivió.
+  - Confirmado Luis Vélez (3158795086, Bogotá, 1 L). Antes se corrigió la dirección: faltaba «APTO 202».
+  - Lucid subió solos 2 pedidos. El de 3202304495 falló por «Faltan campos obligatorios» y queda para revisar.
+  - WhatsApp del equipo (310 846 7560): Ronald no alcanzó a vincular con el código XGEMHDH1, que venció. wa_grupo.js ya no se cae cuando se cierra la sesión.
+  - Garantías: el buscador de compras está bien. Los «sin compra» que sí tienen pedido en Dropi lo tienen devuelto o cancelado, es decir, nunca lo recibieron. Quedan 6 casos nuevos por subir al Excel (GRT-R158 a R163), porque la aprobación de la escritura quedó sin responder.
