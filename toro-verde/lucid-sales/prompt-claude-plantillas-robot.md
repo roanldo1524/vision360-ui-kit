@@ -21,36 +21,44 @@ PASO 2 · PLANTILLAS (Configuración → WhatsApp → Plantillas → Nueva)
 
 1) Nombre: confirmar_pedido_tv
 Cuerpo:
-Hola {{1}}, te escribimos de Toro Verde por tu pedido de {{2}} para {{3}}, pago contra entrega. Ya está listo para salir. ¿Lo despachamos?
-Botones de respuesta rápida: «Sí, despáchenlo» · «Quiero cambiar algo»
+Hola {{1}} 👋 Soy Karen, de Toro Verde. Tu pedido de {{2}} para {{3}} ya está empacado y listo para salir hoy, pago contra entrega 🚚
+
+Solo falta tu OK para despacharlo. ¿Lo enviamos?
+Botones de respuesta rápida: «Sí, envíenlo hoy» · «Quiero cambiar algo»
 Ejemplos: {{1}} Gonzalo · {{2}} 1 litro de Herbicida Toro Verde · {{3}} Cumbitara, Nariño
 
 2) Nombre: aclarar_dato_pedido_tv
 Cuerpo:
-Hola {{1}}, te escribimos de Toro Verde por tu pedido de {{2}}. Antes de despacharlo necesitamos confirmar un dato: {{3}}. Respóndenos por aquí y lo dejamos listo.
-Botón de respuesta rápida: «Ya les respondo»
+Hola {{1}} 👋 Soy Karen, de Toro Verde. Tu pedido de {{2}} ya está listo, y para que te llegue sin contratiempos necesito confirmar un dato: {{3}}
+
+Respóndeme por aquí y sale hoy mismo 🚚
+Botón de respuesta rápida: «Ya te respondo»
 Ejemplos: {{1}} Walter · {{2}} 1 litro de Herbicida Toro Verde · {{3}} ¿lo envío a tu casa o lo reclamas en la oficina de Interrapidísimo?
 
 3) Nombre: pedido_en_proceso_tv
 Cuerpo:
-Hola {{1}} 😊 ¡Muchísimas gracias por tu compra y por confiar en Toro Verde!
+Hola {{1}} 😊 ¡Gracias por tu compra en Toro Verde!
 
-Tu pedido ya está listo para salir 🚚📦
+Tu pedido está empacado y listo para salir 🚚📦
 • {{2}}
 • {{3}}
-• Pagas al recibir
+• Pagas cuando lo recibes
 
-Solo falta tu confirmación para despacharlo hoy mismo. Toca *Sí, despáchenlo* y sale 🙌
+Solo falta tu confirmación para despacharlo hoy mismo. Toca *Sí, envíenlo hoy* y queda en camino 🙌
 
-Apenas tengamos el número de guía te lo compartimos para que sigas tu envío 🌱🐂
-Botones de respuesta rápida: «Sí, despáchenlo» · «Quiero cambiar algo»
+Apenas salga te compartimos el número de guía para que lo sigas 🌱
+Botones de respuesta rápida: «Sí, envíenlo hoy» · «Quiero cambiar algo»
 Ejemplos: {{1}} María · {{2}} 1 litro de Herbicida Toro Verde · {{3}} Reclamas en la oficina de Interrapidísimo de Pasto
 
 4) Nombre: rastreo_pedido_tv
 Cuerpo:
-Hola {{1}} 👋 Te escribe Karen de Toro Verde. Actualización de tu pedido: {{2}}. Para recibirlo ten a la mano tu cédula y el pago contra entrega de {{3}}. ¿Te podemos ayudar en algo?
-Botones de respuesta rápida: «Voy a reclamarlo» · «No puedo ir» · «Tengo una duda»
-Ejemplos: {{1}} Diego · {{2}} ya está disponible en la oficina de Interrapidísimo de Doradal, CLL 23 25 30 · {{3}} $169.000
+Hola {{1}} 👋 Soy Karen, de Toro Verde. ¡Buenas noticias! {{2}} 📦
+
+Ten a la mano tu cédula y {{3}} para el pago contra entrega.
+
+⏳ La transportadora solo lo guarda unos pocos días y, si no se recibe, lo devuelve. ¿Te ayudamos a recibirlo?
+Botones de respuesta rápida: «Voy hoy por él» · «No puedo ir» · «Tengo una duda»
+Ejemplos: {{1}} Diego · {{2}} Tu pedido ya está en la oficina de Interrapidísimo de Doradal (CLL 23 25 30) · {{3}} $169.000
 
 5) Nombre: entregado_toroverde
 Cuerpo:

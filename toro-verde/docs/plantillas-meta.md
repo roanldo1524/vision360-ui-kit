@@ -60,3 +60,13 @@ Texto:
 Variables: {{1}} nombre · {{2}} etapa con el detalle (por ejemplo, «ya está disponible en la oficina de Interrapidísimo de Doradal, CLL 23 25 30» o «hoy sale a reparto en Tuluá») · {{3}} valor.
 Botones de respuesta rápida: «Voy a reclamarlo» · «No puedo ir» · «Tengo una duda».
 Cuando Meta la apruebe, crea en Lucid un flujo que solo envíe esta plantilla y pásame su número para ponerlo en `FLUJO_RASTREO`.
+
+## Versión persuasiva final (Ronald 26-11: «deben ser persuasivos, que realmente funcionen»)
+**Esta versión reemplaza los textos de arriba.** El texto exacto que se crea en Lucid está en `lucid-sales/prompt-claude-plantillas-robot.md`.
+Qué la hace persuasiva sin dejar de ser de utilidad:
+- **Hoy:** «listo para salir hoy» y «sale hoy mismo». La gente actúa cuando el beneficio es inmediato.
+- **Un solo toque:** el botón dice exactamente lo que pasa («Sí, envíenlo hoy»), sin tener que escribir.
+- **Miedo a perder:** en rastreo, «la transportadora solo lo guarda unos pocos días y, si no se recibe, lo devuelve». Es la frase que más baja las devoluciones por no reclamar.
+- **Una persona, no una empresa:** «Soy Karen, de Toro Verde».
+- **Sin riesgo:** «pagas cuando lo recibes».
+- Sin precios de promoción, descuentos ni palabras prohibidas, para que Meta la apruebe como Utilidad.
