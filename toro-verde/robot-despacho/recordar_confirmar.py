@@ -16,6 +16,10 @@ def TXT_SHOPIFY(nom, prod, donde, total):
             "Solo falta tu confirmación para despacharlo *hoy mismo*. Responde *SÍ* y sale 🙌\n"
             "Si quieres cambiar algo, escríbenos aquí.\n\n"
             "Apenas tengamos el número de guía te lo compartimos para que sigas tu envío 🌱🐂")
+REG = '/tmp/dropi/recordados_conf.json'; reg = json.load(open(REG)) if os.path.exists(REG) else {}
+hora = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=5)).hour
+if not 6 <= hora < 20: print('RECORDAR_CONFIRMAR fuera de horario'); raise SystemExit
+def get(p): return json.loads(urllib.request.urlopen(urllib.request.Request(API + p, headers={'X-ACCESS-TOKEN': K}), timeout=40).read())
 def post(p, body=None):
     return urllib.request.urlopen(urllib.request.Request(API + p, data=json.dumps(body or {}).encode(), headers={'X-ACCESS-TOKEN': K, 'Content-Type': 'application/json'}, method='POST'), timeout=40).read().decode()
 det = {d['id']: d for d in json.load(open('/tmp/dropi/detalle.json'))}
