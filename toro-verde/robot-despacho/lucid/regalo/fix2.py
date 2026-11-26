@@ -61,7 +61,7 @@ try:
     mdir = re.search(r'Direcci[oó]n:\s*([^,]*),', n)
     if ciu and md and mdir and not re.search(r'\d', mdir.group(1)) and re.search(r'oficina|reclam|interr?ap', n, re.I):
         d = _o.dir_oficina(md.group(1), ciu, '')
-        if d: n = n.replace(mdir.group(0), 'Dirección: %s,' % d, 1)
+        if d: n = n.replace(mdir.group(0), 'Dirección: %s,' % d.replace(', RECLAMA', ' - RECLAMA'), 1)  # sin coma: Lucid corta el campo en la coma
 except Exception as e: print('OFICINA_ERR', str(e)[:60])
 if n==v: print('SIN_CAMBIO'); sys.exit(1)
 open(f'regalo/{c}_nuevo.txt','w').write(n); print(c, n[:260])
