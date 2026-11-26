@@ -1,4 +1,4 @@
-# Ronald 26-11: «si te mencionamos en algún grupo o te hacemos alguna pregunta, que tú puedas responder también».
+# Ronald 26-11: «si te mencionamos en algún grupo… que tú puedas responder» + «SOLO si lo pregunta Ronaldo; a nadie más» (el filtro está en wa_grupo.js).
 # wa_grupo.js llama este programa cuando alguien menciona al agente (@) en un grupo. Responde corto, como una persona del equipo,
 # SOLO con información (números del día, reglas, qué hizo cada líder). No hace acciones (no confirma, no cancela, no promete plata):
 # lo que pida una acción lo anota como tarea para la vuelta del robot. Usa la API de OpenAI (el proxy pone la clave).

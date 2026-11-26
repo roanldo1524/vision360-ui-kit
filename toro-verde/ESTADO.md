@@ -964,3 +964,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 26-11 5:50 p. m.:
   - El agente responde cuando lo mencionan (@) en cualquier grupo (whatsapp/responder.py, con OpenAI gpt-4o-mini y los datos del día). Solo da información; lo que sea una acción queda en /tmp/wa/preguntas para la vuelta.
   - IMPORTANTE: el servidor del robot se duerme cuando nadie lo usa, y por eso WhatsApp «se caía» (no era la desconexión 428). El robot solo está conectado mientras corre una vuelta. Los mensajes que llegan mientras duerme WhatsApp los entrega al reconectar. Para tenerlo 24/7 hace falta una máquina siempre prendida (VPS o un PC).
+- 26-11 5:55 p. m. (Ronald): el agente responde menciones SOLO si pregunta Ronald (3218940042 o nombre Ronald). A cualquier otra persona la ignora.

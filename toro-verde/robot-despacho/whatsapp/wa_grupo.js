@@ -82,6 +82,8 @@ function escuchar(){ if (!sock) return; sock.ev.on('messages.upsert', ({ message
     const tx = mm.conversation || (mm.extendedTextMessage || {}).text || (mm.imageMessage || {}).caption || '';
     if (m.key.remoteJid.endsWith('@g.us') && (men.some(j => yo.includes(j.split('@')[0].split(':')[0])) || yo.some(n => tx.includes('@' + n)))) {
       const quien_num = (m.key.participantPn || m.key.participantAlt || m.key.participant || '').split('@')[0].split(':')[0];
+      // Ronald 26-11: «solo si lo pregunta Ronaldo; a nadie más le puedes responder tú como bot cosas del sistema»
+      if (!(quien_num === '573218940042' || /ronald/i.test(m.pushName || ''))) { log('MENCION_IGNORADA', m.pushName || '', quien_num); continue; }
       const datos = JSON.stringify({ pregunta: tx.replace(/@\d+/g, '').trim(), quien: m.pushName || '', quien_num: /^57\d{10}$/.test(quien_num) ? quien_num : '', grupo: m.key.remoteJid, grupo_nombre: (grupos[m.key.remoteJid] || {}).subject || '' });
       const ch = require('child_process').spawn('python3', ['-I', path.join(BASE, 'responder.py')], { cwd: BASE }); ch.stdin.end(datos);
       ch.stdout.on('data', d => log('RESPONDER', String(d).trim().slice(0, 120))); log('MENCION', m.pushName || '', tx.slice(0, 60));
