@@ -60,6 +60,7 @@ REGLAS = [
     ('OFICINA', r'disponible para (ser )?reclam|reclamar? en (la )?oficina|en (la )?oficina|centro de servicio|punto de (venta|servicio)|para retiro'),
     ('DEVOLUCION', r'devoluci[oó]n|devuelt|retorno a (origen|remitente)|en devoluci'),
     ('NOVEDAD_CLIENTE', r'no (contesta|responde|se encontr)|direcci[oó]n (errada|incorrecta|incompleta|no existe)|destinatario (ausente|no)|rehus|cerrado'),
+    ('CICLO', r'intentos? de entrega fallidos|no es posible programar|cumplido (su|el) ciclo|agot\w+ (los )?intentos'),
     ('ESPERA', r'reexpedi|reparto|despachad|programad|en ruta|novedad operativa|inconvenientes operativos|regional|escala|en tr[aá]nsito|pr[oó]xim\w* d[ií]as|recomend|nuevo intento|intentos? de entrega|tardar|d[ií]as h[aá]biles'),
 ]
 
@@ -129,6 +130,10 @@ for c in casos:
         acc['cas'] = sal + (f"Con gusto: {datos}. " if tipo == 'DATOS' else
                             f"Por favor NO devolver el paquete: solicitamos un nuevo ofrecimiento. Datos confirmados: {datos}. ") + \
                      "Agradecemos programar la entrega y confirmarnos la fecha. Muchas gracias."
+    elif tipo == 'CICLO' and not reciente:
+        # Ronald 26-11 (aprendido de Coordinadora): sin más intentos → pedir custodia en oficina para que el cliente lo reclame, no devolver
+        acc['cas'] = (sal + "Gracias por la información. Para no devolver el paquete, por favor dejarlo en custodia en la oficina más cercana al destino "
+                      f"para que el cliente lo reclame con su cédula (guía {guia}), y compartirnos la dirección de esa oficina para avisarle. Muchas gracias.")
     elif tipo == 'ESPERA' and not reciente and q and q.get('horas', 0) >= 48:
         acc['cas'] = (sal + f"Gracias por la gestión. La guía {guia} sigue en «{q.get('status')}» desde {q.get('desde', '')} "
                       f"({q.get('dias', '?')} días sin movimiento). Por favor nos ayudan con una gestión concreta con la regional y una fecha estimada de entrega. Muchas gracias.")
