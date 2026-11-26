@@ -28,6 +28,15 @@ ab = leer('/tmp/wa/abonos_registro.json', []) or []
 comp = leer('/tmp/wa/comprobantes_enviados.json', {}) or {}
 datos += (f"\nCAS hoy: {cas}. Garantías abiertas: {len(gar)} (" + ', '.join(f'{k} {v}' for k, v in collections.Counter(g.get('categoria') for g in gar).items()) +
           f"). Comprobantes publicados en el grupo: {len(comp)}; abonos aprobados: {len(ab)}.\nÚLTIMO EN LA OFICINA (bitácora):\n{est_md}")
+# Ronald 26-11: «de varias cosas: CAS, tecnología, etc.» → más detalle por área
+try: inn = open(f'{R}/datos/innovaciones.md', encoding='utf-8').read()[-1500:]
+except Exception: inn = ''
+quietas = leer('/tmp/dropi/quietas.json', []) or []
+plan_cas = (leer('/tmp/dropi/cas_auto.json', {}) or {}).get('plan', [])
+qreg = leer('/tmp/dropi/quejas_reg.json', {}) or {}
+datos += ("\nCAS (transportadoras): " + f"{len(quietas)} guías quietas; quejas registradas {len(qreg)}; últimas acciones del robot en el CAS: " +
+          '; '.join(f"{a.get('tipo')} pedido {a.get('pedido')} ({a.get('dc')})" for a in plan_cas[:8]) +
+          f"\nTECNOLOGÍA (innovaciones):\n{inn}")
 reglas = ("Reglas: nunca decir orgánico, ecológico, natural, sin veneno ni no tóxico; uso: mínimo 130 ml por bomba de 20 litros y agite el envase; "
           "descuentos solo a quien nunca compró; abono si el cliente devuelve más del 50 %; flete hasta 15 % sobre el tope (1 L $28.750, 2 L $33.350, galón $40.250); "
           "nunca se cancelan pedidos; la plata (reenvíos, devoluciones, aprobar abonos) la decide Ronald o el equipo en el grupo de comprobantes.")
