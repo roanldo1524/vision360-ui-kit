@@ -69,6 +69,15 @@ for c, r in reg.items():
     if n_img is not None and n_img > r.get('imagenes', 0):
         r['comprobante'] = time.time()
         nuevos.append(f"💰 *Comprobante de anticipo* · {r['nombre']} · pedido {r['pedido']} · cel {c[2:]}\n{urls[-1] if urls else ''}\nRevisa que la plata llegó y confirma en Dropi descontando el abono del total.")
+        # Ronald 26-11: también al GRUPO de WhatsApp del equipo (agente «Mensajero del grupo», whatsapp/wa_grupo.js), con la foto
+        try:
+            os.makedirs('/tmp/wa/salida', exist_ok=True); img = ''
+            if urls:
+                img = f'/tmp/wa/comp_{c}.jpg'; open(img, 'wb').write(urllib.request.urlopen(urls[-1], timeout=40).read())
+            json.dump({'grupo': os.environ.get('WA_GRUPO', ''), 'imagen': img,
+                       'texto': f"💰 Comprobante de anticipo\nCliente: {r['nombre']}\nCelular: {c[2:]}\nPedido Dropi: {r['pedido']}\nValor del pedido: ${(r.get('total') or 0):,.0f}".replace(',', '.') + "\nEstado: POR VALIDAR (revisar en Bancolombia)"},
+                      open(f'/tmp/wa/salida/{int(time.time())}_{c}.json', 'w'), ensure_ascii=False)
+        except Exception as e: print('WA_GRUPO_ERROR', str(e)[:60])
 if nuevos:
     av = json.load(open(AV)) if os.path.exists(AV) else {}
     equipo = re.search(r"EQUIPO = (\[.*?\])", open('robot/avisar_equipo.py').read())
