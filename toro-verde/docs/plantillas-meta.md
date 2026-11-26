@@ -22,22 +22,29 @@ Hola {{1}}, te escribimos de Toro Verde por tu pedido de {{2}}. Antes de despach
 
 Ejemplo para Meta: {{1}} = Walter · {{2}} = 1 litro de Herbicida Toro Verde · {{3}} = ¿lo envío a tu casa o lo reclamas en la oficina de Interrapidísimo?
 
-## 3. `pedido_en_proceso_tv` (pedidos de Shopify sin confirmar — Ronald 26-11)
-**Categoría:** Utilidad · **Idioma:** Español (COL) · **Sin variables** (el texto va tal cual).
+## 3. `pedido_en_proceso_tv` (pedidos de Shopify sin confirmar — Ronald 26-11, versión mejorada)
+**Categoría:** Utilidad · **Idioma:** Español (COL)
 
 **Cuerpo:**
-Hola, ¿Cómo estás? 😊 ¡Muchísimas gracias por tu compra y por confiar en nosotros!
+Hola {{1}} 😊 ¡Muchísimas gracias por tu compra y por confiar en Toro Verde!
 
-Tu pedido ya está en proceso para ser despachado a la dirección que nos proporcionaste. 🚚📦
+Tu pedido ya está listo para salir 🚚📦
+• {{2}}
+• {{3}}
+• Pagas al recibir
 
-Apenas tengamos el número de guía, te lo estaremos compartiendo para que puedas hacer seguimiento a tu envío. ¡Estamos atentos y felices de atenderte! 🌱🐂
+Solo falta tu confirmación para despacharlo hoy mismo. Toca *Sí, despáchenlo* y sale 🙌
+
+Apenas tengamos el número de guía te lo compartimos para que sigas tu envío 🌱🐂
 
 **Botones de respuesta rápida:**
 - Sí, despáchenlo
 - Quiero cambiar algo
 
+Ejemplo para Meta: {{1}} = María · {{2}} = 1 litro de Herbicida Toro Verde · {{3}} = Reclamas en la oficina de Interrapidísimo de Pasto
+
 Cuando Meta la apruebe: en Lucid crea un flujo que solo envíe esta plantilla y pásame su número; lo pongo en `FLUJO_SHOPIFY` (recordar_confirmar.py).
-Mientras tanto el robot manda el mismo texto cuando el chat del cliente está abierto (habló en las últimas 23 h). Si el cliente responde que sí (o toca «Sí, despáchenlo»), el robot confirma solo.
+Mientras tanto el robot manda el mismo mensaje (con el total) cuando el chat del cliente está abierto. Si responde que sí, el robot confirma solo.
 
 ## Cómo crearlas (Ronald)
 1. Lucid → Configuración → WhatsApp → Plantillas → Nueva plantilla (o en Meta Business Suite → WhatsApp Manager → Plantillas de mensajes).

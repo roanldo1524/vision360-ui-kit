@@ -9,13 +9,13 @@ FLUJO_CONFIRMAR = ''  # pon aquí el número del flujo «Robot - Confirmar pedid
 CAMPO_RESUMEN = '198260'
 # Ronald 26-11: pedidos de Shopify (página) sin confirmar → este mensaje exacto. Ventana cerrada: plantilla «pedido_en_proceso_tv» (docs/plantillas-meta.md).
 FLUJO_SHOPIFY = ''  # pon aquí el número del flujo de Lucid de la plantilla «pedido_en_proceso_tv» cuando Meta la apruebe
-TXT_SHOPIFY = ('Hola, ¿Cómo estás? 😊 ¡Muchísimas gracias por tu compra y por confiar en nosotros!\n\n'
-               'Tu pedido ya está en proceso para ser despachado a la dirección que nos proporcionaste. 🚚📦\n\n'
-               'Apenas tengamos el número de guía, te lo estaremos compartiendo para que puedas hacer seguimiento a tu envío. ¡Estamos atentos y felices de atenderte! 🌱🐂')  # Resumen_confirmacion_pedido: {{2}} de la plantilla
-REG = '/tmp/dropi/recordados_conf.json'; reg = json.load(open(REG)) if os.path.exists(REG) else {}
-hora = (datetime.datetime.utcnow() - datetime.timedelta(hours=5)).hour
-if not 6 <= hora < 20: print('RECORDAR_CONFIRMAR fuera de horario'); raise SystemExit
-def get(p): return json.loads(urllib.request.urlopen(urllib.request.Request(API + p, headers={'X-ACCESS-TOKEN': K}), timeout=40).read())
+def TXT_SHOPIFY(nom, prod, donde, total):
+    # Ronald 26-11: «mejoremos el mensaje de Shopify para aumentar la confirmación»: personal, con el pedido a la vista y una sola acción (responder SÍ).
+    return (f"Hola {nom} 😊 ¡Muchísimas gracias por tu compra y por confiar en Toro Verde!\n\n"
+            "Tu pedido ya está listo para salir 🚚📦\n" + f"• {prod}\n• {donde}\n" + f"• Total: ${total:,.0f}".replace(',', '.') + ", pagas al recibir\n\n" +
+            "Solo falta tu confirmación para despacharlo *hoy mismo*. Responde *SÍ* y sale 🙌\n"
+            "Si quieres cambiar algo, escríbenos aquí.\n\n"
+            "Apenas tengamos el número de guía te lo compartimos para que sigas tu envío 🌱🐂")
 def post(p, body=None):
     return urllib.request.urlopen(urllib.request.Request(API + p, data=json.dumps(body or {}).encode(), headers={'X-ACCESS-TOKEN': K, 'Content-Type': 'application/json'}, method='POST'), timeout=40).read().decode()
 det = {d['id']: d for d in json.load(open('/tmp/dropi/detalle.json'))}
@@ -37,7 +37,9 @@ for a in json.load(open('/tmp/dropi/acciones.json')):
     shopify = any('CONFIRMAR PEDIDO' in m for m in partes)
     try:
         if shopify:
-            if time.time() - li < 23 * 3600: r = post(f'/contacts/{c}/send_content', {'messages': [{'message': {'text': TXT_SHOPIFY}}]}); via = 'texto_shopify'
+            dirx = (d.get('dir') or '').strip()
+            donde = f"Reclamas en la oficina de Interrapidísimo de {(d.get('city') or '').title()}" if re.search(r'reclam|oficina', dirx, re.I) else f"Llega a {dirx}, {(d.get('city') or '').title()}"
+            if time.time() - li < 23 * 3600: r = post(f'/contacts/{c}/send_content', {'messages': [{'message': {'text': TXT_SHOPIFY(nom or 'cliente', ', '.join(f"{int(i['q'] or 1)} {PL.get((i['pres'] or '').lower(), (i['pres'] or '').lower()) if (i['q'] or 1) > 1 else (i['pres'] or '').lower().replace('galon', 'galón')}" for i in d.get('items', [])) + ' de Herbicida Toro Verde 🌱', donde, d.get('total') or 0)}}]}); via = 'texto_shopify'
             elif FLUJO_SHOPIFY: r = post(f'/contacts/{c}/send/{FLUJO_SHOPIFY}'); via = 'plantilla_shopify'
             else: continue  # ventana cerrada y la plantilla aún no está aprobada
         elif time.time() - li < 23 * 3600:

@@ -47,7 +47,7 @@ def marcas(c):
     return shop, carrito
 # Ronald 26-11: a los pedidos de Shopify sin confirmar se les manda «Tu pedido ya está en proceso…»; si responden que sí, cuenta como confirmación
 def shop_si(t):
-    k = t.rfind('Tu pedido ya está en proceso para ser despachado')
+    k = max(t.rfind('Tu pedido ya está en proceso para ser despachado'), t.rfind('Tu pedido ya está listo para salir'))
     if k < 0: return False
     return any(len(l.split('):', 1)[-1].strip()) < 80 and re.search(r'\b(s[ií]+|ok|listo|dale|de una|confirm\w*|correct[oa]|perfecto|claro|bueno|gracias|est[aá] bien|am[eé]n|bendiciones)\b', l.split('):', 1)[-1], re.I)
                for l in re.split(r'\n(?=(?:Yo|Usuario) \()', t[k:]) if l.startswith('Usuario'))
