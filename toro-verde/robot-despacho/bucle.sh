@@ -14,8 +14,8 @@ while true; do
     (cd /tmp/dropi && cp $R/cas_auto.py $R/cas_hilos.js . && timeout 600 node cas_bandeja.js >/dev/null 2>&1 && python3 -I $R/cas_conversar.py >/dev/null 2>&1 && timeout 1800 python3 -I cas_auto.py --enviar --max 25 >> /tmp/robot/cas_auto.log 2>&1)
   fi
   # Rastreo humanizado al cliente (sin IA)
-  # APAGADO (Ronald 26-11): Lucid ya manda sus propias plantillas por estado (guía, oficina, reparto, con video). rastreo.py las duplicaba.
-  # if [ "$H" -ge 7 ] && [ "$H" -lt 20 ]; then (cd /tmp/dropi && timeout 900 python3 -I $R/rastreo.py --enviar >> /tmp/robot/rastreo.log 2>&1); fi
+  # Ronald 26-11: Lucid ya avisa por estado; rastreo.py solo INSISTE (2 y 4 días en oficina sin que el cliente responda).
+  if [ "$H" -ge 7 ] && [ "$H" -lt 20 ]; then (cd /tmp/dropi && cp $R/dropi/oficina_desde.js . && timeout 1500 python3 -I $R/rastreo.py --enviar >> /tmp/robot/rastreo.log 2>&1); fi
   python3 -I $R/salud.py >/dev/null 2>&1
   mkdir -p $V && python3 -I $R/panel/generar_panel.py $V/robot-despacho.html >/dev/null 2>&1
   (cd $R/panel && python3 -I generar_torre.py $V/sede.html sede.html >/dev/null 2>&1)

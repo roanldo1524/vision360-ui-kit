@@ -10,12 +10,11 @@ CAMPO_RESUMEN = '198260'
 # Ronald 26-11: pedidos de Shopify (página) sin confirmar → este mensaje exacto. Ventana cerrada: plantilla «pedido_en_proceso_tv» (docs/plantillas-meta.md).
 FLUJO_SHOPIFY = ''  # pon aquí el número del flujo de Lucid de la plantilla «pedido_en_proceso_tv» cuando Meta la apruebe
 def TXT_SHOPIFY(nom, prod, donde, total):
-    # Ronald 26-11: «mejoremos el mensaje de Shopify para aumentar la confirmación»: personal, con el pedido a la vista y una sola acción (responder SÍ).
-    return (f"Hola {nom} 😊 ¡Muchísimas gracias por tu compra y por confiar en Toro Verde!\n\n"
-            "Tu pedido ya está listo para salir 🚚📦\n" + f"• {prod}\n• {donde}\n" + f"• Total: ${total:,.0f}".replace(',', '.') + ", pagas al recibir\n\n" +
-            "Solo falta tu confirmación para despacharlo *hoy mismo*. Responde *SÍ* y sale 🙌\n"
-            "Si quieres cambiar algo, escríbenos aquí.\n\n"
-            "Apenas tengamos el número de guía te lo compartimos para que sigas tu envío 🌱🐂")
+    # Ronald 26-11: «más prometedora: que ya está seguro de su compra y ya lo vamos a despachar; no ponerlo en duda».
+    return (f"Hola {nom} 🎉 ¡Gracias por tu compra en Toro Verde!\n\n"
+            "Tu pedido ya está empacado y sale hoy mismo 🚚📦\n" + f"• {prod}\n• {donde}\n" + f"• Total: ${total:,.0f}".replace(',', '.') + ", pagas cuando lo recibes\n\n" +
+            "Apenas salga te compartimos el número de guía para que lo sigas 🌱\n"
+            "Respóndenos *Perfecto* y lo dejamos en camino. Si necesitas cambiar algo, escríbenos aquí. 🙌")
 REG = '/tmp/dropi/recordados_conf.json'; reg = json.load(open(REG)) if os.path.exists(REG) else {}
 hora = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=5)).hour
 if not 6 <= hora < 20: print('RECORDAR_CONFIRMAR fuera de horario'); raise SystemExit

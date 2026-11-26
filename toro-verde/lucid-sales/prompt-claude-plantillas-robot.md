@@ -1,6 +1,6 @@
 # Prompt para Claude en línea (Claude en Chrome): crear las plantillas del robot en Lucid
 
-> **ACTUALIZADO 26-11, después de las preguntas de Ronald.** NO crear la 4 (rastreo_pedido_tv): Lucid ya manda sus propias plantillas por estado, con video. NO crear la 3 (pedido_en_proceso_tv) si la plantilla de Shopify que ya existe funciona: basta con pasarle al robot el número de ese flujo (o cambiarle el texto por el nuevo). La 1 (confirmar_pedido_tv) es opcional. **La que sí falta es la 2 (aclarar_dato_pedido_tv).**
+> **ACTUALIZADO 26-11, después de las preguntas de Ronald.** Crear: **la 2 (aclarar_dato_pedido_tv)** y **la 4 (rastreo_pedido_tv)**, que sirve para INSISTIR cuando el cliente no responde la plantilla de oficina de Lucid. **La 3:** cambiar el texto de la plantilla de Shopify que ya existe por el nuevo, más seguro, y pasar el número de su flujo. La 1 (confirmar_pedido_tv) es opcional. La 5 (entregado) va cuando Ronald quiera unificar los mensajes de entregado.
 
 Ronald (26-11): «dime qué plantillas toca hacer, para programar a Claude en línea y que lo haga él».
 Copia TODO el bloque de abajo y pégaselo a Claude en Chrome, con Lucid abierto en panel.lucidbot.co (cuenta Toro Verde).
@@ -37,22 +37,20 @@ Respóndeme por aquí y sale hoy mismo 🚚
 Botón de respuesta rápida: «Ya te respondo»
 Ejemplos: {{1}} Walter · {{2}} 1 litro de Herbicida Toro Verde · {{3}} ¿lo envío a tu casa o lo reclamas en la oficina de Interrapidísimo?
 
-3) Nombre: pedido_en_proceso_tv
+3) Nombre: pedido_en_proceso_tv  (REEMPLAZA el texto de la plantilla de Shopify que ya existe; si no se puede editar, créala nueva)
 Cuerpo:
-Hola {{1}} 😊 ¡Gracias por tu compra en Toro Verde!
+Hola {{1}} 🎉 ¡Gracias por tu compra en Toro Verde!
 
-Tu pedido está empacado y listo para salir 🚚📦
+Tu pedido ya está empacado y sale hoy mismo 🚚📦
 • {{2}}
 • {{3}}
 • Pagas cuando lo recibes
 
-Solo falta tu confirmación para despacharlo hoy mismo. Toca *Sí, envíenlo hoy* y queda en camino 🙌
-
 Apenas salga te compartimos el número de guía para que lo sigas 🌱
-Botones de respuesta rápida: «Sí, envíenlo hoy» · «Quiero cambiar algo»
+Botones de respuesta rápida: «¡Perfecto, lo espero!» · «Quiero cambiar algo»
 Ejemplos: {{1}} María · {{2}} 1 litro de Herbicida Toro Verde · {{3}} Reclamas en la oficina de Interrapidísimo de Pasto
 
-4) Nombre: rastreo_pedido_tv
+4) Nombre: rastreo_pedido_tv  (para INSISTIR: solo se manda si el paquete lleva 2 o 4 días en oficina y el cliente no ha respondido la plantilla de Lucid)
 Cuerpo:
 Hola {{1}} 👋 Soy Karen, de Toro Verde. ¡Buenas noticias! {{2}} 📦
 

@@ -42,7 +42,7 @@ def revisar(d):
     ir = max([i for i, (q, f, t) in enumerate(msgs) if q == 'Yo' and 'Resumen de tu pedido' in t] or [-1])
     ic = max([i for i, (q, f, t) in enumerate(msgs) if q == 'Usuario' and re.fullmatch(r'\W*CONFIRMAR PEDIDO\W*', t, re.I)] or [-1])
     # Ronald 26-11: pedidos de Shopify: si el cliente responde que sí al mensaje «Tu pedido ya está en proceso…», cuenta como confirmación
-    ish = max([i for i, (q, f, t) in enumerate(msgs) if q == 'Yo' and ('Tu pedido ya está en proceso para ser despachado' in t or 'Solo falta tu confirmación para despacharlo' in t)] or [-1])
+    ish = max([i for i, (q, f, t) in enumerate(msgs) if q == 'Yo' and ('Tu pedido ya está en proceso para ser despachado' in t or 'Solo falta tu confirmación para despacharlo' in t or 'Tu pedido ya está empacado y sale hoy mismo' in t)] or [-1])
     if ish > max(ir, ic):
         desp = [m for m in msgs[ish + 1:] if m[0] == 'Usuario']
         ok = next(((f, t) for _, f, t in desp if SI.search(t)), None)
