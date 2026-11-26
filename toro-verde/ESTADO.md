@@ -924,3 +924,7 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 26-11 2:20 p. m. · Tecnología (Diego): empezó la pantalla de novedades. Las novedades solucionadas de Dropi se ven en /dashboard/incidence-history; falta encontrar la consulta interna de ese historial para contar las resueltas por el bot y por humano. Sigue mañana.
 - 26-11 · medir.py: de 65 pedidos de hoy, el robot confirmó 28 (43 %). Lo que más frena y después aprueba una persona: «recibe poco» (17), «flete sobre el tope» (16), otros motivos (10), chat en modo humano (9), sin «confirmar» en el chat (8), dirección sin número (5) y forma de pago (3). Para llegar al 95 % hacen falta decisiones de Ronald sobre «recibe poco» y el flete, las plantillas de Meta y que el equipo suelte el modo humano en Lucid.
 - 26-11 2:20 p. m. Vuelta de los :19: Lucid subió solos 2 pedidos (3117369917 y 3217164017; el obsequio se quitó como producto). OJO_YA_SUBIDO: 3219614748, no se toca. No hubo fichas ni tareas de la sala.
+- 26-11 2:30 p. m. REGLAS NUEVAS de Ronald, ya en razonar.py:
+  - Si el cliente devuelve MÁS del 50 %, se le pide abono (eso ya lo hace pedir_anticipo.py); con 50 % o menos se confirma.
+  - El flete se acepta hasta 15 % sobre el tope: 1 L $28.750, 2 L $33.350, galón $40.250 y lo demás $34.500.
+  - La sala de reunión ahora tiene una sección «Reglas de la operación» con todas las reglas, y un campo para que Ronald agregue una regla nueva. La regla llega como tarea a Diego (tecnología) y la vuelta de los :19 la programa.

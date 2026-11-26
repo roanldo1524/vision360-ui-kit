@@ -64,7 +64,8 @@ for d in det:
     # 1) Historial de entregas
     gp = ((d.get('huella') or {}).get('global_profile') or {}); lt = gp.get('lifetime_totals') or {}
     ent, dev = lt.get('delivered', 0), lt.get('returned', 0)
-    if ent + dev > 0 and ent / (ent + dev) <= 0.5: motivos.append(f'recibe solo el {round(100*ent/(ent+dev))} % ({ent} entregados, {dev} devueltos)')
+    # Ronald 26-11: «clientes que tienen más del 50 % de devolución deben solicitar abono» (pedir_anticipo.py les pide el abono); 50 % o menos se confirma.
+    if ent + dev > 0 and dev / (ent + dev) > 0.5: motivos.append(f'recibe solo el {round(100*ent/(ent+dev))} % ({ent} entregados, {dev} devueltos)')
     if re.search(r'riesgosa|cr[ií]tica', gp.get('risk_label') or '', re.I): motivos.append(f'Dropi lo marca {gp.get("risk_label")}')
     # Repetido en Dropi
     abiertos = [o for o in d.get('otros', []) if not re.search(r'CANCELADO|ENTREGADO|DEVOLUCION|DEVUELTO|ANULAD|RECHAZ|INDEMNIZ|REEMPLAZADA', o['status'] or '')]
@@ -139,7 +140,7 @@ for d in det:
         editar['transportadora'] = 'BARATA'
     elif sum(act) and tasa(act) <= 0.5: motivos.append(f'con {TR.get(d["dc"])} devuelve y no hay otra transportadora con buen historial')
     # 6) Flete
-    tope = tope_flete(d)
+    tope = round(tope_flete(d) * 1.15)  # Ronald 26-11: «se acepta un 15 % sobre el tope» (1 L $28.750 · 2 L $33.350 · galón $40.250 · resto $34.500)
     if d['flete'] > tope and 'transportadora' not in editar: motivos.append(f'flete ${d["flete"]:,.0f} mayor a ${tope:,.0f}'.replace(',', '.'))
     if rural_ofi and not motivos:
         if d['dc'] != 3: editar['transportadora'] = UI['INTERRAPIDISIMO']  # Dropi crea ID nuevo; en la próxima vuelta ya es Inter y pasa a oficina
