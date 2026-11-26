@@ -33,7 +33,7 @@ def dir_oficina(estado, ciudad, dirx):
     if any(c.startswith(g) for g in GRANDES) and re.search(r'\d', base): return f'{base}, {SUF}'
     o = busca(estado, ciudad)
     if not o: return None
-    o = re.sub(r'^OF\.?\s*PRINC\.?\s*', '', o).strip(' ,')
+    o = re.sub(r'^(OF\.?\s*PRINC\.?|OFICINA\s+PRINCIPAL)\s*', '', o).strip(' ,')
     return f'{o}, {SUF}'
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
