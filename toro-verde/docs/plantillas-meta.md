@@ -51,3 +51,12 @@ Mientras tanto el robot manda el mismo mensaje (con el total) cuando el chat del
 2. Pega el nombre, la categoría «Utilidad», el idioma, el cuerpo, los botones y los ejemplos de arriba.
 3. Enviar a revisión. Meta suele aprobar en minutos u horas.
 4. Cuando estén aprobadas, avisa en el chat del robot y las conecto a las vueltas (de 5 a. m. a 8 p. m., nunca de noche).
+
+## 4. `rastreo_pedido_tv` (rastreo humanizado: Ronald 26-11)
+Categoría: **Utilidad**. Idioma: español. La usan rastreo.py y cas_auto.py cuando el chat del cliente está cerrado (más de 24 h). La mayoría de los avisos de oficina y de reparto caen aquí, y son los que evitan devoluciones.
+Texto:
+> Hola {{1}} 👋 Te escribe Karen de Toro Verde. Actualización de tu pedido: {{2}}. Para recibirlo ten a la mano tu cédula y el pago contra entrega de {{3}}. ¿Te podemos ayudar en algo?
+
+Variables: {{1}} nombre · {{2}} etapa con el detalle (por ejemplo, «ya está disponible en la oficina de Interrapidísimo de Doradal, CLL 23 25 30» o «hoy sale a reparto en Tuluá») · {{3}} valor.
+Botones de respuesta rápida: «Voy a reclamarlo» · «No puedo ir» · «Tengo una duda».
+Cuando Meta la apruebe, crea en Lucid un flujo que solo envíe esta plantilla y pásame su número para ponerlo en `FLUJO_RASTREO`.

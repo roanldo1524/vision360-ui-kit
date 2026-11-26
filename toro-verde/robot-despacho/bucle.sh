@@ -8,6 +8,13 @@ while true; do
   R=/home/user/vision360-ui-kit/toro-verde/robot-despacho; V=/tmp/claude-0/-home-user-vision360-ui-kit/e5356e22-aa29-59c6-b4c4-4ff8cf2bcd7f/scratchpad/visual
   H=$(TZ=America/Bogota date +%H)
   if [ "$H" -ge 5 ] && [ "$H" -lt 21 ]; then (cd /tmp/dropi && timeout 400 node hoy.js >/dev/null 2>&1); fi
+  # Ronald 26-11: «el CAS es prioridad, automático, sin consumo agresivo de tokens»: agente del CAS en código cada 2 h de 8 a. m. a 6 p. m.
+  if [ "$H" -ge 8 ] && [ "$H" -le 18 ] && [ $((10#$H % 2)) -eq 0 ] && [ "$(cat /tmp/dropi/cas_auto.hora 2>/dev/null)" != "$(date +%F)-$H" ]; then
+    echo "$(date +%F)-$H" > /tmp/dropi/cas_auto.hora
+    (cd /tmp/dropi && cp $R/cas_auto.py $R/cas_hilos.js . && timeout 600 node cas_bandeja.js >/dev/null 2>&1 && python3 -I $R/cas_conversar.py >/dev/null 2>&1 && timeout 1800 python3 -I cas_auto.py --enviar --max 25 >> /tmp/robot/cas_auto.log 2>&1)
+  fi
+  # Rastreo humanizado al cliente (sin IA)
+  if [ "$H" -ge 7 ] && [ "$H" -lt 20 ]; then (cd /tmp/dropi && timeout 900 python3 -I $R/rastreo.py --enviar >> /tmp/robot/rastreo.log 2>&1); fi
   python3 -I $R/salud.py >/dev/null 2>&1
   mkdir -p $V && python3 -I $R/panel/generar_panel.py $V/robot-despacho.html >/dev/null 2>&1
   (cd $R/panel && python3 -I generar_torre.py $V/sede.html sede.html >/dev/null 2>&1)
