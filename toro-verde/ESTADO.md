@@ -933,3 +933,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
   - Ronald pregunta por micrófono o escribiendo, y responde el líder que corresponde. Las tareas se guardan en la colección «tareas» de la sede.
   - Los datos salen de datos/reportes_lideres.json, que cada agente actualiza, y de los KPI que calcula generar_torre.py.
   - Se usan los nombres de la sede (Valentina Ríos, Daniela Mejía, Camilo Herrera, etc.) en todo, incluido docs/equipo-agentes.md.
+- 26-11 3:40 p. m. Rastreo propio APAGADO: Lucid ya avisa al cliente en cada estado de Dropi (guía, oficina, reparto) con sus plantillas de video, y rastreo.py los duplicaba (33 mensajes hoy). cas_auto solo avisa la oficina si Dropi aún no marca RECLAME EN OFICINA. Plantillas: la única que falta es aclarar_dato_pedido_tv. Para Shopify se usa el flujo que ya existe y solo falta su número.

@@ -1,5 +1,7 @@
 # Prompt para Claude en línea (Claude en Chrome): crear las plantillas del robot en Lucid
 
+> **ACTUALIZADO 26-11, después de las preguntas de Ronald.** NO crear la 4 (rastreo_pedido_tv): Lucid ya manda sus propias plantillas por estado, con video. NO crear la 3 (pedido_en_proceso_tv) si la plantilla de Shopify que ya existe funciona: basta con pasarle al robot el número de ese flujo (o cambiarle el texto por el nuevo). La 1 (confirmar_pedido_tv) es opcional. **La que sí falta es la 2 (aclarar_dato_pedido_tv).**
+
 Ronald (26-11): «dime qué plantillas toca hacer, para programar a Claude en línea y que lo haga él».
 Copia TODO el bloque de abajo y pégaselo a Claude en Chrome, con Lucid abierto en panel.lucidbot.co (cuenta Toro Verde).
 

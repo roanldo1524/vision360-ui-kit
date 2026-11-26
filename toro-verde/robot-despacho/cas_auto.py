@@ -108,7 +108,8 @@ for c in casos:
                       "Necesitamos verificar dónde está el paquete, gestionar la entrega y una fecha estimada. Muchas gracias.")
     elif tipo == 'OFICINA':
         dirof = oficina(txt)
-        if not e.get('cliente_oficina'):
+        # Ronald 26-11: Lucid ya manda su plantilla de oficina (con video) cuando Dropi pasa a RECLAME EN OFICINA → aquí solo si Dropi aún NO lo marca así.
+        if not e.get('cliente_oficina') and estado_hoy != 'RECLAME EN OFICINA':
             total = o.get('total') or 0
             acc['cliente'] = (f"Hola {nom.split(' ')[0] if nom else ''} 👋 Te escribe Karen de Toro Verde. ¡Tu pedido ya llegó! 📦\n"
                               f"Está disponible para reclamar en la oficina de {dc.title()}" + (f": *{dirof}*" if dirof else '') +
