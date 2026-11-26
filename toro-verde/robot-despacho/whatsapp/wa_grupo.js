@@ -18,7 +18,7 @@ var iniciar = async function() {
   const { state, saveCreds } = await useMultiFileAuthState(path.join(BASE, 'auth'));
   const { version } = await fetchLatestBaileysVersion().catch(() => ({ version: undefined }));
   const agent = process.env.HTTPS_PROXY ? new HttpsProxyAgent(process.env.HTTPS_PROXY) : undefined;
-  sock = makeWASocket({ auth: state, version, agent, fetchAgent: agent, logger: pino({ level: 'silent' }), browser: Browsers.ubuntu('Chrome'), markOnlineOnConnect: false, syncFullHistory: false });
+  sock = makeWASocket({ auth: state, version, agent, fetchAgent: agent, logger: pino({ level: 'silent' }), browser: Browsers.ubuntu('Chrome'), markOnlineOnConnect: false, syncFullHistory: false, keepAliveIntervalMs: 10000, connectTimeoutMs: 60000 });
   sock.ev.on('creds.update', saveCreds);
   // Ronald 26-11: «el QR no lo coge» → vincular con CÓDIGO de 8 letras (WhatsApp → Dispositivos vinculados → Vincular con número de teléfono).
   // Uso: WA_NUMERO=57XXXXXXXXXX node wa_grupo.js → escribe el código en /tmp/wa/codigo.txt
@@ -76,6 +76,16 @@ function leerIds(){ try { return JSON.parse(fs.readFileSync(IDS, 'utf8')); } cat
 function escuchar(){ if (!sock) return; sock.ev.on('messages.upsert', ({ messages }) => { for (const m of messages || []) { try {
   if (m.key.remoteJid && m.key.remoteJid.endsWith('@g.us') && !m.key.fromMe) log('MSG_GRUPO', (grupos[m.key.remoteJid] || {}).subject || m.key.remoteJid, m.pushName || '', m.message ? Object.keys(m.message).join(',') : 'SIN_CONTENIDO(no descifrado)');
   if (!m.message || m.key.fromMe) continue;
+  // Ronald 26-11: si mencionan al agente en cualquier grupo, responde (responder.py)
+  try { const mm = m.message, ci = (mm.extendedTextMessage || mm.imageMessage || {}).contextInfo || {}, men = ci.mentionedJid || [];
+    const yo = [(sock.user.id || '').split(':')[0].split('@')[0], (sock.user.lid || '').split(':')[0].split('@')[0]].filter(Boolean);
+    const tx = mm.conversation || (mm.extendedTextMessage || {}).text || (mm.imageMessage || {}).caption || '';
+    if (m.key.remoteJid.endsWith('@g.us') && (men.some(j => yo.includes(j.split('@')[0].split(':')[0])) || yo.some(n => tx.includes('@' + n)))) {
+      const quien_num = (m.key.participantPn || m.key.participantAlt || m.key.participant || '').split('@')[0].split(':')[0];
+      const datos = JSON.stringify({ pregunta: tx.replace(/@\d+/g, '').trim(), quien: m.pushName || '', quien_num: /^57\d{10}$/.test(quien_num) ? quien_num : '', grupo: m.key.remoteJid, grupo_nombre: (grupos[m.key.remoteJid] || {}).subject || '' });
+      const ch = require('child_process').spawn('python3', ['-I', path.join(BASE, 'responder.py')], { cwd: BASE }); ch.stdin.end(datos);
+      ch.stdout.on('data', d => log('RESPONDER', String(d).trim().slice(0, 120))); log('MENCION', m.pushName || '', tx.slice(0, 60));
+    } } catch (e) { log('MENCION_ERROR', e.message); }
   const msg = m.message, ctx = (msg.extendedTextMessage || msg.imageMessage || msg.videoMessage || {}).contextInfo || {};
   let ref = ctx.stanzaId && leerIds()[ctx.stanzaId];
   if (!ref && ctx.quotedMessage){ const q = ctx.quotedMessage, qt = q.conversation || (q.extendedTextMessage || {}).text || (q.imageMessage || {}).caption || '';
