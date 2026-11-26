@@ -159,7 +159,9 @@ def reunion(kpi, salud, ev, revisar):
              nota='Armada con reglas a partir de los datos reales del día; cada intervención cita un número del sistema.')
     try:
         # durante el día el acta vive en /tmp/dropi/reuniones (cambia cada 15 min); desde las 8 p. m. se guarda el acta final en el repositorio
-        carpeta = os.path.join(AQUI, 'datos', 'reuniones') if datetime.datetime.now(TZ).hour >= 20 else os.path.join(D, 'reuniones')
+        # (una sola vez: si el acta del día ya está en el repo, las vueltas siguientes escriben en /tmp para no dejar cambios sin guardar)
+        repo = os.path.join(AQUI, 'datos', 'reuniones')
+        carpeta = repo if datetime.datetime.now(TZ).hour >= 20 and not os.path.exists(os.path.join(repo, f'{fecha}.json')) else os.path.join(D, 'reuniones')
         os.makedirs(carpeta, exist_ok=True)
         json.dump(r, open(os.path.join(carpeta, f'{fecha}.json'), 'w'), ensure_ascii=False, indent=1)
     except Exception:
