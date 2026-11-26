@@ -67,6 +67,16 @@ def revisar(d):
         if not nr: return 'DUDA', 'el resumen no trae números de dirección'
         if not nr <= nd: return 'DUDA', f'números de la dirección del resumen ({" ".join(sorted(nr))}) no están en Dropi'
     if not ciudad or not direc: return 'DUDA', 'resumen incompleto en el chat'
+    # Ronald 25-11: producto y cantidad tal cual el último resumen («1 x … 2 Litros» = 2 litros, no 1 litro a $169.000)
+    pr = {}
+    for q, desc in re.findall(r'(\d+)\s*x\s*([^\n]+)', res.split('Total pedido')[0]):
+        u = n(desc); m2 = re.search(r'(\d+)\s*LITROS', u)
+        k = 'GALON' if 'GALON' in u else 'POMA' if 'POMA' in u else 'LITRO' if 'LITRO' in u else None
+        if not k: continue
+        pr[k] = pr.get(k, 0) + int(q) * (int(m2.group(1)) if (m2 and k == 'LITRO') else 1)
+    pd = {}
+    for it in d.get('items') or []: k = n(it.get('pres')); pd[k] = pd.get(k, 0) + int(float(it.get('q') or 0))
+    if pr and pd and pr != pd: return 'DUDA', f'producto/cantidad del resumen {pr} ≠ Dropi {pd}'
     # Ronald 25-11: muchos clientes dan otro número en el chat; el del resumen aceptado es el que va en Dropi
     tc = re.sub(r'\D', '', campo('Contacto'))[-10:]
     if len(tc) == 10 and tc.startswith('3') and tc != re.sub(r'\D', '', d.get('phone') or '')[-10:]: d['_tel'] = tc
