@@ -941,3 +941,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
   - Confirmado Orlando Bedoya (3214844789, Samaná, 2 L, $169.000). Había aceptado el resumen con «Asies», y ahora revision_auto reconoce «asies».
   - Arreglado avisar_equipo.py: se colaba al WhatsApp del equipo el resumen de confirmados. Ahora solo salen los comprobantes 💰. Queda pendiente el comprobante de Horacio (98403862) para el tercer número del equipo, que tiene el chat cerrado.
   - No hubo tareas de la reunión.
+- 26-11 4:20 p. m. — Casino: 39 personas, 0 fallos. Casino hoy: 8 pedidos $1.022.100.
