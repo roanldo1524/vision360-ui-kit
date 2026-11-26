@@ -876,3 +876,8 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 
 - 26-11 9:50 p. m. (Ronald: «cada 15 min es muy intenso; antes de las 11 tener todo confirmado»): bucle sin IA cada 15 min de 5 a 11 a. m. y luego cada hora; revisiones con IA :04/:34/:49 solo de 5 a 10:49 a. m.; la completa :19 cada hora hasta las 8 p. m.
 - 26-11 9:55 p. m. (Ronald: «a las 9 de la mañana full confirmado»): bucle cada 15 min de 5 a 9 a. m., luego cada hora; revisiones con IA :04/:34/:49 de 5 a 8:49 a. m.; antes de las 9 la duda pasa a Karen a los 30 min (no 2 h).
+
+### 26-11 5:19 a. m. (completa)
+- Bucle sin IA se había caído en la noche (reinicio de la máquina) → revivido a las 5:04. Robot ocupado por el bucle: 0 dudas.
+- Lucid «Error al subir»: 5 pedidos arreglados y subidos SOLOS (2 con el obsequio como producto, 3 sin departamento/dirección → fix2.py nuevo). Miguel (Bogotá, domicilio), Yesica (Cúcuta, oficina principal CLL 21 NORTE 10-25), Jorge Eduardo Moya 3152142594 (Bogotá, oficina CALLE 18 # 65 A 03).
+- **Karen**: Jorge Moya 3152142594 dijo «reclamar a partir del 1 o 2 de diciembre» → si sale hoy llega antes y puede devolverse: confirmar con él la oficina de Bogotá que le queda y si despachamos el 30-11.
