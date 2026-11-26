@@ -1,5 +1,5 @@
 #!/bin/bash
-# Ronald 25-11: el robot sigue trabajando aunque se acabe el cupo de IA. Corre la vuelta cada 15 min de 5 a 11 a. m. y cada hora hasta las 9 p. m. SIN Claude:
+# Ronald 25-11: el robot sigue trabajando aunque se acabe el cupo de IA. Corre la vuelta cada 15 min de 5 a 9 a. m. y cada hora hasta las 9 p. m. SIN Claude:
 # las reglas confirman lo seguro y lo dudoso pasa a Karen a las 2 h si la IA no lo revisa. Uso: setsid nohup bash robot/bucle.sh &
 S="$(cd "$(dirname "$0")/.." && pwd)"; echo $$ > /tmp/robot/bucle.pid
 while true; do
@@ -12,6 +12,6 @@ while true; do
   mkdir -p $V && python3 -I $R/panel/generar_panel.py $V/robot-despacho.html >/dev/null 2>&1
   (cd $R/panel && python3 -I generar_torre.py $V/sede.html sede.html >/dev/null 2>&1)
   echo "--- $(TZ=America/Bogota date '+%d-%m %H:%M') fin de vuelta" >> /tmp/robot/bucle.log
-  # Ronald 26-11: «antes de las 11 tener todo confirmado»: cada 15 min de 5 a 11 a. m.; después, cada hora
-  if [ "$(TZ=America/Bogota date +%-H)" -lt 11 ]; then sleep 900; else sleep 3600; fi
+  # Ronald 26-11: «a las 9 a. m. todo confirmado»: cada 15 min de 5 a 9 a. m.; después, cada hora
+  if [ "$(TZ=America/Bogota date +%-H)" -lt 9 ]; then sleep 900; else sleep 3600; fi
 done

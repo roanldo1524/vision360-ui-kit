@@ -11,6 +11,8 @@ os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 K = open('lucidbot.key').read().strip()
 P, DUD, DESDE = '/tmp/dropi/plan.json', '/tmp/dropi/plan_dudas.json', '/tmp/dropi/dudas_desde.json'
 ESPERA_IA = 120 * 60   # si la IA no revisa una duda en 2 horas, va a Karen
+# Ronald 26-11: «a las 9 a. m. todo confirmado»: en la mañana la duda pasa a Karen a los 30 min para que alcance antes de las 9
+if (datetime.datetime.utcnow() - datetime.timedelta(hours=5)).hour < 9: ESPERA_IA = 30 * 60
 
 def n(s): return re.sub(r'[^A-Z0-9 ]', ' ', unicodedata.normalize('NFKD', (s or '').upper()).encode('ascii', 'ignore').decode())
 def compacto(s): return re.sub(r'\s+', '', n(s))
