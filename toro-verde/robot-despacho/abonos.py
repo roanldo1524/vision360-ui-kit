@@ -11,7 +11,7 @@
 # con los conectores de Google, leyendo /tmp/wa/abonos_registro.json. Uso: python3 -I abonos.py [--enviar]
 import json, os, re, sys, glob, time, datetime, subprocess
 ENVIAR = '--enviar' in sys.argv
-EQUIPO = {'3218940042': 'Ronald', '3234209080': 'Leidy', '3206357423': 'Karen'}  # Ronald 26-11: «yo confirmo o alguien del equipo»
+EQUIPO = {'3218940042': 'Ronald', '94502349988013': 'Ronald', '3234209080': 'Leidy', '3206357423': 'Karen'}  # Ronald 26-11: «yo confirmo o alguien del equipo»
 W = '/tmp/wa'; D = '/tmp/dropi'; REG = f'{W}/abonos_registro.json'; HECHOS = f'{W}/abonos_hechos.json'
 reg = json.load(open(REG)) if os.path.exists(REG) else []
 hechos = json.load(open(HECHOS)) if os.path.exists(HECHOS) else {}
