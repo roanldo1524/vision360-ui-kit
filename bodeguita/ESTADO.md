@@ -197,6 +197,11 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   SH CUBRE CANAS color NEGRO ($99.900, $69.900, $129.900, $99.900 = $399.600): …8588, …6017, …1892, …7819
   (Lucid 146647, 177239, 179328, 763029). Hoy sí subieron 7 de cubre canas de otros colores → probablemente la variante
   NEGRO cambió o se borró en Dropi. Avisado a Ronald/Sandra; hay que corregir el producto en Lucid/Dropi y subirlos a mano.
+- 26-nov 4:21 p. m.: 327 tibios, 57 ya compraron → **83 enviados, 0 fallos**. Total casino: 1.613 recibieron.
+  Acumulado de pedidos de gente que recibió el casino: 10 = **$1.142.700**, todos a precio normal, 0 con el premio.
+  Errores de Dropi de hoy: queda 1 (de 4; parece que 3 ya se corrigieron).
+  Propuesta pendiente de Ronald: (1) arreglar el bot con objeciones.md, (2) premio directo con foto de «fuente de los
+  deseos» y respuesta «SÍ» en vez del juego, (3) acceso a Dropi.
 - Ronald (24-nov): en este chat SOLO datos de La Bodeguita; no compararla ni mencionar Toro Verde.
 - Pendiente técnico: la foto de la máquina y los sonidos del casino todavía se cargan desde el almacenamiento de
   Shopify de otra tienda (no se ve marca). Pasarlos a un alojamiento propio de La Bodeguita.
