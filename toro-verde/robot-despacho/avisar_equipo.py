@@ -30,7 +30,7 @@ t += f"\n📋 Total en revisión humana: {total_rev}\nTodo queda con etiqueta en
 n = 0
 for c in EQUIPO:
     r = reg.setdefault(c, {'pendiente': [], 'plantilla': 0})
-    if novedad: r['pendiente'] = (r['pendiente'] + [t])[-5:]
+    # Ronald 24-11: el resumen de confirmados NO se manda al equipo (solo 2 reportes al día); solo salen los 💰 comprobantes
     if not r['pendiente']: continue
     try:
         info = get(f'/contacts/{c}'); li = float(info.get('last_interaction') or 0) / 1000

@@ -27,7 +27,7 @@ def chat(c):
         out.append((m.group(1), f, m.group(3).strip()))
     return out
 
-SI = re.compile(r'^\W*((es|est[aá]|todo|ok|si|s[ií],?)\s+(muy\s+)?correct|ah,?\s+listo|(muchas\s+)?gracias\W*$|s[ií]+|sip|sii|si se[ñn]or|correct|corect|perfect|confirm|listo|ok|okey|de acuerdo|dale|claro|as[ií] es|exacto|todo (est[aá] )?(bien|correcto)|est[aá]n? bien|bien|👍)', re.I)
+SI = re.compile(r'^\W*((es|est[aá]|todo|ok|si|s[ií],?)\s+(muy\s+)?correct|ah,?\s+listo|(muchas\s+)?gracias\W*$|s[ií]+|sip|sii|si se[ñn]or|correct|corect|perfect|confirm|listo|ok|okey|de acuerdo|dale|claro|as[ií]\s*es|exacto|todo (est[aá] )?(bien|correcto)|est[aá]n? bien|bien|👍)', re.I)
 RIESGO = re.compile(r'cambi|corrij|correg|otra direc|otra ciudad|mejor (a|en|para|lo)|no lo quiero|ya no|cancel|anul|ma[ñn]ana (te|le) (pago|confirmo)|pago (ma[ñn]ana|despu|luego)|nequi|netflix|daviplata|transfer|consign|addi|cuota|tarjeta|devolu|esper(e|a) (un|que)|despu[eé]s (le|te) (digo|confirmo)|no (estoy|voy a estar)|viaj', re.I)
 HOY_MIN = 48  # horas: la aceptación tiene que ser reciente (nada de «CONFIRMAR PEDIDO» de un pedido viejo)
 
