@@ -501,6 +501,91 @@ function pasoReunion(t){
   if (tab === 'reunion') pintar();
 }
 
+// ================= REUNIÓN EN LIDV CON VOZ (Ronald 26-11: «la reunión dentro de la sala, más realista, que se vea qué está haciendo cada uno y una pantalla para presentar»; «que traigan siempre qué hicieron nuevo, qué mejoró, el problema y la solución») =================
+const LIDV = DATOS.envivo || [];
+let vivo = false, vTts = null, vDic = null, vSam = null, vDb = null, vHist = [], vLog = [], vBase = '', vEnviarAlParar = false;
+const usar = n => (window.claude && window.claude.use) ? window.claude.use(n).catch(() => null) : Promise.resolve(null);
+usar('tts').then(x => { vTts = x; if (x) try { x.onLine(({id}) => vHabla(String(id || '').split('#')[0])); x.onState(({state}) => { if (state === 'idle' && vivo) vHabla(null); }); } catch (e) {} });
+usar('sample').then(x => vSam = x); usar('db').then(x => vDb = x);
+usar('dictation').then(x => { vDic = x; if (!x) return; try {
+  x.onPartial(({text}) => { const t = $('v_txt'); if (t) t.value = vBase + text; });
+  x.onFinal(({text}) => { vBase += text + ' '; const t = $('v_txt'); if (t) t.value = vBase; });
+  x.onState(({state}) => { const b = $('v_mic'); if (!b) return; const on = state === 'listening' || state === 'starting';
+    b.textContent = on ? '⏹ Listo' : '🎤 Hablar'; b.style.background = on ? '#c0392b' : ''; if (state === 'idle' && vEnviarAlParar && vBase.trim()){ vEnviarAlParar = false; vPreguntar(); } });
+} catch (e) {} });
+const vQ = q => LIDV.find(v => v.quien === q);
+function vEnvolver(t, n){ const out = []; let l = ''; String(t || '').split(/\s+/).forEach(w => { if ((l + ' ' + w).trim().length > n){ out.push(l.trim()); l = w; } else l += ' ' + w; }); if (l.trim()) out.push(l.trim()); return out; }
+const texSlide = (v, extra) => lienzo(1024, 512, (g, c) => {
+  g.fillStyle = '#0e130f'; g.fillRect(0, 0, 1024, 512); g.strokeStyle = '#e9b84f'; g.lineWidth = 8; g.strokeRect(4, 4, 1016, 504);
+  g.textAlign = 'left'; g.fillStyle = '#ffffff'; g.font = '800 40px "Bricolage Grotesque", sans-serif'; g.fillText(v.persona, 36, 62);
+  g.fillStyle = '#b9beb6'; g.font = '500 24px "IBM Plex Sans", sans-serif'; g.fillText(v.area + (v.remoto ? ' · por videollamada' : ''), 36, 96);
+  g.fillStyle = '#e74c3c'; g.beginPath(); g.arc(880, 52, 10, 0, 7); g.fill(); g.fillStyle = '#ffffff'; g.font = '700 22px "IBM Plex Sans", sans-serif'; g.fillText('EN LIDV', 898, 60);
+  g.fillStyle = '#3ccf7e'; g.font = '800 50px "Bricolage Grotesque", sans-serif'; g.fillText(v.kpi || '', 36, 160);
+  g.fillStyle = '#b9beb6'; g.font = '500 24px "IBM Plex Sans", sans-serif'; g.fillText(v.meta || '', 36, 194);
+  const filas = extra ? [['Responde', extra]] : [['Nuevo', v.nuevo], ['Mejoró', v.mejoro], ['Problema', v.problema], ['Solución', v.solucion]];
+  let y = 236; filas.forEach(([k, t]) => { if (y > 495) return; g.fillStyle = k === 'Problema' ? '#e9845f' : '#e9b84f'; g.font = '700 22px "IBM Plex Sans", sans-serif'; g.fillText(k, 36, y);
+    g.fillStyle = '#ffffff'; g.font = '500 22px "IBM Plex Sans", sans-serif'; vEnvolver(t, extra ? 66 : 64).slice(0, extra ? 9 : 2).forEach((l, i) => { if (y + i*28 <= 500) g.fillText(l, 170, y + i*28); }); y += extra ? 260 : 66; }); });
+let vPorHablar = {};
+function vHabla(quien){
+  Object.values(gente).forEach(quitarBurbuja);
+  if (!quien){ return; }
+  const v = vQ(quien); if (!v) return;
+  pantallaSala.material.map = texSlide(v, vPorHablar[quien]); pantallaSala.material.needsUpdate = true;
+  const g = gente[quien]; if (g) burbuja(g, vPorHablar[quien] || ('Nuevo: ' + v.nuevo), '#e9b84f');
+}
+function vDecir(lineas){
+  lineas.forEach(l => vLog.push({quien: l.quien, texto: l.texto}));
+  if (tab === 'reunion') pintar();
+  if (vTts){ vTts.speak(lineas.map((l, i) => ({text: l.texto.slice(0, 1900), voice: (vQ(l.quien) || {}).voz || 'buttery', language: 'es', id: l.quien + '#' + i}))).catch(() => {}); return; }
+  let i = 0; const paso = () => { if (!vivo || i >= lineas.length) return; vHabla(lineas[i].quien); i++; setTimeout(paso, 9000); }; paso();
+}
+function vivoEmpezar(){
+  if (!LIDV.length) return; vivo = true; vLog = []; vHist = []; vPorHablar = {};
+  const part = LIDV.filter(v => !v.remoto && gente[v.quien] && gente[v.quien].piso === 1);
+  part.forEach((v, i) => { const g = gente[v.quien], s = ASIENTOS[i % ASIENTOS.length]; quitarBurbuja(g);
+    const pts = [...ruta(g.casa, {x:s.x}), {x:s.x, z:2.4}, {x:s.x, z:s.z + (s.rot ? .45 : -.45)}, {x:s.x, z:s.z}];
+    g.accion = {tipo:'ir', ini:clock.getElapsedTime(), pts, L:largo(pts), rol:'reunion', asiento:s}; });
+  ver('piso', 1); tab = 'reunion'; pintar(); vBarra(true);
+  const lineas = LIDV.map(v => ({quien: v.quien, texto: `${v.persona.split(' ')[0]}, ${v.area}${v.remoto ? ', por videollamada' : ''}. ${v.kpi}${v.meta ? ', ' + v.meta : ''}. Lo nuevo: ${v.nuevo} Lo que mejoró: ${v.mejoro} El problema: ${v.problema} La solución: ${v.solucion}`}));
+  lineas.push({quien: LIDV[0].quien, texto: 'Ronald, ese es el reporte del equipo. ¿Qué le quiere preguntar a alguien? Hable con el micrófono o escriba abajo.'});
+  setTimeout(() => { if (vivo) vDecir(lineas); }, 5000);
+}
+function vivoTerminar(){ vivo = false; try { vTts && vTts.stop(); } catch (e) {} vBarra(false); terminar(); }
+function vBarra(on){
+  let b = $('v_barra');
+  if (!b){ b = document.createElement('div'); b.id = 'v_barra';
+    b.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:8px;align-items:flex-end;background:#0e130fee;border-top:1px solid #e9b84f;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))';
+    b.innerHTML = '<button id="v_mic" class="accion" style="margin:0">🎤 Hablar</button><textarea id="v_txt" placeholder="Pregúntele al equipo (ej.: Daniela, ¿qué falta para llegar al 95 %?)" style="flex:1;min-width:0;height:44px;resize:none;border-radius:10px;border:1px solid #3a3f3a;background:#151a16;color:#fff;padding:10px;font:400 15px IBM Plex Sans,sans-serif"></textarea><button id="v_env" class="accion" style="margin:0">Enviar</button><button id="v_fin" class="accion" style="margin:0">Salir</button>';
+    document.body.append(b);
+    $('v_env').onclick = vPreguntar; $('v_fin').onclick = vivoTerminar;
+    $('v_txt').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); vPreguntar(); } });
+    $('v_mic').onclick = () => { if (!vDic){ $('v_txt').focus(); return; }
+      if ($('v_mic').textContent.includes('Listo')){ vEnviarAlParar = true; vDic.stop().catch(() => {}); return; }
+      try { vTts && vTts.stop(); } catch (e) {} vBase = ''; $('v_txt').value = ''; vDic.start({language: 'es'}).catch(() => {}); };
+  }
+  b.hidden = !on; if (!vDic) $('v_mic').hidden = true;
+}
+async function vPreguntar(){
+  const t = $('v_txt'); const q = (t.value || '').trim(); if (!q) return; t.value = ''; vBase = '';
+  vLog.push({quien: 'Ronald', texto: q}); if (tab === 'reunion') pintar();
+  if (!vSam){ vLog.push({quien: LIDV[0].quien, texto: 'Las respuestas en vivo funcionan al abrir la sede en claude.ai desde Chrome o la app de escritorio.'}); pintar(); return; }
+  $('v_env').disabled = true;
+  const ctx = 'Eres la sala de juntas del equipo de agentes de Toro Verde (herbicida, Colombia). Hablan como personas reales en una reunión por voz: español sencillo, frases cortas, sin listas ni emojis. Ronald es el dueño.\nLíderes (quien | persona | área | KPI | nuevo | mejoró | problema | solución):\n' +
+    LIDV.map(v => [v.quien, v.persona, v.area, v.kpi + ' ' + v.meta, v.nuevo, v.mejoro, v.problema, v.solucion].join(' | ')).join('\n') +
+    '\nReglas: nunca decir orgánico, ecológico, natural, sin veneno ni no tóxico; uso: mínimo 130 ml por bomba de 20 litros y agite el envase; descuentos solo a quien nunca ha comprado; abono si devuelve más del 50 %; flete hasta 15 % sobre el tope; nunca se cancelan pedidos; Ronald solo decide plata y llamadas; las tareas las ejecuta el equipo.\n' +
+    'Responde SOLO JSON: {"respuestas":[{"quien":"<quien exacto de la lista>","texto":"<lo que dice en voz alta, máximo 3 frases, con número si lo tiene>"}],"tareas":[{"quien":"<quien>","texto":"<tarea concreta que ese agente ejecuta y cómo se mide>"}]}. Responde el líder del área (1 o 2); si no hay dato, dilo y crea una tarea para traerlo. Nunca le pases tareas a Ronald salvo plata o llamadas.';
+  vHist.push((q)); 
+  try {
+    const r = await vSam.json([{role: 'user', content: ctx + '\n\nConversación:\n' + vLog.slice(-10).map(x => (x.quien === 'Ronald' ? 'Ronald' : (vQ(x.quien) || {}).persona || x.quien) + ': ' + x.texto).join('\n')}], {cache: false});
+    const resp = (Array.isArray(r && r.respuestas) ? r.respuestas : []).filter(x => x && x.texto && vQ(x.quien));
+    for (const x of (Array.isArray(r && r.tareas) ? r.tareas : [])){ const f = {lider: String(x.quien || ''), texto: String(x.texto || '').slice(0, 400), estado: 'pendiente', creada: Date.now(), origen: 'sede · sala de juntas'};
+      if (f.texto && vDb){ try { await vDb.collection('tareas').add(f); } catch (e) {} } if (f.texto) vLog.push({quien: 'Tarea', texto: ((vQ(f.lider) || {}).persona || f.lider) + ': ' + f.texto}); }
+    resp.forEach(x => vPorHablar[x.quien] = x.texto);
+    vDecir(resp.length ? resp : [{quien: LIDV[0].quien, texto: 'No le entendí bien, Ronald. ¿Me lo repite?'}]);
+  } catch (e) { vLog.push({quien: 'Sala', texto: e && e.code === 'rate_limited' ? 'Muchas preguntas seguidas; espere un momento.' : 'No se pudo responder. Intente de nuevo.'}); pintar(); }
+  finally { $('v_env').disabled = false; }
+}
+
 // ================= PANEL DE CONTEXTO =================
 document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => { tab = b.dataset.tab; pintar(); });
 function pintar(){
@@ -524,6 +609,8 @@ function pintar(){
     const iv = REU.intervenciones || [];
     cu.innerHTML = `<h3>${esc(REU.titulo)}</h3><div class="cargo"><span class="mono">${esc(REU.id)}</span> · ${esc(REU.fecha)} · convoca ${esc(REU.convoca)}</div>
       ${enReunion ? '<button class="accion" id="b_fin">Terminar reunión</button>' : '<button class="accion" id="b_reu">Entrar a la reunión</button>'}
+      ${LIDV.length ? (vivo ? '<button class="accion" id="b_vfin">Salir de la reunión en vivo</button>' : '<button class="accion" id="b_vivo">🎙️ Reunión EN VIVO con voz</button>') : ''}
+      <div id="v_log"></div>
       <div class="sec">Agenda</div>${(REU.agenda || []).map((a, i) => `<div class="item">${i + 1}. ${esc(a)}</div>`).join('')}
       <div class="sec">Participantes</div><div class="item">${(REU.participantes || []).map(n => esc(corto(n) + ' (' + n + ')')).join(' · ')}</div>
       <div class="sec">Conversación</div>${iv.map((x, i) => `<div class="item" style="${enReunion && i === reuPaso ? 'color:var(--texto)' : ''}"><b>${esc(corto(x.quien))}:</b> ${esc(x.dice)}</div>`).join('')}
@@ -531,6 +618,10 @@ function pintar(){
       <div class="sec">Tareas (responsable · fecha · estado)</div>${(REU.tareas || []).map(x => `<div class="item"><span class="mono">${esc(x.id)}</span> ${esc(x.titulo)}<br><b>${esc(x.responsable)}</b> · ${esc(x.fecha)} · <span class="pill ${x.aprobacion_humana ? 'humano' : ''}">${esc(x.estado)}</span></div>`).join('')}
       <p class="cargo">${esc(REU.nota || '')}</p>`;
     const b1 = $('b_reu'), b2 = $('b_fin'); if (b1) b1.onclick = convocar; if (b2) b2.onclick = terminar;
+    const b3 = $('b_vivo'), b4 = $('b_vfin'); if (b3) b3.onclick = vivoEmpezar; if (b4) b4.onclick = vivoTerminar;
+    const vl = $('v_log'); if (vl && vLog.length){ const h = document.createElement('div'); h.className = 'sec'; h.textContent = 'Conversación en vivo'; vl.append(h);
+      vLog.slice(-14).forEach(x => { const d = document.createElement('div'); d.className = 'item'; const b = document.createElement('b'); b.textContent = (x.quien === 'Ronald' || x.quien === 'Tarea' || x.quien === 'Sala' ? x.quien : ((vQ(x.quien) || {}).persona || x.quien)) + ': ';
+        d.append(b, document.createTextNode(x.texto)); vl.append(d); }); }
   } else {
     const I = DATOS.iso || {}, P = I.phva || {};
     cu.innerHTML = `<h3>Sistema de Gestión de Calidad</h3><div class="cargo">ISO 9001 · gestión por procesos y ciclo PHVA</div>

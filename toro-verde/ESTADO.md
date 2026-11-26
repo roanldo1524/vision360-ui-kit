@@ -928,3 +928,8 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
   - Si el cliente devuelve MÁS del 50 %, se le pide abono (eso ya lo hace pedir_anticipo.py); con 50 % o menos se confirma.
   - El flete se acepta hasta 15 % sobre el tope: 1 L $28.750, 2 L $33.350, galón $40.250 y lo demás $34.500.
   - La sala de reunión ahora tiene una sección «Reglas de la operación» con todas las reglas, y un campo para que Ronald agregue una regla nueva. La regla llega como tarea a Diego (tecnología) y la vuelta de los :19 la programa.
+- 26-11 3:00 p. m. · REUNIÓN EN VIVO dentro de la sede 3D, en la Sala de Juntas (https://claude.ai/artifact/1jUBeerjPGt1qAH8sBUJ5n, pestaña Reunión, botón «Reunión EN VIVO con voz»):
+  - Los líderes caminan a la sala y la pantalla presenta a cada uno: su KPI, qué hizo nuevo, qué mejoró, el problema y la solución. Cada uno habla con su voz.
+  - Ronald pregunta por micrófono o escribiendo, y responde el líder que corresponde. Las tareas se guardan en la colección «tareas» de la sede.
+  - Los datos salen de datos/reportes_lideres.json, que cada agente actualiza, y de los KPI que calcula generar_torre.py.
+  - Se usan los nombres de la sede (Valentina Ríos, Daniela Mejía, Camilo Herrera, etc.) en todo, incluido docs/equipo-agentes.md.

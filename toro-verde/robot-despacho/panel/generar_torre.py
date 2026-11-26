@@ -171,7 +171,42 @@ try:
 except Exception as _e:
     _ev, _reu, _iso = [], {}, {}
     print('OJO oficina_datos', _e)
-datos = dict(eventos=_ev, reunion=_reu, iso=_iso,
+# Ronald 26-11: reunión EN VIVO en la Sala de Juntas: cada líder presenta su número, qué hizo nuevo, qué mejoró, el problema y la solución.
+def _envivo():
+    import glob, re as _re
+    R = os.path.dirname(AQUI)
+    try: rep = json.load(open(os.path.join(R, 'datos', 'reportes_lideres.json')))
+    except Exception: return []
+    def _j(f, d=None):
+        try: return json.load(open(f))
+        except Exception: return d
+    pct_robot = round(100 * conf_robot / max(1, len(validos)))
+    cas = (_j('/tmp/dropi/cas_auto.json', {}) or {}).get('conteo', {})
+    cas_n = sum(v for k, v in cas.items() if k != 'ya_cerrado'); cas_ia = cas.get('OTRO', 0)
+    ras = _j('/tmp/dropi/rastreo_estado.json', {}) or {}
+    gar = _j('/tmp/dropi/garantias_filas.json', []) or []
+    inn = 0
+    try: inn = len([l for l in open(os.path.join(R, 'datos', 'innovaciones.md')).read().split('## Semana')[-1].splitlines() if _re.match(r'\|\s*\d+\s*\|.*\|\s*Activa', l)])
+    except Exception: pass
+    KPI = {'Líder de Logística': (f"{kpi.get('entrega', '—')} % entregado", 'meta 90 %'),
+           'Confirmador de pedidos': (f'{pct_robot} % confirmado por el robot', f'meta 95 % · {conf_robot} de {len(validos)} hoy'),
+           'Gestor de tickets y CAS': (f'{cas_n - cas_ia} de {cas_n} casos sin IA' if cas_n else 'CAS en código', 'meta: más del 90 % sin IA'),
+           'Rastreador de oficinas': (f"{kpi.get('oficina', 0)} paquetes en oficina", f'{len(ras)} clientes avisados'),
+           'Abogado de devoluciones': (f"{kpi.get('devolucion', '—')} % de devolución", 'meta 3 %'),
+           'Líder de Tecnología': (f'{inn} de 3 innovaciones', 'esta semana'),
+           'Casino y remarketing': ('$17 M en ventas', 'desde el 18-11'),
+           'Sofía · Garantías': (f'{len(gar)} casos abiertos', f"{sum(1 for g in gar if g.get('categoria') == 'SIN_COMPRA')} sin compra comprobada")}
+    out = []
+    for quien, r in rep.items():
+        if quien.startswith('_'): continue
+        k = KPI.get(quien, ('', ''))
+        out.append(dict(quien=quien, persona=NOMBRES.get(quien, quien.split(' · ')[0]), area=r.get('area', ''), voz=r.get('voz', 'buttery'),
+                        remoto=bool(r.get('remoto')), kpi=k[0], meta=k[1], nuevo=r.get('nuevo', ''), mejoro=r.get('mejoro', ''),
+                        problema=r.get('problema', ''), solucion=r.get('solucion', '')))
+    return out
+try: _vivo = _envivo()
+except Exception as _e: _vivo = []; print('OJO envivo', _e)
+datos = dict(eventos=_ev, reunion=_reu, iso=_iso, envivo=_vivo,
     actualizado=ahora.strftime('%d %b, %I:%M %p').replace('AM', 'a. m.').replace('PM', 'p. m.'),
     vendido=vendido, pedidos=len(validos), conf_robot=conf_robot, revisar=revisar, guias=guias,
     quejas_hoy=quejas_hoy, cas_activos=cas_activos, fletes=fletes, kpi=kpi, salud=salud, pisos=pisos,
