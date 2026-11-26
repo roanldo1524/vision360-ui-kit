@@ -5,7 +5,7 @@
 //       Mensaje a enviar (archivo JSON en /tmp/wa/salida): {"grupo": "nombre o parte del nombre del grupo", "texto": "...", "imagen": "/ruta/foto.jpg"}
 // Nunca escribe a clientes: solo al grupo configurado. Solo envía; no responde mensajes.
 const fs = require('fs'), path = require('path');
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion } = require('@whiskeysockets/baileys');
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, Browsers } = require('@whiskeysockets/baileys');
 const QRCode = require('qrcode'); const pino = require('pino');
 const { HttpsProxyAgent } = require('https-proxy-agent');
 const BASE = '/tmp/wa', SAL = path.join(BASE, 'salida'), ENV = path.join(BASE, 'enviados');
@@ -18,7 +18,7 @@ async function iniciar() {
   const { state, saveCreds } = await useMultiFileAuthState(path.join(BASE, 'auth'));
   const { version } = await fetchLatestBaileysVersion().catch(() => ({ version: undefined }));
   const agent = process.env.HTTPS_PROXY ? new HttpsProxyAgent(process.env.HTTPS_PROXY) : undefined;
-  sock = makeWASocket({ auth: state, version, agent, fetchAgent: agent, logger: pino({ level: 'silent' }), browser: ['Toro Verde Robot', 'Chrome', '1.0'], markOnlineOnConnect: false, syncFullHistory: false });
+  sock = makeWASocket({ auth: state, version, agent, fetchAgent: agent, logger: pino({ level: 'silent' }), browser: Browsers.ubuntu('Chrome'), markOnlineOnConnect: false, syncFullHistory: false });
   sock.ev.on('creds.update', saveCreds);
   // Ronald 26-11: «el QR no lo coge» → vincular con CÓDIGO de 8 letras (WhatsApp → Dispositivos vinculados → Vincular con número de teléfono).
   // Uso: WA_NUMERO=57XXXXXXXXXX node wa_grupo.js → escribe el código en /tmp/wa/codigo.txt
