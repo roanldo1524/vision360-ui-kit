@@ -74,7 +74,7 @@ process.on('unhandledRejection', e => log('ERROR', e && e.message)); process.on(
 const IDS = path.join(BASE, 'ids.json'), RESP = path.join(BASE, 'respuestas'); fs.mkdirSync(RESP, { recursive: true });
 function leerIds(){ try { return JSON.parse(fs.readFileSync(IDS, 'utf8')); } catch (e) { return {}; } }
 function escuchar(){ if (!sock) return; sock.ev.on('messages.upsert', ({ messages }) => { for (const m of messages || []) { try {
-  if (m.key.remoteJid && m.key.remoteJid.endsWith('@g.us') && !m.key.fromMe) log('MSG_GRUPO', (grupos[m.key.remoteJid] || {}).subject || m.key.remoteJid, m.pushName || '', m.message ? Object.keys(m.message).join(',') : 'SIN_CONTENIDO(no descifrado)');
+  if (m.key.remoteJid && m.key.remoteJid.endsWith('@g.us') && !m.key.fromMe) log('MSG_GRUPO', (grupos[m.key.remoteJid] || {}).subject || m.key.remoteJid, m.pushName || '', m.message ? Object.keys(m.message).join(',') : 'SIN_CONTENIDO(no descifrado)', ((m.message || {}).conversation || ((m.message || {}).extendedTextMessage || {}).text || '').slice(0, 120));
   if (!m.message || m.key.fromMe) continue;
   // Ronald 26-11: si mencionan al agente en cualquier grupo, responde (responder.py)
   try { const mm = m.message, ci = (mm.extendedTextMessage || mm.imageMessage || {}).contextInfo || {}, men = ci.mentionedJid || [];
