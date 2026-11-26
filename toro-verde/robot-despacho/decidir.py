@@ -45,7 +45,13 @@ def marcas(c):
     rec = campo(c, '731835')
     carrito = any('carrito' in n.lower() for n in nombres) or bool(re.search(r's[ií]|true|1|lograd', rec or '', re.I))
     return shop, carrito
-def confirmo_boton(t): return bool(re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) or SI.search(t))
+# Ronald 26-11: a los pedidos de Shopify sin confirmar se les manda «Tu pedido ya está en proceso…»; si responden que sí, cuenta como confirmación
+def shop_si(t):
+    k = t.rfind('Tu pedido ya está en proceso para ser despachado')
+    if k < 0: return False
+    return any(len(l.split('):', 1)[-1].strip()) < 80 and re.search(r'\b(s[ií]+|ok|listo|dale|de una|confirm\w*|correct[oa]|perfecto|claro|bueno|gracias|est[aá] bien|am[eé]n|bendiciones)\b', l.split('):', 1)[-1], re.I)
+               for l in re.split(r'\n(?=(?:Yo|Usuario) \()', t[k:]) if l.startswith('Usuario'))
+def confirmo_boton(t): return bool(re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) or SI.search(t) or shop_si(t))
 
 ops = []; o = 0
 while o < 30000:
@@ -84,8 +90,8 @@ for c, lst in por_contacto.items():
     tras = t[t.rfind('Resumen de tu pedido'):] if 'Resumen de tu pedido' in t else ''
     dijo_si = any((len(l.split('):',1)[-1].strip()) < 80 and re.search(r'\b(s[ií]+|ok|listo|dale|de una|confirm\w*|correct[oa]|as[ií] est[aá]|m[aá]nd\w*|env[ií]\w*|perfecto|claro|bueno|est[aá] bien)\b', l.split('):',1)[-1], re.I))
                   for l in re.split(r'\n(?=(?:Yo|Usuario) \()', tras) if l.startswith('Usuario'))
-    if not (SI.search(t) or dijo_si or SI_CLIENTE.search(tras or '')): motivos.append('no veo la confirmación del cliente en el chat')
-    if re.search(r'confirmacion_landing|CONFIRMAR PEDIDO', t) and not re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) and not SI.search(t): motivos.append('pedido de la página: el cliente no ha tocado «CONFIRMAR PEDIDO»')
+    if not (SI.search(t) or dijo_si or SI_CLIENTE.search(tras or '') or shop_si(t)): motivos.append('no veo la confirmación del cliente en el chat')
+    if re.search(r'confirmacion_landing|CONFIRMAR PEDIDO', t) and not re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) and not SI.search(t) and not shop_si(t): motivos.append('pedido de la página: el cliente no ha tocado «CONFIRMAR PEDIDO»')
     # Ronald 21-11 (Evidalio): si el cliente pide Addi, cuotas o transferencia NUNCA se confirma solo, aunque Lucid diga «contra entrega».
     pago_previo = re.search(r'addi|cuotas|transferencia|consignaci|comprobante|sin recaudo|bancolombia|nequi|daviplata|no (lo )?pago (en )?contra ?entrega', p['Método de pago'] + ' ' + usuario + ' ' + (tras or ''), re.I)
     # Último resumen que el cliente vio y confirmó en el chat (manda sobre el campo de Lucid, que a veces queda viejo)

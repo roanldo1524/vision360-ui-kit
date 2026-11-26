@@ -41,6 +41,10 @@ if __name__ == '__main__':
     for a in json.load(open('/tmp/dropi/acciones.json')):
         if a['accion'] not in ('CONFIRMAR', 'EDITAR_Y_CONFIRMAR'): continue
         d = det.get(a['id']) or {}; dirx = re.sub(r'\s+', ' ', (d.get('dir') or '')).strip(' ,')
-        if not es_oficina(dirx): continue
+        if not es_oficina(dirx):
+            # Ronald 26-11: vereda/finca o sin nomenclatura → oficina del municipio (lo decidió razonar.py en rural.json)
+            ru = (json.load(open('/tmp/dropi/rural.json')) if os.path.exists('/tmp/dropi/rural.json') else {}).get(str(a['id']))
+            if ru: print(f"{a['id']}\t{ru['dir']}")
+            continue
         nueva = dir_oficina(d.get('state'), d.get('city'), dirx)
         if nueva and n(nueva) != n(dirx): print(f"{a['id']}\t{nueva}")

@@ -32,6 +32,7 @@ def litros_chat(txt):
     return tot
 
 acc = []
+RURAL = {}  # id → oficina para direcciones rurales (Ronald 26-11)
 for d in det:
     motivos, editar = [], {}
     f = luc.get(d.get('chat') or '57' + d['phone'])
@@ -43,9 +44,15 @@ for d in det:
     if re.search(r'servientrega|coordinadora|\benv[ií]a\b|\btcc\b|deprisa|\b472\b|domina|veloces', dirx): motivos.append(f'la dirección nombra otra transportadora (solo enviamos a oficinas de Interrapidísimo): «{(d["dir"] or "").strip()[:70]}»')
     # Ronald 25-11: la dirección de oficina la arregla oficinas.py («dirección del punto, RECLAMA EN OFICINA INTERRAPIDÍSIMO»); solo se frena si no se encuentra la oficina
     if oficina and not es_oficina_std and not _ofi.dir_oficina(d.get('state'), d.get('city'), d['dir']): motivos.append(f'dirección rara para oficina y no encuentro la oficina de Interrapidísimo del municipio: «{d["dir"].strip()[:70]}»')
-    elif not oficina and not (re.search(r'#\s*\d+|\bn[oº°]\.?\s*\d+|\d+\s*[a-z]?\s*-\s*\d+|\bmz[a]?\.?\s*\w+\s*(cs|casa|lt|lote)\.?\s*\d+|\b(km|kil[oó]metro)\s*\d+', dirx) or re.search(r'vereda|finca|corregimiento|v[ií]a a |sector|parcela|hacienda', dirx)):
-        motivos.append(f'dirección sin número de puerta, no es clara: «{(d["dir"] or "").strip()[:70]}»')
-    elif not oficina and not tiene_via: motivos.append(f'dirección incompleta o rara: «{(d["dir"] or "").strip()[:70]}»')
+    # Ronald 26-11: vereda, finca o dirección sin nomenclatura clara → el pedido va para reclamar en la oficina de Interrapidísimo
+    # del municipio y se le avisa al cliente (revision_auto.py manda el mensaje por Lucid). Si no hay oficina conocida, revisión humana.
+    rural_ofi = None
+    con_numero = bool(re.search(r'#\s*\d+|\bn[oº°]\.?\s*\d+|\d+\s*[a-z]?\s*-\s*\d+|\b(mz[a]?|manzana)\.?\s*\w+\s*(cs|casa|lt|lote)\.?\s*\d+', dirx))
+    # vereda, corregimiento, km, «vía a…»: siempre oficina. Finca/sector/parcela: oficina salvo que traiga nomenclatura completa (calle # número).
+    rural = bool(re.search(r'\b(vereda|vda|corregimiento|km|kil[oó]metro)\b|v[ií]a a ', dirx)) or (bool(re.search(r'\b(finca|fca|sector|parcela|hacienda)\b', dirx)) and not con_numero)
+    if not oficina and (rural or not con_numero or not tiene_via):
+        rural_ofi = _ofi.dir_oficina(d.get('state'), d.get('city'), '')
+        if not rural_ofi: motivos.append(f'dirección rural o sin nomenclatura y no encuentro la oficina de Interrapidísimo del municipio: «{(d["dir"] or "").strip()[:70]}»')
     nom = ((d.get('name') or '') + ' ' + (d.get('surname') or '')).lower()
     pal = re.findall(r'[a-záéíóúñ]+', nom)
     if len(pal) != len(set(pal)) or re.search(r'([a-záéíóúñ]{4,})\1', nom) or len(nom.strip()) < 4: motivos.append(f'nombre raro: «{(d.get("name") or "")} {(d.get("surname") or "")}»')
@@ -75,6 +82,16 @@ for d in det:
             if solo_litro and vcc in cuadra: editar.update(cantidad=lc, precio=int(vcc))
             elif solo_litro and vcc: motivos.append(f'producto distinto: en el chat {lc} L pero el valor del chat es ${vcc:,.0f}, en Dropi {ld} L: aclarar con el cliente'.replace(',', '.'))
             else: motivos.append(f'producto distinto: en el chat {lc} L, en Dropi {ld} L')
+    # Ronald 26-11: más de 4 litros solo si el cliente recibe: entregados ÷ total de pedidos × 100 ≥ 70 %.
+    # Cantidades permitidas por encima de 4 L: galón + 2 litros (6 L) o 2 galones (8 L). Nunca se cancela: va a REVISAR HUMANO.
+    lt_dropi = sum((i['q'] or 0) * next((v for k, v in LITROS.items() if k in (i['pres'] or '').upper()), 0) for i in d['items'])
+    lmax = max(lt_dropi, litros_chat(f.get('producto', '')) if f else 0)
+    if lmax > 4:
+        tot, entr = lt.get('orders', 0) or 0, lt.get('delivered', 0) or 0
+        pct = round(100 * entr / tot) if tot else 0
+        es_poma = any('POMA' in (i['pres'] or '').upper() for i in d['items'])
+        if pct < 70: motivos.append(f'pide {lmax} L (más de 4) y recibe {pct} % ({entr} entregados de {tot} pedidos); mínimo 70 %: no se autoriza más de 4 litros')
+        elif not es_poma and lmax not in (6, 8): motivos.append(f'pide {lmax} L: por encima de 4 L solo se permite galón + 2 litros (6 L) o 2 galones (8 L)')
     if f and f.get('origen') == 'pagina' and round(d['total']) not in PRECIOS: motivos.append(f'pedido de la página con precio raro: {d["total"]:.0f}')
     # Lo que el agente ya frenó al leer el chat no se vuelve a proponer (hasta que una persona lo resuelva)
     _V = '/tmp/dropi/vetos.json'
@@ -124,10 +141,15 @@ for d in det:
     # 6) Flete
     tope = tope_flete(d)
     if d['flete'] > tope and 'transportadora' not in editar: motivos.append(f'flete ${d["flete"]:,.0f} mayor a ${tope:,.0f}'.replace(',', '.'))
+    if rural_ofi and not motivos:
+        if d['dc'] != 3: editar['transportadora'] = UI['INTERRAPIDISIMO']  # Dropi crea ID nuevo; en la próxima vuelta ya es Inter y pasa a oficina
+        else:
+            editar.pop('transportadora', None); RURAL[str(d['id'])] = {'dir': rural_ofi, 'antes': (d['dir'] or '').strip(), 'chat': d.get('chat') or '57' + (d.get('phone') or ''), 'nombre': d['name'], 'ciudad': d.get('city')}
     if motivos: acc.append({'id': d['id'], 'accion': 'REVISAR', 'motivo': '; '.join(motivos), 'nombre': d['name']})
     elif editar: acc.append({'id': d['id'], 'accion': 'EDITAR_Y_CONFIRMAR', 'editar': editar, 'nombre': d['name'], 'dc': UI.get(TR.get(d['dc'], ''), '')})
     else: acc.append({'id': d['id'], 'accion': 'CONFIRMAR', 'nombre': d['name']})
 json.dump(acc, open('/tmp/dropi/acciones.json', 'w'), ensure_ascii=False)
+json.dump(RURAL, open('/tmp/dropi/rural.json', 'w'), ensure_ascii=False)
 from collections import Counter
 print('ACCIONES', dict(Counter(a['accion'] for a in acc)))
 for a in acc: print(' -', a['accion'], a['id'], a['nombre'], a.get('editar') or a.get('motivo') or '')

@@ -22,6 +22,7 @@ def fecha(c):
 # Ronald 25-11: «que al entrar a Dropi ya sepa qué hacer con cada uno, ni siquiera pensar». Receta concreta según el motivo.
 RECETAS=[
  (r'revisi[oó]n del agente', None),
+ (r'm[aá]s de 4|por encima de 4 L', 'Más de 4 litros solo si recibe 70 % o más. Si no cumple, ofrécele hasta 4 litros (un galón) y corrige el pedido; nunca lo canceles.'),
  (r'sin revisi[oó]n de la IA', 'Lee el chat: si aceptó el último resumen y ciudad, dirección y valor cuadran con Dropi, confirma.'),
  (r'pago anticipado', 'Mira en Bancolombia que llegó la plata con el nombre del cliente. Si llegó, confirma; si no, escríbele.'),
  (r'flete', 'Cotiza Envía e Interrapidísimo en Dropi. Si ninguna queda bajo el tope (1 L 25 mil, 2 L 29 mil, galón 35 mil), llama y ofrécele reclamar en oficina.'),

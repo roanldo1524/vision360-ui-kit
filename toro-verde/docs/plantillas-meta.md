@@ -22,6 +22,23 @@ Hola {{1}}, te escribimos de Toro Verde por tu pedido de {{2}}. Antes de despach
 
 Ejemplo para Meta: {{1}} = Walter · {{2}} = 1 litro de Herbicida Toro Verde · {{3}} = ¿lo envío a tu casa o lo reclamas en la oficina de Interrapidísimo?
 
+## 3. `pedido_en_proceso_tv` (pedidos de Shopify sin confirmar — Ronald 26-11)
+**Categoría:** Utilidad · **Idioma:** Español (COL) · **Sin variables** (el texto va tal cual).
+
+**Cuerpo:**
+Hola, ¿Cómo estás? 😊 ¡Muchísimas gracias por tu compra y por confiar en nosotros!
+
+Tu pedido ya está en proceso para ser despachado a la dirección que nos proporcionaste. 🚚📦
+
+Apenas tengamos el número de guía, te lo estaremos compartiendo para que puedas hacer seguimiento a tu envío. ¡Estamos atentos y felices de atenderte! 🌱🐂
+
+**Botones de respuesta rápida:**
+- Sí, despáchenlo
+- Quiero cambiar algo
+
+Cuando Meta la apruebe: en Lucid crea un flujo que solo envíe esta plantilla y pásame su número; lo pongo en `FLUJO_SHOPIFY` (recordar_confirmar.py).
+Mientras tanto el robot manda el mismo texto cuando el chat del cliente está abierto (habló en las últimas 23 h). Si el cliente responde que sí (o toca «Sí, despáchenlo»), el robot confirma solo.
+
 ## Cómo crearlas (Ronald)
 1. Lucid → Configuración → WhatsApp → Plantillas → Nueva plantilla (o en Meta Business Suite → WhatsApp Manager → Plantillas de mensajes).
 2. Pega el nombre, la categoría «Utilidad», el idioma, el cuerpo, los botones y los ejemplos de arriba.
