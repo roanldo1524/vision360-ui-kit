@@ -15,7 +15,11 @@ hoy_s = time.strftime('%Y-%m-%d', time.gmtime(time.time() - 5 * 3600))
 dia = [o for o in hoy if (o.get('created') or '')[:10] == hoy_s]
 robot = sum(1 for o in dia if any(t.get('tag_name') == 'CONFIRMADO AGENTE' for t in (o.get('tags') or [])))
 est = collections.Counter(o.get('status') for o in hoy)
-datos = (f"Pedidos de hoy: {len(dia)}; confirmados por el robot: {robot}. Estados en los últimos días: " +
+can_hoy = sum(1 for o in dia if o.get('status') == 'CANCELADO')
+qreg0 = leer('/tmp/dropi/quejas_reg.json', {}) or {}
+q_hoy = sum(1 for v in qreg0.values() if v.get('ultima', 0) >= time.time() - ((time.time() - 5 * 3600) % 86400))
+datos = (f"HOY: pedidos {len(dia)}; confirmados por el robot {robot}; CANCELADOS HOY {can_hoy} (el robot NUNCA cancela: los cancela el cliente o una persona); "
+         f"quejas al CAS puestas hoy {q_hoy}.\nEstados de TODOS los pedidos de los ÚLTIMOS 45 DÍAS (no son de hoy): " +
          ', '.join(f'{k} {v}' for k, v in est.most_common(8)) + ".\nLíderes:\n" +
          '\n'.join(f"- {k}: nuevo: {v.get('nuevo')}; problema: {v.get('problema')}; solución: {v.get('solucion')}" for k, v in lid.items() if not k.startswith('_')))
 # Ronald 26-11: «por medio de este número podemos conocer información también, cosas que están pasando en la oficina»
@@ -41,7 +45,7 @@ reglas = ("Reglas: nunca decir orgánico, ecológico, natural, sin veneno ni no 
           "descuentos solo a quien nunca compró; abono si el cliente devuelve más del 50 %; flete hasta 15 % sobre el tope (1 L $28.750, 2 L $33.350, galón $40.250); "
           "nunca se cancelan pedidos; la plata (reenvíos, devoluciones, aprobar abonos) la decide Ronald o el equipo en el grupo de comprobantes.")
 sistema = ("Eres el Agente de Confirmaciones de Comercializadora del Rey (tienda El Toro, herbicida Toro Verde, Colombia), miembro del equipo en WhatsApp. "
-           "Respondes en español sencillo, cálido y corto (máximo 6 líneas), como una persona del equipo. Usa solo los datos que te doy; si no tienes el dato, "
+           "Respondes en español sencillo, cálido y corto (máximo 6 líneas), como una persona del equipo. Usa solo los datos que te doy y distingue bien HOY de los últimos 45 días; si no tienes el dato, "
            "dilo y di que lo revisas en la próxima vuelta. No inventes números. No prometas plata ni hagas acciones: si te piden algo (confirmar, revisar un pedido, "
            "cambiar algo), di que quedó anotado como tarea y que la vuelta del robot lo hace. " + reglas)
 msg = [{'role': 'system', 'content': sistema + '\n\nDATOS DE HOY:\n' + datos},
