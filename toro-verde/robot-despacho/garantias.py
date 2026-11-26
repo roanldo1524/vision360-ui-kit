@@ -88,7 +88,8 @@ def texto(cat, nom, ent=None):
                 "Al día 7 mándanos fotos del lote 📸 y una del frasco, y revisamos juntos cómo va.")
     return None
 
-SUGERIDO = {'SIN_COMPRA': 'NO hay pedido ENTREGADO con ese celular en Dropi: se le pidió número, nombre y fecha del pedido. No hay garantía hasta comprobar la compra (posible estafa).',
+SUGERIDO = {'EN_CAMINO': 'El pedido todavía no se entrega: lo sigue logística/CAS (no se abre garantía ni se le escribe desde garantías).',
+            'SIN_COMPRA': 'NO hay pedido ENTREGADO con ese celular en Dropi: se le pidió número, nombre y fecha del pedido. No hay garantía hasta comprobar la compra (posible estafa).',
             'VERIFICAR': 'No se pudo consultar Dropi: revisar la compra a mano antes de responder.',
             'PLATA': 'Ronald: revisar el pago o el daño (foto) y decidir reposición o devolución. El robot no promete nada.',
             'LLAMAR': 'Llamar al cliente: escuchar, revisar cómo aplicó (ml por bomba, agitó, agua limpia, lluvia, boquilla, quién aplicó) y pedir fotos del lote y del frasco. Según la política: reaplicación guiada, reenvío 50 % (cliente paga envío) o 100 % (Toro paga) si cumplió todo — eso lo decide Ronald.'}
@@ -131,7 +132,11 @@ for r in sorted(casos, key=lambda x: x['created_at'], reverse=True):
     cat, por = clasificar(msgs)
     ent = entregados(c[2:]); e0 = est.get(c, {})
     if ent is None: cat, por = 'VERIFICAR', 'no se pudo consultar Dropi'
-    elif not ent: cat, por = 'SIN_COMPRA', f"sin pedido ENTREGADO en Dropi con el {c[2:]} ({len(compras.get(c[2:]) or [])} pedidos en otro estado)"
+    elif not ent:
+        otros = compras.get(c[2:]) or []
+        camino = [o for o in otros if o['status'] not in ('DEVOLUCION', 'CANCELADO', 'RECHAZADO', 'PENDIENTE CONFIRMACION', 'PENDIENTE')]
+        if camino: cat, por = 'EN_CAMINO', f"su pedido aún no se entrega ({camino[0]['status']}, {camino[0]['fecha']}): es tema de logística, no de garantía"
+        else: cat, por = 'SIN_COMPRA', f"sin pedido ENTREGADO en Dropi con el {c[2:]}" + (f" (tiene {len(otros)} en devolución o cancelado)" if otros else " (ningún pedido con ese número)")
     compra_txt = ' · '.join(f"{o['fecha']} {o['producto'] or ''} ${(o['total'] or 0):,.0f}".replace(',', '.') for o in (ent or [])[:4])
     cont[cat] = cont.get(cat, 0) + 1
     nom = (info.get('first_name') or '').split(' ')[0].title()
@@ -147,18 +152,18 @@ for r in sorted(casos, key=lambda x: x['created_at'], reverse=True):
         else: accion = 'LISTO PARA ENVIAR'
     elif t and humano: accion = 'modo humano: respuesta sugerida para Karen'
     e.update(categoria=cat, motivo=por, revisado=time.time())
-    GEST = {'SIN_COMPRA': 'Comprobar compra (no aparece en Dropi)', 'VERIFICAR': 'Revisar compra a mano', 'PLATA': 'Ronald decide (plata/daño)', 'LLAMAR': 'Llamar al cliente', 'DOSIS': 'Reaplicación guiada', 'PACIENCIA': 'Esperar 7 días + fotos', 'FALTAN_DATOS': 'Pedir datos y fotos'}
+    GEST = {'EN_CAMINO': 'Logística: pedido sin entregar', 'SIN_COMPRA': 'Comprobar compra (no aparece en Dropi)', 'VERIFICAR': 'Revisar compra a mano', 'PLATA': 'Ronald decide (plata/daño)', 'LLAMAR': 'Llamar al cliente', 'DOSIS': 'Reaplicación guiada', 'PACIENCIA': 'Esperar 7 días + fotos', 'FALTAN_DATOS': 'Pedir datos y fotos'}
     filas.append({'contacto': c, 'fecha': r['created_at'][:10], 'nombre': (info.get('full_name') or nom), 'telefono': c[2:], 'producto': r['title'][:80],
                   'valor': float(r['value'] or 0), 'categoria': cat, 'motivo': por, 'gestion': GEST[cat], 'accion': accion or ('modo humano' if humano else ''),
                   'compras': compra_txt or 'SIN PEDIDO ENTREGADO', 'fotos': 'pedidas' if cat in ('FALTAN_DATOS', 'DOSIS', 'PACIENCIA') and e['enviado'] else ''})
     ult = next((t2 for q, _, t2 in reversed(msgs) if q == 'Usuario'), '')[:220].replace('\n', ' ')
-    ico = {'SIN_COMPRA': '🕵️', 'VERIFICAR': '🔎', 'PLATA': '💰', 'LLAMAR': '📞', 'DOSIS': '🧪', 'PACIENCIA': '⏳', 'FALTAN_DATOS': '❓'}[cat]
+    ico = {'EN_CAMINO': '🚚', 'SIN_COMPRA': '🕵️', 'VERIFICAR': '🔎', 'PLATA': '💰', 'LLAMAR': '📞', 'DOSIS': '🧪', 'PACIENCIA': '⏳', 'FALTAN_DATOS': '❓'}[cat]
     fichas.append(f"## {ico} {cat} · {nom or '-'} · {c[2:]} · {r['title'][:50]} (${float(r['value'] or 0):,.0f})\n".replace(',', '.') +
                   f"Caso del {r['created_at'][:10]} · por: «{por}» · {'modo humano' if humano else 'bot'} · {accion}\n"
                   f"Compras entregadas en Dropi: {compra_txt or 'NINGUNA'}\n" + f"Último mensaje del cliente: «{ult}»\n" + (f"Qué hacer: {SUGERIDO[cat]}\n" if cat in SUGERIDO else f"Respuesta: {(t or '')[:160]}…\n"))
 json.dump(est, open(EST, 'w'), ensure_ascii=False)
 json.dump(filas, open('/tmp/dropi/garantias_filas.json', 'w'), ensure_ascii=False)
-orden = {'🕵️': 0, '🔎': 0, '💰': 0, '📞': 1, '🧪': 2, '⏳': 3, '❓': 4}
+orden = {'🚚': 5, '🕵️': 0, '🔎': 0, '💰': 0, '📞': 1, '🧪': 2, '⏳': 3, '❓': 4}
 fichas.sort(key=lambda f: orden.get(f[3], 9))
 open('/tmp/dropi/garantias.md', 'w').write(f"# Garantías · {ahora:%d-%m %H:%M} · {len(casos)} casos abiertos de los últimos {DIAS} días\n\n" + '\n'.join(fichas))
 print('GARANTIAS casos', len(casos), 'por tipo', cont, 'mensajes', enviados, '→ /tmp/dropi/garantias.md')
