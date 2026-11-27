@@ -1,8 +1,18 @@
 #!/bin/bash
 # Pedidos ya confirmados (PENDIENTE, sin guía, a domicilio): si el cliente recibe más con otra transportadora
-# (Envía o Interrapidísimo, más entregas y >50 %), se cambia y se vuelve a CONFIRMAR al momento (el dueño 21-11).
+# (Envía o Interrapidísimo, más entregas y >50 %), se cambia y se vuelve a CONFIRMAR al momento.
 cd /tmp/dropi || exit 1
 node buscar_conf.js >/dev/null 2>&1
+# Confirmados a oficina sin la dirección del punto → «dirección del punto, RECLAMA EN OFICINA INTERRAPIDÍSIMO».
+python3 -I -c "
+import json,re,sys; sys.path.insert(0,'/tmp/robot/robot'); import oficinas as o
+for x in json.load(open('confirmados.json')):
+  if x.get('status')!='PENDIENTE' or x.get('shipping_guide'): continue
+  d=re.sub(r'\s+',' ',x.get('dir') or '').strip(' ,')
+  if re.search(r'oficina|reclam',d,re.I) and not re.search(r'\d',d):
+    n=o.dir_oficina(x.get('state'),x.get('city'),d)
+    if n: print(f\"{x['id']}\t{n}\")" > dir_ofi_conf.tsv 2>/dev/null
+[ -s dir_ofi_conf.tsv ] && node dir_lote.js dir_ofi_conf.tsv | sed 's/^/OFICINA_PUNTO /'
 python3 -I -c "
 import json
 for o in json.load(open('confirmados.json')):
@@ -23,7 +33,7 @@ for l in open('rev_tels.txt'):
   t=lambda z:z[0]/(z[0]+z[1]) if sum(z) else 0
   if all(bc.get(n,[0,0])[0]>=2 and t(bc[n])>=0.8 for n in N.values()): print(i,t_,'BARATA',dc); continue
   m=max(bc,key=lambda n:(bc[n][0],-bc[n][1]));d,r=bc[m]
-  if m!=dc and d>bc.get(dc,[0,0])[0] and d/(d+r)>0.5: print(i,t_,'Envia' if m=='ENVIA' else 'Interrapidisimo',dc)" | while read id tel trans dc; do
+  if m!=dc and d>bc.get(dc,[0,0])[0] and d/(d+r)>__MIN_ENTREGA__: print(i,t_,'Envia' if m=='ENVIA' else 'Interrapidisimo',dc)" | while read id tel trans dc; do
   r=$(node ui_editar3.js "$id" "" "$trans" guardar "$dc" </dev/null 2>&1 | grep -E "SIN_CAMBIO|NO_GUARDO|API PUT 200")
   echo "$r" | grep -q SIN_CAMBIO && continue
   if echo "$r" | grep -q "API PUT 200"; then sleep 3

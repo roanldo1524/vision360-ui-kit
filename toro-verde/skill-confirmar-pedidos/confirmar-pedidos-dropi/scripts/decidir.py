@@ -1,4 +1,4 @@
-# Robot de despacho — paso 1: decide, pedido por pedido, si SALE o va «POR CANCELAR» (solo lee Lucid; no toca nada).
+# Robot de despacho — paso 1: decide, pedido por pedido, si SALE o NO SALE (lo que no sale va a REVISAR HUMANO; nunca se cancela) (solo lee Lucid; no toca nada).
 # Uso: python3 -I robot/decidir.py [--desde "AAAA-MM-DD HH:MM" (UTC)]
 import json, os, re, sys, time, datetime, urllib.request, urllib.error
 os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -30,7 +30,7 @@ SI = re.compile(r'(gracias por confirmar tu pedido|procederemos a gestionar y su
 SI_CLIENTE = re.compile(r'^Usuario \([^)]*\):\s*(confirmar pedido|s[ií]\b|si,? es correcto|es correcto|correcto|confirmo|listo|ok\b|dale|de una|m[aá]nd(e|al)o)', re.I | re.M)
 
 
-# el dueño 21-11 (no negociable): transportadora que pide el cliente, pedidos de Shopify y carritos recuperados.
+# No negociable: transportadora que pide el cliente, pedidos de Shopify y carritos recuperados.
 TRANS_CLIENTE = re.compile(r'(?:por|con|en|transportadora|empresa|mensajer[ií]a)\s+(?:la\s+de\s+|de\s+)?(env[ií]a|interrap\w*|inter\b|servientrega|coordinadora|tcc|domina)', re.I)
 def trans_pedida(usuario):
     m = list(TRANS_CLIENTE.finditer(usuario))
@@ -45,7 +45,15 @@ def marcas(c):
     rec = campo(c, '__CAMPO_CARRITO_RECUPERADO__')
     carrito = any('carrito' in n.lower() for n in nombres) or bool(re.search(r's[ií]|true|1|lograd', rec or '', re.I))
     return shop, carrito
-def confirmo_boton(t): return bool(re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) or SI.search(t))
+# A los pedidos de Shopify/página sin confirmar se les manda un mensaje («Tu pedido ya está en proceso…», recordar_confirmar.py);
+# si el cliente responde que sí después de ese mensaje, cuenta como confirmación.
+FRASES_CONF = ['Tu pedido ya está en proceso para ser despachado', 'Solo falta tu confirmación para despacharlo', 'Tu pedido ya está empacado y sale hoy mismo', 'está listo para salir'] + __FRASES_CONFIRMACION__
+def shop_si(t):
+    k = max(t.rfind(fr) for fr in FRASES_CONF)
+    if k < 0: return False
+    return any(len(l.split('):', 1)[-1].strip()) < 80 and re.search(r'\b(s[ií]+|ok|listo|dale|de una|confirm\w*|correct[oa]|perfecto|claro|bueno|gracias|est[aá] bien|am[eé]n|bendiciones)\b', l.split('):', 1)[-1], re.I)
+               for l in re.split(r'\n(?=(?:Yo|Usuario) \()', t[k:]) if l.startswith('Usuario'))
+def confirmo_boton(t): return bool(re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) or SI.search(t) or shop_si(t))
 
 ops = []; o = 0
 while o < 30000:
@@ -84,9 +92,9 @@ for c, lst in por_contacto.items():
     tras = t[t.rfind('Resumen de tu pedido'):] if 'Resumen de tu pedido' in t else ''
     dijo_si = any((len(l.split('):',1)[-1].strip()) < 80 and re.search(r'\b(s[ií]+|ok|listo|dale|de una|confirm\w*|correct[oa]|as[ií] est[aá]|m[aá]nd\w*|env[ií]\w*|perfecto|claro|bueno|est[aá] bien)\b', l.split('):',1)[-1], re.I))
                   for l in re.split(r'\n(?=(?:Yo|Usuario) \()', tras) if l.startswith('Usuario'))
-    if not (SI.search(t) or dijo_si or SI_CLIENTE.search(tras or '')): motivos.append('no veo la confirmación del cliente en el chat')
-    if re.search(r'confirmacion_landing|CONFIRMAR PEDIDO', t) and not re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) and not SI.search(t): motivos.append('pedido de la página: el cliente no ha tocado «CONFIRMAR PEDIDO»')
-    # el dueño 21-11 : si el cliente pide Addi, cuotas o transferencia NUNCA se confirma solo, aunque Lucid diga «contra entrega».
+    if not (SI.search(t) or dijo_si or SI_CLIENTE.search(tras or '') or shop_si(t)): motivos.append('no veo la confirmación del cliente en el chat')
+    if re.search(r'confirmacion_landing|CONFIRMAR PEDIDO', t) and not re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) and not SI.search(t) and not shop_si(t): motivos.append('pedido de la página: el cliente no ha tocado «CONFIRMAR PEDIDO»')
+    # si el cliente pide Addi, cuotas o transferencia NUNCA se confirma solo, aunque Lucid diga «contra entrega».
     pago_previo = re.search(r'addi|cuotas|transferencia|consignaci|comprobante|sin recaudo|bancolombia|nequi|daviplata|no (lo )?pago (en )?contra ?entrega', p['Método de pago'] + ' ' + usuario + ' ' + (tras or ''), re.I)
     # Último resumen que el cliente vio y confirmó en el chat (manda sobre el campo de Lucid, que a veces queda viejo)
     ult = t[t.rfind('Resumen de tu pedido'):] if 'Resumen de tu pedido' in t else ''
@@ -100,8 +108,8 @@ for c, lst in por_contacto.items():
     filas.append({'contacto': c, 'shopify': es_shop, 'carrito': carrito, 'trans_cliente': trans_pedida(usuario), 'nombre': (p['Nombre'] + ' ' + p['Apellido']).strip(), 'ciudad': f"{p['Ciudad']} ({p['Departamento']})",
                   'producto': (prod_chat or p['Productos'])[:120], 'valor': (valor_chat or p['Valor total']), 'producto_lucid': p['Productos'][:120], 'valor_lucid': p['Valor total'], 'entrega': 'Oficina Interrapidísimo' if oficina else 'Domicilio',
                   'transportadora': 'INTERRAPIDISIMO' if oficina else 'la que más entregue en el municipio', 'id_lucidsales': re.findall(r'"id":"?(\d+)', msg)[:1],
-                  'decision': 'POR CANCELAR' if motivos else ('REVISAR PAGO' if pago_previo else 'SALE'), 'motivos': motivos or (['pago anticipado (transferencia o Addi): confirmar que la plata llegó'] if pago_previo else [])})
-# el dueño 21-11: «cada cliente debes buscarlo en el chat y evaluar la intención de compra».
+                  'decision': 'NO SALE' if motivos else ('REVISAR PAGO' if pago_previo else 'SALE'), 'motivos': motivos or (['pago anticipado (transferencia o Addi): confirmar que la plata llegó'] if pago_previo else [])})
+# «cada cliente debes buscarlo en el chat y evaluar la intención de compra».
 # Pedidos de la página (landing) no pasan por el embudo __EMBUDO_LUCID__: se lee igual su chat de Lucid (contacto = 57 + teléfono).
 if '--contactos' in sys.argv:
     for c in sorted(quiero - set(por_contacto)):
@@ -120,7 +128,7 @@ if '--contactos' in sys.argv:
         if re.search(r'reclam|recog|me (mandan|env[ií]an) (el )?c[oó]digo|en la oficina', usuario, re.I): motivos.append('en el chat habla de reclamar en oficina: revisar la dirección')
         es_shop, carrito = marcas(c)
         filas.append({'contacto': c, 'shopify': es_shop, 'carrito': carrito, 'trans_cliente': trans_pedida(usuario), 'nombre': info.get('first_name') or '', 'ciudad': '', 'producto': '', 'valor': '', 'producto_lucid': '', 'valor_lucid': '',
-                      'entrega': '', 'transportadora': '', 'id_lucidsales': [], 'origen': 'pagina', 'decision': 'POR CANCELAR' if motivos else 'SALE', 'motivos': motivos})
+                      'entrega': '', 'transportadora': '', 'id_lucidsales': [], 'origen': 'pagina', 'decision': 'NO SALE' if motivos else 'SALE', 'motivos': motivos})
 json.dump(filas, open('robot/decision.json', 'w'), ensure_ascii=False, indent=1)
 sale = [f for f in filas if f['decision'] == 'SALE']; can = [f for f in filas if f['decision'] != 'SALE']
 print('PEDIDOS', len(filas), 'SALEN', len(sale), 'OTROS', len(can))

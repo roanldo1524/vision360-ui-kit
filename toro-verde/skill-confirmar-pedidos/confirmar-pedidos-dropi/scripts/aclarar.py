@@ -12,7 +12,7 @@ for a in json.load(open('/tmp/dropi/acciones.json')):
     if a['accion'] != 'REVISAR' or str(a['id']) in reg: continue
     m = a['motivo']
     if not ('dirección' in m or 'nombre raro' in m or 'ciudad' in m or 'oficina' in m) or 'dijo que no' in m or 'persona' in m: continue
-    d = det.get(a['id'], {}); c = '57' + d.get('phone', '')
+    d = det.get(a['id'], {}); c = d.get('chat') or '57' + d.get('phone', '')
     try:
         info = get(f'/contacts/{c}'); info = info.get('data', info)
         if info.get('live_chat') or (time.time() - float(info.get('last_interaction') or 0) / 1000) > 23 * 3600: continue

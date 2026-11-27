@@ -19,8 +19,8 @@ for(const x of plan.confirmar){if(n>=MAX)break;
   if(/oficina|reclama|interrap/.test(dir)&&dc!=='INTERRAPIDISIMO')motivos.push('es para oficina y la transportadora no es Interrapidísimo');
   // 2) Historial del cliente (cuida la efectividad)
   const h=await huella(tel);const gp=(h&&h.global_profile)||{};const lt=gp.lifetime_totals||{};const dev=lt.returned||0,ent=lt.delivered||0;
-  // Regla de el dueño (21-11): si devuelve MÁS DEL 50 %, nunca se confirma solo: va a REVISAR HUMANO.
-  if((ent+dev>0&&dev/(ent+dev)>(1-__MIN_ENTREGA__))||/riesgosa|cr[ií]tica/i.test(gp.risk_label||''))motivos.push(`cliente devuelve el ${Math.round(100*dev/Math.max(1,ent+dev))} % (${ent} entregados, ${dev} devueltos): pedir abono o llamar`);
+  // Regla del dueño: si devuelve MÁS de max_devolucion (config), nunca se confirma solo: va a REVISAR HUMANO.
+  if((ent+dev>0&&dev/(ent+dev)>__MAX_DEVOLUCION__)||/riesgosa|cr[ií]tica/i.test(gp.risk_label||''))motivos.push(`cliente devuelve el ${Math.round(100*dev/Math.max(1,ent+dev))} % (${ent} entregados, ${dev} devueltos): pedir abono o llamar`);
   // 2b) Transportadora con la que el cliente SÍ recibe (historial por transportadora, todas las tiendas)
   const TR=JSON.parse(fs.readFileSync('/tmp/dropi/transportadoras.json'));const ca=(h&&h.context_analysis)||{};const hc={};
   for(const sec of [ca.my_shop||{},ca.other_shops||{}])for(const k of (sec.by_courier||[])){const z=hc[k.courier_id]||(hc[k.courier_id]={d:0,r:0});z.d+=k.delivered||0;z.r+=k.returned||0}

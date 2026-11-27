@@ -1,4 +1,4 @@
-# Limpia la dirección: quita el barrio repetido y le pone «BARRIO» si no dice qué es (el dueño 21-11).
+# Limpia la dirección: quita el barrio repetido y le pone «BARRIO» si no dice qué es.
 import re
 ETIQ = r'\b(barrio|br|b/|bario|conjunto|conj|urbanizaci[oó]n|urb|vereda|vda|edificio|ed|torre|apto|apartamento|manzana|mz|sector|corregimiento|finca|casa)\b'
 def limpiar(dir_dropi, colonia=''):
