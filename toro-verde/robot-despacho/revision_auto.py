@@ -91,9 +91,8 @@ def revisar(d):
     pd = {}
     for it in d.get('items') or []: k = n(it.get('pres')); pd[k] = pd.get(k, 0) + int(float(it.get('q') or 0))
     if pr and pd and pr != pd: return 'DUDA', f'producto/cantidad del resumen {pr} ≠ Dropi {pd}'
-    # Ronald 25-11: muchos clientes dan otro número en el chat; el del resumen aceptado es el que va en Dropi
-    tc = re.sub(r'\D', '', campo('Contacto'))[-10:]
-    if len(tc) == 10 and tc.startswith('3') and tc != re.sub(r'\D', '', d.get('phone') or '')[-10:]: d['_tel'] = tc
+    # Ronald 27-11 (reemplaza la regla del 25-11): en Dropi va el número DESDE EL QUE COMPRÓ (su WhatsApp en Lucid) y el número que
+    # escribió en el chat queda en las notas. Lo hace telefonos.py (por el pedido de Lucid Sales, luego por nombre); aquí ya no se cambia.
     return 'SEGURO', f'aceptó el resumen («{acepta[1][:25]}») y todo cuadra'
 
 if __name__ == '__main__':
