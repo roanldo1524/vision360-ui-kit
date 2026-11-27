@@ -972,3 +972,8 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 26-11 6:20 p. m. (Ronald): HILO DE CONVERSACIÓN. Si Ronald responde (cita) un mensaje del agente, el agente contesta sin que lo mencionen y con el mensaje citado como contexto. No aplica si cita un comprobante: eso sigue siendo aprobación de abono. Cuando hay mención, contesta una sola vez.
 - 26-11 6:25 p. m. Vuelta de los :19: confirmados Fernando Ramos (Samaná, galón, oficina, cliente nuevo), Ciro de León (Cereté, 1 L, 8/8) y John Ríos (Calarcá, galón, oficina, cliente nuevo; dio el celular de su señora 3177700640 como respaldo). Lucid subió 1 pedido solo.
 - 26-11 7:20 p. m. Vuelta de los :19: VETADO Ricardo Taborda (3126871464, Zona Bananera, galón con el 10 % del casino). Confirmó, pero 2 min después escribió «Cancelar el envío»; Karen debe verificar con él. Lucid subió 2 pedidos solos. No hubo abonos ni tareas.
+- 26-11 8:20 p. m. MEDICIÓN DEL DÍA (medir.py):
+  - Salieron 155 pedidos y el robot confirmó 90 (58 %; al mediodía iba en 43 %).
+  - Motivos que frenaron pedidos que luego aprobó una persona: «recibe poco» 17 de 26, flete sobre el tope 18 de 24, otros 15 de 28, modo humano 9 de 18 y sin «confirmar» en el chat 8 de 24.
+  - % entregado S47: robot 100 % (68/68 resueltos), persona 98 %. S48 en curso: robot 92 %, persona 90 %.
+  - En la última vuelta los 2 pedidos revisados (Jhon López, La Vega; Absalón Trejos, Quinchía) ya los había confirmado el equipo antes que el robot.

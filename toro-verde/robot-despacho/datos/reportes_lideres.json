@@ -11,10 +11,10 @@
  "Confirmador de pedidos": {
   "area": "Robot de confirmación",
   "voz": "glassy",
-  "nuevo": "Flete aceptado hasta 15 % sobre el tope; abono solo si devuelve más del 50 %.",
-  "mejoro": "Revisa cada 15 min de 5 a 9 a. m. y cada 30 min en la tarde; antes era cada hora.",
-  "problema": "El recordatorio de confirmación estuvo roto de 11:40 a 1:20; y los clientes con chat cerrado no reciben mensaje.",
-  "solucion": "Ya arreglado; con la plantilla pedido_en_proceso_tv les llega aunque el chat esté cerrado."
+  "nuevo": "Reglas nuevas activas: flete hasta 15 % sobre el tope y abono solo si devuelve más del 50 %; reconoce «asies», «así nomás» y «perfecto».",
+  "mejoro": "Hoy 90 de 155 pedidos los confirmó el robot (58 %), frente a 43 % al mediodía.",
+  "problema": "Lo que más frena: flete sobre el tope (24), «recibe poco» (26) y modo humano (18); además el equipo confirma algunos antes que el robot.",
+  "solucion": "Plantillas de WhatsApp para chats cerrados, soltar el modo humano en Lucid y dejar que el robot confirme primero de 5 a 9 a. m."
  },
  "Gestor de tickets y CAS": {
   "area": "Logística y CAS",
