@@ -61,7 +61,7 @@ REGLAS = [
     ('DEVOLUCION', r'devoluci[oó]n|devuelt|retorno a (origen|remitente)|en devoluci'),
     ('NOVEDAD_CLIENTE', r'no (contesta|responde|se encontr)|direcci[oó]n (errada|incorrecta|incompleta|no existe)|destinatario (ausente|no)|rehus|cerrado'),
     ('CICLO', r'intentos? de entrega fallidos|no es posible programar|cumplido (su|el) ciclo|agot\w+ (los )?intentos'),
-    ('ESPERA', r'reexpedi|reparto|despachad|programad|en ruta|novedad operativa|inconvenientes operativos|regional|escala|en tr[aá]nsito|pr[oó]xim\w* d[ií]as|recomend|nuevo intento|intentos? de entrega|tardar|d[ií]as h[aá]biles'),
+    ('ESPERA', r'reexpedi|reparto|despachad|programad|en ruta|novedad operativa|inconvenientes operativos|regional|escala|en tr[aá]nsito|pr[oó]xim\w* d[ií]as|recomend|nuevo intento|intentos? de entrega|tardar|d[ií]as h[aá]biles|ingresad\w* a bodega|atento al movimiento'),
 ]
 
 def ultimo_util(h):

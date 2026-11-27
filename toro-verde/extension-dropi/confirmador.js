@@ -34,14 +34,14 @@
   // ───────── Diseño Toro Verde (Ronald 27-11: «diseño único, buena experiencia de usuario») ─────────
   const css = document.createElement('style');
   css.textContent = `
-  :root{--tv-osc:#0e3a20;--tv-ver:#16592f;--tv-lim:#9ccc24;--tv-nar:#ff7a1a;--tv-roj:#e5484d;--tv-gri:#6b7280;--tv-fon:#f3f5f0}
+  :root{--tv-osc:#141432;--tv-ver:#2b2b6b;--tv-lim:#c6f135;--tv-nar:#ff6b4a;--tv-roj:#e5484d;--tv-gri:#6b7280;--tv-fon:#f4f4f8}
   #tvc-btn{position:fixed;right:22px;bottom:96px;z-index:100000;display:flex;align-items:center;gap:10px;background:var(--tv-osc);color:#fff;border:0;border-radius:999px;padding:12px 18px 12px 14px;font:700 15px 'Segoe UI',system-ui,sans-serif;box-shadow:0 10px 30px #0e3a2066;cursor:pointer;transition:transform .15s}
-  #tvc-btn:hover{transform:translateY(-2px)}#tvc-btn .ic{width:30px;height:30px;border-radius:50%;background:var(--tv-lim);display:grid;place-items:center;font-size:17px}
+  #tvc-btn:hover{transform:translateY(-2px)}#tvc-btn .ic{width:30px;height:30px;border-radius:50%;background:var(--tv-lim);color:var(--tv-osc);display:grid;place-items:center;font-size:17px}
   #tvc-btn .n{background:var(--tv-nar);border-radius:999px;padding:1px 8px;font-size:13px}
   #tvc{position:fixed;top:0;right:0;width:520px;max-width:100vw;height:100vh;z-index:100001;background:var(--tv-fon);box-shadow:-12px 0 40px #0004;display:none;flex-direction:column;font:14px/1.45 'Segoe UI',system-ui,sans-serif;color:#1f2a1f;animation:tvin .2s ease}
   @keyframes tvin{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
-  #tvc .hd{background:linear-gradient(135deg,var(--tv-osc),var(--tv-ver));color:#fff;padding:16px 18px 14px}
-  #tvc .hd .r1{display:flex;align-items:center;gap:10px}#tvc .hd .lg{width:36px;height:36px;border-radius:10px;background:var(--tv-lim);display:grid;place-items:center;font-size:20px}
+  #tvc .hd{background:radial-gradient(120% 140% at 0% 0%,#3b3b9a 0%,var(--tv-osc) 60%);color:#fff;padding:16px 18px 14px}
+  #tvc .hd .r1{display:flex;align-items:center;gap:10px}#tvc .hd .lg{width:36px;height:36px;border-radius:10px;background:var(--tv-lim);color:var(--tv-osc);display:grid;place-items:center;font-size:20px}
   #tvc .hd b{font-size:17px;flex:1;line-height:1.1}#tvc .hd small{display:block;font-weight:400;opacity:.75;font-size:12px}
   #tvc .hd button{background:#ffffff1f;color:#fff;border:0;border-radius:9px;width:34px;height:34px;cursor:pointer;font-size:15px}#tvc .hd button:hover{background:#ffffff33}
   #tvc .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
@@ -56,18 +56,19 @@
   #tvc .cd .top{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 14px 4px}#tvc .cd .nm{font-weight:700;font-size:15px}#tvc .cd .id{color:var(--tv-gri);font-size:12px;font-weight:600}
   #tvc .cd .tt{font-weight:800;font-size:17px;color:var(--tv-osc)}
   #tvc .cd .mt{padding:0 14px;color:#4b5563;font-size:12.5px;display:flex;flex-wrap:wrap;gap:4px 12px}
-  #tvc .cd .pr{padding:6px 14px 0;display:flex;flex-wrap:wrap;gap:6px}#tvc .cd .pr span{background:#eef6dd;color:#2e4a10;border-radius:7px;padding:2px 8px;font-size:12.5px;font-weight:600}
+  #tvc .cd .pr{padding:6px 14px 0;display:flex;flex-wrap:wrap;gap:6px}#tvc .cd .pr span{background:#f0f9d4;color:#3a4a05;border-radius:7px;padding:2px 8px;font-size:12.5px;font-weight:600}
   #tvc .cd .hs{border-radius:7px;padding:2px 8px;font-size:12px;font-weight:700}.hs.b{background:#dcfce7;color:#166534}.hs.m{background:#fef3c7;color:#92400e}.hs.x{background:#fee2e2;color:#991b1b}.hs.n{background:#eef0f3;color:#4b5563}
   #tvc .cd .dr{padding:6px 14px 0;font-size:12.5px;color:#374151}
-  #tvc .cd .qh{margin:10px 14px 0;background:#fff4ea;border:1px solid #ffd7b8;border-radius:10px;padding:9px 11px}
+  #tvc .cd .qh{margin:10px 14px 0;background:#fff3ef;border:1px solid #ffcfc2;border-radius:10px;padding:9px 11px}
   #tvc .cd .qh b{display:block;color:#9a3d00;font-size:13.5px}#tvc .cd .qh .qt{font-weight:800;color:#9a3d00;font-size:12px;text-transform:uppercase;letter-spacing:.3px}
   #tvc .cd .qh ol{margin:6px 0 6px 18px;padding:0;color:#5a2600;font-weight:600;font-size:13.5px}#tvc .cd .qh li{margin:3px 0}
   #tvc .cd .qh .dc{background:#fff;border:1px dashed #ffb27a;border-radius:8px;padding:7px 9px;margin:6px 0;font-size:12.5px;color:#333}#tvc .cd .qh .dc span{display:block;font-weight:700;color:var(--tv-ver);font-size:11.5px;margin-bottom:2px}
-  .tv-ojo{background:#9ca3af!important}#tvc .cd .qh small{color:#8a5a3a;font-size:12px}
+  .tv-ojo{background:#9ca3af!important;color:#fff!important}
+  .tvi{width:16px;height:16px;vertical-align:-3px;flex:none}#tvc .lg .tvi,#tvc-btn .ic .tvi{width:20px;height:20px}#tvc .cd .qh small{color:#8a5a3a;font-size:12px}
   #tvc .cd.rb .qh{background:#f3f4f2;border-color:#e2e5df}#tvc .cd.rb .qh b{color:#4b5563}
   #tvc .cd .ac{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px 12px}
-  #tvc .cd .ac button,#tvc .cd .ac a{border:0;border-radius:9px;padding:8px 12px;font:700 12.5px inherit;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
-  .tv-ok{background:var(--tv-ver);color:#fff!important;flex:1;justify-content:center}.tv-ok:hover{background:var(--tv-osc)}
+  #tvc .cd .ac button,#tvc .cd .ac a{white-space:nowrap;border:0;border-radius:9px;padding:8px 12px;font:700 12.5px inherit;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+  .tv-ok{background:var(--tv-osc);color:var(--tv-lim)!important;flex:1;justify-content:center}.tv-ok:hover{background:#000}
   .tv-pr{background:var(--tv-nar);color:#fff!important}.tv-sec{background:#eef1ec;color:#1f2a1f!important}.tv-sec:hover{background:#e2e7de}
   #tvc .vc{text-align:center;color:var(--tv-gri);padding:40px 20px}#tvc .vc div{font-size:40px}
   #tvc-md{position:fixed;inset:0;z-index:100002;background:#0e3a2066;display:none;place-items:center;font:14px 'Segoe UI',system-ui,sans-serif}
@@ -76,26 +77,48 @@
   #tvc-md .bt{display:flex;gap:8px;justify-content:flex-end}#tvc-md button{border:0;border-radius:9px;padding:9px 14px;font:700 13px inherit;cursor:pointer}
   #tvc-ts{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:100003;background:var(--tv-osc);color:#fff;padding:10px 16px;border-radius:10px;font:600 13.5px 'Segoe UI',system-ui;display:none;box-shadow:0 8px 24px #0004}`;
 
-  let pedidos = [], filtro = 'Todos', busca = '', actual = '';
+  const I = (d) => `<svg class="tvi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const IC = { bolt: I('<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>'), ok: I('<path d="M20 6 9 17l-5-5"/>'), chat: I('<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>'),
+    send: I('<path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/>'), copy: I('<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>'),
+    tag: I('<path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/>'), pin: I('<path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/>'),
+    truck: I('<path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>'), phone: I('<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>'),
+    home: I('<path d="M3 11 12 3l9 8v10h-6v-6H9v6H3z"/>'), refresh: I('<path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/>'), x: I('<path d="M18 6 6 18M6 6l12 12"/>'),
+    alert: I('<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>'), list: I('<path d="M9 6h12M9 12h12M9 18h12M4 6h.01M4 12h.01M4 18h.01"/>') };
+  let pedidos = [], filtro = 'Para ti', busca = '', actual = '';
   const toast = (t) => { const e = document.getElementById('tvc-ts'); e.textContent = t; e.style.display = 'block'; clearTimeout(e._t); e._t = setTimeout(() => e.style.display = 'none', 2600); };
   const corto = (q) => /llam/i.test(q) ? '📞 Llamar' : /plata|pago|banco/i.test(q) ? '💰 Pago' : /precio/i.test(q) ? '💲 Precio' : /cantidad/i.test(q) ? '📦 Cantidad'
-    : /direcc|oficina/i.test(q) ? '📍 Dirección' : /devolverla al bot|conversaci/i.test(q) ? '💬 Chat abierto' : /abono|devuelve/i.test(q) ? '🔁 Abono' : /Ronald/i.test(q) ? '👤 Ronald' : /robot/i.test(q) ? '🤖 Robot revisando' : '🔎 Revisar';
+    : /direcc|oficina/i.test(q) ? '📍 Dirección' : /devolverla al bot|conversaci/i.test(q) ? '💬 Chat abierto' : /abono|devuelve/i.test(q) ? '🔁 Abono' : /Ronald/i.test(q) ? '👤 Ronald' : /robot/i.test(q) ? 'Robot revisando' : '🔎 Revisar';
   const pasos = (q) => q.split(/\s*\d\)\s+/).filter(Boolean).map(x => `<li>${x.replace(/\.$/, '')}</li>`).join('');
   function historial(o) {
     const t = +o.client_total_orders || 0, e = +o.client_total_orders_delivered || 0, d = +o.client_total_orders_returneds || 0;
     if (!(e + d)) return `<span class="hs n">Cliente nuevo</span>`;
     const p = Math.round(100 * e / (e + d)); return `<span class="hs ${p >= 70 ? 'b' : p > 50 ? 'm' : 'x'}">Recibe ${e} de ${e + d} (${p} %)</span>`;
   }
+  // Universal: sirve en cualquier tienda de Dropi. Si un robot dejó nota («🤖 ROBOT · POR QUÉ · QUÉ HACER · QUIÉN · DECIR»), manda la nota;
+  // si no, la extensión revisa sola los datos del pedido (historial del cliente, dirección, repetidos) y propone los pasos.
+  function propio(o) {
+    const e = +o.client_total_orders_delivered || 0, d = +o.client_total_orders_returneds || 0, n = (o.name || '').split(' ')[0];
+    const pasos = [], por = []; let decir = '';
+    if (d > e) { por.push(`devolvió ${d} y recibió ${e}`); pasos.push('NO confirmar todavía: pedir un abono o llamar para asegurar que lo va a recibir'); decir = `Hola ${n}, te escribimos por tu pedido 🙌 Para despacharlo te pedimos un abono; el resto lo pagas al recibir. ¿Te comparto los datos?`; }
+    const dir = String(o.dir || '');
+    if (!/oficina|reclama/i.test(dir) && !/\d+\s*[a-z]?\s*-\s*\d+|#\s*\d+|casa\s*\d+|mz/i.test(dir)) { por.push('la dirección no tiene número de casa'); pasos.push('Pedir la dirección completa con número de casa y un punto de referencia, y corregirla'); decir = decir || `Hola ${n}, para despachar tu pedido nos falta la dirección completa: calle, número de casa, barrio y un punto de referencia. ¿Nos la compartes?`; }
+    if (+o.ordenes_repetidas > 0 || (Array.isArray(o.ordenes_repetidas) && o.ordenes_repetidas.length)) { por.push('tiene otro pedido parecido'); pasos.push('Preguntar si son dos pedidos o uno repetido'); }
+    if (!pasos.length) { pasos.push('Revisar el chat del cliente: que haya aceptado producto, precio y dirección'); decir = `Hola ${n}, tu pedido ya está listo para despachar hoy. ¿Nos confirmas con un SÍ para enviarlo?`; }
+    if (!/NO confirmar/.test(pasos.join())) pasos.push('Si todo queda bien, tocar Confirmar pedido');
+    return { que: pasos.map((p, i) => `${i + 1}) ${p}.`).join(' '), por: por.join(', ') || 'sin revisión automática', decir };
+  }
   function info(o) {
     const nota = String(o.notes || '').split(' | ').find(x => x.startsWith('🤖 ROBOT')) || '';
-    const que = nota ? parte(nota, 'QUÉ HACER') : 'El robot lo está revisando en este momento. Espera la próxima vuelta o confírmalo tú si ya revisaste el chat.';
-    return { nota, que, tipo: nota ? corto(que) : '🤖 Robot revisando' };
+    if (nota) { const que = parte(nota, 'QUÉ HACER'); return { nota, que, por: parte(nota, 'POR QUÉ'), quien: parte(nota, 'QUIÉN') || 'Equipo', decir: parte(nota, 'DECIR'), tipo: corto(que), robot: true }; }
+    const recien = Date.now() - new Date(o.created_at).getTime() < 40 * 60 * 1000;   // el robot pasa cada 15-30 min
+    if (recien && window.__tvRobot) return { nota: '', que: 'El robot lo está revisando. Espera unos minutos.', tipo: 'Robot revisando', robot: true };
+    const pr = propio(o); return { nota: 'propio', que: pr.que, por: pr.por, quien: 'Equipo', decir: pr.decir, tipo: corto(pr.que), robot: false };
   }
   async function cargar() {
     const ls = document.querySelector('#tvc .ls');
     auth = tokLS() || auth;
     if (!auth || !userId) { ls.innerHTML = '<div class="vc"><div>🔑</div>Abre «Mis Pedidos» de Dropi una vez para tomar la sesión y toca 🔄.</div>'; return; }
-    ls.innerHTML = '<div class="vc"><div>⏳</div>Cargando pedidos por confirmar…</div>';
+    ls.innerHTML = '<div class="vc"><div>…</div>Cargando pedidos por confirmar…</div>';
     const f = (d) => d.toISOString().slice(0, 10);
     const r = await api('GET', `/orders/myorders/v2?exportAs=orderByRow&orderBy=id&orderDirection=desc&result_number=300&start=0&textToSearch=&status=PENDIENTE%20CONFIRMACION&supplier_id=false&user_id=${userId}&from=${f(new Date(Date.now() - 10 * 864e5))}&until=${f(new Date(Date.now() + 864e5))}&filter_date_by=FECHA%20DE%20CREADO`);
     if (r.s !== 200) { ls.innerHTML = `<div class="vc"><div>⚠️</div>Dropi respondió con error (${r.s}). Toca 🔄 en un momento.</div>`; return; }
@@ -105,34 +128,38 @@
   }
   function pintar() {
     const p = document.getElementById('tvc'); if (!p) return;
+    window.__tvRobot = pedidos.some(o => String(o.notes || '').includes('🤖 ROBOT'));
     const it = pedidos.map(o => ({ o, ...info(o) }));
-    const conAcc = it.filter(x => x.nota).length;
-    p.querySelector('.kpi').innerHTML = `<div><span>${it.length}</span><em>Por confirmar</em></div><div><span>${conAcc}</span><em>Necesitan acción</em></div><div><span>${it.length - conAcc}</span><em>Robot revisando</em></div>`;
-    p.querySelector('.hd small').textContent = `Pedidos pendientes · actualizado ${actual}`;
-    const n = document.querySelector('#tvc-btn .n'); if (n) n.textContent = it.length;
+    const tuyos = it.filter(x => x.tipo !== 'Robot revisando');
+    p.querySelector('.kpi').innerHTML = `<div><span>${tuyos.length}</span><em>Para resolver</em></div><div><span>${it.filter(x => /NO confirmar/.test(x.que)).length}</span><em>Esperan abono</em></div><div><span>${it.length - tuyos.length}</span><em>Robot revisando</em></div>`;
+    p.querySelector('.hd small').textContent = `${it.length} pendientes de confirmar · actualizado ${actual}`;
+    const n = document.querySelector('#tvc-btn .n'); if (n) n.textContent = tuyos.length;
     const tipos = {}; it.forEach(x => tipos[x.tipo] = (tipos[x.tipo] || 0) + 1);
-    p.querySelector('.ch').innerHTML = ['Todos', ...Object.keys(tipos).sort((a, b) => tipos[b] - tipos[a])].map(t => `<button data-f="${t}" class="${t === filtro ? 'on' : ''}">${t}${t === 'Todos' ? ` · ${it.length}` : ` · ${tipos[t]}`}</button>`).join('');
+    const chips = ['Para ti', ...Object.keys(tipos).filter(t => t !== 'Robot revisando').sort((a, b) => tipos[b] - tipos[a]), ...(tipos['Robot revisando'] ? ['Robot revisando'] : []), 'Todos'];
+    const cuenta = (t) => t === 'Todos' ? it.length : t === 'Para ti' ? tuyos.length : tipos[t];
+    p.querySelector('.ch').innerHTML = chips.map(t => `<button data-f="${t}" class="${t === filtro ? 'on' : ''}">${t} · ${cuenta(t)}</button>`).join('');
     const q = busca.toLowerCase();
-    const vis = it.filter(x => (filtro === 'Todos' || x.tipo === filtro) && (!q || `${x.o.id} ${x.o.name} ${x.o.surname} ${x.o.phone} ${x.o.city}`.toLowerCase().includes(q)))
-      .sort((a, b) => (!!b.nota - !!a.nota) || (a.o.id - b.o.id));
+    const vis = it.filter(x => (filtro === 'Todos' || (filtro === 'Para ti' ? x.tipo !== 'Robot revisando' : x.tipo === filtro)) && (!q || `${x.o.id} ${x.o.name} ${x.o.surname} ${x.o.phone} ${x.o.city}`.toLowerCase().includes(q)))
+      .sort((a, b) => a.o.id - b.o.id);
     const ls = p.querySelector('.ls');
-    if (!vis.length) { ls.innerHTML = `<div class="vc"><div>🎉</div>${it.length ? 'Nada con ese filtro.' : 'No hay pedidos pendientes de confirmar.'}</div>`; return; }
-    ls.innerHTML = vis.map(({ o, nota, que, tipo }) => {
+    if (!vis.length) { ls.innerHTML = `<div class="vc"><div>${IC.ok}</div>${it.length ? (filtro === 'Para ti' ? '¡Nada pendiente para ti! El robot está con el resto.' : 'Nada con ese filtro.') : 'No hay pedidos pendientes de confirmar.'}</div>`; return; }
+    const tit = (x) => String(x || '').toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+    ls.innerHTML = vis.map(({ o, que, por, quien, decir, tipo, robot }) => {
       const tel = String(o.phone || '').slice(-10);
       const prods = (o.orderdetails || []).map(d => `<span>${Math.round(+d.quantity || 1)} × ${((d.variation || {}).attribute_values || []).map(a => a.value).join(' ') || (d.product || {}).name || 'producto'}</span>`).join('');
-      const nuevo = (que.match(/precio en Dropi a \$([\d.]+)/) || [])[1];
-      const chat = lucid(tel); const decir = parte(nota, 'DECIR');
-      return `<div class="cd ${nota ? '' : 'rb'}" data-id="${o.id}">
-        <div class="top"><div><div class="nm">${(o.name || '') + ' ' + (o.surname || '')}</div><div class="id">#${o.id} · ${new Date(o.created_at).toLocaleString('es-CO', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}</div></div><div class="tt">${plata(o.total_order)}</div></div>
-        <div class="mt"><span>📍 ${(o.city || '').toLowerCase().replace(/\b\w/g, c => c.toUpperCase())}, ${(o.state || '').toLowerCase().replace(/\b\w/g, c => c.toUpperCase())}</span><span>🚚 ${(o.distribution_company || {}).name || '—'}</span><span>☎ ${tel}</span></div>
+      const nuevo = (String(que).match(/precio en Dropi a \$([\d.]+)/) || [])[1];
+      const chat = lucid(tel); const espera = tipo === 'Robot revisando'; const ojo = /NO confirmar/.test(que);
+      return `<div class="cd ${espera ? 'rb' : ''}" data-id="${o.id}">
+        <div class="top"><div><div class="nm">${tit(o.name)} ${tit(o.surname)}</div><div class="id">#${o.id} · ${new Date(o.created_at).toLocaleString('es-CO', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}</div></div><div class="tt">${plata(o.total_order)}</div></div>
+        <div class="mt"><span>${IC.pin} ${tit(o.city)}, ${tit(o.state)}</span><span>${IC.truck} ${tit((o.distribution_company || {}).name) || '—'}</span><span>${IC.phone} ${tel}</span></div>
         <div class="pr">${prods}${historial(o)}</div>
-        <div class="dr">🏠 ${o.dir || ''}</div>
-        <div class="qh">${nota ? `<div class="qt">👉 Qué hacer · ${parte(nota, 'QUIÉN') || 'Karen'}</div><ol>${pasos(que)}</ol>${decir ? `<div class="dc"><span>💬 Mensaje listo para el cliente</span>${decir}</div>` : ''}<small>Por qué lo frenó el robot: ${parte(nota, 'POR QUÉ')}</small>` : `<b>${que}</b>`}</div>
-        <div class="ac"><button class="tv-ok ${/NO confirmar/.test(que) ? 'tv-ojo' : ''}" data-acc="ok">${/NO confirmar/.test(que) ? '⚠️ Confirmar igual' : '✅ Confirmar pedido'}</button>
-          ${nuevo ? `<button class="tv-pr" data-acc="precio" data-v="${nuevo.replace(/\./g, '')}">💲 Precio a $${nuevo}</button>` : ''}
-          ${chat ? `<a class="tv-sec" target="_blank" href="${chat}">💬 Chat Lucid</a>` : `<button class="tv-sec tv-aprender">💬 Chat Lucid</button>`}
-          ${tel ? `<a class="tv-sec" target="_blank" href="https://wa.me/57${tel}${decir ? '?text=' + encodeURIComponent(decir) : ''}">📱 ${decir ? 'Enviar mensaje' : 'WhatsApp'}</a>` : ''}
-          ${decir ? `<button class="tv-sec" data-acc="copiar" data-t="${encodeURIComponent(decir)}">📋 Copiar mensaje</button>` : ''}</div></div>`;
+        <div class="dr">${IC.home} ${o.dir || ''}</div>
+        <div class="qh">${espera ? `<b>${que}</b>` : `<div class="qt">${IC.list} Qué hacer · ${quien}${robot ? '' : ' · revisión de la extensión'}</div><ol>${pasos(que)}</ol>${decir ? `<div class="dc"><span>${IC.chat} Mensaje listo para el cliente</span>${decir}</div>` : ''}<small>Por qué: ${por}</small>`}</div>
+        <div class="ac"><button class="tv-ok ${ojo ? 'tv-ojo' : ''}" data-acc="ok">${ojo ? IC.alert + ' Confirmar igual' : IC.ok + ' Confirmar pedido'}</button>
+          ${nuevo ? `<button class="tv-pr" data-acc="precio" data-v="${nuevo.replace(/\./g, '')}">${IC.tag} Precio a $${nuevo}</button>` : ''}
+          ${chat ? `<a class="tv-sec" target="_blank" href="${chat}">${IC.chat} Chat</a>` : `<button class="tv-sec tv-aprender">${IC.chat} Chat</button>`}
+          ${tel ? `<a class="tv-sec" target="_blank" href="https://wa.me/57${tel}${decir ? '?text=' + encodeURIComponent(decir) : ''}">${IC.send} ${decir ? 'Enviar mensaje' : 'WhatsApp'}</a>` : ''}
+          ${decir ? `<button class="tv-sec" data-acc="copiar" data-t="${encodeURIComponent(decir)}">${IC.copy} Copiar</button>` : ''}</div></div>`;
     }).join('');
   }
   async function anotar(id, texto) {
@@ -169,9 +196,9 @@
   function montar() {
     if (!document.body || document.getElementById('tvc-btn')) return;
     document.head.appendChild(css);
-    const b = document.createElement('button'); b.id = 'tvc-btn'; b.innerHTML = '<span class="ic">🐂</span>Confirmador <span class="n">·</span>'; document.body.appendChild(b);
+    const b = document.createElement('button'); b.id = 'tvc-btn'; b.innerHTML = `<span class="ic">${IC.bolt}</span>Confirma+ <span class="n">·</span>`; document.body.appendChild(b);
     const p = document.createElement('div'); p.id = 'tvc';
-    p.innerHTML = `<div class="hd"><div class="r1"><div class="lg">🐂</div><b>Confirmador Toro Verde<small>Pedidos pendientes</small></b><button data-x="r" title="Actualizar">🔄</button><button data-x="c" title="Cerrar">✕</button></div><div class="kpi"></div></div>
+    p.innerHTML = `<div class="hd"><div class="r1"><div class="lg">${IC.bolt}</div><b>Confirma+ <span style="color:var(--tv-lim)">para Dropi</span><small>Pedidos pendientes</small></b><button data-x="r" title="Actualizar">${IC.refresh}</button><button data-x="c" title="Cerrar">${IC.x}</button></div><div class="kpi"></div></div>
       <div class="tl"><input placeholder="Buscar por nombre, teléfono, ciudad o #pedido"><div class="ch"></div></div><div class="ls"></div>`;
     document.body.appendChild(p);
     const md = document.createElement('div'); md.id = 'tvc-md'; document.body.appendChild(md);
@@ -179,7 +206,8 @@
     b.onclick = () => { p.style.display = 'flex'; cargar(); };
     p.querySelector('input').oninput = (e) => { busca = e.target.value; pintar(); };
     p.addEventListener('click', (ev) => {
-      const t = ev.target.closest('button,a') || ev.target;
+      let t = ev.target.closest('button,a') || ev.target;
+      const x = t.closest && t.closest('[data-x]'); if (x) t = x;
       if (t.dataset.x === 'c') p.style.display = 'none'; if (t.dataset.x === 'r') cargar();
       if (t.dataset.f) { filtro = t.dataset.f; pintar(); }
       if (t.dataset.acc) accion(t);
