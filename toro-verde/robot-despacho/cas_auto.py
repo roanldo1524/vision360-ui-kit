@@ -99,14 +99,16 @@ for c in casos:
     cont[tipo] = cont.get(tipo, 0) + 1
     nom = (o.get('name') or q.get('name') or '').title(); tel = (o.get('phone') or q.get('phone') or '')[-10:]
     guia = c.get('guia') or q.get('guia') or ''; dc = c.get('dc') or ''
-    sal = f"{'Buen día' if hora < 12 else 'Buenas tardes' if hora < 18 else 'Buenas noches'}{', ' + asesor if asesor else ''}. "
+    # Ronald 27-11: «siempre de soluciones; háblale a la gente del CAS como si fuera un humano, como si fuera Karen».
+    sal = f"{'Hola ' + asesor.split(' ')[0] + ', b' if asesor else 'B'}{'uen día' if hora < 12 else 'uenas tardes' if hora < 18 else 'uenas noches'}, te escribe Karen de Toro Verde. "
+    fin = ' ¡Mil gracias por tu ayuda! 🙏'
     reciente = ahora - e.get('cas_msg', 0) < 24 * 3600
     acc = {'pedido': pid, 'tipo': tipo, 'nombre': nom, 'tel': tel, 'guia': guia, 'dc': dc}
     if tipo == 'ENTREGADO': continue
     if tipo == 'ESCALAR' and not reciente:
-        acc['cas'] = (sal + f"Por favor nos asignan un asesor humano para la guía {guia} ({dc}): " +
-                      (f"lleva {q.get('dias', '?')} días en «{q.get('status', estado_hoy)}» sin movimiento. " if q else '') +
-                      "Necesitamos verificar dónde está el paquete, gestionar la entrega y una fecha estimada. Muchas gracias.")
+        acc['cas'] = (sal + f"Te pido el favor de que un asesor me ayude con la guía {guia} de {dc.title()}: " +
+                      (f"lleva {q.get('dias', '?')} días en «{q.get('status', estado_hoy)}» sin moverse. " if q else '') +
+                      "¿Me ayudas a ubicar el paquete con la transportadora y darme una fecha de entrega? Así le aviso al cliente." + fin)
     elif tipo == 'OFICINA':
         dirof = oficina(txt)
         # Ronald 26-11: Lucid ya manda su plantilla de oficina (con video) cuando Dropi pasa a RECLAME EN OFICINA → aquí solo si Dropi aún NO lo marca así.
@@ -118,26 +120,29 @@ for c in casos:
                               f" ({(o.get('city') or q.get('city') or '').title()}).\n"
                               "Lleva tu *cédula original*" + (f" y el pago contra entrega de *${total:,.0f}*".replace(',', '.') if total else ' (tu pedido ya está pagado, no pagas nada)') +
                               ". Ve en horario de oficina.\nSi no puedes ir, cuéntanos y lo puede reclamar un familiar con autorización. 🌱")
+        if not reciente and not e.get('gracias_oficina'):
+            acc['cas'] = sal + 'Mil gracias por confirmarme que ya está en la oficina. Ya le aviso al cliente para que pase hoy mismo con su cédula.' + ' ¡Feliz día! 🙏'
+            e['gracias_oficina'] = ahora
     elif tipo == 'EVIDENCIA' and not reciente:
         if not e.get('cliente_evid'):
             acc['cliente'] = (f"Hola {nom.split(' ')[0] if nom else ''} 👋 Te escribe Karen de Toro Verde. La transportadora nos pide evidencia para "
                               "agilizar la entrega de tu pedido. ¿Nos ayudas con una foto de la fachada de tu casa (que se vea la nomenclatura) "
                               "y nos confirmas tu dirección completa y un teléfono donde te encuentren? 🙏")
         acc['adjunto'] = 'pantallazo'
-        acc['cas'] = sal + f"Adjuntamos pantallazo del pedido en Dropi con el estado de la guía {guia}. Ya solicitamos al cliente las fotos y las enviamos apenas lleguen. Agradecemos continuar la gestión de entrega. Muchas gracias."
+        acc['cas'] = sal + f"Te comparto el pantallazo del pedido con el estado de la guía {guia}. Ya le pedí al cliente las fotos y te las paso apenas me lleguen; mientras tanto, ¿me ayudas a seguir con la entrega?" + fin
     elif tipo in ('DATOS', 'DEVOLUCION', 'NOVEDAD_CLIENTE') and not reciente:
         v = ver(pid); dirc = f"{v.get('dir', '')}, {(v.get('city') or '').title()}, {(v.get('state') or '').title()}".strip(', ')
         datos = f"destinatario {nom}, celular {v.get('phone') or tel}, dirección {dirc}"
-        acc['cas'] = sal + (f"Con gusto: {datos}. " if tipo == 'DATOS' else
-                            f"Por favor NO devolver el paquete: solicitamos un nuevo ofrecimiento. Datos confirmados: {datos}. ") + \
-                     "Agradecemos programar la entrega y confirmarnos la fecha. Muchas gracias."
+        acc['cas'] = sal + (f"Claro que sí, aquí van los datos: {datos}. " if tipo == 'DATOS' else
+                            f"Te pido el favor de no devolver el paquete: el cliente sí lo quiere recibir. Hagamos un nuevo ofrecimiento con estos datos confirmados: {datos}. ") + \
+                     "¿Me confirmas la fecha de entrega para avisarle?" + fin
     elif tipo == 'CICLO' and not reciente:
         # Ronald 26-11 (aprendido de Coordinadora): sin más intentos → pedir custodia en oficina para que el cliente lo reclame, no devolver
-        acc['cas'] = (sal + "Gracias por la información. Para no devolver el paquete, por favor dejarlo en custodia en la oficina más cercana al destino "
-                      f"para que el cliente lo reclame con su cédula (guía {guia}), y compartirnos la dirección de esa oficina para avisarle. Muchas gracias.")
+        acc['cas'] = (sal + "Gracias por contarme. Para no perder el envío, ¿me ayudas a dejar el paquete en custodia en la oficina más cercana al cliente "
+                      f"(guía {guia})? Él lo reclama con su cédula. Pásame la dirección de esa oficina y yo le aviso de una." + fin)
     elif tipo == 'ESPERA' and not reciente and q and q.get('horas', 0) >= 48:
-        acc['cas'] = (sal + f"Gracias por la gestión. La guía {guia} sigue en «{q.get('status')}» desde {q.get('desde', '')} "
-                      f"({q.get('dias', '?')} días sin movimiento). Por favor nos ayudan con una gestión concreta con la regional y una fecha estimada de entrega. Muchas gracias.")
+        acc['cas'] = (sal + f"Gracias por la gestión. Te cuento que la guía {guia} sigue en «{q.get('status')}» desde {q.get('desde', '')} "
+                      f"({q.get('dias', '?')} días sin moverse) y el cliente está pendiente. ¿Me ayudas a escalarla con la regional y darme una fecha de entrega?" + fin)
     elif tipo == 'OTRO':
         para_ia.append(f"{pid} {dc} | {txt[:220]}")
     if 'cas' in acc or 'cliente' in acc: plan.append(acc)

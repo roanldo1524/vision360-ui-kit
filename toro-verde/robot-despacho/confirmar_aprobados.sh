@@ -6,3 +6,4 @@ import json,os
 E='/tmp/dropi/etiquetados.json';ya=set(json.load(open(E))) if os.path.exists(E) else set()
 p=json.load(open('/tmp/dropi/plan.json'));json.dump(sorted(ya|{x['id'] for x in p.get('etiquetar',[])}),open(E,'w'))"
 python3 -I robot/avisar_equipo.py
+python3 -I robot/notas_revisar.py 2>&1 | tail -1  # Ronald 27-11: notas en Dropi con el porqué y qué hacer de cada pedido frenado
