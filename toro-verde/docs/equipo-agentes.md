@@ -27,3 +27,30 @@ Regla de oro de Ronald (26-11): **trabajo en código primero y la IA solo para l
 
 ## Todos piensan en vender más
 Cada agente se pregunta todos los días: *¿qué de lo que hago hace que se venda más, que se entregue más o que el cliente vuelva a comprar?* Tecnología también trabaja dentro de **Lucid Bot** (flujos, respuestas del bot, etiquetas, embudos), no solo en Dropi.
+
+## Orquestación: quién piensa con qué cerebro (Ronald 27-11: «orquesta los bots y su inteligencia a cada integrante»)
+Tres niveles de inteligencia, del más barato al más caro. **Cada agente sube de nivel solo si el anterior no pudo.**
+1. **Código (reglas, 0 tokens):** lo que se repite siempre igual. Es el 90 % del trabajo.
+2. **IA ligera (gpt-4o-mini, centavos):** frases cortas y respuestas a Ronald por WhatsApp.
+3. **IA fuerte (Claude, en las vueltas programadas):** solo las dudas que el código deja en una ficha: chats raros, fotos de garantía, casos nuevos del CAS. Cuando un caso se repite, se vuelve regla de código (nivel 1).
+4. **Persona:** Karen solo plata y llamadas; Ronald solo decisiones de plata (reenvíos, abonos grandes) y reglas nuevas.
+
+| Agente | Código (nivel 1) | IA ligera (2) | IA fuerte (3) | Le pasa el trabajo a… | Cuándo corre |
+|---|---|---|---|---|---|
+| **Daniela** · confirmación | revision_auto.py, razonar.py, pedir_anticipo.py (anticipo y excepción con audio), recordar_confirmar.py | — | Lee fichas.md (dudas) | Karen: comprobantes y REVISAR HUMANO · Mateo: pedido confirmado | bucle.sh cada 15-30 min · vueltas :04 :34 :49 (5-8 a. m.) · vuelta completa :19 |
+| **Camilo** · CAS | cas_auto.py (8 reglas), quejas_vuelta.sh | — | Solo líneas PARA_IA; si se repite, la vuelve regla | Mateo: avisar al cliente · Ronald: plata | bucle cada 2 h · 9 a. m. (quejas) · 11:23 y 17:23 |
+| **Mateo** · rastreo | rastreo.py (insiste a los 2 y 4 días; plantilla rastreo_oficina_guia, pagado = «$0») | — | — | Karen: «No puedo ir» (modo humano) | bucle 7 a. m.-8 p. m. |
+| **Juliana** · devoluciones | devol_vuelta.sh (causales de Dropi, plazos) | — | Casos dudosos y respuestas de tickets | Ronald: plata recuperada | 12:43 |
+| **Andrés** · novedades | Mide lo que resuelve el bot de Lucid | — | — | Santiago: mejoras al bot | Pendiente: pantalla de novedades |
+| **Sofía** · garantías | garantias.py (compra en Dropi, encuesta, categorías) | — | Fotos y diagnóstico aplicación/producto | Ronald: 💰 y 📞 | 9:41 y 15:41 |
+| **Tomás** · casino y remarketing | Casino, excluye embudo 705299 y garantías | Textos del premio | — | Daniela: pedido nuevo | 10:07 y 16:07 |
+| **Santiago** · tecnología | Convierte en código el motivo de freno más repetido | — | Diseña la innovación del día | Todos: regla nueva activa | 14:13 |
+| **Valentina** · líder | medir.py, tablero por área | — | Estrategia y 3 compromisos | Cada líder: su compromiso | Lunes y jueves 7:37 |
+| **Mensajero del grupo** (WhatsApp 310 846 7560) | wa_grupo.js, abonos.py (aprobado → despacha), comprobantes_pend.py | responder.py (solo a Ronald) | Preguntas que responder.py no sabe | Daniela: abono aprobado | Siempre encendido · revisión :50 |
+
+### Reglas de traspaso
+- **Un solo dueño por pedido en cada momento:** Daniela hasta confirmarlo → Camilo y Mateo hasta entregarlo → Juliana si se devuelve → Sofía si reclama garantía.
+- **Nadie cancela.** Lo dudoso va a REVISAR HUMANO con el motivo en una línea.
+- **Toda plata la aprueba una persona** (abonos, anticipos, reenvíos), salvo las excepciones que Ronald dejó por escrito: flete +15 % y audio sin anticipo para una sola devolución de más.
+- **Cada regla nueva de Ronald** entra por la sala de juntas (tareas) o por este chat, y la programa Santiago en el siguiente :19.
+- **Al final de cada vuelta**, cada agente actualiza su entrada en datos/reportes_lideres.json (nuevo, mejoró, problema, solución).
