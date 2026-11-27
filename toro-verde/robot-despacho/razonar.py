@@ -148,6 +148,9 @@ for d in det:
     # 6) Flete
     tope = round(tope_flete(d) * 1.15)  # Ronald 26-11: «se acepta un 15 % sobre el tope» (1 L $28.750 · 2 L $33.350 · galón $40.250 · resto $34.500)
     if d['flete'] > tope and 'transportadora' not in editar: motivos.append(f'flete ${d["flete"]:,.0f} mayor a ${tope:,.0f}'.replace(',', '.'))
+    # 27-11 (Rosa, Libardo): «RECLAMA EN OFICINA INTERRAPIDÍSIMO» pero la guía va por otra transportadora → se cambia a Interrapidísimo
+    # (antes quedaba frenado sin aviso en confirmar.js). Dropi crea un ID nuevo y en la próxima vuelta se confirma.
+    if oficina and d['dc'] != 3 and not motivos and 'transportadora' not in editar: editar['transportadora'] = UI['INTERRAPIDISIMO']
     if rural_ofi and not motivos:
         if d['dc'] != 3: editar['transportadora'] = UI['INTERRAPIDISIMO']  # Dropi crea ID nuevo; en la próxima vuelta ya es Inter y pasa a oficina
         else:
