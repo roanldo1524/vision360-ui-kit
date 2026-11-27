@@ -253,7 +253,7 @@
           ${nuevo ? `<button class="tv-pr" data-acc="precio" data-v="${nuevo.replace(/\./g, '')}">${IC.tag} Precio a $${nuevo}</button>` : ''}
           
           ${tel ? `<a class="tv-sec" target="_blank" href="https://wa.me/57${tel}${decir ? '?text=' + encodeURIComponent(decir) : ''}">${IC.send} ${decir ? 'Enviar mensaje' : 'WhatsApp'}</a>` : ''}
-          ${CFG.lucid && tel ? `<button class="tv-sec tv-vc" data-acc="verchat">${IC.chat} Abrir chat</button>` : ''}
+          ${CFG.lucid && tel ? `<button class="tv-sec tv-vc" data-acc="verchat">${IC.chat} Abrir chat</button><button class="tv-sec tv-lucid" data-id="${o.id}">${IC.send} Chat en Lucid</button>` : ''}
           ${CFG.lucid && tel && decir ? `<button class="tv-sec" data-acc="lucid" data-tel="${tel}" data-t="${encodeURIComponent(decir)}">${IC.send} Enviar por Lucid</button>` : ''}
           ${decir ? `<button class="tv-sec" data-acc="copiar" data-t="${encodeURIComponent(decir)}">${IC.copy} Copiar</button>` : ''}</div><div class="tvchat" data-chat="${o.id}"></div></div>`;
     }).join('');
@@ -346,6 +346,32 @@
     setInterval(() => { if (p.style.display === 'flex') cargar(); }, 5 * 60 * 1000);
     // Ronald 27-11: desde el recuadro naranja de cada pedido (aunque el panel esté cerrado) se abre directo ese pedido con su chat
     window.tvAbrir = async (id) => { p.style.display = 'flex'; filtro = 'Todos'; busca = String(id); p.querySelector('input').value = busca; abiertos.add(String(id)); await cargar(); };
+    // Ronald 27-11: desde el recuadro de la lista de Dropi: «Abrir chat en Lucid» abre directo el chat EXACTO de ese cliente en Lucid,
+    // y «Confirmar pedido» lo confirma en Dropi ahí mismo (por la API de Dropi, sin IA).
+    window.tvChatLucid = async (id) => {
+      if (!pedidos.length) await cargarSilencio();
+      let base = CFG.chatUrl || ''; if (!base) { try { base = localStorage.getItem('tv_lucid_url') || ''; } catch (e) {} }
+      if (!base && window.tvAprenderLucid) { if (!(await window.tvAprenderLucid())) return; try { base = localStorage.getItem('tv_lucid_url') || ''; } catch (e) {} }
+      if (!base) return;
+      const w = window.open('about:blank', '_blank');
+      const cid = CFG.lucid ? await contacto(String(id)) : null;
+      const o = pedidos.find(x => String(x.id) === String(id)) || {};
+      const destino = cid || (CFG.lucid ? null : (CFG.pais || '57') + String(o.phone || '').slice(-10));
+      if (!destino) { if (w) w.close(); toast('No encontré con certeza el chat de este pedido: búscalo a mano en Lucid'); return; }
+      if (w) w.location = base.replace('{tel}', destino); else window.open(base.replace('{tel}', destino), '_blank');
+    };
+    window.tvConfirmar = async (id, el) => {
+      if (!pedidos.length) await cargarSilencio();
+      const o = pedidos.find(x => String(x.id) === String(id));
+      if (!o) { toast('Este pedido ya no está pendiente de confirmar'); return; }
+      const res = `<b>${o.name || ''} ${o.surname || ''}</b> · #${id}<br>${plata(o.total_order)} · ${(o.city || '')} · ${(o.distribution_company || {}).name || ''}<br>${o.dir || ''}`;
+      if (!await modal('¿Confirmar este pedido en Dropi?', res + '<br><br>Revisa producto, precio y dirección antes de confirmar.', '✅ Sí, confirmar')) return;
+      const r = await api('PUT', '/orders/myorders/' + id, { status: 'PENDIENTE' });
+      if (r.s === 200) { await anotar(id, 'Confirmado'); toast(`Pedido #${id} confirmado en Dropi ✔`); pedidos = pedidos.filter(x => String(x.id) !== String(id)); pintar();
+        const caja = document.getElementById('tv-' + id); if (caja) caja.classList.add('tv-hecho'); if (el) el.textContent = '✔ Confirmado'; }
+      else toast(`Dropi no dejó confirmar (código ${r.s}). Hazlo desde Dropi.`);
+    };
+    document.addEventListener('click', (ev) => { const l = ev.target.closest && ev.target.closest('.tv-lucid, .tv-ok-l'); if (l) { ev.preventDefault(); ev.stopPropagation(); if (l.classList.contains('tv-lucid')) window.tvChatLucid(l.dataset.id); else window.tvConfirmar(l.dataset.id, l); } }, true);
     document.addEventListener('click', (ev) => { const a = ev.target.closest && ev.target.closest('.tv-abrir'); if (a) { ev.preventDefault(); ev.stopPropagation(); window.tvAbrir(a.dataset.id); } }, true);   // se actualiza solo cada 5 minutos
   }
   setInterval(montar, 1500);

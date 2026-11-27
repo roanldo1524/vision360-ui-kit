@@ -45,7 +45,9 @@ def problema(m):
     out = []
     for pat, txt in PROBLEMAS:
         if re.search(pat, m, re.I) and txt not in out: out.append(txt)
-    return ' y '.join(out[:2]) or 'Hay algo que revisar en el pedido'
+    if 'Va para oficina y este cliente a veces no reclama' in out and 'El cliente ha devuelto pedidos: hay que pedir abono' in out and not re.search(r'devuelve el|recibe solo el', m):
+        out.remove('El cliente ha devuelto pedidos: hay que pedir abono')   # «recibe solo 1 de 2» con Inter no es pedir abono
+    out = out[:2]; return (out[0] + (' y ' + out[1][0].lower() + out[1][1:] if len(out) > 1 else '')) if out else 'Hay algo que revisar en el pedido'
 def accion(m, nombre=''):
     n = (nombre or '').split(' ')[0].title()
     pasos, decir, quien, confirmar = [], '', 'Karen', True

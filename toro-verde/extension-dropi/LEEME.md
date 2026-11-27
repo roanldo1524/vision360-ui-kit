@@ -48,3 +48,7 @@ Dropi con esteroides para confirmar pedidos, **sin IA y sin salir de Dropi**.
 - **«Abrir chat»** abre el chat ahí mismo, dentro de Dropi (ya no lleva a Lucid). Busca el chat EXACTO del pedido por su número de pedido de Lucid; si no lo encuentra con certeza, no abre ninguno (para no escribirle a otra persona). Arriba del chat dice de quién es: nombre, teléfono y pedido.
 - Cada pedido dice primero **el problema** en una frase sencilla (en rojo) y después **«Haz esto»** paso a paso. El detalle técnico del robot queda escondido en «Ver detalle del robot».
 - La voz de aviso dice el nombre de quien atiende: «Karen, nuevo pedido por confirmar» (se pone en Configuración).
+
+## Versión 4.4
+- En el recuadro de cada pedido en la lista de Dropi: **✅ Confirmar pedido** (lo confirma en Dropi ahí mismo, con resumen antes) y **💬 Abrir chat en Lucid** (abre directo el chat EXACTO del cliente en Lucid). Sin IA.
+- La primera vez, «Abrir chat en Lucid» te pide pegar la dirección de un chat de Lucid (o ponla en Configuración).
