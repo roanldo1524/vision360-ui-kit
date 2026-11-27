@@ -12,7 +12,8 @@ MAX = int(sys.argv[sys.argv.index('--max') + 1]) if '--max' in sys.argv else 40
 #   Hola {{1}} 📦 Tu pedido de Toro Verde ya está en la oficina de Interrapidísimo de {{2}} ({{3}}). 📋 Guía: {{4}} 💵 Valor a pagar: ${{5}} …
 # Solo sirve para Interrapidísimo. CAMPOS = IDs de los campos de Lucid que el flujo usa en {{2}}…{{5}} (falta que Ronald diga cuáles).
 FLUJO_RASTREO = '1795789863193'
-CAMPOS = {'ciudad': '', 'direccion': '', 'guia': '', 'valor': ''}
+PLANTILLA_LISTA = False  # se pone True cuando Ronald confirme que el flujo usa estos campos en {{2}}…{{5}} (si no, saldría con datos vacíos)
+CAMPOS = {'ciudad': '954640', 'direccion': '344873', 'guia': '515753', 'valor': '481263'}  # campos «Robot ciudad», «Robot direccion», «Robot guia», «Robot valor» (creados 27-11)
 D = '/tmp/dropi'; EST = f'{D}/rastreo_estado.json'; COLA = f'{D}/rastreo_plantilla.json'
 est = json.load(open(EST)) if os.path.exists(EST) else {}
 est = {k: v for k, v in est.items() if isinstance(v, dict)}  # formato viejo (lista de etapas) ya no sirve
@@ -88,7 +89,7 @@ if 7 <= hoy.hour < 20:
         t = texto(o, e['intentos'] + 1)
         if abierto:
             if ENVIAR and 'true' in json.dumps(lucid(f'/contacts/57{tel}/send_content', {'messages': [{'message': {'text': t}}]})): env += 1
-        elif FLUJO_RASTREO and all(CAMPOS.values()) and 'INTER' in (o.get('dc') or '').upper() and dir_oficina(o) and o.get('guia'):
+        elif PLANTILLA_LISTA and FLUJO_RASTREO and all(CAMPOS.values()) and 'INTER' in (o.get('dc') or '').upper() and dir_oficina(o) and o.get('guia'):
             # «Valor a pagar: ${{5}}»: si ya pagó por anticipo (Ronald 27-11), sale «$0 (ya está pagado, no pagas nada)»
             val = {'ciudad': (o.get('city') or '').title(), 'direccion': dir_oficina(o), 'guia': str(o['guia']),
                    'valor': '0 (ya está pagado, no pagas nada)' if pagado(o) else plata(o.get('total')).lstrip('$')}
