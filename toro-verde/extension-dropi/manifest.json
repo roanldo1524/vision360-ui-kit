@@ -1,12 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "Toro Verde · Qué hacer en Dropi",
-  "version": "1.1",
-  "description": "Muestra en cada pedido frenado de Dropi un recuadro con el porqué y qué hacer, según la nota del robot.",
+  "name": "Toro Verde · Confirmador en Dropi",
+  "version": "2.0",
+  "description": "Dropi con esteroides para confirmar pedidos: qué hacer en cada pedido, confirmar y corregir precio con un toque, chat de Lucid y WhatsApp. Sin IA.",
   "content_scripts": [
     {
-      "matches": ["https://app.dropi.co/*"],
-      "js": ["quehacer.js"],
+      "matches": [
+        "https://app.dropi.co/*"
+      ],
+      "js": [
+        "quehacer.js",
+        "confirmador.js"
+      ],
       "run_at": "document_start",
       "world": "MAIN"
     }

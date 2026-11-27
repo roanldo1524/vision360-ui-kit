@@ -12,6 +12,7 @@
     try { localStorage.setItem('tv_lucid_url', u.replace(m[0], '{tel}')); } catch (e) {} alert('Listo, ya quedó. Toca otra vez «Abrir chat».'); };
   const notas = {};            // id → texto de la nota del robot
   const tels = {};             // id → celular del pedido
+  const tokLS = () => { try { const t = (localStorage.getItem('DROPI_token') || '').replace(/"/g, ''); return t ? 'Bearer ' + t : null; } catch (e) { return null; } };
   let auth = null;             // token que la misma página de Dropi usa (no se guarda en ningún lado)
   const pedidos = new Set();   // ids vistos en la lista
   const guardar = (o) => {
@@ -26,14 +27,18 @@
   // 1) Escucha las respuestas de la API de Dropi que la página ya pide
   const f0 = window.fetch;
   window.fetch = async function (u, opt) {
-    try { const h = opt && opt.headers; const a = h && (h['x-authorization'] || (h.get && h.get('x-authorization'))); if (a) auth = a; } catch (e) {}
+    try { // Dropi llama fetch con un Request o con (url, opciones)
+      const url = (u && u.url) || String(u);
+      const hs = [opt && opt.headers, u && u.headers].filter(Boolean);
+      for (const h of hs) { const a = h.get ? h.get('x-authorization') : (h['x-authorization'] || h['X-Authorization']); if (a && String(a).length > 40 && !tokLS()) auth = a; }
+    } catch (e) {}
     const r = await f0.apply(this, arguments);
-    try { if (String(u).includes('api.dropi.co') && String(u).includes('order')) r.clone().json().then(guardar).catch(() => {}); } catch (e) {}
+    try { if ((((u && u.url) || String(u)) + '').includes('api.dropi.co') && (((u && u.url) || String(u)) + '').includes('order')) r.clone().json().then(guardar).catch(() => {}); } catch (e) {}
     return r;
   };
   const X = XMLHttpRequest.prototype, open0 = X.open, send0 = X.send, set0 = X.setRequestHeader;
   X.open = function (m, u) { this._u = u; return open0.apply(this, arguments); };
-  X.setRequestHeader = function (k, v) { if (String(k).toLowerCase() === 'x-authorization') auth = v; return set0.apply(this, arguments); };
+  X.setRequestHeader = function (k, v) { if (String(k).toLowerCase() === 'x-authorization' && String(v).length > 40 && !tokLS()) auth = v; return set0.apply(this, arguments); };
   X.send = function () {
     this.addEventListener('load', () => { try { if (String(this._u).includes('order')) guardar(JSON.parse(this.responseText)); } catch (e) {} });
     return send0.apply(this, arguments);
@@ -41,6 +46,7 @@
   // 2) Si la lista no trae las notas, se piden pedido por pedido (solo los que se ven en pantalla)
   const pedidas = new Set();
   async function pedirNota(id) {
+    auth = tokLS() || auth;
     if (!auth || pedidas.has(id)) return; pedidas.add(id);
     try {
       const r = await f0('https://api.dropi.co/api/orders/myorders/' + id, { headers: { 'x-authorization': auth, accept: 'application/json' } });

@@ -5,36 +5,52 @@
 # Uso: python3 -I robot/notas_revisar.py   (después de plan.py / confirmar_aprobados.sh)
 import json, os, re, subprocess, datetime
 D = '/tmp/dropi'
-ACC = [  # (patrón del motivo, qué hacer, quién)
-    (r'oficina de Interrap\w* y con Interrap\w* recibe', 'Con Interrapidísimo ha recibido la mitad o menos: llamar y confirmar que sí va a ir a la oficina; si confirma, confirmar el pedido.', 'Karen'),
-    (r'modo humano', 'Terminar la conversación en Lucid y devolverla al bot. Si el cliente ya aceptó el resumen, confirmar.', 'quien atiende el chat'),
-    (r'pago anticipado|transferencia|addi|cuotas|comprobante', 'Validar en el banco que llegó la plata (grupo Comprobantes de Pago CDR) y confirmar descontando el abono.', 'Karen'),
-    (r'recibe solo|devuelve|riesgos|cr[ií]tica', 'Cliente que devuelve: esperar el abono. Si tiene solo una devolución de más y no responde, el robot le manda el audio. No confirmar sin abono.', 'Karen'),
-    (r'no veo la confirmaci|no ha tocado|no confirma|aún no confirma', 'Llamar o escribir al cliente para que confirme el pedido (sí o no).', 'Karen'),
-    (r'descuento|ruleta|casino', 'Cliente que ya compró con descuento del casino: decide Ronald si se respeta el precio o va normal.', 'Ronald'),
-    (r'direcci[oó]n|rural|nomenclatura|vereda|oficina', 'Llamar al cliente: pedir dirección exacta o confirmar la oficina de Interrapidísimo del municipio.', 'Karen'),
-    (r'repetido|otro pedido abierto', 'Preguntar al cliente si son dos pedidos o uno repetido. El robot no cancela.', 'Karen'),
-    (r'flete', 'Flete sobre el tope (+15 %): probar otra transportadora más barata; si no hay, decide Ronald.', 'Karen'),
-    (r'producto distinto|cantidad|pide \d+ L', 'Confirmar con el cliente producto y cantidad del último resumen y corregir en Dropi.', 'Karen'),
-    (r'nombre raro', 'Confirmar el nombre completo como aparece en la cédula.', 'Karen'),
-    (r'tel[eé]fono|n[uú]mero', 'Buscar en Lucid el WhatsApp desde el que compró; dejarlo en Dropi y el otro en notas.', 'Karen'),
-    (r'dijo que no', 'El cliente dijo que no: llamar para confirmar si de verdad no lo quiere.', 'Karen'),
-    (r'etiquetas', 'Ya tiene etiquetas de una persona: revisar y terminar ese pedido.', 'Karen'),
+# Ronald 27-11: «que la extensión nos diga qué hacer, qué solución debe hacer el humano». Cada motivo → un PASO concreto y,
+# si hay que hablarle al cliente, el MENSAJE listo para mandarle por WhatsApp (en tono de Karen). Sin «·» ni «|» en los textos.
+# (patrón, paso, mensaje al cliente o '', quién, ¿se puede confirmar al final?)
+ACC = [
+    (r'modo humano', 'Abrir el chat en Lucid, terminar la conversación y devolverla al bot', '', 'quien atiende el chat', True),
+    (r'pago anticipado|transferencia|addi|cuotas|comprobante', 'Revisar en el banco que llegó la plata (grupo Comprobantes de Pago CDR) y descontar el abono del total', 'Hola {n}, soy Karen de Toro Verde 🌱 ¿Me compartes por favor la foto del comprobante del pago para despachar tu pedido hoy mismo?', 'Karen', True),
+    (r'oficina de Interrap\w* y con Interrap\w* recibe', 'Llamar y preguntar si de verdad va a ir a la oficina de Interrapidísimo a reclamarlo', 'Hola {n}, soy Karen de Toro Verde 🌱 Tu pedido sale hoy para la oficina de Interrapidísimo. ¿Me confirmas que pasas a reclamarlo apenas llegue? Lo guardan pocos días.', 'Karen', True),
+    (r'recibe solo|devuelve|riesgos|cr[ií]tica', 'NO confirmar todavía: pedir el abono. Si solo tiene una devolución de más y no responde, el robot le manda el audio sin anticipo', 'Hola {n}, soy Karen de Toro Verde 🌱 Para despachar tu pedido te pedimos un abono por Nequi o Bancolombia; el resto lo pagas al recibir. ¿Te comparto los datos?', 'Karen', False),
+    (r'no veo la confirmaci|no ha tocado|no confirma|aún no confirma', 'Escribir o llamar al cliente para que diga sí o no', 'Hola {n}, soy Karen de Toro Verde 🌱 Tu pedido ya está listo para despachar hoy. ¿Me confirmas con un SÍ para enviarlo?', 'Karen', True),
+    (r'descuento|ruleta|casino', 'Ya había comprado y le dieron precio de descuento: Ronald decide si se respeta o va a precio normal', '', 'Ronald', False),
+    (r'rural|nomenclatura|vereda|no encuentro la oficina', 'Preguntar en qué oficina de Interrapidísimo del municipio lo reclama y poner esa dirección en Dropi', 'Hola {n}, soy Karen de Toro Verde 🌱 Para que tu pedido llegue sin problema, ¿lo reclamas en la oficina de Interrapidísimo de tu municipio? Si es a domicilio, mándame la dirección con número de casa y un punto de referencia.', 'Karen', True),
+    (r'direcci[oó]n', 'Pedir la dirección completa (calle, número, barrio y punto de referencia) y corregirla en Dropi', 'Hola {n}, soy Karen de Toro Verde 🌱 Para despachar tu pedido me falta la dirección completa: calle, número de casa, barrio y un punto de referencia. ¿Me la compartes?', 'Karen', True),
+    (r'repetido|otro pedido abierto', 'Preguntar si son dos pedidos o si uno está repetido (el robot no cancela)', 'Hola {n}, soy Karen de Toro Verde 🌱 Vemos dos pedidos a tu nombre. ¿Quieres recibir los dos o es uno solo?', 'Karen', True),
+    (r'flete', 'Flete sobre el tope: cambiar a una transportadora más barata en Dropi; si no hay, decide Ronald', '', 'Karen', True),
+    (r'producto distinto|cantidad|pide \d+ L', 'Confirmar con el cliente producto y cantidad del último resumen y corregirlo en Dropi', 'Hola {n}, soy Karen de Toro Verde 🌱 ¿Me confirmas cuántos litros quieres en tu pedido para dejarlo exacto?', 'Karen', True),
+    (r'nombre raro', 'Pedir el nombre completo como aparece en la cédula y corregirlo', 'Hola, soy Karen de Toro Verde 🌱 ¿Me confirmas tu nombre completo como aparece en la cédula para el envío?', 'Karen', True),
+    (r'dijo que no', 'El cliente dijo que no: llamarlo y confirmar si de verdad no lo quiere', '', 'Karen', False),
+    (r'etiquetas', 'Una persona ya le puso etiquetas: revisar y terminar ese pedido', '', 'Karen', True),
 ]
-def accion(m):
+def accion(m, nombre=''):
+    n = (nombre or '').split(' ')[0].title()
+    pasos, decir, quien, confirmar = [], '', 'Karen', True
     pd = re.search(r'precio distinto: Dropi (\d+), chat (\d+)', m)
-    if pd: return f"Cambiar el precio en Dropi a ${int(pd.group(2)):,} (lo que aceptó en el chat; hoy está en ${int(pd.group(1)):,}) y confirmar.".replace(',', '.'), 'Karen'
+    if pd: pasos.append(f"Cambiar el precio en Dropi a ${int(pd.group(2)):,} (lo que aceptó en el chat; hoy dice ${int(pd.group(1)):,})".replace(',', '.'))
     pc = re.search(r'producto distinto: en el chat (\d+) L[^,;]*, en Dropi (\d+) L', m)
-    if pc: return f'Cambiar la cantidad en Dropi a {pc.group(1)} litro(s) (lo del chat; hoy dice {pc.group(2)}) y confirmar.', 'Karen'
-    for pat, que, quien in ACC:
-        if re.search(pat, m, re.I): return que, quien
-    return 'Revisar el chat en Lucid y decidir: confirmar o preguntar al cliente.', 'Karen'
+    if pc: pasos.append(f'Cambiar la cantidad en Dropi a {pc.group(1)} litro(s) (lo del chat; hoy dice {pc.group(2)})')
+    for parte in [x.strip() for x in m.split(';') if x.strip()]:
+        for pat, paso, msj, q, conf in ACC:
+            if re.search(pat, parte, re.I):
+                if paso not in pasos: pasos.append(paso)
+                if msj and not decir: decir = msj.replace('{n}', n or '')
+                if q != 'Karen': quien = q
+                confirmar = confirmar and conf
+                break
+    if not pasos: pasos.append('Revisar el chat en Lucid y decidir si confirmar o preguntarle al cliente')
+    if confirmar: pasos.append('Si todo queda bien, tocar Confirmar pedido')
+    texto = ' '.join(f'{k}) {p}.' for k, p in enumerate(pasos, 1))
+    return texto, quien, decir
 
 plan = json.load(open(f'{D}/plan.json')) if os.path.exists(f'{D}/plan.json') else {}
 mot = {}
+nombres = {}
 for k in ('etiquetar', 'revisar_total', 'etiquetar_extra'):
     for x in plan.get(k, []) or []:
         if x.get('id') and x.get('motivo'): mot.setdefault(int(x['id']), x['motivo'])
+        if x.get('id') and x.get('nombre'): nombres[int(x['id'])] = x['nombre']
 try:
     for k, v in (json.load(open(f'{D}/vetos.json')) or {}).items():
         m = v.get('motivo') if isinstance(v, dict) else v
@@ -45,15 +61,15 @@ hora = (datetime.datetime.utcnow() - datetime.timedelta(hours=5)).strftime('%d/%
 filas = []
 for i, m in mot.items():
     m = re.sub(r'\s+', ' ', m).strip()[:220]
-    if reg.get(str(i)) == m: continue   # misma nota ya puesta
-    que, quien = accion(m)
-    filas.append({'id': i, 'nota': f'🤖 ROBOT {hora} · POR QUÉ: {m} · QUÉ HACER: {que} · QUIÉN: {quien}', 'motivo': m})
+    if reg.get(str(i)) == 'v2:' + m: continue   # misma nota ya puesta (v2 = con pasos y mensaje)
+    que, quien, decir = accion(m, nombres.get(i, ''))
+    filas.append({'id': i, 'nota': f'🤖 ROBOT {hora} · POR QUÉ: {m} · QUÉ HACER: {que} · QUIÉN: {quien}' + (f' · DECIR: {decir}' if decir else ''), 'motivo': m})
 if filas:
     json.dump(filas, open(f'{D}/notas_revisar_lote.json', 'w'), ensure_ascii=False)
     out = subprocess.run(['node', 'notas_lote.js', 'notas_revisar_lote.json'], cwd=D, capture_output=True, text=True, timeout=600).stdout
     for l in out.splitlines():
         if l.startswith('NOTA_OK'):
-            i = l.split()[1]; reg[i] = next(f['motivo'] for f in filas if str(f['id']) == i)
+            i = l.split()[1]; reg[i] = 'v2:' + next(f['motivo'] for f in filas if str(f['id']) == i)
     json.dump(reg, open(REG, 'w'), ensure_ascii=False)
     print('NOTAS', sum(1 for l in out.splitlines() if l.startswith('NOTA_OK')), 'de', len(filas), out.count('SALTO'), 'saltados')
 else: print('NOTAS 0 nuevas')

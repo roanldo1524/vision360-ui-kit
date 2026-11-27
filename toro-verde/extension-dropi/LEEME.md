@@ -1,20 +1,22 @@
-# Extensión «Qué hacer en Dropi» (Toro Verde)
+# Confirmador Toro Verde · extensión para Dropi (v2.0)
 
-Muestra, dentro de Dropi, un recuadro naranja debajo de cada pedido frenado con:
-- 👉 **Qué hacer** exactamente (llamar, validar pago, pedir dirección…)
-- **Por qué** está frenado y **quién** lo hace
-- Botón **💬 Abrir chat en Lucid** y **📞 WhatsApp** del cliente
+Dropi con esteroides para confirmar pedidos, **sin IA y sin salir de Dropi**.
 
-Y un panel arriba a la derecha con «Qué hacer hoy», agrupado por acción. No usa IA (costo cero): lee la nota que el robot deja en cada pedido. No cambia nada en Dropi.
+## Qué hace
+- Botón **🐂 Confirmador** abajo a la derecha en Dropi. Abre un panel con TODOS los pedidos pendientes de confirmar.
+- Arriba: cuántos hay por confirmar, cuántos necesitan acción y cuántos está revisando el robot.
+- Filtros por tipo de acción (Llamar, Pago, Precio, Dirección, Chat abierto…) y buscador.
+- Cada pedido trae:
+  - **Qué hacer, paso por paso** y quién lo hace.
+  - **Mensaje listo para el cliente** (tono de Karen): botón «Enviar mensaje» abre WhatsApp con el texto ya escrito, o «Copiar mensaje».
+  - Historial del cliente (recibe X de Y) y por qué lo frenó el robot.
+  - Botones: **✅ Confirmar pedido**, **💲 Precio a $X** (cuando el chat dice otro precio, también Black Friday y ruleta), **💬 Chat Lucid**.
+- Cada acción queda anotada en las notas del pedido («✋ … desde el Confirmador»). Nunca cancela.
+- Debajo de cada pedido de la lista de Dropi aparece también el recuadro naranja con qué hacer.
 
-## Instalar (una sola vez, en el computador de Karen)
-1. Descomprime `extension-dropi.zip` en una carpeta.
-2. En Chrome abre `chrome://extensions`.
-3. Arriba a la derecha prende **Modo de desarrollador**.
-4. Toca **Cargar descomprimida** y elige la carpeta.
-5. Abre Dropi → Mis Pedidos y filtra «Pendiente confirmación».
-
-## Versión 1.1
-- Solo muestra pedidos SIN confirmar (Pendiente confirmación).
-- «Abrir chat en Lucid»: la primera vez te pide pegar la dirección de cualquier chat abierto en Lucid; desde ahí abre el chat de cada cliente.
-- Cambio de precio o cantidad: el recuadro dice exactamente a cuánto cambiarlo (precios del chat, ruleta y Black Friday).
+## Instalar (una sola vez)
+1. Descomprime `extension-dropi.zip`.
+2. Chrome → `chrome://extensions` → prende **Modo de desarrollador**.
+3. **Cargar descomprimida** → elige la carpeta. (Si ya estaba, toca 🔄 «Actualizar» en la extensión.)
+4. Abre Dropi → Mis Pedidos → toca **🐂 Confirmador**.
+5. La primera vez que toques «Chat Lucid», pega la dirección de cualquier chat abierto en Lucid.
