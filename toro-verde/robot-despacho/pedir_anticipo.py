@@ -58,8 +58,56 @@ if 7 <= h < 21:
             try: post_json(f'/contacts/{c}/send_content', {'messages': [{'message': {'attachment': {'type': 'image', 'payload': {'url': url}}}}]})
             except Exception: pass
         if 'true' in post(f'/contacts/{c}/send/{FLUJO}'):
-            reg[c] = {'foto': bool(url), 'pedido': a['id'], 'nombre': (d.get('name') or '').title(), 'total': d.get('total'), 'enviado': time.time(), 'imagenes': n_img or 0}
+            reg[c] = {'foto': bool(url), 'pedido': a['id'], 'ent': ent, 'dev': dev, 'nombre': (d.get('name') or '').title(), 'total': d.get('total'), 'enviado': time.time(), 'imagenes': n_img or 0}
             enviados += 1
+
+# Ronald 27-11 (EXCEPCIÓN, con su audio): «cuando el cliente registre una devolución más que entregas efectivas, o tenga únicamente una
+# devolución en su historial, y no se obtenga respuesta respecto al anticipo solicitado, se deberá enviar el siguiente audio como parte del
+# proceso de confirmación». El audio dice que le damos la oportunidad SIN anticipo. Se manda una sola vez, 3 h o más después de pedir el
+# anticipo, si no mandó comprobante ni escribió nada, con el chat abierto y sin modo humano. El pedido queda en excepcion_audio.json y
+# razonar.py ya no lo frena por devoluciones (el resto de reglas sigue igual). Si devuelve 2 o más que lo que recibe, sigue el anticipo.
+AUDIO = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'audios', 'anticipo_sin_respuesta.ogg')
+EXC = '/tmp/dropi/excepcion_audio.json'; exc = json.load(open(EXC)) if os.path.exists(EXC) else {}
+def url_audio():
+    # WhatsApp baja el audio al enviarlo: se sube al alojamiento temporal (dura 3 días) y se reusa 1 día
+    cache = '/tmp/dropi/audio_excepcion_url.json'
+    try:
+        x = json.load(open(cache))
+        if time.time() - x['t'] < 86400: return x['url']
+    except Exception: pass
+    b64 = 'data:audio/ogg;base64,' + base64.b64encode(open(AUDIO, 'rb').read()).decode()
+    r = json.loads(urllib.request.urlopen(urllib.request.Request('https://kieai.redpandaai.co/api/file-base64-upload', data=json.dumps({'base64Data': b64, 'uploadPath': 'tv-a', 'fileName': uuid.uuid4().hex + '.ogg'}).encode(), headers={'Content-Type': 'application/json'}, method='POST'), timeout=60).read())
+    u = (r.get('data') or {}).get('downloadUrl')
+    if u: json.dump({'t': time.time(), 'url': u}, open(cache, 'w'))
+    return u
+def respondio(c, desde):
+    try: t = get(f'/contacts/{c}/messages?limit=20'); t = t if isinstance(t, str) else json.dumps(t, ensure_ascii=False)
+    except Exception: return True
+    for f in re.findall(r'Usuario \((\d{4}-\d{2}-\d{2} \d{1,2}:\d{2}[ap]m)\)', t):
+        if datetime.datetime.strptime(f, '%Y-%m-%d %I:%M%p').timestamp() + 5 * 3600 > desde: return True
+    return False
+excepciones = 0
+if 7 <= h < 21 and os.path.exists(AUDIO):
+    for c, r in reg.items():
+        if r.get('comprobante') or r.get('excepcion') or str(r['pedido']) in exc: continue
+        if not (3 * 3600 <= time.time() - r['enviado'] <= 3 * 86400): continue
+        dd = det.get(r['pedido'])
+        if not dd: continue   # el pedido ya no está pendiente
+        lt = (((dd.get('huella') or {}).get('global_profile') or {}).get('lifetime_totals') or {})
+        ent, dev = int(lt.get('delivered') or r.get('ent') or 0), int(lt.get('returned') or r.get('dev') or 0)
+        if dev - ent != 1: continue
+        if respondio(c, r['enviado']): continue
+        try:
+            info = get(f'/contacts/{c}')
+            if info.get('live_chat') or (time.time() - float(info.get('last_interaction') or 0) / 1000) > 23 * 3600: continue
+            u = url_audio()
+            if not u: continue
+            res = post_json(f'/contacts/{c}/send_content', {'messages': [{'message': {'attachment': {'type': 'audio', 'payload': {'url': u}}}}]})
+        except Exception as e: print('EXCEPCION_ERROR', str(e)[:80]); continue
+        if 'true' in res:
+            r['excepcion'] = time.time(); exc[str(r['pedido'])] = {'cel': c, 'nombre': r.get('nombre'), 'ent': ent, 'dev': dev, 'cuando': time.time()}
+            excepciones += 1; print('EXCEPCION audio enviado', r['pedido'], r.get('nombre'), f'{ent} entregados {dev} devueltos')
+json.dump(exc, open(EXC, 'w'), ensure_ascii=False)
 
 # Comprobantes: imagen nueva del cliente después del audio → aviso al equipo (se entrega con avisar_equipo.py)
 nuevos = []
@@ -85,4 +133,4 @@ if nuevos:
         x = av.setdefault(t, {'pendiente': [], 'plantilla': 0}); x['pendiente'] = (x['pendiente'] + nuevos)[-8:]
     json.dump(av, open(AV, 'w'), ensure_ascii=False)
 json.dump(reg, open(REG, 'w'), ensure_ascii=False)
-print('ANTICIPO audios enviados', enviados, 'comprobantes nuevos', len(nuevos), 'esperando', len([r for r in reg.values() if not r.get('comprobante')]))
+print('ANTICIPO audios enviados', enviados, 'excepciones sin anticipo', excepciones, 'comprobantes nuevos', len(nuevos), 'esperando', len([r for r in reg.values() if not r.get('comprobante')]))

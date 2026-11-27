@@ -22,6 +22,8 @@ def tope_flete(d):
     lit = sum(i['q'] * next((v for k, v in LITROS.items() if k in (i['pres'] or '').upper()), 0) for i in d['items'])
     return {1: 25000, 2: 29000}.get(lit, FLETE_MAX)
 det = json.load(open('/tmp/dropi/detalle.json'))
+try: EXCEPCION = {int(k) for k in json.load(open('/tmp/dropi/excepcion_audio.json'))}
+except Exception: EXCEPCION = set()
 luc = {f['contacto']: f for f in json.load(open('robot/decision.json'))}
 
 def litros_chat(txt):
@@ -66,7 +68,10 @@ for d in det:
     gp = ((d.get('huella') or {}).get('global_profile') or {}); lt = gp.get('lifetime_totals') or {}
     ent, dev = lt.get('delivered', 0), lt.get('returned', 0)
     # Ronald 26-11: «clientes que tienen más del 50 % de devolución deben solicitar abono» (pedir_anticipo.py les pide el abono); 50 % o menos se confirma.
-    if ent + dev > 0 and dev / (ent + dev) > 0.5: motivos.append(f'recibe solo el {round(100*ent/(ent+dev))} % ({ent} entregados, {dev} devueltos)')
+    # Ronald 27-11 (EXCEPCIÓN): si tiene UNA sola devolución más que entregas (p. ej. 0 y 1, o 2 y 3), se le pidió anticipo y no respondió,
+    # pedir_anticipo.py le manda el audio «te damos la oportunidad sin anticipo» y anota el pedido en excepcion_audio.json → aquí ya no frena.
+    _exc = d['id'] in EXCEPCION and dev - ent == 1
+    if ent + dev > 0 and dev / (ent + dev) > 0.5 and not _exc: motivos.append(f'recibe solo el {round(100*ent/(ent+dev))} % ({ent} entregados, {dev} devueltos)')
     if re.search(r'riesgosa|cr[ií]tica', gp.get('risk_label') or '', re.I): motivos.append(f'Dropi lo marca {gp.get("risk_label")}')
     # Repetido en Dropi
     abiertos = [o for o in d.get('otros', []) if not re.search(r'CANCELADO|ENTREGADO|DEVOLUCION|DEVUELTO|ANULAD|RECHAZ|INDEMNIZ|REEMPLAZADA', o['status'] or '')]
