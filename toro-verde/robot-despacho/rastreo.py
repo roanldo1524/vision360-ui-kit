@@ -8,8 +8,11 @@ import json, os, re, sys, time, datetime, urllib.request, urllib.parse
 sys.path.insert(0, '/tmp/robot/robot')
 ENVIAR = '--enviar' in sys.argv
 MAX = int(sys.argv[sys.argv.index('--max') + 1]) if '--max' in sys.argv else 40
-FLUJO_RASTREO = ''           # número del flujo de Lucid «Robot - rastreo_pedido_tv» cuando Meta apruebe la plantilla
-CAMPO_DATO2, CAMPO_DATO3 = '', ''  # IDs de los campos «Robot dato 2» y «Robot dato 3» (los da Claude en Chrome al crearlos)
+# Ronald 27-11 creó la plantilla «rastreo_oficina_guia» en el flujo «Rastreo oficina - sin reclamar»:
+#   Hola {{1}} 📦 Tu pedido de Toro Verde ya está en la oficina de Interrapidísimo de {{2}} ({{3}}). 📋 Guía: {{4}} 💵 Valor a pagar: ${{5}} …
+# Solo sirve para Interrapidísimo. CAMPOS = IDs de los campos de Lucid que el flujo usa en {{2}}…{{5}} (falta que Ronald diga cuáles).
+FLUJO_RASTREO = '1795789863193'
+CAMPOS = {'ciudad': '', 'direccion': '', 'guia': '', 'valor': ''}
 D = '/tmp/dropi'; EST = f'{D}/rastreo_estado.json'; COLA = f'{D}/rastreo_plantilla.json'
 est = json.load(open(EST)) if os.path.exists(EST) else {}
 est = {k: v for k, v in est.items() if isinstance(v, dict)}  # formato viejo (lista de etapas) ya no sirve
@@ -85,11 +88,13 @@ if 7 <= hoy.hour < 20:
         t = texto(o, e['intentos'] + 1)
         if abierto:
             if ENVIAR and 'true' in json.dumps(lucid(f'/contacts/57{tel}/send_content', {'messages': [{'message': {'text': t}}]})): env += 1
-        elif FLUJO_RASTREO and CAMPO_DATO2 and CAMPO_DATO3:
+        elif FLUJO_RASTREO and all(CAMPOS.values()) and 'INTER' in (o.get('dc') or '').upper() and dir_oficina(o) and o.get('guia'):
+            # «Valor a pagar: ${{5}}»: si ya pagó por anticipo (Ronald 27-11), sale «$0 (ya está pagado, no pagas nada)»
+            val = {'ciudad': (o.get('city') or '').title(), 'direccion': dir_oficina(o), 'guia': str(o['guia']),
+                   'valor': '0 (ya está pagado, no pagas nada)' if pagado(o) else plata(o.get('total')).lstrip('$')}
             if ENVIAR:
                 try:
-                    lucid(f'/contacts/57{tel}/custom_fields/{CAMPO_DATO2}', form={'value': etapa(o)})
-                    lucid(f'/contacts/57{tel}/custom_fields/{CAMPO_DATO3}', form={'value': pago(o)})
+                    for k, cid in CAMPOS.items(): lucid(f'/contacts/57{tel}/custom_fields/{cid}', form={'value': val[k]})
                     if 'true' in json.dumps(lucid(f'/contacts/57{tel}/send/{FLUJO_RASTREO}', {})): env += 1
                 except Exception: continue
         else:
