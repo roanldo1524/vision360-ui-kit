@@ -1,7 +1,7 @@
 # Prompt para Claude en Chrome · plantilla y flujo de RASTREO (27-11)
 
 Ronald (27-11): «pásame el flujo para la plantilla, para que la extensión de Claude cree el mejor mensaje de rastreo».
-Abre Lucid en panel.lucidbot.co (cuenta Toro Verde), abre Claude en Chrome y pégale TODO el bloque de abajo.
+Abre Lucid en panel.lucidbot.co (cuenta Toro Verde), abre Claude en Chrome, adjúntale la imagen img/rastreo-oficina.jpg y pégale TODO el bloque de abajo.
 Cuando termine, pásale al robot (este chat) los 3 números del PASO 4.
 
 ```
@@ -19,6 +19,7 @@ Crea 2 campos de tipo texto, si no existen ya (no los dupliques): «Robot dato 2
 
 PASO 2 · PLANTILLA (Configuración → WhatsApp → Plantillas → Nueva)
 Nombre: rastreo_pedido_tv
+Encabezado: IMAGEN. Sube la imagen «rastreo-oficina.jpg» que te adjunto (es fija, la misma para todos los clientes).
 Cuerpo:
 Hola {{1}} 👋 Soy Karen, de Toro Verde. {{2}} 📦 y te está esperando.
 
