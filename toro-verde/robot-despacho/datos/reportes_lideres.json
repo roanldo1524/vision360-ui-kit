@@ -43,10 +43,10 @@
  "Líder de Tecnología": {
   "area": "Tecnología e innovación",
   "voz": "glassy",
-  "nuevo": "CAS en código, rastreo humanizado y verificación de compras en garantías.",
-  "mejoro": "Semana con 3 de 3 innovaciones; menos tokens por pedido.",
-  "problema": "El bucle sin IA se apaga cuando el servidor se reinicia.",
-  "solucion": "Cada vuelta de la hora lo revisa y lo vuelve a encender; siguiente: pantalla de novedades."
+  "nuevo": "Recompra: encontramos que la oferta del día 30 («RC S4 otro lote») casi no sale. Programa recompra.py listo en modo prueba.",
+  "mejoro": "Semana 4 de 3. Se midió la fuga: solo 3 de 60 clientes con más de 32 días recibieron algo después del día 25; recompra a 45 días: 8,1 %.",
+  "problema": "551 clientes que ya recibieron hace 28 a 35 días no han vuelto a comprar y nadie les escribe.",
+  "solucion": "Cuando Ronald confirme que el flujo RC S4 no lleva descuento, se activa: hasta 80 por día, una vez por cliente, a precio normal."
  },
  "Casino y remarketing": {
   "area": "Marketing y remarketing",
