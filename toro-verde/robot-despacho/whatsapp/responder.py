@@ -21,7 +21,11 @@ est = collections.Counter(o.get('status') for o in hoy)
 can_hoy = sum(1 for o in dia if o.get('status') == 'CANCELADO')
 qreg0 = leer('/tmp/dropi/quejas_reg.json', {}) or {}
 q_hoy = sum(1 for v in qreg0.values() if v.get('ultima', 0) >= time.time() - ((time.time() - 5 * 3600) % 86400))
-datos = (f"HOY: pedidos {len(dia)}; CONFIRMADOS HOY {len(conf_hoy)} = robot {robot} + equipo/humano {humano}; pendientes por confirmar {pend_hoy}; CANCELADOS HOY {can_hoy} (el robot NUNCA cancela: los cancela el cliente o una persona); "
+_ay = time.strftime('%Y-%m-%d', time.gmtime(time.time() - 29 * 3600)); _hh = time.strftime('%H:%M', time.gmtime(time.time() - 5 * 3600))
+ayer_hora = sum(1 for o in hoy if (o.get('created') or '')[:10] == _ay and (o.get('created') or '')[11:16] <= _hh)
+valor_hoy = sum(float(o.get('total') or 0) for o in dia if o.get('status') != 'CANCELADO')
+datos = (f"VENTAS DE HOY (= pedidos de hoy; úsalo si preguntan por ventas): {len(dia)} pedidos, valor sin cancelados ${valor_hoy/1e6:.1f} millones; ayer a esta misma hora iban {ayer_hora}. "
+         f"HOY: pedidos {len(dia)}; CONFIRMADOS HOY {len(conf_hoy)} = robot {robot} + equipo/humano {humano}; pendientes por confirmar {pend_hoy}; CANCELADOS HOY {can_hoy} (el robot NUNCA cancela: los cancela el cliente o una persona); "
          f"quejas al CAS puestas hoy {q_hoy}.\nEstados de TODOS los pedidos de los ÚLTIMOS 45 DÍAS (no son de hoy): " +
          ', '.join(f'{k} {v}' for k, v in est.most_common(8)) + ".\nLíderes:\n" +
          '\n'.join(f"- {k}: nuevo: {v.get('nuevo')}; problema: {v.get('problema')}; solución: {v.get('solucion')}" for k, v in lid.items() if not k.startswith('_')))
