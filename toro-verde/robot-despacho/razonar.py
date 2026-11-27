@@ -55,7 +55,8 @@ for d in det:
         if not rural_ofi: motivos.append(f'dirección rural o sin nomenclatura y no encuentro la oficina de Interrapidísimo del municipio: «{(d["dir"] or "").strip()[:70]}»')
     nom = ((d.get('name') or '') + ' ' + (d.get('surname') or '')).lower()
     pal = re.findall(r'[a-záéíóúñ]+', nom)
-    if len(pal) != len(set(pal)) or re.search(r'([a-záéíóúñ]{4,})\1', nom) or len(nom.strip()) < 4: motivos.append(f'nombre raro: «{(d.get("name") or "")} {(d.get("surname") or "")}»')
+    # 27-11: un apellido repetido es normal («López López») o viene de Lucid pegado al nombre; ya no frena el pedido
+    if not pal or re.search(r'([a-záéíóúñ]{4,})\1', nom) or len(nom.strip()) < 4: motivos.append(f'nombre raro: «{(d.get("name") or "")} {(d.get("surname") or "")}»')
     otras = [t for t in (d.get('tags') or []) if t and t not in ('CONFIRMADO AGENTE', 'REVISAR HUMANO')]
     if otras: motivos.append('una persona ya le puso etiquetas en Dropi (' + ', '.join(otras) + '): no lo toco')
     # 4) Chat
