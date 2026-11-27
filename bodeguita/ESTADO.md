@@ -202,6 +202,10 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   Errores de Dropi de hoy: queda 1 (de 4; parece que 3 ya se corrigieron).
   Propuesta pendiente de Ronald: (1) arreglar el bot con objeciones.md, (2) premio directo con foto de «fuente de los
   deseos» y respuesta «SÍ» en vez del juego, (3) acceso a Dropi.
+- 27-nov 10:34 a. m.: 475 tibios, 58 ya compraron → **400 enviados (tope), 0 fallos**. Total casino: 2.013 recibieron.
+  Pedidos de gente que recibió el casino: 13 = **$1.398.400** (ayer 26-nov: 5 = $497.700), 0 con el premio.
+  Dropi: sigue fallando el cubre canas NEGRO («Producto 2 no existe»): hoy …9262 (Lucid 230506, $69.900) y queda …7819
+  del 26-nov. El error no está arreglado de raíz.
 - Ronald (24-nov): en este chat SOLO datos de La Bodeguita; no compararla ni mencionar Toro Verde.
 - Pendiente técnico: la foto de la máquina y los sonidos del casino todavía se cargan desde el almacenamiento de
   Shopify de otra tienda (no se ve marca). Pasarlos a un alojamiento propio de La Bodeguita.
