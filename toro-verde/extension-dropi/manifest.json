@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Toro Verde · Qué hacer en Dropi",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Muestra en cada pedido frenado de Dropi un recuadro con el porqué y qué hacer, según la nota del robot.",
   "content_scripts": [
     {

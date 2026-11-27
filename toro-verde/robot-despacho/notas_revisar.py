@@ -22,6 +22,10 @@ ACC = [  # (patrón del motivo, qué hacer, quién)
     (r'etiquetas', 'Ya tiene etiquetas de una persona: revisar y terminar ese pedido.', 'Karen'),
 ]
 def accion(m):
+    pd = re.search(r'precio distinto: Dropi (\d+), chat (\d+)', m)
+    if pd: return f"Cambiar el precio en Dropi a ${int(pd.group(2)):,} (lo que aceptó en el chat; hoy está en ${int(pd.group(1)):,}) y confirmar.".replace(',', '.'), 'Karen'
+    pc = re.search(r'producto distinto: en el chat (\d+) L[^,;]*, en Dropi (\d+) L', m)
+    if pc: return f'Cambiar la cantidad en Dropi a {pc.group(1)} litro(s) (lo del chat; hoy dice {pc.group(2)}) y confirmar.', 'Karen'
     for pat, que, quien in ACC:
         if re.search(pat, m, re.I): return que, quien
     return 'Revisar el chat en Lucid y decidir: confirmar o preguntar al cliente.', 'Karen'

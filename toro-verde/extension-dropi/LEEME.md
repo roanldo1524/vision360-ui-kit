@@ -13,3 +13,8 @@ Y un panel arriba a la derecha con «Qué hacer hoy», agrupado por acción. No 
 3. Arriba a la derecha prende **Modo de desarrollador**.
 4. Toca **Cargar descomprimida** y elige la carpeta.
 5. Abre Dropi → Mis Pedidos y filtra «Pendiente confirmación».
+
+## Versión 1.1
+- Solo muestra pedidos SIN confirmar (Pendiente confirmación).
+- «Abrir chat en Lucid»: la primera vez te pide pegar la dirección de cualquier chat abierto en Lucid; desde ahí abre el chat de cada cliente.
+- Cambio de precio o cantidad: el recuadro dice exactamente a cuánto cambiarlo (precios del chat, ruleta y Black Friday).

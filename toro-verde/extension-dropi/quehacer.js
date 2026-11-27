@@ -3,7 +3,13 @@
 // más un panel arriba a la derecha agrupado por lo que hay que hacer. No cambia nada en Dropi: solo muestra.
 (() => {
   // Enlace al chat del cliente en Lucid. {tel} = 57 + celular. FALTA CONFIRMAR el formato exacto con Ronald (copia de la barra de direcciones al abrir un chat).
-  const LUCID_CHAT = 'https://panel.lucidbot.co/contacts/{tel}';
+  // El enlace del chat de Lucid se aprende UNA vez: la primera vez que tocan «Abrir chat», se pega la dirección de cualquier chat abierto en Lucid
+  // y se guarda en este computador (el número 57… de esa dirección se reemplaza por el de cada cliente).
+  const lucidUrl = (tel) => { let m = ''; try { m = localStorage.getItem('tv_lucid_url') || ''; } catch (e) {}
+    return m ? m.replace('{tel}', tel) : ''; };
+  window.tvAprenderLucid = () => { const u = prompt('Abre en Lucid el chat de cualquier cliente, copia la dirección de arriba del navegador y pégala aquí:');
+    if (!u) return; const m = u.match(/57\d{10}/); if (!m) { alert('Esa dirección no trae el número del cliente (57…). Prueba con otra.'); return; }
+    try { localStorage.setItem('tv_lucid_url', u.replace(m[0], '{tel}')); } catch (e) {} alert('Listo, ya quedó. Toca otra vez «Abrir chat».'); };
   const notas = {};            // id → texto de la nota del robot
   const tels = {};             // id → celular del pedido
   let auth = null;             // token que la misma página de Dropi usa (no se guarda en ningún lado)
@@ -12,7 +18,9 @@
     if (!o || typeof o !== 'object') return;
     if (Array.isArray(o)) return o.forEach(guardar);
     if (o.id && o.phone) tels[o.id] = String(o.phone).slice(-10);
-    if (o.id && typeof o.notes === 'string') { pedidos.add(String(o.id)); if (o.notes.includes('🤖 ROBOT')) notas[o.id] = o.notes; }
+    if (o.id && typeof o.notes === 'string' && o.status) { pedidos.add(String(o.id));
+      // solo pedidos SIN confirmar (Ronald 27-11: no mostrar los ya confirmados)
+      notas[o.id] = (o.notes.includes('🤖 ROBOT') && o.status === 'PENDIENTE CONFIRMACION') ? o.notes : ''; }
     for (const k of ['objects', 'data', 'orders', 'rows']) if (o[k]) guardar(o[k]);
   };
   // 1) Escucha las respuestas de la API de Dropi que la página ya pide
@@ -61,7 +69,7 @@
       if (!fila || fila.dataset.tvId === id) continue;
       fila.dataset.tvId = id;
       const caja = document.createElement(fila.tagName === 'TR' ? 'tr' : 'div');
-      const html = `<div class="tv-q">👉 ${parte(t, 'QUÉ HACER') || 'Revisar el pedido'}</div><div class="tv-p"><b>Por qué:</b> ${parte(t, 'POR QUÉ')} · <b>Quién:</b> ${parte(t, 'QUIÉN') || 'Karen'}</div>` + (tels[id] ? `<a class="tv-chat" target="_blank" href="${LUCID_CHAT.replace('{tel}', '57' + tels[id])}">💬 Abrir chat en Lucid</a> <a class="tv-chat" href="https://wa.me/57${tels[id]}" target="_blank">📞 WhatsApp ${tels[id]}</a>` : '');
+      const html = `<div class="tv-q">👉 ${parte(t, 'QUÉ HACER') || 'Revisar el pedido'}</div><div class="tv-p"><b>Por qué:</b> ${parte(t, 'POR QUÉ')} · <b>Quién:</b> ${parte(t, 'QUIÉN') || 'Karen'}</div>` + (tels[id] ? (lucidUrl('57' + tels[id]) ? `<a class="tv-chat" target="_blank" href="${lucidUrl('57' + tels[id])}">💬 Abrir chat en Lucid</a>` : `<a class="tv-chat tv-aprender" href="#">💬 Abrir chat en Lucid</a>`) + ` <a class="tv-chat" href="https://wa.me/57${tels[id]}" target="_blank">📞 WhatsApp ${tels[id]}</a>` : '');
       if (caja.tagName === 'TR') { const td = document.createElement('td'); td.colSpan = 30; td.innerHTML = `<div class="tv-caja">${html}</div>`; caja.appendChild(td); }
       else { caja.className = 'tv-caja'; caja.innerHTML = html; }
       caja.id = 'tv-' + id; fila.after(caja);
@@ -81,5 +89,7 @@
     p.querySelector('h3').onclick = () => { p.dataset.cerrado = abierto ? '1' : '0'; panel(); };
     p.querySelectorAll('a').forEach(a => a.onclick = () => { const e = document.getElementById('tv-' + a.dataset.id); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
   }
+  // sin onclick en línea (Dropi puede bloquearlo): un solo escuchador para el botón de aprender el enlace
+  document.addEventListener('click', (ev) => { const a = ev.target.closest && ev.target.closest('.tv-aprender'); if (a) { ev.preventDefault(); window.tvAprenderLucid(); document.querySelectorAll('[data-tv-id]').forEach(f => delete f.dataset.tvId); document.querySelectorAll('[id^=tv-]').forEach(e => e.id !== 'tv-panel' && e.remove()); } }, true);
   setInterval(pintar, 1500);
 })();

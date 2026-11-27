@@ -11,6 +11,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import oficinas 
 TR = {int(k): v for k, v in json.load(open('/tmp/dropi/transportadoras.json')).items()}
 UI = {'INTERRAPIDISIMO': 'Interrapidisimo', 'ENVIA': 'Envia', 'COORDINADORA': 'Coordinadora', 'SERVIENTREGA': 'Servientrega', 'TCC': 'Tcc', 'DOMINA': 'Domina', 'VELOCES': 'Veloces'}
 PRECIOS = {99000, 169000, 269000, 89100, 152100, 242100, 995000, 895500}
+# Ronald 27-11: BLACK FRIDAY solo para quien nunca compró, hasta el domingo 30-11 a las 5:00 p. m. (2 L $149.900 · galón $239.900 · poma $899.900).
+import datetime as _dt
+BLACK = {149900, 239900, 899900} if _dt.datetime.utcnow() < _dt.datetime(2026, 11, 30, 22, 0) else set()
+PRECIOS |= BLACK
 LITROS = {'LITRO': 1, 'GALON': 4, 'POMA': 20, '2 LITROS': 2}
 FLETE_MAX = 30000  # Ronald 21-11: más de $30.000 de envío → revisión humana
 FLETE_MAX_GALON = 35000  # Ronald 22-11: si el pedido es de galón, acepta hasta $35.000
@@ -104,7 +108,7 @@ for d in det:
     _V = '/tmp/dropi/vetos.json'
     if os.path.exists(_V) and str(d['id']) in json.load(open(_V)): motivos.append('revisión del agente: ' + json.load(open(_V))[str(d['id'])])
     # Regla de Ronald: el descuento (10 %) es solo para quien nunca ha comprado. Si ya recibió pedidos nuestros, precio normal.
-    DESC = {89100, 152100, 242100, 895500}
+    DESC = {89100, 152100, 242100, 895500} | BLACK
     ms = ((d.get('huella') or {}).get('context_analysis') or {}).get('my_shop') or {}
     ya_compro = sum(k.get('delivered', 0) for k in ms.get('by_courier') or []) or ms.get('period_delivered', 0)
     if round(d['total']) in DESC and ya_compro: motivos.append(f'ya nos había comprado ({ya_compro} entregados) y lleva precio con descuento ${d["total"]:,.0f}: decidir el precio'.replace(',', '.'))
