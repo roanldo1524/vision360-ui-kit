@@ -980,3 +980,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
 - 26-11 8:20 p. m. — Casino: recordatorio de urgencia a 93 personas (de 242 que lo recibieron hoy). Casino hoy: 16 pedidos $2.956.100. Del día completo (164 pedidos en Lucid), la mayoría son de 1 litro: se propuso a Ronald ofrecer el galón al confirmar y que el bot recomiende por costo por bomba; espera su «dale al galón».
 
 - 27-11 5:34 a. m.: vuelta :19 subió 3 pedidos a Lucid (Yovani G., Jimmy V., Mario Z.); OJO_YA_SUBIDO 3202304495. Vuelta :34: confirmado Mario Zapata (98513113); vetado Jimmy Vergara (98513556) por descuento de casino a cliente que ya compró.
+- 27-11 6:27 a. m.: vuelta :19: bucle revivido (servidor dormido); robot confirmó solo a Hernán (98448499) y Edilmer (98448783); sin fichas ni tareas pendientes; pantallas publicadas.
