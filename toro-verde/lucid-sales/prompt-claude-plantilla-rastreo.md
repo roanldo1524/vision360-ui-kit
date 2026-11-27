@@ -23,7 +23,7 @@ Encabezado: IMAGEN. Sube la imagen «rastreo-oficina.jpg» que te adjunto (es fi
 Cuerpo:
 Hola {{1}} 👋 Soy Karen, de Toro Verde. {{2}} 📦 y te está esperando.
 
-Para recibirlo solo necesitas tu cédula y {{3}} para el pago contra entrega.
+Lleva tu cédula original. {{3}}
 
 ⏳ La transportadora lo guarda pocos días y, si nadie lo reclama, lo devuelve. Si no puedes ir, lo puede recoger un familiar con una autorización firmada y copia de tu cédula.
 
@@ -32,7 +32,8 @@ Botones de respuesta rápida: «Voy hoy» · «Voy mañana» · «No puedo ir»
 Ejemplos de las variables:
   {{1}} Diego
   {{2}} Tu pedido ya está en la oficina de Interrapidísimo de Doradal (CLL 23 25 30)
-  {{3}} $169.000
+  {{3}} Lleva $169.000 para pagar al recibirlo.
+  (Si el pedido ya está pagado, el robot pone: «Tu pedido ya está pagado: no tienes que pagar nada al recibirlo.»)
 Envíala a revisión de Meta.
 
 PASO 3 · FLUJO (Automatización → Flujos → Nuevo)

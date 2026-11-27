@@ -26,6 +26,9 @@ try: import oficinas as _of
 except Exception: _of = None
 
 def plata(v): return f"${(v or 0):,.0f}".replace(',', '.')
+# Ronald 27-11: «ojo con lo de pagas al recibirlo, no si es anticipado» → pedido SIN RECAUDO (ya pagó) no se le cobra nada
+def pagado(o): return 'SIN' in (o.get('rate') or '').upper() or not (o.get('total') or 0)
+def pago(o): return 'Tu pedido ya está pagado: no tienes que pagar nada al recibirlo.' if pagado(o) else f"Lleva {plata(o.get('total'))} para pagar al recibirlo."
 def dir_oficina(o):
     if not (_of and 'INTER' in (o.get('dc') or '').upper()): return ''
     try: d = _of.dir_oficina(o.get('state', ''), _of.muni(o.get('city', '')), '') or ''
@@ -37,7 +40,7 @@ def etapa(o):
 def texto(o, intento):
     n = (o.get('name') or '').split(' ')[0].title() or 'compita'
     cab = f"Hola {n} 👋 Soy Karen, de Toro Verde. " + ("Te escribo de nuevo porque es importante: " if intento == 2 else "")
-    return (cab + f"{etapa(o)} 📦\n\nTen a la mano tu cédula y {plata(o.get('total'))} para el pago contra entrega.\n\n"
+    return (cab + f"{etapa(o)} 📦\n\nLleva tu cédula original. {pago(o)}\n\n"
             "⏳ La transportadora solo lo guarda unos pocos días y, si no se recibe, lo devuelve. ¿Te ayudamos a recibirlo? "
             "Si no puedes ir, lo puede reclamar un familiar con una autorización y copia de tu cédula.")
 def ultimo_del_cliente(tel):
@@ -86,7 +89,7 @@ if 7 <= hoy.hour < 20:
             if ENVIAR:
                 try:
                     lucid(f'/contacts/57{tel}/custom_fields/{CAMPO_DATO2}', form={'value': etapa(o)})
-                    lucid(f'/contacts/57{tel}/custom_fields/{CAMPO_DATO3}', form={'value': plata(o.get('total'))})
+                    lucid(f'/contacts/57{tel}/custom_fields/{CAMPO_DATO3}', form={'value': pago(o)})
                     if 'true' in json.dumps(lucid(f'/contacts/57{tel}/send/{FLUJO_RASTREO}', {})): env += 1
                 except Exception: continue
         else:

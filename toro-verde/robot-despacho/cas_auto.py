@@ -112,10 +112,11 @@ for c in casos:
         # Ronald 26-11: Lucid ya manda su plantilla de oficina (con video) cuando Dropi pasa a RECLAME EN OFICINA → aquí solo si Dropi aún NO lo marca así.
         if not e.get('cliente_oficina') and estado_hoy != 'RECLAME EN OFICINA':
             total = o.get('total') or 0
+            if 'SIN' in (o.get('rate') or '').upper(): total = 0   # Ronald 27-11: pedido pagado por anticipo → no se cobra al recibir
             acc['cliente'] = (f"Hola {nom.split(' ')[0] if nom else ''} 👋 Te escribe Karen de Toro Verde. ¡Tu pedido ya llegó! 📦\n"
                               f"Está disponible para reclamar en la oficina de {dc.title()}" + (f": *{dirof}*" if dirof else '') +
                               f" ({(o.get('city') or q.get('city') or '').title()}).\n"
-                              "Lleva tu *cédula original*" + (f" y el pago contra entrega de *${total:,.0f}*".replace(',', '.') if total else '') +
+                              "Lleva tu *cédula original*" + (f" y el pago contra entrega de *${total:,.0f}*".replace(',', '.') if total else ' (tu pedido ya está pagado, no pagas nada)') +
                               ". Ve en horario de oficina.\nSi no puedes ir, cuéntanos y lo puede reclamar un familiar con autorización. 🌱")
     elif tipo == 'EVIDENCIA' and not reciente:
         if not e.get('cliente_evid'):
