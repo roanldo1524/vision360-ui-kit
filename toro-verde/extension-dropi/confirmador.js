@@ -56,7 +56,8 @@
   #tvc .cd .top{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 14px 4px}#tvc .cd .nm{font-weight:700;font-size:15px}#tvc .cd .id{color:var(--tv-gri);font-size:12px;font-weight:600}
   #tvc .cd .tt{font-weight:800;font-size:17px;color:var(--tv-osc)}
   #tvc .cd .mt{padding:0 14px;color:#4b5563;font-size:12.5px;display:flex;flex-wrap:wrap;gap:4px 12px}
-  #tvc .cd .pr{padding:6px 14px 0;display:flex;flex-wrap:wrap;gap:6px}#tvc .cd .pr span{background:#f0f9d4;color:#3a4a05;border-radius:7px;padding:2px 8px;font-size:12.5px;font-weight:600}
+  #tvc .cd .pr{padding:6px 14px 0;display:flex;flex-wrap:wrap;gap:6px}#tvc .cd .pr .lp{display:block;width:100%;background:#f6f8ee;color:#1f2a05;font-weight:500;font-size:13px;padding:5px 9px}#tvc .cd .pr .lp b{color:var(--tv-osc)}#tvc .cd .pr .lp em{font-style:normal;font-weight:700;color:var(--tv-ver);float:right}
+  #tvc .cd .pr span{background:#f0f9d4;color:#3a4a05;border-radius:7px;padding:2px 8px;font-size:12.5px;font-weight:600}
   #tvc .cd .hs{border-radius:7px;padding:2px 8px;font-size:12px;font-weight:700}.hs.b{background:#dcfce7;color:#166534}.hs.m{background:#fef3c7;color:#92400e}.hs.x{background:#fee2e2;color:#991b1b}.hs.n{background:#eef0f3;color:#4b5563}
   #tvc .cd .dr{padding:6px 14px 0;font-size:12.5px;color:#374151}
   #tvc .cd .qh{margin:10px 14px 0;background:#fff3ef;border:1px solid #ffcfc2;border-radius:10px;padding:9px 11px}
@@ -123,8 +124,30 @@
     const r = await api('GET', `/orders/myorders/v2?exportAs=orderByRow&orderBy=id&orderDirection=desc&result_number=300&start=0&textToSearch=&status=PENDIENTE%20CONFIRMACION&supplier_id=false&user_id=${userId}&from=${f(new Date(Date.now() - 10 * 864e5))}&until=${f(new Date(Date.now() + 864e5))}&filter_date_by=FECHA%20DE%20CREADO`);
     if (r.s !== 200) { ls.innerHTML = `<div class="vc"><div>⚠️</div>Dropi respondió con error (${r.s}). Toca 🔄 en un momento.</div>`; return; }
     pedidos = ((r.j || {}).objects || []).filter(o => o.status === 'PENDIENTE CONFIRMACION');
+    detalles();   // Ronald 27-11: cantidad y precio a la vista, sin abrir la lupa
     actual = new Date().toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
     pintar();
+  }
+  // La lista de Dropi no trae cantidad ni precio: se pide el detalle de cada pedido (4 a la vez) y se guarda mientras el panel esté abierto
+  const det = {};
+  async function detalles() {
+    const faltan = pedidos.filter(o => !det[o.id]).map(o => o.id);
+    for (let i = 0; i < faltan.length; i += 4) {
+      await Promise.all(faltan.slice(i, i + 4).map(async (id) => {
+        try { const r = await api('GET', '/orders/myorders/' + id); const o = (r.j || {}).objects; if (o) det[id] = o.orderdetails || []; } catch (e) {}
+      }));
+      pintar();
+    }
+  }
+  function productos(o) {
+    const ds = det[o.id];
+    if (!ds) return (o.orderdetails || []).map(d => `<span>${((d.variation || {}).attribute_values || []).map(a => a.value).join(' ') || (d.product || {}).name || 'producto'} · cargando…</span>`).join('');
+    return ds.map(d => {
+      const q = Math.round(+d.quantity || 1), pu = +d.price || 0;
+      const pres = ((d.variation || {}).attribute_values || []).map(a => a.value).join(' ') || '';
+      const nom = String((d.product || {}).name || 'Producto');
+      return `<span class="lp"><b>${q} ×</b> ${nom}${pres ? ' · ' + pres : ''} <em>${plata(pu)} c/u = ${plata(pu * q)}</em></span>`;
+    }).join('');
   }
   function pintar() {
     const p = document.getElementById('tvc'); if (!p) return;
@@ -146,7 +169,7 @@
     const tit = (x) => String(x || '').toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
     ls.innerHTML = vis.map(({ o, que, por, quien, decir, tipo, robot }) => {
       const tel = String(o.phone || '').slice(-10);
-      const prods = (o.orderdetails || []).map(d => `<span>${Math.round(+d.quantity || 1)} × ${((d.variation || {}).attribute_values || []).map(a => a.value).join(' ') || (d.product || {}).name || 'producto'}</span>`).join('');
+      const prods = productos(o);
       const nuevo = (String(que).match(/precio en Dropi a \$([\d.]+)/) || [])[1];
       const chat = lucid(tel); const espera = tipo === 'Robot revisando'; const ojo = /NO confirmar/.test(que);
       return `<div class="cd ${espera ? 'rb' : ''}" data-id="${o.id}">
