@@ -24,6 +24,28 @@ ACC = [
     (r'dijo que no', 'El cliente dijo que no: llamarlo y confirmar si de verdad no lo quiere', '', 'Karen', False),
     (r'etiquetas', 'Una persona ya le puso etiquetas: revisar y terminar ese pedido', '', 'Karen', True),
 ]
+# Ronald 27-11: «la nota concreta, clara y fácil de entender: cuál es el error». PROBLEMA = una frase corta y sencilla.
+PROBLEMAS = [
+    (r'modo humano', 'Alguien del equipo tiene el chat abierto en Lucid'),
+    (r'pago anticipado|transferencia|addi|cuotas|comprobante', 'El cliente quiere pagar antes: falta revisar que la plata llegó'),
+    (r'oficina de Interrap\w* y con Interrap\w* recibe', 'Va para oficina y este cliente a veces no reclama'),
+    (r'recibe solo|devuelve|riesgos|cr[ií]tica', 'El cliente ha devuelto pedidos: hay que pedir abono'),
+    (r'no veo la confirmaci|no ha tocado|no confirma|aún no confirma', 'El cliente todavía no ha dicho SÍ'),
+    (r'descuento|ruleta|casino', 'Ya había comprado y le dieron precio de descuento'),
+    (r'rural|nomenclatura|vereda|no encuentro la oficina', 'La dirección no es clara (zona rural o sin número)'),
+    (r'direcci[oó]n', 'La dirección está incompleta'),
+    (r'repetido|otro pedido abierto', 'Puede ser un pedido repetido'),
+    (r'flete', 'El envío sale más caro de lo permitido'),
+    (r'precio distinto', 'El precio en Dropi no es el que aceptó en el chat'),
+    (r'producto distinto|cantidad|pide \d+ L', 'La cantidad en Dropi no es la del chat'),
+    (r'nombre raro', 'El nombre del cliente se ve raro'),
+    (r'dijo que no', 'El cliente dijo que no'),
+]
+def problema(m):
+    out = []
+    for pat, txt in PROBLEMAS:
+        if re.search(pat, m, re.I) and txt not in out: out.append(txt)
+    return ' y '.join(out[:2]) or 'Hay algo que revisar en el pedido'
 def accion(m, nombre=''):
     n = (nombre or '').split(' ')[0].title()
     pasos, decir, quien, confirmar = [], '', 'Karen', True
@@ -61,15 +83,15 @@ hora = (datetime.datetime.utcnow() - datetime.timedelta(hours=5)).strftime('%d/%
 filas = []
 for i, m in mot.items():
     m = re.sub(r'\s+', ' ', m).strip()[:220]
-    if reg.get(str(i)) == 'v2:' + m: continue   # misma nota ya puesta (v2 = con pasos y mensaje)
+    if reg.get(str(i)) == 'v3:' + m: continue   # misma nota ya puesta (v2 = con pasos y mensaje)
     que, quien, decir = accion(m, nombres.get(i, ''))
-    filas.append({'id': i, 'nota': f'🤖 ROBOT {hora} · POR QUÉ: {m} · QUÉ HACER: {que} · QUIÉN: {quien}' + (f' · DECIR: {decir}' if decir else ''), 'motivo': m})
+    filas.append({'id': i, 'nota': f'🤖 ROBOT {hora} · PROBLEMA: {problema(m)} · POR QUÉ: {m} · QUÉ HACER: {que} · QUIÉN: {quien}' + (f' · DECIR: {decir}' if decir else ''), 'motivo': m})
 if filas:
     json.dump(filas, open(f'{D}/notas_revisar_lote.json', 'w'), ensure_ascii=False)
     out = subprocess.run(['node', 'notas_lote.js', 'notas_revisar_lote.json'], cwd=D, capture_output=True, text=True, timeout=600).stdout
     for l in out.splitlines():
         if l.startswith('NOTA_OK'):
-            i = l.split()[1]; reg[i] = 'v2:' + next(f['motivo'] for f in filas if str(f['id']) == i)
+            i = l.split()[1]; reg[i] = 'v3:' + next(f['motivo'] for f in filas if str(f['id']) == i)
     json.dump(reg, open(REG, 'w'), ensure_ascii=False)
     print('NOTAS', sum(1 for l in out.splitlines() if l.startswith('NOTA_OK')), 'de', len(filas), out.count('SALTO'), 'saltados')
 else: print('NOTAS 0 nuevas')

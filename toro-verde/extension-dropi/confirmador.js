@@ -68,10 +68,12 @@
   #tvc .cd .hs{border-radius:7px;padding:2px 8px;font-size:12px;font-weight:700}.hs.b{background:#dcfce7;color:#166534}.hs.m{background:#fef3c7;color:#92400e}.hs.x{background:#fee2e2;color:#991b1b}.hs.n{background:#eef0f3;color:#4b5563}
   #tvc .cd .dr{padding:6px 14px 0;font-size:12.5px;color:#374151}
   #tvc .cd .qh{margin:10px 14px 0;background:#fff3ef;border:1px solid #ffcfc2;border-radius:10px;padding:9px 11px}
+  #tvc .cd .qh .pb{font-size:16px;font-weight:800;color:#b42318;margin-bottom:6px;line-height:1.3}#tvc .cd .qh details{margin-top:4px;font-size:12px;color:#8a5a3a}#tvc .cd .qh summary{cursor:pointer}
   #tvc .cd .qh b{display:block;color:#9a3d00;font-size:13.5px}#tvc .cd .qh .qt{font-weight:800;color:#9a3d00;font-size:12px;text-transform:uppercase;letter-spacing:.3px}
   #tvc .cd .qh ol{margin:6px 0 6px 18px;padding:0;color:#5a2600;font-weight:600;font-size:13.5px}#tvc .cd .qh li{margin:3px 0}
   #tvc .cd .qh .dc{background:#fff;border:1px dashed #ffb27a;border-radius:8px;padding:7px 9px;margin:6px 0;font-size:12.5px;color:#333}#tvc .cd .qh .dc span{display:block;font-weight:700;color:var(--tv-ver);font-size:11.5px;margin-bottom:2px}
   #tvc .tvchat{padding:0 14px 6px}#tvc .tvchat .msgc{color:#6b7280;font-size:12.5px;padding:6px 0}
+  #tvc .tvchat .quien{margin-top:8px;font-size:13px;background:#e7e7ff;color:#2b2b6b;border-radius:8px;padding:6px 10px}
   #tvc .tvchat .hilo{max-height:320px;overflow:auto;background:#fafafd;border-radius:10px;padding:4px 8px;margin-top:6px}
   #tvc .tvchat .esc{display:flex;gap:6px;margin-top:6px}#tvc .tvchat textarea{flex:1;border:1px solid #d9d9e3;border-radius:9px;padding:7px 9px;font:13px inherit;resize:vertical}
   #tvc .bur{max-width:85%;margin:6px 0;padding:7px 10px;border-radius:12px;font-size:13px}#tvc .bur small{display:block;color:#6b7280;font-size:10.5px;margin-top:2px}
@@ -124,7 +126,7 @@
   }
   function info(o) {
     const nota = String(o.notes || '').split(' | ').find(x => x.startsWith('🤖 ROBOT')) || '';
-    if (nota) { const que = parte(nota, 'QUÉ HACER'); return { nota, que, por: parte(nota, 'POR QUÉ'), quien: parte(nota, 'QUIÉN') || 'Equipo', decir: parte(nota, 'DECIR'), tipo: corto(que), robot: true }; }
+    if (nota) { const que = parte(nota, 'QUÉ HACER'); return { nota, que, prob: parte(nota, 'PROBLEMA'), por: parte(nota, 'POR QUÉ'), quien: parte(nota, 'QUIÉN') || 'Equipo', decir: parte(nota, 'DECIR'), tipo: corto(que), robot: true }; }
     const recien = Date.now() - new Date(o.created_at).getTime() < 40 * 60 * 1000;   // el robot pasa cada 15-30 min
     if (recien && window.__tvRobot) return { nota: '', que: 'El robot lo está revisando. Espera unos minutos.', tipo: 'Robot revisando', robot: true };
     const pr = propio(o); const e = estado[o.id]; let que = pr.que, por = pr.por, tipo = corto(pr.que);
@@ -134,7 +136,8 @@
       else if (e.si && !/NO confirmar/.test(pr.que)) { que = '1) El cliente ya dijo SÍ en el chat: revisa producto, precio y dirección. 2) Toca Confirmar pedido.'; tipo = '✅ Dijo que sí'; }
       else if (e.nada) { que = '1) Aún no responde al resumen: envíale el mensaje listo. 2) Cuando diga sí, toca Confirmar pedido.'; tipo = '⏳ Sin respuesta'; }
     }
-    return { nota: 'propio', que, por, quien: 'Equipo', decir: pr.decir, tipo, robot: false };
+    const prob = tipo === '✅ Dijo que sí' ? 'El cliente ya dijo SÍ: solo falta confirmar' : tipo === '⏳ Sin respuesta' ? 'El cliente todavía no ha dicho SÍ' : tipo === '✋ Dijo que no' ? 'El cliente dijo que no' : (pr.por !== 'sin revisión automática' ? pr.por.charAt(0).toUpperCase() + pr.por.slice(1) : 'Revisar el chat antes de confirmar');
+    return { nota: 'propio', que, prob, por, quien: 'Equipo', decir: pr.decir, tipo, robot: false };
   }
   async function cargarSilencio() {   // trae los pendientes sin abrir el panel (para el contador del botón y la voz)
     auth = tokLS() || auth; if (!auth || !userId) return;
@@ -156,12 +159,12 @@
     pintar();
   }
   // La lista de Dropi no trae cantidad ni precio: se pide el detalle de cada pedido (4 a la vez) y se guarda mientras el panel esté abierto
-  const det = {}, tienda = {}, chats = {}, estado = {}, abiertos = new Set();
+  const det = {}, tienda = {}, chats = {}, estado = {}, abiertos = new Set(), sids = {}, cids = {}, cnom = {};
   async function detalles() {
     const faltan = pedidos.filter(o => !det[o.id]).map(o => o.id);
     for (let i = 0; i < faltan.length; i += 4) {
       await Promise.all(faltan.slice(i, i + 4).map(async (id) => {
-        try { const r = await api('GET', '/orders/myorders/' + id); const o = (r.j || {}).objects; if (o) { det[id] = o.orderdetails || []; tienda[id] = String(((o.shop || {}).type || '') + ' ' + ((o.shop || {}).name || '')); } } catch (e) {}
+        try { const r = await api('GET', '/orders/myorders/' + id); const o = (r.j || {}).objects; if (o) { det[id] = o.orderdetails || []; tienda[id] = String(((o.shop || {}).type || '') + ' ' + ((o.shop || {}).name || '')); sids[id] = o.shop_order_id; } } catch (e) {}
         if (CFG.lucid) await analizar(id);
       }));
       pintar();
@@ -171,13 +174,25 @@
   const SI = /\b(s[ií]+|ok|okey|listo|dale|de una|confirm\w*|correct[oa]|perfecto|claro|bueno|est[aá] bien|as[ií] es|h[aá]gale|env[ií]e\w*)\b/i;
   const NO = /\b(no lo quiero|ya no|cancel\w*|no gracias|despu[eé]s|m[aá]s adelante|no tengo plata)\b/i;
   function mensajes(t) { return String(t || '').split(/\n(?=(?:Yo|Usuario) \()/).filter(x => /^(Yo|Usuario) \(/.test(x)).map(x => ({ yo: x.startsWith('Yo'), h: (x.match(/\(([^)]+)\)/) || [])[1] || '', tx: x.replace(/^(Yo|Usuario) \([^)]*\):\s*/, '').trim() })); }
-  async function leerChat(tel) {
-    const r = await lucidApi(`/contacts/${CFG.pais || '57'}${tel}/messages?limit=30`);
-    if (!r.ok) return null; chats[tel] = mensajes(typeof r.data === 'string' ? r.data : JSON.stringify(r.data || '')); return chats[tel];
+  // Ronald 27-11: «no puede mandar a un chat diferente». 1.º el contacto exacto del pedido (número de pedido de Lucid Sales);
+  // 2.º el WhatsApp del pedido solo si existe en Lucid. Si no se encuentra con certeza, no se abre ningún chat.
+  async function contacto(id) {
+    if (id in cids) return cids[id];
+    const o = pedidos.find(x => String(x.id) === String(id)) || {}; let c = null;
+    if (!sids[id]) { try { const r = await api('GET', '/orders/myorders/' + id); const d = (r.j || {}).objects || {}; sids[id] = d.shop_order_id; } catch (e) {} }
+    if (sids[id] && /^\d+$/.test(String(sids[id]))) { const r = await lucidApi('/buscar_pedido?sid=' + sids[id]); if (r.ok && Array.isArray(r.data) && r.data.length === 1) c = r.data[0]; }
+    if (!c) { const tel = (CFG.pais || '57') + String(o.phone || '').slice(-10); const r = await lucidApi('/contacts/' + tel); if (r.ok && r.data && String(r.data.id) === tel) c = tel; }
+    if (c) { const r = await lucidApi('/contacts/' + c); if (r.ok && r.data) cnom[id] = `${r.data.full_name || r.data.first_name || ''} · ${r.data.phone || c}`; }
+    cids[id] = c; return c;
+  }
+  async function leerChat(cid) {
+    if (!cid) return null;
+    const r = await lucidApi(`/contacts/${cid}/messages?limit=30`);
+    if (!r.ok) return null; chats[cid] = mensajes(typeof r.data === 'string' ? r.data : JSON.stringify(r.data || '')); return chats[cid];
   }
   async function analizar(id) {
     const o = pedidos.find(x => x.id == id); if (!o || !CFG.lucid) return;
-    const tel = String(o.phone || '').slice(-10); const ms = chats[tel] || await leerChat(tel); if (!ms) return;
+    const cid = await contacto(id); const ms = chats[cid] || await leerChat(cid); if (!ms) return;
     let k = -1; ms.forEach((m, i) => { if (m.yo && /Resumen de tu pedido|Tu pedido ya est[aá]/i.test(m.tx)) k = i; });
     const tras = ms.slice(k + 1).filter(m => !m.yo).map(m => m.tx);
     const ult = ms.filter(m => !m.yo).slice(-1)[0];
@@ -198,7 +213,7 @@
       const ctx = new (window.AudioContext || window.webkitAudioContext)(); const o = ctx.createOscillator(), g = ctx.createGain();
       o.type = 'sine'; o.frequency.setValueAtTime(880, ctx.currentTime); o.frequency.setValueAtTime(1320, ctx.currentTime + 0.15);
       g.gain.setValueAtTime(0.25, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45); o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + 0.5);
-      setTimeout(() => { const u = new SpeechSynthesisUtterance(n > 1 ? `${n} pedidos nuevos por confirmar` : 'Nuevo pedido por confirmar'); u.lang = 'es-CO'; u.rate = 1; speechSynthesis.speak(u); }, 550);
+      setTimeout(() => { const quien = CFG.nombre ? CFG.nombre + ', ' : ''; const u = new SpeechSynthesisUtterance(n > 1 ? `${quien}${n} pedidos nuevos por confirmar` : `${quien}nuevo pedido por confirmar`); u.lang = 'es-CO'; u.rate = 1; speechSynthesis.speak(u); }, 550);
     } catch (e) {}
     toast(n > 1 ? `🔔 ${n} pedidos nuevos por confirmar` : '🔔 Nuevo pedido por confirmar');
   }
@@ -223,7 +238,7 @@
     const ls = p.querySelector('.ls');
     if (!vis.length) { ls.innerHTML = `<div class="vc"><div>${IC.ok}</div>${it.length ? (filtro === 'Para ti' ? '¡Nada pendiente para ti! El robot está con el resto.' : 'Nada con ese filtro.') : 'No hay pedidos pendientes de confirmar.'}</div>`; return; }
     const tit = (x) => String(x || '').toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-    ls.innerHTML = vis.map(({ o, que, por, quien, decir, tipo, robot }) => {
+    ls.innerHTML = vis.map(({ o, que, prob, por, quien, decir, tipo, robot }) => {
       const tel = String(o.phone || '').slice(-10);
       const prods = productos(o);
       const nuevo = (String(que).match(/precio en Dropi a \$([\d.]+)/) || [])[1];
@@ -233,12 +248,12 @@
         <div class="mt"><span>${IC.pin} ${tit(o.city)}, ${tit(o.state)}</span><span>${IC.truck} ${tit((o.distribution_company || {}).name) || '—'}</span><span>${IC.phone} ${tel}</span></div>
         <div class="pr">${prods}${historial(o)}</div>
         <div class="dr">${IC.home} ${o.dir || ''}</div>
-        <div class="qh">${espera ? `<b>${que}</b>` : `<div class="qt">${IC.list} Qué hacer · ${quien}${robot ? '' : ' · revisión de la extensión'}</div><ol>${pasos(que)}</ol>${decir ? `<div class="dc"><span>${IC.chat} Mensaje listo para el cliente</span>${decir}</div>` : ''}<small>Por qué: ${por}</small>`}</div>
+        <div class="qh">${espera ? `<b>${que}</b>` : `<div class="pb">${IC.alert} ${prob || 'Hay algo que revisar'}</div><div class="qt">${IC.list} Haz esto · ${quien}</div><ol>${pasos(que)}</ol>${decir ? `<div class="dc"><span>${IC.chat} Mensaje listo para el cliente</span>${decir}</div>` : ''}<details><summary>Ver detalle del robot</summary><small>${por}</small></details>`}</div>
         <div class="ac"><button class="tv-ok ${ojo ? 'tv-ojo' : ''}" data-acc="ok">${ojo ? IC.alert + ' Confirmar igual' : IC.ok + ' Confirmar pedido'}</button>
           ${nuevo ? `<button class="tv-pr" data-acc="precio" data-v="${nuevo.replace(/\./g, '')}">${IC.tag} Precio a $${nuevo}</button>` : ''}
-          ${chat ? `<a class="tv-sec" target="_blank" href="${chat}">${IC.chat} Abrir en Lucid</a>` : (CFG.lucid ? '' : `<button class="tv-sec tv-aprender">${IC.chat} Abrir en Lucid</button>`)}
+          
           ${tel ? `<a class="tv-sec" target="_blank" href="https://wa.me/57${tel}${decir ? '?text=' + encodeURIComponent(decir) : ''}">${IC.send} ${decir ? 'Enviar mensaje' : 'WhatsApp'}</a>` : ''}
-          ${CFG.lucid && tel ? `<button class="tv-sec tv-vc" data-acc="verchat" data-tel="${tel}">${IC.chat} Ver y escribir chat</button>` : ''}
+          ${CFG.lucid && tel ? `<button class="tv-sec tv-vc" data-acc="verchat">${IC.chat} Abrir chat</button>` : ''}
           ${CFG.lucid && tel && decir ? `<button class="tv-sec" data-acc="lucid" data-tel="${tel}" data-t="${encodeURIComponent(decir)}">${IC.send} Enviar por Lucid</button>` : ''}
           ${decir ? `<button class="tv-sec" data-acc="copiar" data-t="${encodeURIComponent(decir)}">${IC.copy} Copiar</button>` : ''}</div><div class="tvchat" data-chat="${o.id}"></div></div>`;
     }).join('');
@@ -254,14 +269,17 @@
     m.style.display = 'grid';
     return new Promise(res => { m.onclick = (e) => { const b = e.target.dataset.m; if (b || e.target === m) { m.style.display = 'none'; res(b === 'si'); } }; });
   }
-  async function mostrarChat(cd, tel, recargar) {
-    const box = cd.querySelector('.tvchat'); if (!box) return;
-    if (recargar || !chats[tel]) { box.innerHTML = '<div class="msgc">Cargando chat…</div>'; await leerChat(tel); }
-    const ms = (chats[tel] || []).slice(-15);
+  async function mostrarChat(cd, _x, recargar) {
+    const box = cd.querySelector('.tvchat'); if (!box) return; const id = cd.dataset.id;
+    if (!(id in cids)) box.innerHTML = '<div class="msgc">Buscando el chat exacto de este pedido…</div>';
+    const cid = await contacto(id);
+    if (!cid) { box.innerHTML = '<div class="msgc">⚠ No encontré con certeza el chat de este pedido en Lucid (puede que el cliente haya comprado desde otro número o desde la página). Para no escribirle a otra persona, búscalo a mano en Lucid.</div>'; return; }
+    if (recargar || !chats[cid]) { box.innerHTML = '<div class="msgc">Cargando chat…</div>'; await leerChat(cid); }
+    const ms = (chats[cid] || []).slice(-15);
     const txt = (m) => m.tx.replace(/\[Complex Message\] Check inbox for details\./g, '📨 (plantilla o mensaje con botones)').replace(/</g, '&lt;').replace(/\n/g, '<br>');
     const borr = (box.querySelector('textarea') || {}).value || '';
-    box.innerHTML = `<div class="hilo">${ms.map(m => `<div class="bur ${m.yo ? 'yo' : 'cl'}"><div>${txt(m)}</div><small>${m.yo ? 'Tienda' : 'Cliente'} · ${m.h}</small></div>`).join('') || '<div class="msgc">Sin mensajes (o falta la clave de Lucid en Opciones).</div>'}</div>
-      <div class="esc"><textarea rows="2" placeholder="Escribe al cliente…">${borr.replace(/</g, '&lt;')}</textarea><button class="tv-ok" data-acc="escribir" data-tel="${tel}">Enviar</button></div>`;
+    box.innerHTML = `<div class="quien">💬 Chat de <b>${cnom[id] || cid}</b> · pedido #${id}</div><div class="hilo">${ms.map(m => `<div class="bur ${m.yo ? 'yo' : 'cl'}"><div>${txt(m)}</div><small>${m.yo ? 'Tienda' : 'Cliente'} · ${m.h}</small></div>`).join('') || '<div class="msgc">Sin mensajes (o falta la clave de Lucid en Opciones).</div>'}</div>
+      <div class="esc"><textarea rows="2" placeholder="Escribe al cliente…">${borr.replace(/</g, '&lt;')}</textarea><button class="tv-ok" data-acc="escribir">Enviar</button></div>`;
     const h = box.querySelector('.hilo'); h.scrollTop = h.scrollHeight;
   }
   async function accion(btn) {
@@ -270,7 +288,8 @@
     if (btn.dataset.acc === 'escribir') {
       const inp = cd.querySelector('.tvchat textarea'); const txt = (inp.value || '').trim(); if (!txt) return;
       btn.disabled = true; btn.textContent = 'Enviando…';
-      const r = await lucidApi(`/contacts/${CFG.pais || '57'}${btn.dataset.tel}/send_content`, 'POST', { messages: [{ message: { text: txt } }] });
+      const cid = await contacto(id); if (!cid) { btn.disabled = false; btn.textContent = 'Enviar'; toast('No encontré el chat exacto de este pedido'); return; }
+      const r = await lucidApi(`/contacts/${cid}/send_content`, 'POST', { messages: [{ message: { text: txt } }] });
       btn.disabled = false; btn.textContent = 'Enviar';
       if (r.ok && JSON.stringify(r.data).includes('true')) { inp.value = ''; toast('Enviado por Lucid ✔'); await anotar(id, 'Mensaje enviado por Lucid'); await mostrarChat(cd, btn.dataset.tel, true); }
       else toast('Lucid no lo envió: el chat lleva más de 24 h cerrado. Usa «Enviar mensaje» por WhatsApp.');
@@ -278,8 +297,9 @@
     }
     if (btn.dataset.acc === 'lucid') {
       const txt = decodeURIComponent(btn.dataset.t);
-      if (!await modal('¿Enviar este mensaje por Lucid?', txt.replace(/</g, '&lt;'), 'Sí, enviar')) return;
-      const r = await lucidApi(`/contacts/${CFG.pais || '57'}${btn.dataset.tel}/send_content`, 'POST', { messages: [{ message: { text: txt } }] });
+      const cid = await contacto(id); if (!cid) { toast('No encontré el chat exacto de este pedido: búscalo a mano en Lucid'); return; }
+      if (!await modal('¿Enviar este mensaje por Lucid?', `<b>Para: ${cnom[id] || cid}</b><br><br>` + txt.replace(/</g, '&lt;'), 'Sí, enviar')) return;
+      const r = await lucidApi(`/contacts/${cid}/send_content`, 'POST', { messages: [{ message: { text: txt } }] });
       if (r.ok && JSON.stringify(r.data).includes('true')) { await anotar(cd.dataset.id, 'Mensaje enviado por Lucid'); toast('Mensaje enviado por Lucid ✔'); btn.textContent = 'Enviado ✔'; btn.disabled = true; }
       else toast('Lucid no lo envió: el chat lleva más de 24 h cerrado. Usa «Enviar mensaje» por WhatsApp.');
       return;

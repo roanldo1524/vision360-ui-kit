@@ -43,3 +43,8 @@ Dropi con esteroides para confirmar pedidos, **sin IA y sin salir de Dropi**.
 ## Versión 4.2
 - El pedido con novedad se **resalta en la lista de Dropi**: fila naranja, etiqueta «⚠ POR RESOLVER» junto al número y recuadro con el número de pedido, qué hacer y botones.
 - **Aviso de voz**: cuando entra un pedido nuevo para resolver suena un timbre y una voz dice «Nuevo pedido por confirmar» (revisa cada 3 minutos aunque el panel esté cerrado). Chrome solo deja sonar después de que hayas hecho clic una vez en la página.
+
+## Versión 4.3
+- **«Abrir chat»** abre el chat ahí mismo, dentro de Dropi (ya no lleva a Lucid). Busca el chat EXACTO del pedido por su número de pedido de Lucid; si no lo encuentra con certeza, no abre ninguno (para no escribirle a otra persona). Arriba del chat dice de quién es: nombre, teléfono y pedido.
+- Cada pedido dice primero **el problema** en una frase sencilla (en rojo) y después **«Haz esto»** paso a paso. El detalle técnico del robot queda escondido en «Ver detalle del robot».
+- La voz de aviso dice el nombre de quien atiende: «Karen, nuevo pedido por confirmar» (se pone en Configuración).
