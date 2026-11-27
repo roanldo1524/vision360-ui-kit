@@ -13,12 +13,15 @@ lid = leer(f'{R}/datos/reportes_lideres.json', {}) or {}
 hoy = leer('/tmp/dropi/hoy.json', []) or []
 hoy_s = time.strftime('%Y-%m-%d', time.gmtime(time.time() - 5 * 3600))
 dia = [o for o in hoy if (o.get('created') or '')[:10] == hoy_s]
-robot = sum(1 for o in dia if any(t.get('tag_name') == 'CONFIRMADO AGENTE' for t in (o.get('tags') or [])))
+def _tag(o): return any((t if isinstance(t, str) else (t or {}).get('tag_name')) == 'CONFIRMADO AGENTE' for t in (o.get('tags') or []))
+conf_hoy = [o for o in dia if o.get('status') not in ('PENDIENTE CONFIRMACION', 'CANCELADO')]
+robot = sum(1 for o in conf_hoy if _tag(o)); humano = len(conf_hoy) - robot
+pend_hoy = sum(1 for o in dia if o.get('status') == 'PENDIENTE CONFIRMACION')
 est = collections.Counter(o.get('status') for o in hoy)
 can_hoy = sum(1 for o in dia if o.get('status') == 'CANCELADO')
 qreg0 = leer('/tmp/dropi/quejas_reg.json', {}) or {}
 q_hoy = sum(1 for v in qreg0.values() if v.get('ultima', 0) >= time.time() - ((time.time() - 5 * 3600) % 86400))
-datos = (f"HOY: pedidos {len(dia)}; confirmados por el robot {robot}; CANCELADOS HOY {can_hoy} (el robot NUNCA cancela: los cancela el cliente o una persona); "
+datos = (f"HOY: pedidos {len(dia)}; CONFIRMADOS HOY {len(conf_hoy)} = robot {robot} + equipo/humano {humano}; pendientes por confirmar {pend_hoy}; CANCELADOS HOY {can_hoy} (el robot NUNCA cancela: los cancela el cliente o una persona); "
          f"quejas al CAS puestas hoy {q_hoy}.\nEstados de TODOS los pedidos de los ÚLTIMOS 45 DÍAS (no son de hoy): " +
          ', '.join(f'{k} {v}' for k, v in est.most_common(8)) + ".\nLíderes:\n" +
          '\n'.join(f"- {k}: nuevo: {v.get('nuevo')}; problema: {v.get('problema')}; solución: {v.get('solucion')}" for k, v in lid.items() if not k.startswith('_')))
