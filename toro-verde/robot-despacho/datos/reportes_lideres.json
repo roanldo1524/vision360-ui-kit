@@ -19,10 +19,10 @@
  "Gestor de tickets y CAS": {
   "area": "Logística y CAS",
   "voz": "rounded",
-  "nuevo": "El CAS ahora lo maneja código: lee la respuesta del asesor y actúa solo cada 2 horas.",
-  "mejoro": "De 36 casos, 35 sin IA; 10 mensajes puestos en el CAS en una vuelta.",
-  "problema": "Los asesores cierran el caso con «se da por finalizada» sin entregar el paquete.",
-  "solucion": "Si la guía sigue quieta 48 h, se reabre con seguimiento y se pide fecha concreta."
+  "nuevo": "Regla nueva: «destinatario desconocido / validar con el cliente» ya se responde sola con los datos del cliente y la petición de no devolver.",
+  "mejoro": "Vuelta 5:23 p. m.: 42 casos leídos, solo 1 necesitó IA; 41 los resolvió el código.",
+  "problema": "3 paquetes en oficina con el chat del cliente cerrado (no se les pudo avisar): Roberto Pérez, Luis Ernesto Cárdenas, Diego Alexander.",
+  "solucion": "Cuando Ronald active la plantilla de rastreo de oficina, se les avisa aunque el chat esté cerrado."
  },
  "Rastreador de oficinas": {
   "area": "Rastreo al cliente",
