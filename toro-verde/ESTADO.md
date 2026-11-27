@@ -977,3 +977,4 @@ Carpeta Flujos / Recompra, 20 flujos, todos con Estado y Bandeja de Entrada ence
   - Motivos que frenaron pedidos que luego aprobó una persona: «recibe poco» 17 de 26, flete sobre el tope 18 de 24, otros 15 de 28, modo humano 9 de 18 y sin «confirmar» en el chat 8 de 24.
   - % entregado S47: robot 100 % (68/68 resueltos), persona 98 %. S48 en curso: robot 92 %, persona 90 %.
   - En la última vuelta los 2 pedidos revisados (Jhon López, La Vega; Absalón Trejos, Quinchía) ya los había confirmado el equipo antes que el robot.
+- 26-11 8:20 p. m. — Casino: recordatorio de urgencia a 93 personas (de 242 que lo recibieron hoy). Casino hoy: 16 pedidos $2.956.100. Del día completo (164 pedidos en Lucid), la mayoría son de 1 litro: se propuso a Ronald ofrecer el galón al confirmar y que el bot recomiende por costo por bomba; espera su «dale al galón».
