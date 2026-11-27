@@ -24,3 +24,11 @@ Dropi con esteroides para confirmar pedidos, **sin IA y sin salir de Dropi**.
 ## Versión 3.0
 - Universal: sirve para cualquier tienda de Dropi. Si hay un robot que deja notas («🤖 ROBOT …»), las usa; si no, la extensión revisa sola historial, dirección y repetidos.
 - Filtro «Para ti»: solo lo que necesita una persona. Íconos y colores propios.
+
+## Versión 4.0: configurable y con Lucid
+- Toca el ícono de la extensión (arriba en Chrome) para abrir la **Configuración**:
+  - **Clave de la API de Lucid** (opcional; se guarda solo en ese Chrome y nunca pasa a la página de Dropi).
+  - **Enlace de un chat de Lucid**, **nombre de quien atiende**, **nombre de la tienda** y **código del país**.
+  - Botón **Probar conexión con Lucid**.
+- Con la clave de Lucid, cada pedido trae **Ver chat** (los últimos mensajes del cliente dentro de Dropi) y **Enviar por Lucid** (manda el mensaje listo; si el chat lleva más de 24 h cerrado, avisa que uses WhatsApp).
+- Sirve para cualquier tienda: cada una pone su clave y sus datos.

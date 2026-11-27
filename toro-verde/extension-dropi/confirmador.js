@@ -26,9 +26,16 @@
     const r = await f0(API + u, { method: m, headers: { 'x-authorization': auth, accept: 'application/json', 'content-type': 'application/json' }, body: body ? JSON.stringify(body) : undefined });
     let j = null; try { j = await r.json(); } catch (e) {} return { s: r.status, j };
   };
+  // Configuración (Opciones de la extensión) y Lucid por el puente: la clave nunca llega a esta página
+  let CFG = { lucid: false, chatUrl: '', nombre: '', tienda: '', pais: '57' };
+  const esperando = {}; let nreq = 0;
+  window.addEventListener('message', (e) => { const m = e.data; if (e.source !== window || !m) return;
+    if (m.tv === 'cfg') { CFG = Object.assign(CFG, m.cfg); if (document.getElementById('tvc')) pintar(); }
+    if (m.tv === 'res' && esperando[m.id]) { esperando[m.id](m.r); delete esperando[m.id]; } });
+  const lucidApi = (ruta, metodo, cuerpo) => new Promise(res => { const id = ++nreq; esperando[id] = res; window.postMessage({ tv: 'req', id, ruta, metodo, cuerpo }, '*'); setTimeout(() => { if (esperando[id]) { delete esperando[id]; res({ ok: false, error: 'tiempo' }); } }, 20000); });
   const plata = (n) => '$' + Math.round(+n || 0).toLocaleString('es-CO');
   const parte = (t, k) => { const m = String(t || '').match(new RegExp(k + ':\\s*([^·|]+)')); return m ? m[1].trim() : ''; };
-  const lucid = (tel) => { let m = ''; try { m = localStorage.getItem('tv_lucid_url') || ''; } catch (e) {} return m ? m.replace('{tel}', '57' + tel) : ''; };
+  const lucid = (tel) => { let m = CFG.chatUrl || ''; if (!m) { try { m = localStorage.getItem('tv_lucid_url') || ''; } catch (e) {} } return m ? m.replace('{tel}', (CFG.pais || '57') + tel) : ''; };
   const hora = () => new Date().toLocaleString('es-CO', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
 
   // ───────── Diseño Toro Verde (Ronald 27-11: «diseño único, buena experiencia de usuario») ─────────
@@ -64,6 +71,9 @@
   #tvc .cd .qh b{display:block;color:#9a3d00;font-size:13.5px}#tvc .cd .qh .qt{font-weight:800;color:#9a3d00;font-size:12px;text-transform:uppercase;letter-spacing:.3px}
   #tvc .cd .qh ol{margin:6px 0 6px 18px;padding:0;color:#5a2600;font-weight:600;font-size:13.5px}#tvc .cd .qh li{margin:3px 0}
   #tvc .cd .qh .dc{background:#fff;border:1px dashed #ffb27a;border-radius:8px;padding:7px 9px;margin:6px 0;font-size:12.5px;color:#333}#tvc .cd .qh .dc span{display:block;font-weight:700;color:var(--tv-ver);font-size:11.5px;margin-bottom:2px}
+  #tvc .tvchat{padding:0 14px 6px}#tvc .tvchat .msgc{color:#6b7280;font-size:12.5px;padding:6px 0}
+  #tvc .bur{max-width:85%;margin:6px 0;padding:7px 10px;border-radius:12px;font-size:13px}#tvc .bur small{display:block;color:#6b7280;font-size:10.5px;margin-top:2px}
+  #tvc .bur.cl{background:#eef0ff;border-top-left-radius:3px}#tvc .bur.yo{background:#f0f9d4;margin-left:auto;border-top-right-radius:3px}
   .tv-ojo{background:#9ca3af!important;color:#fff!important}
   .tvi{width:16px;height:16px;vertical-align:-3px;flex:none}#tvc .lg .tvi,#tvc-btn .ic .tvi{width:20px;height:20px}#tvc .cd .qh small{color:#8a5a3a;font-size:12px}
   #tvc .cd.rb .qh{background:#f3f4f2;border-color:#e2e5df}#tvc .cd.rb .qh b{color:#4b5563}
@@ -97,14 +107,15 @@
   }
   // Universal: sirve en cualquier tienda de Dropi. Si un robot dejó nota («🤖 ROBOT · POR QUÉ · QUÉ HACER · QUIÉN · DECIR»), manda la nota;
   // si no, la extensión revisa sola los datos del pedido (historial del cliente, dirección, repetidos) y propone los pasos.
+  const firma = () => `soy ${CFG.nombre || 'del equipo'}${CFG.tienda ? ' de ' + CFG.tienda : ''}`;
   function propio(o) {
     const e = +o.client_total_orders_delivered || 0, d = +o.client_total_orders_returneds || 0, n = (o.name || '').split(' ')[0];
     const pasos = [], por = []; let decir = '';
-    if (d > e) { por.push(`devolvió ${d} y recibió ${e}`); pasos.push('NO confirmar todavía: pedir un abono o llamar para asegurar que lo va a recibir'); decir = `Hola ${n}, te escribimos por tu pedido 🙌 Para despacharlo te pedimos un abono; el resto lo pagas al recibir. ¿Te comparto los datos?`; }
+    if (d > e) { por.push(`devolvió ${d} y recibió ${e}`); pasos.push('NO confirmar todavía: pedir un abono o llamar para asegurar que lo va a recibir'); decir = `Hola ${n}, ${firma()} 🙌 Te escribimos por tu pedido. Para despacharlo te pedimos un abono; el resto lo pagas al recibir. ¿Te comparto los datos?`; }
     const dir = String(o.dir || '');
-    if (!/oficina|reclama/i.test(dir) && !/\d+\s*[a-z]?\s*-\s*\d+|#\s*\d+|casa\s*\d+|mz/i.test(dir)) { por.push('la dirección no tiene número de casa'); pasos.push('Pedir la dirección completa con número de casa y un punto de referencia, y corregirla'); decir = decir || `Hola ${n}, para despachar tu pedido nos falta la dirección completa: calle, número de casa, barrio y un punto de referencia. ¿Nos la compartes?`; }
+    if (!/oficina|reclama/i.test(dir) && !/\d+\s*[a-z]?\s*-\s*\d+|#\s*\d+|casa\s*\d+|mz/i.test(dir)) { por.push('la dirección no tiene número de casa'); pasos.push('Pedir la dirección completa con número de casa y un punto de referencia, y corregirla'); decir = decir || `Hola ${n}, ${firma()}. Para despachar tu pedido nos falta la dirección completa: calle, número de casa, barrio y un punto de referencia. ¿Nos la compartes?`; }
     if (+o.ordenes_repetidas > 0 || (Array.isArray(o.ordenes_repetidas) && o.ordenes_repetidas.length)) { por.push('tiene otro pedido parecido'); pasos.push('Preguntar si son dos pedidos o uno repetido'); }
-    if (!pasos.length) { pasos.push('Revisar el chat del cliente: que haya aceptado producto, precio y dirección'); decir = `Hola ${n}, tu pedido ya está listo para despachar hoy. ¿Nos confirmas con un SÍ para enviarlo?`; }
+    if (!pasos.length) { pasos.push('Revisar el chat del cliente: que haya aceptado producto, precio y dirección'); decir = `Hola ${n}, ${firma()}. Tu pedido ya está listo para despachar hoy. ¿Nos confirmas con un SÍ para enviarlo?`; }
     if (!/NO confirmar/.test(pasos.join())) pasos.push('Si todo queda bien, tocar Confirmar pedido');
     return { que: pasos.map((p, i) => `${i + 1}) ${p}.`).join(' '), por: por.join(', ') || 'sin revisión automática', decir };
   }
@@ -182,7 +193,9 @@
           ${nuevo ? `<button class="tv-pr" data-acc="precio" data-v="${nuevo.replace(/\./g, '')}">${IC.tag} Precio a $${nuevo}</button>` : ''}
           ${chat ? `<a class="tv-sec" target="_blank" href="${chat}">${IC.chat} Chat</a>` : `<button class="tv-sec tv-aprender">${IC.chat} Chat</button>`}
           ${tel ? `<a class="tv-sec" target="_blank" href="https://wa.me/57${tel}${decir ? '?text=' + encodeURIComponent(decir) : ''}">${IC.send} ${decir ? 'Enviar mensaje' : 'WhatsApp'}</a>` : ''}
-          ${decir ? `<button class="tv-sec" data-acc="copiar" data-t="${encodeURIComponent(decir)}">${IC.copy} Copiar</button>` : ''}</div></div>`;
+          ${CFG.lucid && tel ? `<button class="tv-sec" data-acc="verchat" data-tel="${tel}">${IC.list} Ver chat</button>` : ''}
+          ${CFG.lucid && tel && decir ? `<button class="tv-sec" data-acc="lucid" data-tel="${tel}" data-t="${encodeURIComponent(decir)}">${IC.send} Enviar por Lucid</button>` : ''}
+          ${decir ? `<button class="tv-sec" data-acc="copiar" data-t="${encodeURIComponent(decir)}">${IC.copy} Copiar</button>` : ''}</div><div class="tvchat" data-chat="${o.id}"></div></div>`;
     }).join('');
   }
   async function anotar(id, texto) {
@@ -197,6 +210,25 @@
   }
   async function accion(btn) {
     const cd = btn.closest('.cd'); const id = cd.dataset.id; const o = pedidos.find(x => String(x.id) === id) || {};
+    if (btn.dataset.acc === 'verchat') {
+      const box = cd.querySelector('.tvchat'); if (box.innerHTML) { box.innerHTML = ''; return; }
+      box.innerHTML = '<div class="msgc">Cargando chat…</div>';
+      const r = await lucidApi(`/contacts/${CFG.pais || '57'}${btn.dataset.tel}/messages?limit=12`);
+      const t = typeof r.data === 'string' ? r.data : JSON.stringify(r.data || '');
+      if (!r.ok) { box.innerHTML = `<div class="msgc">No pude leer el chat (${r.error || r.status}).</div>`; return; }
+      const ms = t.split(/\n(?=(?:Yo|Usuario) \()/).filter(x => /^(Yo|Usuario) \(/.test(x)).slice(-10);
+      box.innerHTML = ms.map(x => { const yo = x.startsWith('Yo'); const h = (x.match(/\(([^)]+)\)/) || [])[1] || ''; const tx = x.replace(/^(Yo|Usuario) \([^)]*\):\s*/, '').replace(/\[Complex Message\] Check inbox for details\./g, '📨 (plantilla o mensaje con botones)');
+        return `<div class="bur ${yo ? 'yo' : 'cl'}"><div>${tx.replace(/</g, '&lt;').replace(/\n/g, '<br>')}</div><small>${yo ? 'Tienda' : 'Cliente'} · ${h}</small></div>`; }).join('') || '<div class="msgc">Sin mensajes.</div>';
+      return;
+    }
+    if (btn.dataset.acc === 'lucid') {
+      const txt = decodeURIComponent(btn.dataset.t);
+      if (!await modal('¿Enviar este mensaje por Lucid?', txt.replace(/</g, '&lt;'), 'Sí, enviar')) return;
+      const r = await lucidApi(`/contacts/${CFG.pais || '57'}${btn.dataset.tel}/send_content`, 'POST', { messages: [{ message: { text: txt } }] });
+      if (r.ok && JSON.stringify(r.data).includes('true')) { await anotar(cd.dataset.id, 'Mensaje enviado por Lucid'); toast('Mensaje enviado por Lucid ✔'); btn.textContent = 'Enviado ✔'; btn.disabled = true; }
+      else toast('Lucid no lo envió: el chat lleva más de 24 h cerrado. Usa «Enviar mensaje» por WhatsApp.');
+      return;
+    }
     if (btn.dataset.acc === 'copiar') { try { await navigator.clipboard.writeText(decodeURIComponent(btn.dataset.t)); toast('Mensaje copiado: pégalo en el chat del cliente'); } catch (e) { toast('No se pudo copiar'); } return; }
     const res = `<b>${o.name || ''} ${o.surname || ''}</b> · #${id}<br>${plata(o.total_order)} · ${(o.city || '')} · ${(o.distribution_company || {}).name || ''}<br>${o.dir || ''}`;
     if (btn.dataset.acc === 'ok') {
