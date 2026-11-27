@@ -136,6 +136,12 @@
     }
     return { nota: 'propio', que, por, quien: 'Equipo', decir: pr.decir, tipo, robot: false };
   }
+  async function cargarSilencio() {   // trae los pendientes sin abrir el panel (para el contador del botón y la voz)
+    auth = tokLS() || auth; if (!auth || !userId) return;
+    const f = (d) => d.toISOString().slice(0, 10);
+    const r = await api('GET', `/orders/myorders/v2?exportAs=orderByRow&orderBy=id&orderDirection=desc&result_number=300&start=0&textToSearch=&status=PENDIENTE%20CONFIRMACION&supplier_id=false&user_id=${userId}&from=${f(new Date(Date.now() - 10 * 864e5))}&until=${f(new Date(Date.now() + 864e5))}&filter_date_by=FECHA%20DE%20CREADO`);
+    if (r.s !== 200) return; pedidos = ((r.j || {}).objects || []).filter(o => o.status === 'PENDIENTE CONFIRMACION'); pintar();
+  }
   async function cargar() {
     const ls = document.querySelector('#tvc .ls');
     auth = tokLS() || auth;
@@ -187,6 +193,15 @@
       return `<span class="lp"><b>${q} ×</b> ${nom}${pres ? ' · ' + pres : ''} <em>${plata(pu)} c/u = ${plata(pu * q)}</em></span>`;
     }).join('');
   }
+  function avisar(n) {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)(); const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sine'; o.frequency.setValueAtTime(880, ctx.currentTime); o.frequency.setValueAtTime(1320, ctx.currentTime + 0.15);
+      g.gain.setValueAtTime(0.25, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45); o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + 0.5);
+      setTimeout(() => { const u = new SpeechSynthesisUtterance(n > 1 ? `${n} pedidos nuevos por confirmar` : 'Nuevo pedido por confirmar'); u.lang = 'es-CO'; u.rate = 1; speechSynthesis.speak(u); }, 550);
+    } catch (e) {}
+    toast(n > 1 ? `🔔 ${n} pedidos nuevos por confirmar` : '🔔 Nuevo pedido por confirmar');
+  }
   function pintar() {
     const p = document.getElementById('tvc'); if (!p) return;
     window.__tvRobot = pedidos.some(o => String(o.notes || '').includes('🤖 ROBOT'));
@@ -195,6 +210,9 @@
     p.querySelector('.kpi').innerHTML = `<div><span>${tuyos.length}</span><em>Para resolver</em></div><div><span>${it.filter(x => /NO confirmar/.test(x.que)).length}</span><em>Esperan abono</em></div><div><span>${it.length - tuyos.length}</span><em>Robot revisando</em></div>`;
     p.querySelector('.hd small').textContent = `${it.length} pendientes de confirmar · actualizado ${actual}`;
     const n = document.querySelector('#tvc-btn .n'); if (n) n.textContent = tuyos.length;
+    // Ronald 27-11: «sonido de nuevo pedido por confirmar, así como una nota de voz»
+    if (window.__tvAntes !== undefined && tuyos.length > window.__tvAntes) avisar(tuyos.length - window.__tvAntes);
+    window.__tvAntes = tuyos.length;
     const tipos = {}; it.forEach(x => tipos[x.tipo] = (tipos[x.tipo] || 0) + 1);
     const chips = ['Para ti', ...Object.keys(tipos).filter(t => t !== 'Robot revisando').sort((a, b) => tipos[b] - tipos[a]), ...(tipos['Robot revisando'] ? ['Robot revisando'] : []), 'Todos'];
     const cuenta = (t) => t === 'Todos' ? it.length : t === 'Para ti' ? tuyos.length : tipos[t];

@@ -39,3 +39,7 @@ Dropi con esteroides para confirmar pedidos, **sin IA y sin salir de Dropi**.
 - **Solo pedidos de Lucid Bot** en el panel.
 - **Abrir chat y acciones** desde el recuadro naranja de cada pedido en la lista de Dropi, aunque el panel esté cerrado.
 - Ventana grande y clara para conectar el botón «Abrir en Lucid».
+
+## Versión 4.2
+- El pedido con novedad se **resalta en la lista de Dropi**: fila naranja, etiqueta «⚠ POR RESOLVER» junto al número y recuadro con el número de pedido, qué hacer y botones.
+- **Aviso de voz**: cuando entra un pedido nuevo para resolver suena un timbre y una voz dice «Nuevo pedido por confirmar» (revisa cada 3 minutos aunque el panel esté cerrado). Chrome solo deja sonar después de que hayas hecho clic una vez en la página.

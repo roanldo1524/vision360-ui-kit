@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Confirma+ para Dropi",
-  "version": "4.1",
+  "version": "4.2",
   "description": "Confirmación de pedidos con esteroides dentro de Dropi: qué hacer en cada pedido, mensaje listo para el cliente y botones de un toque. Funciona con cualquier tienda. Sin IA.",
   "content_scripts": [
     {
