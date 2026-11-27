@@ -156,6 +156,10 @@ if __name__ == '__main__':
             vivos = {str(x['id']) for x in seguros}
             for k, v in list(pend.items()):
                 if k in nuevos_r and k not in vivos: pend.pop(k); continue  # no se le pudo poner la oficina: no se avisa
+                try:  # Ronald 27-11: en modo humano el robot confirma pero NO le escribe al cliente (no pisa al equipo)
+                    ii = json.loads(urllib.request.urlopen(urllib.request.Request(f"https://panel.lucidbot.co/api/contacts/{v['chat']}", headers={'X-ACCESS-TOKEN': K}), timeout=40).read())
+                    if (ii.get('data', ii) or {}).get('live_chat'): continue
+                except Exception: continue
                 try:
                     r = urllib.request.Request(f"https://panel.lucidbot.co/api/contacts/{v['chat']}/send_content", data=json.dumps({'messages': [{'message': {'text': v['txt']}}]}).encode(),
                                                headers={'X-ACCESS-TOKEN': K, 'Content-Type': 'application/json'}, method='POST')

@@ -78,7 +78,6 @@ for c, lst in por_contacto.items():
     usuario = ' '.join(l for l in re.split(r'\n(?=(?:Yo|Usuario) \()', t) if l.startswith('Usuario'))
     oficina = bool(re.search(r'oficina|interrapid', (p['Dirección'] + ' ' + p['Notas']), re.I))
     motivos = []
-    if en_humano: motivos.append('una persona del equipo está atendiendo este chat (modo humano en Lucid): no lo toco')
     oficina_chat = re.search(r'reclam|recog|me (mandan|env[ií]an) (el )?c[oó]digo|bajo (a|para)|voy a (la oficina|recogerlo)|en la oficina|interrapid', usuario, re.I)
     if oficina_chat and not oficina: motivos.append('en el chat habla de reclamarlo/recogerlo pero la dirección es de casa: preguntar si es oficina de Interrapidísimo')
     if len(lst) > 1: motivos.append(f'repetido ({len(lst)} pedidos en Lucid)')
@@ -101,6 +100,10 @@ for c, lst in por_contacto.items():
     valor_chat = re.sub(r'[^\d]', '', vt.group(1)) if vt else ''
     if prod_chat and p['Productos'] and prod_chat.upper().replace('Ó','O').split('PRESENTACION')[1:] != p['Productos'].upper().replace('Ó','O').split('PRESENTACION')[1:]:
         pass
+    # Ronald 27-11 («sí lo acepto»): en modo humano se CONFIRMA si el cliente aceptó el resumen y todo cuadra; el robot no le escribe.
+    # Si hay cualquier otro motivo, sigue frenado y se respeta el modo humano.
+    if en_humano and (motivos or pago_previo): motivos.append('una persona del equipo está atendiendo este chat (modo humano en Lucid): no lo toco')
+    if en_humano and not motivos and not pago_previo: open('/tmp/dropi/humano_ok.txt', 'a').write(c + '\n')
     es_shop, carrito = marcas(c)
     if es_shop and not confirmo_boton(t) and not any('CONFIRMAR PEDIDO' in m for m in motivos): motivos.append('pedido de Shopify: el cliente no ha tocado «CONFIRMAR PEDIDO» en el chat')
     filas.append({'contacto': c, 'shopify': es_shop, 'carrito': carrito, 'trans_cliente': trans_pedida(usuario), 'nombre': (p['Nombre'] + ' ' + p['Apellido']).strip(), 'ciudad': f"{p['Ciudad']} ({p['Departamento']})",
@@ -118,12 +121,12 @@ if '--contactos' in sys.argv:
         usuario = ' '.join(l for l in re.split(r'\n(?=(?:Yo|Usuario) \()', t) if l.startswith('Usuario'))
         tras = t[t.rfind('Resumen de tu pedido'):] if 'Resumen de tu pedido' in t else ''
         motivos = []
-        if info.get('live_chat'): motivos.append('una persona del equipo está atendiendo este chat (modo humano en Lucid): no lo toco')
         if NO.search(usuario): motivos.append('el cliente dijo que no: «' + NO.search(usuario).group(0) + '»')
         if re.search(r'addi|cuotas|transferencia|consignaci|comprobante|nequi|daviplata|no (lo )?pago (en )?contra ?entrega', usuario + ' ' + tras, re.I): motivos.append('pide pagar por Addi, cuotas o transferencia: se confirma a mano')
         confirmo = re.search(r'^Usuario \([^)]*\):\s*(confirmar pedido|s[ií]\b|si,? es correcto|es correcto|correcto|confirmo)', t, re.I | re.M) or SI.search(t)
         if not confirmo: motivos.append('pedido de la página: el cliente aún no confirma en el chat (no tocó «CONFIRMAR PEDIDO» ni dijo sí)')
         if re.search(r'reclam|recog|me (mandan|env[ií]an) (el )?c[oó]digo|en la oficina', usuario, re.I): motivos.append('en el chat habla de reclamar en oficina: revisar la dirección')
+        if info.get('live_chat') and motivos: motivos.append('una persona del equipo está atendiendo este chat (modo humano en Lucid): no lo toco')  # Ronald 27-11: sin otro motivo, se confirma aunque esté en humano
         es_shop, carrito = marcas(c)
         filas.append({'contacto': c, 'shopify': es_shop, 'carrito': carrito, 'trans_cliente': trans_pedida(usuario), 'nombre': info.get('first_name') or '', 'ciudad': '', 'producto': '', 'valor': '', 'producto_lucid': '', 'valor_lucid': '',
                       'entrega': '', 'transportadora': '', 'id_lucidsales': [], 'origen': 'pagina', 'decision': 'POR CANCELAR' if motivos else 'SALE', 'motivos': motivos})
