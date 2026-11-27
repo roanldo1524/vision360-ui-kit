@@ -35,6 +35,7 @@ VAL = {
     '__PRECIOS_DESCUENTO__': py(set(int(p) for p in C.get('precios_descuento') or [])),
     '__PRECIOS_POR_UNIDADES__': py({str(k): [int(x) for x in v] for k, v in (C.get('precios_por_unidades') or {}).items()}),
     '__ESPERA_IA_MIN__': str(int(C.get('espera_ia_min', 120))),
+    '__CONFIRMAR_EN_HUMANO__': 'True' if C.get('confirmar_en_humano', False) else 'False',
     '__AVISO_CADA_VUELTA__': py(bool(C['avisos'].get('cada_vuelta', True))),
     '__TITULO_RESUMEN__': str(C['lucid'].get('titulo_resumen') or 'Resumen de tu pedido').replace("'", ''),
     '__FRASES_CONFIRMACION__': py([str(x) for x in C['lucid'].get('frases_confirmacion') or []]),

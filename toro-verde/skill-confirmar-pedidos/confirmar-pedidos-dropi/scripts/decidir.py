@@ -47,6 +47,7 @@ def marcas(c):
     return shop, carrito
 # A los pedidos de Shopify/página sin confirmar se les manda un mensaje («Tu pedido ya está en proceso…», recordar_confirmar.py);
 # si el cliente responde que sí después de ese mensaje, cuenta como confirmación.
+CONFIRMAR_EN_HUMANO = __CONFIRMAR_EN_HUMANO__
 FRASES_CONF = ['Tu pedido ya está en proceso para ser despachado', 'Solo falta tu confirmación para despacharlo', 'Tu pedido ya está empacado y sale hoy mismo', 'está listo para salir'] + __FRASES_CONFIRMACION__
 def shop_si(t):
     k = max(t.rfind(fr) for fr in FRASES_CONF)
@@ -80,7 +81,6 @@ for c, lst in por_contacto.items():
     usuario = ' '.join(l for l in re.split(r'\n(?=(?:Yo|Usuario) \()', t) if l.startswith('Usuario'))
     oficina = bool(re.search(r'oficina|interrapid', (p['Dirección'] + ' ' + p['Notas']), re.I))
     motivos = []
-    if en_humano: motivos.append('una persona del equipo está atendiendo este chat (modo humano en Lucid): no lo toco')
     oficina_chat = re.search(r'reclam|recog|me (mandan|env[ií]an) (el )?c[oó]digo|bajo (a|para)|voy a (la oficina|recogerlo)|en la oficina|interrapid', usuario, re.I)
     if oficina_chat and not oficina: motivos.append('en el chat habla de reclamarlo/recogerlo pero la dirección es de casa: preguntar si es oficina de Interrapidísimo')
     if len(lst) > 1: motivos.append(f'repetido ({len(lst)} pedidos en Lucid)')
@@ -103,6 +103,9 @@ for c, lst in por_contacto.items():
     valor_chat = re.sub(r'[^\d]', '', vt.group(1)) if vt else ''
     if prod_chat and p['Productos'] and prod_chat.upper().replace('Ó','O').split('PRESENTACION')[1:] != p['Productos'].upper().replace('Ó','O').split('PRESENTACION')[1:]:
         pass
+    # config confirmar_en_humano: si está activo, un chat en modo humano se confirma cuando el cliente aceptó y no hay ningún otro motivo
+    # (el robot no le escribe a ese cliente). Si está apagado, el modo humano siempre frena.
+    if en_humano and (motivos or pago_previo or not CONFIRMAR_EN_HUMANO): motivos.append('una persona del equipo está atendiendo este chat (modo humano en Lucid): no lo toco')
     es_shop, carrito = marcas(c)
     if es_shop and not confirmo_boton(t) and not any('CONFIRMAR PEDIDO' in m for m in motivos): motivos.append('pedido de Shopify: el cliente no ha tocado «CONFIRMAR PEDIDO» en el chat')
     filas.append({'contacto': c, 'shopify': es_shop, 'carrito': carrito, 'trans_cliente': trans_pedida(usuario), 'nombre': (p['Nombre'] + ' ' + p['Apellido']).strip(), 'ciudad': f"{p['Ciudad']} ({p['Departamento']})",
@@ -120,12 +123,12 @@ if '--contactos' in sys.argv:
         usuario = ' '.join(l for l in re.split(r'\n(?=(?:Yo|Usuario) \()', t) if l.startswith('Usuario'))
         tras = t[t.rfind('Resumen de tu pedido'):] if 'Resumen de tu pedido' in t else ''
         motivos = []
-        if info.get('live_chat'): motivos.append('una persona del equipo está atendiendo este chat (modo humano en Lucid): no lo toco')
         if NO.search(usuario): motivos.append('el cliente dijo que no: «' + NO.search(usuario).group(0) + '»')
         if re.search(r'addi|cuotas|transferencia|consignaci|comprobante|nequi|daviplata|no (lo )?pago (en )?contra ?entrega', usuario + ' ' + tras, re.I): motivos.append('pide pagar por Addi, cuotas o transferencia: se confirma a mano')
         confirmo = re.search(r'^Usuario \([^)]*\):\s*(confirmar pedido|s[ií]\b|si,? es correcto|es correcto|correcto|confirmo)', t, re.I | re.M) or SI.search(t)
         if not confirmo: motivos.append('pedido de la página: el cliente aún no confirma en el chat (no tocó «CONFIRMAR PEDIDO» ni dijo sí)')
         if re.search(r'reclam|recog|me (mandan|env[ií]an) (el )?c[oó]digo|en la oficina', usuario, re.I): motivos.append('en el chat habla de reclamar en oficina: revisar la dirección')
+        if info.get('live_chat') and (motivos or not CONFIRMAR_EN_HUMANO): motivos.append('una persona del equipo está atendiendo este chat (modo humano en Lucid): no lo toco')
         es_shop, carrito = marcas(c)
         filas.append({'contacto': c, 'shopify': es_shop, 'carrito': carrito, 'trans_cliente': trans_pedida(usuario), 'nombre': info.get('first_name') or '', 'ciudad': '', 'producto': '', 'valor': '', 'producto_lucid': '', 'valor_lucid': '',
                       'entrega': '', 'transportadora': '', 'id_lucidsales': [], 'origen': 'pagina', 'decision': 'NO SALE' if motivos else 'SALE', 'motivos': motivos})

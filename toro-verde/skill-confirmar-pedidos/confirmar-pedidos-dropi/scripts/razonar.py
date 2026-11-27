@@ -151,6 +151,8 @@ for d in det:
     # 6) Flete: tope del dueño + tolerancia (p. ej. 15 %)
     tope = round(tope_flete(d) * (1 + TOLERANCIA))
     if d['flete'] > tope and 'transportadora' not in editar: motivos.append(f'flete ${d["flete"]:,.0f} mayor a ${tope:,.0f}'.replace(',', '.'))
+    # Pedido para reclamar en oficina de Interrapidísimo que va por otra transportadora → se cambia a Interrapidísimo (Dropi da un ID nuevo y se confirma en la próxima vuelta)
+    if oficina and d['dc'] != 3 and not motivos and 'transportadora' not in editar: editar['transportadora'] = UI['INTERRAPIDISIMO']
     if rural_ofi and not motivos:
         if d['dc'] != 3: editar['transportadora'] = UI['INTERRAPIDISIMO']  # Dropi crea ID nuevo; en la próxima vuelta ya es Inter y pasa a oficina
         else:

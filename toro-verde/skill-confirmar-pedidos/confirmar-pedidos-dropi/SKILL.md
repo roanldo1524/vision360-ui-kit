@@ -24,6 +24,7 @@ Si no existe `config.json` junto a este archivo (o el dueño pide cambiar reglas
 9. **Equipo que recibe los avisos** por WhatsApp: celulares. ¿Quiere el resumen de cada vuelta (`avisos.cada_vuelta: true`) o solo los avisos de plata, como comprobantes de abono (`false`)?
 10. **Abono a clientes que devuelven** (opcional): si tiene en Lucid un flujo que pide el abono (audio o texto con los datos para consignar), su número va en `lucid.flujo_anticipo`. Si no tiene, va en 0 y esos pedidos solo quedan en REVISAR HUMANO.
 11. **Tiempo de espera de la IA** (`espera_ia_min`, por defecto 120): si un pedido dudoso no lo revisa nadie en ese tiempo, pasa solo a REVISAR HUMANO.
+12. **Confirmar en modo humano** (`confirmar_en_humano`, por defecto `false`): si el dueño lo activa, un chat que está atendiendo una persona se confirma igual cuando el cliente aceptó el resumen y todo cuadra. El robot no le escribe a ese cliente para no pisar al equipo.
 12. **Credenciales** (no las pidas en el chat): un usuario de Dropi solo para el robot, guardado en las variables de entorno `DU` (correo) y `DP` (clave), y el token de Lucid Bot (variable `LUCID_TOKEN` o archivo `/tmp/robot/lucidbot.key`). Nunca imprimas sus valores.
 
 Los números internos no se le preguntan al dueño: **búscalos tú**.

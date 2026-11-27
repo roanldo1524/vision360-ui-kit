@@ -22,3 +22,6 @@ Confirma solo los pedidos contra entrega que están bien y deja los dudosos con 
 - **Descuentos solo para clientes nuevos**: si alguien que ya compró llega con precio de descuento, decide una persona.
 - Ya no frena a clientes con apellidos iguales («López López»).
 - Una sola vuelta a la vez, para que no se pisen.
+
+- Nuevo: cambia a Interrapidísimo los pedidos de oficina que iban por otra transportadora.
+- Nuevo (opcional): confirmar pedidos en modo humano cuando todo cuadra (`confirmar_en_humano: true` en la configuración).

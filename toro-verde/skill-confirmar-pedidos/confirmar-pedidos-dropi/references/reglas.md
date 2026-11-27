@@ -27,3 +27,6 @@ Todas se ajustan en `config.json`; las que no tienen número son fijas porque cu
 - Tope de envío para 2 unidades en $28.000 cuando la tarifa más común era $28.645: frenaba casi todos (por eso existe la tolerancia).
 - Cliente que aceptó 2 unidades en el chat pero el pedido subió a Dropi con 1: ahora se corrige solo si el precio del chat es el de 2 unidades.
 - Clientes frenados por «nombre raro» solo por tener los dos apellidos iguales.
+
+- **Oficina con otra transportadora:** si el pedido dice «RECLAMA EN OFICINA INTERRAPIDÍSIMO» pero va por otra transportadora, el robot lo cambia a Interrapidísimo (Dropi le da un número nuevo) y lo confirma en la vuelta siguiente.
+- **Modo humano (opcional, `confirmar_en_humano`):** apagado, el modo humano siempre frena. Prendido, se confirma si el cliente aceptó y no hay otro motivo; el robot nunca le escribe a ese cliente.
