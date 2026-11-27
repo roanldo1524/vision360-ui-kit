@@ -206,6 +206,9 @@ Taloneras 9 % (11) · Paraguas 0 % (11) · Chaleco 0 % (7).
   Pedidos de gente que recibió el casino: 13 = **$1.398.400** (ayer 26-nov: 5 = $497.700), 0 con el premio.
   Dropi: sigue fallando el cubre canas NEGRO («Producto 2 no existe»): hoy …9262 (Lucid 230506, $69.900) y queda …7819
   del 26-nov. El error no está arreglado de raíz.
+- 27-nov 4:25 p. m.: 419 tibios, 46 ya compraron → **165 enviados, 0 fallos** (hoy 565). Total: 2.174 personas.
+  Pedidos de gente que recibió el casino: 16 = **$1.637.300** (hoy 5 = $424.700), 0 con el premio. Hoy 43 pedidos en total.
+  Dropi: el pedido trabado de hoy (…9262) ya no aparece con error.
 - Ronald (24-nov): en este chat SOLO datos de La Bodeguita; no compararla ni mencionar Toro Verde.
 - Pendiente técnico: la foto de la máquina y los sonidos del casino todavía se cargan desde el almacenamiento de
   Shopify de otra tienda (no se ve marca). Pasarlos a un alojamiento propio de La Bodeguita.
