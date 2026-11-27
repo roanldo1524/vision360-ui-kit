@@ -7,9 +7,29 @@
   // y se guarda en este computador (el número 57… de esa dirección se reemplaza por el de cada cliente).
   const lucidUrl = (tel) => { let m = ''; try { m = localStorage.getItem('tv_lucid_url') || ''; } catch (e) {}
     return m ? m.replace('{tel}', tel) : ''; };
-  window.tvAprenderLucid = () => { const u = prompt('Abre en Lucid el chat de cualquier cliente, copia la dirección de arriba del navegador y pégala aquí:');
-    if (!u) return; const m = u.match(/57\d{10}/); if (!m) { alert('Esa dirección no trae el número del cliente (57…). Prueba con otra.'); return; }
-    try { localStorage.setItem('tv_lucid_url', u.replace(m[0], '{tel}')); } catch (e) {} alert('Listo, ya quedó. Toca otra vez «Abrir chat».'); };
+  // Ronald 27-11: «más tamaño, que sea claro»: ventana propia y grande en vez del aviso gris del navegador
+  window.tvAprenderLucid = () => new Promise((fin) => {
+    let v = document.getElementById('tv-guia'); if (v) v.remove();
+    v = document.createElement('div'); v.id = 'tv-guia';
+    v.innerHTML = `<style>#tv-guia{position:fixed;inset:0;z-index:100005;background:#141432aa;display:grid;place-items:center;font:16px/1.5 'Segoe UI',system-ui,sans-serif}
+      #tv-guia .bx{background:#fff;border-radius:18px;width:560px;max-width:94vw;padding:26px 28px;box-shadow:0 24px 70px #0006;color:#141432}
+      #tv-guia h2{margin:0 0 6px;font-size:22px}#tv-guia ol{margin:10px 0 14px 22px;padding:0;font-size:16px}#tv-guia li{margin:6px 0}
+      #tv-guia input{width:100%;box-sizing:border-box;font-size:16px;padding:12px 14px;border:2px solid #2b2b6b;border-radius:12px}
+      #tv-guia .er{color:#b91c1c;font-weight:600;min-height:22px;margin-top:6px}#tv-guia .bt{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
+      #tv-guia button{border:0;border-radius:12px;padding:12px 18px;font:700 16px inherit;cursor:pointer}#tv-guia .si{background:#141432;color:#c6f135}#tv-guia .no{background:#eef0f3;color:#141432}</style>
+      <div class="bx"><h2>💬 Conectar el botón «Chat» con Lucid</h2><div>Esto se hace <b>una sola vez</b>:</div>
+      <ol><li>Abre <b>Lucid</b> en otra pestaña.</li><li>Entra al chat de <b>cualquier cliente</b>.</li><li>Copia la <b>dirección de arriba</b> del navegador (la que empieza por https://).</li><li>Pégala aquí abajo y toca <b>Guardar</b>.</li></ol>
+      <input placeholder="https://panel.lucidbot.co/…"><div class="er"></div>
+      <div class="bt"><button class="no">Cancelar</button><button class="si">Guardar</button></div>
+      <div style="margin-top:10px;font-size:13.5px;color:#6b7280">Consejo: si pones la clave de Lucid en la configuración de la extensión (ícono arriba en Chrome), el chat se ve aquí mismo dentro de Dropi.</div></div>`;
+    document.body.appendChild(v); const inp = v.querySelector('input'); inp.focus();
+    v.querySelector('.no').onclick = () => { v.remove(); fin(false); };
+    v.querySelector('.si').onclick = () => {
+      const u = inp.value.trim(); const m = u.match(/57\d{10}/);
+      if (!m) { v.querySelector('.er').textContent = 'Esa dirección no trae el número del cliente (57…). Abre un chat de cliente y copia otra vez.'; return; }
+      try { localStorage.setItem('tv_lucid_url', u.replace(m[0], '{tel}')); } catch (e) {} v.remove(); fin(true);
+    };
+  });
   const notas = {};            // id → texto de la nota del robot
   const tels = {};             // id → celular del pedido
   const tokLS = () => { try { const t = (localStorage.getItem('DROPI_token') || '').replace(/"/g, ''); return t ? 'Bearer ' + t : null; } catch (e) { return null; } };
@@ -75,7 +95,7 @@
       if (!fila || fila.dataset.tvId === id) continue;
       fila.dataset.tvId = id;
       const caja = document.createElement(fila.tagName === 'TR' ? 'tr' : 'div');
-      const html = `<div class="tv-q">👉 ${parte(t, 'QUÉ HACER') || 'Revisar el pedido'}</div><div class="tv-p"><b>Por qué:</b> ${parte(t, 'POR QUÉ')} · <b>Quién:</b> ${parte(t, 'QUIÉN') || 'Karen'}</div>` + (tels[id] ? (lucidUrl('57' + tels[id]) ? `<a class="tv-chat" target="_blank" href="${lucidUrl('57' + tels[id])}">💬 Abrir chat en Lucid</a>` : `<a class="tv-chat tv-aprender" href="#">💬 Abrir chat en Lucid</a>`) + ` <a class="tv-chat" href="https://wa.me/57${tels[id]}" target="_blank">📞 WhatsApp ${tels[id]}</a>` : '');
+      const html = `<div class="tv-q">👉 ${parte(t, 'QUÉ HACER') || 'Revisar el pedido'}</div><div class="tv-p"><b>Por qué:</b> ${parte(t, 'POR QUÉ')} · <b>Quién:</b> ${parte(t, 'QUIÉN') || 'Karen'}</div>` + `<a class="tv-chat tv-abrir" href="#" data-id="${id}">⚡ Abrir chat y acciones</a> ` + (tels[id] ? (lucidUrl('57' + tels[id]) ? `<a class="tv-chat" target="_blank" href="${lucidUrl('57' + tels[id])}">💬 Abrir chat en Lucid</a>` : `<a class="tv-chat tv-aprender" href="#">💬 Abrir chat en Lucid</a>`) + ` <a class="tv-chat" href="https://wa.me/57${tels[id]}" target="_blank">📞 WhatsApp ${tels[id]}</a>` : '');
       if (caja.tagName === 'TR') { const td = document.createElement('td'); td.colSpan = 30; td.innerHTML = `<div class="tv-caja">${html}</div>`; caja.appendChild(td); }
       else { caja.className = 'tv-caja'; caja.innerHTML = html; }
       caja.id = 'tv-' + id; fila.after(caja);

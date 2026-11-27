@@ -72,8 +72,11 @@
   #tvc .cd .qh ol{margin:6px 0 6px 18px;padding:0;color:#5a2600;font-weight:600;font-size:13.5px}#tvc .cd .qh li{margin:3px 0}
   #tvc .cd .qh .dc{background:#fff;border:1px dashed #ffb27a;border-radius:8px;padding:7px 9px;margin:6px 0;font-size:12.5px;color:#333}#tvc .cd .qh .dc span{display:block;font-weight:700;color:var(--tv-ver);font-size:11.5px;margin-bottom:2px}
   #tvc .tvchat{padding:0 14px 6px}#tvc .tvchat .msgc{color:#6b7280;font-size:12.5px;padding:6px 0}
+  #tvc .tvchat .hilo{max-height:320px;overflow:auto;background:#fafafd;border-radius:10px;padding:4px 8px;margin-top:6px}
+  #tvc .tvchat .esc{display:flex;gap:6px;margin-top:6px}#tvc .tvchat textarea{flex:1;border:1px solid #d9d9e3;border-radius:9px;padding:7px 9px;font:13px inherit;resize:vertical}
   #tvc .bur{max-width:85%;margin:6px 0;padding:7px 10px;border-radius:12px;font-size:13px}#tvc .bur small{display:block;color:#6b7280;font-size:10.5px;margin-top:2px}
   #tvc .bur.cl{background:#eef0ff;border-top-left-radius:3px}#tvc .bur.yo{background:#f0f9d4;margin-left:auto;border-top-right-radius:3px}
+  .tv-vc{background:#e7e7ff!important;color:#2b2b6b!important}
   .tv-ojo{background:#9ca3af!important;color:#fff!important}
   .tvi{width:16px;height:16px;vertical-align:-3px;flex:none}#tvc .lg .tvi,#tvc-btn .ic .tvi{width:20px;height:20px}#tvc .cd .qh small{color:#8a5a3a;font-size:12px}
   #tvc .cd.rb .qh{background:#f3f4f2;border-color:#e2e5df}#tvc .cd.rb .qh b{color:#4b5563}
@@ -124,7 +127,14 @@
     if (nota) { const que = parte(nota, 'QUÉ HACER'); return { nota, que, por: parte(nota, 'POR QUÉ'), quien: parte(nota, 'QUIÉN') || 'Equipo', decir: parte(nota, 'DECIR'), tipo: corto(que), robot: true }; }
     const recien = Date.now() - new Date(o.created_at).getTime() < 40 * 60 * 1000;   // el robot pasa cada 15-30 min
     if (recien && window.__tvRobot) return { nota: '', que: 'El robot lo está revisando. Espera unos minutos.', tipo: 'Robot revisando', robot: true };
-    const pr = propio(o); return { nota: 'propio', que: pr.que, por: pr.por, quien: 'Equipo', decir: pr.decir, tipo: corto(pr.que), robot: false };
+    const pr = propio(o); const e = estado[o.id]; let que = pr.que, por = pr.por, tipo = corto(pr.que);
+    if (e) {
+      por = `chat real: el cliente dijo ${e.ult}` + (pr.por !== 'sin revisión automática' ? `; ${pr.por}` : '');
+      if (e.no) { que = '1) En el chat dijo que no o que después: llamar y preguntar si de verdad no lo quiere.'; tipo = '✋ Dijo que no'; }
+      else if (e.si && !/NO confirmar/.test(pr.que)) { que = '1) El cliente ya dijo SÍ en el chat: revisa producto, precio y dirección. 2) Toca Confirmar pedido.'; tipo = '✅ Dijo que sí'; }
+      else if (e.nada) { que = '1) Aún no responde al resumen: envíale el mensaje listo. 2) Cuando diga sí, toca Confirmar pedido.'; tipo = '⏳ Sin respuesta'; }
+    }
+    return { nota: 'propio', que, por, quien: 'Equipo', decir: pr.decir, tipo, robot: false };
   }
   async function cargar() {
     const ls = document.querySelector('#tvc .ls');
@@ -140,15 +150,32 @@
     pintar();
   }
   // La lista de Dropi no trae cantidad ni precio: se pide el detalle de cada pedido (4 a la vez) y se guarda mientras el panel esté abierto
-  const det = {};
+  const det = {}, tienda = {}, chats = {}, estado = {}, abiertos = new Set();
   async function detalles() {
     const faltan = pedidos.filter(o => !det[o.id]).map(o => o.id);
     for (let i = 0; i < faltan.length; i += 4) {
       await Promise.all(faltan.slice(i, i + 4).map(async (id) => {
-        try { const r = await api('GET', '/orders/myorders/' + id); const o = (r.j || {}).objects; if (o) det[id] = o.orderdetails || []; } catch (e) {}
+        try { const r = await api('GET', '/orders/myorders/' + id); const o = (r.j || {}).objects; if (o) { det[id] = o.orderdetails || []; tienda[id] = String(((o.shop || {}).type || '') + ' ' + ((o.shop || {}).name || '')); } } catch (e) {}
+        if (CFG.lucid) await analizar(id);
       }));
       pintar();
     }
+  }
+  // Ronald 27-11: «que sea real lo que analizo»: se lee el chat de Lucid y se mira qué dijo el cliente después del último resumen
+  const SI = /\b(s[ií]+|ok|okey|listo|dale|de una|confirm\w*|correct[oa]|perfecto|claro|bueno|est[aá] bien|as[ií] es|h[aá]gale|env[ií]e\w*)\b/i;
+  const NO = /\b(no lo quiero|ya no|cancel\w*|no gracias|despu[eé]s|m[aá]s adelante|no tengo plata)\b/i;
+  function mensajes(t) { return String(t || '').split(/\n(?=(?:Yo|Usuario) \()/).filter(x => /^(Yo|Usuario) \(/.test(x)).map(x => ({ yo: x.startsWith('Yo'), h: (x.match(/\(([^)]+)\)/) || [])[1] || '', tx: x.replace(/^(Yo|Usuario) \([^)]*\):\s*/, '').trim() })); }
+  async function leerChat(tel) {
+    const r = await lucidApi(`/contacts/${CFG.pais || '57'}${tel}/messages?limit=30`);
+    if (!r.ok) return null; chats[tel] = mensajes(typeof r.data === 'string' ? r.data : JSON.stringify(r.data || '')); return chats[tel];
+  }
+  async function analizar(id) {
+    const o = pedidos.find(x => x.id == id); if (!o || !CFG.lucid) return;
+    const tel = String(o.phone || '').slice(-10); const ms = chats[tel] || await leerChat(tel); if (!ms) return;
+    let k = -1; ms.forEach((m, i) => { if (m.yo && /Resumen de tu pedido|Tu pedido ya est[aá]/i.test(m.tx)) k = i; });
+    const tras = ms.slice(k + 1).filter(m => !m.yo).map(m => m.tx);
+    const ult = ms.filter(m => !m.yo).slice(-1)[0];
+    estado[id] = { si: tras.some(t => SI.test(t) && t.length < 120), no: tras.some(t => NO.test(t)), resumen: k >= 0, nada: k >= 0 && !tras.length, ult: ult ? `«${ult.tx.slice(0, 90)}» (${ult.h})` : 'sin mensajes del cliente' };
   }
   function productos(o) {
     const ds = det[o.id];
@@ -163,7 +190,7 @@
   function pintar() {
     const p = document.getElementById('tvc'); if (!p) return;
     window.__tvRobot = pedidos.some(o => String(o.notes || '').includes('🤖 ROBOT'));
-    const it = pedidos.map(o => ({ o, ...info(o) }));
+    const it = pedidos.filter(o => !tienda[o.id] || /lucid/i.test(tienda[o.id])).map(o => ({ o, ...info(o) }));   // Ronald 27-11: solo pedidos que vienen de Lucid Bot
     const tuyos = it.filter(x => x.tipo !== 'Robot revisando');
     p.querySelector('.kpi').innerHTML = `<div><span>${tuyos.length}</span><em>Para resolver</em></div><div><span>${it.filter(x => /NO confirmar/.test(x.que)).length}</span><em>Esperan abono</em></div><div><span>${it.length - tuyos.length}</span><em>Robot revisando</em></div>`;
     p.querySelector('.hd small').textContent = `${it.length} pendientes de confirmar · actualizado ${actual}`;
@@ -191,12 +218,13 @@
         <div class="qh">${espera ? `<b>${que}</b>` : `<div class="qt">${IC.list} Qué hacer · ${quien}${robot ? '' : ' · revisión de la extensión'}</div><ol>${pasos(que)}</ol>${decir ? `<div class="dc"><span>${IC.chat} Mensaje listo para el cliente</span>${decir}</div>` : ''}<small>Por qué: ${por}</small>`}</div>
         <div class="ac"><button class="tv-ok ${ojo ? 'tv-ojo' : ''}" data-acc="ok">${ojo ? IC.alert + ' Confirmar igual' : IC.ok + ' Confirmar pedido'}</button>
           ${nuevo ? `<button class="tv-pr" data-acc="precio" data-v="${nuevo.replace(/\./g, '')}">${IC.tag} Precio a $${nuevo}</button>` : ''}
-          ${chat ? `<a class="tv-sec" target="_blank" href="${chat}">${IC.chat} Chat</a>` : `<button class="tv-sec tv-aprender">${IC.chat} Chat</button>`}
+          ${chat ? `<a class="tv-sec" target="_blank" href="${chat}">${IC.chat} Abrir en Lucid</a>` : (CFG.lucid ? '' : `<button class="tv-sec tv-aprender">${IC.chat} Abrir en Lucid</button>`)}
           ${tel ? `<a class="tv-sec" target="_blank" href="https://wa.me/57${tel}${decir ? '?text=' + encodeURIComponent(decir) : ''}">${IC.send} ${decir ? 'Enviar mensaje' : 'WhatsApp'}</a>` : ''}
-          ${CFG.lucid && tel ? `<button class="tv-sec" data-acc="verchat" data-tel="${tel}">${IC.list} Ver chat</button>` : ''}
+          ${CFG.lucid && tel ? `<button class="tv-sec tv-vc" data-acc="verchat" data-tel="${tel}">${IC.chat} Ver y escribir chat</button>` : ''}
           ${CFG.lucid && tel && decir ? `<button class="tv-sec" data-acc="lucid" data-tel="${tel}" data-t="${encodeURIComponent(decir)}">${IC.send} Enviar por Lucid</button>` : ''}
           ${decir ? `<button class="tv-sec" data-acc="copiar" data-t="${encodeURIComponent(decir)}">${IC.copy} Copiar</button>` : ''}</div><div class="tvchat" data-chat="${o.id}"></div></div>`;
     }).join('');
+    ls.querySelectorAll('.cd').forEach(cd => { if (abiertos.has(cd.dataset.id)) { const o = pedidos.find(x => String(x.id) === cd.dataset.id); if (o) mostrarChat(cd, String(o.phone || '').slice(-10), false); } });
   }
   async function anotar(id, texto) {
     const g = await api('GET', '/orders/myorders/' + id); const o = (g.j || {}).objects || {};
@@ -208,17 +236,26 @@
     m.style.display = 'grid';
     return new Promise(res => { m.onclick = (e) => { const b = e.target.dataset.m; if (b || e.target === m) { m.style.display = 'none'; res(b === 'si'); } }; });
   }
+  async function mostrarChat(cd, tel, recargar) {
+    const box = cd.querySelector('.tvchat'); if (!box) return;
+    if (recargar || !chats[tel]) { box.innerHTML = '<div class="msgc">Cargando chat…</div>'; await leerChat(tel); }
+    const ms = (chats[tel] || []).slice(-15);
+    const txt = (m) => m.tx.replace(/\[Complex Message\] Check inbox for details\./g, '📨 (plantilla o mensaje con botones)').replace(/</g, '&lt;').replace(/\n/g, '<br>');
+    const borr = (box.querySelector('textarea') || {}).value || '';
+    box.innerHTML = `<div class="hilo">${ms.map(m => `<div class="bur ${m.yo ? 'yo' : 'cl'}"><div>${txt(m)}</div><small>${m.yo ? 'Tienda' : 'Cliente'} · ${m.h}</small></div>`).join('') || '<div class="msgc">Sin mensajes (o falta la clave de Lucid en Opciones).</div>'}</div>
+      <div class="esc"><textarea rows="2" placeholder="Escribe al cliente…">${borr.replace(/</g, '&lt;')}</textarea><button class="tv-ok" data-acc="escribir" data-tel="${tel}">Enviar</button></div>`;
+    const h = box.querySelector('.hilo'); h.scrollTop = h.scrollHeight;
+  }
   async function accion(btn) {
     const cd = btn.closest('.cd'); const id = cd.dataset.id; const o = pedidos.find(x => String(x.id) === id) || {};
-    if (btn.dataset.acc === 'verchat') {
-      const box = cd.querySelector('.tvchat'); if (box.innerHTML) { box.innerHTML = ''; return; }
-      box.innerHTML = '<div class="msgc">Cargando chat…</div>';
-      const r = await lucidApi(`/contacts/${CFG.pais || '57'}${btn.dataset.tel}/messages?limit=12`);
-      const t = typeof r.data === 'string' ? r.data : JSON.stringify(r.data || '');
-      if (!r.ok) { box.innerHTML = `<div class="msgc">No pude leer el chat (${r.error || r.status}).</div>`; return; }
-      const ms = t.split(/\n(?=(?:Yo|Usuario) \()/).filter(x => /^(Yo|Usuario) \(/.test(x)).slice(-10);
-      box.innerHTML = ms.map(x => { const yo = x.startsWith('Yo'); const h = (x.match(/\(([^)]+)\)/) || [])[1] || ''; const tx = x.replace(/^(Yo|Usuario) \([^)]*\):\s*/, '').replace(/\[Complex Message\] Check inbox for details\./g, '📨 (plantilla o mensaje con botones)');
-        return `<div class="bur ${yo ? 'yo' : 'cl'}"><div>${tx.replace(/</g, '&lt;').replace(/\n/g, '<br>')}</div><small>${yo ? 'Tienda' : 'Cliente'} · ${h}</small></div>`; }).join('') || '<div class="msgc">Sin mensajes.</div>';
+    if (btn.dataset.acc === 'verchat') { if (abiertos.has(id)) { abiertos.delete(id); cd.querySelector('.tvchat').innerHTML = ''; return; } abiertos.add(id); await mostrarChat(cd, btn.dataset.tel, true); return; }
+    if (btn.dataset.acc === 'escribir') {
+      const inp = cd.querySelector('.tvchat textarea'); const txt = (inp.value || '').trim(); if (!txt) return;
+      btn.disabled = true; btn.textContent = 'Enviando…';
+      const r = await lucidApi(`/contacts/${CFG.pais || '57'}${btn.dataset.tel}/send_content`, 'POST', { messages: [{ message: { text: txt } }] });
+      btn.disabled = false; btn.textContent = 'Enviar';
+      if (r.ok && JSON.stringify(r.data).includes('true')) { inp.value = ''; toast('Enviado por Lucid ✔'); await anotar(id, 'Mensaje enviado por Lucid'); await mostrarChat(cd, btn.dataset.tel, true); }
+      else toast('Lucid no lo envió: el chat lleva más de 24 h cerrado. Usa «Enviar mensaje» por WhatsApp.');
       return;
     }
     if (btn.dataset.acc === 'lucid') {
@@ -266,9 +303,12 @@
       if (t.dataset.x === 'c') p.style.display = 'none'; if (t.dataset.x === 'r') cargar();
       if (t.dataset.f) { filtro = t.dataset.f; pintar(); }
       if (t.dataset.acc) accion(t);
-      if (t.classList && t.classList.contains('tv-aprender') && window.tvAprenderLucid) { window.tvAprenderLucid(); pintar(); }
+      if (t.classList && t.classList.contains('tv-aprender') && window.tvAprenderLucid) { window.tvAprenderLucid().then(ok => { if (ok) { toast('Listo: el botón ya abre el chat de cada cliente en Lucid'); pintar(); } }); }
     });
-    setInterval(() => { if (p.style.display === 'flex') cargar(); }, 5 * 60 * 1000);   // se actualiza solo cada 5 minutos
+    setInterval(() => { if (p.style.display === 'flex') cargar(); }, 5 * 60 * 1000);
+    // Ronald 27-11: desde el recuadro naranja de cada pedido (aunque el panel esté cerrado) se abre directo ese pedido con su chat
+    window.tvAbrir = async (id) => { p.style.display = 'flex'; filtro = 'Todos'; busca = String(id); p.querySelector('input').value = busca; abiertos.add(String(id)); await cargar(); };
+    document.addEventListener('click', (ev) => { const a = ev.target.closest && ev.target.closest('.tv-abrir'); if (a) { ev.preventDefault(); ev.stopPropagation(); window.tvAbrir(a.dataset.id); } }, true);   // se actualiza solo cada 5 minutos
   }
   setInterval(montar, 1500);
 })();

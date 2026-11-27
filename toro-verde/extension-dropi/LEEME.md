@@ -32,3 +32,10 @@ Dropi con esteroides para confirmar pedidos, **sin IA y sin salir de Dropi**.
   - Botón **Probar conexión con Lucid**.
 - Con la clave de Lucid, cada pedido trae **Ver chat** (los últimos mensajes del cliente dentro de Dropi) y **Enviar por Lucid** (manda el mensaje listo; si el chat lleva más de 24 h cerrado, avisa que uses WhatsApp).
 - Sirve para cualquier tienda: cada una pone su clave y sus datos.
+
+## Versión 4.1
+- **Ver y escribir chat**: el chat del cliente dentro de Dropi, con caja para escribirle y enviar por Lucid.
+- **Análisis real del chat** (con la clave de Lucid): dice si el cliente ya dijo SÍ, si no ha respondido o si dijo que no.
+- **Solo pedidos de Lucid Bot** en el panel.
+- **Abrir chat y acciones** desde el recuadro naranja de cada pedido en la lista de Dropi, aunque el panel esté cerrado.
+- Ventana grande y clara para conectar el botón «Abrir en Lucid».
