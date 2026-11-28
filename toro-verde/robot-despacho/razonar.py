@@ -63,7 +63,8 @@ for d in det:
     pal = re.findall(r'[a-záéíóúñ]+', nom)
     # 27-11: un apellido repetido es normal («López López») o viene de Lucid pegado al nombre; ya no frena el pedido
     if not pal or re.search(r'([a-záéíóúñ]{4,})\1', nom) or len(nom.strip()) < 4: motivos.append(f'nombre raro: «{(d.get("name") or "")} {(d.get("surname") or "")}»')
-    otras = [t for t in (d.get('tags') or []) if t and t not in ('CONFIRMADO AGENTE', 'REVISAR HUMANO')]
+    # 28-11: CARRITORECUPERADOLUC la pone Lucid sola (carrito recuperado), no una persona: no frena.
+    otras = [t for t in (d.get('tags') or []) if t and t not in ('CONFIRMADO AGENTE', 'REVISAR HUMANO') and not re.match(r'CARRITO ?RECUPERADO', str(t), re.I)]
     if otras: motivos.append('una persona ya le puso etiquetas en Dropi (' + ', '.join(otras) + '): no lo toco')
     # 4) Chat
     if not f: motivos.append('no encontré el chat de este teléfono en Lucid')
