@@ -11,10 +11,10 @@
  "Confirmador de pedidos": {
   "area": "Robot de confirmación",
   "voz": "glassy",
-  "nuevo": "Reglas nuevas activas: flete hasta 15 % sobre el tope y abono solo si devuelve más del 50 %; reconoce «asies», «así nomás» y «perfecto».",
-  "mejoro": "Hoy 90 de 155 pedidos los confirmó el robot (58 %), frente a 43 % al mediodía.",
-  "problema": "Lo que más frena: flete sobre el tope (24), «recibe poco» (26) y modo humano (18); además el equipo confirma algunos antes que el robot.",
-  "solucion": "Plantillas de WhatsApp para chats cerrados, soltar el modo humano en Lucid y dejar que el robot confirme primero de 5 a 9 a. m."
+  "nuevo": "Confirma en modo humano, cambia oficina a Interrapidísimo y pone la dirección de la oficina sola. Notas del robot en Dropi apagadas (Ronald).",
+  "mejoro": "27-11: salieron 155 pedidos, el robot confirmó 110 (70 %); unos 80 solo con reglas, sin IA. Semana 48: robot entrega 95 % de lo resuelto vs persona 93 %.",
+  "problema": "Lo que más frena: «recibe poco» (44), «otro» (41), sin «confirmar» en el chat (34) y flete sobre el tope (25); la persona aprobó la mitad de esos.",
+  "solucion": "Revisar los 41 «otro» para convertirlos en reglas, y que el bot pida «confirmar» antes de cerrar el chat."
  },
  "Gestor de tickets y CAS": {
   "area": "Logística y CAS",

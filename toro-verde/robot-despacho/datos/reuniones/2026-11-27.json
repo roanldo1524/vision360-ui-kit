@@ -1,0 +1,110 @@
+{
+ "id": "R-20261127",
+ "fecha": "2026-11-27",
+ "titulo": "Reunión operativa diaria",
+ "convoca": "Líder de Logística (coordinadora)",
+ "participantes": [
+  "Auditor de calidad",
+  "Confirmador de pedidos",
+  "Gestor de tickets y CAS",
+  "Líder de Logística",
+  "Líder de Tecnología",
+  "Monitor de fallas",
+  "Rastreador de oficinas"
+ ],
+ "agenda": [
+  "Indicadores contra la meta",
+  "Confirmación y frenados",
+  "CAS y paquetes en oficina",
+  "Salud del sistema",
+  "Tareas y aprobaciones"
+ ],
+ "intervenciones": [
+  {
+   "quien": "Líder de Logística",
+   "dice": "Últimos 30 días: entrega 81.7 % (meta 90), devolución 7.7 % (meta 3), cancelación 10.6 % (meta 7)."
+  },
+  {
+   "quien": "Confirmador de pedidos",
+   "dice": "Hoy confirmé 48 pedidos con chat leído y frené 26 con motivo. Quedan 14 en revisión de Karen."
+  },
+  {
+   "quien": "Gestor de tickets y CAS",
+   "dice": "Hoy puse 11 quejas al CAS; 0 guías aparecen disponibles en oficina según los asesores."
+  },
+  {
+   "quien": "Rastreador de oficinas",
+   "dice": "Hay 265 paquetes en «Reclame en oficina» en los últimos 30 días; es la fuga más grande de la entrega."
+  },
+  {
+   "quien": "Monitor de fallas",
+   "dice": "7 de 7 agentes al día, sin fallas."
+  },
+  {
+   "quien": "Líder de Tecnología",
+   "dice": "Propuesta: construir la lista diaria del Rastreador antes que cualquier otra mejora; es lo que más sube la entrega."
+  }
+ ],
+ "conclusiones": [
+  "La meta que más se aleja es la entrega.",
+  "Las decisiones de dinero (anticipos, descuentos, topes de flete) las aprueba una persona.",
+  "6 tareas asignadas con responsable y fecha."
+ ],
+ "tareas": [
+  {
+   "id": "T-20261127-01",
+   "titulo": "Lista diaria de paquetes en oficina (265) con días en oficina y aviso al cliente",
+   "responsable": "Rastreador de oficinas",
+   "fecha": "2026-11-29",
+   "estado": "abierta",
+   "aprobacion_humana": false,
+   "proceso": "Rastreo de oficinas"
+  },
+  {
+   "id": "T-20261127-02",
+   "titulo": "Quejar al CAS toda guía con más de 48 h quieta y reclamar cada devolución injustificada dentro del plazo",
+   "responsable": "Gestor de tickets y CAS",
+   "fecha": "2026-11-28",
+   "estado": "abierta",
+   "aprobacion_humana": false,
+   "proceso": "Tickets y CAS"
+  },
+  {
+   "id": "T-20261127-03",
+   "titulo": "Analizar los motivos de cancelación de los últimos 30 días y proponer reglas de confirmación",
+   "responsable": "Auditor de calidad",
+   "fecha": "2026-11-30",
+   "estado": "abierta",
+   "aprobacion_humana": false,
+   "proceso": "Confirmación"
+  },
+  {
+   "id": "T-20261127-04",
+   "titulo": "Revisar 14 pedidos frenados por el robot (llamar o confirmar)",
+   "responsable": "Karen (humana)",
+   "fecha": "2026-11-27",
+   "estado": "requiere aprobación humana",
+   "aprobacion_humana": true,
+   "proceso": "Confirmación"
+  },
+  {
+   "id": "T-20261127-05",
+   "titulo": "Construir el monitor de stock (Jefe de inventarios)",
+   "responsable": "Líder de Tecnología",
+   "fecha": "2026-12-04",
+   "estado": "abierta",
+   "aprobacion_humana": false,
+   "proceso": "Inventarios"
+  },
+  {
+   "id": "T-20261127-06",
+   "titulo": "Cualquier anticipo, descuento o cambio de tope de flete",
+   "responsable": "Ronald (humano)",
+   "fecha": "2026-11-27",
+   "estado": "requiere aprobación humana",
+   "aprobacion_humana": true,
+   "proceso": "Dinero"
+  }
+ ],
+ "nota": "Armada con reglas a partir de los datos reales del día; cada intervención cita un número del sistema."
+}
