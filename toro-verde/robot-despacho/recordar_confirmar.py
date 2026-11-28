@@ -7,6 +7,9 @@ K = open('lucidbot.key').read().strip(); API = 'https://panel.lucidbot.co/api'
 # Ronald 23-11: con la ventana cerrada se usa la plantilla aprobada «confirmar_pedido_robot» (flujo de Lucid). Vacío = apagado.
 FLUJO_CONFIRMAR = ''  # pon aquí el número del flujo «Robot - Confirmar pedido» cuando Meta apruebe la plantilla
 CAMPO_RESUMEN = '198260'
+# Ronald 27-11 «mañana sin intervención humana»: mientras no haya plantilla propia de confirmación, con el chat cerrado se usa la
+# plantilla aprobada «aclarar_dato_pedido_tv» (flujo «Robot - aclarar dato»): «…necesitamos confirmar un dato: {{Robot dato 2}}».
+FLUJO_ACLARAR, CAMPO_DATO2 = '1795794788926', '608743'
 # Ronald 26-11: pedidos de Shopify (página) sin confirmar → este mensaje exacto. Ventana cerrada: plantilla «pedido_en_proceso_tv» (docs/plantillas-meta.md).
 FLUJO_SHOPIFY = ''  # pon aquí el número del flujo de Lucid de la plantilla «pedido_en_proceso_tv» cuando Meta la apruebe
 def TXT_SHOPIFY(nom, prod, donde, total):
@@ -22,6 +25,9 @@ def get(p): return json.loads(urllib.request.urlopen(urllib.request.Request(API 
 def post(p, body=None):
     return urllib.request.urlopen(urllib.request.Request(API + p, data=json.dumps(body or {}).encode(), headers={'X-ACCESS-TOKEN': K, 'Content-Type': 'application/json'}, method='POST'), timeout=40).read().decode()
 det = {d['id']: d for d in json.load(open('/tmp/dropi/detalle.json'))}
+def aclarar(c, dato):
+    urllib.request.urlopen(urllib.request.Request(f'{API}/contacts/{c}/custom_fields/{CAMPO_DATO2}', data=urllib.parse.urlencode({'value': re.sub(r'\s+', ' ', dato)[:300]}).encode(), headers={'X-ACCESS-TOKEN': K, 'Content-Type': 'application/x-www-form-urlencoded'}, method='POST'), timeout=40).read()
+    return post(f'/contacts/{c}/send/{FLUJO_ACLARAR}')
 FALTA = re.compile(r'no veo la confirmación del cliente|no ha tocado «CONFIRMAR PEDIDO»|aún no confirma en el chat')
 n = 0
 for a in json.load(open('/tmp/dropi/acciones.json')):
@@ -44,7 +50,7 @@ for a in json.load(open('/tmp/dropi/acciones.json')):
             donde = f"Reclamas en la oficina de Interrapidísimo de {(d.get('city') or '').title()}" if re.search(r'reclam|oficina', dirx, re.I) else f"Llega a {dirx}, {(d.get('city') or '').title()}"
             if time.time() - li < 23 * 3600: r = post(f'/contacts/{c}/send_content', {'messages': [{'message': {'text': TXT_SHOPIFY(nom or 'cliente', ', '.join(f"{int(i['q'] or 1)} {PL.get((i['pres'] or '').lower(), (i['pres'] or '').lower()) if (i['q'] or 1) > 1 else (i['pres'] or '').lower().replace('galon', 'galón')}" for i in d.get('items', [])) + ' de Herbicida Toro Verde 🌱', donde, d.get('total') or 0)}}]}); via = 'texto_shopify'
             elif FLUJO_SHOPIFY: r = post(f'/contacts/{c}/send/{FLUJO_SHOPIFY}'); via = 'plantilla_shopify'
-            else: continue  # ventana cerrada y la plantilla aún no está aprobada
+            else: r = aclarar(c, f"si te despachamos hoy {prod} por ${d.get('total',0):,.0f}".replace(',', '.') + f" ({donde.lower()}). Respóndenos SÍ y sale de una"); via = 'plantilla_aclarar'
         elif time.time() - li < 23 * 3600:
             t = (f"¡Hola {nom}! 🌱 Tu pedido de Toro Verde está listo para salir: *{prod}* por *${d.get('total',0):,.0f}*".replace(',', '.') +
                  f", a {(d.get('dir') or '').strip()}, {(d.get('city') or '').title()}. Pagas al recibir 🚚\n\n¿Me confirmas que te lo despachamos? Responde *SÍ* y sale de una 🙌")
@@ -56,7 +62,9 @@ for a in json.load(open('/tmp/dropi/acciones.json')):
             urllib.request.urlopen(urllib.request.Request(f'{API}/contacts/{c}/custom_fields/{CAMPO_RESUMEN}', data=urllib.parse.urlencode({'value': res}).encode(), headers={'X-ACCESS-TOKEN': K, 'Content-Type': 'application/x-www-form-urlencoded'}, method='POST'), timeout=40).read()
             r = post(f'/contacts/{c}/send/{FLUJO_CONFIRMAR}'); via = 'plantilla'
         else:
-            continue  # ventana cerrada y todavía no hay plantilla aprobada
+            dirx = (d.get('dir') or '').strip()
+            donde = f"para reclamar en la oficina de Interrapidísimo de {(d.get('city') or '').title()}" if re.search(r'reclama', dirx, re.I) else f"a {dirx}, {(d.get('city') or '').title()}"
+            r = aclarar(c, f"si te despachamos hoy {prod} por ${d.get('total',0):,.0f}".replace(',', '.') + f", {donde}. Respóndenos SÍ y sale de una"); via = 'plantilla_aclarar'
     except Exception as e:
         continue
     if 'true' in r or 'success' in r:

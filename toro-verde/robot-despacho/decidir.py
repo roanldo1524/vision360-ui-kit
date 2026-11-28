@@ -46,12 +46,16 @@ def marcas(c):
     carrito = any('carrito' in n.lower() for n in nombres) or bool(re.search(r's[ií]|true|1|lograd', rec or '', re.I))
     return shop, carrito
 # Ronald 26-11: a los pedidos de Shopify sin confirmar se les manda «Tu pedido ya está en proceso…»; si responden que sí, cuenta como confirmación
-def shop_si(t):
+# Ronald 27-11: a quien el robot le pidió el «sí» con la plantilla (aparece en el chat como «[Complex Message]»), su «sí» después cuenta.
+try: PLANT = {v.get('contacto') for v in json.load(open('/tmp/dropi/recordados_conf.json')).values() if isinstance(v, dict) and v.get('via') == 'plantilla_aclarar'}
+except Exception: PLANT = set()
+def shop_si(t, c=None):
     k = max(t.rfind('Tu pedido ya está en proceso para ser despachado'), t.rfind('Tu pedido ya está listo para salir'))
+    if c in PLANT: k = max(k, t.rfind('[Complex Message]'))
     if k < 0: return False
     return any(len(l.split('):', 1)[-1].strip()) < 80 and re.search(r'\b(s[ií]+|ok|listo|dale|de una|confirm\w*|correct[oa]|perfecto|claro|bueno|gracias|est[aá] bien|am[eé]n|bendiciones)\b', l.split('):', 1)[-1], re.I)
                for l in re.split(r'\n(?=(?:Yo|Usuario) \()', t[k:]) if l.startswith('Usuario'))
-def confirmo_boton(t): return bool(re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) or SI.search(t) or shop_si(t))
+def confirmo_boton(t, c=None): return bool(re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) or SI.search(t) or shop_si(t, c))
 
 ops = []; o = 0
 while o < 30000:
@@ -80,7 +84,8 @@ for c, lst in por_contacto.items():
     motivos = []
     oficina_chat = re.search(r'reclam|recog|me (mandan|env[ií]an) (el )?c[oó]digo|bajo (a|para)|voy a (la oficina|recogerlo)|en la oficina|interrapid', usuario, re.I)
     if oficina_chat and not oficina: motivos.append('en el chat habla de reclamarlo/recogerlo pero la dirección es de casa: preguntar si es oficina de Interrapidísimo')
-    if len(lst) > 1: motivos.append(f'repetido ({len(lst)} pedidos en Lucid)')
+    # Ronald 27-11 «mañana sin intervención humana»: repetido SOLO en Lucid ya no frena (11 de 11 se confirmaron). Si de verdad hay
+    # dos pedidos en Dropi, razonar.py lo frena con «tiene otro pedido abierto en Dropi».
     if NO.search(usuario): motivos.append('el cliente dijo que no: «' + NO.search(usuario).group(0) + '»')
     if not p['Ciudad']: motivos.append('sin ciudad')
     if not p['Departamento']: motivos.append('sin departamento')
@@ -90,7 +95,7 @@ for c, lst in por_contacto.items():
     dijo_si = any((len(l.split('):',1)[-1].strip()) < 80 and re.search(r'\b(s[ií]+|ok|listo|dale|de una|confirm\w*|correct[oa]|as[ií] est[aá]|m[aá]nd\w*|env[ií]\w*|perfecto|claro|bueno|est[aá] bien)\b', l.split('):',1)[-1], re.I))
                   for l in re.split(r'\n(?=(?:Yo|Usuario) \()', tras) if l.startswith('Usuario'))
     if not (SI.search(t) or dijo_si or SI_CLIENTE.search(tras or '') or shop_si(t)): motivos.append('no veo la confirmación del cliente en el chat')
-    if re.search(r'confirmacion_landing|CONFIRMAR PEDIDO', t) and not re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) and not SI.search(t) and not shop_si(t): motivos.append('pedido de la página: el cliente no ha tocado «CONFIRMAR PEDIDO»')
+    if re.search(r'confirmacion_landing|CONFIRMAR PEDIDO', t) and not re.search(r'^Usuario \([^)]*\):\s*confirmar pedido', t, re.I | re.M) and not SI.search(t) and not shop_si(t, c): motivos.append('pedido de la página: el cliente no ha tocado «CONFIRMAR PEDIDO»')
     # Ronald 21-11 (Evidalio): si el cliente pide Addi, cuotas o transferencia NUNCA se confirma solo, aunque Lucid diga «contra entrega».
     pago_previo = re.search(r'addi|cuotas|transferencia|consignaci|comprobante|sin recaudo|bancolombia|nequi|daviplata|no (lo )?pago (en )?contra ?entrega', p['Método de pago'] + ' ' + usuario + ' ' + (tras or ''), re.I)
     # Último resumen que el cliente vio y confirmó en el chat (manda sobre el campo de Lucid, que a veces queda viejo)
@@ -105,7 +110,7 @@ for c, lst in por_contacto.items():
     if en_humano and (motivos or pago_previo): motivos.append('una persona del equipo está atendiendo este chat (modo humano en Lucid): no lo toco')
     if en_humano and not motivos and not pago_previo: open('/tmp/dropi/humano_ok.txt', 'a').write(c + '\n')
     es_shop, carrito = marcas(c)
-    if es_shop and not confirmo_boton(t) and not any('CONFIRMAR PEDIDO' in m for m in motivos): motivos.append('pedido de Shopify: el cliente no ha tocado «CONFIRMAR PEDIDO» en el chat')
+    if es_shop and not confirmo_boton(t, c) and not any('CONFIRMAR PEDIDO' in m for m in motivos): motivos.append('pedido de Shopify: el cliente no ha tocado «CONFIRMAR PEDIDO» en el chat')
     filas.append({'contacto': c, 'shopify': es_shop, 'carrito': carrito, 'trans_cliente': trans_pedida(usuario), 'nombre': (p['Nombre'] + ' ' + p['Apellido']).strip(), 'ciudad': f"{p['Ciudad']} ({p['Departamento']})",
                   'producto': (prod_chat or p['Productos'])[:120], 'valor': (valor_chat or p['Valor total']), 'producto_lucid': p['Productos'][:120], 'valor_lucid': p['Valor total'], 'entrega': 'Oficina Interrapidísimo' if oficina else 'Domicilio',
                   'transportadora': 'INTERRAPIDISIMO' if oficina else 'la que más entregue en el municipio', 'id_lucidsales': re.findall(r'"id":"?(\d+)', msg)[:1],
@@ -123,7 +128,7 @@ if '--contactos' in sys.argv:
         motivos = []
         if NO.search(usuario): motivos.append('el cliente dijo que no: «' + NO.search(usuario).group(0) + '»')
         if re.search(r'addi|cuotas|transferencia|consignaci|comprobante|nequi|daviplata|no (lo )?pago (en )?contra ?entrega', usuario + ' ' + tras, re.I): motivos.append('pide pagar por Addi, cuotas o transferencia: se confirma a mano')
-        confirmo = re.search(r'^Usuario \([^)]*\):\s*(confirmar pedido|s[ií]\b|si,? es correcto|es correcto|correcto|confirmo)', t, re.I | re.M) or SI.search(t)
+        confirmo = re.search(r'^Usuario \([^)]*\):\s*(confirmar pedido|s[ií]\b|si,? es correcto|es correcto|correcto|confirmo)', t, re.I | re.M) or SI.search(t) or shop_si(t, c)
         if not confirmo: motivos.append('pedido de la página: el cliente aún no confirma en el chat (no tocó «CONFIRMAR PEDIDO» ni dijo sí)')
         if re.search(r'reclam|recog|me (mandan|env[ií]an) (el )?c[oó]digo|en la oficina', usuario, re.I): motivos.append('en el chat habla de reclamar en oficina: revisar la dirección')
         if info.get('live_chat') and motivos: motivos.append('una persona del equipo está atendiendo este chat (modo humano en Lucid): no lo toco')  # Ronald 27-11: sin otro motivo, se confirma aunque esté en humano

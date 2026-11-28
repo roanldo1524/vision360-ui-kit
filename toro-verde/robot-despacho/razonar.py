@@ -135,7 +135,11 @@ for d in det:
         idc = {'ENVIA': 2, 'INTERRAPIDISIMO': 3}.get(tc)
         zc = hc.get(idc, [0, 0]) if idc else [0, 0]
         if not idc: motivos.append(f'el cliente pidió la transportadora {tc}: revisarlo a mano')
-        elif oficina and tc != 'INTERRAPIDISIMO': motivos.append('el cliente pidió Envía pero la dirección es de oficina Interrapidísimo: preguntar')
+        elif oficina and tc != 'INTERRAPIDISIMO':
+            # Ronald 27-11: la oficina de Interrapidísimo manda (4 de 4 los confirmó una persona así). Va por Interrapidísimo si con ella recibe más del 50 %.
+            if sum(act) and tasa(act) <= 0.5 and d['dc'] == 3: motivos.append(f'es para oficina de Interrapidísimo y con Interrapidísimo recibe solo {act[0]} de {sum(act)}')
+            elif d['dc'] != 3 and sum(hc.get(3, [0, 0])) and tasa(hc[3]) <= 0.5: motivos.append(f'es para oficina de Interrapidísimo y con Interrapidísimo recibe solo {hc[3][0]} de {sum(hc[3])}')
+            elif d['dc'] != 3 and not motivos: editar['transportadora'] = UI['INTERRAPIDISIMO']
         elif sum(zc) and tasa(zc) <= 0.5: motivos.append(f'el cliente pidió {tc} pero con esa recibe solo {zc[0]} de {sum(zc)}')
         elif idc != d['dc'] and not motivos: editar['transportadora'] = UI[TR[idc]]
     elif oficina:
