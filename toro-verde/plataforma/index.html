@@ -1,0 +1,566 @@
+<title>Máquina Creativa Toro Verde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..800&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: barra lateral de módulos (arriba en teléfono) + área de trabajo con tarjetas por etapa del ciclo */
+:root{
+  --bg:#F2F4EE; --surface:#FFFFFF; --ink:#0E2A26; --muted:#5A6B66; --line:#D9DFD6;
+  --roble:#043434; --vital:#C8F520; --on-roble:#EAF3E6; --soft:#E6ECE2;
+  --ok:#2F7D3A; --warn:#B26B00; --bad:#B3261E; --ok-bg:#E3F1E2; --warn-bg:#FBEFD9; --bad-bg:#F8E1DF;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1A18; --surface:#122522; --ink:#E4EEE6; --muted:#9DB0A9; --line:#25403B;
+  --roble:#0A2F2B; --vital:#C8F520; --on-roble:#DDEBDD; --soft:#183330;
+  --ok:#7FCB86; --warn:#F0B35A; --bad:#F28B82; --ok-bg:#16351E; --warn-bg:#3A2A10; --bad-bg:#3D1916; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1A18; --surface:#122522; --ink:#E4EEE6; --muted:#9DB0A9; --line:#25403B;
+  --roble:#0A2F2B; --vital:#C8F520; --on-roble:#DDEBDD; --soft:#183330;
+  --ok:#7FCB86; --warn:#F0B35A; --bad:#F28B82; --ok-bg:#16351E; --warn-bg:#3A2A10; --bad-bg:#3D1916; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.app{display:grid;grid-template-columns:232px 1fr;min-height:100%}
+nav{background:var(--roble);color:var(--on-roble);padding:24px 14px;display:flex;flex-direction:column;gap:4px;position:sticky;top:env(safe-area-inset-top,0px);height:100vh;height:100dvh;overflow:auto}
+.brand{font-family:var(--display);font-stretch:85%;font-weight:800;font-size:22px;line-height:1.05;letter-spacing:.01em;padding:0 10px 18px}
+.brand small{display:block;font-family:var(--body);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--vital);margin-bottom:6px}
+nav button{all:unset;cursor:pointer;padding:9px 10px;border-radius:8px;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:8px}
+nav button:hover{background:rgba(255,255,255,.07)}
+nav button[aria-current="true"]{background:rgba(200,245,32,.14);color:#fff;box-shadow:inset 3px 0 0 var(--vital)}
+nav button:focus-visible{outline:2px solid var(--vital);outline-offset:2px}
+nav .count{font-family:var(--mono);font-size:12px;opacity:.8}
+.navfoot{margin-top:auto;font-size:12px;opacity:.75;padding:12px 10px 0;line-height:1.4}
+main{padding-block:28px 60px;padding-inline:clamp(16px,4vw,40px);min-width:0;max-width:1180px}
+h1{font-family:var(--display);font-stretch:88%;font-weight:800;font-size:clamp(26px,3.4vw,34px);line-height:1.1;margin:0 0 4px;text-wrap:balance}
+h2{font-family:var(--display);font-stretch:92%;font-weight:700;font-size:19px;margin:0;text-wrap:balance}
+h3{font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0}
+.lead{color:var(--muted);max-width:68ch;margin:0 0 22px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.stat{font-family:var(--display);font-weight:800;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.stat small{font-family:var(--body);font-size:14px;font-weight:600;color:var(--muted)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.between{justify-content:space-between}
+.btn{font:inherit;font-weight:700;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer}
+.btn:hover{border-color:var(--muted)}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--ok);outline-offset:1px}
+.btn.primary{background:var(--roble);color:#fff;border-color:var(--roble)}
+.btn.gate{background:var(--vital);color:#0E2A26;border-color:var(--vital)}
+.btn.danger{color:var(--bad)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.sm{padding:5px 10px;font-size:13px}
+label{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:600;color:var(--muted);min-width:0}
+input,select,textarea{font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:8px 10px;width:100%}
+textarea{resize:vertical;min-height:90px}
+.form{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.form .full{grid-column:1/-1}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--soft);color:var(--ink);white-space:nowrap}
+.pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.warn{background:var(--warn-bg);color:var(--warn)} .pill.bad{background:var(--bad-bg);color:var(--bad)}
+.pill.gatep{background:var(--vital);color:#0E2A26}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.empty{border:1.5px dashed var(--line);border-radius:var(--r);padding:26px;text-align:center;color:var(--muted)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.pipeline{display:flex;gap:6px;flex-wrap:wrap}
+.stage{flex:1 1 100px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px;min-width:96px}
+.stage b{display:block;font-family:var(--display);font-size:24px;font-variant-numeric:tabular-nums}
+.stage span{font-size:12px;color:var(--muted);font-weight:600}
+.stage.gate{border-color:var(--vital);box-shadow:inset 0 3px 0 var(--vital)}
+.brief{border-left:3px solid var(--line)}
+.brief[data-gate="true"]{border-left-color:var(--vital)}
+.scenes td:first-child{white-space:nowrap;font-family:var(--mono)}
+ol.tight,ul.tight{margin:0;padding-left:20px}
+.banner{background:var(--warn-bg);color:var(--warn);border-radius:8px;padding:10px 14px;font-weight:600;margin-bottom:16px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--roble);color:#fff;padding:10px 18px;border-radius:8px;font-weight:600;z-index:9}
+details summary{cursor:pointer;font-weight:700}
+.critic{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.critic > div{background:var(--bg);border-radius:8px;padding:10px}
+.confirm{background:var(--bad-bg);border-radius:8px;padding:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+@media (max-width:820px){
+  .app{grid-template-columns:1fr}
+  nav{position:static;height:auto;flex-direction:row;flex-wrap:wrap;padding:14px 16px;gap:2px}
+  .brand{width:100%;padding:0 4px 8px;font-size:19px}
+  nav button{padding:7px 9px;font-size:14px}
+  .navfoot{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="app">
+  <nav aria-label="Módulos">
+    <div class="brand"><small>Toro Verde</small>Máquina Creativa UGC</div>
+    <button data-tab="panel">Panel</button>
+    <button data-tab="plan">Planificador semanal</button>
+    <button data-tab="briefs">Briefs y aprobaciones <span class="count" id="c-briefs"></span></button>
+    <button data-tab="embajadoras">Embajadoras <span class="count" id="c-emb"></span></button>
+    <button data-tab="resultados">Resultados en Meta</button>
+    <button data-tab="comisiones">Comisiones</button>
+    <button data-tab="adn">ADN de marca</button>
+    <div class="navfoot">Dos aprobaciones tuyas son obligatorias: antes de grabar y antes de lanzar.</div>
+  </nav>
+  <main id="main" aria-live="polite"></main>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const ESTADOS = [
+  ["pendiente","Sin escribir"],["borrador","Escrito"],["revisado","Pasó críticos"],
+  ["aprobado","Aprobado para grabar"],["enviado","Enviado"],["grabado","Material recibido"],
+  ["editado","Editado"],["listo","Aprobado para lanzar"],["lanzado","En Meta"],["cerrado","Cerrado"],["descartado","Descartado"]
+];
+const ESTADO_LABEL = Object.fromEntries(ESTADOS);
+const GATES = new Set(["revisado","editado"]); // estados que esperan tu aprobación
+const PROHIBIDAS_BASE = ["orgánico","organico","ecológico","ecologico","natural","sin veneno","no tóxico","no toxico","ica"];
+
+/* ---------- Almacén: db compartida si está disponible, memoria si no ---------- */
+const S = { emb:[], briefs:[], semanas:[], adn:null, tab:"panel", db:null, sample:null, live:false, confirm:null, busy:{} };
+const mem = {embajadoras:{},briefs:{},semanas:{},config:{}};
+const store = {
+  async set(col,id,data){ if(S.db) return S.db.doc(col+"/"+id).set(data); mem[col][id]=data; refreshMem(col); },
+  async update(col,id,data){ if(S.db) return S.db.doc(col+"/"+id).update(data); mem[col][id]={...mem[col][id],...data}; refreshMem(col); },
+  async del(col,id){ if(S.db) return S.db.doc(col+"/"+id).delete(); delete mem[col][id]; refreshMem(col); },
+};
+function refreshMem(col){ apply(col, Object.entries(mem[col]).map(([id,d])=>({id,...d}))); }
+function apply(col, rows){
+  if(col==="embajadoras") S.emb = rows.sort((a,b)=>(a.nombre||"").localeCompare(b.nombre||""));
+  if(col==="briefs") S.briefs = rows.sort((a,b)=>(b.creado||0)-(a.creado||0));
+  if(col==="semanas") S.semanas = rows.sort((a,b)=>(b.creada||0)-(a.creada||0));
+  if(col==="config") S.adn = rows.find(r=>r.id==="adn")||null;
+  render();
+}
+const uid = () => Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = n => Number(n||0).toLocaleString("es-CO");
+const money = n => "$"+fmt(Math.round(n||0));
+function toast(t){ const el=document.getElementById("toast"); el.textContent=t; el.hidden=false; clearTimeout(toast.t); toast.t=setTimeout(()=>el.hidden=true,2600); }
+function lunes(d=new Date()){ const x=new Date(d); const k=(x.getDay()+6)%7; x.setDate(x.getDate()-k); x.setHours(0,0,0,0); return x; }
+function semanaId(d){ const m=lunes(d); return m.toISOString().slice(0,10); }
+function embName(id){ return (S.emb.find(e=>e.id===id)||{}).nombre || "Sin embajadora"; }
+function adn(){ return S.adn || {texto:"",angulos:[],prohibidas:PROHIBIDAS_BASE,metaCTR:5,metaCPA:10000,bonoGanador:0,valorVenta:0}; }
+
+/* ---------- Navegación ---------- */
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{ S.tab=b.dataset.tab; S.confirm=null; try{localStorage.setItem("mc-tab",S.tab)}catch(e){} render(); window.scrollTo(0,0); });
+try{ const t=localStorage.getItem("mc-tab"); if(t) S.tab=t; }catch(e){}
+
+function render(){
+  document.querySelectorAll("nav button").forEach(b=>b.setAttribute("aria-current", String(b.dataset.tab===S.tab)));
+  document.getElementById("c-emb").textContent = S.emb.filter(e=>e.estado==="activa").length || "";
+  const porAprobar = S.briefs.filter(b=>GATES.has(b.estado)).length;
+  document.getElementById("c-briefs").textContent = porAprobar ? porAprobar+" por aprobar" : "";
+  const m = document.getElementById("main");
+  const ae = document.activeElement; const keep = ae && ae.id && m.contains(ae) ? {id:ae.id, s:ae.selectionStart} : null;
+  if (keep && (ae.tagName==="INPUT"||ae.tagName==="TEXTAREA")) return; // no repintar mientras escribes
+  const banner = S.live ? "" : `<div class="banner">Modo de prueba: los cambios no se guardan. Abre esta página en claude.ai para guardar todo en la base de datos.</div>`;
+  m.innerHTML = banner + ({panel:vPanel,plan:vPlan,briefs:vBriefs,embajadoras:vEmb,resultados:vRes,comisiones:vCom,adn:vAdn}[S.tab]||vPanel)();
+  bind();
+}
+
+/* ---------- Panel ---------- */
+function vPanel(){
+  const sem = semanaId(); const sb = S.briefs.filter(b=>b.semana===sem);
+  const meta = (S.semanas.find(s=>s.id===sem)||{}).meta || 0;
+  const activas = S.emb.filter(e=>e.estado==="activa");
+  const counts = Object.fromEntries(ESTADOS.map(([k])=>[k,0])); S.briefs.forEach(b=>counts[b.estado]=(counts[b.estado]||0)+1);
+  const gan = S.briefs.filter(esGanador).length, lanz = S.briefs.filter(b=>["lanzado","cerrado"].includes(b.estado)).length;
+  const pend = S.briefs.filter(b=>GATES.has(b.estado));
+  return `<h1>Panel de la semana</h1>
+  <p class="lead">Semana del ${new Date(sem+"T12:00").toLocaleDateString("es-CO",{day:"numeric",month:"long"})}. Cada brief rinde 5 anuncios (1 cuerpo × 5 ganchos).</p>
+  <div class="grid g4">
+    <div class="card"><h3>Meta de anuncios</h3><div class="stat">${fmt(meta)} <small>${meta?Math.ceil(meta/5)+" briefs":"sin plan"}</small></div></div>
+    <div class="card"><h3>Briefs esta semana</h3><div class="stat">${sb.length} <small>${fmt(sb.length*5)} anuncios</small></div></div>
+    <div class="card"><h3>Embajadoras activas</h3><div class="stat">${activas.length} <small>de ${S.emb.length}</small></div></div>
+    <div class="card"><h3>Ganadores</h3><div class="stat">${gan} <small>de ${lanz} lanzados</small></div></div>
+  </div>
+  <div class="card" style="margin-top:16px"><div class="row between"><h2>El ciclo</h2><span class="small muted">Borde verde = espera tu aprobación</span></div>
+    <div class="pipeline">${ESTADOS.filter(([k])=>k!=="descartado").map(([k,l])=>`<div class="stage ${GATES.has(k)?"gate":""}"><b>${counts[k]||0}</b><span>${l}</span></div>`).join("")}</div>
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h2>Esperan tu aprobación</h2>
+      ${pend.length? `<ul class="tight">${pend.slice(0,8).map(b=>`<li><b>${esc(b.angulo)}</b> · ${esc(embName(b.embajadoraId))} — <span class="pill gatep">${b.estado==="revisado"?"Aprobar para grabar":"Aprobar para lanzar"}</span></li>`).join("")}</ul><button class="btn primary" data-go="briefs">Ir a aprobar</button>` : `<p class="muted">Nada pendiente. Cuando un brief pase los críticos o un video quede editado, aparece aquí.</p>`}
+    </div>
+    <div class="card"><h2>Lo que falta conectar</h2>
+      <ul class="tight small">
+        <li><b>LucidBot:</b> API key y endpoint para disparar la plantilla "Nueva jornada". Mientras tanto, copia el mensaje del brief.</li>
+        <li><b>Creatomate:</b> las 3 a 5 plantillas de estilo de José.</li>
+        <li><b>Meta Ads:</b> reconectar el conector para traer las métricas del día 3, 7 y 21. Hoy se escriben a mano.</li>
+        <li><b>Shopify + Dropi:</b> webhook de pedidos con código de embajadora. Hoy las ventas entregadas se escriben a mano.</li>
+      </ul>
+    </div>
+  </div>`;
+}
+
+/* ---------- Planificador ---------- */
+function vPlan(){
+  const sem = semanaId(); const s = S.semanas.find(x=>x.id===sem);
+  const meta = S.planMeta ?? s?.meta ?? 100;
+  const plan = calcPlan(meta);
+  const existentes = S.briefs.filter(b=>b.semana===sem).length;
+  return `<h1>Planificador semanal</h1>
+  <p class="lead">Pon la meta de anuncios. El sistema calcula cuántos briefs hacen falta, reparte entre las embajadoras activas y disponibles (máximo 4 briefs por jornada) y mezcla 70% variantes de ganadores con 30% ángulos nuevos.</p>
+  <div class="card"><div class="row">
+    <label style="max-width:200px">Meta de anuncios<input id="meta" type="number" min="5" step="5" value="${meta}"></label>
+    <div class="small muted" style="align-self:end">= <b class="mono">${plan.need}</b> briefs · capacidad disponible <b class="mono">${plan.cap}</b> briefs</div>
+  </div>
+  ${plan.falta? `<div class="pill warn" style="white-space:normal">Faltan ${plan.falta} embajadora(s) activas para la meta. Conviene reclutar perfiles de avatares que hoy no cubres.</div>`:""}
+  ${!adn().angulos.length? `<div class="pill bad" style="white-space:normal">No hay ángulos cargados. Agrégalos en ADN de marca.</div>`:""}
+  </div>
+  <div class="card" style="margin-top:16px"><h2>Reparto propuesto</h2>
+  ${plan.rows.length? `<div class="tablewrap"><table><thead><tr><th>Embajadora</th><th>Avatar</th><th class="num">Briefs</th><th>Ángulos</th></tr></thead><tbody>
+    ${plan.rows.map(r=>`<tr><td><b>${esc(r.e.nombre)}</b>${r.e.ejemplo?' <span class="pill">Ejemplo</span>':""}</td><td class="small">${esc(r.e.avatar||"—")}</td><td class="num">${r.items.length}</td><td class="small">${r.items.map(i=>`${esc(i.angulo)} <span class="pill ${i.tipo==="nuevo"?"warn":"ok"}">${i.tipo==="nuevo"?"nuevo":"ganador"}</span>`).join("<br>")}</td></tr>`).join("")}
+  </tbody></table></div>
+  <div class="row"><button class="btn gate" id="aprobarPlan" ${!plan.rows.length?"disabled":""}>Aprobar plan y crear ${plan.rows.reduce((a,r)=>a+r.items.length,0)} briefs</button>
+  ${existentes?`<span class="small muted">Ya hay ${existentes} briefs creados esta semana; se suman a esos.</span>`:""}</div>`
+  : `<div class="empty">No hay embajadoras activas y disponibles. Ve a <b>Embajadoras</b>, registra a cada una y márcala como activa.</div>`}
+  </div>`;
+}
+function calcPlan(meta){
+  const need = Math.ceil((Number(meta)||0)/5);
+  const act = S.emb.filter(e=>e.estado==="activa" && e.disponible!==false);
+  const cap = act.reduce((a,e)=>a+Math.min(4,Number(e.capacidad)||4),0);
+  const angs = adn().angulos; const gan = angs.filter(a=>a.tipo!=="nuevo"); const nue = angs.filter(a=>a.tipo==="nuevo");
+  const rows = act.map(e=>({e,items:[],cap:Math.min(4,Number(e.capacidad)||4)}));
+  let left = Math.min(need,cap), i=0, total=0;
+  while(left>0 && rows.length){ const r=rows[i%rows.length]; if(r.items.length<r.cap){ r.items.push(null); left--; } i++; if(i>1000) break; }
+  // ángulos: primero donde ya ganó, 70/30, sin repetir el mismo ángulo entre embajadoras cuando se pueda
+  const usados = {};
+  rows.forEach((r,ri)=>{
+    const wins = S.briefs.filter(b=>b.embajadoraId===r.e.id && esGanador(b)).map(b=>b.angulo);
+    r.items = r.items.map((_,k)=>{
+      total++;
+      const nuevo = nue.length && (total % 10 >= 7);
+      const pool = nuevo ? nue : (gan.length?gan:nue);
+      if(!pool.length) return {angulo:"Sin ángulo",tipo:"ganador"};
+      let pref = !nuevo ? pool.filter(a=>wins.includes(a.nombre)) : [];
+      let cand = (pref.length?pref:pool).slice().sort((a,b)=>(usados[a.nombre]||0)-(usados[b.nombre]||0));
+      const pick = cand[(ri+k)%Math.max(1,Math.min(cand.length,2))] || cand[0];
+      usados[pick.nombre]=(usados[pick.nombre]||0)+1;
+      return {angulo:pick.nombre,tipo:nuevo?"nuevo":"ganador"};
+    });
+  });
+  const falta = need>cap ? Math.ceil((need-cap)/4) : 0;
+  return {need,cap,falta,rows:rows.filter(r=>r.items.length)};
+}
+
+/* ---------- Briefs ---------- */
+function vBriefs(){
+  const f = S.filtro || "todos";
+  let list = S.briefs;
+  if(f==="aprobar") list = list.filter(b=>GATES.has(b.estado));
+  else if(f!=="todos") list = list.filter(b=>b.estado===f);
+  return `<h1>Briefs y aprobaciones</h1>
+  <p class="lead">El guionista escribe cada brief con el ADN de marca y el perfil de la embajadora. Los 3 críticos lo revisan (máximo 3 vueltas). Tú apruebas antes de grabar y antes de lanzar.</p>
+  <div class="row" style="margin-bottom:14px">
+    <label style="max-width:260px">Ver<select id="filtro">
+      <option value="todos">Todos (${S.briefs.length})</option>
+      <option value="aprobar" ${f==="aprobar"?"selected":""}>Esperan tu aprobación</option>
+      ${ESTADOS.map(([k,l])=>`<option value="${k}" ${f===k?"selected":""}>${l}</option>`).join("")}
+    </select></label>
+    ${S.sample?"":`<span class="pill warn">El guionista con IA funciona al abrir la página en claude.ai</span>`}
+  </div>
+  ${S.copia?`<div class="card" style="margin-bottom:14px"><div class="row between"><h2>Mensaje para copiar</h2><button class="btn sm" data-act="cerrarcopia">Cerrar</button></div><textarea id="copiaTxt" readonly style="min-height:220px">${esc(S.copia)}</textarea></div>`:""}
+  ${list.length? `<div class="grid">${list.map(vBrief).join("")}</div>` : `<div class="empty">No hay briefs aquí. Crea el plan de la semana en <b>Planificador semanal</b> y aparecen los briefs para escribir.</div>`}`;
+}
+function vBrief(b){
+  const br = b.brief; const c = b.criticos; const busy = S.busy[b.id];
+  const acc = [];
+  if(b.estado==="pendiente") acc.push(`<button class="btn primary" data-act="escribir" data-id="${b.id}" ${busy||!S.sample?"disabled":""}>${busy?"Escribiendo… (puede tardar 1 minuto)":"Escribir brief con IA"}</button>`);
+  if(b.estado==="borrador"){
+    acc.push(`<button class="btn primary" data-act="criticos" data-id="${b.id}" ${busy||!S.sample?"disabled":""}>${busy?"Revisando…":"Pasar por los 3 críticos"}</button>`);
+    if(c && !c.pasa && (b.vueltas||0)<3) acc.push(`<button class="btn" data-act="reescribir" data-id="${b.id}" ${busy||!S.sample?"disabled":""}>Reescribir con las correcciones (vuelta ${(b.vueltas||0)+1} de 3)</button>`);
+    if(c && !c.pasa && (b.vueltas||0)>=3) acc.push(`<button class="btn" data-act="otro" data-id="${b.id}">Descartar y escribir otro</button>`);
+  }
+  if(b.estado==="revisado") acc.push(`<button class="btn gate" data-act="estado" data-to="aprobado" data-id="${b.id}">Aprobar para grabar</button>`);
+  if(b.estado==="aprobado") acc.push(`<button class="btn" data-act="copiar" data-id="${b.id}">Copiar mensaje para la embajadora</button><button class="btn primary" data-act="estado" data-to="enviado" data-id="${b.id}">Marcar enviado</button>`);
+  if(b.estado==="enviado") acc.push(`<button class="btn primary" data-act="estado" data-to="grabado" data-id="${b.id}">Material recibido</button>`);
+  if(b.estado==="grabado") acc.push(`<button class="btn primary" data-act="estado" data-to="editado" data-id="${b.id}">Videos editados</button>`);
+  if(b.estado==="editado") acc.push(`<button class="btn gate" data-act="estado" data-to="listo" data-id="${b.id}">Aprobar para lanzar</button>`);
+  if(b.estado==="listo") acc.push(`<button class="btn primary" data-act="estado" data-to="lanzado" data-id="${b.id}">Marcar lanzado en Meta</button>`);
+  const confirmDel = S.confirm===b.id;
+  return `<article class="card brief" data-gate="${GATES.has(b.estado)}">
+    <div class="row between"><div><h2>${esc(b.angulo)}</h2><div class="small muted">${esc(embName(b.embajadoraId))} · semana ${esc(b.semana)} · ${b.tipo==="nuevo"?"ángulo nuevo":"variante de ganador"}</div></div>
+      <span class="pill ${GATES.has(b.estado)?"gatep":b.estado==="descartado"?"bad":""}">${ESTADO_LABEL[b.estado]}</span></div>
+    ${b.error?`<div class="pill bad" style="white-space:normal">${esc(b.error)}</div>`:""}
+    ${br? vBriefBody(br):""}
+    ${c? vCriticos(c,b):""}
+    <div class="row">${acc.join("")}
+      ${confirmDel?`<span class="confirm">¿Borrar este brief? <button class="btn sm danger" data-act="borrar" data-id="${b.id}">Sí, borrar</button><button class="btn sm" data-act="nocancel">No</button></span>`:`<button class="btn sm danger" data-act="askdel" data-id="${b.id}">Borrar</button>`}
+    </div>
+  </article>`;
+}
+function vBriefBody(br){
+  return `<details ${S.open===br._k?"open":""}><summary>Ver brief completo</summary>
+  <div class="grid" style="margin-top:10px">
+    <p><b>Hipótesis:</b> ${esc(br.hipotesis)}</p>
+    <p class="small"><b>Sale de:</b> ${esc(br.origen)} · <b>Nivel de consciencia:</b> ${esc(br.nivelConsciencia)} · <b>Objeción:</b> ${esc(br.objecion)}</p>
+    ${br.frasesCliente?.length?`<p class="small"><b>Frases reales del cliente:</b> ${br.frasesCliente.map(f=>"“"+esc(f)+"”").join(" · ")}</p>`:""}
+    <div class="tablewrap"><table class="scenes"><thead><tr><th>Seg.</th><th>Visual</th><th>Audio</th><th>Texto en pantalla</th></tr></thead><tbody>
+      ${(br.escenas||[]).map(s=>`<tr><td>${esc(s.seg)}</td><td>${esc(s.visual)}</td><td>${esc(s.audio)}</td><td>${esc(s.texto)}</td></tr>`).join("")}
+    </tbody></table></div>
+    <div class="grid g2"><div><h3>5 ganchos (0–3 s)</h3><ol class="tight">${(br.ganchos||[]).map(g=>`<li>${esc(g)}</li>`).join("")}</ol></div>
+    <div><h3>5 cierres</h3><ol class="tight">${(br.cierres||[]).map(g=>`<li>${esc(g)}</li>`).join("")}</ol></div></div>
+    ${br.grabacion?`<div><h3>Grabación</h3><p class="small"><b>Dónde:</b> ${esc(br.grabacion.donde)}<br><b>Tomas de apoyo:</b> ${esc((br.grabacion.apoyo||[]).join(", "))}<br><b>No hacer:</b> ${esc((br.grabacion.noHacer||[]).join(", "))}</p></div>`:""}
+  </div></details>`;
+}
+function vCriticos(c,b){
+  const box=(t,x)=>`<div><div class="row between"><b>${t}</b><span class="pill ${x?.aprobado?"ok":"bad"}">${x?.aprobado?"Aprobado":"Devuelve"}${x?.puntaje!=null?" · "+esc(x.puntaje)+"/10":""}</span></div>
+    ${(x?.cambios||x?.problemas||[]).length?`<ul class="tight small">${(x.cambios||x.problemas).map(i=>`<li>${esc(i)}</li>`).join("")}</ul>`:""}</div>`;
+  return `<div><h3 style="margin-bottom:6px">Críticos · vuelta ${b.vueltas||1}</h3><div class="critic">${box("Anti-genérico",c.antiGenerico)}${box("Cumplimiento",c.cumplimiento)}${box("Director",c.director)}</div></div>`;
+}
+
+/* ---------- Embajadoras ---------- */
+const CAMPOS = [
+  ["Datos básicos",[["nombre","Nombre"],["edad","Edad"],["ciudad","Ciudad o vereda"],["rural","Rural o urbana",["rural","urbana"]],["whatsapp","WhatsApp"],["correo","Correo"],["redes","Redes"]]],
+  ["Contexto real",[["finca","¿Tiene finca?",["sí","no"]],["cultivo","Cultivo (café, cacao, plátano, potrero)"],["rol","Rol (dueña, hija, mayordomo, vecina)"]]],
+  ["Avatar al que le habla",[["avatar","Edad y perfil del público que le cree"],["nivel","Nivel de consciencia que mejor maneja",["inconsciente","consciente del problema","consciente de la solución","consciente del producto","muy consciente"]]]],
+  ["Estilo",[["tono","Tono",["serio","humor","técnico","tímido"]],["vocabulario","Vocabulario propio y muletillas"],["fortalezas","Fortalezas frente a cámara"],["limites","Qué no puede fingir"]]],
+  ["Logística",[["equipo","Equipo (celular, luz, micrófono)"],["locaciones","Locaciones disponibles"],["capacidad","Briefs por jornada (máx. 4)"],["tarifa","Tarifa por jornada"]]],
+];
+function vEmb(){
+  const ed = S.editEmb; const e = ed ? (S.emb.find(x=>x.id===ed)||{id:ed,estado:"activa",capacidad:4,disponible:true}) : null;
+  return `<h1>Embajadoras</h1>
+  <p class="lead">Cada perfil lo lee el guionista antes de escribirle: el brief se escribe para ella, para que diga lo que puede decir sin sonar falsa. El historial se llena solo con sus briefs y ganadores.</p>
+  <div class="row" style="margin-bottom:14px"><button class="btn primary" id="nuevaEmb">Registrar embajadora</button></div>
+  ${e? vEmbForm(e):""}
+  ${S.emb.length? `<div class="card"><div class="tablewrap"><table><thead><tr><th>Nombre</th><th>Contexto</th><th>Estado</th><th class="num">Briefs</th><th class="num">Ganadores</th><th></th></tr></thead><tbody>
+    ${S.emb.map(x=>{const bs=S.briefs.filter(b=>b.embajadoraId===x.id);return `<tr><td><b>${esc(x.nombre)}</b>${x.ejemplo?' <span class="pill">Ejemplo</span>':""}<div class="small muted">${esc(x.ciudad||"")}</div></td>
+    <td class="small">${esc([x.cultivo,x.rol,x.tono].filter(Boolean).join(" · "))}</td>
+    <td><span class="pill ${x.estado==="activa"?"ok":x.estado==="pausa"?"warn":"bad"}">${esc(x.estado)}</span>${x.disponible===false?' <span class="pill">no disponible</span>':""}</td>
+    <td class="num">${bs.length}</td><td class="num">${bs.filter(esGanador).length}</td>
+    <td><button class="btn sm" data-edit="${x.id}">Editar</button></td></tr>`}).join("")}
+  </tbody></table></div></div>` : `<div class="empty">Todavía no hay embajadoras. Registra la primera con el botón de arriba.</div>`}`;
+}
+function vEmbForm(e){
+  return `<form class="card" id="embForm" style="margin-bottom:16px"><h2>${e.nombre?esc(e.nombre):"Nueva embajadora"}</h2>
+  ${CAMPOS.map(([t,fs])=>`<h3>${t}</h3><div class="form">${fs.map(([k,l,opts])=>`<label>${l}${opts?`<select id="f-${k}" name="${k}"><option value=""></option>${opts.map(o=>`<option ${e[k]===o?"selected":""}>${o}</option>`).join("")}</select>`:`<input id="f-${k}" name="${k}" value="${esc(e[k]??"")}" ${k==="capacidad"?'type="number" min="1" max="4"':""}>`}</label>`).join("")}</div>`).join("")}
+  <h3>Estado</h3><div class="form">
+    <label>Estado<select id="f-estado" name="estado">${["activa","pausa","retirada"].map(o=>`<option ${e.estado===o?"selected":""}>${o}</option>`).join("")}</select></label>
+    <label>¿Disponible esta semana?<select id="f-disponible" name="disponible"><option value="true" ${e.disponible!==false?"selected":""}>sí</option><option value="false" ${e.disponible===false?"selected":""}>no</option></select></label>
+    <label>Valor por venta entregada (COP)<input id="f-valorVenta" name="valorVenta" type="number" min="0" value="${esc(e.valorVenta??"")}"></label>
+  </div>
+  <label class="row" style="flex-direction:row;gap:8px;color:var(--ink)"><input type="checkbox" id="f-datos" name="autorizaDatos" style="width:auto" ${e.autorizaDatos?"checked":""}> Autorizó el tratamiento de datos personales (Ley 1581 de 2012)</label>
+  <div class="row"><button class="btn primary" type="submit">Guardar</button><button class="btn" type="button" id="cancelEmb">Cerrar</button>
+  ${S.emb.some(x=>x.id===e.id)?(S.confirm==="emb"+e.id?`<span class="confirm">¿Borrar a ${esc(e.nombre)}? <button class="btn sm danger" type="button" id="delEmbOk">Sí, borrar</button><button class="btn sm" type="button" data-act="nocancel">No</button></span>`:`<button class="btn danger" type="button" id="delEmb">Borrar</button>`):""}</div>
+  </form>`;
+}
+
+/* ---------- Resultados ---------- */
+function esGanador(b){ const m=b.metricas||{}; const a=adn(); return m.ctrUnico!=null && m.cpa!=null && Number(m.ctrUnico)>Number(a.metaCTR||5) && Number(m.cpa)>0 && Number(m.cpa)<Number(a.metaCPA||10000); }
+function vRes(){
+  const list = S.briefs.filter(b=>["lanzado","cerrado"].includes(b.estado));
+  const a = adn();
+  return `<h1>Resultados en Meta</h1>
+  <p class="lead">Tres cortes: día 3 (¿engancha?), día 7 (¿vende?) y día 21 (resultado final y bono). Ganador = CTR único mayor a ${a.metaCTR||5}% y CPA menor a ${money(a.metaCPA||10000)} sobre pedidos entregados.</p>
+  ${list.length? `<div class="card"><div class="tablewrap"><table><thead><tr><th>Brief</th><th class="num">Día 3 · % gancho</th><th class="num">Día 3 · CTR %</th><th class="num">Día 7 · CTR único %</th><th class="num">Día 7 · CPA</th><th>Día 21 · aprendizaje</th><th>Veredicto</th></tr></thead><tbody>
+  ${list.map(b=>{const m=b.metricas||{};const n=(k)=>`<input class="mono" style="width:96px;text-align:right" type="number" step="any" id="m-${b.id}-${k}" data-met="${b.id}" data-k="${k}" value="${m[k]??""}">`;
+   const v = m.ctrUnico==null||m.cpa==null ? `<span class="pill">Esperando día 7</span>` : esGanador(b)?`<span class="pill ok">Ganador</span>`:`<span class="pill bad">Perdedor</span>`;
+   return `<tr><td><b>${esc(b.angulo)}</b><div class="small muted">${esc(embName(b.embajadoraId))}</div></td><td class="num">${n("gancho")}</td><td class="num">${n("ctr")}</td><td class="num">${n("ctrUnico")}</td><td class="num">${n("cpa")}</td>
+   <td><input id="m-${b.id}-nota" data-met="${b.id}" data-k="nota" value="${esc(m.nota||"")}" placeholder="Por qué vendió o no"></td><td>${v}</td></tr>`}).join("")}
+  </tbody></table></div><p class="small muted">Los cambios se guardan al salir de cada casilla. Cuando se reconecte Meta Ads, estas cifras se llenarán solas.</p></div>`
+  : `<div class="empty">Aún no hay anuncios lanzados. Cuando marques un brief como "Lanzado en Meta", aparece aquí para registrar sus métricas.</div>`}`;
+}
+
+/* ---------- Comisiones ---------- */
+function vCom(){
+  const a = adn();
+  return `<h1>Comisiones</h1>
+  <p class="lead">Comisión = ventas entregadas × valor por venta, más el bono por cada anuncio suyo que gane en Meta. Solo cuenta lo entregado: en contra entrega un pedido creado no es una venta. El pago se hace por fuera y aquí se marca como pagado.</p>
+  <div class="card"><div class="row"><label style="max-width:240px">Bono por anuncio ganador (COP)<input id="bono" type="number" min="0" value="${a.bonoGanador||0}"></label></div>
+  ${S.emb.length? `<div class="tablewrap"><table><thead><tr><th>Embajadora</th><th class="num">Ventas entregadas</th><th class="num">Valor por venta</th><th class="num">Ganadores</th><th class="num">Total del periodo</th><th>Pagado</th></tr></thead><tbody>
+  ${S.emb.map(e=>{const g=S.briefs.filter(b=>b.embajadoraId===e.id&&esGanador(b)).length;const tot=(Number(e.ventasEntregadas)||0)*(Number(e.valorVenta)||0)+g*(Number(a.bonoGanador)||0);
+   return `<tr><td><b>${esc(e.nombre)}</b></td><td class="num"><input class="mono" style="width:90px;text-align:right" type="number" min="0" id="v-${e.id}" data-ventas="${e.id}" value="${e.ventasEntregadas||0}"></td>
+   <td class="num mono">${money(e.valorVenta)}</td><td class="num mono">${g}</td><td class="num mono"><b>${money(tot)}</b></td>
+   <td><button class="btn sm ${e.pagado?"":"primary"}" data-pagar="${e.id}">${e.pagado?"Pagado ✓":"Marcar pagado"}</button></td></tr>`}).join("")}
+  </tbody></table></div>`:`<div class="empty">Registra embajadoras para calcular sus comisiones.</div>`}
+  <p class="small muted">Hoy las ventas se escriben a mano. El siguiente paso es el link personal (toroverde.co/?ref=nombre), el webhook de Shopify y el estado ENTREGADO de Dropi para que se cuenten solas.</p></div>`;
+}
+
+/* ---------- ADN ---------- */
+function vAdn(){
+  const a = adn();
+  return `<h1>ADN de marca</h1>
+  <p class="lead">El documento vivo que el guionista y los críticos leen antes de cada brief. Sin él, cualquier IA escribe genérico. Los patrones ganadores y la lista negra se actualizan con lo que aprendes en Resultados.</p>
+  <div class="card"><label>ADN (patrones ganadores, lista negra, voz del cliente, diferencial, objeciones, reglas)<textarea id="adnTexto" style="min-height:320px">${esc(a.texto)}</textarea></label>
+  <div class="form"><label>Palabras prohibidas (separadas por coma)<input id="adnProh" value="${esc((a.prohibidas||PROHIBIDAS_BASE).join(", "))}"></label>
+  <label>Meta CTR único (%)<input id="adnCTR" type="number" step="any" value="${a.metaCTR??5}"></label>
+  <label>Meta CPA (COP)<input id="adnCPA" type="number" value="${a.metaCPA??10000}"></label></div>
+  <div class="row"><button class="btn primary" id="guardarAdn">Guardar ADN</button></div></div>
+  <div class="card" style="margin-top:16px"><h2>Ángulos</h2>
+    <p class="small muted">"Ganador" = ya vendió; el planificador le da el 70% de los briefs. "Nuevo" = para probar, el 30%.</p>
+    ${a.angulos.length?`<div class="tablewrap"><table><tbody>${a.angulos.map((g,i)=>`<tr><td>${esc(g.nombre)}</td><td><span class="pill ${g.tipo==="nuevo"?"warn":"ok"}">${g.tipo==="nuevo"?"nuevo":"ganador"}</span></td><td><button class="btn sm" data-tipo="${i}">Cambiar a ${g.tipo==="nuevo"?"ganador":"nuevo"}</button> <button class="btn sm danger" data-quitar="${i}">Quitar</button></td></tr>`).join("")}</tbody></table></div>`:`<div class="empty">Sin ángulos. Agrega el primero abajo.</div>`}
+    <div class="row"><label style="flex:1 1 260px">Nuevo ángulo<input id="nuevoAng" placeholder="Ej.: Lo que se ahorra en jornales de guadaña"></label>
+    <label style="max-width:160px">Tipo<select id="nuevoTipo"><option value="ganador">ganador</option><option value="nuevo">nuevo</option></select></label>
+    <button class="btn" id="addAng" style="align-self:end">Agregar</button></div>
+  </div>`;
+}
+
+/* ---------- Eventos ---------- */
+function bind(){
+  const $ = id => document.getElementById(id);
+  document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{S.tab=b.dataset.go;S.filtro="aprobar";render();});
+  if($("meta")) $("meta").onchange = e=>{ S.planMeta=Number(e.target.value)||0; render(); };
+  if($("aprobarPlan")) $("aprobarPlan").onclick = aprobarPlan;
+  if($("filtro")) $("filtro").onchange = e=>{ S.filtro=e.target.value; render(); };
+  document.querySelectorAll("[data-act]").forEach(b=>b.onclick=()=>accion(b.dataset.act,b.dataset.id,b.dataset.to));
+  if($("nuevaEmb")) $("nuevaEmb").onclick=()=>{S.editEmb=uid();render();};
+  document.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>{S.editEmb=b.dataset.edit;render();window.scrollTo(0,0);});
+  if($("cancelEmb")) $("cancelEmb").onclick=()=>{S.editEmb=null;S.confirm=null;render();};
+  if($("delEmb")) $("delEmb").onclick=()=>{S.confirm="emb"+S.editEmb;render();};
+  if($("delEmbOk")) $("delEmbOk").onclick=async()=>{await store.del("embajadoras",S.editEmb);S.editEmb=null;S.confirm=null;toast("Embajadora borrada");render();};
+  if($("embForm")) $("embForm").onsubmit = guardarEmb;
+  document.querySelectorAll("[data-met]").forEach(i=>i.onchange=async e=>{
+    const b=S.briefs.find(x=>x.id===e.target.dataset.met); const k=e.target.dataset.k; const v=k==="nota"?e.target.value:(e.target.value===""?null:Number(e.target.value));
+    await store.update("briefs",b.id,{metricas:{...(b.metricas||{}),[k]:v}}); toast("Guardado"); e.target.blur(); render();
+  });
+  if($("bono")) $("bono").onchange=async e=>{await saveAdn({bonoGanador:Number(e.target.value)||0});e.target.blur();render();};
+  document.querySelectorAll("[data-ventas]").forEach(i=>i.onchange=async e=>{await store.update("embajadoras",e.target.dataset.ventas,{ventasEntregadas:Number(e.target.value)||0,pagado:false});e.target.blur();toast("Guardado");render();});
+  document.querySelectorAll("[data-pagar]").forEach(b=>b.onclick=async()=>{const e=S.emb.find(x=>x.id===b.dataset.pagar);await store.update("embajadoras",e.id,{pagado:!e.pagado});});
+  if($("guardarAdn")) $("guardarAdn").onclick=async()=>{await saveAdn({texto:$("adnTexto").value,prohibidas:$("adnProh").value.split(",").map(s=>s.trim().toLowerCase()).filter(Boolean),metaCTR:Number($("adnCTR").value)||5,metaCPA:Number($("adnCPA").value)||10000});toast("ADN guardado");document.activeElement?.blur();render();};
+  if($("addAng")) $("addAng").onclick=async()=>{const n=$("nuevoAng").value.trim();if(!n)return;await saveAdn({angulos:[...adn().angulos,{nombre:n,tipo:$("nuevoTipo").value}]});$("nuevoAng").value="";$("nuevoAng").blur();render();};
+  document.querySelectorAll("[data-quitar]").forEach(b=>b.onclick=()=>saveAdn({angulos:adn().angulos.filter((_,i)=>i!==Number(b.dataset.quitar))}));
+  document.querySelectorAll("[data-tipo]").forEach(b=>b.onclick=()=>saveAdn({angulos:adn().angulos.map((g,i)=>i===Number(b.dataset.tipo)?{...g,tipo:g.tipo==="nuevo"?"ganador":"nuevo"}:g)}));
+}
+const clean = o => { const x={...o}; delete x.id; Object.keys(x).forEach(k=>x[k]===undefined&&delete x[k]); return x; };
+async function saveAdn(patch){ await store.set("config","adn",clean({...adn(),...patch})); }
+async function guardarEmb(ev){
+  ev.preventDefault(); const fd=new FormData(ev.target); const d=Object.fromEntries(fd.entries());
+  if(!d.nombre?.trim()){ toast("Escribe el nombre"); return; }
+  d.disponible = d.disponible!=="false"; d.autorizaDatos = !!fd.get("autorizaDatos");
+  d.capacidad = Math.min(4,Math.max(1,Number(d.capacidad)||4)); d.valorVenta = Number(d.valorVenta)||0;
+  const prev = S.emb.find(x=>x.id===S.editEmb)||{};
+  await store.set("embajadoras",S.editEmb,clean({...prev,...d,ejemplo:prev.ejemplo&&prev.nombre===d.nombre?true:false,creada:prev.creada||Date.now()}));
+  S.editEmb=null; document.activeElement?.blur(); toast("Embajadora guardada"); render();
+}
+async function aprobarPlan(){
+  const sem=semanaId(); const meta=S.planMeta ?? (S.semanas.find(s=>s.id===sem)?.meta) ?? 100; const plan=calcPlan(meta); let n=0;
+  await store.set("semanas",sem,{meta,briefs:plan.need,inicio:sem,creada:Date.now()});
+  for(const r of plan.rows) for(const it of r.items){ await store.set("briefs",uid(),{semana:sem,embajadoraId:r.e.id,angulo:it.angulo,tipo:it.tipo,estado:"pendiente",vueltas:0,creado:Date.now()+(n++)}); }
+  toast(n+" briefs creados"); S.tab="briefs"; S.filtro="pendiente"; render();
+}
+async function accion(act,id,to){
+  const b=S.briefs.find(x=>x.id===id);
+  if(act==="askdel"){S.confirm=id;render();return;}
+  if(act==="cerrarcopia"){S.copia=null;render();return;}
+  if(act==="nocancel"){S.confirm=null;render();return;}
+  if(act==="borrar"){await store.del("briefs",id);S.confirm=null;toast("Brief borrado");return;}
+  if(act==="estado"){await store.update("briefs",id,{estado:to,[to+"En"]:Date.now()});toast(ESTADO_LABEL[to]);return;}
+  if(act==="copiar"){const t=mensajeEmb(b);try{await navigator.clipboard.writeText(t);toast("Mensaje copiado");}catch(e){S.copia=t;render();setTimeout(()=>document.getElementById("copiaTxt")?.select(),0);toast("Selecciona y copia el texto");} return;}
+  if(act==="otro"){await store.update("briefs",id,{estado:"descartado"});await store.set("briefs",uid(),{semana:b.semana,embajadoraId:b.embajadoraId,angulo:b.angulo,tipo:b.tipo,estado:"pendiente",vueltas:0,creado:Date.now()});toast("Nuevo brief listo para escribir");return;}
+  if(act==="escribir"||act==="reescribir") return escribir(b, act==="reescribir");
+  if(act==="criticos") return criticar(b);
+}
+
+/* ---------- IA: guionista y críticos ---------- */
+function perfil(e){ return CAMPOS.flatMap(([,fs])=>fs).map(([k,l])=>e[k]?`${l}: ${e[k]}`:"").filter(Boolean).join("\n"); }
+const FORMATO = `Responde SOLO con un objeto JSON con esta forma:
+{"hipotesis":"creemos que X porque Y","origen":"de qué ganador o formato sale","frasesCliente":["frase textual del cliente"],"nivelConsciencia":"...","objecion":"...","escenas":[{"seg":"0-3","visual":"...","audio":"lo que dice","texto":"texto en pantalla"}],"ganchos":["5 ganchos, solo los primeros 3 segundos"],"cierres":["5 cierres"],"grabacion":{"donde":"...","apoyo":["tomas de apoyo"],"noHacer":["..."]}}
+Exactamente 5 ganchos y 5 cierres. Video vertical de 30 a 45 segundos. Español colombiano campesino, de "usted", frases cortas que la embajadora pueda decir con naturalidad.`;
+async function escribir(b, rehacer){
+  const e=S.emb.find(x=>x.id===b.embajadoraId)||{}; const a=adn();
+  S.busy[b.id]=true; render();
+  const prompt = `Eres el guionista de anuncios UGC de Toro Verde, un herbicida para fincas colombianas. Escribe UN brief para que una embajadora lo grabe con su celular.
+
+ADN DE MARCA:
+${(a.texto||"").slice(0,12000)}
+
+PALABRAS PROHIBIDAS (nunca las uses): ${(a.prohibidas||PROHIBIDAS_BASE).join(", ")}. No menciones precios ni el ICA. No prometas que mata la raíz ni que es permanente. Si hablas de dosis: mínimo 130 ml por bomba de 20 litros.
+
+EMBAJADORA (escribe para ella, que suene a ella):
+${perfil(e)||"Sin perfil cargado"}
+
+ÁNGULO: ${b.angulo} (${b.tipo==="nuevo"?"ángulo nuevo para probar":"variante de un ángulo que ya vendió, con otro formato"})
+${rehacer&&b.brief?`\nBRIEF ANTERIOR:\n${JSON.stringify(b.brief)}\n\nCORRECCIONES DE LOS CRÍTICOS (aplícalas todas):\n${JSON.stringify(b.criticos)}`:""}
+
+${FORMATO}`;
+  try{
+    const br = await S.sample.json(prompt,{modelTier:"complex",cache:false});
+    if(!br || !Array.isArray(br.escenas)) throw {code:"invalid_json"};
+    br._k = uid();
+    await store.update("briefs",b.id,{brief:br,estado:"borrador",criticos:null,error:null,vueltas:rehacer?(b.vueltas||0)+1:(b.vueltas||0)});
+    S.open=br._k; toast("Brief escrito. Ahora pásalo por los críticos.");
+  }catch(err){ await store.update("briefs",b.id,{error:errMsg(err)}); }
+  S.busy[b.id]=false; render();
+}
+async function criticar(b){
+  const a=adn(); const e=S.emb.find(x=>x.id===b.embajadoraId)||{};
+  S.busy[b.id]=true; render();
+  const txt = JSON.stringify(b.brief).toLowerCase();
+  const prohibidas = (a.prohibidas||PROHIBIDAS_BASE).filter(p=>new RegExp("(^|[^a-záéíóúñ])"+p.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"([^a-záéíóúñ]|$)").test(txt));
+  const prompt = `Eres un panel de 3 críticos que revisa un brief de anuncio UGC para Toro Verde (herbicida para fincas colombianas) antes de que llegue al dueño.
+
+ADN DE MARCA (resumen):
+${(a.texto||"").slice(0,8000)}
+
+PERFIL DE LA EMBAJADORA:
+${perfil(e)}
+
+BRIEF:
+${JSON.stringify(b.brief)}
+
+1. ANTI-GENÉRICO: lista de 10 puntos. ¿Usa lenguaje real del cliente? ¿Cita un ganador o formato y una frase real? ¿Evita palabras de marketing ("increíble", "revolucionario", "descubre", "el mejor")? ¿El gancho es específico de una finca? Devuelve la línea exacta a cambiar.
+2. CUMPLIMIENTO: bloquea si menciona ICA, precios, "orgánico", "ecológico", "natural", "sin veneno", "no tóxico", promete matar la raíz o resultados permanentes, o da una dosis menor a 130 ml por bomba de 20 L.
+3. DIRECTOR: ¿se entiende sin audio? ¿una acción por bloque? ¿la embajadora lo puede decir con naturalidad? Devuelve la escena a simplificar.
+
+Responde SOLO con JSON:
+{"antiGenerico":{"aprobado":true,"puntaje":8,"cambios":["..."]},"cumplimiento":{"aprobado":true,"problemas":["..."]},"director":{"aprobado":true,"puntaje":8,"cambios":["..."]}}
+Aprueba solo si el puntaje es 7 o más. Si está aprobado, "cambios" puede ir vacío.`;
+  try{
+    const c = await S.sample.json(prompt,{modelTier:"default",cache:false});
+    c.cumplimiento = c.cumplimiento||{aprobado:false,problemas:[]};
+    if(prohibidas.length){ c.cumplimiento.aprobado=false; c.cumplimiento.problemas=[...(c.cumplimiento.problemas||[]),"Usa palabras prohibidas: "+prohibidas.join(", ")]; }
+    c.pasa = !!(c.antiGenerico?.aprobado && c.cumplimiento.aprobado && c.director?.aprobado);
+    await store.update("briefs",b.id,{criticos:c,estado:c.pasa?"revisado":"borrador",vueltas:Math.max(1,b.vueltas||0),error:null});
+    toast(c.pasa?"Pasó los 3 críticos. Espera tu aprobación.":"Los críticos lo devolvieron");
+  }catch(err){ await store.update("briefs",b.id,{error:errMsg(err)}); }
+  S.busy[b.id]=false; render();
+}
+function errMsg(e){
+  return ({not_granted:"No diste permiso para usar Claude en esta página. Recarga y acepta el permiso.",rate_limited:"Demasiadas solicitudes seguidas. Espera un par de minutos y vuelve a intentar.",invalid_json:"La respuesta salió incompleta. Vuelve a intentar.",refused:"Claude no quiso escribir este brief. Cambia el ángulo e intenta de nuevo.",session_expired:"Tu sesión se venció. Vuelve a iniciar sesión en claude.ai."}[e?.code]) || "No se pudo completar. Vuelve a intentar.";
+}
+function mensajeEmb(b){
+  const br=b.brief||{}; const e=S.emb.find(x=>x.id===b.embajadoraId)||{};
+  return `Hola ${e.nombre||""}, tenemos nueva jornada de grabación con Toro Verde.
+
+Ángulo: ${b.angulo}
+Idea: ${br.hipotesis||""}
+
+GUION
+${(br.escenas||[]).map(s=>`[${s.seg} s] ${s.audio}  (Se ve: ${s.visual})`).join("\n")}
+
+GRABA LOS 5 GANCHOS (los primeros 3 segundos):
+${(br.ganchos||[]).map((g,i)=>`${i+1}. ${g}`).join("\n")}
+
+GRABA LOS 5 CIERRES:
+${(br.cierres||[]).map((g,i)=>`${i+1}. ${g}`).join("\n")}
+
+Dónde: ${br.grabacion?.donde||""}
+Tomas de apoyo: ${(br.grabacion?.apoyo||[]).join(", ")}
+No hacer: ${(br.grabacion?.noHacer||[]).join(", ")}
+
+Celular en vertical, sin viento, con buena luz. Sube todo a tu carpeta de Drive. ¡Gracias!`;
+}
+
+/* ---------- Arranque ---------- */
+render();
+(async()=>{
+  try{
+    const db = await claude.use("db");
+    if(db){
+      S.db=db; S.live=true;
+      ["embajadoras","briefs","semanas","config"].forEach(col=>db.collection(col).onSnapshot(s=>apply(col,s.docs.map(d=>({id:d.id,...d.data()}))),()=>{S.live=false;render();}));
+    }
+  }catch(e){}
+  try{ S.sample = await claude.use("sample"); }catch(e){}
+  render();
+})();
+</script>

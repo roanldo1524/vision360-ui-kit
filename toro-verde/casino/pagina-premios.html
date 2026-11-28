@@ -1,0 +1,128 @@
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;700;800&amp;family=Barlow+Condensed:wght@800;900&amp;family=Orbitron:wght@900&amp;display=swap">
+<style>#tvx{--v:#c8f520;--o:#ffd54a;--eo:cubic-bezier(.23,1,.32,1);max-width:480px;margin:0 auto;font-family:Barlow,system-ui,sans-serif;color:#fff;background:radial-gradient(120% 50% at 50% 0,#1c1c1c,#050505 60%);border-radius:18px;position:relative;overflow:hidden;padding:14px 12px 22px;-webkit-font-smoothing:antialiased}
+#tvx,#tvx *{box-sizing:border-box;margin:0}
+#tvx .cab{text-align:center}
+#tvx .pill{display:inline-block;background:var(--v);color:#043434;font-weight:800;font-size:14px;letter-spacing:.06em;padding:6px 14px;border-radius:99px;box-shadow:0 0 22px rgba(200,245,32,.55)}
+#tvx h1{font-family:"Barlow Condensed",sans-serif;font-weight:900;font-size:28px;line-height:1;text-transform:uppercase;margin-top:10px}
+#tvx h1 .m{display:block;font-size:58px;background:linear-gradient(180deg,#fff7c2,#ffd54a 45%,#e0a100);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 #6b4700) drop-shadow(0 0 18px rgba(255,200,40,.45))}
+#tvx .como{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px}
+#tvx .como div{background:rgba(255,255,255,.07);border-radius:10px;padding:8px 6px;font-size:12.5px;line-height:1.25;text-align:center;color:#ddd}
+#tvx .como b{display:block;font-family:"Barlow Condensed";font-size:20px;color:var(--v)}
+#tvx .maq{position:relative;margin:12px auto 0;width:100%;aspect-ratio:1024/1260;background:url(https://cdn.shopify.com/s/files/1/0687/6096/1211/files/casino-maquina.jpg?v=1795396299) top center/100% auto no-repeat;border-radius:12px;overflow:hidden}
+#tvx .led{position:absolute;left:23%;right:23%;top:14.9%;height:7.9%;border-radius:8px;background:#0a0a0a;box-shadow:inset 0 0 0 2px #2b2b2b,0 0 18px rgba(255,80,40,.25);display:flex;flex-direction:column;align-items:center;justify-content:center}
+#tvx .led small{font:800 9px/1 Barlow;letter-spacing:.2em;color:#ff8a3d}
+#tvx .led b{font:900 22px/1 Orbitron,monospace;color:#ff3b1f;text-shadow:0 0 10px #ff3b1f;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+#tvx .led.gana b{color:var(--o);text-shadow:0 0 14px var(--o)}
+#tvx .vent{position:absolute;left:16.3%;width:66%;top:36.4%;height:36.8%;display:grid;grid-template-columns:repeat(3,1fr);gap:2.5%;padding:2%}
+#tvx .rod{position:relative;overflow:hidden;border-radius:6px;background:linear-gradient(90deg,#b9b29a,#f6f1df 30%,#fffdf3 50%,#f6f1df 70%,#b9b29a)}
+#tvx .rod:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.65),transparent 28%,transparent 72%,rgba(0,0,0,.65));pointer-events:none}
+#tvx .tira{will-change:transform}
+#tvx .s{display:flex;align-items:center;justify-content:center;font-size:44px;line-height:1}
+#tvx .s .logo{display:block;width:52px;height:66px;background:url(https://toroverde.co/cdn/shop/files/tv-logo.png?width=300) -4px 50%/auto 76px no-repeat}
+#tvx .s .siete{font:900 54px/1 "Barlow Condensed";color:#d0140f;-webkit-text-stroke:2px #6d0000;text-shadow:0 2px 0 #ffcf3a}
+#tvx .s .bar{font:900 18px/1 "Barlow Condensed";color:#fff;background:#111;padding:6px 8px;border-radius:4px;border:2px solid #d9b13b;letter-spacing:.05em}
+#tvx .tira.blur{filter:blur(2.5px)}
+#tvx .linea{position:absolute;left:12%;right:15%;top:54.8%;height:3px;background:#ff2a2a;box-shadow:0 0 10px #ff2a2a;opacity:.85;pointer-events:none}
+#tvx .rod.win{box-shadow:0 0 0 3px var(--v),0 0 24px var(--v);animation:tvxw .5s ease-in-out infinite alternate}@keyframes tvxw{to{box-shadow:0 0 0 3px var(--o),0 0 34px var(--o)}}
+#tvx .palanca{position:absolute;right:0;top:14.6%;width:14%;height:54.8%;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#tvx .mano{position:absolute;right:2%;top:29.3%;font-size:28px;animation:tvxm 1.2s ease-in-out infinite;pointer-events:none}@keyframes tvxm{50%{transform:translateY(14px)}}
+#tvx .flash{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(circle at 50% 45%,rgba(255,220,80,.55),transparent 60%)}
+#tvx .flash.on{animation:tvxf .35s steps(2) 6}@keyframes tvxf{50%{opacity:1}}
+#tvx .bandeja{position:absolute;left:21%;right:24%;top:82.9%;height:11%;pointer-events:none}
+#tvx .moneda{position:absolute;width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6b0,#ffd54a 40%,#b07a00 80%);box-shadow:inset 0 0 0 2px #e0a100,0 2px 3px rgba(0,0,0,.5)}
+#tvx .vuela{position:absolute;z-index:6;animation:tvxc .9s cubic-bezier(.3,.1,.6,1) forwards}@keyframes tvxc{to{transform:translate(var(--dx),var(--dy)) rotate(540deg)}}
+#tvx .tiros{display:flex;justify-content:center;gap:8px;margin-top:12px;font-size:13px;color:#bbb;align-items:center}
+#tvx .tiros i{width:14px;height:14px;border-radius:50%;background:var(--o);box-shadow:0 0 10px var(--o);display:inline-block}#tvx .tiros i.off{background:#333;box-shadow:none}
+#tvx .msg{text-align:center;font-size:19px;font-weight:800;min-height:50px;margin-top:8px;line-height:1.25}
+#tvx .pop{animation:tvxp .45s var(--eo)}@keyframes tvxp{from{opacity:0;transform:scale(.94)}}
+#tvx .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:8px;border:0;border-radius:999px;padding:19px 20px;font:900 22px/1 "Barlow Condensed",sans-serif;letter-spacing:.04em;cursor:pointer;color:#3a0000;background:linear-gradient(180deg,#ffe680,#ffc21a 50%,#e09400);box-shadow:0 6px 0 #9b6200,0 12px 24px rgba(255,190,30,.35);text-transform:uppercase;transition:transform .12s}
+#tvx .btn:active{transform:translateY(4px);box-shadow:0 2px 0 #9b6200}
+#tvx .btn[disabled]{filter:grayscale(.6);opacity:.7}
+#tvx .btn.late{animation:tvxb 1.2s ease-in-out infinite}@keyframes tvxb{50%{transform:scale(1.04)}}
+#tvx #premio{display:none;margin-top:14px;background:linear-gradient(180deg,#fffbe8,#fff2c2);color:#2a1a00;border-radius:18px;padding:18px 16px 16px;box-shadow:0 0 0 3px var(--o),0 0 40px rgba(255,200,40,.4);animation:tvxp .5s var(--eo)}
+#tvx #premio h2{font-family:"Barlow Condensed";font-weight:900;text-transform:uppercase;font-size:32px;line-height:.95;color:#043434;text-align:center}
+#tvx #premio h2 span{color:#c47b00}
+#tvx #premio .g{text-align:center;font-weight:800;color:#2f6b00;margin-top:6px;font-size:16px}
+#tvx #premio .p{font-size:14.5px;margin-top:8px;color:#5c4a20;line-height:1.35;text-align:center}
+#tvx .prod{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 10px;width:100%;margin-top:10px;border-radius:14px;padding:12px 14px;background:#043434;color:#fff;text-decoration:none;transition:transform .14s}
+#tvx .prod:active{transform:scale(.97)}
+#tvx .prod .n{font:800 18px/1.1 Barlow}#tvx .prod .a{font:900 22px/1 "Barlow Condensed";color:var(--o);text-align:right}
+#tvx .prod .d{font-size:13px;color:#cfe;grid-column:1/-1;display:flex;justify-content:space-between}#tvx .prod .d s{opacity:.6}
+#tvx .prod.top1{background:#0b5a5a;box-shadow:inset 0 0 0 2px var(--v)}
+#tvx .aviso{font-size:12.5px;color:#6d5a2c;margin-top:12px;line-height:1.4;text-align:center}
+#tvx .uso{margin-top:14px;font-size:12px;color:rgba(255,255,255,.5);line-height:1.4;text-align:center}
+#tvx .sonido{position:absolute;top:12px;right:12px;border:0;background:rgba(255,255,255,.1);color:#fff;border-radius:99px;padding:6px 10px;font:700 12px Barlow;cursor:pointer;z-index:9}
+#tvx .pz{position:absolute;top:-16px;width:8px;height:14px;border-radius:2px;pointer-events:none;z-index:9;animation:tvxz 2.6s cubic-bezier(.33,.6,.6,1) forwards}@keyframes tvxz{to{transform:translate(var(--dx),1600px) rotate(var(--r));opacity:0}}
+#tvx .sh{animation:tvxs .4s}@keyframes tvxs{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@media (prefers-reduced-motion:reduce){#tvx *{animation:none!important;transition:none!important}}</style>
+<div id="tvx">
+<button class="sonido" id="son">🔊 Sonido</button>
+<div class="cab"><span class="pill">🎰 JUEGA GRATIS HOY</span>
+<h1 id="hola">Gana hasta <span class="m">$26.900</span> de descuento + semilla de regalo</h1></div>
+<div class="como"><div><b>1</b>Jala la palanca o toca GIRAR</div><div><b>2</b>Los rodillos paran solos</div><div><b>3</b>Lo que ganes se va sumando. 7-7-7 = premio mayor</div></div>
+<div class="maq" id="maq">
+<div class="led" id="led"><small>PREMIO</small><b id="premioLed">$0</b></div>
+<div class="vent"><div class="rod"><div class="tira" id="r0"></div></div><div class="rod"><div class="tira" id="r1"></div></div><div class="rod"><div class="tira" id="r2"></div></div></div>
+<div class="linea"></div>
+<div class="bandeja" id="bandeja"></div>
+<div class="flash" id="flash"></div>
+<div class="palanca" id="palanca" aria-label="Jalar la palanca"></div><div class="mano" id="mano">👆</div>
+</div>
+<div class="tiros" id="tiros">Tiros gratis: <i></i><i></i><i></i><i></i><i></i></div>
+<p class="msg" id="msg">Tienes 5 tiros gratis. ¡Jala la palanca!</p>
+<button class="btn late" id="tirar">🎰 Girar gratis</button>
+<section id="premio" aria-live="polite"><h2>¡Jackpot! Ganaste <span>hasta $26.900</span></h2><p class="g">+ semilla de maíz criollo de regalo 🌽</p><p class="p">Tu premio es <b>10% de descuento</b>: con el <b>galón ahorras $26.900</b>, con 2 litros $16.900 y con 1 litro $9.900. Toca el que quieres y te tomamos el pedido por WhatsApp 👇</p><div id="prods"></div><p class="aviso">Código RULETA10. Premio apartado a tu nombre hasta la medianoche. Pagas al recibir en tu casa o en la oficina de Interrapidísimo. Un premio por persona, válido en tu primer pedido.</p></section>
+<p class="uso">Uso: agite el envase y aplique mínimo 130 ml por bomba de 20 litros.</p>
+</div>
+<script>
+(function(){var W="573014293375",$=function(i){return document.getElementById(i)},root=$("tvx"),N=5,F="https://cdn.shopify.com/s/files/1/0687/6096/1211/files/";
+window.clarity=window.clarity||function(){(window.clarity.q=window.clarity.q||[]).push(arguments)};function ev(n){try{window.clarity("event",n)}catch(x){}}try{var u0=new URLSearchParams(location.search);window.clarity("set","casino","v5");window.clarity("set","origen",u0.get("utm_source")||"directo")}catch(x){}ev("casino_abre");
+var SND={spin:F+"casino-spin.mp3?v=1795396299",jack:F+"casino-jackpot.mp3?v=1795396299",coin:F+"casino-coins.mp3?v=1795396299",cont:F+"casino-counter.mp3?v=1795396299"},A={},son=true;
+for(var k in SND){A[k]=new Audio(SND[k]);A[k].preload="auto"}
+function play(k,vol,dur){if(!son)return;try{var a=A[k];a.pause();a.currentTime=0;a.volume=vol||1;var p=a.play();p&&p.catch&&p.catch(function(){});if(dur)setTimeout(function(){a.pause()},dur)}catch(x){}}
+function stop(k){try{A[k].pause()}catch(x){}}
+var ac;function tono(f,d,t,v,ty){if(!son)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();var o=ac.createOscillator(),g=ac.createGain(),w=ac.currentTime+(t||0);o.type=ty||"triangle";o.frequency.value=f;g.gain.setValueAtTime(v||.14,w);g.gain.exponentialRampToValueAtTime(.001,w+d);o.connect(g);g.connect(ac.destination);o.start(w);o.stop(w+d)}catch(x){}}
+function clunk(){tono(120,.12,0,.35,"sine");tono(60,.18,0,.3,"square");tono(900,.03,0,.05)}
+function vib(p){try{navigator.vibrate&&navigator.vibrate(p)}catch(x){}}
+$("son").onclick=function(){son=!son;this.textContent=son?"🔊 Sonido":"🔇 Sin sonido";if(!son){ev("casino_sin_sonido");for(var k in A)stop(k)}};
+var q=new URLSearchParams(location.search),nom=(q.get("n")||"").replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ ]/g,"").trim().split(" ")[0];
+if(nom){nom=nom.charAt(0).toUpperCase()+nom.slice(1).toLowerCase();$("msg").textContent=nom+", tienes 5 tiros gratis. ¡Jala la palanca!"}
+var SY={toro:'<span class="logo" aria-label="Toro Verde"></span>',siete:'<span class="siete">7</span>',bar:'<span class="bar">BAR</span>',cereza:'🍒',campana:'🔔'},K=["toro","siete","cereza","bar","campana"];
+var H=0;function alto(){H=$("r0").parentNode.clientHeight;return H}
+function cel(k){return'<div class="s" style="height:'+H+'px">'+SY[k]+'</div>'}
+function pone(i,k){alto();$("r"+i).style.transition="none";$("r"+i).style.transform="";$("r"+i).innerHTML=cel(k)}
+var PLANES=[{p:[["cereza","cereza","bar"],["bar","cereza","campana"],["campana","campana","campana"],["siete","siete","cereza"],["siete","siete","siete"]],a:[3400,3400,10200,14500,26900],g:[[0,1],[],[0,1,2],[0,1],[0,1,2]]},{p:[["campana","campana","cereza"],["cereza","cereza","cereza"],["siete","bar","siete"],["siete","siete","campana"],["siete","siete","siete"]],a:[2900,8300,8300,13700,26900],g:[[0,1],[0,1,2],[],[0,1],[0,1,2]]}];
+var pz0=Math.random()<.5?0:1;try{var g1=localStorage.getItem("tvPlan");if(g1==="0"||g1==="1")pz0=+g1;else localStorage.setItem("tvPlan",String(pz0))}catch(x){}var PZ=PLANES[pz0];
+var PLAN=PZ.p,ACUM=PZ.a,GANA=PZ.g;
+function MS(n){var d=ACUM[n]-(n?ACUM[n-1]:0),v="$"+ACUM[n].toLocaleString("es-CO");if(n==N-1)return"¡¡JACKPOT!! 7️⃣7️⃣7️⃣ Llegaste a $26.900";if(!d)return"Uy, esta vez nada 😬 Sigues con "+v+". Te quedan "+(N-1-n)+" tiros";return"+$"+d.toLocaleString("es-CO")+" ✅ Llevas "+v+(n==N-2?". Queda el último tiro… 🤞":". ¡Sigue!")}
+var BTN=["🎰 Girar gratis","🎰 Girar otra vez","🎰 Girar otra vez","🎰 Girar otra vez","🔥 Último tiro"];
+function hoy(){return new Date().toLocaleDateString("en-CA",{timeZone:"America/Bogota"})}
+var st={d:hoy(),u:0};try{var g0=JSON.parse(localStorage.getItem("tvCasino5")||"null");if(g0&&(g0.d==st.d||g0.u>=N))st=g0}catch(x){}
+function guarda(){try{localStorage.setItem("tvCasino5",JSON.stringify(st))}catch(x){}}
+function pinta(){var is=$("tiros").getElementsByTagName("i");for(var k=0;k<N;k++)is[k].className=k<st.u?"off":"";if(st.u<N)$("tirar").textContent=BTN[st.u]}
+var fase=0,b=$("tirar"),red=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function girar(){if(fase!=0||st.u>=N)return;ev("casino_tiro_"+(st.u+1));fase=1;b.disabled=true;b.classList.remove("late");$("mano").style.display="none";vib(30);clunk();play("spin",.9);
+var jug=PLAN[st.u],m=$("msg");m.textContent=st.u==N-1?"Último tiro… 🤞":"¡Girando!";alto();
+document.querySelectorAll("#tvx .rod").forEach(function(x){x.classList.remove("win")});
+var vueltas=[18,24,(st.u==N-1?40:30)],dur=[1300,1900,(st.u==N-1?3600:2600)];
+for(var i=0;i<3;i++)(function(i){var t=$("r"+i),h="";for(var k=0;k<vueltas[i];k++)h+=cel(K[(k*3+i)%5]);h+=cel(jug[i]);t.innerHTML=h;t.style.transition="none";t.style.transform="translateY(0)";if(!red)t.classList.add("blur");void t.offsetWidth;
+t.style.transition="transform "+(red?0:dur[i])+"ms cubic-bezier(.12,.6,.2,1.04)";t.style.transform="translateY(-"+(vueltas[i]*H)+"px)";
+setTimeout(function(){t.classList.remove("blur");clunk();vib(20);if(i==1&&jug[0]==jug[1]){m.textContent=st.u==N-1?"Dos sietes… ¡que salga el tercero! 🤞":"¡Van dos iguales! 🤞";tono(990,.15,0,.12)}if(i==2)fin()},red?50:dur[i])})(i)}
+function fin(){stop("spin");var n=st.u,m=$("msg");st.u++;guarda();pinta();m.classList.remove("pop");void m.offsetWidth;m.classList.add("pop");m.textContent=MS(n);
+if(n<N-1){var rs=document.querySelectorAll("#tvx .rod"),ant=n?ACUM[n-1]:0;if(ACUM[n]>ant){GANA[n].forEach(function(k){rs[k].classList.add("win")});[523,659,784].forEach(function(f,k){tono(f,.18,k*.1,.13)});vib([60,40,60]);contar(ant,ACUM[n],1100);monedas(Math.round((ACUM[n]-ant)/600))}else{[440,415,392].forEach(function(f,k){tono(f,.22,k*.16,.13,"sine")});vib([70,60,70]);var q=$("maq");q.classList.remove("sh");void q.offsetWidth;q.classList.add("sh")}setTimeout(function(){fase=0;b.disabled=false;b.classList.add("late")},1300);return}
+jackpot()}
+function contar(a,fin,D){var led=$("led"),el=$("premioLed"),t0=performance.now();led.classList.add("gana");play("cont",.8);
+(function paso(t){var p=Math.min(1,(t-t0)/D),v=Math.round((a+(fin-a)*(1-Math.pow(1-p,3)))/100)*100;el.textContent="$"+v.toLocaleString("es-CO");if(p<1)requestAnimationFrame(paso);else{stop("cont");el.textContent="$"+fin.toLocaleString("es-CO")}})(t0)}
+function monedas(n){var maq=$("maq"),r=maq.getBoundingClientRect(),band=$("bandeja");for(var k=0;k<n;k++)(function(k){setTimeout(function(){var c=document.createElement("i");c.className="moneda vuela";c.style.left=(40+Math.random()*20)+"%";c.style.top="45%";c.style.setProperty("--dx",(Math.random()*160-80)+"px");c.style.setProperty("--dy",(r.height*.33+Math.random()*20)+"px");maq.appendChild(c);if(k%4==0)play("coin",.7);
+setTimeout(function(){c.remove();if(band.children.length<45){var p=document.createElement("i");p.className="moneda";p.style.left=(Math.random()*85)+"%";p.style.bottom=(Math.random()*40)+"%";band.appendChild(p)}},900)},k*70)})(k)}
+function papel(n){var cs=["#c8f520","#ffd54a","#fff","#ff3b1f"];for(var k=0;k<n;k++){var d=document.createElement("i");d.className="pz";d.style.left=Math.random()*100+"%";d.style.background=cs[k%4];d.style.setProperty("--dx",(Math.random()*140-70)+"px");d.style.setProperty("--r",(Math.random()*720-360)+"deg");d.style.animationDelay=Math.random()*.8+"s";root.appendChild(d);setTimeout(function(x){x.remove()}.bind(null,d),3600)}}
+function jackpot(){ev("casino_jackpot");document.querySelectorAll("#tvx .rod").forEach(function(x){x.classList.add("win")});play("jack",1,9000);vib([100,50,100,50,400]);var f=$("flash");f.classList.remove("on");void f.offsetWidth;f.classList.add("on");papel(90);setTimeout(function(){papel(60)},1200);contar(ACUM[N-2],ACUM[N-1],2600);monedas(45);b.style.display="none";setTimeout(premio,2900)}
+function premio(){var P=[["Galón (4 litros)",269000,242100,"El que más rinde"],["2 litros",169000,152100,""],["1 litro",99000,89100,""]],mm=function(x){return"$"+x.toLocaleString("es-CO")};
+$("prods").innerHTML=P.map(function(x,k){var t="Hola, gané en el casino Toro Verde: 10% de descuento + semilla de maíz criollo de regalo. Código RULETA10. Quiero "+x[0]+" a "+mm(x[2])+".";return'<a class="prod'+(k==0?" top1":"")+'" href="https://wa.me/'+W+'?text='+encodeURIComponent(t)+'"><span class="n">'+x[0]+'</span><span class="a">Ahorras '+mm(x[1]-x[2])+'</span><span class="d"><span>'+(x[3]||"Pagas al recibir")+'</span><span><s>'+mm(x[1])+'</s> '+mm(x[2])+'</span></span></a>'}).join("");
+document.querySelectorAll("#tvx #prods a").forEach(function(a,k){a.addEventListener("click",function(){ev("casino_reclama_"+["galon","2litros","1litro"][k])})});ev("casino_premio_visto");
+$("premio").style.display="block";setTimeout(function(){$("premio").scrollIntoView({behavior:"smooth",block:"center"})},150)}
+b.onclick=girar;$("palanca").onclick=girar;
+window.addEventListener("load",function(){for(var i=0;i<3;i++)pone(i,["cereza","toro","bar"][i]);if(st.u>=N){for(var i=0;i<3;i++)pone(i,"siete");document.querySelectorAll("#tvx .rod").forEach(function(x){x.classList.add("win")});$("premioLed").textContent="$26.900";$("led").classList.add("gana");$("msg").textContent="¡Ya ganaste! Reclama tu premio 👇";b.style.display="none";$("mano").style.display="none";pinta();premio()}else{pinta();if(st.u>0){$("msg").textContent=MS(st.u-1);if(ACUM[st.u-1]){$("premioLed").textContent="$"+ACUM[st.u-1].toLocaleString("es-CO");$("led").classList.add("gana")}}}});
+window.addEventListener("resize",function(){if(fase==0){var ks=[];for(var i=0;i<3;i++){var s=$("r"+i).lastChild;ks.push(s)}alto();for(var i=0;i<3;i++){var t=$("r"+i);t.style.transition="none";t.style.transform="";if(ks[i]){ks[i].style.height=H+"px";t.innerHTML="";t.appendChild(ks[i])}}}});
+})();
+</script>

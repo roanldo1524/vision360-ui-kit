@@ -1,0 +1,69 @@
+{
+ "_nota": "Ronald 26-11: «sobre cosas nuevas que han hecho, que han mejorado, traer problema y solución siempre los agentes». Cada agente actualiza SU entrada al final de su vuelta (nuevo, mejoro, problema, solucion; frases cortas, con número). Los KPI los calcula generar_torre.py solo. La reunión en vivo de la sede (Sala de Juntas) los presenta en la pantalla y los dice en voz alta.",
+ "Líder de Logística": {
+  "area": "Líder del equipo",
+  "voz": "buttery",
+  "nuevo": "Tablero por área con una meta cada uno y reunión en vivo en la sala de juntas.",
+  "mejoro": "Las tareas de la reunión ahora las ejecuta el equipo en la vuelta de cada hora, no Ronald.",
+  "problema": "El robot confirma 43 % y la meta de mañana es 95 %.",
+  "solucion": "Reglas nuevas de flete y abono ya activas; faltan las 3 plantillas de WhatsApp que crea Ronald."
+ },
+ "Confirmador de pedidos": {
+  "area": "Robot de confirmación",
+  "voz": "glassy",
+  "nuevo": "Confirma en modo humano, cambia oficina a Interrapidísimo y pone la dirección de la oficina sola. Notas del robot en Dropi apagadas (Ronald).",
+  "mejoro": "27-11: salieron 155 pedidos, el robot confirmó 110 (70 %); unos 80 solo con reglas, sin IA. Semana 48: robot entrega 95 % de lo resuelto vs persona 93 %.",
+  "problema": "Lo que más frena: «recibe poco» (44), «otro» (41), sin «confirmar» en el chat (34) y flete sobre el tope (25); la persona aprobó la mitad de esos.",
+  "solucion": "Revisar los 41 «otro» para convertirlos en reglas, y que el bot pida «confirmar» antes de cerrar el chat."
+ },
+ "Gestor de tickets y CAS": {
+  "area": "Logística y CAS",
+  "voz": "rounded",
+  "nuevo": "Regla nueva: «destinatario desconocido / validar con el cliente» ya se responde sola con los datos del cliente y la petición de no devolver.",
+  "mejoro": "Vuelta 5:23 p. m.: 42 casos leídos, solo 1 necesitó IA; 41 los resolvió el código.",
+  "problema": "3 paquetes en oficina con el chat del cliente cerrado (no se les pudo avisar): Roberto Pérez, Luis Ernesto Cárdenas, Diego Alexander.",
+  "solucion": "Cuando Ronald active la plantilla de rastreo de oficina, se les avisa aunque el chat esté cerrado."
+ },
+ "Rastreador de oficinas": {
+  "area": "Rastreo al cliente",
+  "voz": "airy",
+  "nuevo": "Se descubrió que Lucid ya avisa al cliente en cada estado (guía, oficina, reparto) con video.",
+  "mejoro": "Se apagó el rastreo propio para no duplicar mensajes; el aviso del CAS solo sale si Dropi aún no marcó «en oficina».",
+  "problema": "Hoy salieron 33 mensajes repetidos antes de apagarlo.",
+  "solucion": "Medir cuántos paquetes en oficina se reclaman tras el aviso de Lucid y mejorar esa plantilla si no funciona."
+ },
+ "Abogado de devoluciones": {
+  "area": "Devoluciones y fletes",
+  "voz": "rounded",
+  "nuevo": "Lee el chat de cada devolución para separar culpa de la transportadora de cliente que no quería.",
+  "mejoro": "Hoy 203 devoluciones leídas en una sola vuelta.",
+  "problema": "Hoy ninguna cumplía las causales de Dropi para reclamar el flete.",
+  "solucion": "Reclamar a tiempo: Interrapidísimo 7 días, las demás 30; revisar las respuestas de tickets anteriores."
+ },
+ "Líder de Tecnología": {
+  "area": "Tecnología e innovación",
+  "voz": "glassy",
+  "nuevo": "Recompra: encontramos que la oferta del día 30 («RC S4 otro lote») casi no sale. Programa recompra.py listo en modo prueba.",
+  "mejoro": "Semana 4 de 3. Se midió la fuga: solo 3 de 60 clientes con más de 32 días recibieron algo después del día 25; recompra a 45 días: 8,1 %.",
+  "problema": "551 clientes que ya recibieron hace 28 a 35 días no han vuelto a comprar y nadie les escribe.",
+  "solucion": "Cuando Ronald confirme que el flujo RC S4 no lleva descuento, se activa: hasta 80 por día, una vez por cliente, a precio normal."
+ },
+ "Casino y remarketing": {
+  "area": "Marketing y remarketing",
+  "voz": "buttery",
+  "remoto": true,
+  "nuevo": "Casino con récord: 20 pedidos y $3,72 M en un día.",
+  "mejoro": "93 ventas por $17 M desde el 18 de noviembre.",
+  "problema": "El casino le estaba mandando descuento a clientes que ya compraron y a clientes en garantía.",
+  "solucion": "Excluir todo el embudo 705299 y la lista de garantías antes de enviar."
+ },
+ "Sofía · Garantías": {
+  "area": "Garantías",
+  "voz": "airy",
+  "remoto": true,
+  "nuevo": "Comprueba en Dropi que la persona sí compró antes de atender la garantía.",
+  "mejoro": "Encuesta con limón, dosis y tipo de maleza, y evidencias guardadas en Drive por caso.",
+  "problema": "68 de 158 celulares con garantía no tienen ningún pedido en Dropi con ese número.",
+  "solucion": "Se les pide con qué número, a nombre de quién y en qué fecha recibieron; sin compra no hay garantía."
+ }
+}

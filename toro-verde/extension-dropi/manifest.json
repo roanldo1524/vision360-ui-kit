@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Confirma+ para Dropi",
+  "version": "4.4",
+  "description": "Confirmación de pedidos con esteroides dentro de Dropi: qué hacer en cada pedido, mensaje listo para el cliente y botones de un toque. Funciona con cualquier tienda. Sin IA.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.dropi.co/*"
+      ],
+      "js": [
+        "quehacer.js",
+        "confirmador.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://app.dropi.co/*"
+      ],
+      "js": [
+        "puente.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://panel.lucidbot.co/*"
+  ],
+  "background": {
+    "service_worker": "fondo.js"
+  },
+  "options_page": "opciones.html",
+  "action": {
+    "default_title": "Confirma+ · Configuración",
+    "default_popup": "opciones.html"
+  }
+}

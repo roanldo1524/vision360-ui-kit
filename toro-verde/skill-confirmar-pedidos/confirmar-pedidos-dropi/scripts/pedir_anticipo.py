@@ -1,0 +1,64 @@
+# Clientes frenados SOLO porque devuelven mucho (más de max_devolucion de sus pedidos, historial completo de Dropi):
+# se les manda el flujo de Lucid del dueño que pide un abono (anticipo) con sus datos para consignar.
+# Una vez por cliente, 7 a. m.–9 p. m., solo con la ventana de 24 h abierta y sin modo humano.
+# Después vigila el chat: si el cliente manda una imagen (comprobante), avisa al equipo para que una PERSONA valide la plata.
+# El pedido sigue en REVISAR HUMANO: el robot nunca confirma un pago anticipado solo. Uso: python3 -I robot/pedir_anticipo.py
+# Si config.json no trae lucid.flujo_anticipo (0), no envía nada.
+import json, os, re, time, datetime, urllib.request
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+K = open('lucidbot.key').read().strip(); API = 'https://panel.lucidbot.co/api'
+FLUJO = str(__FLUJO_ANTICIPO__ or '')  # flujo de Lucid que pide el abono (audio o texto con los datos para consignar)
+MAX_DEVOLUCION = __MAX_DEVOLUCION__
+EQUIPO = __EQUIPO__
+REG = '/tmp/dropi/anticipos.json'; reg = json.load(open(REG)) if os.path.exists(REG) else {}
+AV = '/tmp/dropi/avisos_equipo.json'
+DEVUELVE = re.compile(r'recibe solo|devuelve|riesgosa|cr[ií]tica', re.I)
+if not FLUJO: print('ANTICIPO apagado (falta lucid.flujo_anticipo en config.json)'); raise SystemExit
+def get(p):
+    d = json.loads(urllib.request.urlopen(urllib.request.Request(API + p, headers={'X-ACCESS-TOKEN': K}), timeout=40).read())
+    return d.get('data', d) if isinstance(d, dict) else d
+def post(p): return urllib.request.urlopen(urllib.request.Request(API + p, data=b'{}', headers={'X-ACCESS-TOKEN': K, 'Content-Type': 'application/json'}, method='POST'), timeout=40).read().decode()
+def imagenes(c):
+    try: t = get(f'/contacts/{c}/messages?limit=20'); t = t if isinstance(t, str) else json.dumps(t, ensure_ascii=False)
+    except Exception: return None, []
+    usr = [l for l in re.split(r'\n(?=(?:Yo|Usuario) \()', t) if l.startswith('Usuario')]
+    return len([l for l in usr if '[Image]' in l]), [re.search(r'https?://\S+', l).group(0) for l in usr if '[Image]' in l and re.search(r'https?://\S+', l)]
+
+h = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-5))).hour
+det = {d['id']: d for d in json.load(open('/tmp/dropi/detalle.json'))}
+enviados = 0
+if 7 <= h < 21:
+    for a in json.load(open('/tmp/dropi/acciones.json')):
+        if a['accion'] != 'REVISAR': continue
+        partes = [p.strip() for p in a['motivo'].split(';') if p.strip()]
+        if not partes or not all(DEVUELVE.search(p) for p in partes): continue  # solo si el ÚNICO problema es que devuelve
+        d = det.get(a['id'], {}); c = d.get('chat') or '57' + d.get('phone', '')
+        # Solo a clientes con devoluciones altas (historial COMPLETO de Dropi, todas las tiendas). Nunca a quien recibe bien.
+        lt = (((d.get('huella') or {}).get('global_profile') or {}).get('lifetime_totals') or {})
+        ent, dev = int(lt.get('delivered') or 0), int(lt.get('returned') or 0)
+        if ent + dev == 0 or dev / (ent + dev) <= MAX_DEVOLUCION: continue
+        if c in reg: continue
+        try:
+            info = get(f'/contacts/{c}')
+            if info.get('live_chat') or (time.time() - float(info.get('last_interaction') or 0) / 1000) > 23 * 3600: continue
+        except Exception: continue
+        n_img, _ = imagenes(c)
+        if 'true' in post(f'/contacts/{c}/send/{FLUJO}'):
+            reg[c] = {'pedido': a['id'], 'nombre': (d.get('name') or '').title(), 'total': d.get('total'), 'enviado': time.time(), 'imagenes': n_img or 0}
+            enviados += 1
+
+# Comprobantes: imagen nueva del cliente después del mensaje → aviso al equipo (lo entrega avisar_equipo.py). Una persona valida la plata.
+nuevos = []
+for c, r in reg.items():
+    if r.get('comprobante') or time.time() - r['enviado'] > 3 * 86400: continue
+    n_img, urls = imagenes(c)
+    if n_img is not None and n_img > r.get('imagenes', 0):
+        r['comprobante'] = time.time()
+        nuevos.append(f"💰 *Comprobante de anticipo* · {r['nombre']} · pedido {r['pedido']} · cel {c[2:]}\n{urls[-1] if urls else ''}\nRevisa que la plata llegó y confirma en Dropi descontando el abono del total.")
+if nuevos:
+    av = json.load(open(AV)) if os.path.exists(AV) else {}
+    for t in EQUIPO:
+        x = av.setdefault(t, {'pendiente': [], 'plantilla': 0}); x['pendiente'] = (x['pendiente'] + nuevos)[-8:]
+    json.dump(av, open(AV, 'w'), ensure_ascii=False)
+json.dump(reg, open(REG, 'w'), ensure_ascii=False)
+print('ANTICIPO mensajes enviados', enviados, 'comprobantes nuevos', len(nuevos), 'esperando', len([r for r in reg.values() if not r.get('comprobante')]))

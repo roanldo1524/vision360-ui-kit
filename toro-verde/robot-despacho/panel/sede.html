@@ -1,0 +1,715 @@
+<title>Comercializadora del Rey</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Sede virtual de Comercializadora del Rey. Escena 3D a pantalla completa; encima, paneles de vidrio grafito con borde dorado:
+   arriba la barra de modos y KPI reales; izquierda los pisos; derecha el panel de contexto (agente · reunión · calidad ISO 9001);
+   abajo la actividad real de hoy. Tema oscuro fijo (escena nocturna). */
+:root{
+  --noche:#0b0c0b; --vidrio:rgba(16,18,17,.86); --borde:rgba(230,190,110,.32); --borde2:rgba(255,255,255,.08);
+  --texto:#f1f2ee; --suave:#a9aea6; --verde:#7ed957; --oro:#e9b84f; --alerta:#ff7a59; --azul:#5aa9ff; --morado:#a77bff;
+  --display:"Bricolage Grotesque",system-ui,sans-serif; --cuerpo:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{margin:0;background:var(--noche);color:var(--texto);font-family:var(--cuerpo);overflow:hidden}
+#escena{position:fixed;inset:0}
+.vidrio{position:fixed;background:var(--vidrio);border:1px solid var(--borde);border-radius:14px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 8px 30px rgba(0,0,0,.35)}
+button{font:inherit;color:inherit}
+#barra{top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);display:flex;gap:14px;align-items:center;padding:8px 12px;max-width:calc(100% - 28px);overflow-x:auto}
+#barra .modo{display:flex;gap:4px}
+#barra .modo button,.tabs button,.pisos button,.accion{all:unset;cursor:pointer;padding:6px 10px;border-radius:9px;font-size:13px;white-space:nowrap;border:1px solid var(--borde2)}
+#barra .modo button[aria-pressed="true"],.tabs button[aria-pressed="true"],.pisos button[aria-pressed="true"]{background:rgba(233,184,79,.16);border-color:var(--borde);color:var(--oro)}
+button:focus-visible,.accion:focus-visible{outline:2px solid var(--oro)}
+.kpis{display:flex;gap:14px;padding-left:12px;border-left:1px solid var(--borde2)}
+.kpis small{display:block;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--suave);white-space:nowrap}
+.kpis b{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pisos{top:calc(70px + env(safe-area-inset-top,0px));left:max(12px,env(safe-area-inset-left,0px));padding:10px;width:200px;display:grid;gap:6px}
+.pisos button{display:block;padding:9px 10px}
+.pisos button b{display:block;font-family:var(--display);font-size:16px}
+.pisos button span{font-size:12px;color:var(--suave)}
+.pisos h2,#contexto h2,#actividad h2{margin:0 0 4px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--suave);font-weight:600}
+#contexto{top:calc(70px + env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));width:340px;max-height:calc(100% - 290px);overflow:auto;padding:12px}
+.tabs{display:flex;gap:4px;margin-bottom:10px}
+#contexto h3{margin:2px 0;font-family:var(--display);font-size:20px}
+#contexto p{font-size:13px;line-height:1.45;margin:4px 0 8px}
+.cargo{font-size:13px;color:var(--suave)}
+.pill{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:99px;background:rgba(255,255,255,.08);color:var(--suave);vertical-align:middle}
+.pill.on{background:rgba(126,217,87,.18);color:var(--verde)} .pill.obra{background:rgba(233,184,79,.15);color:var(--oro)} .pill.humano{background:rgba(255,122,89,.15);color:var(--alerta)}
+.item{border-top:1px solid var(--borde2);padding:7px 0;font-size:12.5px;line-height:1.4;color:var(--suave)}
+.item b{color:var(--texto)} .mono{font-family:var(--mono);color:var(--oro);font-size:11.5px}
+.sec{margin-top:10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--oro)}
+.accion{display:inline-block;margin:6px 6px 0 0;background:rgba(233,184,79,.14);border-color:var(--borde);color:var(--oro);font-weight:600}
+.phva{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
+.phva div{border-radius:9px;padding:7px;font-size:12px;line-height:1.35;background:rgba(255,255,255,.04)}
+.phva b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+#actividad{left:max(12px,env(safe-area-inset-left,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));width:430px;padding:10px 12px;max-height:180px;overflow:hidden}
+#actividad ol{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+#actividad li{font-size:12.5px;line-height:1.35}
+#actividad li .h{font-family:var(--mono);color:var(--oro);font-size:11.5px;margin-right:6px}
+#ayuda{bottom:calc(12px + env(safe-area-inset-bottom,0px));right:max(12px,env(safe-area-inset-right,0px));padding:8px 12px;font-size:12px;color:var(--suave)}
+@media (max-width:900px){
+  .pisos{top:auto;bottom:calc(200px + env(safe-area-inset-bottom,0px));width:auto;display:flex;padding:6px}
+  .pisos h2,.pisos button span{display:none}
+  .pisos button b{font-size:13px}
+  #contexto{top:auto;bottom:calc(254px + env(safe-area-inset-bottom,0px));left:max(12px,env(safe-area-inset-left,0px));width:auto;max-height:30%}
+  #actividad{width:auto;right:max(12px,env(safe-area-inset-right,0px));max-height:180px}
+  #ayuda{display:none}
+  .kpis{display:none}
+}
+</style>
+
+<canvas id="escena" aria-label="Sede virtual de Comercializadora del Rey en 3D"></canvas>
+<nav id="barra" class="vidrio" aria-label="Modos de vista">
+  <div class="modo" role="group">
+    <button id="m_edificio" aria-pressed="true">Edificio</button>
+    <button id="m_piso" aria-pressed="false">Piso</button>
+    <button id="m_seguir" aria-pressed="false">Seguir agente</button>
+    <button id="m_pantallas" aria-pressed="false">Pantallas</button>
+  </div>
+  <div class="kpis">
+    <div><small>Vendido hoy</small><b id="k_ven"></b></div>
+    <div><small>Pedidos hoy</small><b id="k_ped"></b></div>
+    <div><small>Robot confirmó</small><b id="k_rob"></b></div>
+    <div><small>Entrega · 90</small><b id="k_ent"></b></div>
+    <div><small>Devolución · 3</small><b id="k_dev"></b></div>
+    <div><small>Cancelación · 7</small><b id="k_can"></b></div>
+    <div><small>Equipo al día</small><b id="k_sal"></b></div>
+  </div>
+</nav>
+<section class="pisos vidrio" aria-label="Pisos">
+  <h2>Pisos</h2>
+  <button data-piso="2" aria-pressed="false"><b>Piso 3</b><span>Creatividad, contenido y estrategia</span></button>
+  <button data-piso="1" aria-pressed="false"><b>Piso 2</b><span>Centro de operaciones IA</span></button>
+  <button data-piso="0" aria-pressed="false"><b>Piso 1</b><span>Recepción, bodega y despachos</span></button>
+</section>
+<aside id="contexto" class="vidrio" aria-live="polite">
+  <div class="tabs" role="tablist">
+    <button data-tab="agente" aria-pressed="true">Agente</button>
+    <button data-tab="reunion" aria-pressed="false">Reunión</button>
+    <button data-tab="calidad" aria-pressed="false">Calidad ISO 9001</button>
+  </div>
+  <div id="cuerpo"></div>
+</aside>
+<section id="actividad" class="vidrio" aria-live="polite"><h2 id="act_titulo">Actividad real de hoy</h2><ol id="lista"></ol></section>
+<div id="ayuda" class="vidrio">Toca un piso o una persona · arrastra para girar · rueda o pellizco para acercar</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const DATOS = /*DATOS*/null || {pisos:[], eventos:[], reunion:{}, iso:{}};
+const $ = id => document.getElementById(id);
+const pesos = n => '$' + Math.round(n||0).toLocaleString('es-CO');
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const K = DATOS.kpi || {}, SAL = DATOS.salud || {};
+$('k_ven').textContent = pesos(DATOS.vendido); $('k_ped').textContent = DATOS.pedidos ?? '—'; $('k_rob').textContent = DATOS.conf_robot ?? '—';
+[['k_ent', K.entrega, v => v >= 90], ['k_dev', K.devolucion, v => v <= 3], ['k_can', K.cancelacion, v => v <= 7]].forEach(([id, v, ok]) => {
+  const el = $(id); el.textContent = v == null ? '—' : v + ' %'; if (v != null) el.style.color = ok(v) ? 'var(--verde)' : 'var(--alerta)'; });
+{ const el = $('k_sal'); el.textContent = SAL.revisados ? `${SAL.ok}/${SAL.revisados}` : '—'; el.style.color = (SAL.fallas||[]).length ? 'var(--alerta)' : 'var(--verde)'; }
+
+function bogota(){ const d = new Date(Date.now() - 5*3600e3); return {h:d.getUTCHours(), m:d.getUTCMinutes()}; }
+function trabaja(a){ const {h,m} = bogota(); return a.horas.includes(h) && a.min.some(x => m >= x && m < x + 12); }
+function proxima(a){ const {h,m} = bogota(); if (!a.horas.length) return null;
+  for (let add = 1; add < 1440; add++){ const t = h*60 + m + add, hh = Math.floor(t/60) % 24, mm = t % 60;
+    if (a.horas.includes(hh) && a.min.includes(mm)) return `${(hh%12)||12}:${String(mm).padStart(2,'0')} ${hh<12?'a. m.':'p. m.'}`; } return null; }
+const CARGOS = {}; (DATOS.pisos || []).forEach(p => p.agentes.forEach(c => CARGOS[c.nombre] = c));
+const corto = n => ((CARGOS[n] && CARGOS[n].persona) || n || '').split(' ')[0];
+
+// ================= ESCENA =================
+const canvas = $('escena');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+renderer.outputEncoding = THREE.sRGBEncoding; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .95;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+const scene = new THREE.Scene(); scene.background = new THREE.Color('#0a101a'); scene.fog = new THREE.Fog('#0a101a', 75, 150);
+const camera = new THREE.PerspectiveCamera(36, 1, .1, 400);
+const controls = new THREE.OrbitControls(camera, canvas);
+controls.enableDamping = true; controls.minDistance = 3; controls.maxDistance = 85; controls.maxPolarAngle = Math.PI*.52;
+scene.add(new THREE.HemisphereLight('#ffe6c4', '#151a16', .42));
+const llave = new THREE.DirectionalLight('#ffe3bd', .55); llave.position.set(-12, 30, 26); llave.castShadow = true;
+llave.shadow.mapSize.set(2048, 2048); Object.assign(llave.shadow.camera, {left:-20, right:20, top:16, bottom:-4, near:1, far:80}); llave.shadow.bias = -.0004; scene.add(llave);
+
+const S = (c, o = {}) => new THREE.MeshStandardMaterial(Object.assign({color:c, roughness:.7, metalness:0}, o));
+const E = c => new THREE.MeshBasicMaterial({color:c});
+const GEO_CAJA = new THREE.BoxGeometry(1, 1, 1);
+function caja(w, h, d, mat, x, y, z, padre = scene, sombra = true){ const m = new THREE.Mesh(GEO_CAJA, mat); m.scale.set(w, h, d); m.position.set(x, y, z); m.castShadow = m.receiveShadow = sombra; padre.add(m); return m; }
+const W = 30, D = 12, H = 4.2, YS = [0, H, 2*H];
+const MAT = {
+  nogal: S('#6b4428', {roughness:.55}), roble: S('#a9774a', {roughness:.6}), concreto: S('#8a8b88', {roughness:.32, metalness:.05}),
+  concretoOsc: S('#3a3c3d', {roughness:.4}), grafito: S('#1d1f21', {roughness:.5, metalness:.35}), negro: S('#121314', {roughness:.45, metalness:.4}),
+  blanco: S('#efebe3', {roughness:.45}), oro: S('#c9a24a', {roughness:.3, metalness:.85}), hoja: S('#3f8a3a', {roughness:.8}),
+  carton: S('#c49a63', {roughness:.85}), rack: S('#2b3f6e', {roughness:.45, metalness:.5}), rackN: S('#d26a2a', {roughness:.5, metalness:.4}),
+  vidrio: new THREE.MeshStandardMaterial({color:'#cfe8ee', transparent:true, opacity:.14, roughness:.05, metalness:.3, depthWrite:false}),
+  piel:['#f1c7a5','#d9a27c','#b97f5a','#8d5a3b'].map(c => S(c, {roughness:.6})), pelo:['#2b1d14','#4a3022','#151515','#7a5230'].map(c => S(c, {roughness:.8}))
+};
+const LED = E('#ffcf8a');
+
+// --------- Instancias (rendimiento): hojas y cajas repetidas ---------
+const hojas = [], cajas = [];
+function hojaEn(x, y, z, s){ hojas.push([x, y, z, s]); }
+function cajaEn(x, y, z, w, h, d){ cajas.push([x, y, z, w, h, d]); }
+function planta(x, y, z, s = 1){ caja(.55*s, .6*s, .55*s, MAT.grafito, x, y + .3*s, z); caja(.58*s, .04*s, .58*s, MAT.oro, x, y + .6*s, z, scene, false);
+  for (let i = 0; i < 7; i++) hojaEn(x + (Math.random()-.5)*.55*s, y + (.85 + Math.random()*.9)*s, z + (Math.random()-.5)*.55*s, (.22 + Math.random()*.12)*s); }
+function jardinera(x, y, z, largo){ caja(largo, .45, .45, MAT.grafito, x, y + .23, z); for (let i = 0; i < largo*3; i++) hojaEn(x - largo/2 + Math.random()*largo, y + .55 + Math.random()*.35, z + (Math.random()-.5)*.3, .18 + Math.random()*.1); }
+
+// --------- Edificio: losas, fachada, iluminación indirecta ---------
+YS.forEach((y, i) => {
+  caja(W, .4, D, MAT.concretoOsc, 0, y - .2, 0);
+  caja(W, .02, D, i === 1 ? S('#6e6a63', {roughness:.25}) : MAT.concreto, 0, y + .01, 0);
+  caja(W, H, .3, S('#17191a'), 0, y + H/2, -D/2 - .15);
+  for (let x = -W/2 + .2; x < W/2; x += .26) caja(.11, H - .5, .06, MAT.nogal, x, y + H/2 + .05, -D/2 + .03, scene, false);
+  caja(W, .05, .05, LED, 0, y + H - .32, -D/2 + .12, scene, false);
+  caja(W + .5, .32, .4, MAT.grafito, 0, y + H - .02, D/2 + .05);
+  caja(W + .5, .035, .06, LED, 0, y + H - .2, D/2 + .27, scene, false);
+  for (let k = -4; k <= 4; k++) caja(2.6, .04, .12, E('#fff3dc'), k*3.3, y + H - .19, 0, scene, false);
+  const l1 = new THREE.PointLight('#ffd6a0', .85, 15, 2); l1.position.set(-8, y + H - .7, 1.5); scene.add(l1);
+  const l2 = l1.clone(); l2.position.set(8, y + H - .7, 1.5); scene.add(l2);
+  if (i > 0){ caja(W - 1, 1.05, .04, MAT.vidrio, 0, y + .55, D/2 - .2, scene, false); caja(W - 1, .05, .07, MAT.oro, 0, y + 1.08, D/2 - .2); jardinera(-10, y, D/2 - .6, 4); jardinera(10, y, D/2 - .6, 4); }
+});
+caja(W + 1, .5, D + .6, MAT.grafito, 0, 3*H + .25, 0);
+[-W/2, W/2].forEach(x => { caja(.7, 3*H + .5, .7, MAT.grafito, x, 3*H/2, D/2 - .1); caja(.05, 3*H, .05, LED, x + (x < 0 ? .37 : -.37), 3*H/2, D/2 + .26, scene, false); });
+[-W/2 - .9, W/2 + .9].forEach(x => { caja(1.2, 3*H + .4, D, S('#1d3a1d'), x, 3*H/2, 0); for (let i = 0; i < 170; i++) hojaEn(x + (x < 0 ? .6 : -.6), .3 + Math.random()*(3*H), -D/2 + Math.random()*D, .2 + Math.random()*.14); });
+function texto(c, txt, x, y, font, color, glow){ const g = c.getContext('2d'); g.font = font; g.fillStyle = color; g.textAlign = 'center'; if (glow){ g.shadowColor = glow; g.shadowBlur = 26; } g.fillText(txt, x, y); g.shadowBlur = 0; }
+function corona(g, cx, cy, s, color){ g.strokeStyle = color; g.lineWidth = 9*s; g.lineJoin = 'round'; g.fillStyle = 'rgba(233,184,79,.12)'; g.beginPath();
+  g.moveTo(cx - 90*s, cy + 60*s); g.lineTo(cx - 75*s, cy - 50*s); g.lineTo(cx - 30*s, cy + 5*s); g.lineTo(cx, cy - 70*s); g.lineTo(cx + 30*s, cy + 5*s); g.lineTo(cx + 75*s, cy - 50*s); g.lineTo(cx + 90*s, cy + 60*s); g.closePath(); g.fill(); g.stroke();
+  [[-75,-50],[0,-70],[75,-50]].forEach(([a, b]) => { g.beginPath(); g.arc(cx + a*s, cy + (b - 12)*s, 10*s, 0, 7); g.fillStyle = color; g.fill(); }); }
+function lienzo(w, h, pintar){ const c = document.createElement('canvas'); c.width = w; c.height = h; pintar(c.getContext('2d'), c); const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; t.anisotropy = 4; return t; }
+function redondo(g, x, y, w, h, r){ g.beginPath(); if (g.roundRect) g.roundRect(x, y, w, h, r); else g.rect(x, y, w, h); }
+{ const t = lienzo(2048, 300, (g, c) => { g.shadowColor = '#e9b84f'; g.shadowBlur = 22; corona(g, 330, 150, 1.25, '#e9b84f'); g.shadowBlur = 0;
+    texto(c, 'COMERCIALIZADORA', 1000, 120, '800 108px "Bricolage Grotesque", sans-serif', '#ffffff', '#e9b84f');
+    texto(c, 'DEL REY', 1000, 255, '800 150px "Bricolage Grotesque", sans-serif', '#f3c45a', '#e9b84f');
+    g.strokeStyle = '#8be05a'; g.lineWidth = 8; g.shadowColor = '#8be05a'; g.shadowBlur = 18; redondo(g, 1520, 95, 440, 120, 60); g.stroke(); g.shadowBlur = 0;
+    texto(c, 'Oficina IA', 1740, 177, '700 72px "IBM Plex Sans", sans-serif', '#ffffff'); });
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(19, 2.8), new THREE.MeshBasicMaterial({map:t, transparent:true})); m.position.set(0, 3*H + 2.0, D/2 - .4); scene.add(m);
+  caja(20, 3.2, .3, S('#141516'), 0, 3*H + 2.0, D/2 - .62); }
+caja(160, .1, 160, S('#121413', {roughness:.9}), 0, -.46, 0, scene, false);
+caja(W + 12, .3, 9, S('#4a4b4a', {roughness:.22, metalness:.1}), 0, -.35, D/2 + 4.5);
+for (let x = -W/2 - 4; x <= W/2 + 4; x += 3) caja(.04, .02, 9, S('#5c5d5c'), x, -.19, D/2 + 4.5, scene, false);
+[-W/2 - 3, W/2 + 3].forEach(x => { planta(x, -.2, D/2 + 2, 1.8); planta(x, -.2, D/2 + 6, 1.6); });
+[-10, 0, 10].forEach(x => { caja(.08, 3.5, .08, MAT.negro, x, 1.5, D/2 + 8.2); caja(.5, .05, .25, E('#ffd99a'), x, 3.25, D/2 + 8.2, scene, false);
+  const l = new THREE.PointLight('#ffcc88', .6, 9, 2); l.position.set(x, 3, D/2 + 8); scene.add(l); });
+
+// --------- Ciudad de lujo alrededor: torres con ventanas encendidas, avenida con carros, palmeras y alumbrado ---------
+const MATS_TORRE = ['#0f1720', '#141a1f', '#10161c', '#1a1712'].map((fondo, i) => {
+  const t = lienzo(256, 512, g => { g.fillStyle = fondo; g.fillRect(0, 0, 256, 512);
+    for (let y = 6; y < 512; y += 21) for (let x = 6; x < 256; x += 19){ const r = Math.random();
+      g.fillStyle = r < .34 ? (r < .1 ? '#ffe6b0' : '#f0c27a') : r < .46 ? '#4b6b82' : '#1b242b'; g.fillRect(x, y, 13, 14); } });
+  t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(1 + i % 2, 2);
+  return new THREE.MeshStandardMaterial({map:t, emissiveMap:t, emissive:new THREE.Color('#ffffff'), emissiveIntensity:.5, roughness:.3, metalness:.45}); });
+for (let gx = -63; gx <= 63; gx += 9) for (let gz = -63; gz <= 36; gz += 9){
+  if (Math.abs(gx) < 26 && gz > -16) continue;               // la sede y su plaza
+  if (Math.abs(gx) < 34 && gz > 12) continue;                // vista libre desde la avenida
+  if (gz > 12 && gz < 28) continue;                          // avenida
+  if (Math.random() < .18) continue;                         // parques entre torres
+  const lejos = Math.min(1, Math.hypot(gx, gz)/70), alto = 12 + Math.random()*22 + lejos*26, w = 5 + Math.random()*2.6, d = 5 + Math.random()*2.6;
+  const x = gx + (Math.random()-.5)*1.6, z = gz + (Math.random()-.5)*1.6;
+  const m = new THREE.Mesh(GEO_CAJA, MATS_TORRE[(Math.random()*4)|0]); m.scale.set(w, alto, d); m.position.set(x, alto/2 - .4, z); scene.add(m);
+  if (Math.random() < .45){ caja(w + .1, .12, .12, LED, x, alto - .4, z + d/2, scene, false); caja(w*.6, 1.2, d*.6, MAT.grafito, x, alto + .2, z, scene, false); }
+  if (Math.random() < .15) caja(.15, 6, .15, E('#ff5b4a'), x, alto + 3, z, scene, false);
+}
+const ZA = D/2 + 12.5;                                        // eje de la avenida
+caja(220, .06, 7.5, S('#1c1d1f', {roughness:.55}), 0, -.36, ZA, scene, false);
+caja(220, .22, 2.4, S('#6d6a64', {roughness:.6}), 0, -.3, ZA + 5, scene, false);
+caja(220, .3, .9, S('#2c3a2a'), 0, -.25, ZA, scene, false);                      // separador con matas
+for (let x = -105; x <= 105; x += 5){ caja(2, .02, .14, E('#d8d0b2'), x, -.32, ZA - 1.9, scene, false); caja(2, .02, .14, E('#d8d0b2'), x, -.32, ZA + 1.9, scene, false); }
+function palma(x, z, h = 7){ const tr = new THREE.Mesh(new THREE.CylinderGeometry(.13, .22, h, 8), S('#6e5a44', {roughness:.9})); tr.position.set(x, h/2 - .3, z); scene.add(tr);
+  for (let k = 0; k < 9; k++){ const a = k/9*Math.PI*2; hojaEn(x + Math.cos(a)*1.1, h - .3 - Math.random()*.4, z + Math.sin(a)*1.1, .45); } hojaEn(x, h, z, .55); }
+for (let x = -96; x <= 96; x += 12){ if (Math.abs(x + 6) > 22) palma(x + 6, ZA, 6 + Math.random()*2); if (Math.abs(x) > 18) palma(x, ZA + 5.6, 7);
+  caja(.1, 5, .1, MAT.negro, x, 2.2, ZA + 4.3, scene, false); caja(1.2, .08, .25, E('#ffdca0'), x - .5, 4.7, ZA + 4.3, scene, false); }
+[-W/2 - 5, W/2 + 5].forEach(x => { palma(x, D/2 + 1, 8); palma(x, D/2 + 7, 7.5); palma(x, -2, 8.5); });
+const autos = [];
+for (let i = 0; i < 14; i++){
+  const g = new THREE.Group(), dir = i % 2 ? 1 : -1, color = ['#e9e6e0', '#151617', '#7b1d1d', '#2a4f8f', '#b9a27a', '#3d4246'][i % 6];
+  caja(4.2, .7, 1.8, S(color, {roughness:.25, metalness:.75}), 0, .55, 0, g, false); caja(2.3, .55, 1.6, S('#0d1216', {roughness:.1, metalness:.6}), -.2, 1.15, 0, g, false);
+  caja(.06, .16, .4, E('#fffbe8'), 2.12, .6, .6, g, false); caja(.06, .16, .4, E('#fffbe8'), 2.12, .6, -.6, g, false);
+  caja(.06, .14, .45, E('#ff3b30'), -2.12, .65, .6, g, false); caja(.06, .14, .45, E('#ff3b30'), -2.12, .65, -.6, g, false);
+  g.rotation.y = dir > 0 ? 0 : Math.PI; g.position.set(-100 + Math.random()*200, -.33, ZA + dir*(i % 4 < 2 ? 1.3 : 2.9));
+  scene.add(g); autos.push({g, v:dir*(9 + Math.random()*6)});
+}
+
+// --------- Utilidades de mobiliario ---------
+const ETIQUETAS = []; let modoTV = false;
+function etiqueta(txt, sub, color = '#e9b84f', ancho = 620){
+  const alto = sub ? 150 : 96;
+  const t = lienzo(ancho, alto, (g, c) => { g.fillStyle = 'rgba(14,16,15,.92)'; redondo(g, 4, 4, ancho - 8, alto - 8, 26); g.fill();
+    g.strokeStyle = color; g.lineWidth = 5; g.shadowColor = color; g.shadowBlur = 14; g.stroke(); g.shadowBlur = 0;
+    g.fillStyle = '#fff'; g.font = '600 46px "IBM Plex Sans", sans-serif'; g.textAlign = 'center'; g.fillText(txt, ancho/2, sub ? 64 : 63);
+    if (sub){ g.fillStyle = '#b9beb6'; g.font = '500 34px "IBM Plex Sans", sans-serif'; g.fillText(sub, ancho/2, 115); } });
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({map:t, depthTest:false, transparent:true})); s.scale.set(ancho/240, alto/240, 1); s.renderOrder = 6; ETIQUETAS.push(s); s.visible = !modoTV; return s;
+}
+function rotulo(txt, sub, x, y, z, color, ancho){ const s = etiqueta(txt, sub, color, ancho); s.position.set(x, y, z); scene.add(s); return s; }
+function silla(x, y, z, rot){ const g = new THREE.Group(); caja(.52, .09, .52, MAT.negro, 0, .5, 0, g); caja(.5, .62, .07, MAT.negro, 0, .86, -.25, g);
+  caja(.05, .42, .05, MAT.grafito, 0, .26, 0, g); caja(.6, .03, .6, MAT.grafito, 0, .04, 0, g); g.position.set(x, y, z); g.rotation.y = rot; scene.add(g); return g; }
+function escritorio(x, y, z, color, rot = 0, ancho = 1.6, nPant = 2){ const g = new THREE.Group();
+  caja(ancho, .06, .78, MAT.blanco, 0, .75, 0, g); caja(ancho, .3, .04, MAT.roble, 0, .58, .37, g);
+  caja(.06, .72, .7, MAT.grafito, -ancho/2 + .05, .37, 0, g); caja(.4, .58, .6, MAT.blanco, ancho/2 - .3, .3, 0, g);
+  const mat = new THREE.MeshBasicMaterial({color});
+  for (let i = 0; i < nPant; i++){ const ox = (i - (nPant-1)/2)*.6; caja(.56, .34, .03, MAT.negro, ox, 1.04, .2, g);
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(.52, .3), mat); p.position.set(ox, 1.04, .218); g.add(p); caja(.05, .18, .05, MAT.negro, ox, .85, .22, g); }
+  caja(.42, .02, .14, MAT.grafito, 0, .79, -.12, g);
+  g.position.set(x, y, z); g.rotation.y = rot; scene.add(g); return mat; }
+function personaje(color, k, mujer){
+  // avatar con volumen: cadera y torso cónicos, extremidades cilíndricas, cabeza con cabello; nada cúbico
+  const g = new THREE.Group(), cam = S(color, {roughness:.65}), pan = S(k % 2 ? '#2a303a' : '#3a3530'), piel = MAT.piel[k % 4], pelo = MAT.pelo[(k + 1) % 4];
+  const cil = (r1, r2, h, m) => { const x = new THREE.Mesh(new THREE.CylinderGeometry(r1, r2, h, 12), m); x.castShadow = true; return x; };
+  const pierna = l => { const p = new THREE.Group(); const m = cil(.085, .07, .74, pan); m.position.y = -.37; p.add(m); const z = new THREE.Mesh(new THREE.SphereGeometry(.09, 10, 8), MAT.negro); z.scale.set(1, .6, 1.6); z.position.set(0, -.76, .05); p.add(z); p.position.set(l*.1, .8, 0); g.add(p); return p; };
+  const brazo = l => { const p = new THREE.Group(); const m = cil(.065, .055, .58, cam); m.position.y = -.29; p.add(m); const mano = new THREE.Mesh(new THREE.SphereGeometry(.06, 8, 6), piel); mano.position.y = -.62; p.add(mano); p.position.set(l*.27, 1.38, 0); g.add(p); return p; };
+  const pi = pierna(-1), pd = pierna(1), bi = brazo(-1), bd = brazo(1);
+  const cadera = cil(.2, .19, .2, pan); cadera.position.y = .86; g.add(cadera);
+  const torso = cil(mujer ? .2 : .24, .2, .58, cam); torso.position.y = 1.16; g.add(torso);
+  const hombros = new THREE.Mesh(new THREE.SphereGeometry(mujer ? .2 : .24, 14, 8, 0, Math.PI*2, 0, Math.PI/2), cam); hombros.scale.y = .45; hombros.position.y = 1.44; g.add(hombros);
+  const cuello = cil(.06, .06, .1, piel); cuello.position.y = 1.52; g.add(cuello);
+  const cabeza = new THREE.Mesh(new THREE.SphereGeometry(.15, 16, 12), piel); cabeza.scale.y = 1.12; cabeza.position.y = 1.72; cabeza.castShadow = true; g.add(cabeza);
+  const cab = new THREE.Mesh(new THREE.SphereGeometry(.16, 16, 12, 0, Math.PI*2, 0, Math.PI*.52), pelo); cab.position.y = 1.75; g.add(cab);
+  if (mujer){ const larga = cil(.15, .17, .38, pelo); larga.position.set(0, 1.55, -.06); g.add(larga); }
+  g.userData = {pi, pd, bi, bd, cabeza}; return g;
+}
+const MUJERES = /^(Daniela|Juliana|Valentina|Laura|Sara|Isabella|Mariana)/;
+
+// ================= PISO 1 · Recepción, bodega e inventarios, alistamiento y despachos =================
+const y1 = YS[0];
+rotulo('Recepción', null, -11, y1 + 3.45, 1, '#e9b84f', 420);
+caja(5, 1.1, 1.1, MAT.blanco, -11, y1 + .55, 2.6); caja(5.2, .08, 1.3, MAT.nogal, -11, y1 + 1.14, 2.6); caja(5, .04, .05, LED, -11, y1 + .08, 3.17, scene, false);
+{ const t = lienzo(1024, 360, (g, c) => { corona(g, 512, 120, .9, '#e9b84f'); texto(c, 'COMERCIALIZADORA', 512, 255, '800 82px "Bricolage Grotesque", sans-serif', '#ffffff'); texto(c, 'DEL REY', 512, 340, '800 92px "Bricolage Grotesque", sans-serif', '#f3c45a'); });
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(4.2, 1.5), new THREE.MeshBasicMaterial({map:t, transparent:true})); m.position.set(-11, y1 + 2.4, -D/2 + .12); scene.add(m); }
+[[-8.2, 3.6], [-7.2, 3.6]].forEach(([x, z]) => { caja(.8, .45, .8, MAT.blanco, x, y1 + .3, z); caja(.8, .45, .15, MAT.blanco, x, y1 + .6, z - .35); });
+planta(-13.8, y1, 3.4, 1.4); planta(-8.6, y1, -4.8, 1.2);
+rotulo('Bodega e inventario', null, -1, y1 + 3.45, 1, '#e9b84f', 560);
+{ const t = lienzo(640, 400, (g, c) => { g.fillStyle = '#0d1410'; g.fillRect(0, 0, 640, 400); g.strokeStyle = '#e9b84f'; g.lineWidth = 6; g.strokeRect(3, 3, 634, 394);
+    texto(c, 'Inventario en tiempo real', 320, 80, '600 40px "IBM Plex Sans", sans-serif', '#ffffff'); texto(c, 'EN CONSTRUCCIÓN', 320, 200, '800 58px "IBM Plex Mono", monospace', '#e9b84f');
+    texto(c, 'El monitor de stock aún no existe:', 320, 280, '500 30px "IBM Plex Sans", sans-serif', '#b9beb6'); texto(c, 'no se muestran cifras inventadas', 320, 325, '500 30px "IBM Plex Sans", sans-serif', '#b9beb6'); });
+  caja(2.1, 1.35, .08, MAT.negro, -5.6, y1 + 2.2, -1.6); const m = new THREE.Mesh(new THREE.PlaneGeometry(2, 1.25), new THREE.MeshBasicMaterial({map:t})); m.position.set(-5.6, y1 + 2.2, -1.55); scene.add(m);
+  caja(.08, 1.6, .08, MAT.negro, -5.6, y1 + .8, -1.65); }
+['A','B','C','D'].forEach((letra, r) => { const rx = -2.5 + r*2.6;
+  for (let zz = -5.2; zz <= 1.2; zz += 1.6){ [-.55, .55].forEach(dx => caja(.07, 3.2, .07, MAT.rack, rx + dx, y1 + 1.6, zz - .78, scene, false));
+    for (let n = 0; n < 3; n++){ const yy = y1 + .5 + n*1.05; caja(1.2, .05, 1.55, MAT.rackN, rx, yy, zz, scene, false);
+      for (let b = 0; b < 2; b++) if ((r + n + b + Math.round(zz)) % 5) cajaEn(rx, yy + .3, zz - .38 + b*.76, .95, .5, .66); } }
+  const s = etiqueta(letra, null, '#e9b84f', 120); s.position.set(rx, y1 + 3.6, 1.3); scene.add(s); });
+rotulo('Alistamiento y empaque', null, 9.3, y1 + 3.45, 1, '#e9b84f', 620);
+[[8.2, -.6], [10.4, -.6]].forEach(([x, z]) => { caja(1.9, .06, .9, MAT.blanco, x, y1 + .9, z); caja(1.8, .85, .08, MAT.grafito, x, y1 + .45, z); cajaEn(x - .4, y1 + 1.1, z, .45, .3, .45); cajaEn(x + .35, y1 + 1.05, z + .1, .35, .2, .35); });
+for (let k = 0; k < 6; k++) cajaEn(9.3 + (k % 3)*.6 - .6, y1 + .25 + Math.floor(k/3)*.5, 2, .55, .48, .55);
+rotulo('Despachos', null, 13.3, y1 + 3.45, 1, '#e9b84f', 380);
+[12.2, 14.2].forEach(x => { caja(1.7, 2.6, .06, S('#5d6064', {roughness:.5, metalness:.4}), x, y1 + 1.3, -D/2 + .1); caja(1.8, .06, .1, LED, x, y1 + 2.7, -D/2 + .14, scene, false); });
+{ const g = new THREE.Group(); caja(3.2, 1.9, 1.7, MAT.blanco, -.4, 1.25, 0, g); caja(1.1, 1.3, 1.6, S('#2a4f8f', {metalness:.4, roughness:.35}), 1.75, .95, 0, g);
+  [-1.3, .6, 1.8].forEach(x => { const r = new THREE.Mesh(new THREE.CylinderGeometry(.3, .3, 1.75, 14), MAT.negro); r.rotation.x = Math.PI/2; r.position.set(x, .3, 0); g.add(r); });
+  g.position.set(13.2, y1, 3.6); g.rotation.y = Math.PI/2; scene.add(g); }
+
+// ================= PISO 2 · Centro de operaciones IA =================
+const y2 = YS[1];
+rotulo('Logística y Atención', '6 agentes IA', -10, y2 + 3.55, 0, '#e9b84f', 560);
+rotulo('Tecnología y Procesos', '5 agentes IA', 10, y2 + 3.55, 0, '#e9b84f', 560);
+caja(9.4, .015, 7.6, S('#2a2b2a', {roughness:.95}), -10, y2 + .03, -.6, scene, false); caja(9.4, .015, 7.6, S('#2a2b2a', {roughness:.95}), 10, y2 + .03, -.6, scene, false);
+// sala de juntas acristalada para 16 (mesa premium, pantalla ejecutiva)
+caja(9.6, .015, 7, S('#3d3328', {roughness:.9}), 0, y2 + .03, -1.6, scene, false);
+caja(9.4, 2.5, .05, MAT.vidrio, 0, y2 + 1.25, 1.9, scene, false); caja(.05, 2.5, 7.6, MAT.vidrio, -4.7, y2 + 1.25, -1.9, scene, false); caja(.05, 2.5, 7.6, MAT.vidrio, 4.7, y2 + 1.25, -1.9, scene, false);
+caja(9.4, .06, .08, MAT.oro, 0, y2 + 2.52, 1.9); caja(.08, .06, 7.6, MAT.oro, -4.7, y2 + 2.52, -1.9); caja(.08, .06, 7.6, MAT.oro, 4.7, y2 + 2.52, -1.9);
+{ const ov = new THREE.Mesh(new THREE.TorusGeometry(2.8, .04, 8, 60), E('#ffd99a')); ov.rotation.x = Math.PI/2; ov.scale.y = .55; ov.position.set(0, y2 + H - .25, -1.6); scene.add(ov); }
+caja(7.4, .08, 1.7, MAT.nogal, 0, y2 + .76, -1.6); caja(7.4, .02, 1.5, S('#1a1a1a', {roughness:.2, metalness:.3}), 0, y2 + .81, -1.6, scene, false);
+caja(.5, .72, .5, MAT.grafito, -2.6, y2 + .37, -1.6); caja(.5, .72, .5, MAT.grafito, 2.6, y2 + .37, -1.6);
+const ASIENTOS = []; for (let i = 0; i < 8; i++){ const x = -3.15 + i*.9; ASIENTOS.push({x, z:-2.75, rot:0}); ASIENTOS.push({x, z:-.45, rot:Math.PI});
+  silla(x, y2, -2.75, 0); silla(x, y2, -.45, Math.PI); }
+const texSala = (lineas) => lienzo(1024, 512, (g, c) => { g.fillStyle = '#0e130f'; g.fillRect(0, 0, 1024, 512); g.strokeStyle = '#e9b84f'; g.lineWidth = 8; g.strokeRect(4, 4, 1016, 504);
+  if (!lineas){ corona(g, 512, 180, 1.1, '#e9b84f'); texto(c, 'COMERCIALIZADORA DEL REY', 512, 340, '800 64px "Bricolage Grotesque", sans-serif', '#ffffff'); texto(c, 'Sala de Juntas IA', 512, 420, '500 44px "IBM Plex Sans", sans-serif', '#b9beb6'); return; }
+  g.textAlign = 'left'; g.fillStyle = '#e9b84f'; g.font = '700 42px "IBM Plex Sans", sans-serif'; g.fillText(lineas[0], 40, 70);
+  g.fillStyle = '#ffffff'; g.font = '500 32px "IBM Plex Sans", sans-serif'; lineas.slice(1, 10).forEach((l, i) => g.fillText(l.slice(0, 58), 40, 130 + i*42)); });
+caja(3.9, 2, .1, MAT.negro, 0, y2 + 1.6, -5.55); const pantallaSala = new THREE.Mesh(new THREE.PlaneGeometry(3.7, 1.85), new THREE.MeshBasicMaterial({map:texSala()})); pantallaSala.position.set(0, y2 + 1.6, -5.49); scene.add(pantallaSala);
+// --------- Televisores reales de 65" (1,43 × 0,80 m) en la pared de cada ala: solo datos reales, se redibujan en vivo ---------
+const teles = [], VIVO = [];
+function tele(x, y, z, titulo, dibujar){
+  const c = document.createElement('canvas'); c.width = 1280; c.height = 720;
+  const tex = new THREE.CanvasTexture(c); tex.encoding = THREE.sRGBEncoding; tex.anisotropy = 4;
+  caja(.5, .3, .06, MAT.grafito, x, y, z, scene, false);
+  caja(1.47, .85, .045, MAT.negro, x, y, z + .06);
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(1.43, .805), new THREE.MeshBasicMaterial({map:tex, toneMapped:false})); m.position.set(x, y, z + .084); scene.add(m);
+  caja(.12, .012, .012, E('#e9b84f'), x, y - .418, z + .084, scene, false);
+  const t = {m, x, y, z, pintar(){ const g = c.getContext('2d'); g.fillStyle = '#080c0a'; g.fillRect(0, 0, 1280, 720);
+    const gr = g.createLinearGradient(0, 0, 0, 720); gr.addColorStop(0, 'rgba(126,217,87,.07)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(0, 0, 1280, 720);
+    g.fillStyle = '#e9b84f'; g.fillRect(0, 0, 1280, 6); g.textAlign = 'left'; g.fillStyle = '#fff'; g.font = '700 44px "IBM Plex Sans", sans-serif'; g.fillText(titulo, 40, 72);
+    const {h, m: mi} = bogota(); g.textAlign = 'right'; g.fillStyle = '#7ed957'; g.font = '600 26px "IBM Plex Mono", monospace';
+    g.fillText(`● EN VIVO  ${(h % 12) || 12}:${String(mi).padStart(2, '0')} ${h < 12 ? 'a. m.' : 'p. m.'}`, 1240, 66);
+    g.fillStyle = 'rgba(255,255,255,.1)'; g.fillRect(40, 100, 1200, 2); g.textAlign = 'left'; dibujar(g); tex.needsUpdate = true; }};
+  t.pintar(); teles.push(t); return t;
+}
+const recorta = (s, n) => (s = String(s ?? '')).length > n ? s.slice(0, n - 1) + '…' : s;
+const telKpi = tele(-11.2, y2 + 2.12, -5.92, 'Indicadores reales', g => {
+  [['Pedidos hoy', String(DATOS.pedidos ?? '—')], ['Vendido hoy', pesos(DATOS.vendido)], ['Robot confirmó', String(DATOS.conf_robot ?? '—')]].forEach(([n, v], i) => {
+    const x = [40, 330, 950][i]; g.fillStyle = '#9aa197'; g.font = '500 26px "IBM Plex Sans", sans-serif'; g.fillText(n, x, 150);
+    g.fillStyle = '#fff'; g.font = '700 ' + (i === 1 ? 54 : 62) + 'px "IBM Plex Mono", monospace'; g.fillText(v, x, 218); });
+  [['Entrega', K.entrega, 90, 100, true], ['Devolución', K.devolucion, 3, 20, false], ['Cancelación', K.cancelacion, 7, 20, false]].forEach(([n, v, meta, tope, alto], i) => {
+    const y = 300 + i*118, bien = v != null && (alto ? v >= meta : v <= meta), col = v == null ? '#9aa197' : bien ? '#7ed957' : '#ff7a59';
+    g.fillStyle = '#fff'; g.font = '600 32px "IBM Plex Sans", sans-serif'; g.fillText(n, 40, y);
+    g.fillStyle = col; g.font = '700 40px "IBM Plex Mono", monospace'; g.textAlign = 'right'; g.fillText(v == null ? '—' : v + ' %', 1240, y); g.textAlign = 'left';
+    g.fillStyle = 'rgba(255,255,255,.08)'; g.fillRect(40, y + 20, 1200, 26);
+    if (v != null){ g.fillStyle = col; g.fillRect(40, y + 20, 1200*Math.min(1, v/tope), 26); }
+    const mx = 40 + 1200*meta/tope; g.fillStyle = '#e9b84f'; g.fillRect(mx - 3, y + 12, 6, 42); g.font = '500 22px "IBM Plex Sans", sans-serif'; g.fillText('meta ' + meta + ' %', Math.min(mx + 10, 1120), y + 76); });
+  g.fillStyle = '#9aa197'; g.font = '500 22px "IBM Plex Sans", sans-serif'; g.fillText(`Fuente: Dropi, últimos 30 días · ${K.oficina ?? 0} paquetes esperando en oficina`, 40, 700); });
+const telVivo = tele(-8.8, y2 + 2.12, -5.92, 'Actividad del equipo', g => {
+  if (!VIVO.length){ g.fillStyle = '#9aa197'; g.font = '500 32px "IBM Plex Sans", sans-serif'; g.fillText('Esperando el primer evento real de hoy…', 40, 180); return; }
+  VIVO.slice(0, 9).forEach((e, i) => { const y = 160 + i*62; if (i % 2 === 0){ g.fillStyle = 'rgba(255,255,255,.035)'; g.fillRect(30, y - 40, 1220, 58); }
+    g.fillStyle = '#e9b84f'; g.font = '600 26px "IBM Plex Mono", monospace'; g.fillText(e.hora || '', 40, y);
+    g.fillStyle = (CARGOS[e.de] && CARGOS[e.de].color) || '#fff'; g.font = '700 28px "IBM Plex Sans", sans-serif'; const quien = corto(e.de) + (e.para ? ' → ' + corto(e.para) : '');
+    g.fillText(quien, 215, y); g.fillStyle = i ? '#c9cdc5' : '#fff'; g.font = (i ? '400' : '600') + ' 27px "IBM Plex Sans", sans-serif'; g.fillText(recorta(e.texto, 44), 540, y); }); });
+const telSalud = tele(8.8, y2 + 2.12, -5.92, 'Salud del sistema 24/7', g => {
+  const det = SAL.detalle || []; g.fillStyle = (SAL.fallas || []).length ? '#ff7a59' : '#7ed957'; g.font = '700 54px "IBM Plex Mono", monospace';
+  g.fillText(SAL.revisados ? `${SAL.ok}/${SAL.revisados} al día` : 'sin revisión', 40, 172); g.fillStyle = '#9aa197'; g.font = '500 24px "IBM Plex Sans", sans-serif'; g.fillText('Monitor de fallas · revisado ' + (SAL.hora || '—'), 560, 168);
+  det.slice(0, 8).forEach((r, i) => { const y = 248 + i*58, col = r.estado === 'ok' ? '#7ed957' : r.estado === 'falla' ? '#ff7a59' : '#9aa197';
+    g.fillStyle = col; g.beginPath(); g.arc(56, y - 9, 11, 0, 7); g.fill();
+    g.fillStyle = '#fff'; g.font = '500 27px "IBM Plex Sans", sans-serif'; g.fillText(recorta(r.agente, 40), 85, y);
+    g.fillStyle = col; g.font = '600 24px "IBM Plex Mono", monospace'; g.textAlign = 'right'; g.fillText((r.estado === 'descanso' ? 'en pausa' : r.estado) + ' · ' + r.ultima, 1240, y); g.textAlign = 'left'; }); });
+const telTareas = tele(11.2, y2 + 2.12, -5.92, 'Tareas y aprobaciones', g => {
+  const ts = REU_T(); g.fillStyle = '#9aa197'; g.font = '500 24px "IBM Plex Sans", sans-serif'; g.fillText(`Reunión ${DATOS.reunion && DATOS.reunion.id || '—'} · ${ts.length} tareas · rojo = necesita aprobación humana`, 40, 150);
+  if (!ts.length){ g.fillStyle = '#fff'; g.font = '500 32px "IBM Plex Sans", sans-serif'; g.fillText('Sin tareas abiertas.', 40, 230); return; }
+  ts.slice(0, 8).forEach((x, i) => { const y = 215 + i*62, col = x.aprobacion_humana ? '#ff7a59' : '#7ed957';
+    g.fillStyle = '#e9b84f'; g.font = '600 24px "IBM Plex Mono", monospace'; g.fillText(String(x.id || '').slice(-5), 40, y);
+    g.fillStyle = '#fff'; g.font = '500 27px "IBM Plex Sans", sans-serif'; g.fillText(recorta(x.titulo, 44), 150, y);
+    g.fillStyle = col; g.font = '600 24px "IBM Plex Sans", sans-serif'; g.textAlign = 'right'; g.fillText(corto(x.responsable) + ' · ' + recorta(x.estado, 16), 1240, y); g.textAlign = 'left'; }); });
+function REU_T(){ return (DATOS.reunion && DATOS.reunion.tareas) || []; }
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => teles.forEach(t => t.pintar()));
+setInterval(() => teles.forEach(t => t.pintar()), 60000);
+for (let r = 0; r < 2; r++){ const rx = 13.3 + r*1.0; caja(.9, 2.6, .9, MAT.negro, rx, y2 + 1.3, -4.6);
+  for (let yy = .35; yy < 2.5; yy += .17) caja(.75, .025, .02, E((yy*10|0) % 2 ? '#3be6ff' : '#8be05a'), rx, y2 + yy, -4.14, scene, false); }
+caja(2.3, 2.9, .04, MAT.vidrio, 13.8, y2 + 1.45, -3.8, scene, false);
+{ const l = new THREE.PointLight('#3be6ff', .7, 6, 2); l.position.set(13.8, y2 + 1.6, -3); scene.add(l); }
+[-14.2, -5.4, 5.4].forEach(x => planta(x, y2, -5.1, 1.25));
+// punto de encuentro (café) en el pasillo frontal
+caja(1.6, 1.05, .6, MAT.nogal, -6.4, y2 + .53, 4.1); caja(1.7, .05, .7, MAT.blanco, -6.4, y2 + 1.07, 4.1); caja(.25, .35, .25, MAT.negro, -6.8, y2 + 1.27, 4.1);
+caja(1.6, 1.05, .6, MAT.nogal, 6.4, y2 + .53, 4.1); caja(1.7, .05, .7, MAT.blanco, 6.4, y2 + 1.07, 4.1);
+
+// ================= PISO 3 · Creatividad, contenido y estrategia =================
+const y3 = YS[2];
+rotulo('Estudio de grabación', null, -11.5, y3 + 3.45, 0, '#e9b84f', 560); rotulo('Producción de contenido', null, -3.5, y3 + 3.45, 0, '#a77bff', 620);
+rotulo('Estrategia y creatividad', null, 4.5, y3 + 3.45, 0, '#e9b84f', 620); rotulo('Sala de ideas', null, 11.8, y3 + 3.45, 0, '#e9b84f', 420);
+caja(6, 3.3, .1, S('#16c446', {roughness:.95}), -11.5, y3 + 1.65, -D/2 + .35, scene, false); caja(6, .04, 3.4, S('#16c446', {roughness:.95}), -11.5, y3 + .03, -4.2, scene, false);
+{ const l = new THREE.PointLight('#5dff7a', .45, 8, 2); l.position.set(-11.5, y3 + 2.2, -3); scene.add(l); }
+[[-13.8, -2.2], [-9.2, -2.2]].forEach(([x, z]) => { caja(.04, 2, .04, MAT.negro, x, y3 + 1, z, scene, false);
+  const sb = new THREE.Mesh(new THREE.BoxGeometry(.8, .8, .1), E('#fffbe8')); sb.position.set(x, y3 + 2.1, z); sb.lookAt(-11.5, y3 + 1.4, -4.5); scene.add(sb); });
+caja(.04, 1.4, .04, MAT.negro, -11.5, y3 + .7, -1); caja(.42, .3, .55, MAT.negro, -11.5, y3 + 1.5, -1);
+caja(.4, 1.2, .4, MAT.grafito, -11.5, y3 + .6, -4.4);
+for (let k = 0; k < 3; k++){ caja(1.5, .8, .05, MAT.negro, -5 + k*1.6, y3 + 2.4, -D/2 + .2); const p = new THREE.Mesh(new THREE.PlaneGeometry(1.4, .7), E(['#6a3dd8','#2f8de0','#d0459a'][k])); p.position.set(-5 + k*1.6, y3 + 2.4, -D/2 + .23); scene.add(p); }
+caja(3.6, .06, 1.4, MAT.nogal, 4.5, y3 + .76, -1.4); caja(.4, .72, .4, MAT.grafito, 4.5, y3 + .37, -1.4);
+{ const t = lienzo(512, 400, (g) => { corona(g, 256, 210, 1.3, '#e9b84f'); }); const m = new THREE.Mesh(new THREE.PlaneGeometry(2, 1.6), new THREE.MeshBasicMaterial({map:t, transparent:true})); m.position.set(11.8, y3 + 2.5, -D/2 + .15); scene.add(m); }
+caja(3.6, .45, 1, S('#d8d2c6'), 11.8, y3 + .3, -1.2); caja(3.6, .55, .25, S('#d8d2c6'), 11.8, y3 + .72, -1.7); caja(1.4, .05, .8, MAT.nogal, 11.8, y3 + .42, .1);
+{ const anillo = new THREE.Mesh(new THREE.TorusGeometry(1.3, .03, 8, 50), E('#ffd99a')); anillo.rotation.x = Math.PI/2; anillo.position.set(11.8, y3 + H - .3, -.6); scene.add(anillo); }
+for (let yy = .7; yy < 3.3; yy += .8){ caja(2.2, .04, .4, MAT.nogal, 8.4, y3 + yy, -D/2 + .35); planta(7.8, y3 + yy + .02, -D/2 + .35, .4); planta(9, y3 + yy + .02, -D/2 + .35, .4); }
+planta(-8.4, y3, -4.8, 1.2); planta(1.2, y3, -4.8, 1.2); planta(14.4, y3, -4.8, 1.2);
+
+// --------- Instancias finales ---------
+// las hojas se agrupan por piso (y aparte la ciudad) para poder mostrar un solo piso
+const esCiudad = (x, z) => Math.abs(x) > W/2 + 3 || z > D/2 + 3 || z < -D/2 - 3;
+const pisoDeY = y => Math.max(0, Math.min(3, Math.floor((y + .3)/H)));
+{ const ig = new THREE.IcosahedronGeometry(1, 0), grupos = {}, m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler();
+  hojas.forEach(h => { const k = esCiudad(h[0], h[2]) ? 'c' : pisoDeY(h[1]); (grupos[k] = grupos[k] || []).push(h); });
+  Object.entries(grupos).forEach(([k, lista]) => { const im = new THREE.InstancedMesh(ig, MAT.hoja, lista.length);
+    lista.forEach(([x, y, z, s], i) => { e.set(Math.random()*3, Math.random()*3, 0); q.setFromEuler(e); m4.compose(new THREE.Vector3(x, y, z), q, new THREE.Vector3(s, s*1.2, s)); im.setMatrixAt(i, m4);
+      im.setColorAt(i, new THREE.Color(Math.random() < .5 ? '#3f8a3a' : '#2c6a2a')); });
+    im.castShadow = true; im.userData.piso = k === 'c' ? 'c' : +k; scene.add(im); }); }
+{ const im = new THREE.InstancedMesh(GEO_CAJA, MAT.carton, cajas.length), m4 = new THREE.Matrix4(), q = new THREE.Quaternion();
+  cajas.forEach(([x, y, z, w, h, d], i) => { m4.compose(new THREE.Vector3(x, y, z), q, new THREE.Vector3(w, h, d)); im.setMatrixAt(i, m4); }); im.castShadow = im.receiveShadow = true; im.userData.piso = 0; scene.add(im); }
+
+// ================= AGENTES =================
+// [x, piso, z, rot]; las filas de cada ala miran hacia la cámara, como en la referencia
+const PUESTOS = {
+  'Jefe de inventarios':      [-5.6, 0, -.6, 0],
+  'Líder de Logística':       [-12.4, 1, -2.7, 0], 'Confirmador de pedidos': [-10, 1, -2.7, 0], 'Resolutor de novedades': [-7.6, 1, -2.7, 0],
+  'Gestor de tickets y CAS':  [-12.4, 1, .6, 0],   'Abogado de devoluciones': [-10, 1, .6, 0], 'Rastreador de oficinas': [-7.6, 1, .6, 0],
+  'Líder de Tecnología':      [7.6, 1, -2.7, 0],   'Monitor de fallas': [10, 1, -2.7, 0], 'Auditor de calidad': [12.4, 1, -2.7, 0],
+  'Optimizador de procesos':  [8.8, 1, .6, 0],     'Guardián de datos': [11.2, 1, .6, 0],
+  'Vendedor de WhatsApp':     [-4.8, 2, -.8, 0],   'Casino y remarketing': [-2.2, 2, -.8, 0],
+  'Máquina Creativa':         [3.4, 2, -2.4, 0],   'Analista de pauta': [5.6, 2, -2.4, 0],
+};
+const gente = {}, clicables = []; let kk = 0;
+Object.entries(PUESTOS).forEach(([nombre, [x, pi, z, rot]]) => {
+  const c = CARGOS[nombre]; if (!c) return;
+  const y = YS[pi], enObra = !c.funciones.some(a => a.horas.length || /otro chat/.test(a.dato));
+  const lider = nombre === 'Líder de Logística';
+  const pant = escritorio(x, y, z + .62, enObra ? '#3a3320' : c.color, rot, lider ? 2.2 : 1.6, lider ? 3 : 2);
+  silla(x, y, z, rot);
+  const r = personaje(c.color, kk++, MUJERES.test(c.persona || '')); r.position.set(x, y, z); scene.add(r);
+  r.traverse(o => { o.userData.cargo = nombre; if (o.isMesh) clicables.push(o); });
+  const tag = etiqueta(corto(nombre), (c.nombre || '').replace(' de pedidos', '').replace('Gestor de ', '').slice(0, 24), enObra ? '#e9b84f' : c.color, 380);
+  tag.scale.multiplyScalar(.72); tag.position.set(0, 2.35, 0); r.add(tag);
+  gente[nombre] = {c, r, piso:pi, casa:{x, y, z, rot}, pant, fase:Math.random()*6, accion:null, burbuja:null, obra:enObra};
+});
+
+// ================= MOTOR DE EVENTOS REALES =================
+const EVENTOS = (DATOS.eventos || []).filter(e => gente[e.de]);
+const lista = $('lista'), historial = [];
+let tab = 'agente', sel = 'Líder de Logística';
+function burbuja(g, txt, color){ if (g.burbuja) g.r.remove(g.burbuja); const corto2 = txt.length > 52 ? txt.slice(0, 51) + '…' : txt;
+  const s = etiqueta(corto2, null, color || '#e9b84f', Math.min(1400, 80 + corto2.length*24)); s.scale.multiplyScalar(.62); s.position.set(0, 2.95, 0); g.r.add(s); g.burbuja = s; }
+function quitarBurbuja(g){ if (g.burbuja){ g.r.remove(g.burbuja); g.burbuja = null; } }
+function registrar(e){ historial.unshift(`<li><span class="h">${esc(e.hora)}</span><b>${esc(corto(e.de))}</b>${e.para ? ' → <b>' + esc(corto(e.para)) + '</b>' : ''}: ${esc(e.texto)}</li>`);
+  lista.innerHTML = historial.slice(0, 6).join(''); VIVO.unshift(e); if (VIVO.length > 20) VIVO.pop(); telVivo.pintar(); }
+// Respuesta de quien recibe: es el paso siguiente real del proceso para ese tipo de evento (no se inventan datos)
+const RESPUESTA = {
+  veto: 'Recibido. Queda en REVISAR HUMANO para Karen',
+  cas_oficina: 'Anotado. Vigilo que el cliente lo recoja',
+  cas_intento: 'Bien. Si no entregan, Karen llama al cliente',
+  cas_entregado: 'Listo: lo cuento como entregado, no devolución',
+  ticket: 'Bien. Sigo el ticket hasta que Dropi responda',
+  falla: 'Recibido. Se relanza en la próxima vuelta',
+};
+function responder(g, e){ const r = RESPUESTA[e.tipo] || 'Recibido, queda en mi lista'; burbuja(g, '↩ ' + r, '#7ed957');
+  historial.unshift(`<li><span class="h">${esc(e.hora)}</span><b>${esc(corto(e.para))}</b> → <b>${esc(corto(e.de))}</b>: ${esc(r)}</li>`); lista.innerHTML = historial.slice(0, 6).join('');
+  VIVO.unshift({hora:e.hora, de:e.para, para:e.de, texto:r}); telVivo.pintar(); }
+const PASILLO = 3.1;
+function ruta(a, b){ return [{x:a.x, z:a.z}, {x:a.x + .95, z:a.z}, {x:a.x + .95, z:PASILLO}, {x:b.x, z:PASILLO}]; }
+function largo(p){ let s = 0; for (let i = 1; i < p.length; i++) s += Math.hypot(p[i].x - p[i-1].x, p[i].z - p[i-1].z); return s; }
+function punto(p, d){ for (let i = 1; i < p.length; i++){ const L = Math.hypot(p[i].x - p[i-1].x, p[i].z - p[i-1].z);
+  if (d <= L){ const k = L ? d/L : 0; return {x:p[i-1].x + (p[i].x - p[i-1].x)*k, z:p[i-1].z + (p[i].z - p[i-1].z)*k, dir:Math.atan2(p[i].x - p[i-1].x, p[i].z - p[i-1].z)}; } d -= L; }
+  const a = p[p.length-2], b = p[p.length-1]; return {x:b.x, z:b.z, dir:Math.atan2(b.x - a.x, b.z - a.z)}; }
+let cursor = 0, proximo = 1.2, enReunion = false;
+function siguienteEvento(t){
+  if (!EVENTOS.length || enReunion) return;
+  const e = EVENTOS[cursor % EVENTOS.length]; cursor++;
+  $('act_titulo').textContent = `Actividad real de hoy · ${((cursor - 1) % EVENTOS.length) + 1} de ${EVENTOS.length}`;
+  const de = gente[e.de], para = e.para && gente[e.para];
+  registrar(e);
+  if (para && para.piso === de.piso && !de.accion && !para.accion){
+    // colaboración: los dos caminan al punto de encuentro del pasillo y se pasan la información
+    const mx = (de.casa.x + para.casa.x)/2;
+    de.accion = {tipo:'ir', ini:t, pts:ruta(de.casa, {x:mx - .45}), e, rol:'lleva'};
+    para.accion = {tipo:'ir', ini:t, pts:ruta(para.casa, {x:mx + .45}), e, rol:'recibe'};
+    [de, para].forEach(g => g.accion.L = largo(g.accion.pts));
+    burbuja(de, '📄 ' + e.texto, de.c.color);
+  } else if (!de.accion){ de.accion = {tipo:'trabajo', ini:t, e}; burbuja(de, e.texto, de.c.color); }
+  if (tab === 'agente' && (sel === e.de || sel === e.para)) pintar();
+}
+
+// ================= REUNIÓN (con datos reales del día) =================
+const REU = DATOS.reunion || {};
+let reuPaso = -1, reuSig = 0;
+function convocar(){
+  if (!REU.id) return; enReunion = true; reuPaso = -1; reuSig = clock.getElapsedTime() + 4;
+  const part = (REU.participantes || []).filter(n => gente[n] && gente[n].piso === 1);
+  part.forEach((n, i) => { const g = gente[n], s = ASIENTOS[i % ASIENTOS.length]; quitarBurbuja(g);
+    const pts = [...ruta(g.casa, {x:s.x}), {x:s.x, z:2.4}, {x:s.x, z:s.z + (s.rot ? .45 : -.45)}, {x:s.x, z:s.z}];
+    g.accion = {tipo:'ir', ini:clock.getElapsedTime(), pts, L:largo(pts), rol:'reunion', asiento:s}; });
+  ver('piso', 1); tab = 'reunion'; pintar();
+}
+function terminar(){ enReunion = false; reuPaso = -1;
+  Object.values(gente).forEach(g => { if (g.accion && g.accion.rol === 'reunion'){ const pts = [...g.accion.pts].reverse(); g.accion = {tipo:'volver', ini:clock.getElapsedTime(), pts, L:largo(pts)}; } quitarBurbuja(g); });
+  pantallaSala.material.map = texSala(); pantallaSala.material.needsUpdate = true; pintar(); }
+function pasoReunion(t){
+  if (!enReunion || t < reuSig) return;
+  const iv = REU.intervenciones || []; reuPaso++;
+  if (reuPaso < iv.length){ const x = iv[reuPaso], g = gente[x.quien]; Object.values(gente).forEach(quitarBurbuja); if (g) burbuja(g, x.dice, '#e9b84f');
+    pantallaSala.material.map = texSala([REU.titulo + ' · ' + REU.id, ...(REU.agenda || []).map((a, i) => (i === Math.min(reuPaso, 4) ? '▶ ' : '    ') + a)]); pantallaSala.material.needsUpdate = true;
+    reuSig = t + 6; }
+  else { Object.values(gente).forEach(quitarBurbuja); pantallaSala.material.map = texSala(['Tareas asignadas', ...(REU.tareas || []).map(x => `${x.id} · ${corto(x.responsable)} · ${x.fecha}`)]); pantallaSala.material.needsUpdate = true; reuSig = t + 1e9; }
+  if (tab === 'reunion') pintar();
+}
+
+// ================= REUNIÓN EN LIDV CON VOZ (Ronald 26-11: «la reunión dentro de la sala, más realista, que se vea qué está haciendo cada uno y una pantalla para presentar»; «que traigan siempre qué hicieron nuevo, qué mejoró, el problema y la solución») =================
+const LIDV = DATOS.envivo || [];
+let vivo = false, vTts = null, vDic = null, vSam = null, vDb = null, vHist = [], vLog = [], vBase = '', vEnviarAlParar = false;
+const usar = n => (window.claude && window.claude.use) ? window.claude.use(n).catch(() => null) : Promise.resolve(null);
+usar('tts').then(x => { vTts = x; if (x) try { x.onLine(({id}) => vHabla(String(id || '').split('#')[0])); x.onState(({state}) => { if (state === 'idle' && vivo) vHabla(null); }); } catch (e) {} });
+usar('sample').then(x => vSam = x); usar('db').then(x => vDb = x);
+usar('dictation').then(x => { vDic = x; if (!x) return; try {
+  x.onPartial(({text}) => { const t = $('v_txt'); if (t) t.value = vBase + text; });
+  x.onFinal(({text}) => { vBase += text + ' '; const t = $('v_txt'); if (t) t.value = vBase; });
+  x.onState(({state}) => { const b = $('v_mic'); if (!b) return; const on = state === 'listening' || state === 'starting';
+    b.textContent = on ? '⏹ Listo' : '🎤 Hablar'; b.style.background = on ? '#c0392b' : ''; if (state === 'idle' && vEnviarAlParar && vBase.trim()){ vEnviarAlParar = false; vPreguntar(); } });
+} catch (e) {} });
+const vQ = q => LIDV.find(v => v.quien === q);
+function vEnvolver(t, n){ const out = []; let l = ''; String(t || '').split(/\s+/).forEach(w => { if ((l + ' ' + w).trim().length > n){ out.push(l.trim()); l = w; } else l += ' ' + w; }); if (l.trim()) out.push(l.trim()); return out; }
+const texSlide = (v, extra) => lienzo(1024, 512, (g, c) => {
+  g.fillStyle = '#0e130f'; g.fillRect(0, 0, 1024, 512); g.strokeStyle = '#e9b84f'; g.lineWidth = 8; g.strokeRect(4, 4, 1016, 504);
+  g.textAlign = 'left'; g.fillStyle = '#ffffff'; g.font = '800 40px "Bricolage Grotesque", sans-serif'; g.fillText(v.persona, 36, 62);
+  g.fillStyle = '#b9beb6'; g.font = '500 24px "IBM Plex Sans", sans-serif'; g.fillText(v.area + (v.remoto ? ' · por videollamada' : ''), 36, 96);
+  g.fillStyle = '#e74c3c'; g.beginPath(); g.arc(880, 52, 10, 0, 7); g.fill(); g.fillStyle = '#ffffff'; g.font = '700 22px "IBM Plex Sans", sans-serif'; g.fillText('EN LIDV', 898, 60);
+  g.fillStyle = '#3ccf7e'; g.font = '800 50px "Bricolage Grotesque", sans-serif'; g.fillText(v.kpi || '', 36, 160);
+  g.fillStyle = '#b9beb6'; g.font = '500 24px "IBM Plex Sans", sans-serif'; g.fillText(v.meta || '', 36, 194);
+  const filas = extra ? [['Responde', extra]] : [['Nuevo', v.nuevo], ['Mejoró', v.mejoro], ['Problema', v.problema], ['Solución', v.solucion]];
+  let y = 236; filas.forEach(([k, t]) => { if (y > 495) return; g.fillStyle = k === 'Problema' ? '#e9845f' : '#e9b84f'; g.font = '700 22px "IBM Plex Sans", sans-serif'; g.fillText(k, 36, y);
+    g.fillStyle = '#ffffff'; g.font = '500 22px "IBM Plex Sans", sans-serif'; vEnvolver(t, extra ? 66 : 64).slice(0, extra ? 9 : 2).forEach((l, i) => { if (y + i*28 <= 500) g.fillText(l, 170, y + i*28); }); y += extra ? 260 : 66; }); });
+let vPorHablar = {};
+function vHabla(quien){
+  Object.values(gente).forEach(quitarBurbuja);
+  if (!quien){ return; }
+  const v = vQ(quien); if (!v) return;
+  pantallaSala.material.map = texSlide(v, vPorHablar[quien]); pantallaSala.material.needsUpdate = true;
+  const g = gente[quien]; if (g) burbuja(g, vPorHablar[quien] || ('Nuevo: ' + v.nuevo), '#e9b84f');
+}
+function vDecir(lineas){
+  lineas.forEach(l => vLog.push({quien: l.quien, texto: l.texto}));
+  if (tab === 'reunion') pintar();
+  if (vTts){ vTts.speak(lineas.map((l, i) => ({text: l.texto.slice(0, 1900), voice: (vQ(l.quien) || {}).voz || 'buttery', language: 'es', id: l.quien + '#' + i}))).catch(() => {}); return; }
+  let i = 0; const paso = () => { if (!vivo || i >= lineas.length) return; vHabla(lineas[i].quien); i++; setTimeout(paso, 9000); }; paso();
+}
+function vivoEmpezar(){
+  if (!LIDV.length) return; vivo = true; vLog = []; vHist = []; vPorHablar = {};
+  const part = LIDV.filter(v => !v.remoto && gente[v.quien] && gente[v.quien].piso === 1);
+  part.forEach((v, i) => { const g = gente[v.quien], s = ASIENTOS[i % ASIENTOS.length]; quitarBurbuja(g);
+    const pts = [...ruta(g.casa, {x:s.x}), {x:s.x, z:2.4}, {x:s.x, z:s.z + (s.rot ? .45 : -.45)}, {x:s.x, z:s.z}];
+    g.accion = {tipo:'ir', ini:clock.getElapsedTime(), pts, L:largo(pts), rol:'reunion', asiento:s}; });
+  ver('piso', 1); tab = 'reunion'; pintar(); vBarra(true);
+  const lineas = LIDV.map(v => ({quien: v.quien, texto: `${v.persona.split(' ')[0]}, ${v.area}${v.remoto ? ', por videollamada' : ''}. ${v.kpi}${v.meta ? ', ' + v.meta : ''}. Lo nuevo: ${v.nuevo} Lo que mejoró: ${v.mejoro} El problema: ${v.problema} La solución: ${v.solucion}`}));
+  lineas.push({quien: LIDV[0].quien, texto: 'Ronald, ese es el reporte del equipo. ¿Qué le quiere preguntar a alguien? Hable con el micrófono o escriba abajo.'});
+  setTimeout(() => { if (vivo) vDecir(lineas); }, 5000);
+}
+function vivoTerminar(){ vivo = false; try { vTts && vTts.stop(); } catch (e) {} vBarra(false); terminar(); }
+function vBarra(on){
+  let b = $('v_barra');
+  if (!b){ b = document.createElement('div'); b.id = 'v_barra';
+    b.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:8px;align-items:flex-end;background:#0e130fee;border-top:1px solid #e9b84f;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))';
+    b.innerHTML = '<button id="v_mic" class="accion" style="margin:0">🎤 Hablar</button><textarea id="v_txt" placeholder="Pregúntele al equipo (ej.: Daniela, ¿qué falta para llegar al 95 %?)" style="flex:1;min-width:0;height:44px;resize:none;border-radius:10px;border:1px solid #3a3f3a;background:#151a16;color:#fff;padding:10px;font:400 15px IBM Plex Sans,sans-serif"></textarea><button id="v_env" class="accion" style="margin:0">Enviar</button><button id="v_fin" class="accion" style="margin:0">Salir</button>';
+    document.body.append(b);
+    $('v_env').onclick = vPreguntar; $('v_fin').onclick = vivoTerminar;
+    $('v_txt').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); vPreguntar(); } });
+    $('v_mic').onclick = () => { if (!vDic){ $('v_txt').focus(); return; }
+      if ($('v_mic').textContent.includes('Listo')){ vEnviarAlParar = true; vDic.stop().catch(() => {}); return; }
+      try { vTts && vTts.stop(); } catch (e) {} vBase = ''; $('v_txt').value = ''; vDic.start({language: 'es'}).catch(() => {}); };
+  }
+  b.hidden = !on; if (!vDic) $('v_mic').hidden = true;
+}
+async function vPreguntar(){
+  const t = $('v_txt'); const q = (t.value || '').trim(); if (!q) return; t.value = ''; vBase = '';
+  vLog.push({quien: 'Ronald', texto: q}); if (tab === 'reunion') pintar();
+  if (!vSam){ vLog.push({quien: LIDV[0].quien, texto: 'Las respuestas en vivo funcionan al abrir la sede en claude.ai desde Chrome o la app de escritorio.'}); pintar(); return; }
+  $('v_env').disabled = true;
+  const ctx = 'Eres la sala de juntas del equipo de agentes de Toro Verde (herbicida, Colombia). Hablan como personas reales en una reunión por voz: español sencillo, frases cortas, sin listas ni emojis. Ronald es el dueño.\nLíderes (quien | persona | área | KPI | nuevo | mejoró | problema | solución):\n' +
+    LIDV.map(v => [v.quien, v.persona, v.area, v.kpi + ' ' + v.meta, v.nuevo, v.mejoro, v.problema, v.solucion].join(' | ')).join('\n') +
+    '\nReglas: nunca decir orgánico, ecológico, natural, sin veneno ni no tóxico; uso: mínimo 130 ml por bomba de 20 litros y agite el envase; descuentos solo a quien nunca ha comprado; abono si devuelve más del 50 %; flete hasta 15 % sobre el tope; nunca se cancelan pedidos; Ronald solo decide plata y llamadas; las tareas las ejecuta el equipo.\n' +
+    'Responde SOLO JSON: {"respuestas":[{"quien":"<quien exacto de la lista>","texto":"<lo que dice en voz alta, máximo 3 frases, con número si lo tiene>"}],"tareas":[{"quien":"<quien>","texto":"<tarea concreta que ese agente ejecuta y cómo se mide>"}]}. Responde el líder del área (1 o 2); si no hay dato, dilo y crea una tarea para traerlo. Nunca le pases tareas a Ronald salvo plata o llamadas.';
+  vHist.push((q)); 
+  try {
+    const r = await vSam.json([{role: 'user', content: ctx + '\n\nConversación:\n' + vLog.slice(-10).map(x => (x.quien === 'Ronald' ? 'Ronald' : (vQ(x.quien) || {}).persona || x.quien) + ': ' + x.texto).join('\n')}], {cache: false});
+    const resp = (Array.isArray(r && r.respuestas) ? r.respuestas : []).filter(x => x && x.texto && vQ(x.quien));
+    for (const x of (Array.isArray(r && r.tareas) ? r.tareas : [])){ const f = {lider: String(x.quien || ''), texto: String(x.texto || '').slice(0, 400), estado: 'pendiente', creada: Date.now(), origen: 'sede · sala de juntas'};
+      if (f.texto && vDb){ try { await vDb.collection('tareas').add(f); } catch (e) {} } if (f.texto) vLog.push({quien: 'Tarea', texto: ((vQ(f.lider) || {}).persona || f.lider) + ': ' + f.texto}); }
+    resp.forEach(x => vPorHablar[x.quien] = x.texto);
+    vDecir(resp.length ? resp : [{quien: LIDV[0].quien, texto: 'No le entendí bien, Ronald. ¿Me lo repite?'}]);
+  } catch (e) { vLog.push({quien: 'Sala', texto: e && e.code === 'rate_limited' ? 'Muchas preguntas seguidas; espere un momento.' : 'No se pudo responder. Intente de nuevo.'}); pintar(); }
+  finally { $('v_env').disabled = false; }
+}
+
+// ================= PANEL DE CONTEXTO =================
+document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => { tab = b.dataset.tab; pintar(); });
+function pintar(){
+  document.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-pressed', b.dataset.tab === tab));
+  const cu = $('cuerpo');
+  if (tab === 'agente'){
+    const g = gente[sel]; if (!g){ cu.innerHTML = '<p>Toca a una persona.</p>'; return; }
+    const c = g.c, on = c.funciones.some(trabaja);
+    const tareas = (REU.tareas || []).filter(x => x.responsable === sel);
+    const reg = (DATOS.eventos || []).filter(e => e.de === sel || e.para === sel).slice(-8).reverse();
+    cu.innerHTML = `<div class="cargo">${esc(c.area || '')}</div><h3>${esc(c.persona || c.nombre)}</h3>
+      <div class="cargo">${esc(c.nombre)} · <span class="pill ${g.obra ? 'obra' : on ? 'on' : ''}">${g.obra ? 'en construcción' : on ? 'trabajando ahora' : 'en su puesto'}</span></div>
+      <p>${esc(c.mision)}</p><button class="accion" id="b_seguir">Seguir a ${esc(corto(sel))}</button>
+      <div class="sec">Funciones y horario</div>${c.funciones.map(a => { const t = trabaja(a), p = proxima(a), otro = /otro chat/.test(a.dato);
+        return `<div class="item"><b>${esc(a.nombre)}</b> · ${esc(a.hace)}<br><span class="pill ${t ? 'on' : ''}">${t ? 'ahora' : p || (otro ? 'otro chat' : 'en construcción')}</span> <span class="mono">${esc(a.dato)}</span></div>`; }).join('')}
+      <div class="sec">Tareas asignadas</div>${tareas.length ? tareas.map(x => `<div class="item"><span class="mono">${esc(x.id)}</span> ${esc(x.titulo)}<br>vence ${esc(x.fecha)} · <span class="pill ${x.aprobacion_humana ? 'humano' : ''}">${esc(x.estado)}</span></div>`).join('') : '<div class="item">Sin tareas abiertas.</div>'}
+      <div class="sec">Registro de actividad real (hoy)</div>${reg.length ? reg.map(e => `<div class="item"><span class="mono">${esc(e.hora)}</span> ${esc(e.texto)}</div>`).join('') : '<div class="item">Sin actividad registrada hoy.</div>'}`;
+    $('b_seguir').onclick = () => ver('seguir', sel);
+  } else if (tab === 'reunion'){
+    if (!REU.id){ cu.innerHTML = '<p>No hay reunión registrada hoy.</p>'; return; }
+    const iv = REU.intervenciones || [];
+    cu.innerHTML = `<h3>${esc(REU.titulo)}</h3><div class="cargo"><span class="mono">${esc(REU.id)}</span> · ${esc(REU.fecha)} · convoca ${esc(REU.convoca)}</div>
+      ${enReunion ? '<button class="accion" id="b_fin">Terminar reunión</button>' : '<button class="accion" id="b_reu">Entrar a la reunión</button>'}
+      ${LIDV.length ? (vivo ? '<button class="accion" id="b_vfin">Salir de la reunión en vivo</button>' : '<button class="accion" id="b_vivo">🎙️ Reunión EN VIVO con voz</button>') : ''}
+      <div id="v_log"></div>
+      <div class="sec">Agenda</div>${(REU.agenda || []).map((a, i) => `<div class="item">${i + 1}. ${esc(a)}</div>`).join('')}
+      <div class="sec">Participantes</div><div class="item">${(REU.participantes || []).map(n => esc(corto(n) + ' (' + n + ')')).join(' · ')}</div>
+      <div class="sec">Conversación</div>${iv.map((x, i) => `<div class="item" style="${enReunion && i === reuPaso ? 'color:var(--texto)' : ''}"><b>${esc(corto(x.quien))}:</b> ${esc(x.dice)}</div>`).join('')}
+      <div class="sec">Conclusiones</div>${(REU.conclusiones || []).map(x => `<div class="item">${esc(x)}</div>`).join('')}
+      <div class="sec">Tareas (responsable · fecha · estado)</div>${(REU.tareas || []).map(x => `<div class="item"><span class="mono">${esc(x.id)}</span> ${esc(x.titulo)}<br><b>${esc(x.responsable)}</b> · ${esc(x.fecha)} · <span class="pill ${x.aprobacion_humana ? 'humano' : ''}">${esc(x.estado)}</span></div>`).join('')}
+      <p class="cargo">${esc(REU.nota || '')}</p>`;
+    const b1 = $('b_reu'), b2 = $('b_fin'); if (b1) b1.onclick = convocar; if (b2) b2.onclick = terminar;
+    const b3 = $('b_vivo'), b4 = $('b_vfin'); if (b3) b3.onclick = vivoEmpezar; if (b4) b4.onclick = vivoTerminar;
+    const vl = $('v_log'); if (vl && vLog.length){ const h = document.createElement('div'); h.className = 'sec'; h.textContent = 'Conversación en vivo'; vl.append(h);
+      vLog.slice(-14).forEach(x => { const d = document.createElement('div'); d.className = 'item'; const b = document.createElement('b'); b.textContent = (x.quien === 'Ronald' || x.quien === 'Tarea' || x.quien === 'Sala' ? x.quien : ((vQ(x.quien) || {}).persona || x.quien)) + ': ';
+        d.append(b, document.createTextNode(x.texto)); vl.append(d); }); }
+  } else {
+    const I = DATOS.iso || {}, P = I.phva || {};
+    cu.innerHTML = `<h3>Sistema de Gestión de Calidad</h3><div class="cargo">ISO 9001 · gestión por procesos y ciclo PHVA</div>
+      <div class="phva"><div style="border:1px solid var(--azul)"><b style="color:var(--azul)">Planear</b>${esc(P.planear)}</div><div style="border:1px solid var(--verde)"><b style="color:var(--verde)">Hacer</b>${esc(P.hacer)}</div>
+      <div style="border:1px solid var(--oro)"><b style="color:var(--oro)">Verificar</b>${esc(P.verificar)}</div><div style="border:1px solid var(--morado)"><b style="color:var(--morado)">Actuar</b>${esc(P.actuar)}</div></div>
+      <div class="sec">Mapa de procesos (responsable · objetivo medible)</div>${(I.procesos || []).map(p => `<div class="item"><b>${esc(p.proceso)}</b> · ${esc(corto(p.responsable))}<br>${esc(p.objetivo)} · <span class="mono">${esc(p.seguimiento)}</span></div>`).join('')}
+      <div class="sec">Riesgos y controles</div>${(I.riesgos || []).map(r => `<div class="item"><span class="pill ${r.nivel === 'alto' ? 'humano' : 'obra'}">${esc(r.nivel)}</span> <b>${esc(r.riesgo)}</b><br>${esc(r.control)}</div>`).join('')}
+      <div class="sec">Incidencias de hoy</div>${(I.incidencias || []).length ? I.incidencias.map(x => `<div class="item">${esc(x.fecha)} · ${esc(x.detalle)}</div>`).join('') : '<div class="item">Sin incidencias.</div>'}
+      <div class="sec">Acciones correctivas</div>${(I.acciones || []).map(x => `<div class="item"><span class="mono">${esc(x.id)}</span> ${esc(x.titulo)} · <b>${esc(corto(x.responsable))}</b> · ${esc(x.fecha)}</div>`).join('')}
+      <div class="sec">Control documental</div>${(I.documentos || []).map(x => `<div class="item">${esc(x)}</div>`).join('')}`;
+  }
+}
+
+// ================= MODOS DE CÁMARA =================
+let modo = 'edificio', pisoSel = 1, seguido = null; const destinoCam = {pos:new THREE.Vector3(), tgt:new THREE.Vector3(), activo:false};
+function ver(m, arg){
+  modo = m; ['edificio','piso','seguir','pantallas'].forEach(x => $('m_' + x).setAttribute('aria-pressed', x === m));
+  document.querySelectorAll('.pisos button').forEach(b => b.setAttribute('aria-pressed', m === 'piso' && +b.dataset.piso === pisoSel));
+  const movil = innerWidth < 700;
+  const corte = m === 'piso' ? (arg ?? pisoSel) : m === 'pantallas' || m === 'tele' ? 1 : m === 'seguir' ? (gente[arg || sel] || {}).piso : null;
+  if (m === 'edificio'){ destinoCam.pos.set(-6, 9, movil ? 64 : 44); destinoCam.tgt.set(0, 6.6, 0); }
+  if (m === 'piso'){ pisoSel = arg ?? pisoSel; const y = YS[pisoSel]; destinoCam.pos.set(-1.5, y + 10.5, movil ? 40 : 25); destinoCam.tgt.set(0, y + .6, -.8);
+    document.querySelectorAll('.pisos button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.piso === pisoSel)); }
+  if (m === 'seguir'){ seguido = arg || sel; sel = seguido; tab = 'agente'; pintar(); }
+  if (m === 'pantallas'){ ladoTV = arg; const x = ladoTV * 10; destinoCam.pos.set(x, y2 + 2.05, movil ? -.4 : -1.5); destinoCam.tgt.set(x, y2 + 2.1, -5.9); }
+  if (m === 'tele'){ modo = 'pantallas'; $('m_pantallas').setAttribute('aria-pressed', true); destinoCam.pos.set(arg.x, arg.y, arg.z + 5.1); destinoCam.tgt.set(arg.x, arg.y, arg.z); }
+  destinoCam.activo = m !== 'seguir';
+  modoTV = modo === 'pantallas'; ETIQUETAS.forEach(s => { if (modoTV) s.visible = false; else if (s.parent !== scene) s.visible = true; });
+  cortar(corte); if (modoTV) ETIQUETAS.forEach(s => s.visible = false);
+}
+let ladoTV = 1, PARTES = null;
+// Muestra solo un piso (n) como maqueta abierta: oculta los pisos de arriba y de abajo, la cubierta y el letrero; la ciudad queda.
+function cortar(n){
+  if (!PARTES) PARTES = scene.children.filter(o => !o.isLight).map(o => {
+    if (o.userData.piso !== undefined) return {o, f:o.userData.piso};
+    const p = o.position, sc = o.scale || {x:1, y:1};
+    if (sc.x > 60 || esCiudad(p.x, p.z)) return {o, f:'c'};
+    if (o.isMesh && sc.y > H + .5) return {o, f:'alto'};
+    return {o, f:pisoDeY(p.y)}; });
+  PARTES.forEach(({o, f}) => o.visible = n == null || f === 'c' || f === n);
+}
+$('m_edificio').onclick = () => ver('edificio'); $('m_piso').onclick = () => ver('piso', pisoSel); $('m_seguir').onclick = () => ver('seguir', sel);
+$('m_pantallas').onclick = () => ver('pantallas', modo === 'pantallas' ? -ladoTV : -1);
+document.querySelectorAll('.pisos button').forEach(b => b.onclick = () => ver('piso', +b.dataset.piso));
+controls.addEventListener('start', () => { destinoCam.activo = false; });
+const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(); let abajo = null;
+canvas.addEventListener('pointerdown', e => abajo = [e.clientX, e.clientY]);
+canvas.addEventListener('pointerup', e => { if (!abajo || Math.hypot(e.clientX-abajo[0], e.clientY-abajo[1]) > 6) return;
+  mouse.set(e.clientX/innerWidth*2-1, -(e.clientY/innerHeight)*2+1); ray.setFromCamera(mouse, camera);
+  const tv = ray.intersectObjects(teles.map(t => t.m))[0], hit = ray.intersectObjects(clicables)[0];
+  if (tv && (!hit || tv.distance < hit.distance)){ const t = teles.find(t => t.m === tv.object); ver('tele', {x:t.x, y:t.y, z:t.z}); return; }
+  if (hit){ sel = hit.object.userData.cargo; tab = 'agente'; pintar(); } });
+function tam(){ renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix(); }
+addEventListener('resize', () => { tam(); if (modo === 'pantallas') ver('pantallas', ladoTV); else if (modo !== 'seguir') ver(modo, pisoSel); }); tam();
+const clock = new THREE.Clock();
+ver('edificio'); camera.position.copy(destinoCam.pos); controls.target.copy(destinoCam.tgt); pintar();
+
+// ================= BUCLE =================
+const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function sentar(g, t){ const u = g.r.userData; g.r.position.set(g.casa.x, g.casa.y - .05, g.casa.z); g.r.rotation.y = g.casa.rot;
+  u.pi.rotation.x = u.pd.rotation.x = -Math.PI/2; const tecla = quieto ? 0 : Math.sin(t*9 + g.fase)*.08; u.bi.rotation.x = -1.2 + tecla; u.bd.rotation.x = -1.2 - tecla;
+  if (!quieto) u.cabeza.rotation.y = Math.sin(t*.4 + g.fase)*.12; }
+function caminar(g, q, t){ const u = g.r.userData; g.r.position.set(q.x, g.casa.y, q.z); g.r.rotation.y = q.dir;
+  const p = Math.sin(t*8)*.55; u.pi.rotation.x = p; u.pd.rotation.x = -p; u.bi.rotation.x = -p*.7; u.bd.rotation.x = p*.7; }
+const vTmp = new THREE.Vector3(), vTmp2 = new THREE.Vector3(); let tPrev = 0;
+(function animar(){
+  requestAnimationFrame(animar);
+  const t = clock.getElapsedTime(), dt = Math.min(.1, t - tPrev); tPrev = t;
+  if (!quieto){ autos.forEach(a => { a.g.position.x += a.v*dt; if (a.g.position.x > 105) a.g.position.x = -105; if (a.g.position.x < -105) a.g.position.x = 105; }); }
+  if (!quieto && t > proximo){ siguienteEvento(t); proximo = t + 2.4; }
+  pasoReunion(t);
+  Object.values(gente).forEach(g => {
+    const a = g.accion, on = g.c.funciones.some(trabaja);
+    g.pant.color.set(g.obra ? '#3a3320' : (a && a.tipo === 'trabajo') || on ? '#8be05a' : g.c.color);
+    if (!a){ sentar(g, t); return; }
+    if (a.tipo === 'trabajo'){ sentar(g, t*2.6); if (Math.sin(t*14) > .6) g.pant.color.set('#ffffff'); if (t - a.ini > 2.6){ g.accion = null; quitarBurbuja(g); } return; }
+    if (a.tipo === 'ir' || a.tipo === 'volver'){ const d = (t - a.ini)*2.4, q = punto(a.pts, Math.min(d, a.L)); caminar(g, q, t);
+      if (d >= a.L){ if (a.tipo === 'volver'){ g.accion = null; quitarBurbuja(g); } else if (a.rol === 'reunion'){ a.tipo = 'reunido'; } else { a.tipo = 'charla'; a.ini = t; } } return; }
+    if (a.tipo === 'reunido'){ const u = g.r.userData; g.r.position.set(a.asiento.x, g.casa.y - .05, a.asiento.z); g.r.rotation.y = a.asiento.rot;
+      u.pi.rotation.x = u.pd.rotation.x = -Math.PI/2; u.bi.rotation.x = u.bd.rotation.x = -.9; return; }
+    if (a.tipo === 'charla'){ const u = g.r.userData; u.pi.rotation.x = u.pd.rotation.x = 0; g.r.rotation.y = a.rol === 'lleva' ? Math.PI/2 : -Math.PI/2;
+      u.bd.rotation.x = a.rol === 'lleva' ? -1 + Math.sin(t*4)*.15 : -.3; u.bi.rotation.x = 0; u.cabeza.rotation.y = Math.sin(t*2 + g.fase)*.2;
+      if (a.rol === 'recibe' && !a.respondio && t - a.ini > 1.1){ a.respondio = true; responder(g, a.e); }
+      if (t - a.ini > 3.4){ const pts = [...a.pts].reverse(); g.accion = {tipo:'volver', ini:t, pts, L:largo(pts)}; if (a.rol === 'lleva') quitarBurbuja(g); } }
+  });
+  if (modo === 'seguir' && seguido && gente[seguido]){ const p = gente[seguido].r.position; controls.target.lerp(vTmp.set(p.x, p.y + 1.2, p.z), 1 - Math.exp(-dt*5));
+    camera.position.lerp(vTmp2.set(p.x - 2.5, p.y + 3.6, p.z + 7.5), 1 - Math.exp(-dt*3)); }
+  else if (destinoCam.activo){ const k = 1 - Math.exp(-dt*3.2); camera.position.lerp(destinoCam.pos, k); controls.target.lerp(destinoCam.tgt, k); if (camera.position.distanceTo(destinoCam.pos) < .05) destinoCam.activo = false; }
+  controls.update(); renderer.render(scene, camera);
+})();
+</script>

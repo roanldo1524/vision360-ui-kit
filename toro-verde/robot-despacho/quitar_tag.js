@@ -1,0 +1,6 @@
+const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const c=await b.newContext({storageState:'/tmp/dropi/estado.json',locale:'es-CO',userAgent:'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36'});const p=await c.newPage();let auth=null;p.on('request',r=>{const h=r.headers();if(!auth&&h['x-authorization'])auth=h['x-authorization']});
+await p.goto('https://app.dropi.co/dashboard/orders',{waitUntil:'networkidle',timeout:60000});
+const [id,tag]=process.argv.slice(2);
+for(const v of [['DELETE',`/tags/deleteordertag?tag_id=${tag}&order_id=${id}`,null],['DELETE','/tags/deleteordertag',{tag_id:+tag,order_id:+id}]]){
+ const r=await p.evaluate(async([m,u,body,a])=>{const x=await fetch('https://api.dropi.co/api'+u,{method:m,headers:{'x-authorization':a,'content-type':'application/json'},body:body?JSON.stringify(body):undefined});return x.status+' '+(await x.text()).slice(0,150)},[...v,auth]);console.log(v[0],v[1].slice(0,40),r);if(r.startsWith('200'))break}
+const g=await p.evaluate(async([id,a])=>{const x=await fetch('https://api.dropi.co/api/orders/myorders/'+id,{headers:{'x-authorization':a}});const j=await x.json();return j.objects.status+' '+JSON.stringify((j.objects.tags||[]).map(t=>t.tag_name))},[id,auth]);console.log('AHORA',g);await b.close()})();

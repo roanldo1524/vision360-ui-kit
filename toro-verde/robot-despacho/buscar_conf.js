@@ -1,0 +1,6 @@
+// Lista pedidos confirmados (PENDIENTE) de los últimos 3 días con su dirección.
+const {chromium}=require('playwright');const fs=require('fs');(async()=>{const b=await chromium.launch();const c=await b.newContext({storageState:'/tmp/dropi/estado.json',locale:'es-CO',userAgent:'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36'});const p=await c.newPage();let auth=null;p.on('request',r=>{const h=r.headers();if(!auth&&h['x-authorization'])auth=h['x-authorization']});
+await p.goto('https://app.dropi.co/dashboard/orders',{waitUntil:'networkidle',timeout:60000});
+const f=d=>d.toISOString().slice(0,10);
+const r=await p.evaluate(async([u,a])=>{const x=await fetch('https://api.dropi.co/api'+u,{headers:{'x-authorization':a}});return x.json()},[`/orders/myorders/v2?exportAs=orderByRow&orderBy=id&orderDirection=desc&result_number=300&start=0&textToSearch=&status=PENDIENTE&supplier_id=false&user_id=1024715&from=${f(new Date(Date.now()-4*864e5))}&until=${f(new Date())}&filter_date_by=FECHA%20DE%20CREADO`,auth]);
+fs.writeFileSync('/tmp/dropi/confirmados.json',JSON.stringify(r.objects||[]));console.log('CONFIRMADOS',(r.objects||[]).length);await b.close()})();
